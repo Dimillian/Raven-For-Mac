@@ -1,0 +1,80 @@
+/* color 
+content:#d5eba1;
+headline:#d0ff5f;
+link: #fff
+border:1px solid #e8e0c6;
+*/
+
+/* basic type setting*/
+
+body {font-size: 14px;line-height: 1.5em;margin: 0; padding: 0; font-family: "proxima-nova-condensed-1","proxima-nova-condensed-2","sans-serif"; background: #fff url(../images/tile.png) repeat-x top left; color:#4e5658; height: 100%;}
+h1 {margin: 0;font: 1.67em Arial, Verdana, serif;line-height: 0.9em;	margin-bottom: 0.9em;}
+h2 {margin: 0;font: 1.4em  Arial, Verdana, serif;line-height: 1em;margin-bottom: 1em; }
+h3 {margin: 0;font: 1.33em  Arial, Verdana, serif;line-height: 1.125em;margin-bottom: 1.125em;}
+h4 {margin: 0;font-size: 1.167em;line-height: 1.29em;margin-bottom: 1.29em;}
+p, ul, blockquote, pre, td, th {margin: 0;font-size: 1em;line-height: 1.5em;margin-bottom: 1.5em;}
+table {border-collapse: collapse;	margin-bottom: 1.5em;}
+input, select, textarea {font:12px Verdana, Arial, serif;}
+/*general style*/
+
+a { text-decoration: none;color:#4e5658;  border-bottom: 1px solid #4e5658;}
+a:hover 	{color:#434343;}
+.amp 				{font-family:"Hoefler Text", Baskerville,'Goudy Old Style',Palatino,'Book Antiqua',serif;color:#e8f9c0; font-style:italic;}
+.headline2 			{color:#d0ff5f;padding:0.5em 0; margin-bottom:0.5em;border-bottom:1px solid #75a30a;border-top:1px solid #75a30a;}
+.headline 			{color:#d0ff5f;padding:0.5em 0; margin-bottom:0.5em;border-bottom:1px solid #688e10;border-top:1px solid #688e10;}
+.small-headline 	{font-weight:normal;color:#d0ff5f;}
+.clear 				{clear:both;}
+.highlight			{color:#d0ff5f;}
+.headline span		{font-style:italic;color:#a5ce47;}
+.success {background:#f3ffe2; color:#4f8700; padding:15px; font-size:14px; border:1px solid #8cc33e; margin-bottom:1em;}
+.error {background:#ffaa71; color:#b20c08; padding:15px; font-size:14px; border:1px solid #cc5440;margin-bottom:1em;}
+.content-wrapper {padding: 10px 20px 0 20px;}
+
+
+/*basic structure*/
+#wrap 				{width:790px;  margin: 100px auto auto auto; }
+#logo  {width: 178px; height: 176px; margin:  0 auto; margin: 0 auto;}
+#logo a {display: block; background: url(../images/logo.png) top left; text-indent: -9999px; width: 178px; height: 176px; border: none;}
+
+#search-form {background: #e3e3e3; margin-top:50px; border:1px solid #acacac; -moz-border-radius: 7px; -webkit-border-radius: 7px; border-radius: 7px; overflow: hidden; 
+padding:8px; -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+     -moz-box-shadow: inset 0 2px 2px rgba(0,0,0,.1); 
+  -webkit-box-shadow: inset 0 2px 2px rgba(0,0,0,.1); 
+          box-shadow: inset 0 2px 2px rgba(0,0,0,.1); 
+ }
+#query {border:1px solid #acacac;-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;  padding:7px; height:16px; font:16px "proxima-nova-condensed-1","proxima-nova-condensed-2","sans-serif"; width: 650px; float:left;}
+#query.label{background:#fff url(../images/google.png) 7px 7px no-repeat;}
+#query:hover,#query:active, #query:focus {background:#fff; padding:6px; border-width: 2px;}
+#submit { float:left; margin-left: 10px; font-weight: bold;
+
+     -moz-box-shadow: 0 1px 0 #fff; 
+  -webkit-box-shadow: 0 1px 0 #fff; 
+          box-shadow: 0 1px 0 #fff; 
+
+  background-color: #000000; width:92px; display: block; text-align: center;
+  border:1px solid #acacac;-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;   line-height: 32px; height:32px; font:16px "proxima-nova-condensed-1","proxima-nova-condensed-2","sans-serif";
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e1e1e1)); /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #ffffff, #e1e1e1); /* Chrome 10+, Saf5.1+ */
+  }
+#submit:hover { background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#d1d1d1)); /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #ffffff, #d1d1d1); /* Chrome 10+, Saf5.1+ */}
+
+#submit:active { background-image: -webkit-gradient(linear, left top, left bottom, from(#e1e1e1), to(#ffffff)); /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #e1e1e1, #ffffff); /* Chrome 10+, Saf5.1+ */}  
+  
+  
+    
+#footer {position: absolute; bottom:20px; text-align: center;width:790px;  margin: 0 auto; position: absolute; left:50%; margin-left:-395px;}		
+.clearfix:after, #main:after,#section-headline:after,.recipe-view .user-actions:after,.recipe-list > li:after,.blog-list > li:after{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    }
+
+.clearfix, #main,#section-headline,.recipe-view .user-actions,.recipe-list > li,.blog-list > li  {display: inline-block;}  /* for IE/Mac */
+
+
+.clear {clear:both;}                 
+#iframe {background:#fff;}

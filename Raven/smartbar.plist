@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SmarBarApp</key>
+	<array>
+		<dict>
+			<key>Name</key>
+			<string>Twitter</string>
+			<key>AppIcon</key>
+			<string>Twitter.png</string>
+			<key>button0</key>
+			<dict>
+				<key>Name</key>
+				<string>TImeline</string>
+				<key>iconFileOFF</key>
+				<string>TimelineOff.png</string>
+				<key>iconFileON</key>
+				<string>TimelineOn.png</string>
+				<key>URL</key>
+				<string>https://twitter.com</string>
+			</dict>
+			<key>button1</key>
+			<dict>
+				<key>Name</key>
+				<string>Mention</string>
+				<key>iconFileOFF</key>
+				<string>MentionOff.png</string>
+				<key>iconFileON</key>
+				<string>MentionOn.png</string>
+				<key>URL</key>
+				<string>https://twitter.com/mention</string>
+			</dict>
+			<key>button2</key>
+			<dict>
+				<key>Name</key>
+				<string>Mention</string>
+				<key>iconFileOFF</key>
+				<string>MentionOff.png</string>
+				<key>iconFileON</key>
+				<string>MentionOn.png</string>
+				<key>URL</key>
+				<string>https://twitter.com/mention</string>
+			</dict>
+			<key>button3</key>
+			<dict>
+				<key>Name</key>
+				<string>Mention</string>
+				<key>iconFileOFF</key>
+				<string>MentionOff.png</string>
+				<key>iconFileON</key>
+				<string>MentionOn.png</string>
+				<key>URL</key>
+				<string>https://twitter.com/mention</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Quora</string>
+			<key>AppIcon</key>
+			<string>Quora.png</string>
+		</dict>
+		<dict/>
+	</array>
+</dict>
+</plist>

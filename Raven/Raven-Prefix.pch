@@ -1,0 +1,10 @@
+//
+// Prefix header for all source files of the 'Raven' target in the 'Raven' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
+#ifndef IS_RUNNING_LION
+#define IS_RUNNING_LION ((int)kCFCoreFoundationVersionNumber > (int)550)
+#endif
