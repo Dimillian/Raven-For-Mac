@@ -64,7 +64,7 @@
 {
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     if (standardUserDefaults) {
-        if ([standardUserDefaults integerForKey:@"AutoSelectUrl"] == 1) {
+        if ([standardUserDefaults integerForKey:SELECT_URL_MOUSE_HOVER] == 1) {
     [self selectText:self];  
         }
     }
@@ -138,7 +138,7 @@
 
         NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
         if (standardUserDefaults) {
-            if ([standardUserDefaults integerForKey:@"SuggestionBar"] == 1) {
+            if ([standardUserDefaults integerForKey:SUGGESTION_BAR] == 1) {
                 [self check:nil];
             }
         }

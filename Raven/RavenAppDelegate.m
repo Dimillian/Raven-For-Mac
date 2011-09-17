@@ -12,6 +12,8 @@
 @synthesize setting, mainWindowArray; 
 #pragma mark -
 #pragma mark launch
+
+#define default_url @"http://go.raven.io"
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {    
     
@@ -32,47 +34,47 @@
 	if (standardUserDefaults) 
         {
             //Suggestion address bar
-            if ([standardUserDefaults objectForKey:@"SuggestionBar"] == nil) {
-                [standardUserDefaults setInteger:1 forKey:@"SuggestionBar"];
+            if ([standardUserDefaults objectForKey:SUGGESTION_BAR] == nil) {
+                [standardUserDefaults setInteger:1 forKey:SUGGESTION_BAR];
             }  
             //Auto select URL on mouse hover
-            if ([standardUserDefaults objectForKey:@"AutoSelectUrl"] == nil) {
-                [standardUserDefaults setInteger:1 forKey:@"AutoSelectUrl"];
+            if ([standardUserDefaults objectForKey:SELECT_URL_MOUSE_HOVER] == nil) {
+                [standardUserDefaults setInteger:1 forKey:SELECT_URL_MOUSE_HOVER];
             }  
             //Button tool tip for sidebar
-            if ([standardUserDefaults objectForKey:@"ButtonTooltip"] == nil) {
-                [standardUserDefaults setInteger:0 forKey:@"ButtonTooltip"];
+            if ([standardUserDefaults objectForKey:BUTTON_TOOLTIP] == nil) {
+                [standardUserDefaults setInteger:0 forKey:BUTTON_TOOLTIP];
             }
             //Auto hide sidebar key
-            if ([standardUserDefaults objectForKey:@"SidebarLikeDock"] == nil) {
-                [standardUserDefaults setInteger:1 forKey:@"SidebarLikeDock"];
+            if ([standardUserDefaults objectForKey:SIDEBAR_LIKE_DOCK] == nil) {
+                [standardUserDefaults setInteger:1 forKey:SIDEBAR_LIKE_DOCK];
             }
             //Set the prefered URL to local page if nil
-            if ([standardUserDefaults objectForKey:@"PreferredUrl"] == nil) {
-                [standardUserDefaults setObject:@"http://go.raven.io" forKey:@"PreferredUrl"];
+            if ([standardUserDefaults objectForKey:PREFERRED_URL] == nil) {
+                [standardUserDefaults setObject:default_url forKey:PREFERRED_URL];
             }
             //if nil set the new tab URL to local page
-            if ([standardUserDefaults objectForKey:@"NewTabUrl"] == nil) {
-                [standardUserDefaults setObject:@"http://go.raven.io" forKey:@"NewTabUrl"];
+            if ([standardUserDefaults objectForKey:NEW_TAB_URL] == nil) {
+                [standardUserDefaults setObject:default_url forKey:NEW_TAB_URL];
             }
             //Clear history setting
-            if ([standardUserDefaults objectForKey:@"removeHistoryButton"] == nil) {
-                [standardUserDefaults setInteger:3 forKey:@"removeHistoryButton"];
+            if ([standardUserDefaults objectForKey:REMOVE_HISTORY_BUTTON] == nil) {
+                [standardUserDefaults setInteger:3 forKey:REMOVE_HISTORY_BUTTON];
             }
             //First Time launch
-            if ([standardUserDefaults objectForKey:@"doHaveLaunched"] == nil) {
-                [standardUserDefaults setInteger:0 forKey:@"doHaveLaunched"];
+            if ([standardUserDefaults objectForKey:DO_HAVE_LAUNCHED] == nil) {
+                [standardUserDefaults setInteger:0 forKey:DO_HAVE_LAUNCHED];
             }
-            if ([standardUserDefaults objectForKey:@"AutoSaveInstapaper"] == nil){
-                [standardUserDefaults setInteger:0 forKey:@"AutoSaveInstapaper"];
+            if ([standardUserDefaults objectForKey:AUTO_SAVE_INSTAPAPER] == nil){
+                [standardUserDefaults setInteger:0 forKey:AUTO_SAVE_INSTAPAPER];
             }
-            if ([standardUserDefaults objectForKey:@"OpenTabInBackground"] == nil) {
-                [standardUserDefaults setInteger:0 forKey:@"OpenTabInBackground"]; 
+            if ([standardUserDefaults objectForKey:OPEN_TAB_IN_BACKGROUND] == nil) {
+                [standardUserDefaults setInteger:0 forKey:OPEN_TAB_IN_BACKGROUND]; 
             }
             [standardUserDefaults synchronize];
             
             //maintenance stuff
-            [controler removehistorySinceDate:[standardUserDefaults integerForKey:@"removeHistoryButton"]];
+            [controler removehistorySinceDate:[standardUserDefaults integerForKey:REMOVE_HISTORY_BUTTON]];
         }
     
     MainWindowController *MainWindow = [[MainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 

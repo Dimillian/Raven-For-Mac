@@ -9,6 +9,15 @@
 #import "MainWindowController.h"
 #import "RavenAppDelegate.h"
 
+//smart bar app positioning constante
+#define retracted_app_height 54
+#define app_expanded_height 200
+#define initial_position 234
+#define app_position_x -7
+#define app_view_w 108
+#define app_view_h 278
+
+
 
 @implementation MainWindowController
 @synthesize passedUrl, navigatorview, downloadButton, centeredView, myCurrentViewController, appList;
@@ -128,7 +137,6 @@
     NSArray *folders = [[dict objectForKey:@"app"] mutableCopy];
     NSInteger count  = [folders count];
     NSInteger x; 
-    CGFloat position = 235;
     for (x=0; x<count; x++) {
         NSDictionary *item = [folders objectAtIndex:x];
         NSArray *URL = [[item objectForKey:@"URL"]mutableCopy];
@@ -141,9 +149,8 @@
         [appList addObject:smartApp]; 
         [[appList objectAtIndex:x]view];
         [rightView addSubview:[[appList objectAtIndex:x]view]];
-        [[smartApp view]setFrame:NSMakeRect(-7, position, 108, 278)];
+        [[smartApp view]setFrame:NSMakeRect(app_position_x, initial_position - (retracted_app_height*x), app_view_w, app_view_h)];
         [smartApp retractApp:nil];
-        position = position - 54;
         [URL release]; 
         [smartApp release]; 
     }
@@ -162,10 +169,10 @@
             [smartApp retractApp:nil];
         }
         if (x<=index && [smartBarApp state] == 0 && x > previousIndex) {
-            [[[smartApp view]animator]setFrame:NSMakeRect(-7, frame.origin.y + 200, 108, 278)]; 
+            [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, frame.origin.y + app_expanded_height, app_view_w, app_view_h)]; 
         }
         if (x > index && index <= previousIndex && x <= previousIndex) {
-           [[[smartApp view]animator]setFrame:NSMakeRect(-7, frame.origin.y - 200, 108, 278)];   
+           [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, frame.origin.y - app_expanded_height, app_view_w, app_view_h)];   
         }
             
     }
@@ -187,12 +194,10 @@
 {
     NSInteger count  = [appList count];
     NSInteger x; 
-    CGFloat position = 235;
     for (x=0; x<count; x++) {
          RASmartBarViewController *smartApp = [appList objectAtIndex:x]; 
-         [[[smartApp view]animator]setFrame:NSMakeRect(-7, position, 108, 278)];
+         [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, initial_position - (retracted_app_height*x), app_view_w, app_view_h)];
          [smartApp retractApp:nil];
-         position = position - 54;
 
      }
     previousIndex = -1;

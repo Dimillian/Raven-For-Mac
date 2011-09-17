@@ -53,10 +53,10 @@
     //Set the initial window setting
 	if (standardUserDefaults) 
         {
-        [removeHistoryButton selectItemAtIndex:[standardUserDefaults integerForKey:@"removeHistoryButton"]];
-            if ([standardUserDefaults objectForKey:@"LoginInstapaper"] != nil)
+        [removeHistoryButton selectItemAtIndex:[standardUserDefaults integerForKey:REMOVE_HISTORY_BUTTON]];
+            if ([standardUserDefaults objectForKey:LOGIN_INSTAPAPER] != nil)
             {
-                [instapaperLogin setStringValue:[standardUserDefaults stringForKey:@"LoginInstapaper"]];
+                [instapaperLogin setStringValue:[standardUserDefaults stringForKey:LOGIN_INSTAPAPER]];
                 EMGenericKeychainItem *key = [EMGenericKeychainItem genericKeychainItemForService:@"raven.instapaper" withUsername:[instapaperLogin stringValue]];
             if (key.password != nil) {
                 [instapaperPassword setStringValue:key.password];
@@ -164,7 +164,7 @@
 {
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
 	if (standardUserDefaults) {
-		[standardUserDefaults setInteger:[removeHistoryButton indexOfSelectedItem] forKey:@"removeHistoryButton"];
+		[standardUserDefaults setInteger:[removeHistoryButton indexOfSelectedItem] forKey:REMOVE_HISTORY_BUTTON];
 		[standardUserDefaults synchronize];
 	}
 }
@@ -185,7 +185,7 @@
 {
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     if (standardUserDefaults) {
-        if ([standardUserDefaults integerForKey:@"HaveImportedSafariBar"] == 1) {
+        if ([standardUserDefaults integerForKey:HAVE_IMPORTED_FROM_SAFARI] == 1) {
             NSAlert *alert = [[NSAlert alloc] init];
             [alert setMessageText:NSLocalizedString(@"It seems that you already have imported your favorites from Safari", @"ImportBookmarkError")];
             [alert setInformativeText:NSLocalizedString(@"You can do it again but you may have duplicate favorites as it will import it again", @"ImportBookmarkDetailError")];
@@ -195,7 +195,7 @@
             {
                 DatabaseController *controller = [DatabaseController sharedUser]; 
                 [controller importBookmarkFromSafari]; 
-                [standardUserDefaults setInteger:1 forKey:@"HaveImportedSafariBar"];
+                [standardUserDefaults setInteger:1 forKey:HAVE_IMPORTED_FROM_SAFARI];
                 [standardUserDefaults synchronize];
             }
             [alert release];
@@ -205,7 +205,7 @@
         {
             DatabaseController *controller = [DatabaseController sharedUser]; 
             [controller importBookmarkFromSafari]; 
-            [standardUserDefaults setInteger:1 forKey:@"HaveImportedSafariBar"];
+            [standardUserDefaults setInteger:1 forKey:HAVE_IMPORTED_FROM_SAFARI];
             [standardUserDefaults synchronize];
         }
     }
@@ -240,7 +240,7 @@
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     if (standardUserDefaults){
         [isCheckingForInstapaperLogin startAnimation:self];
-        [standardUserDefaults setObject:[instapaperLogin stringValue] forKey:@"LoginInstapaper"]; 
+        [standardUserDefaults setObject:[instapaperLogin stringValue] forKey:LOGIN_INSTAPAPER]; 
         //[standardUserDefaults setObject:[instapaperPassword stringValue] forKey:@"PasswordInstapaper"];
        EMGenericKeychainItem *item =  [EMGenericKeychainItem addGenericKeychainItemForService:@"raven.instapaper" withUsername:[instapaperLogin stringValue] password:[instapaperPassword stringValue]];
         if (item == nil) {

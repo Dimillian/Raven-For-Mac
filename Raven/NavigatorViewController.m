@@ -14,6 +14,9 @@
 #import "NavigatorViewController.h"
 #import "RavenAppDelegate.h"
 #import "DownloadDelegate.h"
+
+//the size of a tab button
+#define tabButtonSize 110
 @implementation NavigatorViewController
 
 @synthesize PassedUrl, tabsArray, fromOtherViews; 
@@ -43,7 +46,6 @@
     //Initialize the array which contain tabs
     tabsArray = [[NSMutableArray alloc]init];
     //Value for the tabs button position and tag (y)
-     buttonPosition = 0; 
      buttonId = 0;
     
     istab = NO; 
@@ -69,7 +71,7 @@
     NSRect windowSize = [[allTabsButton window]frame];
     int size = windowSize.size.width;  
     //WebViewController *button = [tabsArray lastObject];
-    if (buttonPosition > size - 120)
+    if ([tabController numberOfTabViewItems]*tabButtonSize > size - 120)
     {
         //[button.tabview setHidden:YES]; 
         [allTabsButton setHidden:NO]; 
@@ -137,7 +139,7 @@
     //force the view to init
     [newtab view]; 
     [[newtab tabview]setAlphaValue:0.0]; 
-    [[newtab tabview]setFrame:NSMakeRect(buttonPosition, 0, 110, 20)]; 
+    [[newtab tabview]setFrame:NSMakeRect([tabController numberOfTabViewItems]*tabButtonSize, 0, tabButtonSize, 20)]; 
     [[newtab tabButtonTab]setAction:@selector(tabs:)]; 
     [[newtab tabButtonTab]setTarget:self]; 
     [[newtab tabButtonTab]setTag:buttonId]; 
@@ -148,7 +150,6 @@
     [[newtab closeButtonTab]setAction:@selector(closeSelectedTab:)]; 
     [[newtab closeButtonTab]setTarget:self];
     [[newtab closeButtonTab]setEnabled:YES]; 
-    
     //Bind the addtabd button to the current object action
     [[newtab tabsButton]setAction:@selector(addtabs:)];
     [[newtab tabsButton]setTarget:self]; 
@@ -162,7 +163,7 @@
     CGFloat size = windowSize.size.width;  
     
     //If the buttposition is over 900 then display a button which will list tabs
-    if (buttonPosition > size - 250)
+    if ([tabController numberOfTabViewItems]*tabButtonSize > size - 250)
     {
         [allTabsButton setHidden:NO]; 
         [allTabsButton setAction:@selector(menutabs:)]; 
@@ -182,7 +183,6 @@
     [[newtab tabview]setAlphaValue:1.0]; 
     
     //increment the position and the tag value for the next button placement
-    buttonPosition = buttonPosition + 110; 
     buttonId = buttonId +1;
     
     //Pre select the address for faster typing
@@ -327,7 +327,6 @@
 
 
     //reset the buttonid and position in preparation of reorg of tabs
-    buttonPosition = 0; 
     buttonId = 0; 
     
     //Transfert all the tabs from the real array to the tempsarray
@@ -337,8 +336,7 @@
         WebViewController *tpstab = [tabsArray objectAtIndex:v]; 
         [[tpstab tabButtonTab]setTag:buttonId]; 
         [[tpstab closeButtonTab]setTag:buttonId]; 
-        [[[tpstab tabview]animator]setFrame:NSMakeRect(buttonPosition, 0, 110, 20)]; 
-        buttonPosition = buttonPosition + 110; 
+        [[[tpstab tabview]animator]setFrame:NSMakeRect(tabButtonSize*v, 0, tabButtonSize, 20)]; 
         buttonId = buttonId +1; 
         [tpstabarray addObject:tpstab]; 
     }
@@ -392,7 +390,6 @@
     int i; 
     
     //reset the buttonid and position in preparation of reorg of tabs
-    buttonPosition = 0; 
     buttonId = 0; 
     
     //Get all the buton,reset their position and id and, pass it in a temps array

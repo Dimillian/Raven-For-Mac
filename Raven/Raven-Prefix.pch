@@ -5,6 +5,21 @@
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
 #endif
+//preference key
+#define SUGGESTION_BAR @"SuggestionBar"
+#define SELECT_URL_MOUSE_HOVER @"AutoSelectUrl"
+#define BUTTON_TOOLTIP @"ButtonTooltip"
+#define SIDEBAR_LIKE_DOCK @"SidebarLikeDock"
+#define PREFERRED_URL @"PreferredUrl"
+#define NEW_TAB_URL @"NewTabUrl"
+#define REMOVE_HISTORY_BUTTON @"removeHistoryButton"
+#define DO_HAVE_LAUNCHED @"doHaveLaunched"
+#define AUTO_SAVE_INSTAPAPER @"AutoSaveInstapaper"
+#define OPEN_TAB_IN_BACKGROUND @"OpenTabInBackground"
+#define HAVE_IMPORTED_FROM_SAFARI @"HaveImportedSafariBar"
+#define LOGIN_INSTAPAPER @"LoginInstapaper"
+#define PASSWORD_INSTAPAPER @"PasswordInstapaper"
+
 #ifndef IS_RUNNING_LION
 #define IS_RUNNING_LION ((int)kCFCoreFoundationVersionNumber > (int)550)
 #endif

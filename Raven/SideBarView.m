@@ -40,7 +40,7 @@
 {
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     if (standardUserDefaults) {
-        if ([standardUserDefaults integerForKey:@"SidebarLikeDock"] == 1 && [[self toolTip]isEqualToString:@"isHidden"]) {
+        if ([standardUserDefaults integerForKey:SIDEBAR_LIKE_DOCK] == 1 && [[self toolTip]isEqualToString:@"isHidden"]) {
     [       [self animator]setAlphaValue:1.0]; 
             if (isHidden == NO) {
                 [self setFrame:NSMakeRect(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height - 29)];
@@ -56,7 +56,7 @@
 {
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     if (standardUserDefaults) {
-        if ([standardUserDefaults integerForKey:@"SidebarLikeDock"] == 1 && [[self toolTip]isEqualToString:@"isHidden"]) {
+        if ([standardUserDefaults integerForKey:SIDEBAR_LIKE_DOCK] == 1 && [[self toolTip]isEqualToString:@"isHidden"]) {
                 [self setAlphaValue:0.0]; 
             if (isHidden == YES) {
                 [self setFrame:NSMakeRect(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height + 29)];

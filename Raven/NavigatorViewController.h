@@ -30,7 +30,6 @@
     NSMutableArray *tabsArray;
     NSInteger curentSelectedTab;
     NSInteger count; 
-    double buttonPosition;
     double buttonId;  
     
     BOOL istab; 

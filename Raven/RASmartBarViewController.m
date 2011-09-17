@@ -9,6 +9,13 @@
 #import "RASmartBarViewController.h"
 #import "MainWindowController.h"
 
+#define application_support_path @"~/Library/Application Support/RavenApp/app/"
+
+//button size and position
+#define button_x 35
+#define button_w 32
+#define button_h 32
+
 @implementation RASmartBarViewController
 @synthesize folderName, appName, firstURL, secondURL, thirdURL, fourthURL, state, delegate; 
 
@@ -45,24 +52,15 @@
     ThirdtNavigatorView = [[NavigatorViewController alloc]init];
     FourthNavigatorView = [[NavigatorViewController alloc]init];
 
-    NSString *homeButtonPath = [NSString stringWithFormat:
-                                @"~/Library/Application Support/RavenApp/app/%@/main.png", folderName];
-    NSString *firstImageOffPath = [NSString stringWithFormat:
-                                   @"~/Library/Application Support/RavenApp/app/%@/1_off.png", folderName];
-    NSString *firstImageOnPath = [NSString stringWithFormat:
-                                  @"~/Library/Application Support/RavenApp/app/%@/1_on.png", folderName];
-    NSString *secondImageOffPath = [NSString stringWithFormat:
-                                    @"~/Library/Application Support/RavenApp/app/%@/2_off.png", folderName]; 
-    NSString *secondImageOnPath = [NSString stringWithFormat:
-                                   @"~/Library/Application Support/RavenApp/app/%@/2_on.png", folderName]; 
-    NSString *thirdImageOffPath = [NSString stringWithFormat:
-                                   @"~/Library/Application Support/RavenApp/app/%@/3_off.png", folderName]; 
-    NSString *thirdImageOnPath = [NSString stringWithFormat:
-                                  @"~/Library/Application Support/RavenApp/app/%@/3_on.png", folderName]; 
-    NSString *fourImageOffPath = [NSString stringWithFormat:
-                                  @"~/Library/Application Support/RavenApp/app/%@/4_off.png", folderName]; 
-    NSString *fourImageOnPath = [NSString stringWithFormat:
-                                 @"~/Library/Application Support/RavenApp/app/%@/4_on.png", folderName];
+    NSString *homeButtonPath = [NSString stringWithFormat:application_support_path@"%@/main.png", folderName];
+    NSString *firstImageOffPath = [NSString stringWithFormat:application_support_path@"%@/1_off.png", folderName];
+    NSString *firstImageOnPath = [NSString stringWithFormat:application_support_path@"%@/1_on.png", folderName];
+    NSString *secondImageOffPath = [NSString stringWithFormat:application_support_path@"%@/2_off.png", folderName]; 
+    NSString *secondImageOnPath = [NSString stringWithFormat:application_support_path@"%@/2_on.png", folderName]; 
+    NSString *thirdImageOffPath = [NSString stringWithFormat:application_support_path@"%@/3_off.png", folderName]; 
+    NSString *thirdImageOnPath = [NSString stringWithFormat:application_support_path@"%@/3_on.png", folderName]; 
+    NSString *fourImageOffPath = [NSString stringWithFormat:application_support_path@"%@/4_off.png", folderName]; 
+    NSString *fourImageOnPath = [NSString stringWithFormat:application_support_path@"%@/4_on.png", folderName];
 
     NSImage *homeButtonImage = [[NSImage alloc]initWithContentsOfFile:[homeButtonPath stringByExpandingTildeInPath]];
     NSImage *firstImageOff = [[NSImage alloc]initWithContentsOfFile:[firstImageOffPath stringByExpandingTildeInPath]];
@@ -108,13 +106,13 @@
 {
     if (state == 0) {
          [self setSelectedButton];
-        [[firstButton animator]setFrame:NSMakeRect(35, 166, 32, 32)];
+        [[firstButton animator]setFrame:NSMakeRect(button_x, 166, button_w, button_h)];
         [[firstButton animator]setAlphaValue:1.0]; 
-        [[secondButton animator] setFrame:NSMakeRect(35, 116, 32, 32)]; 
+        [[secondButton animator] setFrame:NSMakeRect(button_x, 116, button_w, button_h)]; 
         [[secondButton animator]setAlphaValue:1.0];
-        [[thirdButton animator]setFrame:NSMakeRect(35, 66, 32, 32)];
+        [[thirdButton animator]setFrame:NSMakeRect(button_x, 66, button_w, button_h)];
         [[thirdButton animator]setAlphaValue:1.0];
-        [[fourthButton animator]setFrame:NSMakeRect(35, 16, 32, 32)];
+        [[fourthButton animator]setFrame:NSMakeRect(button_x, 16, button_w, button_h)];
         [[fourthButton animator]setAlphaValue:1.0];
         [firstButton setEnabled:YES];
         [secondButton setEnabled:YES];
@@ -134,13 +132,13 @@
 
 -(IBAction)retractApp:(id)sender
 {
-    [[firstButton animator]setFrame:NSMakeRect(35, 196, 32, 32)]; 
+    [[firstButton animator]setFrame:NSMakeRect(button_x, 196, button_w, button_h)]; 
     [[firstButton animator]setAlphaValue:0.0]; 
-    [[secondButton animator] setFrame:NSMakeRect(35, 196, 32, 32)]; 
+    [[secondButton animator] setFrame:NSMakeRect(button_x, 196, button_w, button_h)]; 
     [[secondButton animator]setAlphaValue:0.0]; 
-    [[thirdButton animator]setFrame:NSMakeRect(35, 196, 32, 32)];
+    [[thirdButton animator]setFrame:NSMakeRect(button_x, 196, button_w, button_h)];
     [[thirdButton animator]setAlphaValue:0.0]; 
-    [[fourthButton animator]setFrame:NSMakeRect(35, 196, 32, 32)];
+    [[fourthButton animator]setFrame:NSMakeRect(button_x, 196, button_w, button_h)];
     [[fourthButton animator]setAlphaValue:0.0]; 
     [firstButton setEnabled:NO];
     [secondButton setEnabled:NO];

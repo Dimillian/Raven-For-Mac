@@ -64,7 +64,7 @@
     if ([buttonChoice selectedTag] == 1) {
         NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
         if (standardUserDefaults) {
-            [instapaperButton setState:[standardUserDefaults integerForKey:@"AutoSaveInstapaper"]]; 
+            [instapaperButton setState:[standardUserDefaults integerForKey:AUTO_SAVE_INSTAPAPER]]; 
         }
     }
     else if ([buttonChoice selectedTag] == 0)
@@ -107,7 +107,7 @@
     if ([instapaperButton state] == 1) {
         if (standardUserDefaults)
         {
-            if ([standardUserDefaults stringForKey:@"LoginInstapaper"] == nil) {
+            if ([standardUserDefaults stringForKey:LOGIN_INSTAPAPER] == nil) {
                 RavenAppDelegate *delegate  = (RavenAppDelegate *)[[NSApplication sharedApplication]delegate]; 
                 [delegate showSettingsWindow:nil];
                 [[delegate setting]setEightTab:nil]; 
@@ -122,8 +122,8 @@
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     if (standardUserDefaults)
     {
-        EMGenericKeychainItem *key = [EMGenericKeychainItem genericKeychainItemForService:@"raven.instapaper" withUsername:[standardUserDefaults stringForKey:@"LoginInstapaper"]];
-        LTInstapaperAPI *instaApi = [[LTInstapaperAPI alloc]initWithUsername:[standardUserDefaults stringForKey:@"LoginInstapaper"] password:key.password delegate:self]; 
+        EMGenericKeychainItem *key = [EMGenericKeychainItem genericKeychainItemForService:@"raven.instapaper" withUsername:[standardUserDefaults stringForKey:LOGIN_INSTAPAPER]];
+        LTInstapaperAPI *instaApi = [[LTInstapaperAPI alloc]initWithUsername:[standardUserDefaults stringForKey:LOGIN_INSTAPAPER] password:key.password delegate:self]; 
         localInsta = instaApi;
         [localInsta authenticate]; 
         [instaApi release]; 

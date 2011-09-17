@@ -94,7 +94,7 @@
         [[self animator]setAlphaValue:0.7f];
         NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
         if (standardUserDefaults) {
-            if ([standardUserDefaults integerForKey:@"ButtonTooltip"] == 1) {
+            if ([standardUserDefaults integerForKey:BUTTON_TOOLTIP] == 1) {
                 //timer = [NSTimer scheduledTimerWithTimeInterval:(0.0) target:self selector:@selector(showToolTip) userInfo:nil repeats:NO];
             }
         }
