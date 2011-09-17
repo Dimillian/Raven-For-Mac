@@ -132,7 +132,6 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     //Check if exist, if not create the dir
     if ([fileManager fileExistsAtPath:applicationSupport] == NO)
         [fileManager createDirectoryAtPath:applicationSupport withIntermediateDirectories:YES attributes:nil error:nil];
-    
     [[[firstImageOn image] TIFFRepresentation] writeToFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/app/%@/1_on.png", [folderNameField stringValue]]stringByExpandingTildeInPath] atomically:YES];
     [[[firstImageOff image] TIFFRepresentation] writeToFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/app/%@/1_off.png", [folderNameField stringValue]]stringByExpandingTildeInPath] atomically:YES];
     [[[secondImageOff image] TIFFRepresentation] writeToFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/app/%@/2_off.png", [folderNameField stringValue]]stringByExpandingTildeInPath] atomically:YES];

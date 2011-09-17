@@ -143,7 +143,7 @@
         [rightView addSubview:[[appList objectAtIndex:x]view]];
         [[smartApp view]setFrame:NSMakeRect(-7, position, 108, 278)];
         [smartApp retractApp:nil];
-        position = position - 52;
+        position = position - 54;
         [URL release]; 
         [smartApp release]; 
     }
@@ -192,7 +192,7 @@
          RASmartBarViewController *smartApp = [appList objectAtIndex:x]; 
          [[[smartApp view]animator]setFrame:NSMakeRect(-7, position, 108, 278)];
          [smartApp retractApp:nil];
-         position = position - 50;
+         position = position - 54;
 
      }
     previousIndex = -1;
