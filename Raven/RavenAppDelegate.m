@@ -89,7 +89,6 @@
     
     setting = [[SettingWindow alloc]initWithWindowNibName:@"PreferenceWindow"];
     about = [[AboutPanel alloc]initWithWindowNibName:@"AboutPanel"]; 
-    appManager = [[RAppManagerWindow alloc]initWithWindowNibName:@"RAappManagerWindow"];
    
         
 }
@@ -135,10 +134,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [about showWindow:self]; 
 }
 
--(void)showAppManager:(id)sender
-{
-    [appManager showWindow:self];
-}
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication
 					hasVisibleWindows:(BOOL)flag

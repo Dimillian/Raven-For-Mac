@@ -24,12 +24,10 @@
 #import "DownloadObject.h"
 #import "SettingWindow.h"
 #import "AboutPanel.h"
-#import "RAppManagerWindow.h"
 
 @interface RavenAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, NSImageDelegate> {
     SettingWindow *setting;
     AboutPanel *about; 
-    RAppManagerWindow *appManager;
     IBOutlet NSMenu *favoriteMenu; 
     NSMutableArray *mainWindowArray; 
 }
@@ -39,7 +37,6 @@
 -(IBAction)showSettingsWindow:(id)sender;
 -(IBAction)showAboutPanel:(id)sender;
 -(IBAction)favoriteMenu:(id)sender;
--(IBAction)showAppManager:(id)sender;
 @property (nonatomic, retain) SettingWindow *setting; 
 @property (nonatomic, retain) NSMutableArray *mainWindowArray;  
 

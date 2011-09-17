@@ -184,9 +184,6 @@
 		9F2BF6BE13FDAD1000F809E6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F2BF6C013FDAD1000F809E6 /* Localizable.strings */; };
 		9F2F458E140D198C00BAB731 /* RASmartBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2F458C140D198C00BAB731 /* RASmartBarViewController.m */; };
 		9F2F458F140D198C00BAB731 /* RASmartBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F2F458D140D198C00BAB731 /* RASmartBarViewController.xib */; };
-		9F3C5F6E1424CC8B00C82F6E /* RAppManagerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3C5F6D1424CC8B00C82F6E /* RAppManagerWindow.m */; };
-		9F3C5F711424CCA200C82F6E /* RAappManagerPlistController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3C5F701424CCA200C82F6E /* RAappManagerPlistController.m */; };
-		9F3C5F731424CD7100C82F6E /* RAappManagerWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F3C5F721424CD7100C82F6E /* RAappManagerWindow.xib */; };
 		9F53F8DD13F569BF0025C821 /* advanced_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F53F8CB13F569BF0025C821 /* advanced_icon.png */; };
 		9F53F8DE13F569BF0025C821 /* amazon_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F53F8CC13F569BF0025C821 /* amazon_off.png */; };
 		9F53F8DF13F569BF0025C821 /* amazon_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F53F8CD13F569BF0025C821 /* amazon_on.png */; };
@@ -507,11 +504,6 @@
 		9F2F458B140D198C00BAB731 /* RASmartBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RASmartBarViewController.h; sourceTree = "<group>"; };
 		9F2F458C140D198C00BAB731 /* RASmartBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RASmartBarViewController.m; sourceTree = "<group>"; };
 		9F2F458D140D198C00BAB731 /* RASmartBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RASmartBarViewController.xib; sourceTree = "<group>"; };
-		9F3C5F6C1424CC8B00C82F6E /* RAppManagerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAppManagerWindow.h; sourceTree = "<group>"; };
-		9F3C5F6D1424CC8B00C82F6E /* RAppManagerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAppManagerWindow.m; sourceTree = "<group>"; };
-		9F3C5F6F1424CCA200C82F6E /* RAappManagerPlistController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAappManagerPlistController.h; sourceTree = "<group>"; };
-		9F3C5F701424CCA200C82F6E /* RAappManagerPlistController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAappManagerPlistController.m; sourceTree = "<group>"; };
-		9F3C5F721424CD7100C82F6E /* RAappManagerWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RAappManagerWindow.xib; sourceTree = "<group>"; };
 		9F53F8CB13F569BF0025C821 /* advanced_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = advanced_icon.png; sourceTree = "<group>"; };
 		9F53F8CC13F569BF0025C821 /* amazon_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amazon_off.png; sourceTree = "<group>"; };
 		9F53F8CD13F569BF0025C821 /* amazon_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amazon_on.png; sourceTree = "<group>"; };
@@ -978,7 +970,6 @@
 		69F8A083133CD50300E32E6D /* Raven */ = {
 			isa = PBXGroup;
 			children = (
-				9F3C5F6A1424CC6700C82F6E /* App Manager */,
 				9F87403F14140E9000D04281 /* Categories */,
 				9F2F4591140D19C600BAB731 /* SmartBarFork */,
 				9FC3B79D14038C7300E28D71 /* Specific object */,
@@ -1079,18 +1070,6 @@
 			);
 			name = "External class";
 			path = Raven;
-			sourceTree = "<group>";
-		};
-		9F3C5F6A1424CC6700C82F6E /* App Manager */ = {
-			isa = PBXGroup;
-			children = (
-				9F3C5F6C1424CC8B00C82F6E /* RAppManagerWindow.h */,
-				9F3C5F6D1424CC8B00C82F6E /* RAppManagerWindow.m */,
-				9F3C5F6F1424CCA200C82F6E /* RAappManagerPlistController.h */,
-				9F3C5F701424CCA200C82F6E /* RAappManagerPlistController.m */,
-				9F3C5F721424CD7100C82F6E /* RAappManagerWindow.xib */,
-			);
-			name = "App Manager";
 			sourceTree = "<group>";
 		};
 		9F53F8C913F569150025C821 /* setting window */ = {
@@ -1540,7 +1519,6 @@
 				9FC2709814102F1F00EAFD3C /* text_off.png in Resources */,
 				9FC2709914102F1F00EAFD3C /* text_on.png in Resources */,
 				9F8654081423348B00F32B77 /* app in Resources */,
-				9F3C5F731424CD7100C82F6E /* RAappManagerWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1631,8 +1609,6 @@
 				9FC2709314101E8100EAFD3C /* GGReadability.m in Sources */,
 				9F2501EA141BC0B30094D79C /* INAppStoreWindow.m in Sources */,
 				9FF75E2A141D532600910A65 /* EMKeychainItem.m in Sources */,
-				9F3C5F6E1424CC8B00C82F6E /* RAppManagerWindow.m in Sources */,
-				9F3C5F711424CCA200C82F6E /* RAappManagerPlistController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
