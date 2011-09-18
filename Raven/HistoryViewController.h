@@ -36,6 +36,7 @@
     IBOutlet NSProgressIndicator *progressIndicator; 
     NSInteger count; 
     BOOL isSearching; 
+    int tempUdid; 
 }
 
 -(IBAction)check:(id)sender; 

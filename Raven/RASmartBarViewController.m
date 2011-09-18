@@ -163,11 +163,13 @@
         
     }
     
-    if ([[firstNavigatorView tabsArray]count] == 0) {
+    if ([[firstNavigatorView tabsArray]count] == 0 ) {
         [firstNavigatorView view];
         [firstNavigatorView setPassedUrl:firstURL];
         [firstNavigatorView addtabs:nil]; 
-    }    
+    }  
+    
+    
     [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
     [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
     selectedButton = 1;

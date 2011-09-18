@@ -262,6 +262,7 @@
 //history view
 -(IBAction)history:(id)sender
 {
+    [NSThread detachNewThreadSelector:@selector(check:) toTarget:historyviewcontroller withObject:nil];
     if ([myCurrentViewController view] != nil)
 		[[myCurrentViewController view] removeFromSuperview];	// remove the current view
     //Check if the view is nil (to see if it correctly initialized or instanciated
@@ -280,7 +281,6 @@
     //Method for the smartbar
     [self hideall]; 
     [self animate:2];
-    [NSThread detachNewThreadSelector:@selector(check:) toTarget:historyviewcontroller withObject:nil];
 }
 
 

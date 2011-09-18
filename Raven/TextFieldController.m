@@ -140,6 +140,8 @@
         if (standardUserDefaults) {
             if ([standardUserDefaults integerForKey:SUGGESTION_BAR] == 1) {
                 [self check:nil];
+                
+                
             }
         }
     }

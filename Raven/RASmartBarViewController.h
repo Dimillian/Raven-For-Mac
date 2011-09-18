@@ -41,6 +41,7 @@
     IBOutlet NSButton *fourthButton;
     
     IBOutlet NSView *mainView; 
+
 }
 -(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate;
 -(IBAction)expandApp:(id)sender;
