@@ -125,8 +125,7 @@
     [self initSmartBar]; 
     previousIndex = -1;
     
-    [smartBarScrollView setDocumentView: rightView];
-    [rightView setAutoresizingMask: NSViewWidthSizable|NSViewHeightSizable];
+
     
 }
 
@@ -182,6 +181,11 @@
     [self animate:12]; 
     previousIndex = index;
     
+}
+
+-(void)windowDidResize:(NSNotification *)notification
+{
+   //[rightView setFrame:NSMakeRect(rightView.frame.origin.x, rightView.frame.origin.y, rightView.frame.size.width, 800)]; 
 }
 
 -(void)updateSmartBarUi
@@ -432,8 +436,8 @@
             [settingButton setImage:settingButtonOn]; 
             break;
         case 12:
-    
-            [[homeButton animator]setAlphaValue:0.0]; 
+            [[ravenMenuButton animator]setAlphaValue:0.5];
+            [[homeButton animator]setAlphaValue:0.0];
             [homeButton setEnabled:NO];
             [[historyButton animator]setAlphaValue:0.0]; 
             [historyButton setEnabled:NO];
@@ -448,6 +452,7 @@
             
             break;
         case 13:
+            [[ravenMenuButton animator]setAlphaValue:1.0];
             [[homeButton animator]setAlphaValue:1.0];
             [homeButton setEnabled:YES];
             [[historyButton animator]setAlphaValue:1.0];

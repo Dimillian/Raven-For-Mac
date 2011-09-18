@@ -136,7 +136,7 @@
 															<array class="NSMutableArray" key="NSSubviews">
 																<object class="NSButton" id="1032335943">
 																	<reference key="NSNextResponder" ref="667449050"/>
-																	<int key="NSvFlags">300</int>
+																	<int key="NSvFlags">268</int>
 																	<string key="NSFrame">{{16, 758}, {32, 32}}</string>
 																	<reference key="NSSuperview" ref="667449050"/>
 																	<reference key="NSWindow"/>
@@ -171,7 +171,7 @@
 																</object>
 																<object class="NSButton" id="511754323">
 																	<reference key="NSNextResponder" ref="667449050"/>
-																	<int key="NSvFlags">300</int>
+																	<int key="NSvFlags">268</int>
 																	<string key="NSFrame">{{16, 709}, {32, 32}}</string>
 																	<reference key="NSSuperview" ref="667449050"/>
 																	<reference key="NSWindow"/>
@@ -370,7 +370,7 @@
 											<string key="NSFrameSize">{75, 751}</string>
 											<reference key="NSSuperview" ref="383234069"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="809745902"/>
+											<reference key="NSNextKeyView" ref="277808243"/>
 											<bool key="NSViewIsLayerTreeHost">YES</bool>
 											<int key="NSViewLayerContentsRedrawPolicy">2</int>
 											<string key="NSReuseIdentifierKey">_NS:414</string>
@@ -419,7 +419,7 @@
 							<string key="NSFrame">{{-17, 20}, {90, 763}}</string>
 							<reference key="NSSuperview" ref="325673232"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="383234069"/>
+							<reference key="NSNextKeyView" ref="809745902"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<string key="NSReuseIdentifierKey">_NS:410</string>
 							<int key="NSsFlags">133120</int>
@@ -445,6 +445,7 @@
 							<string key="NSFrame">{{59, -1}, {1093, 773}}</string>
 							<reference key="NSSuperview" ref="325673232"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<string key="NSClassName">NSView</string>
 						</object>
