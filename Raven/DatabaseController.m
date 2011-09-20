@@ -79,7 +79,6 @@ static DatabaseController *sharedUserManager = nil;
     fileManager = nil; 
 	[fileManager release];
     
-    
 }
 
 -(void)readBookmarkFromDatabase:(int)type order:(int)order {

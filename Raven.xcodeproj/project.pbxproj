@@ -227,6 +227,7 @@
 		9F8A1CDD13FDA49C00DD291C /* NavigatorNoBottom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F8A1CDF13FDA49C00DD291C /* NavigatorNoBottom.xib */; };
 		9F8A1CE513FDA6EF00DD291C /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8A1CE613FDA6EF00DD291C /* PXListViewCell.m */; };
 		9F8A1CE713FDA99300DD291C /* NavigatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8A1CE813FDA99300DD291C /* NavigatorViewController.m */; };
+		9F9E525F1428E1EE00F0F703 /* LBProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9E525E1428E1EE00F0F703 /* LBProgressBar.m */; };
 		9FAFB8DE14053517005B94F5 /* MediumSiteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FAFB8DD14053517005B94F5 /* MediumSiteIcon.png */; };
 		9FB6999013CD8505002EAEBA /* AboutPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6998F13CD8505002EAEBA /* AboutPanel.m */; };
 		9FB6999413CD8566002EAEBA /* AboutPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FB6999313CD8566002EAEBA /* AboutPanel.xib */; };
@@ -550,6 +551,8 @@
 		9F8A1CDE13FDA49C00DD291C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/NavigatorNoBottom.xib; sourceTree = "<group>"; };
 		9F8A1CE613FDA6EF00DD291C /* PXListViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PXListViewCell.m; sourceTree = "<group>"; };
 		9F8A1CE813FDA99300DD291C /* NavigatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigatorViewController.m; sourceTree = "<group>"; };
+		9F9E525D1428E1EE00F0F703 /* LBProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBProgressBar.h; sourceTree = "<group>"; };
+		9F9E525E1428E1EE00F0F703 /* LBProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBProgressBar.m; sourceTree = "<group>"; };
 		9FAFB8DD14053517005B94F5 /* MediumSiteIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MediumSiteIcon.png; sourceTree = "<group>"; };
 		9FB6998E13CD8505002EAEBA /* AboutPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutPanel.h; sourceTree = "<group>"; };
 		9FB6998F13CD8505002EAEBA /* AboutPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutPanel.m; sourceTree = "<group>"; };
@@ -872,6 +875,8 @@
 		69F4485E138A249000432BC7 /* Subclass */ = {
 			isa = PBXGroup;
 			children = (
+				9F9E525D1428E1EE00F0F703 /* LBProgressBar.h */,
+				9F9E525E1428E1EE00F0F703 /* LBProgressBar.m */,
 				9F2501E8141BC0B30094D79C /* INAppStoreWindow.h */,
 				9F2501E9141BC0B30094D79C /* INAppStoreWindow.m */,
 				69A15D62138702CB0097FD71 /* TextFieldController.h */,
@@ -913,8 +918,6 @@
 				69F8A090133CD50300E32E6D /* RavenAppDelegate.m */,
 				69D902F9134B9F990097F30F /* DownloadViewController.h */,
 				69D902FA134B9F990097F30F /* DownloadViewController.m */,
-				9F79C1E113D0CA160039A1CB /* DownloadDelegate.h */,
-				9F79C1E213D0CA160039A1CB /* DownloadDelegate.m */,
 			);
 			name = "Main Views";
 			sourceTree = "<group>";
@@ -976,6 +979,7 @@
 				9FC3B79C14038C5700E28D71 /* Other controller */,
 				9FC3B79B14038C5500E28D71 /* Windows */,
 				69F4485F138A24B300432BC7 /* Main Views */,
+				9F69AB6F14272A79003AE44B /* Delegate */,
 				69F4485E138A249000432BC7 /* Subclass */,
 				9F03B6CE1402D8EF00985D32 /* Bookmark cell */,
 				6967C3EB13995A17004B8AAB /* History Cell */,
@@ -1097,6 +1101,15 @@
 				9F53F8DC13F569BF0025C821 /* update_icon.png */,
 			);
 			name = "setting window";
+			sourceTree = "<group>";
+		};
+		9F69AB6F14272A79003AE44B /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				9F79C1E113D0CA160039A1CB /* DownloadDelegate.h */,
+				9F79C1E213D0CA160039A1CB /* DownloadDelegate.m */,
+			);
+			name = Delegate;
 			sourceTree = "<group>";
 		};
 		9F70414713C658B40068C85F /* Home Screen */ = {
@@ -1609,6 +1622,7 @@
 				9FC2709314101E8100EAFD3C /* GGReadability.m in Sources */,
 				9F2501EA141BC0B30094D79C /* INAppStoreWindow.m in Sources */,
 				9FF75E2A141D532600910A65 /* EMKeychainItem.m in Sources */,
+				9F9E525F1428E1EE00F0F703 /* LBProgressBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

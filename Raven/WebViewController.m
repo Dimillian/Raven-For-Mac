@@ -10,6 +10,7 @@
 #import "RavenAppDelegate.h"
 #import "MainWindowController.h"
 
+#define GOOGLE_SEARCH_URL @"http://www.google.com/search?q="
 
 @implementation WebViewController
 @synthesize passedUrl, switchView, tabsButton, webview, address, tabview; 
@@ -457,7 +458,7 @@
         if (addressTo != nil) {
             //Parse it and change the space by +
             addressTo = [addressTo stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-            addressTo = [NSString stringWithFormat:@"http://www.google.com/search?q=%@", addressTo];
+            addressTo = [NSString stringWithFormat:GOOGLE_SEARCH_URL@"%@", addressTo];
             //launch a google search
             [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:addressTo]]];
         }

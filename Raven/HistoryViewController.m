@@ -156,7 +156,7 @@
     
 }
 
-- (void)controlTextDidChange:(NSNotification *)aNotification
+-(void)controlTextDidChange:(NSNotification *)aNotification
 {
     if ([[search stringValue]isEqualToString:@""])
     {
@@ -166,7 +166,6 @@
     {
         isSearching = YES; 
     }
-    
     [self check:nil];
 }
 -(IBAction)deleteAnHistoryItem:(id)sender

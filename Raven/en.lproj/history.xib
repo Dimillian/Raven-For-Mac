@@ -197,7 +197,7 @@
 												<string key="NSFrameSize">{240, 535}</string>
 												<reference key="NSSuperview" ref="170161463"/>
 												<reference key="NSWindow"/>
-												<reference key="NSNextKeyView" ref="620268379"/>
+												<reference key="NSNextKeyView" ref="1032450507"/>
 											</object>
 										</object>
 										<string key="NSFrame">{{1, 1}, {227, 535}}</string>
@@ -245,7 +245,7 @@
 								<string key="NSFrame">{{-1, 15}, {229, 537}}</string>
 								<reference key="NSSuperview" ref="465713705"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="1032450507"/>
+								<reference key="NSNextKeyView" ref="170161463"/>
 								<int key="NSsFlags">133778</int>
 								<reference key="NSVScroller" ref="620268379"/>
 								<reference key="NSHScroller" ref="1032450507"/>
@@ -383,7 +383,6 @@
 								<string key="NSFrame">{{0, -4}, {524, 25}}</string>
 								<reference key="NSSuperview" ref="1009142532"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSImageCell" key="NSCell" id="619635035">

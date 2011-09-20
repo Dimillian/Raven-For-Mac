@@ -71,6 +71,9 @@
     [[cell iconDownload]setImage:[workspace iconForFile:download.path]];
     [[cell openButton]setTarget:self]; 
     [[cell openButton]setAction:@selector(openFile:)];
+    if (download.size == download.progressBytes) {
+        [[cell progressText]setStringValue:@"Download complete!"];
+    }
 
 
 
