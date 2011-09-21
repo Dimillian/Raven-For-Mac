@@ -587,11 +587,11 @@ var HYPE = (function HYPE() {
 			\
 			@-webkit-keyframes HYPE_swapToFront {\
 				0% {\
-					-webkit-transform: translate3d(-175px, 0px, -600px) rotateY(50deg);\
+					-webkit-transform: translate3d(-230px, 0px, -600px) rotateY(50deg);\
 					-webkit-animation-timing-function: ease-in;\
 				}\
 				50% {\
-					-webkit-transform: translate3d(-350px, 0px, -300px) rotateY(40deg);\
+					-webkit-transform: translate3d(-460px, 0px, -300px) rotateY(40deg);\
 					-webkit-animation-timing-function: ease-out;\
 				}\
 				100% {\
@@ -605,12 +605,12 @@ var HYPE = (function HYPE() {
 					-webkit-animation-timing-function: ease-in;\
 				}\
 				50% {\
-					-webkit-transform: translate3d(350px, 0px, -300px) rotateY(-20deg);\
+					-webkit-transform: translate3d(460px, 0px, -300px) rotateY(-20deg);\
 					-webkit-animation-timing-function: ease-out;\
 				}\
 			\
 				100% {\
-					-webkit-transform: translate3d(175px, 0px, -600px) rotateY(-50deg);\
+					-webkit-transform: translate3d(230px, 0px, -600px) rotateY(-50deg);\
 				}\
 			}\
 			\
@@ -729,7 +729,11 @@ var HYPE = (function HYPE() {
 				if(this.currentSceneActionHandlers.hasOwnProperty(eventName) == false) {
 					continue;
 				}
-				document.removeEventListener(eventName, this.currentSceneActionHandlers[eventName]);
+				if (document.removeEventListener) {
+					document.removeEventListener(eventName, this.currentSceneActionHandlers[eventName], false);
+				} else if (document.detachEvent) {
+					document.detachEvent("on" + eventName, this.currentSceneActionHandlers[eventName]);
+				}
 			}
 			this.currentSceneActionHandlers = {};
 		}
@@ -1127,7 +1131,11 @@ var HYPE = (function HYPE() {
 			var keyFunction = this.Apply.CreateActionHandler(this, this.scenes[sceneIndex][handlerName], document);
 			var eventName = keyHandlerNames[handlerName];
 			this.currentSceneActionHandlers[eventName] = keyFunction;
-			document.addEventListener(eventName, keyFunction);
+			if (document.addEventListener) {
+				document.addEventListener(eventName, keyFunction, false);
+			} else if (document.attachEvent) {
+				document.attachEvent("on" + eventName, keyFunction);
+			}
 		}
 	}
 
@@ -2252,7 +2260,7 @@ var HYPE = (function HYPE() {
 					}
 
 					var mute = "100";					
-					if(div.getAttribute("mute") != null && (div.getAttribute("mute") == "loop" || div.getAttribute("mute") == "1" || div.getAttribute("mute") == "True" || div.getAttribute("mute") == "true")) {
+					if(div.getAttribute("mute") != null && (div.getAttribute("mute") == "mute" || div.getAttribute("mute") == "1" || div.getAttribute("mute") == "True" || div.getAttribute("mute") == "true")) {
 						mute = "0";
 					}
 					

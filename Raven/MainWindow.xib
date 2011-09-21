@@ -96,7 +96,7 @@
 							<string key="NSFrame">{{-17, 20}, {76, 763}}</string>
 							<reference key="NSSuperview" ref="325673232"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="535359061"/>
+							<reference key="NSNextKeyView" ref="771680320"/>
 							<string key="NSReuseIdentifierKey">_NS:1658</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSImageCell" key="NSCell" id="706625867">
@@ -116,7 +116,7 @@
 						</object>
 						<object class="NSScrollView" id="535359061">
 							<reference key="NSNextResponder" ref="325673232"/>
-							<int key="NSvFlags">20</int>
+							<int key="NSvFlags">276</int>
 							<array class="NSMutableArray" key="NSSubviews">
 								<object class="NSClipView" id="383234069">
 									<reference key="NSNextResponder" ref="535359061"/>
@@ -124,7 +124,7 @@
 									<array class="NSMutableArray" key="NSSubviews">
 										<object class="NSView" id="549827444">
 											<reference key="NSNextResponder" ref="383234069"/>
-											<int key="NSvFlags">18</int>
+											<int key="NSvFlags">274</int>
 											<array class="NSMutableArray" key="NSSubviews">
 												<object class="NSBox" id="277808243">
 													<reference key="NSNextResponder" ref="549827444"/>
@@ -268,7 +268,7 @@
 																	<string key="NSFrame">{{-17, 113}, {1, 32}}</string>
 																	<reference key="NSSuperview" ref="667449050"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView" ref="771680320"/>
+																	<reference key="NSNextKeyView" ref="916339109"/>
 																	<int key="NSViewLayerContentsRedrawPolicy">2</int>
 																	<bool key="NSEnabled">YES</bool>
 																	<object class="NSButtonCell" key="NSCell" id="202223439">
@@ -321,7 +321,7 @@
 															<int key="NSViewLayerContentsRedrawPolicy">2</int>
 														</object>
 													</array>
-													<string key="NSFrame">{{12, -104}, {64, 857}}</string>
+													<string key="NSFrame">{{12, -106}, {64, 857}}</string>
 													<reference key="NSSuperview" ref="549827444"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="667449050"/>
@@ -367,16 +367,16 @@
 													</object>
 												</object>
 											</array>
-											<string key="NSFrameSize">{75, 751}</string>
+											<string key="NSFrameSize">{75, 2988}</string>
 											<reference key="NSSuperview" ref="383234069"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
+											<reference key="NSNextKeyView" ref="277808243"/>
 											<bool key="NSViewIsLayerTreeHost">YES</bool>
 											<int key="NSViewLayerContentsRedrawPolicy">2</int>
 											<string key="NSReuseIdentifierKey">_NS:414</string>
 										</object>
 									</array>
-									<string key="NSFrameSize">{90, 763}</string>
+									<string key="NSFrameSize">{90, 3000}</string>
 									<reference key="NSSuperview" ref="535359061"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="549827444"/>
@@ -416,7 +416,7 @@
 									<double key="NSPercent">0.50602412223815918</double>
 								</object>
 							</array>
-							<string key="NSFrame">{{-17, 20}, {90, 763}}</string>
+							<string key="NSFrame">{{-17, 20}, {90, 3000}}</string>
 							<reference key="NSSuperview" ref="325673232"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="809745902"/>
@@ -453,10 +453,10 @@
 					<string key="NSFrameSize">{1152, 772}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
-					<reference key="NSNextKeyView" ref="916339109"/>
+					<reference key="NSNextKeyView" ref="535359061"/>
 					<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{350, 522}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<int key="NSWindowCollectionBehavior">128</int>

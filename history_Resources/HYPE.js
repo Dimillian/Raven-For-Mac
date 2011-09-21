@@ -729,7 +729,11 @@ var HYPE = (function HYPE() {
 				if(this.currentSceneActionHandlers.hasOwnProperty(eventName) == false) {
 					continue;
 				}
-				document.removeEventListener(eventName, this.currentSceneActionHandlers[eventName]);
+				if (document.removeEventListener) {
+					document.removeEventListener(eventName, this.currentSceneActionHandlers[eventName], false);
+				} else if (document.detachEvent) {
+					document.detachEvent("on" + eventName, this.currentSceneActionHandlers[eventName]);
+				}
 			}
 			this.currentSceneActionHandlers = {};
 		}
@@ -1127,7 +1131,11 @@ var HYPE = (function HYPE() {
 			var keyFunction = this.Apply.CreateActionHandler(this, this.scenes[sceneIndex][handlerName], document);
 			var eventName = keyHandlerNames[handlerName];
 			this.currentSceneActionHandlers[eventName] = keyFunction;
-			document.addEventListener(eventName, keyFunction);
+			if (document.addEventListener) {
+				document.addEventListener(eventName, keyFunction, false);
+			} else if (document.attachEvent) {
+				document.attachEvent("on" + eventName, keyFunction);
+			}
 		}
 	}
 
@@ -2252,7 +2260,7 @@ var HYPE = (function HYPE() {
 					}
 
 					var mute = "100";					
-					if(div.getAttribute("mute") != null && (div.getAttribute("mute") == "loop" || div.getAttribute("mute") == "1" || div.getAttribute("mute") == "True" || div.getAttribute("mute") == "true")) {
+					if(div.getAttribute("mute") != null && (div.getAttribute("mute") == "mute" || div.getAttribute("mute") == "1" || div.getAttribute("mute") == "True" || div.getAttribute("mute") == "true")) {
 						mute = "0";
 					}
 					

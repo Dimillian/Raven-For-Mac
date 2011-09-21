@@ -185,7 +185,7 @@
 
 -(void)windowDidResize:(NSNotification *)notification
 {
-   //[rightView setFrame:NSMakeRect(rightView.frame.origin.x, rightView.frame.origin.y, rightView.frame.size.width, 800)]; 
+   //[rightView setFrame:NSMakeRect(rightView.frame.origin.x, rightView.frame.origin.y, rightView.frame.size.width, 4000)];
 }
 
 -(void)updateSmartBarUi
