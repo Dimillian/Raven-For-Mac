@@ -155,10 +155,7 @@
     {
         
     }
-    
-    
-    
-    
+
 }
 
 
@@ -400,8 +397,7 @@
         [[[self faviconTab]animator]setAlphaValue:1.0]; 
         [[temp animator]setAlphaValue:1.0]; 
         if ([title isEqualToString:@"Raven Welcome Page"] || 
-            [title isEqualToString:@"Start"] || [title isEqualToString:@"Bookmarks"] || 
-            [title isEqualToString:@"history"] || 
+            [title isEqualToString:@"Raven Internal Page"] ||            
             [[webview mainFrameURL]isEqualToString:@"http://go.raven.io/"])
         {
             [temp setImage:[NSImage imageNamed:@"ravenico.png"]]; 
@@ -440,12 +436,7 @@
                 
              }
         }
-
-        
-        
     }  
-    
-    
 }
 
 
@@ -463,8 +454,6 @@
             [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:addressTo]]];
         }
     }
-
-    
 }
 
 

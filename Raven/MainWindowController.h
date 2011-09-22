@@ -31,6 +31,7 @@
     IBOutlet NSView *mainView; 
     IBOutlet NSView *backupView; 
     IBOutlet NSScrollView *smartBarScrollView; 
+    CGFloat staticRightViewHeight;
     
     
     //The view under the button, later texture will be applied

@@ -16,6 +16,8 @@
 #define app_position_x -7
 #define app_view_w 108
 #define app_view_h 278
+#define initial_app_space 518
+#define bottom_bar_size 40
 
 
 
@@ -93,7 +95,7 @@
 }
 
 
-- (void)windowDidLoad
+- (void)awakeFromNib
 {
     [super windowDidLoad];
     [[self window]setDelegate:self]; 
@@ -106,8 +108,7 @@
     //init view controller with appropriate nib
     navigatorview =
     [[NavigatorViewController alloc] init];
-    
-    [self raven:nil]; 
+    [self initSmartBar]; 
     
     historyviewcontroller =
     [[HistoryViewController alloc] initWithNibName:@"history" bundle:nil];
@@ -121,12 +122,15 @@
     settingview = 
     [[SettingViewController alloc]initWithNibName:@"Settings" bundle:nil]; 
     
-    
-    [self initSmartBar]; 
     previousIndex = -1;
     
 
     
+}
+
+-(void)windowDidResize:(NSNotification *)notification
+{
+    [self updateSmartBarUi];
 }
 
 -(void)initSmartBar
@@ -148,15 +152,16 @@
         [appList addObject:smartApp]; 
         [[appList objectAtIndex:x]view];
         [rightView addSubview:[[appList objectAtIndex:x]view]];
-        [[smartApp view]setFrame:NSMakeRect(app_position_x, initial_position - (retracted_app_height*x), app_view_w, app_view_h)];
         [smartApp retractApp:nil];
         [URL release]; 
         [smartApp release]; 
     }
     [folders release];
+    [self resetSmartBarUi];
+    [self updateSmartBarUi];
+    [self raven:nil];
 }
  
-//The method, actually make the sidebar works all together, took me time to find it out.
 -(void)itemDidExpand:(RASmartBarViewController *)smartBarApp
 {
     NSInteger x; 
@@ -175,32 +180,38 @@
         }
             
     }
-    
-
     [self hideall]; 
     [self animate:12]; 
     previousIndex = index;
     
 }
 
--(void)windowDidResize:(NSNotification *)notification
-{
-   //[rightView setFrame:NSMakeRect(rightView.frame.origin.x, rightView.frame.origin.y, rightView.frame.size.width, 4000)];
-}
 
 -(void)updateSmartBarUi
 {
-    
+    NSInteger totalSize = initial_position + ([appList count] * retracted_app_height);
+    if (totalSize < self.window.frame.size.height) {
+        [rightView setFrameSize:NSMakeSize(rightView.frame.size.width, self.window.frame.size.height - bottom_bar_size)];
+    }
+    else
+    {
+        [rightView setFrameSize:NSMakeSize(rightView.frame.size.width, 
+        bottom_bar_size + self.window.frame.size.height + (totalSize - self.window.frame.size.height))];
+    }
     
 }
 
 -(void)resetSmartBarUi
 {
+    NSPoint pt = NSMakePoint(0.0, [[smartBarScrollView documentView]
+                                   bounds].size.height);
+    [[smartBarScrollView documentView] scrollPoint:pt];
+    [smartBarScrollView reflectScrolledClipView: [smartBarScrollView contentView]]; 
     NSInteger count  = [appList count];
     NSInteger x; 
     for (x=0; x<count; x++) {
          RASmartBarViewController *smartApp = [appList objectAtIndex:x]; 
-         [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, initial_position - (retracted_app_height*x), app_view_w, app_view_h)];
+         [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, rightView.frame.size.height - initial_app_space - (retracted_app_height*x), app_view_w, app_view_h)];
          [smartApp retractApp:nil];
 
      }
@@ -445,10 +456,10 @@
             [bookmarkButton setEnabled:NO];
             [[downloadButton animator]setAlphaValue:0.0]; 
             [downloadButton setEnabled:NO];
-            [[homeButton animator ]setFrame:NSMakeRect(16, 810, 32, 32)]; 
-            [[historyButton animator ]setFrame:NSMakeRect(16, 810, 32, 32)];
-            [[bookmarkButton animator ]setFrame:NSMakeRect(16, 810, 32, 32)];
-            [[downloadButton animator ]setFrame:NSMakeRect(16, 810, 32, 32)];
+            [[homeButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -65, 32, 32)]; 
+            [[historyButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -65, 32, 32)];
+            [[bookmarkButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -65, 32, 32)];
+            [[downloadButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -65, 32, 32)];
             
             break;
         case 13:
@@ -461,10 +472,10 @@
             [bookmarkButton setEnabled:YES];
             [[downloadButton animator]setAlphaValue:1.0];
             [downloadButton setEnabled:YES];
-            [[homeButton animator ]setFrame:NSMakeRect(16, 758, 32, 32)];
-            [[historyButton animator ]setFrame:NSMakeRect(16, 708, 32, 32)];
-            [[bookmarkButton animator ]setFrame:NSMakeRect(16, 658, 32, 32)];
-            [[downloadButton animator ]setFrame:NSMakeRect(16, 608, 32, 32)]; 
+            [[homeButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -115, 32, 32)];
+            [[historyButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -165, 32, 32)];
+            [[bookmarkButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -215, 32, 32)];
+            [[downloadButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -265, 32, 32)]; 
             default:
             break;
     }

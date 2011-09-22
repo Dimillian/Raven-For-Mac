@@ -16,7 +16,7 @@
 #define DO_HAVE_LAUNCHED @"doHaveLaunched"
 #define AUTO_SAVE_INSTAPAPER @"AutoSaveInstapaper"
 #define OPEN_TAB_IN_BACKGROUND @"OpenTabInBackground"
-#define HAVE_IMPORTED_FROM_SAFARI @"HaveImportedSafariBar"
+#define HAVE_IMPORTED_FROM_SAFARI @"HaveImportedSafariBar   "
 #define LOGIN_INSTAPAPER @"LoginInstapaper"
 #define PASSWORD_INSTAPAPER @"PasswordInstapaper"
 
