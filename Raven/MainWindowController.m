@@ -108,7 +108,6 @@
     //init view controller with appropriate nib
     navigatorview =
     [[NavigatorViewController alloc] init];
-    [self initSmartBar]; 
     
     historyviewcontroller =
     [[HistoryViewController alloc] initWithNibName:@"history" bundle:nil];
@@ -123,9 +122,15 @@
     [[SettingViewController alloc]initWithNibName:@"Settings" bundle:nil]; 
     
     previousIndex = -1;
+    [self launchRuntime];
     
+}
 
-    
+-(void)launchRuntime
+{  
+    [self initSmartBar]; 
+    [self updateSmartBarUi];
+    [self raven:nil];
 }
 
 -(void)windowDidResize:(NSNotification *)notification
@@ -157,9 +162,6 @@
         [smartApp release]; 
     }
     [folders release];
-    [self resetSmartBarUi];
-    [self updateSmartBarUi];
-    [self raven:nil];
 }
  
 -(void)itemDidExpand:(RASmartBarViewController *)smartBarApp
@@ -190,7 +192,7 @@
 -(void)updateSmartBarUi
 {
     NSInteger totalSize = initial_position + ([appList count] * retracted_app_height);
-    if (totalSize < self.window.frame.size.height) {
+    if ((totalSize + 60) < self.window.frame.size.height) {
         [rightView setFrameSize:NSMakeSize(rightView.frame.size.width, self.window.frame.size.height - bottom_bar_size)];
     }
     else
@@ -203,10 +205,6 @@
 
 -(void)resetSmartBarUi
 {
-    NSPoint pt = NSMakePoint(0.0, [[smartBarScrollView documentView]
-                                   bounds].size.height);
-    [[smartBarScrollView documentView] scrollPoint:pt];
-    [smartBarScrollView reflectScrolledClipView: [smartBarScrollView contentView]]; 
     NSInteger count  = [appList count];
     NSInteger x; 
     for (x=0; x<count; x++) {
@@ -216,6 +214,10 @@
 
      }
     previousIndex = -1;
+    NSPoint pt = NSMakePoint(0.0, [[smartBarScrollView documentView]
+                                   bounds].size.height);
+    [[smartBarScrollView documentView] scrollPoint:pt];
+    [smartBarScrollView reflectScrolledClipView: [smartBarScrollView contentView]]; 
 }
 
 
@@ -228,11 +230,12 @@
         [[centeredView animator]setFrame:[backupView frame]]; 
         [NSAnimationContext beginGrouping];
         [[NSAnimationContext currentContext] setDuration:0.3];
-        [[smartBarScrollView animator]setAlphaValue:1.0];
         [[rightView  animator]setAlphaValue:1.0];
+        [[smartBarScrollView  animator]setAlphaValue:1.0];
         [[settingButton animator]setAlphaValue:1.0];
         [NSAnimationContext endGrouping];
         [rightView setToolTip:@""]; 
+        [smartBarScrollView setHidden:NO];
     
     }
     else{
@@ -241,10 +244,12 @@
         [[NSAnimationContext currentContext] setDuration:0.3];  ;
         [[rightView  animator]setAlphaValue:0.0];
         [[settingButton animator]setAlphaValue:0.0];
+        [[smartBarScrollView  animator]setAlphaValue:0.0];
         if ([standardUserDefaults integerForKey:@"SidebarLikeDock"] == 0)
         {
             [settingButton setHidden:YES];
             [[settingButton animator]setHidden:YES];
+            [smartBarScrollView setHidden:YES];
         }
         [NSAnimationContext endGrouping];
         [rightView setToolTip:@"isHidden"];
@@ -258,15 +263,13 @@
 //Method for big button
 -(IBAction)raven:(id)sender
 {
-    //Set the button position
-    [self animate:13]; 
-    //Set the alpha value
     [self SetMenuButton]; 
     //Select the button
     [self home:sender]; 
     //Set the alphe value of the current button
     [[ravenMenuButton animator]setAlphaValue:1.0]; 
     [self resetSmartBarUi];
+    [self animate:13]; 
 }
 
 #pragma mark raven button

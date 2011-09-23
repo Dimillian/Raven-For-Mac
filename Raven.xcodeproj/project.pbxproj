@@ -909,8 +909,6 @@
 				69B313541356395000F3DCFD /* SettingViewController.m */,
 				693A0AC21361F8DB001C309F /* WebViewController.h */,
 				693A0AC31361F8DB001C309F /* WebViewController.m */,
-				9F8A1CCA13FD9E9B00DD291C /* RavenAppDelegate.h */,
-				69F8A090133CD50300E32E6D /* RavenAppDelegate.m */,
 				69D902F9134B9F990097F30F /* DownloadViewController.h */,
 				69D902FA134B9F990097F30F /* DownloadViewController.m */,
 			);
@@ -1101,6 +1099,8 @@
 		9F69AB6F14272A79003AE44B /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
+				9F8A1CCA13FD9E9B00DD291C /* RavenAppDelegate.h */,
+				69F8A090133CD50300E32E6D /* RavenAppDelegate.m */,
 				9F79C1E113D0CA160039A1CB /* DownloadDelegate.h */,
 				9F79C1E213D0CA160039A1CB /* DownloadDelegate.m */,
 			);

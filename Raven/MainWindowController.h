@@ -84,6 +84,7 @@
 -(void)initSmartBar; 
 -(void)updateSmartBarUi;
 -(void)resetSmartBarUi;
+-(void)launchRuntime;
 @property (assign) NSString *passedUrl; 
 @property (assign) NavigatorViewController *navigatorview; 
 @property (assign) NSButton *downloadButton; 

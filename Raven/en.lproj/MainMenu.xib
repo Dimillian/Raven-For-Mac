@@ -929,7 +929,7 @@
 					</object>
 					<object class="NSMenuItem" id="935268334">
 						<reference key="NSMenu" ref="649796088"/>
-						<string key="NSTitle">Smartbar</string>
+						<string key="NSTitle">Smart Bar</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSKeyEquivModMask">1048576</int>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -937,7 +937,7 @@
 						<reference key="NSMixedImage" ref="502551668"/>
 						<string key="NSAction">submenuAction:</string>
 						<object class="NSMenu" key="NSSubmenu" id="644817650">
-							<string key="NSTitle">Smartbar</string>
+							<string key="NSTitle">Smart Bar</string>
 							<object class="NSMutableArray" key="NSMenuItems">
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="NSMenuItem" id="128541136">
