@@ -511,7 +511,6 @@
 								<string key="NSFrame">{{35, 763}, {1, 1}}</string>
 								<reference key="NSSuperview" ref="928699272"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="58904644">
@@ -605,7 +604,6 @@
 						<string key="NSFrame">{{107, -39}, {5, 96}}</string>
 						<reference key="NSSuperview" ref="662933798"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSOffsets">{0, 0}</string>
 						<object class="NSTextFieldCell" key="NSTitleCell">
@@ -1417,11 +1415,13 @@
 					<string>189.CustomClassName</string>
 					<string>189.IBPluginDependency</string>
 					<string>190.CustomClassName</string>
+					<string>190.IBAttributePlaceholdersKey</string>
 					<string>190.IBPluginDependency</string>
 					<string>191.CustomClassName</string>
 					<string>191.IBPluginDependency</string>
 					<string>192.IBPluginDependency</string>
 					<string>193.CustomClassName</string>
+					<string>193.IBAttributePlaceholdersKey</string>
 					<string>193.IBPluginDependency</string>
 					<string>194.CustomClassName</string>
 					<string>194.IBPluginDependency</string>
@@ -1484,11 +1484,27 @@
 					<string>NSButtonSub</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>NSButtonSub</string>
+					<object class="NSMutableDictionary">
+						<string key="NS.key.0">ToolTip</string>
+						<object class="IBToolTipAttribute" key="NS.object.0">
+							<string key="name">ToolTip</string>
+							<reference key="object" ref="620180824"/>
+							<string key="toolTip">Add Tab</string>
+						</object>
+					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>NSButtonSub</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>NSButtonSub</string>
+					<object class="NSMutableDictionary">
+						<string key="NS.key.0">ToolTip</string>
+						<object class="IBToolTipAttribute" key="NS.object.0">
+							<string key="name">ToolTip</string>
+							<reference key="object" ref="518533517"/>
+							<string key="toolTip">Refresh</string>
+						</object>
+					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>NSButtonSub</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

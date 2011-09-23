@@ -33,7 +33,7 @@
     [self addTrackingArea:[area autorelease]];
 }
 
-
+/*
 -(void)showToolTip
 {
     if ([self toolTip] != nil) { 
@@ -86,7 +86,7 @@
     [attachedWindow orderOut:self];
     [attachedWindow release], attachedWindow = nil;; 
 }
-
+*/
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
@@ -96,6 +96,7 @@
         if (standardUserDefaults) {
             if ([standardUserDefaults integerForKey:BUTTON_TOOLTIP] == 1) {
                 //timer = [NSTimer scheduledTimerWithTimeInterval:(0.0) target:self selector:@selector(showToolTip) userInfo:nil repeats:NO];
+                    [super mouseEntered:theEvent];
             }
         }
     }
@@ -107,8 +108,8 @@
     if ([self isEnabled] == YES) {
         [[self animator]setAlphaValue:1.0f]; 
     }
-    
-    [self closeSuggestionBox];
+    [super mouseExited:theEvent];
+    //[self closeSuggestionBox];
 }
 
 

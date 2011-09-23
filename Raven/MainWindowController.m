@@ -97,6 +97,7 @@
 
 - (void)awakeFromNib
 {
+    
     [super windowDidLoad];
     [[self window]setDelegate:self]; 
     if (IS_RUNNING_LION) {
@@ -186,6 +187,7 @@
     [self animate:12]; 
     previousIndex = index;
     
+    
 }
 
 
@@ -255,6 +257,7 @@
         [rightView setToolTip:@"isHidden"];
         
     }
+    
 }
 
 #pragma mark -

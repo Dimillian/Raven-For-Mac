@@ -17,7 +17,7 @@
     NSTimer *timer; 
     NSImage *tempImage;
 }
--(void)closeSuggestionBox;
--(void)showToolTip; 
+//-(void)closeSuggestionBox;
+//-(void)showToolTip; 
 
 @end

@@ -345,6 +345,7 @@
         [[temp animator]setAlphaValue:0.0];
         [[[self faviconTab]animator]setAlphaValue:0.0];
         [[self progressTab]startAnimation:self];
+        
     }
     
 }
