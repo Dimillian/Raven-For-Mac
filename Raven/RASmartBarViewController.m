@@ -9,7 +9,6 @@
 #import "RASmartBarViewController.h"
 #import "MainWindowController.h"
 
-#define application_support_path @"~/Library/Application Support/RavenApp/app/"
 
 //button size and position
 #define button_x 35
@@ -17,7 +16,7 @@
 #define button_h 32
 
 @implementation RASmartBarViewController
-@synthesize folderName, appName, firstURL, secondURL, thirdURL, fourthURL, state, delegate; 
+@synthesize folderName, appName, firstURL, secondURL, thirdURL, fourthURL, state, delegate, selectedButton; 
 
 
 -(id)init

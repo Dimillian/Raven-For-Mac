@@ -20,6 +20,12 @@
 #define LOGIN_INSTAPAPER @"LoginInstapaper"
 #define PASSWORD_INSTAPAPER @"PasswordInstapaper"
 
+#define application_support_path @"~/Library/Application Support/RavenApp/app/"
+#define PLIST_KEY_APPNAME @"appname"
+#define PLIST_KEY_FOLDER @"foldername"
+#define PLIST_KEY_URL @"URL"
+#define PLIST_KEY_DICTIONNARY @"app"
+#define PLIST_PATH @"~/Library/Application Support/RavenApp/app/app.plist"
 #ifndef IS_RUNNING_LION
 #define IS_RUNNING_LION ((int)kCFCoreFoundationVersionNumber > (int)550)
 #endif

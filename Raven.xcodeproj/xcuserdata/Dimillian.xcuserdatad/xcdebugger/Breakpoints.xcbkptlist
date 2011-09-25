@@ -107,11 +107,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/RASmartBarViewController.m"
-         timestampString = "337980643.571048"
+         timestampString = "338627902.165429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "67"
-         endingLineNumber = "67"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
          landmarkName = "-awakeFromNib"
          landmarkType = "5">
       </FileBreakpoint>

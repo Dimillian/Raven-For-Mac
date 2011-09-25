@@ -199,6 +199,42 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     
 }
 
+-(void)importSelectedApp:(id)sender
+{
+    NSOpenPanel *tvarNSOpenPanelObj	= [NSOpenPanel openPanel];
+    [tvarNSOpenPanelObj setTitle:@"Please select an application bundle file that have been exported with rSDK"];
+    [tvarNSOpenPanelObj setAllowedFileTypes:[NSArray arrayWithObject:@"bundle"]];
+    NSInteger tvarNSInteger	= [tvarNSOpenPanelObj runModal];
+    if(tvarNSInteger == NSOKButton){
+        
+    } else if(tvarNSInteger == NSCancelButton) {
+     	
+     	return;
+    } else {
+     	return;
+    }  
+    
+    NSString * tvarDirectory = [[tvarNSOpenPanelObj URL]absoluteString];
+    tvarDirectory = [tvarDirectory stringByReplacingOccurrencesOfString:@"file://localhost" withString:@""];
+    NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", tvarDirectory];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
+    NSString *appFolder = [dict objectForKey:PLIST_KEY_FOLDER];
+    NSString *appPlist = [PLIST_PATH stringByExpandingTildeInPath];
+    NSMutableDictionary *dictToEdit = [NSMutableDictionary dictionaryWithContentsOfFile:appPlist];
+    NSMutableArray *folders = [[dictToEdit objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    [folders addObject:dict];
+    [dictToEdit setObject:folders forKey:PLIST_KEY_DICTIONNARY];
+    [dictToEdit writeToFile:appPlist atomically:YES];
+    
+    [folders release];
+    NSString *applicationSupportPath = [[NSString stringWithFormat:application_support_path@"%@", appFolder]stringByExpandingTildeInPath];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager copyItemAtPath:tvarDirectory toPath:applicationSupportPath error:nil];
+    [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/app.plist", applicationSupportPath] error:nil];
+
+
+}
+
 - (void)dealloc
 {
  

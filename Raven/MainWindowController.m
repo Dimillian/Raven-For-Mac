@@ -213,6 +213,7 @@
          RASmartBarViewController *smartApp = [appList objectAtIndex:x]; 
          [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, rightView.frame.size.height - initial_app_space - (retracted_app_height*x), app_view_w, app_view_h)];
          [smartApp retractApp:nil];
+        
 
      }
     previousIndex = -1;

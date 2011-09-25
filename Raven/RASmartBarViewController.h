@@ -59,6 +59,7 @@
 @property (copy) NSString *secondURL;
 @property (copy) NSString *thirdURL;
 @property (copy) NSString *fourthURL;
+@property int selectedButton;
 @property int state;
 @end
 
