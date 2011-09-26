@@ -426,6 +426,7 @@
                                                                 delegate:dlDelegate];
         [theDownload release]; 
         [dlDelegate release];  
+        [webView stopLoading:nil];
     }
 }
 

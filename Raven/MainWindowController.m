@@ -205,6 +205,31 @@
     
 }
 
+-(void)newAppInstalled
+{
+    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
+    NSDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    NSArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    NSDictionary *item = [folders lastObject];
+    NSArray *URL = [[item objectForKey:PLIST_KEY_URL]mutableCopy];
+    RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self];
+    smartApp.folderName = [item objectForKey:PLIST_KEY_FOLDER];
+    smartApp.firstURL = [URL objectAtIndex:0];
+    smartApp.secondURL = [URL objectAtIndex:1]; 
+    smartApp.thirdURL = [URL objectAtIndex:2]; 
+    smartApp.fourthURL = [URL objectAtIndex:3];
+    [appList addObject:smartApp]; 
+    [[appList lastObject]view];
+    [rightView addSubview:[[appList lastObject]view]];
+    [smartApp retractApp:nil];
+    [URL release]; 
+    [smartApp release]; 
+    [folders release];
+    [self updateSmartBarUi];
+    [self raven:nil];
+
+}
+
 -(void)resetSmartBarUi
 {
     NSInteger count  = [appList count];

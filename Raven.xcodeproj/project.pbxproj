@@ -240,6 +240,7 @@
 		9FC3B7A81403B1D400E28D71 /* Bookmark 16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FC3B7A61403B1D400E28D71 /* Bookmark 16x16.png */; };
 		9FC3B7A91403B1D400E28D71 /* Rate 16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FC3B7A71403B1D400E28D71 /* Rate 16x16.png */; };
 		9FD180FE1430B22C004B3F12 /* rSDk.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9FD180FD1430B22C004B3F12 /* rSDk.icns */; };
+		9FD1812C1430C57F004B3F12 /* Builder.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9FD1812B1430C57F004B3F12 /* Builder.icns */; };
 		9FEF52C7140E2F71004A16D0 /* delete_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FEF52C6140E2F71004A16D0 /* delete_big.png */; };
 		9FF1017E13CCF03500B8F942 /* TabFaviconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF1017D13CCF03500B8F942 /* TabFaviconView.m */; };
 		9FF4B9D31408D6DB005FCE7F /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D11408D6DB005FCE7F /* eye.png */; };
@@ -566,6 +567,7 @@
 		9FC3B7A61403B1D400E28D71 /* Bookmark 16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bookmark 16x16.png"; sourceTree = "<group>"; };
 		9FC3B7A71403B1D400E28D71 /* Rate 16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rate 16x16.png"; sourceTree = "<group>"; };
 		9FD180FD1430B22C004B3F12 /* rSDk.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = rSDk.icns; sourceTree = "<group>"; };
+		9FD1812B1430C57F004B3F12 /* Builder.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Builder.icns; sourceTree = "<group>"; };
 		9FEF52C6140E2F71004A16D0 /* delete_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_big.png; sourceTree = "<group>"; };
 		9FF1017C13CCF03500B8F942 /* TabFaviconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabFaviconView.h; sourceTree = "<group>"; };
 		9FF1017D13CCF03500B8F942 /* TabFaviconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabFaviconView.m; sourceTree = "<group>"; };
@@ -641,6 +643,7 @@
 		690C5546133DCD27005D50B3 /* ressources */ = {
 			isa = PBXGroup;
 			children = (
+				9FD1812B1430C57F004B3F12 /* Builder.icns */,
 				9FD180FD1430B22C004B3F12 /* rSDk.icns */,
 				9FC2709614102F1F00EAFD3C /* text_off.png */,
 				9FC2709714102F1F00EAFD3C /* text_on.png */,
@@ -1531,6 +1534,7 @@
 				9FC2709914102F1F00EAFD3C /* text_on.png in Resources */,
 				9F8654081423348B00F32B77 /* app in Resources */,
 				9FD180FE1430B22C004B3F12 /* rSDk.icns in Resources */,
+				9FD1812C1430C57F004B3F12 /* Builder.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

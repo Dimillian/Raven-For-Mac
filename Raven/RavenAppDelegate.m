@@ -244,30 +244,43 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         NSFileManager *fileManager = [NSFileManager defaultManager];
         [fileManager copyItemAtPath:path toPath:applicationSupportPath error:nil];
         [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/app.plist", applicationSupportPath] error:nil];
-        NSAlert *alert  = [[NSAlert alloc]init];
-        [alert setInformativeText:NSLocalizedString(@"You need to create a new window to see it", @"appImportedWithSuccess")];
-        [alert setMessageText:NSLocalizedString(@"Application imported with success", @"appImportedWithSuccessMessage")];
-        [alert runModal]; 
-        [alert release]; 
+        NSApplication *app = [NSApplication sharedApplication];  
+        NSArray *windowsArray = [app windows];
+        int i;
+        int count = [windowsArray count]; 
+        for (i = 0; i<count; i++) {
+            if ([[[windowsArray objectAtIndex:i]windowController]isKindOfClass:[MainWindowController class]]) {
+                MainWindowController *Mainwindow = [[windowsArray objectAtIndex:i]windowController]; 
+                [Mainwindow newAppInstalled];
+               
+            }
+        }
     }
-    
 }
 
 
 -(BOOL)application:(NSApplication *)sender openFile:(NSString *)filename
 {
+    if ([filename hasSuffix:@".rpa"]) {
     opennedDocumentPath = filename;
     [opennedDocumentPath retain];
     NSAlert *alert = [[NSAlert alloc]init];
-    [alert setMessageText:NSLocalizedString(@"Do you want to import this application ?", @"prompt")];
-    [alert setInformativeText:NSLocalizedString(@"Maybe you already have this application, it can create a duplicate", @"Continue")];
+    [alert setMessageText:NSLocalizedString(@"Do you want to import this application ?", @"importPrompt")];
+    [alert setInformativeText:NSLocalizedString(@"Maybe you already have this application, it can create a duplicate", @"importPromptContinue")];
     [alert addButtonWithTitle:NSLocalizedString(@"Yes", @"Yeah")];
     [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
     //call the alert and check the selected button
     [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
     [alert release];
-    return YES;
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
 }
+
+
 
 
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {

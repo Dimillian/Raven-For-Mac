@@ -118,9 +118,40 @@
     DownloadController *controller = [DownloadController sharedUser]; 
     downloadIndex  = [controller.downloadArray count];  
     //NSLog(@"Finish"); 
-    
+    if ([downloadPath hasSuffix:@"rpa.zip"]) {
+        NSAlert *alert = [[NSAlert alloc]init];
+        [alert setMessageText:NSLocalizedString(@"You have downloaded a Raven Smart Bar Application", @"promptInstallFromWeb")];
+        [alert setInformativeText:NSLocalizedString(@"To install it just unzip it and run the extracted file from your download folder", @"promptInstallFromWebContinue")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Yeah")];
+        //[alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
+        //call the alert and check the selected button
+        [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:nil didEndSelector:nil contextInfo:nil];
+        [alert release];
+        
+    }
+
+}
+
+/*
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    if (returnCode == NSAlertFirstButtonReturn) {
+            //[self UnzipFile:downloadPath extractFileName:@"/test"];
+    }
+}
+
+- (void)UnzipFile:(NSString*)sourcePath
+  extractFileName:(NSString*)extractFileName
+{
+    NSTask    *unzip = [[[NSTask alloc] init] autorelease];
+    NSPipe    *aPipe = [NSPipe pipe];
+    [unzip setStandardOutput:aPipe];
+    [unzip setLaunchPath:@"/usr/bin/unzip"];
+    [unzip setArguments:[NSArray arrayWithObjects:@"-p", sourcePath,
+                         extractFileName, nil]];
+    [unzip launch];
     
 }
+ */
 
 
 

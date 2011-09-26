@@ -12,7 +12,7 @@
 				<string>rpa</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>rSDk</string>
+			<string>Builder</string>
 			<key>CFBundleTypeName</key>
 			<string>Raven Package Application</string>
 			<key>CFBundleTypeRole</key>
@@ -36,7 +36,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.5.7184</string>
+	<string>0.5.7224</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -79,7 +79,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>0.5.7184</string>
+	<string>0.5.7224</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.news</string>
 	<key>LSMinimumSystemVersion</key>
@@ -104,7 +104,7 @@
 			<key>UTTypeDescription</key>
 			<string>Raven Package Application</string>
 			<key>UTTypeIconFile</key>
-			<string>rSDk</string>
+			<string>Builder</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.ravenco.Raven</string>
 			<key>UTTypeTagSpecification</key>
@@ -126,7 +126,7 @@
 			<key>UTTypeDescription</key>
 			<string>Raven Package Application</string>
 			<key>UTTypeIconFile</key>
-			<string>rSDk</string>
+			<string>Builder</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.ravenco.Raven</string>
 			<key>UTTypeTagSpecification</key>

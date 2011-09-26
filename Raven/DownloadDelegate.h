@@ -24,5 +24,6 @@
     NSURLResponse *downloadResponse;
     NSTimeInterval startTime; 
 }
-
+//- (void)UnzipFile:(NSString*)sourcePath
+ // extractFileName:(NSString*)extractFileName;
 @end
