@@ -457,8 +457,9 @@ if (frame == [sender mainFrame]){
 
 - (void)webView:(WebView *)webView decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id < WebPolicyDecisionListener >)listener
 {
-    PassedUrl = [[request URL]absoluteString]; 
-    [self addtabs:nil]; 
+    //PassedUrl = [[request URL]absoluteString]; 
+    //[self addtabs:nil]; 
+    [listener use];
 }
 
 
@@ -558,7 +559,6 @@ if (frame == [sender mainFrame]){
     }
     
 }
-
 /*
 - (void)webView:(WebView *)sender runOpenPanelForFileButtonWithResultListener:(id < WebOpenPanelResultListener >)resultListener allowMultipleFiles:(BOOL)allowMultipleFiles
 {

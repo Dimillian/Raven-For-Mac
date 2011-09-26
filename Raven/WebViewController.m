@@ -54,15 +54,7 @@
 {
     WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"]; 
     [myPreference setUsesPageCache:NO]; 
-    NSString *versionString;
-    NSDictionary * sv = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
-    versionString = [sv objectForKey:@"ProductVersion"];
-    NSString *appversion = [self infoValueForKey:@"CFBundleVersion"];
-    NSString *webkitVerion; 
-    NSDictionary * wv = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/Frameworks/WebKit.framework/Versions/A/Resources/Info.plist"];
-    webkitVerion = [wv objectForKey:@"CFBundleVersion"];
-    UA = [NSString stringWithFormat:@"Mozilla/5.0 (Macintosh; Intel Mac OS X %@) AppleWebKit/%@ (KHTML, like Gecko) Raven for Mac/%@" , versionString, webkitVerion, appversion]; 
-    [UA retain];
+    [self setDesktopUserAgent];
     [self setDoRegisterHistory:2];
     //Hide the stop loading button
     [stopLoading setHidden:YES];
@@ -74,7 +66,6 @@
     [webview setFrameLoadDelegate:self]; 
      DownloadDelegate *dlDelegate = [[DownloadDelegate alloc]init];
     [webview setDownloadDelegate:dlDelegate]; 
-    [webview setCustomUserAgent:UA];
     [webview setPolicyDelegate:self]; 
     [webview setPreferences:myPreference]; 
     [[webview preferences]setDefaultFontSize:16];
@@ -169,9 +160,9 @@
 {
     //cool workflow to check if user put http:// or not and put it if not
     
-    NSString *addressTo = [address stringValue];
+    NSString *uncoded = [address stringValue];
+    NSString *addressTo = [uncoded stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     if (addressTo != nil) {
-        addressTo = [addressTo stringByReplacingOccurrencesOfString:@" " withString:@"+"];
             if ([addressTo hasPrefix:@"javascript:"]) {
                 [webview stringByEvaluatingJavaScriptFromString:addressTo]; 
                 }
@@ -272,16 +263,7 @@
     //Instanciate the app delegate
     //Check if the UA is already mobile, and change it back to desktop
     if ([UA isEqualToString:@"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A5302b Safari/7534.48.3"]) {
-        NSString *versionString;
-        NSDictionary * sv = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
-        versionString = [sv objectForKey:@"ProductVersion"];
-        NSString *appversion = [self infoValueForKey:@"CFBundleVersion"];
-        NSString *webkitVerion; 
-        NSDictionary * wv = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/Frameworks/WebKit.framework/Versions/A/Resources/Info.plist"];
-        webkitVerion = [wv objectForKey:@"CFBundleVersion"];
-        UA = [NSString stringWithFormat:@"Mozilla/5.0 (Macintosh; Intel Mac OS X %@) AppleWebKit/%@ (KHTML, like Gecko) Raven for Mac/%@", versionString, webkitVerion, appversion]; 
-        [UA retain];
-        [webview setCustomUserAgent:UA];
+        [self setDesktopUserAgent];
         //set the mobile button to a new image
         NSImage *iphone = [NSImage imageNamed:@"narrow.png"]; 
         [mobileButton setImage:iphone];
@@ -291,9 +273,7 @@
     }
     else
     {
-        //Change the ua to iPhone one
-        UA = [NSString stringWithFormat:@"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A5302b Safari/7534.48.3"]; 
-        [webview setCustomUserAgent:UA];
+        [self setMobileUserAgent];
         //set the mobile button to a new image
         NSImage *display = [NSImage imageNamed:@"wide.png"]; 
         [mobileButton setImage:display]; 
@@ -306,6 +286,32 @@
     [UA retain]; 
     [webview reload:self]; 
     
+}
+
+-(void)setDesktopUserAgent
+{
+    NSString *versionString;
+    NSDictionary * sv = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
+    versionString = [sv objectForKey:@"ProductVersion"];
+    NSDictionary *safariVersion = [NSDictionary dictionaryWithContentsOfFile:@"/Applications/Safari.app/Contents/info.plist"];
+    NSString *safariVersionShort = [safariVersion objectForKey:@"CFBundleShortVersionString"];
+    NSString *safariVersionLong = [safariVersion objectForKey:@"CFBundleVersion"];
+    NSString *appversion = [self infoValueForKey:@"CFBundleVersion"];
+    NSDictionary * wv = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/Frameworks/WebKit.framework/Versions/A/Resources/Info.plist"];
+    NSString *webkitVerion = [wv objectForKey:@"CFBundleVersion"];
+    //Safari string Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_1) AppleWebKit/534.51.5 (KHTML, like Gecko) Version/5.1 Safari/534.51.3
+    UA = [NSString stringWithFormat:@"Mozilla/5.0 (Macintosh; Intel Mac OS X %@) AppleWebKit/%@ (KHTML, like Gecko) Version/%@ Safari/%@ Raven for Mac/%@" ,versionString, webkitVerion, safariVersionShort, safariVersionLong, appversion]; 
+    [webview setCustomUserAgent:UA];
+    [UA retain];
+
+}
+
+-(void)setMobileUserAgent
+{
+    UA = [NSString stringWithFormat:@"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A5302b Safari/7534.48.3"]; 
+    [webview setCustomUserAgent:UA];
+    [UA retain];
+
 }
 
 -(void)home:(id)sender
@@ -446,10 +452,9 @@
 {
     if (frame == [sender mainFrame]){
         //get the current address in the address bar
-        NSString *addressTo = [address stringValue];
+        NSString *uncoded = [address stringValue];
+        NSString *addressTo = [uncoded stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
         if (addressTo != nil) {
-            //Parse it and change the space by +
-            addressTo = [addressTo stringByReplacingOccurrencesOfString:@" " withString:@"+"];
             addressTo = [NSString stringWithFormat:GOOGLE_SEARCH_URL@"%@", addressTo];
             //launch a google search
             [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:addressTo]]];

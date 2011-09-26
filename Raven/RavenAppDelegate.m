@@ -203,10 +203,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
     NSOpenPanel *tvarNSOpenPanelObj	= [NSOpenPanel openPanel];
     [tvarNSOpenPanelObj setTitle:@"Please select an application bundle file that have been exported with rSDK"];
-    [tvarNSOpenPanelObj setAllowedFileTypes:[NSArray arrayWithObject:@"bundle"]];
+    [tvarNSOpenPanelObj setAllowedFileTypes:[NSArray arrayWithObject:@"rpa"]];
     NSInteger tvarNSInteger	= [tvarNSOpenPanelObj runModal];
     if(tvarNSInteger == NSOKButton){
-        
+        NSString * tvarDirectory = [[tvarNSOpenPanelObj URL]absoluteString];
+        tvarDirectory = [tvarDirectory stringByReplacingOccurrencesOfString:@"file://localhost" withString:@""];
+        [self importAppAthPath:tvarDirectory];
     } else if(tvarNSInteger == NSCancelButton) {
      	
      	return;
@@ -214,26 +216,67 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
      	return;
     }  
     
-    NSString * tvarDirectory = [[tvarNSOpenPanelObj URL]absoluteString];
-    tvarDirectory = [tvarDirectory stringByReplacingOccurrencesOfString:@"file://localhost" withString:@""];
-    NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", tvarDirectory];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
-    NSString *appFolder = [dict objectForKey:PLIST_KEY_FOLDER];
-    NSString *appPlist = [PLIST_PATH stringByExpandingTildeInPath];
-    NSMutableDictionary *dictToEdit = [NSMutableDictionary dictionaryWithContentsOfFile:appPlist];
-    NSMutableArray *folders = [[dictToEdit objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
-    [folders addObject:dict];
-    [dictToEdit setObject:folders forKey:PLIST_KEY_DICTIONNARY];
-    [dictToEdit writeToFile:appPlist atomically:YES];
-    
-    [folders release];
-    NSString *applicationSupportPath = [[NSString stringWithFormat:application_support_path@"%@", appFolder]stringByExpandingTildeInPath];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager copyItemAtPath:tvarDirectory toPath:applicationSupportPath error:nil];
-    [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/app.plist", applicationSupportPath] error:nil];
-
 
 }
+
+-(void)importAppAthPath:(NSString *)path
+{
+    NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", path];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
+    if (dict == nil) {
+        NSAlert *alert  = [[NSAlert alloc]init];
+        [alert setInformativeText:NSLocalizedString(@"Please use an application bundle made with this SDK", @"InvalideAppBundleInformative")];
+        [alert setMessageText:NSLocalizedString(@"This application bundle is invalide", @"InvalideAppBundleMessage")];
+        [alert runModal]; 
+        [alert release]; 
+    }
+    else {
+        NSString *appFolder = [dict objectForKey:PLIST_KEY_FOLDER];
+        NSString *appPlist = [PLIST_PATH stringByExpandingTildeInPath];
+        NSMutableDictionary *dictToEdit = [NSMutableDictionary dictionaryWithContentsOfFile:appPlist];
+        NSMutableArray *folders = [[dictToEdit objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+        [folders addObject:dict];
+        [dictToEdit setObject:folders forKey:PLIST_KEY_DICTIONNARY];
+        [dictToEdit writeToFile:appPlist atomically:YES];
+        
+        [folders release];
+        NSString *applicationSupportPath = [[NSString stringWithFormat:application_support_path@"%@", appFolder]stringByExpandingTildeInPath];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        [fileManager copyItemAtPath:path toPath:applicationSupportPath error:nil];
+        [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/app.plist", applicationSupportPath] error:nil];
+        NSAlert *alert  = [[NSAlert alloc]init];
+        [alert setInformativeText:NSLocalizedString(@"You need to create a new window to see it", @"appImportedWithSuccess")];
+        [alert setMessageText:NSLocalizedString(@"Application imported with success", @"appImportedWithSuccessMessage")];
+        [alert runModal]; 
+        [alert release]; 
+    }
+    
+}
+
+
+-(BOOL)application:(NSApplication *)sender openFile:(NSString *)filename
+{
+    opennedDocumentPath = filename;
+    [opennedDocumentPath retain];
+    NSAlert *alert = [[NSAlert alloc]init];
+    [alert setMessageText:NSLocalizedString(@"Do you want to import this application ?", @"prompt")];
+    [alert setInformativeText:NSLocalizedString(@"Maybe you already have this application, it can create a duplicate", @"Continue")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Yes", @"Yeah")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
+    //call the alert and check the selected button
+    [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    [alert release];
+    return YES;
+}
+
+
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    if (returnCode == NSAlertFirstButtonReturn) {
+        [self importAppAthPath:opennedDocumentPath];
+        [opennedDocumentPath retain]; 
+    }
+}
+
 
 - (void)dealloc
 {

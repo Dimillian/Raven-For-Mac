@@ -141,16 +141,16 @@
 
 -(void)initSmartBar
 {
-    NSString *path = [@"~/Library/Application Support/RavenApp/app/app.plist" stringByExpandingTildeInPath];
+    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
     NSDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSArray *folders = [[dict objectForKey:@"app"] mutableCopy];
+    NSArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
     NSInteger count  = [folders count];
     NSInteger x; 
     for (x=0; x<count; x++) {
         NSDictionary *item = [folders objectAtIndex:x];
-        NSArray *URL = [[item objectForKey:@"URL"]mutableCopy];
-        RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self];  
-        smartApp.folderName = [item objectForKey:@"foldername"];
+        NSArray *URL = [[item objectForKey:PLIST_KEY_URL]mutableCopy];
+        RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self];
+        smartApp.folderName = [item objectForKey:PLIST_KEY_FOLDER];
         smartApp.firstURL = [URL objectAtIndex:0];
         smartApp.secondURL = [URL objectAtIndex:1]; 
         smartApp.thirdURL = [URL objectAtIndex:2]; 

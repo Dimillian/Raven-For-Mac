@@ -83,6 +83,8 @@
 -(void)checkua; 
 -(void)setWindowTitle:(id)sender; 
 -(id)infoValueForKey:(NSString*)key;
+-(void)setMobileUserAgent;
+-(void)setDesktopUserAgent; 
 @property (nonatomic, retain) NSString *passedUrl;
 @property (nonatomic, retain) NSView *switchView;
 @property (nonatomic, retain) NSButton *tabsButton; 

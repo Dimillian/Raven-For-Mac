@@ -30,6 +30,7 @@
     AboutPanel *about; 
     IBOutlet NSMenu *favoriteMenu; 
     NSMutableArray *mainWindowArray; 
+    NSString *opennedDocumentPath;
 }
 //button action
 -(IBAction)newWindow:(id)sender;
@@ -38,6 +39,7 @@
 -(IBAction)showAboutPanel:(id)sender;
 -(IBAction)favoriteMenu:(id)sender;
 -(IBAction)importSelectedApp:(id)sender;
+-(void)importAppAthPath:(NSString *)path;
 @property (nonatomic, retain) SettingWindow *setting; 
 @property (nonatomic, retain) NSMutableArray *mainWindowArray;  
 
