@@ -129,7 +129,7 @@
 							<reference key="NSSupport" ref="189456516"/>
 							<string key="NSCellIdentifier">_NS:161</string>
 							<reference key="NSControlView" ref="477489796"/>
-							<int key="NSButtonFlags">1208111359</int>
+							<int key="NSButtonFlags">-939376385</int>
 							<int key="NSButtonFlags2">129</int>
 							<string key="NSAlternateContents"/>
 							<string key="NSKeyEquivalent"/>

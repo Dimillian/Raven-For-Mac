@@ -156,17 +156,18 @@
     if ([mainWindow.myCurrentViewController view] != nil)
 		[[mainWindow.myCurrentViewController view] removeFromSuperview];
     
+    if ([[firstNavigatorView tabsArray]count] == 0 || 
+        (selectedButton == 1 && mainWindow.myCurrentViewController == firstNavigatorView)) {
+        [firstNavigatorView view];
+        [firstNavigatorView setPassedUrl:firstURL];
+        [firstNavigatorView addtabs:nil]; 
+    }
+    
     if (firstNavigatorView != nil)
     {
         mainWindow.myCurrentViewController = firstNavigatorView;
         
     }
-    
-    if ([[firstNavigatorView tabsArray]count] == 0 ) {
-        [firstNavigatorView view];
-        [firstNavigatorView setPassedUrl:firstURL];
-        [firstNavigatorView addtabs:nil]; 
-    }  
     
     
     [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
@@ -182,17 +183,19 @@
     if ([mainWindow.myCurrentViewController view] != nil)
 		[[mainWindow.myCurrentViewController view] removeFromSuperview];
     
+    if ([[SecondNavigatorView tabsArray]count] == 0 || 
+        (selectedButton == 2 && mainWindow.myCurrentViewController == SecondNavigatorView)) {
+        [SecondNavigatorView view];
+        [SecondNavigatorView setPassedUrl:secondURL];
+        [SecondNavigatorView addtabs:nil]; 
+    }    
+        
     if (SecondNavigatorView != nil)
     {
         mainWindow.myCurrentViewController = SecondNavigatorView;
         
     }
-    
-    if ([[SecondNavigatorView tabsArray]count] == 0) {
-        [SecondNavigatorView view];
-        [SecondNavigatorView setPassedUrl:secondURL];
-        [SecondNavigatorView addtabs:nil]; 
-    }    
+
     [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
     [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
     selectedButton = 2;
@@ -206,17 +209,19 @@
     if ([mainWindow.myCurrentViewController view] != nil)
 		[[mainWindow.myCurrentViewController view] removeFromSuperview];
     
+    if ([[ThirdtNavigatorView tabsArray]count] == 0 || 
+        (selectedButton == 3 && mainWindow.myCurrentViewController == ThirdtNavigatorView)) {
+        [ThirdtNavigatorView view];
+        [ThirdtNavigatorView setPassedUrl:thirdURL];
+        [ThirdtNavigatorView addtabs:nil]; 
+    }    
+    
     if (ThirdtNavigatorView != nil)
     {
         mainWindow.myCurrentViewController = ThirdtNavigatorView;
         
     }
     
-    if ([[ThirdtNavigatorView tabsArray]count] == 0) {
-        [ThirdtNavigatorView view];
-        [ThirdtNavigatorView setPassedUrl:thirdURL];
-        [ThirdtNavigatorView addtabs:nil]; 
-    }    
     [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
     [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
     selectedButton = 3;
@@ -231,17 +236,20 @@
     if ([mainWindow.myCurrentViewController view] != nil)
 		[[mainWindow.myCurrentViewController view] removeFromSuperview];
     
+    
+    if ([[FourthNavigatorView tabsArray]count] == 0 || 
+        (selectedButton == 4 && mainWindow.myCurrentViewController == FourthNavigatorView)) {
+        [FourthNavigatorView view];
+        [FourthNavigatorView setPassedUrl:fourthURL];
+        [FourthNavigatorView addtabs:nil]; 
+    }  
+    
     if (FourthNavigatorView != nil)
     {
         mainWindow.myCurrentViewController = FourthNavigatorView;
         
     }
 
-    if ([[FourthNavigatorView tabsArray]count] == 0) {
-        [FourthNavigatorView view];
-        [FourthNavigatorView setPassedUrl:fourthURL];
-        [FourthNavigatorView addtabs:nil]; 
-    }  
     [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
     [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
     selectedButton = 4;

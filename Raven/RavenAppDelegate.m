@@ -72,6 +72,10 @@
             if ([standardUserDefaults objectForKey:OPEN_TAB_IN_BACKGROUND] == nil) {
                 [standardUserDefaults setInteger:0 forKey:OPEN_TAB_IN_BACKGROUND]; 
             }
+            if  ([standardUserDefaults objectForKey:@"WebKitDeveloperExtras"] == nil){
+                [standardUserDefaults setInteger:1 forKey:@"WebKitDeveloperExtras"];
+            }
+                
             [standardUserDefaults synchronize];
             
             //maintenance stuff
@@ -214,21 +218,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     if(tvarNSInteger == NSOKButton){
         NSString * tvarDirectory = [[tvarNSOpenPanelObj URL]absoluteString];
         tvarDirectory = [tvarDirectory stringByReplacingOccurrencesOfString:@"file://localhost" withString:@""];
-        RAlistManager *listManager = [[RAlistManager alloc]init]; 
-        BOOL success = [listManager importAppAthPath:tvarDirectory]; 
-        if (success) {
-            [self refreshWindow];
-        }
-        else
-        {
-            NSAlert *alert  = [[NSAlert alloc]init];
-            [alert setInformativeText:NSLocalizedString(@"Please use an application bundle made with this SDK", @"InvalideAppBundleInformative")];
-            [alert setMessageText:NSLocalizedString(@"This application bundle is invalide", @"InvalideAppBundleMessage")];
-            [alert runModal]; 
-            [alert release]; 
-            
-        }
-        [listManager release]; 
+        opennedDocumentPath = tvarDirectory;
+        [opennedDocumentPath retain];
+        [self importAppAction];
     } else if(tvarNSInteger == NSCancelButton) {
      	
      	return;
@@ -237,6 +229,26 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }  
     
 
+}
+
+-(void)importAppAction
+{
+    NSAlert *alert = [[NSAlert alloc]init];
+    NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", opennedDocumentPath];
+    NSDictionary*dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
+    NSString *appname = [NSString stringWithFormat:@"Would you like to install this web app? \n       %@",[dict objectForKey:PLIST_KEY_APPNAME]];
+    [alert setMessageText:appname];
+    [alert setInformativeText:NSLocalizedString(@"If you already have this installed both will display in Smart Bar.", @"importPromptContinue")];
+    NSImage *icon = [[NSImage alloc]initWithContentsOfFile:
+                     [NSString stringWithFormat:@"%@/main.png", opennedDocumentPath]];
+    [alert setIcon:icon];
+    [icon release];
+    [alert addButtonWithTitle:NSLocalizedString(@"Yes", @"Yeah")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
+    //call the alert and check the selected button
+    [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    [alert release];
+ 
 }
 
 -(void)refreshWindow
@@ -258,17 +270,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(BOOL)application:(NSApplication *)sender openFile:(NSString *)filename
 {
     if ([filename hasSuffix:@".rpa"]) {
-    opennedDocumentPath = filename;
-    [opennedDocumentPath retain];
-    NSAlert *alert = [[NSAlert alloc]init];
-    [alert setMessageText:NSLocalizedString(@"Do you want to import this application ?", @"importPrompt")];
-    [alert setInformativeText:NSLocalizedString(@"Maybe you already have this application, it can create a duplicate", @"importPromptContinue")];
-    [alert addButtonWithTitle:NSLocalizedString(@"Yes", @"Yeah")];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
-    //call the alert and check the selected button
-    [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
-    [alert release];
-        return YES;
+        opennedDocumentPath = filename;
+        [opennedDocumentPath retain];
+        [self importAppAction];
+           return YES;
     }
     else
     {

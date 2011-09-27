@@ -39,6 +39,7 @@
 -(IBAction)showAboutPanel:(id)sender;
 -(IBAction)favoriteMenu:(id)sender;
 -(IBAction)importSelectedApp:(id)sender;
+-(void)importAppAction;
 -(void)refreshWindow; 
 @property (nonatomic, retain) SettingWindow *setting; 
 @property (nonatomic, retain) NSMutableArray *mainWindowArray;  
