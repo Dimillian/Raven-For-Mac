@@ -117,6 +117,7 @@
 {
     if ([self isEnabled] == YES){
         [self setAlphaValue:0.5f];
+        
     }
     // this blocks until the button is released
    [super mouseDown:sender];

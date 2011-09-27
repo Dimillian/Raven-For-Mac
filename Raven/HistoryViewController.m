@@ -122,8 +122,7 @@
     NSString *strDate = [formater stringFromDate:[history date]];
     [[cell date]setStringValue:strDate];
     [[cell favicon]setImage:[history favico]];
-    
-	return cell;
+    return cell;
 }
 
 - (CGFloat)listView:(PXListView*)aListView heightOfRow:(NSUInteger)row

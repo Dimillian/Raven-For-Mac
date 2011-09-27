@@ -38,14 +38,33 @@
 
 - (void)moveLeft:(id)sender
 {
+    NSUInteger lenght = [[self stringValue]length];
     NSText *currenrEditor = [self currentEditor];
-    [currenrEditor setSelectedRange:NSMakeRange(currenrEditor.selectedRange.location - 1.0, 0)];
+    NSUInteger currentRange = currenrEditor.selectedRange.length;
+    NSUInteger currentLocation = currenrEditor.selectedRange.location; 
+    NSUInteger null = lenght - lenght;
+    if (lenght == currentRange) {
+        [currenrEditor setSelectedRange:NSMakeRange(0, 0)];
+    }
+    else if (currentLocation > null)
+    {
+        [currenrEditor setSelectedRange:NSMakeRange(currenrEditor.selectedRange.location - 1.0, 0)];
+    }
 }
 
 -(void)moveRight:(id)sender
 {
+    NSUInteger lenght = [[self stringValue]length];
     NSText *currenrEditor = [self currentEditor];
-    [currenrEditor setSelectedRange:NSMakeRange(currenrEditor.selectedRange.location + 1.0, 0)];
+    NSUInteger currentRange = currenrEditor.selectedRange.length;
+    NSUInteger currentLocation = currenrEditor.selectedRange.location; 
+    if (lenght == currentRange) {
+        [currenrEditor setSelectedRange:NSMakeRange(lenght, 0)];
+    }
+    else if (lenght > currentLocation)
+    {
+        [currenrEditor setSelectedRange:NSMakeRange(currenrEditor.selectedRange.location + 1.0, 0)];
+    }
 }
 
 - (void)updateTrackingAreas
@@ -165,17 +184,10 @@
     DatabaseController *controller = [DatabaseController sharedUser];
     [controller suggestionForString:[self stringValue]];
     count = [controller.suggestion count];
-    /*
-    CGFloat height = 19 * count;
-    NSSize size = NSMakeSize(self.frame.size.width, height);
-    [scrollView setFrameSize:size];
-    [attachedWindow setFrame:[scrollView frame] display:YES];
-     */
     if ([controller.suggestion count] != 0) {
         //set the view size 
         [tableview reloadData];
         //[attachedWindow setFrame:[scrollView frame] display:YES];
-        //[self closeSuggestionBox];
         if (!attachedWindow) {
             int side = 11;
             CGFloat x = self.frame.origin.x;
@@ -191,7 +203,7 @@
                                                          atDistance:14];
             [attachedWindow setBorderColor:[NSColor blackColor]];
             [attachedWindow setBackgroundColor:[NSColor blackColor]];
-            [attachedWindow setAlphaValue:0.85];
+            [attachedWindow setAlphaValue:0];
             [attachedWindow setViewMargin:7];
             [attachedWindow setBorderWidth:2];
             [attachedWindow setCornerRadius:10];
@@ -202,9 +214,9 @@
             [[self window] addChildWindow:attachedWindow ordered:NSWindowAbove];
             [attachedWindow setAlphaValue:0.0];
             [NSAnimationContext beginGrouping];
-            [[NSAnimationContext currentContext] setDuration:0.1];  
+            [[NSAnimationContext currentContext] setDuration:0.2];  
             [attachedWindow makeKeyAndOrderFront:self];
-            [[attachedWindow animator] setAlphaValue:0.95];
+            [[attachedWindow animator] setAlphaValue:0.93];
             [NSAnimationContext endGrouping];
         }
         else

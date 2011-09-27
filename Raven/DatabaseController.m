@@ -166,7 +166,7 @@ static DatabaseController *sharedUserManager = nil;
 	// Open the database from the users filessytem
 	if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
 		// Setup the SQL Statement and compile it for faster access
-		const char *sqlStatement = "SELECT * FROM History ORDER BY History_date DESC LIMIT 1200";
+		const char *sqlStatement = "SELECT * FROM History ORDER BY History_date DESC LIMIT 1400";
 		sqlite3_stmt *compiledStatement;
 		if(sqlite3_prepare_v2(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) {
 			// Loop through the results and add them to the feeds array
