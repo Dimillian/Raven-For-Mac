@@ -175,6 +175,7 @@
 		9F0F5688140ECDD600FAB76C /* tab-close-warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F0F5687140ECDD600FAB76C /* tab-close-warning.png */; };
 		9F150648140FF31100C97149 /* instapaper-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F150646140FF31100C97149 /* instapaper-big.png */; };
 		9F150649140FF31100C97149 /* instapaper-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F150647140FF31100C97149 /* instapaper-small.png */; };
+		9F1685301431AC5E00C112A1 /* RAlistManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F16852F1431AC5E00C112A1 /* RAlistManager.m */; };
 		9F1ABB8F140670E7009F68B3 /* database in Resources */ = {isa = PBXBuildFile; fileRef = 9F1ABB8E140670E7009F68B3 /* database */; };
 		9F2501EA141BC0B30094D79C /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2501E9141BC0B30094D79C /* INAppStoreWindow.m */; };
 		9F2BEE6D140FBEB60090AD70 /* LTInstapaperAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2BEE6C140FBEB60090AD70 /* LTInstapaperAPI.m */; };
@@ -491,6 +492,8 @@
 		9F0F5687140ECDD600FAB76C /* tab-close-warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-close-warning.png"; sourceTree = "<group>"; };
 		9F150646140FF31100C97149 /* instapaper-big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instapaper-big.png"; sourceTree = "<group>"; };
 		9F150647140FF31100C97149 /* instapaper-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instapaper-small.png"; sourceTree = "<group>"; };
+		9F16852E1431AC5E00C112A1 /* RAlistManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAlistManager.h; sourceTree = "<group>"; };
+		9F16852F1431AC5E00C112A1 /* RAlistManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAlistManager.m; sourceTree = "<group>"; };
 		9F1ABB8E140670E7009F68B3 /* database */ = {isa = PBXFileReference; lastKnownFileType = file; path = database; sourceTree = "<group>"; };
 		9F2501E8141BC0B30094D79C /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindow.h; sourceTree = "<group>"; };
 		9F2501E9141BC0B30094D79C /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAppStoreWindow.m; sourceTree = "<group>"; };
@@ -1058,6 +1061,8 @@
 				9F2F458B140D198C00BAB731 /* RASmartBarViewController.h */,
 				9F2F458C140D198C00BAB731 /* RASmartBarViewController.m */,
 				9F2F458D140D198C00BAB731 /* RASmartBarViewController.xib */,
+				9F16852E1431AC5E00C112A1 /* RAlistManager.h */,
+				9F16852F1431AC5E00C112A1 /* RAlistManager.m */,
 			);
 			name = SmartBarFork;
 			sourceTree = "<group>";
@@ -1625,6 +1630,7 @@
 				9FC2709314101E8100EAFD3C /* GGReadability.m in Sources */,
 				9F2501EA141BC0B30094D79C /* INAppStoreWindow.m in Sources */,
 				9FF75E2A141D532600910A65 /* EMKeychainItem.m in Sources */,
+				9F1685301431AC5E00C112A1 /* RAlistManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

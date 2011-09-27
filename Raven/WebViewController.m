@@ -172,6 +172,7 @@
                     {
                         [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:addressTo]]];
                     }
+                    
                     else
                     {
                         NSString *parsedAdress = [NSString stringWithFormat:@"http://%@", addressTo];

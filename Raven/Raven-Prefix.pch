@@ -25,6 +25,7 @@
 #define PLIST_KEY_FOLDER @"foldername"
 #define PLIST_KEY_URL @"URL"
 #define PLIST_KEY_DICTIONNARY @"app"
+#define PLIST_KEY_UDID @"udid"
 #define PLIST_PATH @"~/Library/Application Support/RavenApp/app/app.plist"
 #ifndef IS_RUNNING_LION
 #define IS_RUNNING_LION ((int)kCFCoreFoundationVersionNumber > (int)550)

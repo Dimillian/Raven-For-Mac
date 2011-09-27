@@ -7,6 +7,7 @@
 //
 
 #import "RavenAppDelegate.h"
+#import "RAlistManager.h"
 
 @implementation RavenAppDelegate
 @synthesize setting, mainWindowArray; 
@@ -75,6 +76,11 @@
             
             //maintenance stuff
             [controler removehistorySinceDate:[standardUserDefaults integerForKey:REMOVE_HISTORY_BUTTON]];
+            
+            //update process
+            RAlistManager *listManager = [[RAlistManager alloc]init]; 
+            [listManager updateProcess]; 
+            [listManager release]; 
         }
     
     MainWindowController *MainWindow = [[MainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
@@ -202,13 +208,27 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)importSelectedApp:(id)sender
 {
     NSOpenPanel *tvarNSOpenPanelObj	= [NSOpenPanel openPanel];
-    [tvarNSOpenPanelObj setTitle:@"Please select an application bundle file that have been exported with rSDK"];
+    [tvarNSOpenPanelObj setTitle:@"Please select a Raven Application .rpa file"];
     [tvarNSOpenPanelObj setAllowedFileTypes:[NSArray arrayWithObject:@"rpa"]];
     NSInteger tvarNSInteger	= [tvarNSOpenPanelObj runModal];
     if(tvarNSInteger == NSOKButton){
         NSString * tvarDirectory = [[tvarNSOpenPanelObj URL]absoluteString];
         tvarDirectory = [tvarDirectory stringByReplacingOccurrencesOfString:@"file://localhost" withString:@""];
-        [self importAppAthPath:tvarDirectory];
+        RAlistManager *listManager = [[RAlistManager alloc]init]; 
+        BOOL success = [listManager importAppAthPath:tvarDirectory]; 
+        if (success) {
+            [self refreshWindow];
+        }
+        else
+        {
+            NSAlert *alert  = [[NSAlert alloc]init];
+            [alert setInformativeText:NSLocalizedString(@"Please use an application bundle made with this SDK", @"InvalideAppBundleInformative")];
+            [alert setMessageText:NSLocalizedString(@"This application bundle is invalide", @"InvalideAppBundleMessage")];
+            [alert runModal]; 
+            [alert release]; 
+            
+        }
+        [listManager release]; 
     } else if(tvarNSInteger == NSCancelButton) {
      	
      	return;
@@ -219,43 +239,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 }
 
--(void)importAppAthPath:(NSString *)path
+-(void)refreshWindow
 {
-    NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", path];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
-    if (dict == nil) {
-        NSAlert *alert  = [[NSAlert alloc]init];
-        [alert setInformativeText:NSLocalizedString(@"Please use an application bundle made with this SDK", @"InvalideAppBundleInformative")];
-        [alert setMessageText:NSLocalizedString(@"This application bundle is invalide", @"InvalideAppBundleMessage")];
-        [alert runModal]; 
-        [alert release]; 
-    }
-    else {
-        NSString *appFolder = [dict objectForKey:PLIST_KEY_FOLDER];
-        NSString *appPlist = [PLIST_PATH stringByExpandingTildeInPath];
-        NSMutableDictionary *dictToEdit = [NSMutableDictionary dictionaryWithContentsOfFile:appPlist];
-        NSMutableArray *folders = [[dictToEdit objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
-        [folders addObject:dict];
-        [dictToEdit setObject:folders forKey:PLIST_KEY_DICTIONNARY];
-        [dictToEdit writeToFile:appPlist atomically:YES];
-        
-        [folders release];
-        NSString *applicationSupportPath = [[NSString stringWithFormat:application_support_path@"%@", appFolder]stringByExpandingTildeInPath];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        [fileManager copyItemAtPath:path toPath:applicationSupportPath error:nil];
-        [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/app.plist", applicationSupportPath] error:nil];
-        NSApplication *app = [NSApplication sharedApplication];  
-        NSArray *windowsArray = [app windows];
-        int i;
-        int count = [windowsArray count]; 
-        for (i = 0; i<count; i++) {
-            if ([[[windowsArray objectAtIndex:i]windowController]isKindOfClass:[MainWindowController class]]) {
-                MainWindowController *Mainwindow = [[windowsArray objectAtIndex:i]windowController]; 
-                [Mainwindow newAppInstalled];
-               
-            }
+    NSApplication *app = [NSApplication sharedApplication];  
+    NSArray *windowsArray = [app windows];
+    int i;
+    int count = [windowsArray count]; 
+    for (i = 0; i<count; i++) {
+        if ([[[windowsArray objectAtIndex:i]windowController]isKindOfClass:[MainWindowController class]]) {
+            MainWindowController *Mainwindow = [[windowsArray objectAtIndex:i]windowController]; 
+            [Mainwindow newAppInstalled];
         }
     }
+
 }
 
 
@@ -280,15 +276,18 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }
 }
 
-
-
-
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     if (returnCode == NSAlertFirstButtonReturn) {
-        [self importAppAthPath:opennedDocumentPath];
-        [opennedDocumentPath retain]; 
+        RAlistManager *listManager = [[RAlistManager alloc]init]; 
+        [listManager importAppAthPath:opennedDocumentPath]; 
+        [self refreshWindow];
+        [listManager release]; 
+        
     }
 }
+
+
+
 
 
 - (void)dealloc

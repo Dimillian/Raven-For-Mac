@@ -16,6 +16,8 @@
 			<string>Google</string>
 			<key>foldername</key>
 			<string>google</string>
+			<key>udid</key>
+			<string>com.raven.google</string>
 		</dict>
 		<dict>
 			<key>URL</key>
@@ -29,6 +31,8 @@
 			<string>Facebook</string>
 			<key>foldername</key>
 			<string>facebook</string>
+			<key>udid</key>
+			<string>com.raven.facebook</string>
 		</dict>
 		<dict>
 			<key>URL</key>
@@ -42,6 +46,8 @@
 			<string>Twitter</string>
 			<key>foldername</key>
 			<string>twitter</string>
+			<key>udid</key>
+			<string>com.raven.twitter</string>
 		</dict>
 		<dict>
 			<key>URL</key>
@@ -55,6 +61,8 @@
 			<string>Dribbble</string>
 			<key>foldername</key>
 			<string>dribbble</string>
+			<key>udid</key>
+			<string>com.raven.dribbble</string>
 		</dict>
 		<dict>
 			<key>URL</key>
@@ -68,6 +76,8 @@
 			<string>Quora</string>
 			<key>foldername</key>
 			<string>quora</string>
+			<key>udid</key>
+			<string>com.raven.quora</string>
 		</dict>
 		<dict>
 			<key>URL</key>
@@ -81,6 +91,8 @@
 			<string>Instapaper</string>
 			<key>foldername</key>
 			<string>instapaper</string>
+			<key>udid</key>
+			<string>com.raven.intapaper</string>
 		</dict>
 	</array>
 </dict>
