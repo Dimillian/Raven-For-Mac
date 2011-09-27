@@ -18,6 +18,8 @@
 			<string>google</string>
 			<key>udid</key>
 			<string>com.raven.google</string>
+			<key>enable</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>URL</key>
@@ -33,6 +35,8 @@
 			<string>facebook</string>
 			<key>udid</key>
 			<string>com.raven.facebook</string>
+			<key>enable</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>URL</key>
@@ -48,6 +52,8 @@
 			<string>twitter</string>
 			<key>udid</key>
 			<string>com.raven.twitter</string>
+			<key>enable</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>URL</key>
@@ -63,6 +69,8 @@
 			<string>dribbble</string>
 			<key>udid</key>
 			<string>com.raven.dribbble</string>
+			<key>enable</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>URL</key>
@@ -78,6 +86,8 @@
 			<string>quora</string>
 			<key>udid</key>
 			<string>com.raven.quora</string>
+			<key>enable</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>URL</key>
@@ -93,6 +103,8 @@
 			<string>instapaper</string>
 			<key>udid</key>
 			<string>com.raven.intapaper</string>
+			<key>enable</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 </dict>

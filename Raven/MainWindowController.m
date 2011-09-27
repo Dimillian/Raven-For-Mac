@@ -23,7 +23,8 @@
 
 @implementation MainWindowController
 @synthesize passedUrl, navigatorview, downloadButton, centeredView, myCurrentViewController, appList;
-
+#pragma mark -
+#pragma mark init and close
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
@@ -126,7 +127,8 @@
     [self launchRuntime];
     
 }
-
+#pragma mark -
+#pragma mark smart Bar UI
 -(void)launchRuntime
 {  
     [self initSmartBar]; 

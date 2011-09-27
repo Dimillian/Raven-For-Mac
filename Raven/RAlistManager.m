@@ -57,8 +57,11 @@
         if ([item objectForKey:PLIST_KEY_UDID] == nil) {
             NSString *udid = [NSString stringWithFormat:@"com.yourname.%@", [item objectForKey:PLIST_KEY_APPNAME]];
             [item setObject:udid forKey:PLIST_KEY_UDID];
-            [folders replaceObjectAtIndex:x withObject:item];
         }
+        if ([item objectForKey:PLIST_KEY_ENABLE] == nil){
+            [item setObject:[NSNumber numberWithInt:1] forKey:PLIST_KEY_ENABLE];
+        }
+        [folders replaceObjectAtIndex:x withObject:item];
     }
     [dict setObject:folders forKey:PLIST_KEY_DICTIONNARY];
     [dict writeToFile:path atomically:YES];
