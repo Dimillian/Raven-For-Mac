@@ -38,32 +38,37 @@
 
 - (void)moveLeft:(id)sender
 {
+    //get the current string length
     NSUInteger lenght = [[self stringValue]length];
-    NSText *currenrEditor = [self currentEditor];
-    NSUInteger currentRange = currenrEditor.selectedRange.length;
-    NSUInteger currentLocation = currenrEditor.selectedRange.location; 
+    //access NSText of current NStextField
+    NSText *currentEditor = [self currentEditor];
+    //getting the current selection  (numer of chars selected) of the carret
+    NSUInteger currentRange = currentEditor.selectedRange.length;
+    //getting the current location of the carret
+    NSUInteger currentLocation = currentEditor.selectedRange.location; 
     NSUInteger null = lenght - lenght;
+    //now it is pretty obvious, if the total == the current selection then all is selected
     if (lenght == currentRange) {
-        [currenrEditor setSelectedRange:NSMakeRange(0, 0)];
+        [currentEditor setSelectedRange:NSMakeRange(0, 0)];
     }
     else if (currentLocation > null)
     {
-        [currenrEditor setSelectedRange:NSMakeRange(currenrEditor.selectedRange.location - 1.0, 0)];
+        [currentEditor setSelectedRange:NSMakeRange(currentEditor.selectedRange.location - 1.0, 0)];
     }
 }
 
 -(void)moveRight:(id)sender
 {
     NSUInteger lenght = [[self stringValue]length];
-    NSText *currenrEditor = [self currentEditor];
-    NSUInteger currentRange = currenrEditor.selectedRange.length;
-    NSUInteger currentLocation = currenrEditor.selectedRange.location; 
+    NSText *currentEditor = [self currentEditor];
+    NSUInteger currentRange = currentEditor.selectedRange.length;
+    NSUInteger currentLocation = currentEditor.selectedRange.location; 
     if (lenght == currentRange) {
-        [currenrEditor setSelectedRange:NSMakeRange(lenght, 0)];
+        [currentEditor setSelectedRange:NSMakeRange(lenght, 0)];
     }
     else if (lenght > currentLocation)
     {
-        [currenrEditor setSelectedRange:NSMakeRange(currenrEditor.selectedRange.location + 1.0, 0)];
+        [currentEditor setSelectedRange:NSMakeRange(currentEditor.selectedRange.location + 1.0, 0)];
     }
 }
 

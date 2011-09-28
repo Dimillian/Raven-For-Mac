@@ -9,8 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @interface RAlistManager : NSObject
+{
+    NSString *downloadPath;
+    NSString *destinationPath;
+}
 
--(BOOL)importAppAthPath:(NSString *)path;
+-(void)importAppAthPath:(NSString *)path;
+-(BOOL)checkifAppIsValide:(NSString *)path;
 -(void)updateProcess; 
-
+-(void)installApp;
+-(void)UnzipFile:(NSString*)sourcePath;
+-(void)checkforDuplicateFromApp:(NSString *)sourcePath; 
+@property (copy) NSString *downloadPath;
 @end

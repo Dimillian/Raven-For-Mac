@@ -208,7 +208,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     
     
 }
-
+//Method that fire the file browser
 -(void)importSelectedApp:(id)sender
 {
     NSOpenPanel *tvarNSOpenPanelObj	= [NSOpenPanel openPanel];
@@ -231,26 +231,32 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 }
 
+//Import an if user agree
 -(void)importAppAction
 {
-    NSAlert *alert = [[NSAlert alloc]init];
-    NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", opennedDocumentPath];
-    NSDictionary*dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
-    NSString *appname = [NSString stringWithFormat:@"Would you like to install this web app? \n       %@",[dict objectForKey:PLIST_KEY_APPNAME]];
-    [alert setMessageText:appname];
-    [alert setInformativeText:NSLocalizedString(@"If you already have this installed both will display in Smart Bar.", @"importPromptContinue")];
-    NSImage *icon = [[NSImage alloc]initWithContentsOfFile:
-                     [NSString stringWithFormat:@"%@/main.png", opennedDocumentPath]];
-    [alert setIcon:icon];
-    [icon release];
-    [alert addButtonWithTitle:NSLocalizedString(@"Yes", @"Yeah")];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
-    //call the alert and check the selected button
-    [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
-    [alert release];
+    RAlistManager *listManager = [[RAlistManager alloc]init];
+    BOOL success =  [listManager checkifAppIsValide:opennedDocumentPath];
+    if (success) {
+        NSAlert *alert = [[NSAlert alloc]init];
+        NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", opennedDocumentPath];
+        NSDictionary*dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
+        NSString *appname = [NSString stringWithFormat:@"Would you like to install this web app? \n       %@",[dict objectForKey:PLIST_KEY_APPNAME]];
+        [alert setMessageText:appname];
+        [alert setInformativeText:NSLocalizedString(@"If you already have this installed both will display in Smart Bar.", @"importPromptContinue")];
+        NSImage *icon = [[NSImage alloc]initWithContentsOfFile:
+                         [NSString stringWithFormat:@"%@/main.png", opennedDocumentPath]];
+        [alert setIcon:icon];
+        [icon release];
+        [alert addButtonWithTitle:NSLocalizedString(@"Yes", @"Yeah")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
+        //call the alert and check the selected button
+        [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+        [alert release];
+    }
+    [listManager release]; 
  
 }
-
+//refresh SmartBarUI to live install app
 -(void)refreshWindow
 {
     NSApplication *app = [NSApplication sharedApplication];  
@@ -266,7 +272,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 }
 
-
+//fired when double clicked on .rpa file
 -(BOOL)application:(NSApplication *)sender openFile:(NSString *)filename
 {
     if ([filename hasSuffix:@".rpa"]) {
@@ -281,12 +287,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }
 }
 
+//if sheet is ok and app is valid then install
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     if (returnCode == NSAlertFirstButtonReturn) {
         RAlistManager *listManager = [[RAlistManager alloc]init]; 
         [listManager importAppAthPath:opennedDocumentPath]; 
-        [self refreshWindow];
         [listManager release]; 
+    
         
     }
 }

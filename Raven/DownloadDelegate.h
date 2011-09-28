@@ -11,7 +11,7 @@
 #import "DownloadController.h"
 #import "DownloadObject.h"
 
-@interface DownloadDelegate : NSObject {
+@interface DownloadDelegate : NSObject <NSAlertDelegate>{
     NSString *downloadPath;
     NSString *downloadUrl; 
     NSUInteger downloadIndex; 
@@ -24,6 +24,4 @@
     NSURLResponse *downloadResponse;
     NSTimeInterval startTime; 
 }
-//- (void)UnzipFile:(NSString*)sourcePath
- // extractFileName:(NSString*)extractFileName;
 @end
