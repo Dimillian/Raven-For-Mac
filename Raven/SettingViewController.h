@@ -11,11 +11,20 @@
 #import "DatabaseController.h"
 
 
-@interface SettingViewController : NSViewController {
+@interface SettingViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
     
     IBOutlet WebView *webview; 
+    IBOutlet NSTableView *tableview; 
+    IBOutlet NSTableColumn *iconColumn; 
+    IBOutlet NSTableColumn *appNameColumn; 
+    IBOutlet NSTableColumn *stateColumn; 
     
     
 }
+-(IBAction)moveItemDown:(id)sender;
+-(IBAction)moveItemUp:(id)sender;
+-(IBAction)setNextState:(id)sender;
+-(void)selectRowSheet;
+-(void)refreshSmartBar; 
 
 @end

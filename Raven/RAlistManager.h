@@ -20,5 +20,8 @@
 -(void)installApp;
 -(void)UnzipFile:(NSString*)sourcePath;
 -(void)checkforDuplicateFromApp:(NSString *)sourcePath; 
+-(void)changeStateOfAppAtIndex:(NSInteger)index withState:(NSInteger)state;
+-(NSInteger)returnStateOfAppAtIndex:(NSInteger)index;
+-(void)swapObjectAtIndex:(NSInteger)index upOrDown:(NSInteger)order;
 @property (copy) NSString *downloadPath;
 @end

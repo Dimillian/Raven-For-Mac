@@ -22,6 +22,7 @@
     return self;
 }
 
+//Basically import app from separate app.plist to main app.plist after checking it is a real app.
 -(void)importAppAthPath:(NSString *)path
 {
     NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", path];
@@ -39,9 +40,11 @@
     [fileManager copyItemAtPath:path toPath:applicationSupportPath error:nil];
     [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/app.plist", applicationSupportPath] error:nil];
     RavenAppDelegate *delegate =  (RavenAppDelegate *)[[NSApplication sharedApplication] delegate];
+    [self updateProcess];
     [delegate refreshWindow];
 }
 
+//Check if the app is valid, if yes import it
 -(BOOL)checkifAppIsValide:(NSString *)path
 {
     NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", path];
@@ -63,6 +66,7 @@
 
 }
 
+//used to update plist and maintain it up to date with all latest key pair, fired at each launch for beta period
 -(void)updateProcess
 {
     NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
@@ -88,6 +92,7 @@
 
 }
 
+//Fired by the download view, once app unziped, delete the zip
 -(void)installApp
 {
     [self UnzipFile:downloadPath];
@@ -96,6 +101,7 @@
 
 }
 
+//if install is ok then import
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     if (returnCode == NSAlertFirstButtonReturn) {
         [self importAppAthPath:destinationPath];
@@ -104,6 +110,7 @@
     }
 }
 
+//unzip, and see if the user want to import it
 - (void)UnzipFile:(NSString*)sourcePath
 {
     NSString *downloadFolder = [@"~/Downloads" stringByExpandingTildeInPath];
@@ -143,4 +150,60 @@
 {
     
 }
+
+
+-(void)swapObjectAtIndex:(NSInteger)index upOrDown:(NSInteger)order
+{
+    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    if (order == 1 && index+1 < [folders count]) {
+        id tempA = [folders objectAtIndex:index];
+        id tempB = [folders objectAtIndex:index + 1];
+        [folders replaceObjectAtIndex:index withObject:tempB];
+        [folders replaceObjectAtIndex:index+1 withObject:tempA];
+    }
+    else if (order == 0 && index > 0)
+    {
+        id tempA = [folders objectAtIndex:index];
+        id tempB = [folders objectAtIndex:index - 1];
+        [folders replaceObjectAtIndex:index withObject:tempB];
+        [folders replaceObjectAtIndex:index-1 withObject:tempA];
+    }
+    [dict setObject:folders forKey:PLIST_KEY_DICTIONNARY];
+    [dict writeToFile:path atomically:YES];
+    [folders release];
+    
+}
+
+-(void)changeStateOfAppAtIndex:(NSInteger)index withState:(NSInteger)state
+{
+    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    NSMutableDictionary *item = [folders objectAtIndex:index]; 
+    [item setObject:[NSNumber numberWithInteger:state] forKey:PLIST_KEY_ENABLE];
+    [folders replaceObjectAtIndex:index withObject:item];
+    [dict setObject:folders forKey:PLIST_KEY_DICTIONNARY]; 
+    [dict writeToFile:path atomically:YES];
+    [folders release]; 
+    
+    
+    
+}
+
+
+-(NSInteger)returnStateOfAppAtIndex:(NSInteger)index
+{
+    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    NSMutableDictionary *item = [folders objectAtIndex:index]; 
+    NSNumber *state = [item objectForKey:PLIST_KEY_ENABLE]; 
+    [folders release];
+    return [state integerValue];
+    
+}
+
+
 @end

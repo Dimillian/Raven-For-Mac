@@ -13,6 +13,10 @@
 
 @implementation DownloadDelegate
 
+//******
+//This class handle all the download process, need major revision, crash a lot, super ugly
+//*******
+
 -(void)downloadDidBegin:(NSURLDownload *)download
 {
     NSURLRequest *request = [download request];

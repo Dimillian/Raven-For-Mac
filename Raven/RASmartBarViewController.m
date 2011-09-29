@@ -42,6 +42,7 @@
     return self;  
 }
 
+
 -(void)awakeFromNib
 {
     state = 0;
@@ -101,6 +102,7 @@
     
 }
 
+//fired when main app button is clicked
 -(IBAction)expandApp:(id)sender
 {
     if (state == 0) {
@@ -129,6 +131,7 @@
 
 }
 
+//fired to retract app
 -(IBAction)retractApp:(id)sender
 {
     [[firstButton animator]setFrame:NSMakeRect(button_x, 196, button_w, button_h)]; 
@@ -147,6 +150,7 @@
     //[delegate itemDidRetract:self];
     state = 0;
 }
+
 
 -(IBAction)firstItemClicked:(id)sender
 {
@@ -255,6 +259,7 @@
     selectedButton = 4;
 }
 
+//select previously selected button when switching app
 -(void)setSelectedButton
 {
     switch (selectedButton) {
@@ -276,6 +281,7 @@
     }
 }
 
+//reset all buttons state for image reset
 -(void)resetAllButton
 {
     [firstButton setState:0]; 

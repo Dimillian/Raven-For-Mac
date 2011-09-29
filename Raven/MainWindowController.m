@@ -106,7 +106,6 @@
         [[self window]setAnimationBehavior:NSWindowAnimationBehaviorDocumentWindow];
     }
     
-    appList = [[NSMutableArray alloc]init];
     //init view controller with appropriate nib
     navigatorview =
     [[NavigatorViewController alloc] init];
@@ -129,6 +128,8 @@
 }
 #pragma mark -
 #pragma mark smart Bar UI
+
+//take care of the Smart Bar init once window is awake
 -(void)launchRuntime
 {  
     [self initSmartBar]; 
@@ -136,16 +137,33 @@
     [self raven:nil];
 }
 
+//Called each time window is resized
 -(void)windowDidResize:(NSNotification *)notification
 {
     [self updateSmartBarUi];
 }
 
+//Read app.plist and instanciate each item and add them in array, all app are in memory
 -(void)initSmartBar
 {
+    if( appList )
+    {
+        [appList release], appList = nil;
+    }
+	appList = [[NSMutableArray alloc]init];
     NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
     NSDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    NSArray *folder = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    NSInteger countFolder  = [folder count];
+    NSMutableArray *folders = [[NSMutableArray alloc]init]; 
+    NSInteger y; 
+    for (y=0; y<countFolder; y++) {
+        NSDictionary *item = [folder objectAtIndex:y];
+        if ([[item objectForKey:PLIST_KEY_ENABLE]intValue] == 1) {
+            [folders addObject:item];
+        }
+    }
+    [folder release];
     NSInteger count  = [folders count];
     NSInteger x; 
     for (x=0; x<count; x++) {
@@ -153,6 +171,7 @@
         NSArray *URL = [[item objectForKey:PLIST_KEY_URL]mutableCopy];
         RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self];
         smartApp.folderName = [item objectForKey:PLIST_KEY_FOLDER];
+        smartApp.state = [[item objectForKey:PLIST_KEY_ENABLE]intValue];
         smartApp.firstURL = [URL objectAtIndex:0];
         smartApp.secondURL = [URL objectAtIndex:1]; 
         smartApp.thirdURL = [URL objectAtIndex:2]; 
@@ -167,6 +186,7 @@
     [folders release];
 }
  
+//update UI when an app expand
 -(void)itemDidExpand:(RASmartBarViewController *)smartBarApp
 {
     NSInteger x; 
@@ -192,7 +212,7 @@
     
 }
 
-
+//Update the smart bar scrollview height to get the right scroll
 -(void)updateSmartBarUi
 {
     NSInteger totalSize = initial_position + ([appList count] * retracted_app_height);
@@ -207,6 +227,7 @@
     
 }
 
+//Read the latest app installed and place it on the view
 -(void)newAppInstalled
 {
     NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
@@ -232,6 +253,7 @@
 
 }
 
+//reset the smartbar UI, place item at their initial state
 -(void)resetSmartBarUi
 {
     NSInteger count  = [appList count];
@@ -456,6 +478,7 @@
     [settingButton setImage:[NSImage imageNamed:@"btn_settings_off.png"]]; 
 
 }
+
 
 -(void)animate:(NSUInteger)setMode
 {

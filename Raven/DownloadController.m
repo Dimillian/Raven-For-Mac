@@ -5,8 +5,12 @@
 //  Created by Thomas Ricouard on 03/07/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
+//******
+//This class is a singleton that handle the downloadArray and interact with it, it populate the download view.. Super ugly
+//*******
 
 #import "DownloadController.h"
+
 
 @implementation DownloadController
 @synthesize path, downloadArray;

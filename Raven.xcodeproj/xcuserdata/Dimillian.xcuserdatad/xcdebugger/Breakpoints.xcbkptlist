@@ -121,13 +121,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/MainWindowController.m"
-         timestampString = "338828529.694849"
+         timestampString = "338995891.857913"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "169"
-         endingLineNumber = "169"
-         landmarkName = "@implementation MainWindowController"
-         landmarkType = "3">
+         startingLineNumber = "184"
+         endingLineNumber = "184"
+         landmarkName = "-initSmartBar"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -163,11 +163,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/MainWindowController.m"
-         timestampString = "338828529.694849"
+         timestampString = "338995891.857913"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "159"
-         endingLineNumber = "159"
+         startingLineNumber = "174"
+         endingLineNumber = "174"
          landmarkName = "-initSmartBar"
          landmarkType = "5">
       </FileBreakpoint>
@@ -183,6 +183,20 @@
          startingLineNumber = "72"
          endingLineNumber = "72"
          landmarkName = "-moveRight:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Raven/SettingViewController.m"
+         timestampString = "338994858.627191"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "52"
+         endingLineNumber = "52"
+         landmarkName = "-setNextState:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

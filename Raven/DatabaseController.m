@@ -503,6 +503,7 @@ static DatabaseController *sharedUserManager = nil;
     
 }
 
+//used to fill up the suggestion box under the address bar
 -(void)suggestionForString:(NSString *)url
 {
     // Setup the database object
@@ -774,6 +775,7 @@ static DatabaseController *sharedUserManager = nil;
     
 }
 
+//fired at each launch to clean database from blank
 -(void)vacuum
 {
     sqlite3 *database;

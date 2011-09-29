@@ -161,7 +161,7 @@
     //cool workflow to check if user put http:// or not and put it if not
     
     NSString *uncoded = [address stringValue];
-    NSString *addressTo = [uncoded stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *addressTo = [uncoded stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     addressTo = [addressTo stringByReplacingOccurrencesOfString:@"%23" withString:@"#"];
     if (addressTo != nil) {
             if ([addressTo hasPrefix:@"javascript:"]) {

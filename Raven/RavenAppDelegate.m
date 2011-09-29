@@ -72,16 +72,17 @@
             if ([standardUserDefaults objectForKey:OPEN_TAB_IN_BACKGROUND] == nil) {
                 [standardUserDefaults setInteger:0 forKey:OPEN_TAB_IN_BACKGROUND]; 
             }
+            //enable web inspector for webview, we are a browser afterall
             if  ([standardUserDefaults objectForKey:@"WebKitDeveloperExtras"] == nil){
                 [standardUserDefaults setInteger:1 forKey:@"WebKitDeveloperExtras"];
             }
                 
             [standardUserDefaults synchronize];
             
-            //maintenance stuff
+            //maintenance stuff for database
             [controler removehistorySinceDate:[standardUserDefaults integerForKey:REMOVE_HISTORY_BUTTON]];
             
-            //update process
+            //update process, might create a standard default after beta period
             RAlistManager *listManager = [[RAlistManager alloc]init]; 
             [listManager updateProcess]; 
             [listManager release]; 
@@ -90,6 +91,7 @@
     MainWindowController *MainWindow = [[MainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
     [MainWindow showWindow:self]; 
     
+    //init the event that will intercept external URL
     NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
     [em 
      setEventHandler:self
@@ -97,13 +99,14 @@
      forEventClass:kInternetEventClass 
      andEventID:kAEGetURL];
     
+    //instanciate about and setting window
     setting = [[SettingWindow alloc]initWithWindowNibName:@"PreferenceWindow"];
     about = [[AboutPanel alloc]initWithWindowNibName:@"AboutPanel"]; 
    
         
 }
 
-
+//Fired when external URL is clicked
 - (void)getUrl:(NSAppleEventDescriptor *)event 
 withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 { 
@@ -145,6 +148,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 
+//Fired when clicked the on the dock icon
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication
 					hasVisibleWindows:(BOOL)flag
 {
@@ -172,6 +176,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [MainWindow showWindow:self]; 
 }
 
+//Later, to be used for a top menu favorite menu
 -(void)favoriteMenu:(id)sender
 {
     
@@ -208,7 +213,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     
     
 }
-//Method that fire the file browser
+//Method that fire the file browser to select an app to import
 -(void)importSelectedApp:(id)sender
 {
     NSOpenPanel *tvarNSOpenPanelObj	= [NSOpenPanel openPanel];
@@ -270,6 +275,20 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         }
     }
 
+}
+
+-(void)resetSmartBarUI
+{
+    NSApplication *app = [NSApplication sharedApplication];  
+    NSArray *windowsArray = [app windows];
+    int i;
+    int count = [windowsArray count]; 
+    for (i = 0; i<count; i++) {
+        if ([[[windowsArray objectAtIndex:i]windowController]isKindOfClass:[MainWindowController class]]) {
+            MainWindowController *Mainwindow = [[windowsArray objectAtIndex:i]windowController]; 
+            [Mainwindow newAppInstalled];
+        }
+    }
 }
 
 //fired when double clicked on .rpa file
