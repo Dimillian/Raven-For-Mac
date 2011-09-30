@@ -473,7 +473,7 @@
 //Bad memory maanagement for now ! 
 - (void)dealloc
 {  
-    [webview stopLoading:self]; 
+    [webview stopLoading:webview]; 
     [webview setUIDelegate:nil];
     [webview setDownloadDelegate:nil]; 
     [webview setResourceLoadDelegate:nil]; 

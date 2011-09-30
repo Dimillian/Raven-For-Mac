@@ -8,6 +8,7 @@
 
 #import "MainWindowController.h"
 #import "RavenAppDelegate.h"
+#import "SettingViewController.h"
 
 //smart bar app positioning constante
 #define retracted_app_height 54
@@ -45,6 +46,7 @@
     [bookmarkview release]; 
     [downloadview release]; 
     [settingview release]; 
+    [appList release], appList = nil; 
     
     [super dealloc];
 }
@@ -52,6 +54,7 @@
 
 -(void)windowWillClose:(NSNotification *)notification
 {   
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self autorelease]; 
      
 }
@@ -96,6 +99,7 @@
 }
 
 
+
 - (void)awakeFromNib
 {
     
@@ -105,6 +109,20 @@
         static int NSWindowAnimationBehaviorDocumentWindow = 3;
         [[self window]setAnimationBehavior:NSWindowAnimationBehaviorDocumentWindow];
     }
+    
+    //Listen to interesting notifications about GUI refresh
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:@"smartBarWasUpdated" 
+                                              object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:@"newAppInstalled" 
+                                              object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(windowWillClose:) 
+                                                 name:NSWindowWillCloseNotification 
+                                               object:self.window];
     
     //init view controller with appropriate nib
     navigatorview =
@@ -126,6 +144,20 @@
     [self launchRuntime];
     
 }
+
+-(void)receiveNotification:(NSNotification *)notification
+{   
+    if ([[notification name]isEqualToString:@"smartBarWasUpdated"]) {
+        [self initSmartBar];
+        [self updateSmartBarUi];
+        [self resetSmartBarUiWithoutAnimation];
+        [self animate:13];
+    }
+    if ([[notification name]isEqualToString:@"newAppInstalled"]) {
+        [self newAppInstalled];
+    }
+}
+
 #pragma mark -
 #pragma mark smart Bar UI
 
@@ -192,7 +224,7 @@
     [folders release];
 }
  
-//update UI when an app expand
+//update UI when an app expand, Delegate sent from RASmartBarViewController
 -(void)itemDidExpand:(RASmartBarViewController *)smartBarApp
 {
     NSInteger x; 
@@ -296,6 +328,7 @@
     [smartBarScrollView reflectScrolledClipView: [smartBarScrollView contentView]]; 
  
 }
+
 
 -(IBAction)hideSideBar:(id)sender
 {

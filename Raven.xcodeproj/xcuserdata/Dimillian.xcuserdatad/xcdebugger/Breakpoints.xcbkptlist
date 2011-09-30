@@ -107,11 +107,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/RASmartBarViewController.m"
-         timestampString = "338627902.165429"
+         timestampString = "339087618.018591"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
+         startingLineNumber = "76"
+         endingLineNumber = "76"
          landmarkName = "-awakeFromNib"
          landmarkType = "5">
       </FileBreakpoint>
@@ -121,11 +121,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/MainWindowController.m"
-         timestampString = "338997516.621602"
+         timestampString = "339085766.39209"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "190"
-         endingLineNumber = "190"
+         startingLineNumber = "222"
+         endingLineNumber = "222"
          landmarkName = "-initSmartBar"
          landmarkType = "5">
       </FileBreakpoint>
@@ -163,11 +163,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/MainWindowController.m"
-         timestampString = "338997516.621602"
+         timestampString = "339085766.39209"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "180"
-         endingLineNumber = "180"
+         startingLineNumber = "212"
+         endingLineNumber = "212"
          landmarkName = "-initSmartBar"
          landmarkType = "5">
       </FileBreakpoint>

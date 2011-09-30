@@ -315,6 +315,9 @@
     WebViewController *clickedtab = [tabsArray objectAtIndex:[sender tag]];
     [clickedtab view];
     [[clickedtab webview]setHostWindow:nil];
+    [[clickedtab webview]setUIDelegate:nil]; 
+    [[clickedtab webview]setPolicyDelegate:nil];
+    [[clickedtab webview]stopLoading:[clickedtab webview]];
     [[[clickedtab view]animator]setAlphaValue:0.0]; 
     [[clickedtab view]removeFromSuperview];
     [[[clickedtab tabview]animator]setAlphaValue:0.0]; 
@@ -425,8 +428,10 @@
         NSURLDownload  *theDownload = [[NSURLDownload alloc] initWithRequest:request
                                                                 delegate:dlDelegate];
         [theDownload release]; 
-        [dlDelegate release];  
-        [webView stopLoading:nil];
+        [dlDelegate release]; 
+        if (![type isEqualToString:@"application/pdf"]) {
+            [webView stopLoading:nil];
+        }
     }
 }
 
@@ -613,8 +618,14 @@ if (frame == [sender mainFrame]){
 //Bad memory maanagement for now ! 
 - (void)dealloc
 {   
-    [tabsArray removeAllObjects]; 
-    [tabsArray release];
+    int v;
+    for (v=0; v<[tabsArray count]; v++) {
+        WebViewController *newtab = [tabsArray objectAtIndex:v];
+        [[newtab webview]setUIDelegate:nil]; 
+        [[newtab webview]setPolicyDelegate:nil];
+    }
+    [tabsArray removeAllObjects];
+    [tabsArray release], tabsArray = nil;
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter]; 
     [nc removeObserver:self]; 
     [super dealloc];

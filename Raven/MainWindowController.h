@@ -87,6 +87,7 @@
 -(void)resetSmartBarUiWithoutAnimation;
 -(void)newAppInstalled;
 -(void)launchRuntime;
+-(void)receiveNotification:(NSNotification *)notification;
 @property (assign) NSString *passedUrl; 
 @property (assign) NavigatorViewController *navigatorview; 
 @property (assign) NSButton *downloadButton; 

@@ -39,9 +39,8 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager copyItemAtPath:path toPath:applicationSupportPath error:nil];
     [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/app.plist", applicationSupportPath] error:nil];
-    RavenAppDelegate *delegate =  (RavenAppDelegate *)[[NSApplication sharedApplication] delegate];
     [self updateProcess];
-    [delegate refreshWindow];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"newAppInstalled" object:nil];
 }
 
 //Check if the app is valid, if yes import it

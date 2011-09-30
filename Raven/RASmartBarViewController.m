@@ -42,6 +42,16 @@
     return self;  
 }
 
+-(void)dealloc
+{
+    [firstNavigatorView release]; 
+    [SecondNavigatorView release]; 
+    [ThirdtNavigatorView release]; 
+    [FourthNavigatorView release];
+    
+    [super dealloc];
+}
+
 
 -(void)awakeFromNib
 {
@@ -284,6 +294,7 @@
 //reset all buttons state for image reset
 -(void)resetAllButton
 {
+    
     [firstButton setState:0]; 
     [secondButton setState:0]; 
     [thirdButton setState:0]; 

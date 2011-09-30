@@ -40,9 +40,6 @@
 -(IBAction)favoriteMenu:(id)sender;
 -(IBAction)importSelectedApp:(id)sender;
 -(void)importAppAction;
--(void)refreshWindow; 
--(void)resetSmartBarUI; 
--(void)resetSmartBarUIWithoutAnimation;
 @property (nonatomic, retain) SettingWindow *setting; 
 @property (nonatomic, retain) NSMutableArray *mainWindowArray;  
 
