@@ -12,11 +12,11 @@
 //smart bar app positioning constante
 #define retracted_app_height 54
 #define app_expanded_height 200
-#define initial_position 234
+#define initial_position 228
 #define app_position_x -7
 #define app_view_w 108
 #define app_view_h 278
-#define initial_app_space 518
+#define initial_app_space 516
 #define bottom_bar_size 40
 
 
@@ -144,10 +144,16 @@
 }
 
 //Read app.plist and instanciate each item and add them in array, all app are in memory
+//Also reset it totally
 -(void)initSmartBar
 {
     if( appList )
     {
+        NSInteger count  = [appList count];
+        NSInteger g; 
+        for (g=0; g<count; g++) {
+            [[[appList objectAtIndex:g]view]removeFromSuperview];
+        }
         [appList release], appList = nil;
     }
 	appList = [[NSMutableArray alloc]init];
@@ -272,6 +278,24 @@
     [smartBarScrollView reflectScrolledClipView: [smartBarScrollView contentView]]; 
 }
 
+-(void)resetSmartBarUiWithoutAnimation
+{
+    NSInteger count  = [appList count];
+    NSInteger x; 
+    for (x=0; x<count; x++) {
+        RASmartBarViewController *smartApp = [appList objectAtIndex:x]; 
+        [[smartApp view]setFrame:NSMakeRect(app_position_x, rightView.frame.size.height - initial_app_space - (retracted_app_height*x), app_view_w, app_view_h)];
+        [smartApp retractApp:nil];
+        
+        
+    }
+    previousIndex = -1;
+    NSPoint pt = NSMakePoint(0.0, [[smartBarScrollView documentView]
+                                   bounds].size.height);
+    [[smartBarScrollView documentView] scrollPoint:pt];
+    [smartBarScrollView reflectScrolledClipView: [smartBarScrollView contentView]]; 
+ 
+}
 
 -(IBAction)hideSideBar:(id)sender
 {

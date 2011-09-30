@@ -84,6 +84,7 @@
 -(void)initSmartBar; 
 -(void)updateSmartBarUi;
 -(void)resetSmartBarUi;
+-(void)resetSmartBarUiWithoutAnimation;
 -(void)newAppInstalled;
 -(void)launchRuntime;
 @property (assign) NSString *passedUrl; 

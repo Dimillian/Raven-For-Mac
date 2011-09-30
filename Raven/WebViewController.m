@@ -160,9 +160,8 @@
 {
     //cool workflow to check if user put http:// or not and put it if not
     
-    NSString *uncoded = [address stringValue];
-    NSString *addressTo = [uncoded stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    addressTo = [addressTo stringByReplacingOccurrencesOfString:@"%23" withString:@"#"];
+    NSString *addressTo = [address stringValue];
+    addressTo = [addressTo stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     if (addressTo != nil) {
             if ([addressTo hasPrefix:@"javascript:"]) {
                 [webview stringByEvaluatingJavaScriptFromString:addressTo]; 
@@ -454,8 +453,8 @@
 {
     if (frame == [sender mainFrame]){
         //get the current address in the address bar
-        NSString *uncoded = [address stringValue];
-        NSString *addressTo = [uncoded stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+        NSString *addressTo = [address stringValue];
+            addressTo = [addressTo stringByReplacingOccurrencesOfString:@" " withString:@"+"];
         if (addressTo != nil) {
             addressTo = [NSString stringWithFormat:GOOGLE_SEARCH_URL@"%@", addressTo];
             //launch a google search

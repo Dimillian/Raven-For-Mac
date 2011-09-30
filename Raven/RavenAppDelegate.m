@@ -285,10 +285,30 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     int count = [windowsArray count]; 
     for (i = 0; i<count; i++) {
         if ([[[windowsArray objectAtIndex:i]windowController]isKindOfClass:[MainWindowController class]]) {
-            MainWindowController *Mainwindow = [[windowsArray objectAtIndex:i]windowController]; 
-            [Mainwindow newAppInstalled];
+            MainWindowController *Mainwindow = [[windowsArray objectAtIndex:i]windowController];
+            [Mainwindow initSmartBar];
+            [Mainwindow updateSmartBarUi];
+            [Mainwindow resetSmartBarUi];
+            [Mainwindow animate:13];
         }
     }
+}
+
+-(void)resetSmartBarUIWithoutAnimation
+{
+    NSApplication *app = [NSApplication sharedApplication];  
+    NSArray *windowsArray = [app windows];
+    int i;
+    int count = [windowsArray count]; 
+    for (i = 0; i<count; i++) {
+        if ([[[windowsArray objectAtIndex:i]windowController]isKindOfClass:[MainWindowController class]]) {
+            MainWindowController *Mainwindow = [[windowsArray objectAtIndex:i]windowController];
+            [Mainwindow initSmartBar];
+            [Mainwindow updateSmartBarUi];
+            [Mainwindow resetSmartBarUiWithoutAnimation];
+            [Mainwindow animate:13];
+        }
+    } 
 }
 
 //fired when double clicked on .rpa file

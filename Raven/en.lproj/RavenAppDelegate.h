@@ -42,6 +42,7 @@
 -(void)importAppAction;
 -(void)refreshWindow; 
 -(void)resetSmartBarUI; 
+-(void)resetSmartBarUIWithoutAnimation;
 @property (nonatomic, retain) SettingWindow *setting; 
 @property (nonatomic, retain) NSMutableArray *mainWindowArray;  
 

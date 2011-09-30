@@ -23,7 +23,7 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/NavigatorViewController.m"
-         timestampString = "337979101.0264"
+         timestampString = "339012301.854764"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "157"
@@ -121,11 +121,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/MainWindowController.m"
-         timestampString = "338995891.857913"
+         timestampString = "338997516.621602"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "184"
-         endingLineNumber = "184"
+         startingLineNumber = "190"
+         endingLineNumber = "190"
          landmarkName = "-initSmartBar"
          landmarkType = "5">
       </FileBreakpoint>
@@ -163,11 +163,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/MainWindowController.m"
-         timestampString = "338995891.857913"
+         timestampString = "338997516.621602"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "174"
-         endingLineNumber = "174"
+         startingLineNumber = "180"
+         endingLineNumber = "180"
          landmarkName = "-initSmartBar"
          landmarkType = "5">
       </FileBreakpoint>

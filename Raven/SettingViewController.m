@@ -133,7 +133,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 -(void)refreshSmartBar
 {
      RavenAppDelegate *delegate =  (RavenAppDelegate *)[[NSApplication sharedApplication] delegate];
-    [delegate resetSmartBarUI];
+    [delegate resetSmartBarUIWithoutAnimation];
 }
 
 //Little hack to intercept URL, the webview start provisiosing with the previous request. Only way to catch the URL
