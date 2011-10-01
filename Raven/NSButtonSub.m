@@ -38,15 +38,14 @@
 {
     if ([self toolTip] != nil) { 
         int side = 2;
-        NSRect f =  [self frame];
-        float x = f.origin.x; 
-        float y = f.origin.y - 70; 
-        NSPoint buttonPoint = NSMakePoint(x, y);
+        NSPoint where = [self frame].origin;
+		where.x += [self frame].size.width / 2;
+		where.y += [self frame].size.height / 2;
         [attachedWindow display]; 
         if (!attachedWindow) {
             [NSBundle loadNibNamed:@"tooltip" owner:self];
             attachedWindow = [[MAAttachedWindow alloc] initWithView:tooltip 
-                                                    attachedToPoint:buttonPoint 
+                                                    attachedToPoint:where 
                                                            inWindow:[self window] 
                                                              onSide:side 
                                                          atDistance:30];
@@ -71,10 +70,11 @@
         }
         else
         {
-            //[self closeSuggestionBox];
+            [self closeSuggestionBox];
         }
     }
 }
+
 
 -(void)closeSuggestionBox
 {  

@@ -20,18 +20,19 @@
 	[listView setAllowsEmptySelection:NO];
 	[listView registerForDraggedTypes:[NSArray arrayWithObjects: NSStringPboardType, nil]];
 	[self check:nil];
-    
-    
-    NSTimer* timer = [NSTimer timerWithTimeInterval:0.5
-                                             target:self
-                                           selector:@selector(check:)
-                                           userInfo:nil
-                                            repeats:YES];
-    
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:@"downloadDidUpdate" 
+                                              object:nil];
+
     selectedRowSave = 0; 
      
  
+}
+
+-(void)receiveNotification:(NSNotification *)notification
+{
+    [self check:nil];
 }
 
 
@@ -164,6 +165,7 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 
     [super dealloc];
 }

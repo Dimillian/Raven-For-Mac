@@ -11,7 +11,7 @@
 #import "DownloadController.h"
 #import "DownloadObject.h"
 
-@interface DownloadDelegate : NSObject <NSAlertDelegate>{
+@interface DownloadDelegate : NSObject <NSAlertDelegate, NSURLDownloadDelegate>{
     NSString *downloadPath;
     NSString *downloadUrl; 
     NSUInteger downloadIndex; 

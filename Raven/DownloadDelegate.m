@@ -28,6 +28,7 @@
     [downloadUrl retain]; 
     DownloadController *controller = [DownloadController sharedUser]; 
     downloadIndex  = [controller.downloadArray count]; 
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"downloadDidBegin" object:nil];
 }
 
 - (void)download:(NSURLDownload *)download decideDestinationWithSuggestedFilename:(NSString *)filename
@@ -81,8 +82,9 @@
     }
 }
 
-- (void)download:(NSURLDownload *)download didReceiveDataOfLength:(unsigned)length
+- (void)download:(NSURLDownload *)download didReceiveDataOfLength:(NSUInteger)length
 {
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"downloadDidUpdate" object:nil];
     long long expectedLength = [downloadResponse expectedContentLength];
     totalByes = [NSNumber numberWithLongLong:expectedLength]; 
     bytesReceived = bytesReceived + length;
@@ -129,6 +131,7 @@
         listManager.downloadPath = downloadPath;
         [listManager installApp]; 
     }
+     [[NSNotificationCenter defaultCenter]postNotificationName:@"downloadDidFinish" object:nil];
 
 }
 

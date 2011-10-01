@@ -119,10 +119,20 @@
                                             selector:@selector(receiveNotification:) 
                                                 name:@"newAppInstalled" 
                                               object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:@"downloadDidBegin" 
+                                              object:nil];
+
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:@"downloadDidFinish" 
+                                              object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(windowWillClose:) 
                                                  name:NSWindowWillCloseNotification 
                                                object:self.window];
+    
     
     //init view controller with appropriate nib
     navigatorview =
@@ -155,6 +165,17 @@
     }
     if ([[notification name]isEqualToString:@"newAppInstalled"]) {
         [self newAppInstalled];
+    }
+    if ([[notification name]isEqualToString:@"downloadDidBegin"])
+    {
+        [downloadButton setHidden:NO];
+        [downloadButton setAlphaValue:1.0];
+        [downloadButton setImage:[NSImage imageNamed:@"download_on.png"]];
+    }
+    if ([[notification name]isEqualToString:@"downloadDidFinish"]){
+        [downloadButton setHidden:NO];
+        [downloadButton setAlphaValue:1.0];
+        [downloadButton setImage:[NSImage imageNamed:@"download_on.png"]];
     }
 }
 

@@ -1,4 +1,4 @@
- //
+//
 //  NavigatorViewController.m
 //  Raven
 //
@@ -322,6 +322,7 @@
     [[clickedtab view]removeFromSuperview];
     [[[clickedtab tabview]animator]setAlphaValue:0.0]; 
     [[clickedtab tabview]removeFromSuperview];
+    [[clickedtab webview]removeFromSuperview];
                             
     [tabsArray removeObjectAtIndex:[sender tag]];
     NSTabViewItem *item = [tabController tabViewItemAtIndex:[sender tag]];
@@ -420,10 +421,6 @@
 - (void)webView:(WebView *)webView decidePolicyForMIMEType:(NSString *)type request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener
 {
     if ([type hasPrefix:@"application"]) {
-        MainWindowController *mainWindow = [[webView window]windowController];
-        [mainWindow.downloadButton setHidden:NO];
-        [mainWindow.downloadButton setAlphaValue:1.0];
-        [mainWindow.downloadButton setImage:[NSImage imageNamed:@"download_on.png"]];
         DownloadDelegate *dlDelegate = [[DownloadDelegate alloc]init];
         NSURLDownload  *theDownload = [[NSURLDownload alloc] initWithRequest:request
                                                                 delegate:dlDelegate];
@@ -623,11 +620,11 @@ if (frame == [sender mainFrame]){
         WebViewController *newtab = [tabsArray objectAtIndex:v];
         [[newtab webview]setUIDelegate:nil]; 
         [[newtab webview]setPolicyDelegate:nil];
+        [[newtab webview]removeFromSuperview];
     }
     [tabsArray removeAllObjects];
     [tabsArray release], tabsArray = nil;
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter]; 
-    [nc removeObserver:self]; 
+    [[NSNotificationCenter defaultCenter]removeObserver:self]; 
     [super dealloc];
 }
 @end

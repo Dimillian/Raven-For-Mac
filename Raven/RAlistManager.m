@@ -102,10 +102,14 @@
 
 //if install is ok then import
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    NSFileManager *fileManager = [NSFileManager defaultManager]; 
     if (returnCode == NSAlertFirstButtonReturn) {
         [self importAppAthPath:destinationPath];
-        NSFileManager *fileManager = [NSFileManager defaultManager]; 
         [fileManager removeItemAtPath:destinationPath error:nil];
+    }
+    else
+    {
+       [fileManager removeItemAtPath:destinationPath error:nil];  
     }
 }
 

@@ -480,6 +480,7 @@
     [webview setFrameLoadDelegate:nil];
     [webview setPolicyDelegate:nil]; 
     [webview close];
+    [webview removeFromSuperview];
     [webview release], webview = nil;
     
     [super dealloc];
