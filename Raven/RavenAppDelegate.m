@@ -217,8 +217,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)importSelectedApp:(id)sender
 {
     NSOpenPanel *tvarNSOpenPanelObj	= [NSOpenPanel openPanel];
-    [tvarNSOpenPanelObj setTitle:@"Please select a Raven Application .rpa file"];
-    [tvarNSOpenPanelObj setAllowedFileTypes:[NSArray arrayWithObject:@"rpa"]];
+    [tvarNSOpenPanelObj setTitle:@"Please select a Raven Smart Bar Application .sba file"];
+    [tvarNSOpenPanelObj setAllowedFileTypes:[NSArray arrayWithObjects:@"rpa", @"sba", nil]];
     NSInteger tvarNSInteger	= [tvarNSOpenPanelObj runModal];
     if(tvarNSInteger == NSOKButton){
         NSString * tvarDirectory = [[tvarNSOpenPanelObj URL]absoluteString];
@@ -266,7 +266,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 //fired when double clicked on .rpa file
 -(BOOL)application:(NSApplication *)sender openFile:(NSString *)filename
 {
-    if ([filename hasSuffix:@".rpa"]) {
+    if ([filename hasSuffix:@".rpa"] || [filename hasSuffix:@".sba"]) {
         opennedDocumentPath = filename;
         [opennedDocumentPath retain];
         [self importAppAction];

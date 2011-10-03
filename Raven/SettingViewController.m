@@ -16,14 +16,44 @@
 
 -(void)awakeFromNib
 {
-    [webview setUIDelegate:self];
-    [webview setPolicyDelegate:self];
-    [[webview mainFrame]loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://raven.io/demo/apps/"]]];
     
     [tableview setDataSource:self]; 
     [tableview setDelegate:self];
     [tableview setAllowsEmptySelection:NO];
+    [self reloadDataSource];
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:@"newAppInstalled" 
+                                              object:nil];
+
     
+}
+
+-(void)receiveNotification:(NSNotification *)notification
+{
+    [self reloadDataSource];
+}
+
+//Smart reload
+-(void)reloadDataSource
+{
+    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
+    dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    if( images )
+    {
+        [images release], images = nil;
+    }
+	images = [[[NSMutableArray alloc]init]retain];
+    for (int i=0; i<[folders count]; i++) {
+        NSDictionary *item = [folders objectAtIndex:i];
+        NSString *folderNameTemp = [item objectForKey:PLIST_KEY_FOLDER];
+        NSString *imagePath = [NSString stringWithFormat:application_support_path@"%@/main.png", folderNameTemp];
+        NSImage *tempImage = [[[NSImage alloc]initWithContentsOfFile:[imagePath stringByExpandingTildeInPath]]autorelease];
+        [images addObject:tempImage];
+
+    }
+       [tableview reloadData]; 
 }
 
 - (WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
@@ -36,11 +66,7 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    NSDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
-    NSUInteger count = [folders count];
-    [folders release]; 
+    NSUInteger count = [folders count]; 
     return count;
     
 }
@@ -52,7 +78,6 @@
     NSCell *cell = [stateColumn dataCell];
     [listManager changeStateOfAppAtIndex:[tableview selectedRow] withState:[cell state]];
     [listManager release]; 
-    [tableview reloadData]; 
     [self refreshSmartBar];
 }
 
@@ -63,28 +88,32 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
             row:(NSInteger)row
 {  
     
-    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    NSDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
     NSDictionary *item = [folders objectAtIndex:row];
     NSString *appName = [item objectForKey:PLIST_KEY_APPNAME];
-    NSString *folderNameTemp = [item objectForKey:PLIST_KEY_FOLDER];
     NSNumber *buttonState = [item objectForKey:PLIST_KEY_ENABLE];
-    NSString *imagePath = [NSString stringWithFormat:application_support_path@"%@/main.png", folderNameTemp];
-    NSImage *tempImage = [[[NSImage alloc]initWithContentsOfFile:[imagePath stringByExpandingTildeInPath]]autorelease];
-    [folders release]; 
     if (tableColumn == iconColumn) {
-        return tempImage;
+        return [images objectAtIndex:row];
     }
     if (tableColumn == appNameColumn) {
-        return appName;
+        return [NSString stringWithFormat:@"\n%@",appName];
     }
     if (tableColumn == stateColumn) {
         return buttonState;
     }
-    
-    
+    if (tableColumn == appCategoryColumn) {
+        return @"\nNo category";
+    }
+    if (tableColumn == appCompanyColumn) {
+        return @"\nUnofficial - Beta";
+    }
+    if (tableColumn == buttonUpColumn) {
+        if (row == 0)
+        {
+        
+        }
+    }
     return nil;
+    
 }
 
 
@@ -97,7 +126,6 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     {
         RAlistManager *listManager = [[RAlistManager alloc]init];
         [listManager swapObjectAtIndex:[tableview selectedRow] upOrDown:0];
-        [tableview reloadData]; 
         [listManager release];
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[tableview selectedRow]-1];
         [tableview selectRowIndexes:indexSet byExtendingSelection:NO];
@@ -114,13 +142,38 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     {
         RAlistManager *listManager = [[RAlistManager alloc]init];
         [listManager swapObjectAtIndex:[tableview selectedRow] upOrDown:1];
-        [tableview reloadData]; 
         [listManager release];
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[tableview selectedRow]+1];
         [tableview selectRowIndexes:indexSet byExtendingSelection:NO];
     }
     [self refreshSmartBar];
 }
+
+-(void)deleteApp:(id)sender
+{
+    NSAlert *alert = [[NSAlert alloc]init];
+    [alert setMessageText:@"Are you sure you want to remove this web app?"];
+    [alert setIcon:[NSImage imageNamed:@"dialog_app.png"]];
+    [alert addButtonWithTitle:NSLocalizedString(@"Yes", @"Yeah")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
+    //call the alert and check the selected button
+    [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    [alert release];
+}
+
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    if (returnCode == NSAlertFirstButtonReturn) {
+        NSInteger selectedRow = [tableview selectedRow];
+        RAlistManager *listManager = [[RAlistManager alloc]init];
+        [listManager deleteAppAtIndex:selectedRow];
+        [listManager release];
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:selectedRow-1];
+        [tableview selectRowIndexes:indexSet byExtendingSelection:NO];
+        [self refreshSmartBar];
+        
+    }
+}
+
 
 -(void)selectRowSheet
 {
@@ -132,43 +185,13 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 
 -(void)refreshSmartBar
 {
+    [self reloadDataSource];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"smartBarWasUpdated" object:nil];
 }
 
-//Little hack to intercept URL, the webview start provisiosing with the previous request. Only way to catch the URL
-- (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
-{
-    if (frame == [sender mainFrame]){
-        if ([[sender mainFrameURL]isEqualToString:@""]) {
-        }
-        else
-        {
-            MainWindowController *controller = [[webview window]windowController];
-            controller.navigatorview.PassedUrl = [sender mainFrameURL]; 
-            [controller setting:nil];
-            [controller raven:nil];
-            [controller.navigatorview addtabs:nil];
-            [sender stopLoading:sender];   
-        }
-    }
-}
-
-
-- (void)webView:(WebView *)webView decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id < WebPolicyDecisionListener >)listener
-{
-    MainWindowController *controller = [[webView window]windowController];
-    controller.navigatorview.PassedUrl = [[request URL]absoluteString]; 
-    [controller setting:nil];
-    [controller raven:nil];
-    [controller.navigatorview addtabs:nil];
-
-}
 
 - (void)dealloc
 {
-    [webview setUIDelegate:nil]; 
-    [webview setPolicyDelegate:nil]; 
-    [webview close]; 
     [super dealloc];
 }
 

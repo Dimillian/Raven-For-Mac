@@ -22,6 +22,7 @@
     return self;
 }
 
+
 //Basically import app from separate app.plist to main app.plist after checking it is a real app.
 -(void)importAppAthPath:(NSString *)path
 {
@@ -205,6 +206,22 @@
     NSNumber *state = [item objectForKey:PLIST_KEY_ENABLE]; 
     [folders release];
     return [state integerValue];
+    
+}
+
+-(void)deleteAppAtIndex:(NSInteger)index
+{
+    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    NSMutableDictionary *appToDelete = [folders objectAtIndex:index];
+    NSString *folderName = [appToDelete objectForKey:PLIST_KEY_FOLDER];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:[[NSString stringWithFormat:application_support_path@"%@", folderName]stringByExpandingTildeInPath] error:nil];
+    [folders removeObjectAtIndex:index];
+    [dict setObject:folders forKey:PLIST_KEY_DICTIONNARY];
+    [dict writeToFile:path atomically:YES];
+    [folders release]; 
     
 }
 

@@ -228,6 +228,11 @@
 		9F8A1CDD13FDA49C00DD291C /* NavigatorNoBottom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F8A1CDF13FDA49C00DD291C /* NavigatorNoBottom.xib */; };
 		9F8A1CE513FDA6EF00DD291C /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8A1CE613FDA6EF00DD291C /* PXListViewCell.m */; };
 		9F8A1CE713FDA99300DD291C /* NavigatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8A1CE813FDA99300DD291C /* NavigatorViewController.m */; };
+		9FA8F3F4143995F1004DD749 /* Arrow down 16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA8F3F0143995F1004DD749 /* Arrow down 16x16.png */; };
+		9FA8F3F5143995F1004DD749 /* Arrow up 16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA8F3F1143995F1004DD749 /* Arrow up 16x16.png */; };
+		9FA8F3F6143995F1004DD749 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA8F3F2143995F1004DD749 /* header.png */; };
+		9FA8F3F7143995F1004DD749 /* lists.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA8F3F3143995F1004DD749 /* lists.png */; };
+		9FA8F3FE1439A99D004DD749 /* dialog_app.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA8F3FD1439A99D004DD749 /* dialog_app.png */; };
 		9FAFB8DE14053517005B94F5 /* MediumSiteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FAFB8DD14053517005B94F5 /* MediumSiteIcon.png */; };
 		9FB6999013CD8505002EAEBA /* AboutPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6998F13CD8505002EAEBA /* AboutPanel.m */; };
 		9FB6999413CD8566002EAEBA /* AboutPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FB6999313CD8566002EAEBA /* AboutPanel.xib */; };
@@ -557,6 +562,11 @@
 		9F8A1CDE13FDA49C00DD291C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/NavigatorNoBottom.xib; sourceTree = "<group>"; };
 		9F8A1CE613FDA6EF00DD291C /* PXListViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PXListViewCell.m; sourceTree = "<group>"; };
 		9F8A1CE813FDA99300DD291C /* NavigatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigatorViewController.m; sourceTree = "<group>"; };
+		9FA8F3F0143995F1004DD749 /* Arrow down 16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow down 16x16.png"; sourceTree = "<group>"; };
+		9FA8F3F1143995F1004DD749 /* Arrow up 16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow up 16x16.png"; sourceTree = "<group>"; };
+		9FA8F3F2143995F1004DD749 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
+		9FA8F3F3143995F1004DD749 /* lists.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lists.png; sourceTree = "<group>"; };
+		9FA8F3FD1439A99D004DD749 /* dialog_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dialog_app.png; sourceTree = "<group>"; };
 		9FAFB8DD14053517005B94F5 /* MediumSiteIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MediumSiteIcon.png; sourceTree = "<group>"; };
 		9FB6998E13CD8505002EAEBA /* AboutPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutPanel.h; sourceTree = "<group>"; };
 		9FB6998F13CD8505002EAEBA /* AboutPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutPanel.m; sourceTree = "<group>"; };
@@ -650,6 +660,11 @@
 		690C5546133DCD27005D50B3 /* ressources */ = {
 			isa = PBXGroup;
 			children = (
+				9FA8F3FD1439A99D004DD749 /* dialog_app.png */,
+				9FA8F3F0143995F1004DD749 /* Arrow down 16x16.png */,
+				9FA8F3F1143995F1004DD749 /* Arrow up 16x16.png */,
+				9FA8F3F2143995F1004DD749 /* header.png */,
+				9FA8F3F3143995F1004DD749 /* lists.png */,
 				9FE5DE3B1434A77D003614C3 /* down.png */,
 				9FE5DE3C1434A77D003614C3 /* up.png */,
 				9FD1812B1430C57F004B3F12 /* Builder.icns */,
@@ -1548,6 +1563,11 @@
 				9FD1812C1430C57F004B3F12 /* Builder.icns in Resources */,
 				9FE5DE3D1434A77D003614C3 /* down.png in Resources */,
 				9FE5DE3E1434A77D003614C3 /* up.png in Resources */,
+				9FA8F3F4143995F1004DD749 /* Arrow down 16x16.png in Resources */,
+				9FA8F3F5143995F1004DD749 /* Arrow up 16x16.png in Resources */,
+				9FA8F3F6143995F1004DD749 /* header.png in Resources */,
+				9FA8F3F7143995F1004DD749 /* lists.png in Resources */,
+				9FA8F3FE1439A99D004DD749 /* dialog_app.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

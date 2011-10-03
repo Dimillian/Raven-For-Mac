@@ -126,7 +126,7 @@
     DownloadController *controller = [DownloadController sharedUser]; 
     downloadIndex  = [controller.downloadArray count];  
     //NSLog(@"Finish"); 
-    if ([downloadPath hasSuffix:@"rpa.zip"]) {
+    if ([downloadPath hasSuffix:@"rpa.zip"] || [downloadPath hasSuffix:@"sba.zip"]) {
         RAlistManager *listManager = [[RAlistManager alloc]init];
         listManager.downloadPath = downloadPath;
         [listManager installApp]; 

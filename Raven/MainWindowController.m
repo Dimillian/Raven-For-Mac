@@ -361,7 +361,7 @@
         [NSAnimationContext beginGrouping];
         [[NSAnimationContext currentContext] setDuration:0.3];
         [[rightView  animator]setAlphaValue:1.0];
-        [[smartBarScrollView  animator]setAlphaValue:1.0];
+        [[smartBarScrollView animator]setAlphaValue:1.0];
         [[settingButton animator]setAlphaValue:1.0];
         [NSAnimationContext endGrouping];
         [rightView setToolTip:@""]; 
@@ -371,10 +371,10 @@
     else{
         [[centeredView animator]setFrame:[mainView bounds]]; 
         [NSAnimationContext beginGrouping];
-        [[NSAnimationContext currentContext] setDuration:0.3];  ;
+        [[NSAnimationContext currentContext] setDuration:0.3];
+        [[smartBarScrollView  animator]setAlphaValue:0.0];
         [[rightView  animator]setAlphaValue:0.0];
         [[settingButton animator]setAlphaValue:0.0];
-        [[smartBarScrollView  animator]setAlphaValue:0.0];
         if ([standardUserDefaults integerForKey:@"SidebarLikeDock"] == 0)
         {
             [settingButton setHidden:YES];
