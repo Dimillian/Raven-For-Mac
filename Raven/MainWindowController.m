@@ -201,10 +201,8 @@
 -(void)initSmartBar
 {
     if( appList )
-    {
-        NSInteger count  = [appList count];
-        NSInteger g; 
-        for (g=0; g<count; g++) {
+    { 
+        for (NSInteger g=0; g<[appList count]; g++) {
             [[[appList objectAtIndex:g]view]removeFromSuperview];
         }
         [appList release], appList = nil;
@@ -212,22 +210,17 @@
 	appList = [[NSMutableArray alloc]init];
     NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
     NSDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSArray *folder = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
-    NSInteger countFolder  = [folder count];
+    NSArray *folder = [[dict objectForKey:PLIST_KEY_DICTIONNARY]copy];
     NSMutableArray *folders = [[NSMutableArray alloc]init]; 
-    NSInteger y; 
-    for (y=0; y<countFolder; y++) {
-        NSDictionary *item = [folder objectAtIndex:y];
+    for (NSDictionary *item in folder) {
         if ([[item objectForKey:PLIST_KEY_ENABLE]intValue] == 1) {
             [folders addObject:item];
         }
     }
     [folder release];
-    NSInteger count  = [folders count];
-    NSInteger x; 
-    for (x=0; x<count; x++) {
-        NSDictionary *item = [folders objectAtIndex:x];
-        NSArray *URL = [[item objectForKey:PLIST_KEY_URL]mutableCopy];
+    int x = 0;
+    for (NSDictionary *item in folders) {
+        NSArray *URL = [[item objectForKey:PLIST_KEY_URL]copy];
         RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self];
         smartApp.folderName = [item objectForKey:PLIST_KEY_FOLDER];
         smartApp.state = [[item objectForKey:PLIST_KEY_ENABLE]intValue];
@@ -240,7 +233,8 @@
         [rightView addSubview:[[appList objectAtIndex:x]view]];
         [smartApp retractApp:nil];
         [URL release]; 
-        [smartApp release]; 
+        [smartApp release];
+        x+=1;
     }
     [folders release];
 }
@@ -248,9 +242,8 @@
 //update UI when an app expand, Delegate sent from RASmartBarViewController
 -(void)itemDidExpand:(RASmartBarViewController *)smartBarApp
 {
-    NSInteger x; 
     NSInteger index = [appList indexOfObject:smartBarApp]; 
-    for (x=0; x<[appList count]; x++) {
+    for (NSInteger x=0; x<[appList count]; x++) {
         RASmartBarViewController *smartApp = [appList objectAtIndex:x]; 
         NSRect frame = [[smartApp view]frame];
         if (previousIndex == x ) {
@@ -315,14 +308,10 @@
 //reset the smartbar UI, place item at their initial state
 -(void)resetSmartBarUi
 {
-    NSInteger count  = [appList count];
-    NSInteger x; 
-    for (x=0; x<count; x++) {
+    for (NSInteger x=0; x<[appList count]; x++) {
          RASmartBarViewController *smartApp = [appList objectAtIndex:x]; 
          [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, rightView.frame.size.height - initial_app_space - (retracted_app_height*x), app_view_w, app_view_h)];
          [smartApp retractApp:nil];
-        
-
      }
     previousIndex = -1;
     NSPoint pt = NSMakePoint(0.0, [[smartBarScrollView documentView]
@@ -333,9 +322,7 @@
 
 -(void)resetSmartBarUiWithoutAnimation
 {
-    NSInteger count  = [appList count];
-    NSInteger x; 
-    for (x=0; x<count; x++) {
+    for (NSInteger x=0; x<[appList count]; x++) {
         RASmartBarViewController *smartApp = [appList objectAtIndex:x]; 
         [[smartApp view]setFrame:NSMakeRect(app_position_x, rightView.frame.size.height - initial_app_space - (retracted_app_height*x), app_view_w, app_view_h)];
         [smartApp retractApp:nil];

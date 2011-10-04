@@ -113,7 +113,6 @@
             //Set the title of the windows
         [clickedtab setWindowTitle:allTabsButton];
         [self setImageOnSelectedTab]; 
-        
     }
     
     //make the selected button appear to make an animation
@@ -132,7 +131,6 @@
 -(void)addtabs:(id)sender
 {
 
-    
     //Instanciate a new webviewcontroller and the button tab view with the view
     WebViewController *newtab = [[WebViewController alloc]init];
     //Set the Button view
@@ -244,16 +242,10 @@
 //THe action when the tab menu button is clicked
 -(void)menutabs:(id)sender
 {
-    int i=0; 
-    NSUInteger b; 
     NSMenu *menu = [[NSMenu alloc]init]; 
-    
-    //get the number of object in the buttontab array
-    b = [tabsArray count]; 
-    for (i=0;i<b;i++)
+    for (int i=0;i<[tabsArray count];i++)
     {
         WebViewController *button =  [tabsArray objectAtIndex:i];
-        
         //Create a menu and set the different items of the menu
         NSMenuItem *item = [[NSMenuItem alloc]init];
         [item setTarget:self]; 
@@ -291,13 +283,8 @@
 //Reset all tabs button state
 -(void)resetAllTabsButon
 {
-    NSInteger result = [tabsArray count]; 
-    int i; 
-    for (i=0; i<result; i++) {
-        //reset all button stored into the array
-        WebViewController *tpsbutton = [tabsArray objectAtIndex:i]; 
-    [[tpsbutton backgroundTab]setImage:[NSImage imageNamed:@"gradient_normal.png"]];
-        
+    for (WebViewController *tpsbutton in tabsArray) {
+        [[tpsbutton backgroundTab]setImage:[NSImage imageNamed:@"gradient_normal.png"]];
     }
 
 }
@@ -334,9 +321,8 @@
     buttonId = 0; 
     
     //Transfert all the tabs from the real array to the tempsarray
-    int v; 
     NSInteger resulttabs = [tabsArray count]; 
-    for (v=0; v<resulttabs; v++) {
+    for (int v=0; v<resulttabs; v++) {
         WebViewController *tpstab = [tabsArray objectAtIndex:v]; 
         [[tpstab tabButtonTab]setTag:buttonId]; 
         [[tpstab closeButtonTab]setTag:buttonId]; 
@@ -350,7 +336,7 @@
     
     //pass the object from tps array in the originale array
     
-    for (v=0; v<resulttabs; v++) {
+    for (int v=0; v<resulttabs; v++) {
         [tabsArray addObject:[tpstabarray objectAtIndex:v]]; 
     }
     
@@ -578,19 +564,8 @@ if (frame == [sender mainFrame]){
     
     if ( [openDlg runModal] == NSOKButton )
     {
-        NSArray* URLs = [openDlg URLs];
-        NSMutableArray *files = [[NSMutableArray alloc]init];
-        for (int i = 0; i <[URLs count]; i++) {
-            NSString *filename = [[URLs objectAtIndex:i]relativePath];
-            [files addObject:filename];
-        }
-        
-        for(int i = 0; i < [files count]; i++ )
-        {
-            NSString* fileName = [files objectAtIndex:i];
-            [resultListener chooseFilename:fileName]; 
-        }
-        [files release];
+        NSArray* files = [[openDlg URLs]valueForKey:@"relativePath"];
+        [resultListener chooseFilenames:files];
     }
     
 }
@@ -647,9 +622,7 @@ if (frame == [sender mainFrame]){
 //Bad memory maanagement for now ! 
 - (void)dealloc
 {   
-    int v;
-    for (v=0; v<[tabsArray count]; v++) {
-        WebViewController *newtab = [tabsArray objectAtIndex:v];
+    for (WebViewController *newtab in tabsArray) {
         [[newtab webview]setUIDelegate:nil]; 
         [[newtab webview]setPolicyDelegate:nil];
         [[newtab webview]removeFromSuperview];

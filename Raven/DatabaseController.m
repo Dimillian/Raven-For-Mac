@@ -712,7 +712,7 @@ static DatabaseController *sharedUserManager = nil;
 {
     NSString *path = [@"~/Library/Safari/Bookmarks.plist" stringByExpandingTildeInPath];
     NSDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSArray *folders = [[dict objectForKey:@"Children"] mutableCopy];
+    NSArray *folders = [[dict objectForKey:@"Children"]copy];
     NSDictionary *bookmarksBar;
     for (NSDictionary *folder in folders)
     {
@@ -722,7 +722,7 @@ static DatabaseController *sharedUserManager = nil;
             bookmarksBar = folder;
         }
     }
-    NSArray *items = [[bookmarksBar objectForKey:@"Children"] mutableCopy];
+    NSArray *items = [[bookmarksBar objectForKey:@"Children"]copy];
     NSMutableArray *bookmarksItemURL = [[[NSMutableArray alloc]init]autorelease];
     NSMutableArray *bookmarksItemTitleTemp = [[[NSMutableArray alloc]init]autorelease];
     for (NSDictionary *dict in items)
@@ -736,8 +736,7 @@ static DatabaseController *sharedUserManager = nil;
     {
         [bookmarksItemTitle addObject:[dictTitle objectForKey:@"title"]];
     }
-    int i;
-    for (i=0; i<bookmarksItemURL.count; i++) {
+    for (int i=0; i<bookmarksItemURL.count; i++) {
     sqlite3 *database;
     NSImage *image = [NSImage imageNamed:@"MediumSiteIcon.png"];
     NSData *imagedata =  [image TIFFRepresentation]; 

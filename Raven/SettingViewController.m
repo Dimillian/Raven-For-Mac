@@ -39,17 +39,23 @@
 {
     NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
     dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
-    if( images )
-    {
-        [images release], images = nil;
-    }
-	images = [[[NSMutableArray alloc]init]retain];
+    
+    if(folders) [folders release], folders = nil;
+    
+    folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY]mutableCopy];
+    
+    if(images)[images release], images = nil;
+    
+	images = [[NSMutableArray alloc]init];
     for (int i=0; i<[folders count]; i++) {
         NSDictionary *item = [folders objectAtIndex:i];
         NSString *folderNameTemp = [item objectForKey:PLIST_KEY_FOLDER];
         NSString *imagePath = [NSString stringWithFormat:application_support_path@"%@/main.png", folderNameTemp];
         NSImage *tempImage = [[[NSImage alloc]initWithContentsOfFile:[imagePath stringByExpandingTildeInPath]]autorelease];
+        if(tempImage == nil)
+        {
+            tempImage = [NSImage imageNamed:@"app_shelf.png"];
+        }
         [images addObject:tempImage];
 
     }
@@ -124,13 +130,22 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     }
     else
     {
+        
         RAlistManager *listManager = [[RAlistManager alloc]init];
         [listManager swapObjectAtIndex:[tableview selectedRow] upOrDown:0];
         [listManager release];
-        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[tableview selectedRow]-1];
-        [tableview selectRowIndexes:indexSet byExtendingSelection:NO];
+        [self refreshSmartBar];
+        if (IS_RUNNING_LION) {
+            [tableview beginUpdates];
+            [tableview moveRowAtIndex:[tableview selectedRow] toIndex:[tableview selectedRow]-1];
+            [tableview endUpdates];
+        }
+        else
+        {
+            NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[tableview selectedRow]-1];
+            [tableview selectRowIndexes:indexSet byExtendingSelection:NO];
+        }
     }
-    [self refreshSmartBar];
 }
 
 -(void)moveItemDown:(id)sender
@@ -143,10 +158,18 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         RAlistManager *listManager = [[RAlistManager alloc]init];
         [listManager swapObjectAtIndex:[tableview selectedRow] upOrDown:1];
         [listManager release];
-        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[tableview selectedRow]+1];
-        [tableview selectRowIndexes:indexSet byExtendingSelection:NO];
+        [self refreshSmartBar];
+        if (IS_RUNNING_LION) {
+            [tableview beginUpdates];
+            [tableview moveRowAtIndex:[tableview selectedRow] toIndex:[tableview selectedRow]+1];
+            [tableview endUpdates];
+        }
+        else
+        {
+            NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[tableview selectedRow]+1];
+            [tableview selectRowIndexes:indexSet byExtendingSelection:NO];
+        }
     }
-    [self refreshSmartBar];
 }
 
 -(void)deleteApp:(id)sender
@@ -166,10 +189,19 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         NSInteger selectedRow = [tableview selectedRow];
         RAlistManager *listManager = [[RAlistManager alloc]init];
         [listManager deleteAppAtIndex:selectedRow];
+
         [listManager release];
-        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:selectedRow-1];
-        [tableview selectRowIndexes:indexSet byExtendingSelection:NO];
         [self refreshSmartBar];
+        if (IS_RUNNING_LION) {
+            [tableview beginUpdates];
+            [tableview removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:[tableview selectedRow]] withAnimation:NSTableViewAnimationSlideUp];
+            [tableview endUpdates];
+        }
+        else
+        {
+            NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:selectedRow-1];
+            [tableview selectRowIndexes:indexSet byExtendingSelection:NO];
+        }
         
     }
 }

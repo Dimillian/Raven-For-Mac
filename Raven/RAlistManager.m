@@ -72,9 +72,7 @@
     NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
     NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
-    NSInteger count  = [folders count];
-    NSInteger x; 
-    for (x=0; x<count; x++) {
+    for (int x=0; x<[folders count]; x++) {
         NSMutableDictionary *item = [folders objectAtIndex:x];
         if ([item objectForKey:PLIST_KEY_UDID] == nil) {
             NSString *udid = [NSString stringWithFormat:@"com.yourname.%@", [item objectForKey:PLIST_KEY_APPNAME]];
@@ -146,8 +144,6 @@
         [alert release]; 
         [icon release]; 
     }
-
-    
 }
 
 -(void)checkforDuplicateFromApp:(NSString *)sourcePath
@@ -160,7 +156,7 @@
 {
     NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY]mutableCopy];
     if (order == 1 && index+1 < [folders count]) {
         id tempA = [folders objectAtIndex:index];
         id tempB = [folders objectAtIndex:index + 1];
