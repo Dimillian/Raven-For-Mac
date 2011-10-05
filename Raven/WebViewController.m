@@ -9,6 +9,7 @@
 #import "WebViewController.h"
 #import "RavenAppDelegate.h"
 #import "MainWindowController.h"
+#import "NSString+Raven.h"
 
 #define GOOGLE_SEARCH_URL @"http://www.google.com/search?q="
 
@@ -418,29 +419,18 @@
             }
             
             else if (doRegisterHistory == 2) {
-            NSDate *currentDate = [[NSDate alloc]initWithTimeIntervalSinceNow:0]; 
-            NSString *currentUrl= [webview mainFrameURL];
-            NSImage *currentFavicon = [webview mainFrameIcon];
-            NSString *udid = currentUrl;
-            udid = [udid stringByReplacingOccurrencesOfString:@":" withString:@"-"];
-            udid = [udid stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-            udid = [udid stringByReplacingOccurrencesOfString:@"." withString:@"-"];
-            udid = [udid stringByReplacingOccurrencesOfString:@"+" withString:@"-"];
-            udid = [udid stringByReplacingOccurrencesOfString:@"%" withString:@"-"];
-            udid = [udid stringByReplacingOccurrencesOfString:@"&" withString:@"-"];
-            udid = [udid stringByReplacingOccurrencesOfString:@"?" withString:@"-"];
-            udid = [udid stringByReplacingOccurrencesOfString:@"_" withString:@"-"];
-            udid = [udid stringByReplacingOccurrencesOfString:@"=" withString:@"-"];
-            udid = [udid stringByReplacingOccurrencesOfString:@"+" withString:@"-"];
-            udid = [udid stringByPaddingToLength:253 withString: @"." startingAtIndex:0];
-            udid = [udid stringByReplacingOccurrencesOfString:@"." withString:@""];    
-            [[currentFavicon TIFFRepresentation] writeToFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", udid]stringByExpandingTildeInPath] atomically:YES];
-            [controller insetHistoryItem:[webview mainFrameTitle] 
+                NSDate *currentDate = [[NSDate alloc]initWithTimeIntervalSinceNow:0]; 
+                NSString *currentUrl= [webview mainFrameURL];
+                NSImage *currentFavicon = [webview mainFrameIcon];
+                NSString *udid = currentUrl;
+                udid = [udid createFileNameFromString:udid];
+                [[currentFavicon TIFFRepresentation] writeToFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", udid]stringByExpandingTildeInPath] atomically:YES];
+                [controller insetHistoryItem:[webview mainFrameTitle] 
                                       url:currentUrl 
                                     data:[udid dataUsingEncoding:NSStringEncodingConversionAllowLossy] 
                                      date:currentDate];
-            [controller updateBookmarkFavicon:[currentFavicon TIFFRepresentation] forUrl:currentUrl];
-            [currentDate release]; 
+                [controller updateBookmarkFavicon:[currentFavicon TIFFRepresentation] forUrl:currentUrl];
+                [currentDate release]; 
                 
              }
         }

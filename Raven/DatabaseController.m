@@ -160,8 +160,6 @@ static DatabaseController *sharedUserManager = nil;
     {
         [history release], history = nil;
     }
-
-    
     history = [[NSMutableArray alloc]init];
 	// Open the database from the users filessytem
 	if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
@@ -199,7 +197,6 @@ static DatabaseController *sharedUserManager = nil;
 		sqlite3_finalize(compiledStatement);
         sqlite3_close(database); 
 	}
-
 }
 
 //Insert the bookmark into the database
@@ -506,6 +503,8 @@ static DatabaseController *sharedUserManager = nil;
 //used to fill up the suggestion box under the address bar
 -(void)suggestionForString:(NSString *)url
 {
+    url = [url stringByReplacingOccurrencesOfString:@"https://" withString:@""];
+    url = [url stringByReplacingOccurrencesOfString:@"http://" withString:@""];
     // Setup the database object
 	sqlite3 *database;
     if( suggestion )

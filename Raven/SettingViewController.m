@@ -24,7 +24,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
                                                 name:@"newAppInstalled" 
-                                              object:nil];
+                                              object:nil];;
 
     
 }
@@ -121,7 +121,6 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     return nil;
     
 }
-
 
 -(void)moveItemUp:(id)sender
 {
