@@ -41,12 +41,13 @@
     [download setDestination:destinationFilename allowOverwrite:NO];
     downloadName = filename; 
     downloadPath = destinationFilename;
+    [downloadPath retain];
 }
 
 - (void)download:(NSURLDownload *)download didCreateDestination:(NSString *)path
 {
     downloadPath = path; 
-    
+    [downloadPath retain];
 }
 
 - (void)setDownloadResponse:(NSURLResponse *)aDownloadResponse
@@ -124,7 +125,7 @@
 -(void)downloadDidFinish:(NSURLDownload *)download
 {
     DownloadController *controller = [DownloadController sharedUser]; 
-    downloadIndex  = [controller.downloadArray count];  
+    downloadIndex  = [controller.downloadArray count]; 
     //NSLog(@"Finish"); 
     if ([downloadPath hasSuffix:@"rpa.zip"] || [downloadPath hasSuffix:@"sba.zip"]) {
         RAlistManager *listManager = [[RAlistManager alloc]init];

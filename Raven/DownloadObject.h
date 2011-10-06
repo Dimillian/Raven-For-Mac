@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DownloadObject : NSObject <NSCoding>{
+@interface DownloadObject : NSObject{
     NSNumber *key; 
     NSString *name; 
     NSNumber *progress; 
@@ -17,12 +17,12 @@
     NSString *path; 
     NSString *downloadUrl; 
 }
-@property (copy) NSNumber *key; 
+@property (retain) NSNumber *key; 
 @property (copy) NSString *name; 
-@property (copy) NSNumber *progress; 
-@property (copy) NSNumber *size; 
+@property (retain) NSNumber *progress; 
+@property (retain) NSNumber *size; 
 @property (copy) NSString *path; 
-@property (copy) NSNumber *progressBytes; 
+@property (retain) NSNumber *progressBytes; 
 @property (copy) NSString *downloadUrl; 
 -(id)initWithKey:(NSNumber *)k name:(NSString *)n progress:(NSNumber *)pro size:(NSNumber *)s path:(NSString *)p progressBytes:(NSNumber *)pb source:(NSString *)sc; 
 @end

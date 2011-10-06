@@ -23,7 +23,7 @@
     
     return self; 
 }
-
+/*
 //I'll figure out why I put this later
 -(id) initWithCoder: (NSCoder*) coder {
     if (self = [super init]) {
@@ -49,6 +49,7 @@
     [coder encodeObject:self.progressBytes forKey:@"ProgressBytes"]; 
     [coder encodeObject:self.downloadUrl forKey:@"DownloadUrl"]; 
 }
+ */
 
 
 -(void)dealloc

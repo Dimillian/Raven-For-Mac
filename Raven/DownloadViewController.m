@@ -24,6 +24,11 @@
                                             selector:@selector(receiveNotification:) 
                                                 name:@"downloadDidUpdate" 
                                               object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:@"downloadDidFinish" 
+                                              object:nil];
+    
 
     selectedRowSave = 0; 
      

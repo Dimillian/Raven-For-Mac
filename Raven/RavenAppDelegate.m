@@ -27,7 +27,7 @@
     [controler vacuum];
     DownloadController *downloadCenter = [DownloadController sharedUser]; 
     [downloadCenter checkAndCreatePlist];
-    [downloadCenter writeDownloadInplist]; 
+    //[downloadCenter writeDownloadInplist]; 
     mainWindowArray = [[NSMutableArray alloc]init]; 
      //NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
     //Take care of the default setting
