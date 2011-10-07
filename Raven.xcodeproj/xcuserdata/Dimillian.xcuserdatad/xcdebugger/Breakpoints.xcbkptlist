@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/NavigatorViewController.m"
-         timestampString = "339409017.986193"
+         timestampString = "339669318.355831"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "155"
-         endingLineNumber = "155"
+         startingLineNumber = "154"
+         endingLineNumber = "154"
          landmarkName = "-addtabs:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -93,11 +93,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/RASmartBarViewController.m"
-         timestampString = "339279853.246869"
+         timestampString = "339700571.988153"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "76"
-         endingLineNumber = "76"
+         startingLineNumber = "90"
+         endingLineNumber = "90"
          landmarkName = "-awakeFromNib"
          landmarkType = "5">
       </FileBreakpoint>
@@ -107,11 +107,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/MainWindowController.m"
-         timestampString = "339410920.445607"
+         timestampString = "339701012.889181"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "236"
-         endingLineNumber = "236"
+         startingLineNumber = "257"
+         endingLineNumber = "257"
          landmarkName = "-initSmartBar"
          landmarkType = "5">
       </FileBreakpoint>
@@ -149,11 +149,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/MainWindowController.m"
-         timestampString = "339410920.445607"
+         timestampString = "339701012.889181"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "226"
-         endingLineNumber = "226"
+         startingLineNumber = "247"
+         endingLineNumber = "247"
          landmarkName = "-initSmartBar"
          landmarkType = "5">
       </FileBreakpoint>

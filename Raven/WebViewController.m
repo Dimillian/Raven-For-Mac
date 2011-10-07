@@ -80,6 +80,8 @@
     
     [myPreference release]; 
     isNewTab = YES; 
+    
+    
 
     
 }

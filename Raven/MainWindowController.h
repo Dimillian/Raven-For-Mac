@@ -54,6 +54,9 @@
     IBOutlet NSButton *downloadButton;
     IBOutlet NSButton *settingButton; 
     
+    IBOutlet NSTextField *firstButtonNumber; 
+    
+    
     //Raven view
     NavigatorViewController *navigatorview;
     HistoryViewController *historyviewcontroller;
@@ -87,6 +90,7 @@
 -(void)resetSmartBarUiWithoutAnimation;
 -(void)newAppInstalled;
 -(void)launchRuntime;
+-(void)checkButtonNumber; 
 -(void)receiveNotification:(NSNotification *)notification;
 @property (assign) NSString *passedUrl; 
 @property (assign) NavigatorViewController *navigatorview; 

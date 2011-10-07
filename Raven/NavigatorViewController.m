@@ -51,7 +51,7 @@
     istab = NO; 
     fromOtherViews = 2; 
 }
-//check the ua to see if it is mobile or desktop, initially the goal is to resize the window each time the view change
+//Depreciated
 -(void)checkua
 {
     //Check if the UA and change the windows size
@@ -65,7 +65,6 @@
 }
 
 
-//Later, it should really do something useful
 -(void)windowResize:(id)sender
 {
     NSRect windowSize = [[allTabsButton window]frame];
@@ -157,6 +156,15 @@
     //Set the host window to the actual window for plugin 
     [[newtab webview]setHostWindow:[tabController window]];
     
+    /*
+    NSMenu *mainMenu = [[NSApplication sharedApplication]mainMenu];
+    NSMenuItem *iTem = [mainMenu itemAtIndex:1];
+    NSMenu *submenu = [iTem submenu];
+    NSMenuItem *addTab = [submenu itemAtIndex:1];
+    [addTab setAction:@selector(addtabs:)];
+    [addTab setTarget:self]; 
+    */
+    
     NSRect windowSize = [[sender window]frame];
     CGFloat size = windowSize.size.width;  
     
@@ -235,7 +243,7 @@
     
     //reset the value
     PassedUrl = nil; 
-    
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"updateTabNumber" object:nil];
     
 }
 
@@ -367,7 +375,7 @@
         }
     }
     [self setImageOnSelectedTab];
-    
+     [[NSNotificationCenter defaultCenter]postNotificationName:@"updateTabNumber" object:nil];
     
     
 }

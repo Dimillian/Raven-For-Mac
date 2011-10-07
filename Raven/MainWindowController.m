@@ -11,7 +11,7 @@
 #import "SettingViewController.h"
 
 //smart bar app positioning constante
-#define retracted_app_height 54
+#define retracted_app_height 57
 #define app_expanded_height 200
 #define initial_position 228
 #define app_position_x -7
@@ -19,6 +19,17 @@
 #define app_view_h 278
 #define initial_app_space 516
 #define bottom_bar_size 40
+#define number_h 21
+
+#define button_x 16
+#define button_w 32
+#define button_h 32
+
+#define badge_x 37
+#define badge_y 238
+#define badge_w 30
+#define badge_h 30
+
 
 
 
@@ -40,14 +51,13 @@
 {
     
     [navigatorview release];
-    
     //Raven view
     [historyviewcontroller release];
     [bookmarkview release]; 
     [downloadview release]; 
     [settingview release]; 
     [appList release], appList = nil; 
-    
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
     [super dealloc];
 }
 
@@ -132,6 +142,10 @@
                                              selector:@selector(windowWillClose:) 
                                                  name:NSWindowWillCloseNotification 
                                                object:self.window];
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:@"updateTabNumber" 
+                                              object:nil];
     
     
     //init view controller with appropriate nib
@@ -177,11 +191,18 @@
         [downloadButton setAlphaValue:1.0];
         [downloadButton setImage:[NSImage imageNamed:@"download_on.png"]];
     }
+    if ([[notification name]isEqualToString:@"updateTabNumber"]){
+        [self checkButtonNumber];
+    }
 }
 
 #pragma mark -
 #pragma mark smart Bar UI
 
+-(void)checkButtonNumber
+{
+    [firstButtonNumber setStringValue:[NSString stringWithFormat:@"%d", [navigatorview.tabsArray count]]];
+}
 //take care of the Smart Bar init once window is awake
 -(void)launchRuntime
 {  
@@ -578,7 +599,8 @@
             [bookmarkButton setEnabled:NO];
             [[downloadButton animator]setAlphaValue:0.0]; 
             [downloadButton setEnabled:NO];
-            [[homeButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -65, 32, 32)]; 
+            [[homeButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -65, 32, 32)];
+            [[firstButtonNumber animator]setAlphaValue:0.0];
             [[historyButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -65, 32, 32)];
             [[bookmarkButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -65, 32, 32)];
             [[downloadButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -65, 32, 32)];
@@ -595,6 +617,8 @@
             [[downloadButton animator]setAlphaValue:1.0];
             [downloadButton setEnabled:YES];
             [[homeButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -115, 32, 32)];
+            [[firstButtonNumber animator]setFrame:NSMakeRect(16, rightView.frame.size.height -131, button_w, number_h)];
+            [[firstButtonNumber animator]setAlphaValue:1.0];
             [[historyButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -165, 32, 32)];
             [[bookmarkButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -215, 32, 32)];
             [[downloadButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -265, 32, 32)]; 

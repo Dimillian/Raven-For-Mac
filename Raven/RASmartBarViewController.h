@@ -9,6 +9,7 @@
 */
 #import <Cocoa/Cocoa.h>
 #import "NavigatorViewController.h"
+#import "NSButtonSub.h"
 
 @protocol RASmartBarViewControllerDelegate;
 @interface RASmartBarViewController : NSViewController
@@ -36,10 +37,18 @@
     NavigatorViewController *FourthNavigatorView;
     
     IBOutlet NSButton *mainButton; 
-    IBOutlet NSButton *firstButton; 
-    IBOutlet NSButton *secondButton; 
-    IBOutlet NSButton *thirdButton;
-    IBOutlet NSButton *fourthButton;
+    IBOutlet NSButtonSub *firstButton; 
+    IBOutlet NSButtonSub *secondButton; 
+    IBOutlet NSButtonSub *thirdButton;
+    IBOutlet NSButtonSub *fourthButton;
+    
+    IBOutlet NSImageView *badgeView; 
+    
+    IBOutlet NSTextField *totalTabsNumber; 
+    IBOutlet NSTextField *firstButtonNumber; 
+    IBOutlet NSTextField *secondButtonNumber; 
+    IBOutlet NSTextField *thirdButtonNumber; 
+    IBOutlet NSTextField *fourfthButtonNumber; 
     
     IBOutlet NSView *mainView; 
 
@@ -53,6 +62,9 @@
 -(IBAction)fourItemClicked:(id)sender;
 -(void)resetAllButton; 
 -(void)setSelectedButton;
+-(void)updateTabsNumber; 
+-(void)checkButtonNumber; 
+-(void)receiveNotification:(NSNotification *)notification;
 @property (nonatomic, assign) id<RASmartBarViewControllerDelegate> delegate;
 @property (copy) NSString *folderName; 
 @property (copy) NSString *appName; 
