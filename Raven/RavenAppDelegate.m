@@ -72,6 +72,9 @@
             if ([standardUserDefaults objectForKey:OPEN_TAB_IN_BACKGROUND] == nil) {
                 [standardUserDefaults setInteger:0 forKey:OPEN_TAB_IN_BACKGROUND]; 
             }
+            if ([standardUserDefaults objectForKey:OPPENED_TABS_BADGE] == nil) {
+                [standardUserDefaults setInteger:1 forKey:OPPENED_TABS_BADGE]; 
+            }
             //enable web inspector for webview, we are a browser afterall
             if  ([standardUserDefaults objectForKey:@"WebKitDeveloperExtras"] == nil){
                 [standardUserDefaults setInteger:1 forKey:@"WebKitDeveloperExtras"];

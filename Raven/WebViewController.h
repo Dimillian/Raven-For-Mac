@@ -31,6 +31,7 @@
     IBOutlet NSImage *favicon; 
     IBOutlet NSImageView *temp; 
     IBOutlet NSButton *tabsButton; 
+    IBOutlet NSButton *secondTabButton;
     IBOutlet NSScrollView *scrollView; 
     BOOL isNewTab; 
     NSInteger bytesReceived;
@@ -88,6 +89,7 @@
 @property (nonatomic, retain) NSString *passedUrl;
 @property (nonatomic, retain) NSView *switchView;
 @property (nonatomic, retain) NSButton *tabsButton; 
+@property (nonatomic, retain) NSButton *secondTabButton; 
 @property (nonatomic, retain) WebView *webview; 
 @property (nonatomic, retain) NSTextField *address;
 @property int doRegisterHistory;

@@ -11,7 +11,7 @@
 #import "SettingViewController.h"
 
 //smart bar app positioning constante
-#define retracted_app_height 57
+#define retracted_app_height 55
 #define app_expanded_height 200
 #define initial_position 228
 #define app_position_x -7
@@ -361,39 +361,62 @@
 
 -(IBAction)hideSideBar:(id)sender
 {
-     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     if ([settingButton alphaValue] == 0.0) {
-        [rightView setHidden:NO];
         [settingButton setHidden:NO];
-        [[centeredView animator]setFrame:[backupView frame]]; 
         [NSAnimationContext beginGrouping];
         [[NSAnimationContext currentContext] setDuration:0.3];
-        [[rightView  animator]setAlphaValue:1.0];
-        [[smartBarScrollView animator]setAlphaValue:1.0];
+        [[centeredView animator]setFrame:[backupView frame]]; 
+        [[smartBarScrollView animator]setFrame:NSMakeRect(-17, smartBarScrollView.frame.origin.y, smartBarScrollView.frame.size.width, smartBarScrollView.frame.size.height)];
         [[settingButton animator]setAlphaValue:1.0];
         [NSAnimationContext endGrouping];
-        [rightView setToolTip:@""]; 
-        [smartBarScrollView setHidden:NO];
-    
+        isHidden = NO;
+        
     }
     else{
-        [[centeredView animator]setFrame:[mainView bounds]]; 
         [NSAnimationContext beginGrouping];
         [[NSAnimationContext currentContext] setDuration:0.3];
-        [[smartBarScrollView  animator]setAlphaValue:0.0];
-        [[rightView  animator]setAlphaValue:0.0];
+        [[centeredView animator]setFrame:[mainView bounds]]; 
+        [[smartBarScrollView animator]setFrame:NSMakeRect(smartBarScrollView.frame.origin.x - 76, smartBarScrollView.frame.origin.y, smartBarScrollView.frame.size.width, smartBarScrollView.frame.size.height)];
         [[settingButton animator]setAlphaValue:0.0];
-        if ([standardUserDefaults integerForKey:@"SidebarLikeDock"] == 0)
+        if ([standardUserDefaults integerForKey:SIDEBAR_LIKE_DOCK] == 0)
         {
             [settingButton setHidden:YES];
             [[settingButton animator]setHidden:YES];
-            [smartBarScrollView setHidden:YES];
         }
         [NSAnimationContext endGrouping];
-        [rightView setToolTip:@"isHidden"];
+        isHidden = YES;
         
     }
     
+}
+
+-(void)showSideBar{
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    if (standardUserDefaults) {
+        if ([standardUserDefaults integerForKey:SIDEBAR_LIKE_DOCK] == 1 && isHidden == YES) {
+            [settingButton setHidden:NO];
+            [NSAnimationContext beginGrouping];
+            [[NSAnimationContext currentContext] setDuration:0.3];
+            [[settingButton animator]setAlphaValue:1.0];
+            [[smartBarScrollView animator]setFrame:NSMakeRect(-17, smartBarScrollView.frame.origin.y, smartBarScrollView.frame.size.width, smartBarScrollView.frame.size.height)];
+            [NSAnimationContext endGrouping];
+        }
+    }
+    
+}
+
+-(void)hideSideBar{
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    if (standardUserDefaults) {
+        if ([standardUserDefaults integerForKey:SIDEBAR_LIKE_DOCK] == 1 && isHidden == YES) {
+            [NSAnimationContext beginGrouping];
+            [[NSAnimationContext currentContext] setDuration:0.3];
+            [[smartBarScrollView animator]setFrame:NSMakeRect(smartBarScrollView.frame.origin.x - 76, smartBarScrollView.frame.origin.y, smartBarScrollView.frame.size.width, smartBarScrollView.frame.size.height)];
+            [[settingButton animator]setAlphaValue:0.0];
+            [NSAnimationContext endGrouping];
+        }
+    }
 }
 
 #pragma mark -

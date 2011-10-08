@@ -7,6 +7,7 @@
 //
 
 #import "MyWebView.h"
+#import "MainWindowController.h"
 
 
 @implementation MyWebView
@@ -36,7 +37,7 @@
         case 4:
         default:
             break;
-
+        
             
     }
 }
@@ -49,11 +50,23 @@
     {
         [self removeTrackingArea:trackingArea];
     }
-    NSTrackingArea * area = [[NSTrackingArea alloc] initWithRect:[self bounds]
+    NSTrackingArea * area = [[NSTrackingArea alloc] initWithRect:NSMakeRect(0, self.frame.origin.y-30, 45, self.frame.size.height+30)
                                                          options:NSTrackingMouseEnteredAndExited|NSTrackingMouseMoved|NSTrackingActiveInKeyWindow
                                                            owner:self
                                                         userInfo:nil];
     [self addTrackingArea:[area autorelease]];
+}
+
+-(void)mouseEntered:(NSEvent *)theEvent
+{
+    MainWindowController *controller = [[self window]windowController];
+    [controller showSideBar];
+}
+
+-(void)mouseExited:(NSEvent *)theEvent
+{
+    MainWindowController *controller = [[self window]windowController];
+    [controller hideSideBar];
 }
 
 

@@ -19,6 +19,7 @@
 #define HAVE_IMPORTED_FROM_SAFARI @"HaveImportedSafariBar   "
 #define LOGIN_INSTAPAPER @"LoginInstapaper"
 #define PASSWORD_INSTAPAPER @"PasswordInstapaper"
+#define OPPENED_TABS_BADGE @"OpennedTabsBadge"
 
 
 #define application_support_path @"~/Library/Application Support/RavenApp/app/"

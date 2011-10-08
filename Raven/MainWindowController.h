@@ -43,6 +43,7 @@
     int i; 
     int f; 
     int previousIndex;
+    BOOL isHidden; 
     
     NSMutableArray *appList; 
     
@@ -81,6 +82,8 @@
 -(IBAction)raven:(id)sender; 
 
 //method
+-(void)showSideBar; 
+-(void)hideSideBar; 
 -(void)animate:(NSUInteger)setMode;
 -(void)hideall; 
 -(void)SetMenuButton; 

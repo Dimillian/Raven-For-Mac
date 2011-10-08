@@ -15,12 +15,21 @@
 #define button_w 32
 #define button_h 32
 
-#define number_h 21
+#define number_h 20
 
-#define badge_x 56
+#define badge_x 59
 #define badge_y 238
-#define badge_w 30
-#define badge_h 30
+#define badge_w 26
+#define badge_h 26
+
+#define light_y 230
+#define light_x 75
+#define light_w 7
+#define light_h 8
+
+//Perfect place for the badge
+//[[totalTabsNumber animator]setFrame:NSMakeRect(badge_x-1, badge_y+1, badge_w, number_h)];
+//[[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
 
 @implementation RASmartBarViewController
 @synthesize folderName, appName, firstURL, secondURL, thirdURL, fourthURL, state, delegate, selectedButton; 
@@ -136,23 +145,23 @@
 {
     if (state == 0) {
         [self setSelectedButton];
-        [[totalTabsNumber animator]setAlphaValue:0.0];
-        [[badgeView animator]setAlphaValue:0.0];
-
+        //[[totalTabsNumber animator]setAlphaValue:0.0];
+        //[[badgeView animator]setAlphaValue:0.0];
+        [[lightVIew animator]setAlphaValue:0.0];
         [[firstButton animator]setFrame:NSMakeRect(button_x, 166, button_w, button_h)];
         [[firstButtonNumber animator]setFrame:NSMakeRect(button_x, 150, button_w, number_h)];
         [firstButtonNumber setAlphaValue:1.0];
         [[firstButton animator]setAlphaValue:1.0]; 
         [[secondButton animator] setFrame:NSMakeRect(button_x, 116, button_w, button_h)]; 
-        [[secondButtonNumber animator]setFrame:NSMakeRect(button_x, 100, button_x, number_h)];
+        [[secondButtonNumber animator]setFrame:NSMakeRect(button_x, 100, button_w, number_h)];
         [[secondButtonNumber animator]setAlphaValue:1.0];
         [secondButton setAlphaValue:1.0];
         [[thirdButton animator]setFrame:NSMakeRect(button_x, 66, button_w, button_h)];
-        [[thirdButtonNumber animator]setFrame:NSMakeRect(button_x, 50, button_x, number_h)];
+        [[thirdButtonNumber animator]setFrame:NSMakeRect(button_x, 50, button_w, number_h)];
         [[thirdButton animator]setAlphaValue:1.0];
         [thirdButtonNumber setAlphaValue:1.0];
         [[fourthButton animator]setFrame:NSMakeRect(button_x, 16, button_w, button_h)];
-        [[fourfthButtonNumber animator]setFrame:NSMakeRect(button_x, 0, button_x, number_h)];
+        [[fourfthButtonNumber animator]setFrame:NSMakeRect(button_x, 0, button_w, number_h)];
         [[fourthButton animator]setAlphaValue:1.0];
         [fourfthButtonNumber setAlphaValue:1.0];
         [firstButton setEnabled:YES];
@@ -178,18 +187,26 @@
     
     [[firstButton animator]setFrame:NSMakeRect(button_x, 196, button_w, button_h)]; 
     [[firstButton animator]setAlphaValue:0.0]; 
-    if([[totalTabsNumber stringValue]isEqualToString:@"0"])
-    {
-        [[totalTabsNumber animator]setAlphaValue:0.0];
-         [[badgeView animator]setAlphaValue:0.0];
+    
+    NSUserDefaults *standardDefault = [NSUserDefaults standardUserDefaults];
+    if (standardDefault) {
+        if( totalTabs == 0 || [standardDefault integerForKey:OPPENED_TABS_BADGE] == 0)
+        {
+            //[[totalTabsNumber animator]setAlphaValue:0.0];
+            //[[badgeView animator]setAlphaValue:0.0];
+            [[lightVIew animator]setAlphaValue:0.0];
+        }
+        else
+        {
+            //[[totalTabsNumber animator]setAlphaValue:1.0];
+            //[[badgeView animator]setAlphaValue:1.0];
+            [[lightVIew animator]setAlphaValue:1.0];
+        }
     }
-    else
-    {
-        [[totalTabsNumber animator]setAlphaValue:1.0];
-        [[badgeView animator]setAlphaValue:1.0];
-    }
-    [[totalTabsNumber animator]setFrame:NSMakeRect(badge_x, 240, badge_w, number_h)];
-    [[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
+    
+    //[[totalTabsNumber animator]setFrame:NSMakeRect(badge_x-1, badge_y+1, badge_w, number_h)];
+    //[[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
+    [[lightVIew animator]setFrame:NSMakeRect(light_x, light_y , light_w, light_h)];
     [[firstButtonNumber animator]setFrame:NSMakeRect(button_x, 196, button_x, number_h)];
     [firstButtonNumber setAlphaValue:0.0];
     [[secondButton animator] setFrame:NSMakeRect(button_x, 196, button_w, button_h)]; 
@@ -346,9 +363,9 @@
 
 -(void)updateTabsNumber
 {
-    NSUInteger totalTabs = [[firstNavigatorView tabsArray]count] + [[SecondNavigatorView tabsArray]count] 
+     totalTabs = [[firstNavigatorView tabsArray]count] + [[SecondNavigatorView tabsArray]count] 
     +[[ThirdtNavigatorView tabsArray]count] + [[FourthNavigatorView tabsArray]count];
-    [totalTabsNumber setStringValue:[NSString stringWithFormat:@"%d", totalTabs]];
+    //[totalTabsNumber setStringValue:[NSString stringWithFormat:@"%d", totalTabs]];
     [firstButtonNumber setStringValue:[NSString stringWithFormat:@"%d", [firstNavigatorView.tabsArray count]]];
     [secondButtonNumber setStringValue:[NSString stringWithFormat:@"%d", [SecondNavigatorView.tabsArray count]]];
     [thirdButtonNumber setStringValue:[NSString stringWithFormat:@"%d", [ThirdtNavigatorView.tabsArray count]]];

@@ -203,7 +203,7 @@
 								<object class="NSMenuItem" id="321744952">
 									<reference key="NSMenu" ref="595490454"/>
 									<string key="NSTitle">New Window</string>
-									<string key="NSKeyEquiv">n</string>
+									<string key="NSKeyEquiv">N</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
@@ -212,7 +212,7 @@
 								<object class="NSMenuItem" id="365934460">
 									<reference key="NSMenu" ref="595490454"/>
 									<string key="NSTitle">New Tab</string>
-									<string key="NSKeyEquiv">t</string>
+									<string key="NSKeyEquiv">n</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
@@ -1623,14 +1623,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">performClose:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="874651303"/>
-					</object>
-					<int key="connectionID">1238</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">goForward:</string>
 						<reference key="source" ref="1014"/>
 						<reference key="destination" ref="16695391"/>
@@ -1788,6 +1780,14 @@
 						<reference key="destination" ref="365934460"/>
 					</object>
 					<int key="connectionID">1407</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">performClose:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="874651303"/>
+					</object>
+					<int key="connectionID">1238</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -3217,6 +3217,7 @@
 							<string>bookmarkButton</string>
 							<string>centeredView</string>
 							<string>downloadButton</string>
+							<string>firstButtonNumber</string>
 							<string>historyButton</string>
 							<string>homeButton</string>
 							<string>mainView</string>
@@ -3232,6 +3233,7 @@
 							<string>NSButton</string>
 							<string>NSView</string>
 							<string>NSButton</string>
+							<string>NSTextField</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSView</string>
@@ -3250,6 +3252,7 @@
 							<string>bookmarkButton</string>
 							<string>centeredView</string>
 							<string>downloadButton</string>
+							<string>firstButtonNumber</string>
 							<string>historyButton</string>
 							<string>homeButton</string>
 							<string>mainView</string>
@@ -3276,6 +3279,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">downloadButton</string>
 								<string key="candidateClassName">NSButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">firstButtonNumber</string>
+								<string key="candidateClassName">NSTextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">historyButton</string>
@@ -3650,6 +3657,7 @@
 							<string>progress</string>
 							<string>progressTab</string>
 							<string>scrollView</string>
+							<string>secondTabButton</string>
 							<string>stopLoading</string>
 							<string>switchView</string>
 							<string>tabButtonTab</string>
@@ -3674,6 +3682,7 @@
 							<string>NSProgressIndicator</string>
 							<string>NSProgressIndicator</string>
 							<string>NSScrollView</string>
+							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSView</string>
 							<string>NSButton</string>
@@ -3701,6 +3710,7 @@
 							<string>progress</string>
 							<string>progressTab</string>
 							<string>scrollView</string>
+							<string>secondTabButton</string>
 							<string>stopLoading</string>
 							<string>switchView</string>
 							<string>tabButtonTab</string>
@@ -3760,6 +3770,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">scrollView</string>
 								<string key="candidateClassName">NSScrollView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">secondTabButton</string>
+								<string key="candidateClassName">NSButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">stopLoading</string>

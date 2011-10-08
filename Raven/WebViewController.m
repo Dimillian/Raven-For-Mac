@@ -15,7 +15,7 @@
 
 @implementation WebViewController
 @synthesize passedUrl, switchView, tabsButton, webview, address, tabview; 
-@synthesize tabButtonTab, backgroundTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab; 
+@synthesize tabButtonTab, backgroundTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton; 
 
 #pragma -
 #pragma mark action

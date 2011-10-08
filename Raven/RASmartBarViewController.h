@@ -43,6 +43,7 @@
     IBOutlet NSButtonSub *fourthButton;
     
     IBOutlet NSImageView *badgeView; 
+    IBOutlet NSImageView *lightVIew; 
     
     IBOutlet NSTextField *totalTabsNumber; 
     IBOutlet NSTextField *firstButtonNumber; 
@@ -51,6 +52,8 @@
     IBOutlet NSTextField *fourfthButtonNumber; 
     
     IBOutlet NSView *mainView; 
+    
+    NSUInteger totalTabs;
 
 }
 -(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate;

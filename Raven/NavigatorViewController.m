@@ -150,11 +150,14 @@
     //Bind the addtabd button to the current object action
     [[newtab tabsButton]setAction:@selector(addtabs:)];
     [[newtab tabsButton]setTarget:self]; 
+    [[newtab secondTabButton]setAction:@selector(addtabs:)];
+    [[newtab secondTabButton]setTarget:self]; 
     //set the new webview delegate to this class method
     [[newtab webview]setUIDelegate:self]; 
     [[newtab webview]setPolicyDelegate:self]; 
     //Set the host window to the actual window for plugin 
     [[newtab webview]setHostWindow:[tabController window]];
+    
     
     /*
     NSMenu *mainMenu = [[NSApplication sharedApplication]mainMenu];
