@@ -126,8 +126,6 @@
 		69C5868F13447AA20033A7BB /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69C5868E13447AA20033A7BB /* Carbon.framework */; };
 		69C6BAA013BF87D60040658C /* RASplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C6BA9F13BF87D60040658C /* RASplitView.m */; };
 		69C74D9E1392399700A9CBD8 /* RAMainWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C74D9D1392399700A9CBD8 /* RAMainWebView.m */; };
-		69CB527B13B243BF002EA282 /* TabButtonControlle.m in Sources */ = {isa = PBXBuildFile; fileRef = 69CB527913B243BE002EA282 /* TabButtonControlle.m */; };
-		69CB527E13B243FD002EA282 /* buttonTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69CB527D13B243FD002EA282 /* buttonTabView.xib */; };
 		69CE4146134A4C3D00EF867B /* apple_favicon.gif in Resources */ = {isa = PBXBuildFile; fileRef = 69CE4143134A4C3D00EF867B /* apple_favicon.gif */; };
 		69CE4147134A4C3E00EF867B /* gmail.com.br_favicon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 69CE4144134A4C3D00EF867B /* gmail.com.br_favicon.jpg */; };
 		69CE4148134A4C3E00EF867B /* googleFavicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 69CE4145134A4C3D00EF867B /* googleFavicon.png */; };
@@ -254,7 +252,7 @@
 		9FE5DE3D1434A77D003614C3 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE5DE3B1434A77D003614C3 /* down.png */; };
 		9FE5DE3E1434A77D003614C3 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE5DE3C1434A77D003614C3 /* up.png */; };
 		9FEF52C7140E2F71004A16D0 /* delete_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FEF52C6140E2F71004A16D0 /* delete_big.png */; };
-		9FF1017E13CCF03500B8F942 /* TabFaviconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF1017D13CCF03500B8F942 /* TabFaviconView.m */; };
+		9FF1017E13CCF03500B8F942 /* RATabFaviconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */; };
 		9FF4B9D31408D6DB005FCE7F /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D11408D6DB005FCE7F /* eye.png */; };
 		9FF4B9D41408D6DB005FCE7F /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D21408D6DB005FCE7F /* trash.png */; };
 		9FF4B9D91408D84C005FCE7F /* bookmarks_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D61408D84C005FCE7F /* bookmarks_empty.png */; };
@@ -437,9 +435,6 @@
 		69C6BA9F13BF87D60040658C /* RASplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RASplitView.m; sourceTree = "<group>"; };
 		69C74D9C1392399700A9CBD8 /* RAMainWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAMainWebView.h; sourceTree = "<group>"; };
 		69C74D9D1392399700A9CBD8 /* RAMainWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAMainWebView.m; sourceTree = "<group>"; };
-		69CB527813B243BD002EA282 /* TabButtonControlle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabButtonControlle.h; sourceTree = "<group>"; };
-		69CB527913B243BE002EA282 /* TabButtonControlle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabButtonControlle.m; sourceTree = "<group>"; };
-		69CB527D13B243FD002EA282 /* buttonTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = buttonTabView.xib; sourceTree = "<group>"; };
 		69CE4143134A4C3D00EF867B /* apple_favicon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = apple_favicon.gif; sourceTree = "<group>"; };
 		69CE4144134A4C3D00EF867B /* gmail.com.br_favicon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gmail.com.br_favicon.jpg; sourceTree = "<group>"; };
 		69CE4145134A4C3D00EF867B /* googleFavicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = googleFavicon.png; sourceTree = "<group>"; };
@@ -596,8 +591,8 @@
 		9FE5DE3B1434A77D003614C3 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		9FE5DE3C1434A77D003614C3 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		9FEF52C6140E2F71004A16D0 /* delete_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_big.png; sourceTree = "<group>"; };
-		9FF1017C13CCF03500B8F942 /* TabFaviconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabFaviconView.h; sourceTree = "<group>"; };
-		9FF1017D13CCF03500B8F942 /* TabFaviconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabFaviconView.m; sourceTree = "<group>"; };
+		9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = RATabFaviconView.h; sourceTree = "<group>"; };
+		9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATabFaviconView.m; sourceTree = "<group>"; };
 		9FF4B9D11408D6DB005FCE7F /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
 		9FF4B9D21408D6DB005FCE7F /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		9FF4B9D61408D84C005FCE7F /* bookmarks_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmarks_empty.png; sourceTree = "<group>"; };
@@ -644,7 +639,6 @@
 		690A79BE138B056B001AB4DE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				69CB527D13B243FD002EA282 /* buttonTabView.xib */,
 				69F8A092133CD50300E32E6D /* MainMenu.xib */,
 				6914E6B1133E4AAB0054D6D7 /* Navigator.xib */,
 				9F8A1CD313FDA36500DD291C /* Bookmark.xib */,
@@ -932,8 +926,8 @@
 				69E8169013C0F57100D8725C /* RAMainWindowView.m */,
 				9F087FEC13CC852C0075ACC1 /* StopActivityButton.h */,
 				9F087FED13CC852C0075ACC1 /* StopActivityButton.m */,
-				9FF1017C13CCF03500B8F942 /* TabFaviconView.h */,
-				9FF1017D13CCF03500B8F942 /* TabFaviconView.m */,
+				9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */,
+				9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */,
 				9F54091B143F60FF0000D46D /* RABadgeField.h */,
 				9F54091C143F60FF0000D46D /* RABadgeField.m */,
 			);
@@ -1217,8 +1211,6 @@
 		9FC3B79C14038C5700E28D71 /* Other controller */ = {
 			isa = PBXGroup;
 			children = (
-				69CB527813B243BD002EA282 /* TabButtonControlle.h */,
-				69CB527913B243BE002EA282 /* TabButtonControlle.m */,
 				69EDA392138FFDA3000AED59 /* RADatabaseController.h */,
 				69EDA393138FFDA3000AED59 /* RADatabaseController.m */,
 				69DF001013C0B26E006F92BD /* RADownloadController.h */,
@@ -1506,7 +1498,6 @@
 				695831EF13AA7B09009D3725 /* tooltip.xib in Resources */,
 				6952369813AFD2A0009028F1 /* bookmark in Resources */,
 				6952369913AFD2A0009028F1 /* history in Resources */,
-				69CB527E13B243FD002EA282 /* buttonTabView.xib in Resources */,
 				69EA579F13B388FC00C8E12F /* RADownloadCell.xib in Resources */,
 				6900ACC713B4BABD0043BF83 /* MainWindow.xib in Resources */,
 				69B0B9F913BE2A5D007491CB /* smartbar.plist in Resources */,
@@ -1654,7 +1645,6 @@
 				6967C3EF13995A3C004B8AAB /* RAHistoryCell.m in Sources */,
 				69360E4113A8BC7600EECA76 /* MAAttachedWindow.m in Sources */,
 				6984F68113A93DAA00C113A4 /* RASuggestionBoxView.m in Sources */,
-				69CB527B13B243BF002EA282 /* TabButtonControlle.m in Sources */,
 				69EA579D13B388E900C8E12F /* RADownloadCell.m in Sources */,
 				6900ACC413B4B9570043BF83 /* RAMainWindowController.m in Sources */,
 				69C6BAA013BF87D60040658C /* RASplitView.m in Sources */,
@@ -1664,7 +1654,7 @@
 				69E8169113C0F57100D8725C /* RAMainWindowView.m in Sources */,
 				6969EF8913C46D6300D9B6EB /* RASettingWindowController.m in Sources */,
 				9F087FEE13CC852C0075ACC1 /* StopActivityButton.m in Sources */,
-				9FF1017E13CCF03500B8F942 /* TabFaviconView.m in Sources */,
+				9FF1017E13CCF03500B8F942 /* RATabFaviconView.m in Sources */,
 				9FB6999013CD8505002EAEBA /* RAAboutPanelWindowController.m in Sources */,
 				9F85275713CEDBCD00D26BCF /* RAFavoritePanelWController.m in Sources */,
 				9F79C1E313D0CA160039A1CB /* RANSURLDownloadDelegate.m in Sources */,
