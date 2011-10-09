@@ -127,7 +127,7 @@
         NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", destinationPath];
         [destinationPath retain];
         NSDictionary*dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
-        NSString *appname = [NSString stringWithFormat:@"You have downloaded this Raven Smart Bar Application? \n        %@",[dict objectForKey:PLIST_KEY_APPNAME]];
+        NSString *appname = [NSString stringWithFormat:@"Would you like to install this web app? %@",[dict objectForKey:PLIST_KEY_APPNAME]];
         
         NSAlert *alert = [[NSAlert alloc]init];
         [alert setMessageText:appname];
@@ -135,10 +135,9 @@
                          [NSString stringWithFormat:@"%@/main.png", destinationPath]];
         [destinationPath retain];
         [alert setIcon:icon];
-        [alert setInformativeText:NSLocalizedString(@"Would you like to install this application ?", @"promptInstallFromWebContinue")];
         //[alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
         //call the alert and check the selected button
-        [alert addButtonWithTitle:NSLocalizedString(@"Yes", @"Yeah")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Yeah")];
         [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
         [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
         [alert release]; 

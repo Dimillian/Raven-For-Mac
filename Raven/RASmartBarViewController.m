@@ -7,7 +7,7 @@
 //
 
 #import "RASmartBarViewController.h"
-#import "MainWindowController.h"
+#import "RAMainWindowController.h"
 
 
 //button size and position
@@ -80,10 +80,10 @@
     
     state = 0;
     selectedButton = 1; 
-    firstNavigatorView = [[NavigatorViewController alloc]init];
-    SecondNavigatorView = [[NavigatorViewController alloc]init];
-    ThirdtNavigatorView = [[NavigatorViewController alloc]init];
-    FourthNavigatorView = [[NavigatorViewController alloc]init];
+    firstNavigatorView = [[RANavigatorViewController alloc]init];
+    SecondNavigatorView = [[RANavigatorViewController alloc]init];
+    ThirdtNavigatorView = [[RANavigatorViewController alloc]init];
+    FourthNavigatorView = [[RANavigatorViewController alloc]init];
 
     NSString *homeButtonPath = [NSString stringWithFormat:application_support_path@"%@/main.png", folderName];
     NSString *firstImageOffPath = [NSString stringWithFormat:application_support_path@"%@/1_off.png", folderName];
@@ -236,7 +236,7 @@
 {
     [self resetAllButton]; 
     [firstButton setState:1]; 
-    MainWindowController *mainWindow = [[sender window]windowController];
+    RAMainWindowController *mainWindow = [[sender window]windowController];
     if ([mainWindow.myCurrentViewController view] != nil)
 		[[mainWindow.myCurrentViewController view] removeFromSuperview];
     
@@ -263,7 +263,7 @@
 {
     [self resetAllButton]; 
     [secondButton setState:1]; 
-    MainWindowController *mainWindow = [[sender window]windowController];
+    RAMainWindowController *mainWindow = [[sender window]windowController];
     if ([mainWindow.myCurrentViewController view] != nil)
 		[[mainWindow.myCurrentViewController view] removeFromSuperview];
     
@@ -289,7 +289,7 @@
 {
     [self resetAllButton]; 
     [thirdButton setState:1]; 
-    MainWindowController *mainWindow = [[sender window]windowController];
+    RAMainWindowController *mainWindow = [[sender window]windowController];
     if ([mainWindow.myCurrentViewController view] != nil)
 		[[mainWindow.myCurrentViewController view] removeFromSuperview];
     
@@ -316,7 +316,7 @@
 {
     [self resetAllButton]; 
     [fourthButton setState:1];
-    MainWindowController *mainWindow = [[sender window]windowController];
+    RAMainWindowController *mainWindow = [[sender window]windowController];
     if ([mainWindow.myCurrentViewController view] != nil)
 		[[mainWindow.myCurrentViewController view] removeFromSuperview];
     

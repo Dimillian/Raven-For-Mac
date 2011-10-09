@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11B26</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
-		<string key="IBDocument.AppKitVersion">1138</string>
-		<string key="IBDocument.HIToolboxVersion">566.00</string>
+		<string key="IBDocument.SystemVersion">11C73</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.AppKitVersion">1138.23</string>
+		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1617</string>
+			<string key="NS.object.0">1938</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSView</string>
@@ -26,10 +26,13 @@
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</array>
-		<dictionary class="NSMutableDictionary" key="IBDocument.Metadata"/>
+		<object class="NSMutableDictionary" key="IBDocument.Metadata">
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
+		</object>
 		<array class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
 			<object class="NSCustomObject" id="1001">
-				<string key="NSClassName">AddFavoritePanel</string>
+				<string key="NSClassName">RAFavoritePanelWController</string>
 			</object>
 			<object class="NSCustomObject" id="1003">
 				<string key="NSClassName">FirstResponder</string>
@@ -47,7 +50,7 @@
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<object class="NSView" key="NSWindowView" id="804662448">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSBox" id="893974795">
@@ -63,7 +66,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{71, 160}, {36, 17}}</string>
 											<reference key="NSSuperview" ref="237739416"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="61360071"/>
 											<string key="NSReuseIdentifierKey">_NS:3936</string>
 											<bool key="NSEnabled">YES</bool>
@@ -103,7 +105,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{123, 157}, {288, 22}}</string>
 											<reference key="NSSuperview" ref="237739416"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="244527624"/>
 											<string key="NSReuseIdentifierKey">_NS:248</string>
 											<bool key="NSEnabled">YES</bool>
@@ -137,7 +138,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{68, 221}, {39, 17}}</string>
 											<reference key="NSSuperview" ref="237739416"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="617684348"/>
 											<string key="NSReuseIdentifierKey">_NS:3936</string>
 											<bool key="NSEnabled">YES</bool>
@@ -157,7 +157,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{127, 195}, {374, 17}}</string>
 											<reference key="NSSuperview" ref="237739416"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="944801868"/>
 											<string key="NSReuseIdentifierKey">_NS:3936</string>
 											<bool key="NSEnabled">YES</bool>
@@ -184,7 +183,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{49, 119}, {60, 17}}</string>
 											<reference key="NSSuperview" ref="237739416"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="450675844"/>
 											<string key="NSReuseIdentifierKey">_NS:3936</string>
 											<bool key="NSEnabled">YES</bool>
@@ -204,7 +202,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{123, 62}, {288, 73}}</string>
 											<reference key="NSSuperview" ref="237739416"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="923982550"/>
 											<string key="NSReuseIdentifierKey">_NS:3580</string>
 											<bool key="NSEnabled">YES</bool>
@@ -229,7 +226,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{342, 26}, {69, 25}}</string>
 											<reference key="NSSuperview" ref="237739416"/>
-											<reference key="NSWindow"/>
 											<string key="NSReuseIdentifierKey">_NS:161</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSButtonCell" key="NSCell" id="609117071">
@@ -256,7 +252,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{261, 26}, {72, 25}}</string>
 											<reference key="NSSuperview" ref="237739416"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="230883845"/>
 											<string key="NSReuseIdentifierKey">_NS:161</string>
 											<bool key="NSEnabled">YES</bool>
@@ -288,7 +283,6 @@
 											</set>
 											<string key="NSFrame">{{143, 218}, {22, 22}}</string>
 											<reference key="NSSuperview" ref="237739416"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="170178338"/>
 											<string key="NSReuseIdentifierKey">_NS:1658</string>
 											<bool key="NSEnabled">YES</bool>
@@ -320,7 +314,6 @@
 											</set>
 											<string key="NSFrame">{{266, 218}, {22, 22}}</string>
 											<reference key="NSSuperview" ref="237739416"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="862792284"/>
 											<string key="NSReuseIdentifierKey">_NS:1658</string>
 											<bool key="NSEnabled">YES</bool>
@@ -344,7 +337,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{127, 220}, {244, 18}}</string>
 											<reference key="NSSuperview" ref="237739416"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="500212284"/>
 											<string key="NSReuseIdentifierKey">_NS:266</string>
 											<bool key="NSEnabled">YES</bool>
@@ -448,7 +440,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{121, 30}, {141, 18}}</string>
 											<reference key="NSSuperview" ref="237739416"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="553404072"/>
 											<string key="NSReuseIdentifierKey">_NS:239</string>
 											<bool key="NSEnabled">YES</bool>
@@ -477,14 +468,12 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 									</array>
 									<string key="NSFrameSize">{467, 272}</string>
 									<reference key="NSSuperview" ref="893974795"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="881884649"/>
 									<string key="NSReuseIdentifierKey">_NS:632</string>
 								</object>
 							</array>
 							<string key="NSFrame">{{-10, 0}, {467, 272}}</string>
 							<reference key="NSSuperview" ref="804662448"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="237739416"/>
 							<string key="NSReuseIdentifierKey">_NS:630</string>
 							<string key="NSOffsets">{0, 0}</string>
@@ -511,8 +500,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 					</array>
 					<string key="NSFrameSize">{452, 262}</string>
-					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="893974795"/>
 					<string key="NSReuseIdentifierKey">_NS:2818</string>
 				</object>
@@ -870,71 +857,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 			<nil key="sourceID"/>
 			<int key="maxID">95</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">AddFavoritePanel</string>
-					<string key="superclassName">NSWindowController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="AddFavorite:">id</string>
-						<string key="InstapButtonpresse:">id</string>
-						<string key="cancel:">id</string>
-						<string key="matriceChange:">id</string>
-						<string key="submitToInsta:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="AddFavorite:">
-							<string key="name">AddFavorite:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="InstapButtonpresse:">
-							<string key="name">InstapButtonpresse:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="cancel:">
-							<string key="name">cancel:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="matriceChange:">
-							<string key="name">matriceChange:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="submitToInsta:">
-							<string key="name">submitToInsta:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="URL">NSTextField</string>
-						<string key="buttonChoice">NSMatrix</string>
-						<string key="instapaperButton">NSButton</string>
-						<string key="title">NSTextField</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="URL">
-							<string key="name">URL</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="buttonChoice">
-							<string key="name">buttonChoice</string>
-							<string key="candidateClassName">NSMatrix</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="instapaperButton">
-							<string key="name">instapaperButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="title">
-							<string key="name">title</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/AddFavoritePanel.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">

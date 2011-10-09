@@ -11,23 +11,23 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Carbon/Carbon.h>
 #import <sqlite3.h>
-#import "HistoryViewController.h"
-#import "NavigatorViewController.h"
-#import "BookmarkViewController.h"
-#import "DownloadViewController.h"
-#import "SettingViewController.h"
-#import "bookmarkObject.h"
+#import "RAHistoryViewController.h"
+#import "RANavigatorViewController.h"
+#import "RABookmarkViewController.h"
+#import "RADownloadViewController.h"
+#import "RASettingViewController.h"
+#import "RAItemObject.h"
 #import "url.h"
-#import "DatabaseController.h"
-#import "MainWindowController.h"
-#import "DownloadController.h"
-#import "DownloadObject.h"
-#import "SettingWindow.h"
-#import "AboutPanel.h"
+#import "RADatabaseController.h"
+#import "RAMainWindowController.h"
+#import "RADownloadController.h"
+#import "RADownloadObject.h"
+#import "RASettingWindowController.h"
+#import "RAAboutPanelWindowController.h"
 
 @interface RavenAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, NSImageDelegate> {
-    SettingWindow *setting;
-    AboutPanel *about; 
+    RASettingWindowController *setting;
+    RAAboutPanelWindowController *about; 
     IBOutlet NSMenu *favoriteMenu; 
     NSMutableArray *mainWindowArray; 
     NSString *opennedDocumentPath;
@@ -39,8 +39,10 @@
 -(IBAction)showAboutPanel:(id)sender;
 -(IBAction)favoriteMenu:(id)sender;
 -(IBAction)importSelectedApp:(id)sender;
+-(IBAction)webAppShop:(id)sender; 
 -(void)importAppAction;
-@property (nonatomic, retain) SettingWindow *setting; 
+-(void)openAnInternalWindowWithUrl:(NSString *)URL; 
+@property (nonatomic, retain) RASettingWindowController *setting; 
 @property (nonatomic, retain) NSMutableArray *mainWindowArray;  
 
 

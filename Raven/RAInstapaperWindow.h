@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "DatabaseController.h"
+#import "RADatabaseController.h"
 
 @interface RAInstapaperWindow : NSWindowController <NSWindowDelegate>
 {

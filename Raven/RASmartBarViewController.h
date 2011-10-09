@@ -8,8 +8,8 @@
 /*
 */
 #import <Cocoa/Cocoa.h>
-#import "NavigatorViewController.h"
-#import "NSButtonSub.h"
+#import "RANavigatorViewController.h"
+#import "RASmartBarButton.h"
 
 @protocol RASmartBarViewControllerDelegate;
 @interface RASmartBarViewController : NSViewController
@@ -31,16 +31,16 @@
     int selectedButton; 
     
     //google view
-    NavigatorViewController *firstNavigatorView;
-    NavigatorViewController *SecondNavigatorView;
-    NavigatorViewController *ThirdtNavigatorView;
-    NavigatorViewController *FourthNavigatorView;
+    RANavigatorViewController *firstNavigatorView;
+    RANavigatorViewController *SecondNavigatorView;
+    RANavigatorViewController *ThirdtNavigatorView;
+    RANavigatorViewController *FourthNavigatorView;
     
     IBOutlet NSButton *mainButton; 
-    IBOutlet NSButtonSub *firstButton; 
-    IBOutlet NSButtonSub *secondButton; 
-    IBOutlet NSButtonSub *thirdButton;
-    IBOutlet NSButtonSub *fourthButton;
+    IBOutlet RASmartBarButton *firstButton; 
+    IBOutlet RASmartBarButton *secondButton; 
+    IBOutlet RASmartBarButton *thirdButton;
+    IBOutlet RASmartBarButton *fourthButton;
     
     IBOutlet NSImageView *badgeView; 
     IBOutlet NSImageView *lightVIew; 

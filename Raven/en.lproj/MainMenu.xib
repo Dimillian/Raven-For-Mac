@@ -939,7 +939,7 @@
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="NSMenuItem" id="128541136">
 									<reference key="NSMenu" ref="644817650"/>
-									<string key="NSTitle">Web Apps</string>
+									<string key="NSTitle">Web App Shop</string>
 									<string key="NSKeyEquiv">0</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1820,6 +1820,14 @@
 						<reference key="destination" ref="343394567"/>
 					</object>
 					<int key="connectionID">1406</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">webAppShop:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="128541136"/>
+					</object>
+					<int key="connectionID">1408</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -3134,7 +3142,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1407</int>
+			<int key="maxID">1408</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3463,9 +3471,11 @@
 							<string>newWindow:</string>
 							<string>showAboutPanel:</string>
 							<string>showSettingsWindow:</string>
+							<string>webAppShop:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -3482,6 +3492,7 @@
 							<string>newWindow:</string>
 							<string>showAboutPanel:</string>
 							<string>showSettingsWindow:</string>
+							<string>webAppShop:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3503,6 +3514,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">showSettingsWindow:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">webAppShop:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>

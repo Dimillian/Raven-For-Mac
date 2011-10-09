@@ -15,6 +15,7 @@
 #pragma mark launch
 
 #define default_url @"http://go.raven.io"
+#define store_url @"http://start.raven.io"
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {    
     
@@ -22,10 +23,10 @@
    // for (NSString *key in [defaultsDict allKeys])
     //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
     
-    DatabaseController *controler = [DatabaseController sharedUser];
+    RADatabaseController *controler = [RADatabaseController sharedUser];
     [controler checkAndCreateDatabase];
     [controler vacuum];
-    DownloadController *downloadCenter = [DownloadController sharedUser]; 
+    RADownloadController *downloadCenter = [RADownloadController sharedUser]; 
     [downloadCenter checkAndCreatePlist];
     //[downloadCenter writeDownloadInplist]; 
     mainWindowArray = [[NSMutableArray alloc]init]; 
@@ -52,7 +53,7 @@
             }
             //Set the prefered URL to local page if nil
             if ([standardUserDefaults objectForKey:PREFERRED_URL] == nil) {
-                [standardUserDefaults setObject:default_url forKey:PREFERRED_URL];
+                [standardUserDefaults setObject:store_url forKey:PREFERRED_URL];
             }
             //if nil set the new tab URL to local page
             if ([standardUserDefaults objectForKey:NEW_TAB_URL] == nil) {
@@ -91,7 +92,7 @@
             [listManager release]; 
         }
     
-    MainWindowController *MainWindow = [[MainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
+    RAMainWindowController *MainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
     [MainWindow showWindow:self]; 
     
     //init the event that will intercept external URL
@@ -103,8 +104,8 @@
      andEventID:kAEGetURL];
     
     //instanciate about and setting window
-    setting = [[SettingWindow alloc]initWithWindowNibName:@"PreferenceWindow"];
-    about = [[AboutPanel alloc]initWithWindowNibName:@"AboutPanel"]; 
+    setting = [[RASettingWindowController alloc]initWithWindowNibName:@"PreferenceWindow"];
+    about = [[RAAboutPanelWindowController alloc]initWithWindowNibName:@"AboutPanel"]; 
    
         
 }
@@ -113,29 +114,9 @@
 - (void)getUrl:(NSAppleEventDescriptor *)event 
 withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 { 
-    NSApplication *app = [NSApplication sharedApplication];  
-    NSArray *windowsArray = [app windows];
-    NSString *urlStr = [[event paramDescriptorForKeyword:keyDirectObject] 
-                        stringValue];
-    int i;
-    int count = [windowsArray count]; 
-    for (i = 0; i<count; i++) {
-        if ([[[windowsArray objectAtIndex:i]windowController]isKindOfClass:[MainWindowController class]]) {
-            MainWindowController *Mainwindow = [[windowsArray objectAtIndex:i]windowController]; 
-            [Mainwindow showWindow:self]; 
-            [Mainwindow raven:nil]; 
-            [[Mainwindow navigatorview]setPassedUrl:urlStr]; 
-            [[Mainwindow navigatorview]addtabs:nil]; 
-            break; 
-        }
-    }
-    if (i>=count) {
-        MainWindowController *MainWindow = [[MainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
-        [MainWindow showWindow:self];  
-        [MainWindow raven:nil]; 
-        [[MainWindow navigatorview]setPassedUrl:urlStr]; 
-        [[MainWindow navigatorview]addtabs:nil]; 
-    }
+
+    [self openAnInternalWindowWithUrl:[[event paramDescriptorForKeyword:keyDirectObject] 
+                                       stringValue]];
 }
 
 
@@ -150,13 +131,45 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [about showWindow:self]; 
 }
 
+-(void)webAppShop:(id)sender
+{
+    [self openAnInternalWindowWithUrl:@"http://start.raven.io"];
+}
+
+-(void)openAnInternalWindowWithUrl:(NSString *)URL
+{
+    
+    NSApplication *app = [NSApplication sharedApplication];  
+    NSArray *windowsArray = [app windows];
+    int i;
+    int count = [windowsArray count]; 
+    for (i = 0; i<count; i++) {
+        if ([[[windowsArray objectAtIndex:i]windowController]isKindOfClass:[RAMainWindowController class]]) {
+            RAMainWindowController *Mainwindow = [[windowsArray objectAtIndex:i]windowController]; 
+            [Mainwindow showWindow:self]; 
+            [Mainwindow raven:nil]; 
+            [[Mainwindow navigatorview]setPassedUrl:URL]; 
+            [[Mainwindow navigatorview]addtabs:nil]; 
+            break; 
+        }
+    }
+    if (i>=count) {
+        RAMainWindowController *MainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
+        [MainWindow showWindow:self];  
+        [MainWindow raven:nil]; 
+        [[MainWindow navigatorview]setPassedUrl:URL]; 
+        [[MainWindow navigatorview]addtabs:nil]; 
+    }
+
+}
+
 
 //Fired when clicked the on the dock icon
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication
 					hasVisibleWindows:(BOOL)flag
 {
     if (flag == NO) {
-        MainWindowController *MainWindow = [[MainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
+        RAMainWindowController *MainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
         [MainWindow showWindow:self];  
     }
     
@@ -169,13 +182,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 //Open a new window
 -(void)newWindow:(id)sender
 {
-    MainWindowController *MainWindow = [[MainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
+    RAMainWindowController *MainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
     [MainWindow showWindow:self]; 
 }
 //
 -(void)newWindowsFromOther:(NSString *)url
 {
-    MainWindowController *MainWindow = [[MainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
+    RAMainWindowController *MainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
     [MainWindow showWindow:self]; 
 }
 
@@ -186,12 +199,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     int i=0; 
     NSUInteger b; 
     //instancie l'app delegate
-    DatabaseController *controller = [DatabaseController sharedUser];
+    RADatabaseController *controller = [RADatabaseController sharedUser];
     [controller readBookmarkFromDatabase:0 order:1]; 
     b = controller.bookmarks.count; 
     for (i=0;i<b;i++)
     {
-        bookmarkObject *bookmark = (bookmarkObject *)[controller.bookmarks objectAtIndex:i];
+        RAItemObject *bookmark = (RAItemObject *)[controller.bookmarks objectAtIndex:i];
         
         
         NSMenuItem *item = [[NSMenuItem alloc]init];
@@ -204,7 +217,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         [favoriteMenu addItem:item]; 
         [item release]; 
     }
-    MainWindowController *mainWindow = [[sender window]windowController]; 
+    RAMainWindowController *mainWindow = [[sender window]windowController]; 
     [favoriteMenu addItem:[NSMenuItem separatorItem]];
     NSMenuItem *item = [[NSMenuItem alloc]init];
     [item setTarget:mainWindow];
