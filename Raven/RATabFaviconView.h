@@ -8,6 +8,6 @@
 
 #import <AppKit/AppKit.h>
 
-@interface TabFaviconView : NSImageView
+@interface RATabFaviconView : NSImageView
 
 @end

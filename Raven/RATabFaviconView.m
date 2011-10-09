@@ -6,9 +6,9 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "TabFaviconView.h"
+#import "RATabFaviconView.h"
 
-@implementation TabFaviconView
+@implementation RATabFaviconView
 
 -(id)initWithFrame:(NSRect)frameRect
 {
