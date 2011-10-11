@@ -44,9 +44,10 @@
 //Reload the tableview list from the database
 -(void)check:(id)sender
 {
-    RADownloadController *controler = [RADownloadController sharedUser];
+    RADownloadController *controler = [[RADownloadController alloc]init];
     //[controler writeDownloadInplist];
     count = [controler.downloadArray count];
+    [controler release];
     [listView reloadData]; 
     if (count > 0){
     [listView setSelectedRow:selectedRowSave];
@@ -67,7 +68,7 @@
 	}
     
     // Set up the new cell:
-    RADownloadController *controler = [RADownloadController sharedUser];
+    RADownloadController *controler = [[RADownloadController alloc]init];
     //Get the bookmark at the index from the selected row
     RADownloadObject *download = (RADownloadObject *)[controler.downloadArray objectAtIndex:row]; 
      NSWorkspace *workspace = [NSWorkspace sharedWorkspace];
@@ -80,11 +81,7 @@
     if (download.size == download.progressBytes) {
         [[cell progressText]setStringValue:@"Download complete!"];
     }
-
-
-
-    
-	
+    [controler release];
 	return cell;
 }
 
@@ -97,7 +94,7 @@
 {
     selectedRowSave = [listView selectedRow]; 
     NSInteger row = [listView selectedRow]; 
-    RADownloadController *controller = [RADownloadController sharedUser];
+    RADownloadController *controller = [[RADownloadController alloc]init];
     RADownloadObject *aDownload = (RADownloadObject *)[controller.downloadArray objectAtIndex:row];
     NSWorkspace *workspace = [NSWorkspace sharedWorkspace]; 
     //send the url to the class instancied webview
@@ -112,8 +109,9 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSDictionary *attribute = [fileManager attributesOfItemAtPath:aDownload.path error:nil]; 
     if ([attribute objectForKey:NSFileModificationDate] != nil) {
-    [date setStringValue:[formatter stringFromDate:[attribute objectForKey:NSFileModificationDate]]]; 
+        [date setStringValue:[formatter stringFromDate:[attribute objectForKey:NSFileModificationDate]]]; 
     }
+    [controller release];
 
     
 }
@@ -121,10 +119,11 @@
 -(void)openFile:(id)sender
 {
     NSInteger row = [listView selectedRow]; 
-    RADownloadController *controller = [RADownloadController sharedUser];
+    RADownloadController *controller = [[RADownloadController alloc]init];
     RADownloadObject *aDownload = (RADownloadObject *)[controller.downloadArray objectAtIndex:row];
     NSWorkspace *workspace = [NSWorkspace sharedWorkspace]; 
     [workspace selectFile:aDownload.path inFileViewerRootedAtPath:aDownload.path]; 
+    [controller release];
 }
 
 -(void)moveToTrash:(id)sender
@@ -146,10 +145,11 @@
 -(void)resetList:(id)sender
 {
     NSInteger row = [listView selectedRow]; 
-    RADownloadController *controller = [RADownloadController sharedUser]; 
+    RADownloadController *controller = [[RADownloadController alloc]init]; 
     [controller.downloadArray removeObjectAtIndex:row]; 
     selectedRowSave = 0; 
     [self check:nil]; 
+    [controller release];
 }
 
 - (NSString *)stringFromFileSize:(int)theSize

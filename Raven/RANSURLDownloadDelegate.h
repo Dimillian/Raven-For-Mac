@@ -23,6 +23,9 @@
     NSInteger bytesReceived;
     NSURLResponse *downloadResponse;
     NSTimeInterval startTime; 
+    RADownloadObject *aDownload;
+    BOOL trackDownload; 
 }
-- (void)setDownloadResponse:(NSURLResponse *)aDownloadResponse;
+-(void)setDownloadResponse:(NSURLResponse *)aDownloadResponse;
+-(void)updateDownloadInformation; 
 @end

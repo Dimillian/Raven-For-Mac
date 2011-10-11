@@ -49,6 +49,7 @@
     IBOutlet NSTextField *pageTitleTab; 
     IBOutlet NSButton *tabButtonTab; 
     IBOutlet NSButton *closeButtonTab; 
+    IBOutlet NSButton *closeButtonTabShortcut; 
     IBOutlet NSProgressIndicator *progressTab;
     
     NSData *downloadBlob; 
@@ -98,6 +99,7 @@
 @property (nonatomic, retain) NSProgressIndicator *progressTab; 
 @property (nonatomic, retain) NSButton *tabButtonTab;
 @property (nonatomic, retain) NSButton *closeButtonTab; 
+@property (nonatomic, retain) NSButton *closeButtonTabShortcut; 
 @property (nonatomic, retain) NSImageView *backgroundTab; 
 @property (nonatomic, retain) NSImageView *faviconTab; 
 @property (nonatomic, retain) NSTextField *pageTitleTab;

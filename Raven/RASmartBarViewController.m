@@ -32,7 +32,7 @@
 //[[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
 
 @implementation RASmartBarViewController
-@synthesize folderName, appName, firstURL, secondURL, thirdURL, fourthURL, state, delegate, selectedButton; 
+@synthesize folderName, appName, firstURL, secondURL, thirdURL, fourthURL, state, delegate, selectedButton, mainButton; 
 
 
 -(id)init
@@ -172,7 +172,6 @@
         [delegate itemDidExpand:self];
         //[delegate selectionDidChange:self];
         state = 1;
-        [self checkButtonNumber];
 
     
     //MainWindowController *mainWindow = [[sender window]windowController]; 
@@ -366,45 +365,36 @@
      totalTabs = [[firstNavigatorView tabsArray]count] + [[SecondNavigatorView tabsArray]count] 
     +[[ThirdtNavigatorView tabsArray]count] + [[FourthNavigatorView tabsArray]count];
     //[totalTabsNumber setStringValue:[NSString stringWithFormat:@"%d", totalTabs]];
-    [firstButtonNumber setStringValue:[NSString stringWithFormat:@"%d", [firstNavigatorView.tabsArray count]]];
-    [secondButtonNumber setStringValue:[NSString stringWithFormat:@"%d", [SecondNavigatorView.tabsArray count]]];
-    [thirdButtonNumber setStringValue:[NSString stringWithFormat:@"%d", [ThirdtNavigatorView.tabsArray count]]];
-    [fourfthButtonNumber setStringValue:[NSString stringWithFormat:@"%d", [FourthNavigatorView.tabsArray count]]];
-    [self checkButtonNumber];
+    [firstButtonNumber setStringValue:[self numberOfDotToDisplay:[firstNavigatorView.tabsArray count]]];
+    [secondButtonNumber setStringValue:[self numberOfDotToDisplay:[SecondNavigatorView.tabsArray count]]];
+    [thirdButtonNumber setStringValue:[self numberOfDotToDisplay:[ThirdtNavigatorView.tabsArray count]]];
+    [fourfthButtonNumber setStringValue:[self numberOfDotToDisplay:[FourthNavigatorView.tabsArray count]]];
 }
 
--(void)checkButtonNumber
+
+-(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs
 {
-    if (state == 1) {
-        if ([[secondButtonNumber stringValue]isEqualToString:@"0"]) {
-            [[secondButtonNumber animator]setAlphaValue:0.0];
-        }
-        else
-        {
-            [[secondButtonNumber animator]setAlphaValue:1.0];
-        }
-        if ([[thirdButtonNumber stringValue]isEqualToString:@"0"]) {
-            [[thirdButtonNumber animator]setAlphaValue:0.0];
-        }
-        else
-        {
-            [[thirdButtonNumber animator]setAlphaValue:1.0];
-        }
-        if ([[firstButtonNumber stringValue]isEqualToString:@"0"]) {
-            [[firstButtonNumber animator]setAlphaValue:0.0];
-        }
-        else
-        {
-            [[firstButtonNumber animator]setAlphaValue:1.0];
-        }
-        if ([[fourfthButtonNumber stringValue]isEqualToString:@"0"]) {
-            [[fourfthButtonNumber animator]setAlphaValue:0.0];
-        }
-        else
-        {
-            [[fourfthButtonNumber animator]setAlphaValue:1.0];
-        }
+    switch (numberOfTabs) {
+        case 0:
+            return @"";
+            break;
+        case 1:
+            return @"•";
+            break; 
+        case 2:
+            return @"••";
+            break;
+        case 3:
+            return @"•••";
+            break; 
+        case 4:
+            return @"••••";
+            break; 
+        default:
+            return @"•••••";
+            break;
     }
+    
 }
 //reset all buttons state for image reset
 -(void)resetAllButton

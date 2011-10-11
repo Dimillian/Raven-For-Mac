@@ -26,8 +26,9 @@
     RADatabaseController *controler = [RADatabaseController sharedUser];
     [controler checkAndCreateDatabase];
     [controler vacuum];
-    RADownloadController *downloadCenter = [RADownloadController sharedUser]; 
+    RADownloadController *downloadCenter = [[RADownloadController alloc]init]; 
     [downloadCenter checkAndCreatePlist];
+    [downloadCenter release];
     //[downloadCenter writeDownloadInplist]; 
     mainWindowArray = [[NSMutableArray alloc]init]; 
      //NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
@@ -105,7 +106,7 @@
     
     //instanciate about and setting window
     setting = [[RASettingWindowController alloc]initWithWindowNibName:@"PreferenceWindow"];
-    about = [[RAAboutPanelWindowController alloc]initWithWindowNibName:@"AboutPanel"]; 
+    about = [[RAAboutPanelWindowController alloc]initWithWindowNibName:@"RAAboutPanelWindowController"]; 
    
         
 }

@@ -93,7 +93,7 @@
 -(void)resetSmartBarUiWithoutAnimation;
 -(void)newAppInstalled;
 -(void)launchRuntime;
--(void)checkButtonNumber; 
+-(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs;
 -(void)receiveNotification:(NSNotification *)notification;
 @property (assign) NSString *passedUrl; 
 @property (assign) RANavigatorViewController *navigatorview; 

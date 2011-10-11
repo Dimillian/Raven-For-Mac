@@ -147,6 +147,10 @@
     [[newtab closeButtonTab]setAction:@selector(closeSelectedTab:)]; 
     [[newtab closeButtonTab]setTarget:self];
     [[newtab closeButtonTab]setEnabled:YES]; 
+    [[newtab closeButtonTabShortcut]setTag:buttonId]; 
+    [[newtab closeButtonTabShortcut]setAction:@selector(closeSelectedTab:)]; 
+    [[newtab closeButtonTabShortcut]setTarget:self];
+    [[newtab closeButtonTabShortcut]setEnabled:YES]; 
     //Bind the addtabd button to the current object action
     [[newtab tabsButton]setAction:@selector(addtabs:)];
     [[newtab tabsButton]setTarget:self]; 
@@ -337,6 +341,7 @@
         RAWebViewController *tpstab = [tabsArray objectAtIndex:v]; 
         [[tpstab tabButtonTab]setTag:buttonId]; 
         [[tpstab closeButtonTab]setTag:buttonId]; 
+        [[tpstab closeButtonTabShortcut]setTag:buttonId]; 
         [[[tpstab tabview]animator]setFrame:NSMakeRect(tabButtonSize*v, 0, tabButtonSize, 20)]; 
         buttonId = buttonId +1; 
         [tpstabarray addObject:tpstab]; 

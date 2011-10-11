@@ -145,7 +145,7 @@
 		69D902FB134B9F990097F30F /* RADownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D902FA134B9F990097F30F /* RADownloadViewController.m */; };
 		69DF001213C0B26F006F92BD /* RADownloadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69DF001113C0B26E006F92BD /* RADownloadController.m */; };
 		69DF001513C0B281006F92BD /* RADownloadObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 69DF001413C0B280006F92BD /* RADownloadObject.m */; };
-		69E8169113C0F57100D8725C /* RAMainWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E8169013C0F57100D8725C /* RAMainWindowView.m */; };
+		69E8169113C0F57100D8725C /* RALeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E8169013C0F57100D8725C /* RALeftView.m */; };
 		69E87ABB13730F8F00730FE4 /* reader_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 69E87AB913730F8F00730FE4 /* reader_off.png */; };
 		69E87ABC13730F8F00730FE4 /* reader_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 69E87ABA13730F8F00730FE4 /* reader_on.png */; };
 		69EA579D13B388E900C8E12F /* RADownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EA579C13B388E900C8E12F /* RADownloadCell.m */; };
@@ -457,8 +457,8 @@
 		69DF001113C0B26E006F92BD /* RADownloadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADownloadController.m; sourceTree = "<group>"; };
 		69DF001313C0B280006F92BD /* RADownloadObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RADownloadObject.h; sourceTree = "<group>"; };
 		69DF001413C0B280006F92BD /* RADownloadObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADownloadObject.m; sourceTree = "<group>"; };
-		69E8168F13C0F57100D8725C /* RAMainWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAMainWindowView.h; sourceTree = "<group>"; };
-		69E8169013C0F57100D8725C /* RAMainWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAMainWindowView.m; sourceTree = "<group>"; };
+		69E8168F13C0F57100D8725C /* RALeftView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = RALeftView.h; sourceTree = "<group>"; };
+		69E8169013C0F57100D8725C /* RALeftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RALeftView.m; sourceTree = "<group>"; };
 		69E87AB913730F8F00730FE4 /* reader_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reader_off.png; sourceTree = "<group>"; };
 		69E87ABA13730F8F00730FE4 /* reader_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reader_on.png; sourceTree = "<group>"; };
 		69EA579B13B388E900C8E12F /* RADownloadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RADownloadCell.h; sourceTree = "<group>"; };
@@ -591,7 +591,7 @@
 		9FE5DE3B1434A77D003614C3 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		9FE5DE3C1434A77D003614C3 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		9FEF52C6140E2F71004A16D0 /* delete_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_big.png; sourceTree = "<group>"; };
-		9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = RATabFaviconView.h; sourceTree = "<group>"; };
+		9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATabFaviconView.h; sourceTree = "<group>"; };
 		9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATabFaviconView.m; sourceTree = "<group>"; };
 		9FF4B9D11408D6DB005FCE7F /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
 		9FF4B9D21408D6DB005FCE7F /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
@@ -922,8 +922,8 @@
 				69C6BA9F13BF87D60040658C /* RASplitView.m */,
 				6980775113BFBF6D0002D33C /* LionClipView.h */,
 				6980775213BFBF6D0002D33C /* LionClipView.m */,
-				69E8168F13C0F57100D8725C /* RAMainWindowView.h */,
-				69E8169013C0F57100D8725C /* RAMainWindowView.m */,
+				69E8168F13C0F57100D8725C /* RALeftView.h */,
+				69E8169013C0F57100D8725C /* RALeftView.m */,
 				9F087FEC13CC852C0075ACC1 /* StopActivityButton.h */,
 				9F087FED13CC852C0075ACC1 /* StopActivityButton.m */,
 				9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */,
@@ -1651,7 +1651,7 @@
 				6980775313BFBF6D0002D33C /* LionClipView.m in Sources */,
 				69DF001213C0B26F006F92BD /* RADownloadController.m in Sources */,
 				69DF001513C0B281006F92BD /* RADownloadObject.m in Sources */,
-				69E8169113C0F57100D8725C /* RAMainWindowView.m in Sources */,
+				69E8169113C0F57100D8725C /* RALeftView.m in Sources */,
 				6969EF8913C46D6300D9B6EB /* RASettingWindowController.m in Sources */,
 				9F087FEE13CC852C0075ACC1 /* StopActivityButton.m in Sources */,
 				9FF1017E13CCF03500B8F942 /* RATabFaviconView.m in Sources */,

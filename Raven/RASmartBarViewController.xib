@@ -39,7 +39,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSCustomView" id="1005">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSImageView" id="185853453">
@@ -55,6 +55,8 @@
 						</set>
 						<string key="NSFrame">{{66, 68}, {30, 30}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="473961397"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:2141</string>
 						<bool key="NSEnabled">YES</bool>
@@ -78,6 +80,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{39, 154}, {21, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1063754547"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:3944</string>
@@ -118,6 +121,8 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{37, 16}, {32, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:161</string>
@@ -146,6 +151,8 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{37, 66}, {32, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="185853453"/>
 						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:161</string>
@@ -170,6 +177,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{43, 130}, {21, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="913325895"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:3944</string>
@@ -190,6 +198,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{43, 130}, {21, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="432795112"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:3944</string>
@@ -210,6 +219,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{44, 104}, {20, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="239889681"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:3944</string>
@@ -230,6 +240,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{37, 116}, {32, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="476979757"/>
 						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
@@ -255,6 +266,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{37, 166}, {32, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="278264131"/>
 						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
@@ -281,6 +293,7 @@
 						<int key="NSvFlags">269</int>
 						<string key="NSFrame">{{21, 196}, {64, 64}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="477489796"/>
 						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
@@ -303,6 +316,8 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{108, 278}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="676621694"/>
 				<bool key="NSViewIsLayerTreeHost">YES</bool>
 				<int key="NSViewLayerContentsRedrawPolicy">2</int>
@@ -664,7 +679,7 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">NSButtonSub</string>
+					<string key="className">RASmartBarButton</string>
 					<string key="superclassName">NSButton</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="tooltip">NSView</string>
@@ -682,7 +697,7 @@
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/NSButtonSub.h</string>
+						<string key="minorKey">./Classes/RASmartBarButton.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -724,16 +739,16 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="badgeView">NSImageView</string>
-						<string key="firstButton">NSButtonSub</string>
+						<string key="firstButton">RASmartBarButton</string>
 						<string key="firstButtonNumber">NSTextField</string>
 						<string key="fourfthButtonNumber">NSTextField</string>
-						<string key="fourthButton">NSButtonSub</string>
+						<string key="fourthButton">RASmartBarButton</string>
 						<string key="lightVIew">NSImageView</string>
 						<string key="mainButton">NSButton</string>
 						<string key="mainView">NSView</string>
-						<string key="secondButton">NSButtonSub</string>
+						<string key="secondButton">RASmartBarButton</string>
 						<string key="secondButtonNumber">NSTextField</string>
-						<string key="thirdButton">NSButtonSub</string>
+						<string key="thirdButton">RASmartBarButton</string>
 						<string key="thirdButtonNumber">NSTextField</string>
 						<string key="totalTabsNumber">NSTextField</string>
 					</dictionary>
@@ -744,7 +759,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="firstButton">
 							<string key="name">firstButton</string>
-							<string key="candidateClassName">NSButtonSub</string>
+							<string key="candidateClassName">RASmartBarButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="firstButtonNumber">
 							<string key="name">firstButtonNumber</string>
@@ -756,7 +771,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="fourthButton">
 							<string key="name">fourthButton</string>
-							<string key="candidateClassName">NSButtonSub</string>
+							<string key="candidateClassName">RASmartBarButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="lightVIew">
 							<string key="name">lightVIew</string>
@@ -772,7 +787,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="secondButton">
 							<string key="name">secondButton</string>
-							<string key="candidateClassName">NSButtonSub</string>
+							<string key="candidateClassName">RASmartBarButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="secondButtonNumber">
 							<string key="name">secondButtonNumber</string>
@@ -780,7 +795,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="thirdButton">
 							<string key="name">thirdButton</string>
-							<string key="candidateClassName">NSButtonSub</string>
+							<string key="candidateClassName">RASmartBarButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="thirdButtonNumber">
 							<string key="name">thirdButtonNumber</string>

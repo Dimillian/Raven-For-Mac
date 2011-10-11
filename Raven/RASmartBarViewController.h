@@ -66,9 +66,10 @@
 -(void)resetAllButton; 
 -(void)setSelectedButton;
 -(void)updateTabsNumber; 
--(void)checkButtonNumber; 
 -(void)receiveNotification:(NSNotification *)notification;
+-(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs; 
 @property (nonatomic, assign) id<RASmartBarViewControllerDelegate> delegate;
+@property (nonatomic, retain) NSButton *mainButton; 
 @property (copy) NSString *folderName; 
 @property (copy) NSString *appName; 
 @property (copy) NSString *firstURL;

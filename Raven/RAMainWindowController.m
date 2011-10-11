@@ -17,7 +17,7 @@
 #define app_position_x -7
 #define app_view_w 108
 #define app_view_h 278
-#define initial_app_space 516
+#define initial_app_space 518
 #define bottom_bar_size 40
 #define number_h 21
 
@@ -192,16 +192,36 @@
         [downloadButton setImage:[NSImage imageNamed:@"download_on.png"]];
     }
     if ([[notification name]isEqualToString:@"updateTabNumber"]){
-        [self checkButtonNumber];
+        [firstButtonNumber setStringValue:[self numberOfDotToDisplay:[navigatorview.tabsArray count]]];
     }
 }
 
 #pragma mark -
 #pragma mark smart Bar UI
 
--(void)checkButtonNumber
+-(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs
 {
-    [firstButtonNumber setStringValue:[NSString stringWithFormat:@"%d", [navigatorview.tabsArray count]]];
+    switch (numberOfTabs) {
+        case 0:
+            return @"";
+            break;
+        case 1:
+            return @"•";
+            break; 
+        case 2:
+            return @"••";
+            break;
+        case 3:
+            return @"•••";
+            break; 
+        case 4:
+            return @"••••";
+            break; 
+        default:
+            return @"•••••";
+            break;
+    }
+    
 }
 //take care of the Smart Bar init once window is awake
 -(void)launchRuntime

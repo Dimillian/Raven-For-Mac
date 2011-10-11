@@ -155,48 +155,50 @@ static RADatabaseController *sharedUserManager = nil;
 {
     // Setup the database object
 	sqlite3 *database;
-    [history removeAllObjects]; 
-	if( history )
-    {
-        [history release], history = nil;
-    }
-    history = [[NSMutableArray alloc]init];
-	// Open the database from the users filessytem
-	if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
-		// Setup the SQL Statement and compile it for faster access
-		const char *sqlStatement = "SELECT * FROM History ORDER BY History_date DESC LIMIT 1400";
-		sqlite3_stmt *compiledStatement;
-		if(sqlite3_prepare_v2(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) {
-			// Loop through the results and add them to the feeds array
-			while(sqlite3_step(compiledStatement) == SQLITE_ROW) {
-				// Read the data from the result row
-                int udid = sqlite3_column_int(compiledStatement, 0);
-				NSString *aTitle = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 1)];
-				NSString *aUrl = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 2)];
-                NSData *data = [[NSData alloc] initWithBytes:sqlite3_column_blob(compiledStatement, 3) length:sqlite3_column_bytes(compiledStatement, 3)];
-                NSString *decoded = [[NSString alloc]initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-                NSImage *image = [[NSImage alloc]initWithContentsOfFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", decoded]stringByExpandingTildeInPath]];
-                int timesptamp = sqlite3_column_int(compiledStatement, 4);
-                NSDate *aDate = [[NSDate alloc]initWithTimeIntervalSince1970:timesptamp];
-                //Create an history object
-				RAItemObject *historyItem = [[RAItemObject alloc]initHistoryInitWithName:aTitle 
-                                                                                      url:aUrl 
-                                                                                   favico:image 
-                                                                                     date:aDate
+    @synchronized(self){
+        [history removeAllObjects]; 
+        if( history )
+        {
+            [history release], history = nil;
+        }
+        history = [[NSMutableArray alloc]init];
+        // Open the database from the users filessytem
+        if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
+            // Setup the SQL Statement and compile it for faster access
+            const char *sqlStatement = "SELECT * FROM History ORDER BY History_date DESC LIMIT 1400";
+            sqlite3_stmt *compiledStatement;
+            if(sqlite3_prepare_v2(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) {
+                // Loop through the results and add them to the feeds array
+                while(sqlite3_step(compiledStatement) == SQLITE_ROW) {
+                    // Read the data from the result row
+                    int udid = sqlite3_column_int(compiledStatement, 0);
+                    NSString *aTitle = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 1)];
+                    NSString *aUrl = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 2)];
+                    NSData *data = [[NSData alloc] initWithBytes:sqlite3_column_blob(compiledStatement, 3) length:sqlite3_column_bytes(compiledStatement, 3)];
+                    NSString *decoded = [[NSString alloc]initWithData:data encoding:NSStringEncodingConversionAllowLossy];
+                    NSImage *image = [[NSImage alloc]initWithContentsOfFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", decoded]stringByExpandingTildeInPath]];
+                    int timesptamp = sqlite3_column_int(compiledStatement, 4);
+                    NSDate *aDate = [[NSDate alloc]initWithTimeIntervalSince1970:timesptamp];
+                    //Create an history object
+                    RAItemObject *historyItem = [[RAItemObject alloc]initHistoryInitWithName:aTitle 
+                                                                                         url:aUrl 
+                                                                                      favico:image 
+                                                                                        date:aDate
                                                                                         udid:udid]; 
-                //add the created history object to our array
-				[history addObject:historyItem];
-                [historyItem release];
-                [aDate release];
-                [data release]; 
-                [decoded release];
-                [image release];
+                    //add the created history object to our array
+                    [history addObject:historyItem];
+                    [historyItem release];
+                    [aDate release];
+                    [data release]; 
+                    [decoded release];
+                    [image release];
+                }
             }
-		}
-		// Release the compiled statement from memory
-		sqlite3_finalize(compiledStatement);
-        sqlite3_close(database); 
-	}
+            // Release the compiled statement from memory
+            sqlite3_finalize(compiledStatement);
+            sqlite3_close(database); 
+        }
+    }
 }
 
 //Insert the bookmark into the database

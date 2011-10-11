@@ -128,7 +128,6 @@
         [destinationPath retain];
         NSDictionary*dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
         NSString *appname = [NSString stringWithFormat:@"Would you like to install this web app? %@",[dict objectForKey:PLIST_KEY_APPNAME]];
-        
         NSAlert *alert = [[NSAlert alloc]init];
         [alert setMessageText:appname];
         NSImage *icon = [[NSImage alloc]initWithContentsOfFile:

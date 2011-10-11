@@ -42,15 +42,13 @@
     }
 }
 
-
-
 - (void)updateTrackingAreas
 {
     for( NSTrackingArea * trackingArea in [self trackingAreas] )
     {
         [self removeTrackingArea:trackingArea];
     }
-    NSTrackingArea * area = [[NSTrackingArea alloc] initWithRect:[self frame]
+    NSTrackingArea * area = [[NSTrackingArea alloc] initWithRect:NSMakeRect(0, self.frame.origin.y - 30, 45, self.frame.size.height + 20)
                                                          options:NSTrackingMouseEnteredAndExited|NSTrackingMouseMoved|NSTrackingActiveInKeyWindow
                                                            owner:self
                                                         userInfo:nil];
@@ -59,14 +57,15 @@
 
 -(void)mouseEntered:(NSEvent *)theEvent
 {
-  
+    RAMainWindowController *controller = [[self window]windowController];
+    [controller showSideBar];
 }
 
 -(void)mouseExited:(NSEvent *)theEvent
 {
-    
+    RAMainWindowController *controller = [[self window]windowController];
+    [controller hideSideBar];
 }
-
 
 - (void)dealloc
 {

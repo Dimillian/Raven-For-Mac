@@ -6,36 +6,28 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 //******
-//This class is a singleton that handle the downloadArray and interact with it, it populate the download view.. Super ugly
+//This class is super ugly
 //*******
 
 #import "RADownloadController.h"
 
 
 @implementation RADownloadController
-@synthesize path, downloadArray;
-static RADownloadController *sharedUserManager = nil;
+@synthesize path;
 
-+(RADownloadController *)sharedUser
+-(NSMutableArray*) downloadArray
 {
-    if (sharedUserManager == nil) {
-        sharedUserManager = [[super allocWithZone:NULL] init];
-
+    static NSMutableArray* theArray = nil;
+    @synchronized(self)
+    {
+        if (theArray == nil)
+        {
+            theArray = [[NSMutableArray alloc] init];
+        }
     }
-    return sharedUserManager; 
+    return theArray;
 }
 
-+ (id)allocWithZone:(NSZone *)zone {
-    return [[self sharedUser] retain];
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    return self;
-}
-
-- (id)retain {
-    return self;
-}
 
 
 -(void)checkAndCreatePlist
@@ -66,6 +58,14 @@ static RADownloadController *sharedUserManager = nil;
     
 }
 
+-(void)replaceDownloadAtIndex:(NSUInteger)index withDownload:(RADownloadObject *)aDownload
+{
+   // @synchronized(self){
+        [[self downloadArray]replaceObjectAtIndex:index withObject:aDownload];
+    //}
+}
+
+/*
 -(void)readDownloadFromPlist
 {
     downloadArray = [[[NSMutableArray alloc]initWithContentsOfFile:path]retain]; 
@@ -84,15 +84,12 @@ static RADownloadController *sharedUserManager = nil;
 -(void)AddADownloadToArray:(RADownloadObject *)aDownload
 {
     if (downloadArray == nil) {
-    downloadArray = [[NSMutableArray alloc]init];
+        downloadArray = [[NSMutableArray alloc]init];
     }
     [downloadArray addObject:aDownload]; 
 }
+*/
 
--(void)replaceDownloadAtIndex:(NSUInteger)index withDownload:(RADownloadObject *)aDownload
-{
-    [downloadArray replaceObjectAtIndex:index withObject:aDownload]; 
-}
 -(void)dealloc
 {
     [super dealloc]; 

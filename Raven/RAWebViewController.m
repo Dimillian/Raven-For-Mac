@@ -15,7 +15,7 @@
 
 @implementation RAWebViewController
 @synthesize passedUrl, switchView, tabsButton, webview, address, tabview; 
-@synthesize tabButtonTab, backgroundTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton; 
+@synthesize tabButtonTab, backgroundTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, closeButtonTabShortcut; 
 
 #pragma -
 #pragma mark action
@@ -75,8 +75,9 @@
     [temp setImage:homeicon]; 
     
     [tabButtonTab setToolTip:[self title]]; 
-    RADownloadController *controller = [RADownloadController sharedUser]; 
-    downloadIndex  = [controller.downloadArray count];  
+    RADownloadController *controller = [[RADownloadController alloc]init]; 
+    downloadIndex  = [controller.downloadArray count]; 
+    [controller release];
     
     [myPreference release]; 
     isNewTab = YES; 
