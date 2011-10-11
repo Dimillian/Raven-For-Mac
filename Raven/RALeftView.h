@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface RAMainWindowView : NSView
+@interface RALeftView : NSView
 {
     BOOL isHidden; 
 }

@@ -6,10 +6,10 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "RAMainWindowView.h"
+#import "RALeftView.h"
 #import "RAMainWindowController.h"
 
-@implementation RAMainWindowView
+@implementation RALeftView
 
 -(id)initWithFrame:(NSRect)frameRect
 {
@@ -29,7 +29,7 @@
     {
         [self removeTrackingArea:trackingArea];
     }
-    NSTrackingArea * area = [[NSTrackingArea alloc] initWithRect:NSMakeRect(0, self.frame.origin.y, 45, self.frame.size.height-30)
+    NSTrackingArea * area = [[NSTrackingArea alloc] initWithRect:NSMakeRect(0, self.frame.origin.y, 45, self.frame.size.height)
                                                          options:NSTrackingMouseEnteredAndExited|NSTrackingMouseMoved|NSTrackingActiveInKeyWindow
                                                            owner:self
                                                         userInfo:nil];
