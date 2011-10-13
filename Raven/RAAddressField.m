@@ -195,10 +195,10 @@
         //[attachedWindow setFrame:[scrollView frame] display:YES];
         if (!attachedWindow) {
             int side = 11;
-            CGFloat x = self.frame.origin.x;
-            x = x + 42; 
-            CGFloat y = self.frame.origin.y; 
-            y = y + 30;
+            CGFloat x = self.superview.frame.origin.x;
+            x = x + 112; 
+            CGFloat y = self.superview.frame.origin.y; 
+            y = y + 35;
             NSPoint buttonPoint = NSMakePoint(x,y);
             [NSBundle loadNibNamed:@"SuggestionBox" owner:self];
             attachedWindow = [[MAAttachedWindow alloc] initWithView:scrollView 

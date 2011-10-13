@@ -109,15 +109,21 @@
     }
 }
 
-/*
+
 -(void)replaceTitleBarViewWith:(NSView *)view
 {
         INAppStoreWindow *aWindow = (INAppStoreWindow *)self.window;
         [view setFrame:NSMakeRect(titleBar.frame.origin.x, titleBar.frame.origin.y, self.window.frame.size.width - 20, titleBar.frame.size.height)];
         aWindow.titleBarHeight = 40.0;
-        [aWindow.titleBarView addSubview:titleBar];   
+        [view removeFromSuperview];
+        NSArray *subvbiews = [aWindow.titleBarView subviews];
+        for (NSView *subview in subvbiews) {
+            [subview removeFromSuperview];
+        }
+        [aWindow.titleBarView addSubview:view];  
+
 }
- */
+ 
 - (void)awakeFromNib
 {
 
@@ -175,6 +181,8 @@
     
     previousIndex = -1;
     [self launchRuntime];
+    
+    //[self replaceTitleBarViewWith:titleBar];
     
 }
 

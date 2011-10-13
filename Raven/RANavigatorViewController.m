@@ -103,6 +103,9 @@
     //TabButtonControlle *clickedbutton = [buttonTabsArray objectAtIndex:[sender tag]];
     [[clickedtab backgroundTab]setAlphaValue:0.0]; 
     
+    //RAMainWindowController *mainWindow = [[[clickedtab webview]window]windowController];
+    //[mainWindow replaceTitleBarViewWith:[clickedtab addressBarView]];
+    
     //reset all button state
     [self resetAllTabsButon]; 
     
@@ -150,6 +153,7 @@
     [[newtab closeButtonTabShortcut]setAction:@selector(closeSelectedTab:)]; 
     [[newtab closeButtonTabShortcut]setTarget:self];
     [[newtab closeButtonTabShortcut]setEnabled:YES]; 
+    
     //Bind the addtabd button to the current object action
     [[newtab tabsButton]setAction:@selector(addtabs:)];
     [[newtab tabsButton]setTarget:self]; 
@@ -242,6 +246,10 @@
         }
     }
     [self setImageOnSelectedTab];
+    
+    //RAMainWindowController *mainWindow = [[tabController window]windowController];
+    //[mainWindow replaceTitleBarViewWith:[newtab addressBarView]];
+    
     [item release]; 
     [newtab release]; 
     

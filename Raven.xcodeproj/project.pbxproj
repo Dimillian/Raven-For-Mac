@@ -183,6 +183,7 @@
 		9F2BF6BE13FDAD1000F809E6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F2BF6C013FDAD1000F809E6 /* Localizable.strings */; };
 		9F2F458E140D198C00BAB731 /* RASmartBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2F458C140D198C00BAB731 /* RASmartBarViewController.m */; };
 		9F2F458F140D198C00BAB731 /* RASmartBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F2F458D140D198C00BAB731 /* RASmartBarViewController.xib */; };
+		9F4954011446D56A00EED6BE /* RAInstapaperSubmit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4954001446D56A00EED6BE /* RAInstapaperSubmit.m */; };
 		9F4A4CF71440CEDF004AD395 /* lights.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A4CF61440CEDF004AD395 /* lights.png */; };
 		9F53F8DD13F569BF0025C821 /* advanced_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F53F8CB13F569BF0025C821 /* advanced_icon.png */; };
 		9F53F8DE13F569BF0025C821 /* amazon_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F53F8CC13F569BF0025C821 /* amazon_off.png */; };
@@ -515,6 +516,8 @@
 		9F2F458B140D198C00BAB731 /* RASmartBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RASmartBarViewController.h; sourceTree = "<group>"; };
 		9F2F458C140D198C00BAB731 /* RASmartBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RASmartBarViewController.m; sourceTree = "<group>"; };
 		9F2F458D140D198C00BAB731 /* RASmartBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RASmartBarViewController.xib; sourceTree = "<group>"; };
+		9F4953FF1446D56A00EED6BE /* RAInstapaperSubmit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAInstapaperSubmit.h; sourceTree = "<group>"; };
+		9F4954001446D56A00EED6BE /* RAInstapaperSubmit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAInstapaperSubmit.m; sourceTree = "<group>"; };
 		9F4A4CF61440CEDF004AD395 /* lights.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lights.png; sourceTree = "<group>"; };
 		9F53F8CB13F569BF0025C821 /* advanced_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = advanced_icon.png; sourceTree = "<group>"; };
 		9F53F8CC13F569BF0025C821 /* amazon_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amazon_off.png; sourceTree = "<group>"; };
@@ -1215,6 +1218,8 @@
 				69EDA393138FFDA3000AED59 /* RADatabaseController.m */,
 				69DF001013C0B26E006F92BD /* RADownloadController.h */,
 				69DF001113C0B26E006F92BD /* RADownloadController.m */,
+				9F4953FF1446D56A00EED6BE /* RAInstapaperSubmit.h */,
+				9F4954001446D56A00EED6BE /* RAInstapaperSubmit.m */,
 			);
 			name = "Other controller";
 			sourceTree = "<group>";
@@ -1669,6 +1674,7 @@
 				9F1685301431AC5E00C112A1 /* RAlistManager.m in Sources */,
 				9F5BF675143CEDB20033E18B /* NSString+Raven.m in Sources */,
 				9F54091D143F60FF0000D46D /* RABadgeField.m in Sources */,
+				9F4954011446D56A00EED6BE /* RAInstapaperSubmit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

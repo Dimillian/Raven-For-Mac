@@ -10,8 +10,9 @@
 #import "RADatabaseController.h"
 #import "LTInstapaperAPI.h"
 #import "EMKeychainItem.h"
+#import "RAInstapaperSubmit.h"
 
-@interface RAFavoritePanelWController : NSWindowController <NSWindowDelegate, LTInstapaperAPIDelegate>
+@interface RAFavoritePanelWController : NSWindowController <NSWindowDelegate>
 {
     IBOutlet NSTextField *title; 
     IBOutlet NSTextField *URL; 
@@ -24,7 +25,7 @@
     int type;
     IBOutlet NSMatrix *buttonChoice; 
     IBOutlet NSButton *instapaperButton; 
-    LTInstapaperAPI *localInsta; 
+    RAInstapaperSubmit *instapaper;
     
 }
 @property int state; 
@@ -35,9 +36,7 @@
 @property (nonatomic, retain) NSImage *tempFavico; 
 -(IBAction)AddFavorite:(id)sender; 
 -(IBAction)cancel:(id)sender; 
--(IBAction)submitToInsta:(id)sender;
 -(IBAction)InstapButtonpresse:(id)sender; 
 -(IBAction)matriceChange:(id)sender;
--(void)succeeded;
 
 @end

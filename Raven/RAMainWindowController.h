@@ -25,6 +25,7 @@
 @interface RAMainWindowController : NSWindowController <NSWindowDelegate, RASmartBarViewControllerDelegate>{
     //the view controller
     IBOutlet NSViewController* myCurrentViewController;
+    IBOutlet NSViewController *titleBarViewController; 
     
     //The middle view that is swapped when click on button
     IBOutlet NSView *centeredView; 
@@ -97,7 +98,7 @@
 -(void)launchRuntime;
 -(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs;
 -(void)receiveNotification:(NSNotification *)notification;
-//-(void)replaceTitleBarViewWith:(NSView *)view;
+-(void)replaceTitleBarViewWith:(NSView *)view;
 @property (assign) NSString *passedUrl; 
 @property (assign) RANavigatorViewController *navigatorview; 
 @property (assign) NSButton *downloadButton; 

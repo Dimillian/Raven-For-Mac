@@ -224,6 +224,7 @@
         
         NSMenuItem *item = [[NSMenuItem alloc]init];
         [item setTarget:self]; 
+        bookmark.title = [bookmark.title stringByPaddingToLength:35 withString:@" " startingAtIndex:0];
         [item setTitle:bookmark.title]; 
         [item setRepresentedObject:bookmark.url]; 
         [item setImage:bookmark.favico];
