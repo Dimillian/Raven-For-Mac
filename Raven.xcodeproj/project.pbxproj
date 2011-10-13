@@ -457,7 +457,7 @@
 		69DF001113C0B26E006F92BD /* RADownloadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADownloadController.m; sourceTree = "<group>"; };
 		69DF001313C0B280006F92BD /* RADownloadObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RADownloadObject.h; sourceTree = "<group>"; };
 		69DF001413C0B280006F92BD /* RADownloadObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADownloadObject.m; sourceTree = "<group>"; };
-		69E8168F13C0F57100D8725C /* RALeftView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = RALeftView.h; sourceTree = "<group>"; };
+		69E8168F13C0F57100D8725C /* RALeftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RALeftView.h; sourceTree = "<group>"; };
 		69E8169013C0F57100D8725C /* RALeftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RALeftView.m; sourceTree = "<group>"; };
 		69E87AB913730F8F00730FE4 /* reader_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reader_off.png; sourceTree = "<group>"; };
 		69E87ABA13730F8F00730FE4 /* reader_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reader_on.png; sourceTree = "<group>"; };

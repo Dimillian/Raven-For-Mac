@@ -10,8 +10,10 @@
 #import <WebKit/WebKit.h>
 
 @interface RAMainWebView : WebView {
-@private
+    NSMutableDictionary *twoFingersTouches;
     
 }
+
+@property (retain) NSMutableDictionary *twoFingersTouches;
 
 @end

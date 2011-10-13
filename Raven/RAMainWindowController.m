@@ -9,6 +9,7 @@
 #import "RAMainWindowController.h"
 #import "RavenAppDelegate.h"
 #import "RASettingViewController.h"
+#import "INAppStoreWindow.h"
 
 //smart bar app positioning constante
 #define retracted_app_height 55
@@ -108,10 +109,18 @@
     }
 }
 
-
-
+/*
+-(void)replaceTitleBarViewWith:(NSView *)view
+{
+        INAppStoreWindow *aWindow = (INAppStoreWindow *)self.window;
+        [view setFrame:NSMakeRect(titleBar.frame.origin.x, titleBar.frame.origin.y, self.window.frame.size.width - 20, titleBar.frame.size.height)];
+        aWindow.titleBarHeight = 40.0;
+        [aWindow.titleBarView addSubview:titleBar];   
+}
+ */
 - (void)awakeFromNib
 {
+
     
     [super windowDidLoad];
     [[self window]setDelegate:self]; 

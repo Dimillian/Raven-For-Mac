@@ -97,6 +97,8 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     NSDictionary *item = [folders objectAtIndex:row];
     NSString *appName = [item objectForKey:PLIST_KEY_APPNAME];
     NSNumber *buttonState = [item objectForKey:PLIST_KEY_ENABLE];
+    NSString *categoryName = [NSString stringWithFormat:@"\n%@",[item objectForKey:PLIST_KEY_CATEGORY]];
+    NSString *officialState = [NSString stringWithFormat:@"\n%@",[item objectForKey:PLIST_KEY_OFFICIAL]];
     if (tableColumn == iconColumn) {
         return [images objectAtIndex:row];
     }
@@ -107,10 +109,10 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         return buttonState;
     }
     if (tableColumn == appCategoryColumn) {
-        return @"\nNo category";
+        return categoryName;
     }
     if (tableColumn == appCompanyColumn) {
-        return @"\nUnofficial - Beta";
+        return officialState;
     }
     if (tableColumn == buttonUpColumn) {
         if (row == 0)

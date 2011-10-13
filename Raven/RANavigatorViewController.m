@@ -96,7 +96,6 @@
 -(void)tabs:(id)sender
 {
     [tabController selectTabViewItemAtIndex:[sender tag]]; 
-    
     //Instansiate the webviewcontroller with the object in the array at the button tag index
     RAWebViewController *clickedtab = [tabsArray objectAtIndex:[sender tag]];
     curentSelectedTab = [sender tag];
@@ -236,11 +235,9 @@
                 //If the new tab object is diffrent of null then show it (it should be alway different of null)
                 if (newtab != nil)
                 {
-                
                     [newtab setWindowTitle:sender];
                     //[newtab setCurrentButtonClicked:buttonview]; 
                     //Set the clicked button alpha value to show it activated
-                
                 }
         }
     }
@@ -420,6 +417,21 @@
 #pragma mark -
 #pragma mark webview Delegate
 
+- (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
+{   
+    if ([element objectForKey:WebElementLinkURLKey] != nil) {
+        NSMutableArray *newItem = [[defaultMenuItems mutableCopy]autorelease];
+        NSMenuItem *item = [defaultMenuItems objectAtIndex:1]; 
+        [item setTitle:@"Open in a new tab"];
+        [newItem replaceObjectAtIndex:1 withObject:item]; 
+        return newItem; 
+    }
+    else
+    {
+        return defaultMenuItems;
+    }
+}
+
 - (void)webView:(WebView *)webView decidePolicyForMIMEType:(NSString *)type request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener
 {
     if ([type hasPrefix:@"application"]) {
@@ -463,7 +475,7 @@ if (frame == [sender mainFrame]){
 - (void)webView:(WebView *)webView decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id < WebPolicyDecisionListener >)listener
 {
     //PassedUrl = [[request URL]absoluteString]; 
-    //[self addtabs:nil]; 
+    //[self addtabs:nil];
     [listener use];
 }
 
@@ -625,11 +637,6 @@ if (frame == [sender mainFrame]){
     return YES; 
 }
  */
-
-- (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
-{
-    return defaultMenuItems;
-}
 
 
 #pragma -

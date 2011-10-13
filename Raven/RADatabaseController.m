@@ -728,8 +728,27 @@ static RADatabaseController *sharedUserManager = nil;
     NSMutableArray *bookmarksItemTitleTemp = [[[NSMutableArray alloc]init]autorelease];
     for (NSDictionary *dict in items)
     {
-        [bookmarksItemURL addObject:[dict objectForKey:@"URLString"]];
-        [bookmarksItemTitleTemp addObject:[dict objectForKey:@"URIDictionary"]];
+        if ([[dict objectForKey:@"WebBookmarkType"]isEqualToString:@"WebBookmarkTypeList"] ) {
+            NSArray *itemsSub = [[dict objectForKey:@"Children"]copy];
+            for (NSDictionary *dictSub in itemsSub)
+            {
+                if (![[dictSub objectForKey:@"WebBookmarkType"]isEqualToString:@"WebBookmarkTypeList"] ) 
+                {
+                [bookmarksItemURL addObject:[dictSub objectForKey:@"URLString"]];
+                [bookmarksItemTitleTemp addObject:[dictSub objectForKey:@"URIDictionary"]]; 
+                }
+                else
+                {
+                    
+                }
+            }
+            [itemsSub release];
+        }
+        else
+        {
+            [bookmarksItemURL addObject:[dict objectForKey:@"URLString"]];
+            [bookmarksItemTitleTemp addObject:[dict objectForKey:@"URIDictionary"]];
+        }
         
     }
     NSMutableArray *bookmarksItemTitle = [[[NSMutableArray alloc]init]autorelease];

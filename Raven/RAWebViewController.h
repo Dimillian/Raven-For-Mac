@@ -51,6 +51,7 @@
     IBOutlet NSButton *closeButtonTab; 
     IBOutlet NSButton *closeButtonTabShortcut; 
     IBOutlet NSProgressIndicator *progressTab;
+    IBOutlet NSView *addressBarView;
     
     NSData *downloadBlob; 
     NSNumber *totalByes; 
@@ -89,6 +90,7 @@
 -(void)setDesktopUserAgent; 
 @property (nonatomic, retain) NSString *passedUrl;
 @property (nonatomic, retain) NSView *switchView;
+@property (nonatomic, retain) NSView *addressBarView;
 @property (nonatomic, retain) NSButton *tabsButton; 
 @property (nonatomic, retain) NSButton *secondTabButton; 
 @property (nonatomic, retain) WebView *webview; 

@@ -65,6 +65,8 @@
     RADownloadViewController *downloadview; 
     RASettingViewController *settingview; 
     
+    IBOutlet NSView *titleBar;
+    
     
     NSString *passedUrl; 
     
@@ -95,6 +97,7 @@
 -(void)launchRuntime;
 -(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs;
 -(void)receiveNotification:(NSNotification *)notification;
+//-(void)replaceTitleBarViewWith:(NSView *)view;
 @property (assign) NSString *passedUrl; 
 @property (assign) RANavigatorViewController *navigatorview; 
 @property (assign) NSButton *downloadButton; 

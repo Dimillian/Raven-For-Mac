@@ -81,6 +81,12 @@
         if ([item objectForKey:PLIST_KEY_ENABLE] == nil){
             [item setObject:[NSNumber numberWithInt:1] forKey:PLIST_KEY_ENABLE];
         }
+        if ([item objectForKey:PLIST_KEY_CATEGORY] == nil) {
+            [item setObject:@"No categorie" forKey:PLIST_KEY_CATEGORY];
+        }
+        if ([item objectForKey:PLIST_KEY_OFFICIAL] == nil) {
+            [item setObject:@"Unofficial" forKey:PLIST_KEY_OFFICIAL];
+        }
         [folders replaceObjectAtIndex:x withObject:item];
     }
     [dict setObject:folders forKey:PLIST_KEY_DICTIONNARY];

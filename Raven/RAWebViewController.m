@@ -11,11 +11,12 @@
 #import "RAMainWindowController.h"
 #import "NSString+Raven.h"
 
+
 #define GOOGLE_SEARCH_URL @"http://www.google.com/search?q="
 
 @implementation RAWebViewController
 @synthesize passedUrl, switchView, tabsButton, webview, address, tabview; 
-@synthesize tabButtonTab, backgroundTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, closeButtonTabShortcut; 
+@synthesize tabButtonTab, backgroundTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, closeButtonTabShortcut, addressBarView; 
 
 #pragma -
 #pragma mark action
@@ -444,6 +445,9 @@
 //If the webview fail load and receive error
 - (void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
 {
+    if ([error code] == - 999) {
+
+    }
     if (frame == [sender mainFrame]){
         //get the current address in the address bar
         NSString *addressTo = [address stringValue];
@@ -455,7 +459,6 @@
         }
     }
 }
-
 
 
 #pragma -
@@ -479,5 +482,15 @@
     [super dealloc];
 }
 
+@end
+
+//Private API to accept untrunsted certificate, should be enhance or removed
+
+@implementation NSURLRequest(DataController)
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host
+{
+
+	return YES;
+}
 
 @end
