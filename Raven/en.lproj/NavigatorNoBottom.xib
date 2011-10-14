@@ -620,7 +620,7 @@
 					<object class="NSButton" id="472909310">
 						<reference key="NSNextResponder" ref="662933798"/>
 						<int key="NSvFlags">265</int>
-						<string key="NSFrame">{{91, 1}, {17, 20}}</string>
+						<string key="NSFrame">{{89, 1}, {17, 20}}</string>
 						<reference key="NSSuperview" ref="662933798"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="406450565"/>
@@ -644,7 +644,7 @@
 					</object>
 					<object class="NSButton" id="58624413">
 						<reference key="NSNextResponder" ref="662933798"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, -1}, {110, 20}}</string>
 						<reference key="NSSuperview" ref="662933798"/>
 						<reference key="NSWindow"/>
@@ -680,7 +680,7 @@
 					<object class="NSBox" id="406450565">
 						<reference key="NSNextResponder" ref="662933798"/>
 						<int key="NSvFlags">9</int>
-						<string key="NSFrame">{{107, -39}, {5, 96}}</string>
+						<string key="NSFrame">{{106, -39}, {5, 96}}</string>
 						<reference key="NSSuperview" ref="662933798"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -704,8 +704,8 @@
 					</object>
 					<object class="NSTextField" id="141032912">
 						<reference key="NSNextResponder" ref="662933798"/>
-						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{26, 3}, {78, 14}}</string>
+						<int key="NSvFlags">270</int>
+						<string key="NSFrame">{{26, 3}, {67, 14}}</string>
 						<reference key="NSSuperview" ref="662933798"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="472909310"/>
@@ -774,7 +774,7 @@
 					</object>
 					<object class="NSImageView" id="18455685">
 						<reference key="NSNextResponder" ref="662933798"/>
-						<int key="NSvFlags">276</int>
+						<int key="NSvFlags">274</int>
 						<object class="NSMutableSet" key="NSDragTypes">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="NSArray" key="set.sortedObjects">
@@ -2202,7 +2202,7 @@
 				<string>{12, 12}</string>
 				<string>{16, 16}</string>
 				<string>{16, 16}</string>
-				<string>{16, 16}</string>
+				<string>{459, 476}</string>
 				<string>{16, 16}</string>
 				<string>{16, 16}</string>
 				<string>{4, 31}</string>

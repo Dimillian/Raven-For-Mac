@@ -297,6 +297,7 @@
         [ThirdtNavigatorView view];
         [ThirdtNavigatorView setPassedUrl:thirdURL];
         [ThirdtNavigatorView addtabs:nil]; 
+
     }    
     
     if (ThirdtNavigatorView != nil)

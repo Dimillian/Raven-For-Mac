@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11C73</string>
+		<string key="IBDocument.SystemVersion">11C74</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
 		<string key="IBDocument.AppKitVersion">1138.23</string>
 		<string key="IBDocument.HIToolboxVersion">567.00</string>
@@ -1064,7 +1064,7 @@
 								<object class="NSMenuItem" id="16695391">
 									<reference key="NSMenu" ref="949114493"/>
 									<string key="NSTitle">Forward</string>
-									<string key="NSKeyEquiv">]</string>
+									<string key="NSKeyEquiv"></string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
@@ -1073,7 +1073,7 @@
 								<object class="NSMenuItem" id="582197178">
 									<reference key="NSMenu" ref="949114493"/>
 									<string key="NSTitle">Back</string>
-									<string key="NSKeyEquiv">[</string>
+									<string key="NSKeyEquiv"></string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
@@ -3234,6 +3234,8 @@
 							<string>rightView</string>
 							<string>settingButton</string>
 							<string>smartBarScrollView</string>
+							<string>titleBar</string>
+							<string>titleBarViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3250,6 +3252,8 @@
 							<string>NSView</string>
 							<string>NSButton</string>
 							<string>NSScrollView</string>
+							<string>NSView</string>
+							<string>NSViewController</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -3269,6 +3273,8 @@
 							<string>rightView</string>
 							<string>settingButton</string>
 							<string>smartBarScrollView</string>
+							<string>titleBar</string>
+							<string>titleBarViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3323,6 +3329,14 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">smartBarScrollView</string>
 								<string key="candidateClassName">NSScrollView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">titleBar</string>
+								<string key="candidateClassName">NSView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">titleBarViewController</string>
+								<string key="candidateClassName">NSViewController</string>
 							</object>
 						</object>
 					</object>
@@ -3534,8 +3548,10 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>address</string>
+							<string>addressBarView</string>
 							<string>backgroundTab</string>
 							<string>closeButtonTab</string>
+							<string>closeButtonTabShortcut</string>
 							<string>favicon</string>
 							<string>faviconTab</string>
 							<string>mainView</string>
@@ -3559,7 +3575,9 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSTextField</string>
+							<string>NSView</string>
 							<string>NSImageView</string>
+							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSImage</string>
 							<string>NSImageView</string>
@@ -3587,8 +3605,10 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>address</string>
+							<string>addressBarView</string>
 							<string>backgroundTab</string>
 							<string>closeButtonTab</string>
+							<string>closeButtonTabShortcut</string>
 							<string>favicon</string>
 							<string>faviconTab</string>
 							<string>mainView</string>
@@ -3616,11 +3636,19 @@
 								<string key="candidateClassName">NSTextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">addressBarView</string>
+								<string key="candidateClassName">NSView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">backgroundTab</string>
 								<string key="candidateClassName">NSImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">closeButtonTab</string>
+								<string key="candidateClassName">NSButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">closeButtonTabShortcut</string>
 								<string key="candidateClassName">NSButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">

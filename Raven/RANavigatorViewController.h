@@ -46,6 +46,7 @@
 -(IBAction)closeAllTabs:(id)sender; 
 -(void)windowResize:(id)sender; 
 -(void)setImageOnSelectedTab; 
+-(void)redrawTabs;
 //method
 -(void)checkua; 
 -(void)resetAllTabsButon; 

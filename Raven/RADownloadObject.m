@@ -13,15 +13,16 @@
 
 -(id)initWithKey:(NSNumber *)k name:(NSString *)n progress:(NSNumber *)pro size:(NSNumber *)s path:(NSString *)p progressBytes:(NSNumber *)pb source:(NSString *)sc  
 {
-    self.key = k;
-    self.name = n; 
-    self.progress = pro; 
-    self.size = s; 
-    self.path = p; 
-    self.progressBytes = pb; 
-    self.downloadUrl = sc; 
-    
-    return self; 
+    if (self = [super init]) {
+        self.key = k;
+        self.name = n; 
+        self.progress = pro; 
+        self.size = s; 
+        self.path = p; 
+        self.progressBytes = pb; 
+        self.downloadUrl = sc; 
+    }
+    return (self); 
 }
 /*
 //I'll figure out why I put this later

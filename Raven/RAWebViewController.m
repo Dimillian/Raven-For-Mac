@@ -66,8 +66,6 @@
     [webview setUIDelegate:self];
     [webview setResourceLoadDelegate:self]; 
     [webview setFrameLoadDelegate:self]; 
-     RANSURLDownloadDelegate *dlDelegate = [[RANSURLDownloadDelegate alloc]init];
-    [webview setDownloadDelegate:dlDelegate]; 
     [webview setPolicyDelegate:self]; 
     [webview setPreferences:myPreference]; 
     [[webview preferences]setDefaultFontSize:16];

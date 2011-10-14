@@ -16,7 +16,7 @@
 #import "RANSURLDownloadDelegate.h"
 
 //the size of a tab button
-#define tabButtonSize 110
+#define tabButtonSize 190
 @implementation RANavigatorViewController
 
 @synthesize PassedUrl, tabsArray, fromOtherViews; 
@@ -50,6 +50,9 @@
     
     istab = NO; 
     fromOtherViews = 2; 
+    [allTabsButton setHidden:NO]; 
+    [allTabsButton setAction:@selector(menutabs:)]; 
+    [allTabsButton setTarget:self];
 }
 //Depreciated
 -(void)checkua
@@ -67,6 +70,10 @@
 
 -(void)windowResize:(id)sender
 {
+    if ([sender object] == [tabController window]){
+        [self redrawTabs];
+    }
+    /*
     NSRect windowSize = [[allTabsButton window]frame];
     int size = windowSize.size.width;  
     //WebViewController *button = [tabsArray lastObject];
@@ -82,6 +89,8 @@
         //[button.tabview setHidden:NO]; 
         [allTabsButton setHidden:YES];   
     }
+     */
+    
     
 }
 
@@ -129,6 +138,33 @@
     [[clickedtab backgroundTab]setImage:[NSImage imageNamed:@"gradient_on.png"]];
 }
 
+-(void)redrawTabs
+{
+    CGFloat x = 0;
+    for (int i =0; i<[tabsArray count]; i++) {
+        RAWebViewController *aTab = [tabsArray objectAtIndex:i];
+        CGFloat w = ([NSApp keyWindow].frame.size.width-100)/[tabsArray count];
+        if (w > tabButtonSize){
+            w=tabButtonSize;
+            if (i==0){
+                x=0;
+            }
+            else{
+                x = x + tabButtonSize;   
+            }
+        }
+        else {
+            if (i==0){
+                x=0;
+            }
+            else{
+             x = x + ([NSApp keyWindow].frame.size.width - 100)/[tabsArray count];
+            }
+        }
+        [[[aTab tabview]animator]setFrame:NSMakeRect(x, 0, w, 20)];
+    }
+}
+
 -(void)addtabs:(id)sender
 {
 
@@ -138,7 +174,6 @@
     //force the view to init
     [newtab view]; 
     [[newtab tabview]setAlphaValue:0.0]; 
-    [[newtab tabview]setFrame:NSMakeRect([tabController numberOfTabViewItems]*tabButtonSize, 0, tabButtonSize, 20)]; 
     [[newtab tabButtonTab]setAction:@selector(tabs:)]; 
     [[newtab tabButtonTab]setTarget:self]; 
     [[newtab tabButtonTab]setTag:buttonId]; 
@@ -252,7 +287,7 @@
     
     [item release]; 
     [newtab release]; 
-    
+    [self redrawTabs];
     //reset the value
     PassedUrl = nil; 
     [[NSNotificationCenter defaultCenter]postNotificationName:@"updateTabNumber" object:nil];
@@ -269,7 +304,9 @@
         //Create a menu and set the different items of the menu
         NSMenuItem *item = [[NSMenuItem alloc]init];
         [item setTarget:self]; 
-        [item setTitle:[button.pageTitleTab stringValue]]; 
+        NSString *tempTitle = [button.pageTitleTab stringValue];
+        tempTitle = [tempTitle stringByPaddingToLength:35 withString:@" " startingAtIndex:0];
+        [item setTitle:tempTitle]; 
         [item setImage:[button.faviconTab image]];
         [item setTag:i]; 
         [item setAction:@selector(tabs:)];
@@ -347,7 +384,7 @@
         [[tpstab tabButtonTab]setTag:buttonId]; 
         [[tpstab closeButtonTab]setTag:buttonId]; 
         [[tpstab closeButtonTabShortcut]setTag:buttonId]; 
-        [[[tpstab tabview]animator]setFrame:NSMakeRect(tabButtonSize*v, 0, tabButtonSize, 20)]; 
+        [self redrawTabs];
         buttonId = buttonId +1; 
         [tpstabarray addObject:tpstab]; 
     }

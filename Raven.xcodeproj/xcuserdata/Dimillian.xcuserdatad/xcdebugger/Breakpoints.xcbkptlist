@@ -163,11 +163,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/RANavigatorViewController.m"
-         timestampString = "340191370.742532"
+         timestampString = "340321622.569165"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "475"
-         endingLineNumber = "475"
+         startingLineNumber = "513"
+         endingLineNumber = "513"
          landmarkName = "-webView:didStartProvisionalLoadForFrame:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -177,13 +177,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/RANavigatorViewController.m"
-         timestampString = "340191370.742532"
+         timestampString = "340321622.569165"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "480"
-         endingLineNumber = "480"
-         landmarkName = "-webView:didStartProvisionalLoadForFrame:"
-         landmarkType = "5">
+         startingLineNumber = "518"
+         endingLineNumber = "518"
+         landmarkName = "@implementation RANavigatorViewController"
+         landmarkType = "3">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

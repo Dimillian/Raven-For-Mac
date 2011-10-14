@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11C73</string>
+		<string key="IBDocument.SystemVersion">11C74</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
 		<string key="IBDocument.AppKitVersion">1138.23</string>
 		<string key="IBDocument.HIToolboxVersion">567.00</string>
@@ -123,7 +123,7 @@
 							<object class="NSMutableString" key="NSToolbarItemIdentifier">
 								<characters key="NS.bytes">BBFFF863-C50C-46E0-A3B8-2D810E50E14A</characters>
 							</object>
-							<string key="NSToolbarItemLabel">Apperance</string>
+							<string key="NSToolbarItemLabel">Appearance</string>
 							<string key="NSToolbarItemPaletteLabel">Toolbar Item</string>
 							<string key="NSToolbarItemToolTip"/>
 							<nil key="NSToolbarItemView"/>
@@ -910,7 +910,7 @@
 																<string key="NSFrame">{{203, 16}, {234, 26}}</string>
 																<reference key="NSSuperview" ref="100183513"/>
 																<reference key="NSWindow"/>
-																<reference key="NSNextKeyView" ref="197431638"/>
+																<reference key="NSNextKeyView"/>
 																<string key="NSReuseIdentifierKey">_NS:179</string>
 																<bool key="NSEnabled">YES</bool>
 																<object class="NSPopUpButtonCell" key="NSCell" id="564689839">
@@ -3597,7 +3597,6 @@
 																<int key="NSvFlags">268</int>
 																<string key="NSFrame">{{189, 130}, {161, 32}}</string>
 																<reference key="NSSuperview" ref="370208371"/>
-																<reference key="NSNextKeyView" ref="197431638"/>
 																<string key="NSReuseIdentifierKey">_NS:161</string>
 																<bool key="NSEnabled">YES</bool>
 																<object class="NSButtonCell" key="NSCell" id="910394642">
