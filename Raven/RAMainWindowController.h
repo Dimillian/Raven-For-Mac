@@ -44,6 +44,7 @@
     int i; 
     int f; 
     int previousIndex;
+    int previousAppNumber; 
     BOOL isHidden; 
     
     NSMutableArray *appList; 
@@ -83,6 +84,9 @@
 -(IBAction)download:(id)sender; 
 -(IBAction)setting:(id)sender; 
 -(IBAction)raven:(id)sender; 
+
+-(IBAction)nextApp:(id)sender;
+-(IBAction)previousApp:(id)sender;
 
 //method
 -(void)showSideBar; 

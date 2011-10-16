@@ -165,6 +165,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 
+
 //Fired when clicked the on the dock icon
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication
 					hasVisibleWindows:(BOOL)flag

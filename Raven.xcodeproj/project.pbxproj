@@ -171,6 +171,9 @@
 		9F03B6D41402D98900985D32 /* RABookmarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F03B6D31402D98900985D32 /* RABookmarkCell.xib */; };
 		9F087FEE13CC852C0075ACC1 /* StopActivityButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F087FED13CC852C0075ACC1 /* StopActivityButton.m */; };
 		9F0F5688140ECDD600FAB76C /* tab-close-warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F0F5687140ECDD600FAB76C /* tab-close-warning.png */; };
+		9F141476144ACCD900503344 /* active_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F141475144ACCD900503344 /* active_tab.png */; };
+		9F141479144AD71800503344 /* inactive_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F141478144AD71800503344 /* inactive_tab.png */; };
+		9F14147C144AF82800503344 /* RAAddressFieldBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F14147B144AF82800503344 /* RAAddressFieldBox.m */; };
 		9F150648140FF31100C97149 /* instapaper-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F150646140FF31100C97149 /* instapaper-big.png */; };
 		9F150649140FF31100C97149 /* instapaper-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F150647140FF31100C97149 /* instapaper-small.png */; };
 		9F1685301431AC5E00C112A1 /* RAlistManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F16852F1431AC5E00C112A1 /* RAlistManager.m */; };
@@ -497,6 +500,10 @@
 		9F087FEC13CC852C0075ACC1 /* StopActivityButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopActivityButton.h; sourceTree = "<group>"; };
 		9F087FED13CC852C0075ACC1 /* StopActivityButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopActivityButton.m; sourceTree = "<group>"; };
 		9F0F5687140ECDD600FAB76C /* tab-close-warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-close-warning.png"; sourceTree = "<group>"; };
+		9F141475144ACCD900503344 /* active_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = active_tab.png; sourceTree = "<group>"; };
+		9F141478144AD71800503344 /* inactive_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inactive_tab.png; sourceTree = "<group>"; };
+		9F14147A144AF82800503344 /* RAAddressFieldBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAAddressFieldBox.h; sourceTree = "<group>"; };
+		9F14147B144AF82800503344 /* RAAddressFieldBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAAddressFieldBox.m; sourceTree = "<group>"; };
 		9F150646140FF31100C97149 /* instapaper-big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instapaper-big.png"; sourceTree = "<group>"; };
 		9F150647140FF31100C97149 /* instapaper-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instapaper-small.png"; sourceTree = "<group>"; };
 		9F16852E1431AC5E00C112A1 /* RAlistManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAlistManager.h; sourceTree = "<group>"; };
@@ -667,6 +674,8 @@
 		690C5546133DCD27005D50B3 /* ressources */ = {
 			isa = PBXGroup;
 			children = (
+				9F141478144AD71800503344 /* inactive_tab.png */,
+				9F141475144ACCD900503344 /* active_tab.png */,
 				9F4A4CF61440CEDF004AD395 /* lights.png */,
 				9F540918143F4B570000D46D /* badge.png */,
 				9FA8F3FD1439A99D004DD749 /* dialog_app.png */,
@@ -933,6 +942,8 @@
 				9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */,
 				9F54091B143F60FF0000D46D /* RABadgeField.h */,
 				9F54091C143F60FF0000D46D /* RABadgeField.m */,
+				9F14147A144AF82800503344 /* RAAddressFieldBox.h */,
+				9F14147B144AF82800503344 /* RAAddressFieldBox.m */,
 			);
 			name = "Reusable Subclass";
 			sourceTree = "<group>";
@@ -1582,6 +1593,8 @@
 				9FA8F3FE1439A99D004DD749 /* dialog_app.png in Resources */,
 				9F540919143F4B570000D46D /* badge.png in Resources */,
 				9F4A4CF71440CEDF004AD395 /* lights.png in Resources */,
+				9F141476144ACCD900503344 /* active_tab.png in Resources */,
+				9F141479144AD71800503344 /* inactive_tab.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1675,6 +1688,7 @@
 				9F5BF675143CEDB20033E18B /* NSString+Raven.m in Sources */,
 				9F54091D143F60FF0000D46D /* RABadgeField.m in Sources */,
 				9F4954011446D56A00EED6BE /* RAInstapaperSubmit.m in Sources */,
+				9F14147C144AF82800503344 /* RAAddressFieldBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

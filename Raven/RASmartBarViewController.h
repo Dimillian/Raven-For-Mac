@@ -54,6 +54,8 @@
     IBOutlet NSView *mainView; 
     
     NSUInteger totalTabs;
+    
+    int appNumber; 
 
 }
 -(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate;
@@ -66,6 +68,7 @@
 -(void)resetAllButton; 
 -(void)setSelectedButton;
 -(void)updateTabsNumber; 
+-(void)calculateUrlNumber; 
 -(void)receiveNotification:(NSNotification *)notification;
 -(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs; 
 @property (nonatomic, assign) id<RASmartBarViewControllerDelegate> delegate;
@@ -78,6 +81,7 @@
 @property (copy) NSString *fourthURL;
 @property int selectedButton;
 @property int state;
+@property int appNumber;
 @end
 
 @protocol RASmartBarViewControllerDelegate

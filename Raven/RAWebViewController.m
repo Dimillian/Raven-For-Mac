@@ -16,7 +16,7 @@
 
 @implementation RAWebViewController
 @synthesize passedUrl, switchView, tabsButton, webview, address, tabview; 
-@synthesize tabButtonTab, backgroundTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, closeButtonTabShortcut, addressBarView; 
+@synthesize tabButtonTab, backgroundTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, closeButtonTabShortcut, addressBarView, boxTab; 
 
 #pragma -
 #pragma mark action
@@ -80,6 +80,8 @@
     
     [myPreference release]; 
     isNewTab = YES; 
+    [progressMain setMinValue:0.0]; 
+    [progressMain setMaxValue:1.0]; 
     
     
 
@@ -354,8 +356,12 @@
         //animate the progressbar
         [progress startAnimation:self]; 
         [[temp animator]setAlphaValue:0.0];
+        [temp setImage:[webview mainFrameIcon]];
         [[[self faviconTab]animator]setAlphaValue:0.0];
         [[self progressTab]startAnimation:self];
+        [progressMain setHidden:NO]; 
+        [progressMain setControlSize:NSMiniControlSize]; 
+        [progressMain setDoubleValue:[webview estimatedProgress]];
         
     }
     
@@ -368,6 +374,7 @@
     NSString *url = [webview mainFrameURL];
     //set the URl in the address bar
     [address setStringValue:url];
+    [progressMain setDoubleValue:[webview estimatedProgress]];
     
 }
 
@@ -377,6 +384,7 @@
 {
     // Only report feedback for the main frame.
     if (frame == [sender mainFrame]){
+        [progressMain setDoubleValue:[webview estimatedProgress]];
         //get the current title and set it in the window title
         NSString *title = [webview mainFrameTitle];
         [[self pageTitleTab]setStringValue:[webview mainFrameTitle]];
@@ -387,8 +395,14 @@
             [address setStringValue:@""];
             isNewTab = NO; 
         }
-
     }    
+}
+
+- (void)webView:(WebView *)sender didReceiveIcon:(NSImage *)image forFrame:(WebFrame *)frame
+{
+    [temp setImage:[webview mainFrameIcon]];
+    [progressMain setDoubleValue:[webview estimatedProgress]];
+    [[self faviconTab]setImage:[webview mainFrameIcon]]; 
 }
 
 //set the favicon when the webview finished loading
@@ -396,48 +410,53 @@
 {
     RADatabaseController *controller = [RADatabaseController sharedUser];
     // Only report feedback for the main frame.
-    if (frame == [sender mainFrame]){
-        NSString *title =  [webview mainFrameTitle]; 
-        //get the current page icon
-        favicon = [webview mainFrameIcon];
-        [temp setImage:favicon]; 
-        [stopLoading setHidden:YES];
-        [[self faviconTab]setImage:[webview mainFrameIcon]]; 
-        [[self pageTitleTab]setStringValue:[webview mainFrameTitle]];
-        [[self progressTab]stopAnimation:self];
-        [progress stopAnimation:self]; 
-        [[[self faviconTab]animator]setAlphaValue:1.0]; 
-        [[temp animator]setAlphaValue:1.0]; 
-        if ([title isEqualToString:@"Raven Welcome Page"] || 
-            [title isEqualToString:@"Raven Internal Page"] ||            
-            [[webview mainFrameURL]isEqualToString:@"http://go.raven.io/"])
-        {
-            [temp setImage:[NSImage imageNamed:@"ravenico.png"]]; 
-            [faviconTab setImage:[NSImage imageNamed:@"ravenico.png"]]; 
+    [progressMain setHidden:YES]; 
+    NSString *title =  [webview mainFrameTitle]; 
+    //get the current page icon
+    favicon = [webview mainFrameIcon];
+    [temp setImage:favicon]; 
+    [stopLoading setHidden:YES];
+    [[self faviconTab]setImage:[webview mainFrameIcon]]; 
+    [[self pageTitleTab]setStringValue:[webview mainFrameTitle]];
+    [[self progressTab]stopAnimation:self];
+    [progress stopAnimation:self]; 
+    [[[self faviconTab]animator]setAlphaValue:1.0]; 
+    [[temp animator]setAlphaValue:1.0]; 
+    /*
+     if ([[webview mainFrameURL] hasPrefix:@"https"]) {
+     [addressBox setBorderColor:[NSColor greenColor]]; 
+     }
+     */
+    if ([title isEqualToString:@"Raven Welcome Page"] || 
+        [title isEqualToString:@"Raven Internal Page"] ||            
+        [[webview mainFrameURL]isEqualToString:@"http://go.raven.io/"])
+    {
+        [temp setImage:[NSImage imageNamed:@"ravenico.png"]]; 
+        [faviconTab setImage:[NSImage imageNamed:@"ravenico.png"]]; 
+    }
+    else
+    {
+        if ([title isEqualToString:@""]) {
+            NSLog(@"blank title");
         }
-        else
-        {
-            if ([title isEqualToString:@""]) {
-                NSLog(@"blank title");
-            }
-            
-            else if (doRegisterHistory == 2) {
-                NSDate *currentDate = [[NSDate alloc]initWithTimeIntervalSinceNow:0]; 
-                NSString *currentUrl= [webview mainFrameURL];
-                NSImage *currentFavicon = [webview mainFrameIcon];
-                NSString *udid = currentUrl;
-                udid = [udid createFileNameFromString:udid];
-                [[currentFavicon TIFFRepresentation] writeToFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", udid]stringByExpandingTildeInPath] atomically:YES];
-                [controller insetHistoryItem:[webview mainFrameTitle] 
-                                      url:currentUrl 
+        
+        else if (doRegisterHistory == 2) {
+            NSDate *currentDate = [[NSDate alloc]initWithTimeIntervalSinceNow:0]; 
+            NSString *currentUrl= [webview mainFrameURL];
+            NSImage *currentFavicon = [webview mainFrameIcon];
+            NSString *udid = currentUrl;
+            udid = [udid createFileNameFromString:udid];
+            [[currentFavicon TIFFRepresentation] writeToFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", udid]stringByExpandingTildeInPath] atomically:YES];
+            [controller insetHistoryItem:[webview mainFrameTitle] 
+                                     url:currentUrl 
                                     data:[udid dataUsingEncoding:NSStringEncodingConversionAllowLossy] 
-                                     date:currentDate];
-                [controller updateBookmarkFavicon:[currentFavicon TIFFRepresentation] forUrl:currentUrl];
-                [currentDate release]; 
-                
-             }
+                                    date:currentDate];
+            [controller updateBookmarkFavicon:[currentFavicon TIFFRepresentation] forUrl:currentUrl];
+            [currentDate release]; 
+            
         }
-    }  
+    }
+     
 }
 
 

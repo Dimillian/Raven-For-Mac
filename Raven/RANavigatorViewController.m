@@ -54,6 +54,7 @@
     [allTabsButton setAction:@selector(menutabs:)]; 
     [allTabsButton setTarget:self];
 }
+
 //Depreciated
 -(void)checkua
 {
@@ -95,9 +96,6 @@
 }
 
 
-
-
-
 #pragma mark -
 #pragma mark tab management
 
@@ -129,21 +127,40 @@
     [[[clickedtab backgroundTab]animator]setAlphaValue:1.0];
 }
 
+-(void)previousTab:(id)sender
+{
+    [self resetAllTabsButon]; 
+    if ([tabController indexOfTabViewItem:[tabController selectedTabViewItem]] == 0){
+        [tabController selectLastTabViewItem:self];
+    }
+    else{
+        [tabController selectPreviousTabViewItem:self]; 
+    }
+    [self setImageOnSelectedTab];
+}
+-(void)nextTab:(id)sender
+{
+    [self resetAllTabsButon];
+    if ([tabController indexOfTabViewItem:[tabController selectedTabViewItem]] == [tabController numberOfTabViewItems] -1) {
+        [tabController selectFirstTabViewItem:self];
+    }
+    else{
+    [tabController selectNextTabViewItem:self];
+    }
+    [self setImageOnSelectedTab];
+}
+
 //Add a new tabs
 //Maybe a big piece of shit but it works. Need rewrite
 
--(void)setImageOnSelectedTab
-{
-    RAWebViewController *clickedtab = [tabsArray objectAtIndex:[tabController indexOfTabViewItem:[tabController selectedTabViewItem]]];
-    [[clickedtab backgroundTab]setImage:[NSImage imageNamed:@"gradient_on.png"]];
-}
+
 
 -(void)redrawTabs
 {
     CGFloat x = 0;
     for (int i =0; i<[tabsArray count]; i++) {
         RAWebViewController *aTab = [tabsArray objectAtIndex:i];
-        CGFloat w = ([NSApp keyWindow].frame.size.width-100)/[tabsArray count];
+        CGFloat w = ([NSApp keyWindow].frame.size.width-80)/[tabsArray count];
         if (w > tabButtonSize){
             w=tabButtonSize;
             if (i==0){
@@ -158,10 +175,10 @@
                 x=0;
             }
             else{
-             x = x + ([NSApp keyWindow].frame.size.width - 100)/[tabsArray count];
+             x = x + ([NSApp keyWindow].frame.size.width - 80)/[tabsArray count];
             }
         }
-        [[[aTab tabview]animator]setFrame:NSMakeRect(x, 0, w, 20)];
+        [[[aTab tabview]animator]setFrame:NSMakeRect(x, 0, w, 22)];
     }
 }
 
@@ -341,22 +358,31 @@
 -(void)resetAllTabsButon
 {
     for (RAWebViewController *tpsbutton in tabsArray) {
-        [[tpsbutton backgroundTab]setImage:[NSImage imageNamed:@"gradient_normal.png"]];
+        [[tpsbutton boxTab]setFillColor:[NSColor grayColor]];
+        [[tpsbutton boxTab]setBorderWidth:1.0]; 
+        [[tpsbutton boxTab]setBorderColor:[NSColor darkGrayColor]];
     }
 
 }
-
+-(void)setImageOnSelectedTab
+{
+    RAWebViewController *clickedtab = [tabsArray objectAtIndex:[tabController indexOfTabViewItem:[tabController selectedTabViewItem]]];
+    //[[clickedtab backgroundTab]setImage:[NSImage imageNamed:@"active_tab.png"]];
+    [[clickedtab boxTab]setBorderWidth:0.0]; 
+    [[clickedtab boxTab]setBorderColor:[NSColor blackColor]];
+    [[clickedtab boxTab]setFillColor:[NSColor windowBackgroundColor]];
+}
 
 //called when click on the home tab button, bring back the first view
 
 -(void)closeSelectedTab:(id)sender
 {
-   
+    NSInteger tag = [sender tag];
     //Two temporary array that will store temp object
     NSMutableArray *tpstabarray = [[NSMutableArray alloc]init];
 
     //The current webview remove
-    RAWebViewController *clickedtab = [tabsArray objectAtIndex:[sender tag]];
+    RAWebViewController *clickedtab = [tabsArray objectAtIndex:tag];
     [clickedtab view];
     [[clickedtab webview]setHostWindow:nil];
     [[clickedtab webview]setUIDelegate:nil]; 
@@ -367,10 +393,8 @@
     [[[clickedtab tabview]animator]setAlphaValue:0.0]; 
     [[clickedtab tabview]removeFromSuperview];
     [[clickedtab webview]removeFromSuperview];
-                            
-    [tabsArray removeObjectAtIndex:[sender tag]];
-    NSTabViewItem *item = [tabController tabViewItemAtIndex:[sender tag]];
-    [tabController removeTabViewItem:item]; 
+    [tabController removeTabViewItem:[tabController tabViewItemAtIndex:tag]]; 
+    [tabsArray removeObjectAtIndex:tag];
     
 
 
@@ -432,32 +456,26 @@
 //close all tabs
 -(void)closeAllTabs:(id)sender
 {
-    
-    //Get the nimber of object in the array
-    NSInteger result = [tabsArray count]; 
-    int i; 
-    
-    //reset the buttonid and position in preparation of reorg of tabs
-    buttonId = 0; 
-    
-    //Get all the buton,reset their position and id and, pass it in a temps array
-    for (i=0; i<result; i++) {
-        //reset all button stored into the array
-        RAWebViewController *tpsbutton = [tabsArray objectAtIndex:i];
-        [[[tpsbutton tabview]animator]setAlphaValue:0.0]; 
-        [[tpsbutton tabview]removeFromSuperview]; 
+    int i = 0;
+    for (RAWebViewController *clickedtab in tabsArray) {
+        [clickedtab view];
+        [[clickedtab webview]setHostWindow:nil];
+        [[clickedtab webview]setUIDelegate:nil]; 
+        [[clickedtab webview]setPolicyDelegate:nil];
+        [[clickedtab webview]stopLoading:[clickedtab webview]];
+        [[[clickedtab view]animator]setAlphaValue:0.0]; 
+        [[clickedtab view]removeFromSuperview];
+        [[[clickedtab tabview]animator]setAlphaValue:0.0]; 
+        [[clickedtab tabview]removeFromSuperview];
+        [[clickedtab webview]removeFromSuperview];
+        [tabController removeTabViewItem:[tabController tabViewItemAtIndex:i]]; 
     }
-
-    //remove the targeged object from collection/array
-    [tabsArray removeAllObjects]; 
+    [tabsArray removeAllObjects];
     buttonId = 0; 
-    
-    if ([tabsArray count] == 0) {
+    [self redrawTabs];
+    @synchronized(self){
         [self addtabs:nil]; 
     }
-  
-
-    
 }
 #pragma mark -
 #pragma mark webview Delegate

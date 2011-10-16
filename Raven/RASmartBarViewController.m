@@ -32,7 +32,7 @@
 //[[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
 
 @implementation RASmartBarViewController
-@synthesize folderName, appName, firstURL, secondURL, thirdURL, fourthURL, state, delegate, selectedButton, mainButton; 
+@synthesize folderName, appName, firstURL, secondURL, thirdURL, fourthURL, state, delegate, selectedButton, mainButton, appNumber; 
 
 
 -(id)init
@@ -132,6 +132,26 @@
     [secondURL retain]; 
     [thirdURL retain]; 
     [fourthURL retain]; 
+    
+    [self calculateUrlNumber];
+    
+}
+
+-(void)calculateUrlNumber{
+    if ([secondURL isEqualToString:@""]) {
+        appNumber = 1; 
+    }
+    else if ([thirdURL isEqualToString:@""]){
+        appNumber = 2; 
+    }
+    else if ([fourthURL isEqualToString:@""]){
+        appNumber = 3;
+    }
+    else
+    {
+        appNumber = 4; 
+    }
+    
     
 }
 

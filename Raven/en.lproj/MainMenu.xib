@@ -13,7 +13,6 @@
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<string>NSCollectionViewItem</string>
-			<string>NSViewController</string>
 			<string>NSUserDefaultsController</string>
 			<string>NSMenu</string>
 			<string>NSMenuItem</string>
@@ -1185,6 +1184,15 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
+								<object class="NSMenuItem" id="422787406">
+									<reference key="NSMenu" ref="551092105"/>
+									<string key="NSTitle">Close Window</string>
+									<string key="NSKeyEquiv">W</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
 								<object class="NSMenuItem" id="44208534">
 									<reference key="NSMenu" ref="551092105"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -1198,7 +1206,7 @@
 								<object class="NSMenuItem" id="731727071">
 									<reference key="NSMenu" ref="551092105"/>
 									<string key="NSTitle">Close Tab</string>
-									<string key="NSKeyEquiv">W</string>
+									<string key="NSKeyEquiv">w</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
@@ -1217,7 +1225,7 @@
 									<reference key="NSMenu" ref="551092105"/>
 									<string key="NSTitle">Previous Tab</string>
 									<string key="NSKeyEquiv"></string>
-									<int key="NSKeyEquivModMask">1179648</int>
+									<int key="NSKeyEquivModMask">1572864</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
@@ -1226,7 +1234,7 @@
 									<reference key="NSMenu" ref="551092105"/>
 									<string key="NSTitle">Next Tab</string>
 									<string key="NSKeyEquiv"></string>
-									<int key="NSKeyEquivModMask">1179648</int>
+									<int key="NSKeyEquivModMask">1572864</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
@@ -1307,7 +1315,6 @@
 				</object>
 				<string key="NSName">_NSMainMenu</string>
 			</object>
-			<object class="NSViewController" id="815825940"/>
 			<object class="NSCustomObject" id="976324537">
 				<string key="NSClassName">RavenAppDelegate</string>
 			</object>
@@ -1788,6 +1795,22 @@
 						<reference key="destination" ref="874651303"/>
 					</object>
 					<int key="connectionID">1238</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">closeAllTabs:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="5882812"/>
+					</object>
+					<int key="connectionID">1415</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">performClose:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="422787406"/>
+					</object>
+					<int key="connectionID">1417</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2294,12 +2317,6 @@
 						<string key="objectName">Raven App Delegate</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">591</int>
-						<reference key="object" ref="815825940"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">View Controller</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">1128</int>
 						<reference key="object" ref="125365538"/>
 						<reference key="parent" ref="0"/>
@@ -2592,11 +2609,6 @@
 						<reference key="parent" ref="406473466"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">1244</int>
-						<reference key="object" ref="727198130"/>
-						<reference key="parent" ref="406473466"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">1243</int>
 						<reference key="object" ref="566585286"/>
 						<reference key="parent" ref="406473466"/>
@@ -2730,6 +2742,7 @@
 							<reference ref="954184390"/>
 							<reference ref="731727071"/>
 							<reference ref="5882812"/>
+							<reference ref="422787406"/>
 						</object>
 						<reference key="parent" ref="547538665"/>
 					</object>
@@ -2822,6 +2835,16 @@
 						<int key="objectID">1385</int>
 						<reference key="object" ref="411206112"/>
 						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1244</int>
+						<reference key="object" ref="727198130"/>
+						<reference key="parent" ref="406473466"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1416</int>
+						<reference key="object" ref="422787406"/>
+						<reference key="parent" ref="551092105"/>
 					</object>
 				</object>
 			</object>
@@ -2919,6 +2942,7 @@
 					<string>134.IBPluginDependency</string>
 					<string>136.IBPluginDependency</string>
 					<string>1385.IBPluginDependency</string>
+					<string>1416.IBPluginDependency</string>
 					<string>143.IBPluginDependency</string>
 					<string>144.IBPluginDependency</string>
 					<string>145.IBPluginDependency</string>
@@ -2976,7 +3000,6 @@
 					<string>56.IBPluginDependency</string>
 					<string>57.IBPluginDependency</string>
 					<string>58.IBPluginDependency</string>
-					<string>591.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3142,7 +3165,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1408</int>
+			<int key="maxID">1417</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3159,11 +3182,15 @@
 							<string>hideSideBar:</string>
 							<string>history:</string>
 							<string>home:</string>
+							<string>nextApp:</string>
+							<string>previousApp:</string>
 							<string>raven:</string>
 							<string>setting:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -3182,6 +3209,8 @@
 							<string>hideSideBar:</string>
 							<string>history:</string>
 							<string>home:</string>
+							<string>nextApp:</string>
+							<string>previousApp:</string>
 							<string>raven:</string>
 							<string>setting:</string>
 						</object>
@@ -3205,6 +3234,14 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">home:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">nextApp:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">previousApp:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -3356,10 +3393,14 @@
 							<string>closeAllTabs:</string>
 							<string>closeSelectedTab:</string>
 							<string>menutabs:</string>
+							<string>nextTab:</string>
+							<string>previousTab:</string>
 							<string>tabs:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -3375,6 +3416,8 @@
 							<string>closeAllTabs:</string>
 							<string>closeSelectedTab:</string>
 							<string>menutabs:</string>
+							<string>nextTab:</string>
+							<string>previousTab:</string>
 							<string>tabs:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -3393,6 +3436,14 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">menutabs:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">nextTab:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">previousTab:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

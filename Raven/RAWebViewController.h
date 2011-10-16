@@ -14,6 +14,7 @@
 #import "RADownloadObject.h"
 #import "RAFavoritePanelWController.h"
 #import "RANSURLDownloadDelegate.h"
+#import "RAAddressFieldBox.h"
 
 @interface RAWebViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSTableViewDelegate, NSTableViewDataSource>{
     
@@ -33,6 +34,9 @@
     IBOutlet NSButton *tabsButton; 
     IBOutlet NSButton *secondTabButton;
     IBOutlet NSScrollView *scrollView; 
+    
+    IBOutlet NSProgressIndicator *progressMain; 
+    
     BOOL isNewTab; 
     NSInteger bytesReceived;
     NSURLResponse *downloadResponse;
@@ -52,6 +56,7 @@
     IBOutlet NSButton *closeButtonTabShortcut; 
     IBOutlet NSProgressIndicator *progressTab;
     IBOutlet NSView *addressBarView;
+    IBOutlet NSBox *boxTab; 
     
     NSData *downloadBlob; 
     NSNumber *totalByes; 
@@ -61,6 +66,8 @@
     
     int doRegisterHistory;
     int doComeFromHistoryOrBookmark; 
+    
+    IBOutlet RAAddressFieldBox *addressBox; 
     
     
     
@@ -101,6 +108,7 @@
 @property BOOL isNewTab;
 @property (nonatomic, retain) IBOutlet NSView *tabview;
 @property (nonatomic, retain) NSProgressIndicator *progressTab; 
+@property (nonatomic, retain) NSBox *boxTab;
 @property (nonatomic, retain) NSButton *tabButtonTab;
 @property (nonatomic, retain) NSButton *closeButtonTab; 
 @property (nonatomic, retain) NSButton *closeButtonTabShortcut; 

@@ -196,7 +196,7 @@
         if (!attachedWindow) {
             int side = 11;
             CGFloat x = self.superview.frame.origin.x;
-            x = x + 112; 
+            x = x + 190; 
             CGFloat y = self.superview.frame.origin.y; 
             y = y + 35;
             NSPoint buttonPoint = NSMakePoint(x,y);

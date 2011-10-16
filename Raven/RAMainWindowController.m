@@ -180,7 +180,9 @@
     [[RASettingViewController alloc]initWithNibName:@"Settings" bundle:nil]; 
     
     previousIndex = -1;
+    previousAppNumber = 4; 
     [self launchRuntime];
+    [[self window]display];
     
     //[self replaceTitleBarViewWith:titleBar];
     
@@ -300,6 +302,7 @@
 //update UI when an app expand, Delegate sent from RASmartBarViewController
 -(void)itemDidExpand:(RASmartBarViewController *)smartBarApp
 {
+    int currentNumber  = [smartBarApp appNumber];
     NSInteger index = [appList indexOfObject:smartBarApp]; 
     for (NSInteger x=0; x<[appList count]; x++) {
         RASmartBarViewController *smartApp = [appList objectAtIndex:x]; 
@@ -311,15 +314,13 @@
             [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, frame.origin.y + app_expanded_height, app_view_w, app_view_h)]; 
         }
         if (x > index && index <= previousIndex && x <= previousIndex) {
-           [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, frame.origin.y - app_expanded_height, app_view_w, app_view_h)];   
+            [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, frame.origin.y - app_expanded_height, app_view_w, app_view_h)];
         }
-            
     }
     [self hideall]; 
     [self animate:12]; 
     previousIndex = index;
-    
-    
+    previousAppNumber = currentNumber; 
 }
 
 //Update the smart bar scrollview height to get the right scroll
@@ -372,6 +373,7 @@
          [smartApp retractApp:nil];
      }
     previousIndex = -1;
+    previousAppNumber = 4; 
     NSPoint pt = NSMakePoint(0.0, [[smartBarScrollView documentView]
                                    bounds].size.height);
     [[smartBarScrollView documentView] scrollPoint:pt];
@@ -456,6 +458,15 @@
     }
 }
 
+-(void)nextApp:(id)sender
+{
+   
+}
+
+-(void)previousApp:(id)sender
+{
+    
+}
 #pragma mark -
 #pragma mark viewswitch
 #pragma mark app menu button 
@@ -565,6 +576,7 @@
     [[self window]setTitle:NSLocalizedString(@"Downloads", @"DownloadView")]; 
     [self hideall]; 
     [self animate:4];   
+    
 }
 
 -(void)setting:(id)sender

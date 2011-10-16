@@ -44,6 +44,8 @@
 -(IBAction)closeSelectedTab:(id)sender; 
 -(IBAction)menutabs:(id)sender;
 -(IBAction)closeAllTabs:(id)sender; 
+-(IBAction)nextTab:(id)sender;
+-(IBAction)previousTab:(id)sender;
 -(void)windowResize:(id)sender; 
 -(void)setImageOnSelectedTab; 
 -(void)redrawTabs;
