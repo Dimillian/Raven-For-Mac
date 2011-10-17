@@ -150,7 +150,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             [Mainwindow showWindow:self]; 
             [Mainwindow raven:nil]; 
             [[Mainwindow navigatorview]setPassedUrl:URL]; 
-            [[Mainwindow navigatorview]addtabs:nil]; 
+            [[Mainwindow navigatorview]addtabs:Mainwindow]; 
             break; 
         }
     }
@@ -159,7 +159,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         [MainWindow showWindow:self];  
         [MainWindow raven:nil]; 
         [[MainWindow navigatorview]setPassedUrl:URL]; 
-        [[MainWindow navigatorview]addtabs:nil]; 
+        [[MainWindow navigatorview]addtabs:MainWindow]; 
     }
 
 }

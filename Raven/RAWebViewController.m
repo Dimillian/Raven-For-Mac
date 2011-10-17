@@ -361,7 +361,6 @@
         [[self progressTab]startAnimation:self];
         [progressMain setHidden:NO]; 
         [progressMain setControlSize:NSMiniControlSize]; 
-        [progressMain setDoubleValue:[webview estimatedProgress]];
         
     }
     
@@ -374,7 +373,6 @@
     NSString *url = [webview mainFrameURL];
     //set the URl in the address bar
     [address setStringValue:url];
-    [progressMain setDoubleValue:[webview estimatedProgress]];
     
 }
 
@@ -384,7 +382,6 @@
 {
     // Only report feedback for the main frame.
     if (frame == [sender mainFrame]){
-        [progressMain setDoubleValue:[webview estimatedProgress]];
         //get the current title and set it in the window title
         NSString *title = [webview mainFrameTitle];
         [[self pageTitleTab]setStringValue:[webview mainFrameTitle]];
@@ -401,7 +398,6 @@
 - (void)webView:(WebView *)sender didReceiveIcon:(NSImage *)image forFrame:(WebFrame *)frame
 {
     [temp setImage:[webview mainFrameIcon]];
-    [progressMain setDoubleValue:[webview estimatedProgress]];
     [[self faviconTab]setImage:[webview mainFrameIcon]]; 
 }
 

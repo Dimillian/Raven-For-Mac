@@ -263,7 +263,7 @@
         (selectedButton == 1 && mainWindow.myCurrentViewController == firstNavigatorView)) {
         [firstNavigatorView view];
         [firstNavigatorView setPassedUrl:firstURL];
-        [firstNavigatorView addtabs:nil]; 
+        [firstNavigatorView addtabs:mainButton]; 
     }
     
     if (firstNavigatorView != nil)
@@ -290,7 +290,7 @@
         (selectedButton == 2 && mainWindow.myCurrentViewController == SecondNavigatorView)) {
         [SecondNavigatorView view];
         [SecondNavigatorView setPassedUrl:secondURL];
-        [SecondNavigatorView addtabs:nil]; 
+        [SecondNavigatorView addtabs:mainButton]; 
     }    
         
     if (SecondNavigatorView != nil)
@@ -316,7 +316,7 @@
         (selectedButton == 3 && mainWindow.myCurrentViewController == ThirdtNavigatorView)) {
         [ThirdtNavigatorView view];
         [ThirdtNavigatorView setPassedUrl:thirdURL];
-        [ThirdtNavigatorView addtabs:nil]; 
+        [ThirdtNavigatorView addtabs:mainButton]; 
 
     }    
     
@@ -345,7 +345,7 @@
         (selectedButton == 4 && mainWindow.myCurrentViewController == FourthNavigatorView)) {
         [FourthNavigatorView view];
         [FourthNavigatorView setPassedUrl:fourthURL];
-        [FourthNavigatorView addtabs:nil]; 
+        [FourthNavigatorView addtabs:mainButton]; 
     }  
     
     if (FourthNavigatorView != nil)

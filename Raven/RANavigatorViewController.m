@@ -157,10 +157,13 @@
 
 -(void)redrawTabs
 {
+    if (localWindow == nil) {
+        localWindow = [NSApp keyWindow];
+    }
     CGFloat x = 0;
     for (int i =0; i<[tabsArray count]; i++) {
         RAWebViewController *aTab = [tabsArray objectAtIndex:i];
-        CGFloat w = ([NSApp keyWindow].frame.size.width-80)/[tabsArray count];
+        CGFloat w = (localWindow.frame.size.width-80)/[tabsArray count];
         if (w > tabButtonSize){
             w=tabButtonSize;
             if (i==0){
@@ -175,16 +178,20 @@
                 x=0;
             }
             else{
-             x = x + ([NSApp keyWindow].frame.size.width - 80)/[tabsArray count];
+             x = x + (localWindow.frame.size.width - 80)/[tabsArray count];
             }
         }
         [[[aTab tabview]animator]setFrame:NSMakeRect(x, 0, w, 22)];
     }
+    localWindow = nil; 
 }
 
 -(void)addtabs:(id)sender
 {
-
+    localWindow = [sender window];
+    if (localWindow == nil) {
+        localWindow = [NSApp keyWindow];
+    }
     //Instanciate a new webviewcontroller and the button tab view with the view
     RAWebViewController *newtab = [[RAWebViewController alloc]init];
     //Set the Button view
@@ -371,6 +378,7 @@
     [[clickedtab boxTab]setBorderWidth:0.0]; 
     [[clickedtab boxTab]setBorderColor:[NSColor blackColor]];
     [[clickedtab boxTab]setFillColor:[NSColor windowBackgroundColor]];
+
 }
 
 //called when click on the home tab button, bring back the first view
@@ -425,7 +433,7 @@
     [tpstabarray release]; 
     
     if ([tabsArray count] == 0) {
-        [self addtabs:nil]; 
+        [self addtabs:tabsButton]; 
     }
     
     
@@ -474,7 +482,7 @@
     buttonId = 0; 
     [self redrawTabs];
     @synchronized(self){
-        [self addtabs:nil]; 
+        [self addtabs:tabsButton]; 
     }
 }
 #pragma mark -
@@ -528,8 +536,8 @@ if (frame == [sender mainFrame]){
         else
         {
             PassedUrl = [sender mainFrameURL]; 
-            [self addtabs:nil];
-            [sender stopLoading:sender];   
+            [self addtabs:tabsButton];
+            [sender stopLoading:sender]; 
         }
     }
 }

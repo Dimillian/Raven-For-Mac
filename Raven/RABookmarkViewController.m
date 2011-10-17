@@ -429,7 +429,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
             controller.navigatorview.PassedUrl = [sender mainFrameURL]; 
             [controller setting:nil];
             [controller raven:nil];
-            [controller.navigatorview addtabs:nil];
+            [controller.navigatorview addtabs:mainView];
             [sender stopLoading:sender];   
         }
     }
@@ -442,7 +442,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     controller.navigatorview.PassedUrl = [[request URL]absoluteString]; 
     [controller setting:nil];
     [controller raven:nil];
-    [controller.navigatorview addtabs:nil];
+    [controller.navigatorview addtabs:mainView];
     
 }
 

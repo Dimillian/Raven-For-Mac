@@ -7,6 +7,7 @@
 //
 
 #import "RAAddressField.h"
+#import "RAAddressFieldBox.h"
 
 
 @implementation RAAddressField 
@@ -16,6 +17,7 @@
 -(void)awakeFromNib
 {
     ind = -1;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:) name:NSWindowDidResizeNotification object:nil]; 
     //[tableview setAllowsEmptySelection:NO]; 
 }
 
@@ -34,6 +36,11 @@
             return;
             
     }
+}
+
+-(void)windowDidResize:(NSNotification *)notification
+{
+    //[self setFrame:NSMakeRect(self.frame.origin.x, self.frame.origin.y, [self window].frame.size.width /3, self.frame.size.height)];
 }
 
 - (void)moveLeft:(id)sender
@@ -198,7 +205,7 @@
             CGFloat x = self.superview.frame.origin.x;
             x = x + 190; 
             CGFloat y = self.superview.frame.origin.y; 
-            y = y + 35;
+            y = y + 19;
             NSPoint buttonPoint = NSMakePoint(x,y);
             [NSBundle loadNibNamed:@"SuggestionBox" owner:self];
             attachedWindow = [[MAAttachedWindow alloc] initWithView:scrollView 
@@ -285,6 +292,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
     [super dealloc];
 }
 

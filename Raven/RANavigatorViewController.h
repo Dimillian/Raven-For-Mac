@@ -31,12 +31,9 @@
     NSInteger curentSelectedTab;
     NSInteger count; 
     double buttonId;  
-    
     BOOL istab; 
-    
     int fromOtherViews; 
-    
-    
+    NSWindow *localWindow; 
 }
 //Bouton action
 -(IBAction)tabs:(id)sender; 

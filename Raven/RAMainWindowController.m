@@ -407,6 +407,7 @@
         [[NSAnimationContext currentContext] setDuration:0.3];
         [[centeredView animator]setFrame:[backupView frame]]; 
         [[smartBarScrollView animator]setFrame:NSMakeRect(-17, smartBarScrollView.frame.origin.y, smartBarScrollView.frame.size.width, smartBarScrollView.frame.size.height)];
+        [[cornerBox animator]setFrame:NSMakeRect(-17, cornerBox.frame.origin.y, cornerBox.frame.size.width, cornerBox.frame.size.height)];
         [[settingButton animator]setAlphaValue:1.0];
         [NSAnimationContext endGrouping];
         isHidden = NO;
@@ -417,6 +418,7 @@
         [[NSAnimationContext currentContext] setDuration:0.3];
         [[centeredView animator]setFrame:[mainView bounds]]; 
         [[smartBarScrollView animator]setFrame:NSMakeRect(smartBarScrollView.frame.origin.x - 76, smartBarScrollView.frame.origin.y, smartBarScrollView.frame.size.width, smartBarScrollView.frame.size.height)];
+        [[cornerBox animator]setFrame:NSMakeRect(cornerBox.frame.origin.x - 76, cornerBox.frame.origin.y, cornerBox.frame.size.width, cornerBox.frame.size.height)];
         [[settingButton animator]setAlphaValue:0.0];
         if ([standardUserDefaults integerForKey:SIDEBAR_LIKE_DOCK] == 0)
         {
@@ -524,10 +526,9 @@
         //[navigatorview setWindowTitle:self]; 
         
     }
-    
     if ([[navigatorview tabsArray]count] == 0) {
         [navigatorview view];
-        [navigatorview addtabs:nil]; 
+        [navigatorview addtabs:self]; 
     }    
     [centeredView addSubview: [myCurrentViewController view]];
     [[myCurrentViewController view]setFrame:[centeredView bounds]];

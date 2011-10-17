@@ -15,8 +15,8 @@
 			<string>NSCustomView</string>
 			<string>NSButtonCell</string>
 			<string>NSTabView</string>
-			<string>NSButton</string>
 			<string>NSCustomObject</string>
+			<string>NSButton</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -76,6 +76,7 @@
 						<reference key="NSSuperview" ref="9645336"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="213251502"/>
+						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:499</string>
 						<string key="NSClassName">NSView</string>
 					</object>
@@ -85,13 +86,13 @@
 						<string key="NSFrame">{{-1, -5}, {1096, 797}}</string>
 						<reference key="NSSuperview" ref="9645336"/>
 						<reference key="NSWindow"/>
+						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:461</string>
 						<object class="NSMutableArray" key="NSTabViewItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 						</object>
 						<reference key="NSFont" ref="574613330"/>
 						<int key="NSTvFlags">6</int>
-						<bool key="NSAllowTruncatedLabels">YES</bool>
 					</object>
 					<object class="NSButton" id="273397542">
 						<reference key="NSNextResponder" ref="9645336"/>
@@ -119,7 +120,7 @@
 					<object class="NSButton" id="635122633">
 						<reference key="NSNextResponder" ref="9645336"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{545, 395}, {1, 1}}</string>
+						<string key="NSFrame">{{544, 397}, {4, 6}}</string>
 						<reference key="NSSuperview" ref="9645336"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="273397542"/>
@@ -176,46 +177,6 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">allTabsButton</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="213251502"/>
-					</object>
-					<int key="connectionID">263</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">tabPlaceHolder</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="796994459"/>
-					</object>
-					<int key="connectionID">387</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">previousTab:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="635122633"/>
-					</object>
-					<int key="connectionID">433</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">nextTab:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="273397542"/>
-					</object>
-					<int key="connectionID">434</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">closeAllTabs:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="500608064"/>
-					</object>
-					<int key="connectionID">274</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">view</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="9645336"/>
@@ -237,6 +198,46 @@
 						<reference key="destination" ref="152327820"/>
 					</object>
 					<int key="connectionID">402</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">allTabsButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="213251502"/>
+					</object>
+					<int key="connectionID">263</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">tabPlaceHolder</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="796994459"/>
+					</object>
+					<int key="connectionID">387</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">nextTab:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="273397542"/>
+					</object>
+					<int key="connectionID">434</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">previousTab:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="635122633"/>
+					</object>
+					<int key="connectionID">433</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">closeAllTabs:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="500608064"/>
+					</object>
+					<int key="connectionID">274</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -284,6 +285,11 @@
 						<string key="objectName">Custom View</string>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">397</int>
+						<reference key="object" ref="152327820"/>
+						<reference key="parent" ref="9645336"/>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">261</int>
 						<reference key="object" ref="213251502"/>
 						<object class="NSMutableArray" key="children">
@@ -303,20 +309,6 @@
 						<reference key="parent" ref="9645336"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">430</int>
-						<reference key="object" ref="635122633"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="288188260"/>
-						</object>
-						<reference key="parent" ref="9645336"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">431</int>
-						<reference key="object" ref="288188260"/>
-						<reference key="parent" ref="635122633"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">427</int>
 						<reference key="object" ref="273397542"/>
 						<object class="NSMutableArray" key="children">
@@ -331,6 +323,20 @@
 						<reference key="parent" ref="273397542"/>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">430</int>
+						<reference key="object" ref="635122633"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="288188260"/>
+						</object>
+						<reference key="parent" ref="9645336"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">431</int>
+						<reference key="object" ref="288188260"/>
+						<reference key="parent" ref="635122633"/>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">272</int>
 						<reference key="object" ref="500608064"/>
 						<object class="NSMutableArray" key="children">
@@ -343,11 +349,6 @@
 						<int key="objectID">273</int>
 						<reference key="object" ref="791123699"/>
 						<reference key="parent" ref="500608064"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">397</int>
-						<reference key="object" ref="152327820"/>
-						<reference key="parent" ref="9645336"/>
 					</object>
 				</object>
 			</object>

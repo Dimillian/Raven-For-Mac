@@ -57,6 +57,8 @@
     IBOutlet NSButton *downloadButton;
     IBOutlet NSButton *settingButton; 
     
+    IBOutlet NSBox *cornerBox; 
+    
     IBOutlet NSTextField *firstButtonNumber; 
     
     

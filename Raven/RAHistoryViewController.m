@@ -151,7 +151,7 @@
     RADatabaseController *controller = [RADatabaseController sharedUser];
     RAItemObject *history = (RAItemObject *)[controller.history objectAtIndex:row];
     mainController.navigatorview.PassedUrl = history.url;
-    [mainController.navigatorview addtabs:nil];
+    [mainController.navigatorview addtabs:mainView];
     [mainController home:nil]; 
     
 }
@@ -257,7 +257,7 @@
             controller.navigatorview.PassedUrl = [sender mainFrameURL]; 
             [controller setting:nil];
             [controller raven:nil];
-            [controller.navigatorview addtabs:nil];
+            [controller.navigatorview addtabs:mainView];
             [sender stopLoading:sender];   
         }
     }
@@ -270,7 +270,7 @@
     controller.navigatorview.PassedUrl = [[request URL]absoluteString]; 
     [controller setting:nil];
     [controller raven:nil];
-    [controller.navigatorview addtabs:nil];
+    [controller.navigatorview addtabs:mainView];
     
 }
 

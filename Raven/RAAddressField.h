@@ -12,7 +12,7 @@
 #import "RADatabaseController.h"
 
 
-@interface RAAddressField : NSTextField <NSTableViewDelegate, NSTableViewDataSource> {
+@interface RAAddressField : NSTextField <NSTableViewDelegate, NSTableViewDataSource, NSWindowDelegate> {
     
     NSTableView *tableViewEdit; 
     NSUInteger i; 
