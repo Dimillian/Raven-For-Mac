@@ -11,6 +11,7 @@
 #import "RavenAppDelegate.h"
 #import "RAHistoryCell.h"
 #import "RAMainWindowController.h"
+#import "RAHiddenWindow.h"
 
 @implementation RAHistoryViewController
 
@@ -36,6 +37,7 @@
     [search setDelegate:self]; 
     isSearching = NO; 
     [newtab initWithHistoryPage];
+    [[newtab tabHolder]setHidden:YES];
     [[newtab webview]setFrame:NSMakeRect(newtab.webview.frame.origin.x, newtab.webview.frame.origin.y, newtab.webview.frame.size.width, newtab.webview.frame.size.height+22)];
     [[newtab webview]setUIDelegate:self];
 }
@@ -197,8 +199,14 @@
             [alert setShowsSuppressionButton:YES];
             [alert setIcon:[NSImage imageNamed:@"delete_big.png"]];
             //call the alert and check the selected button
-            [alert beginSheetModalForWindow:[sender window] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+            RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
+            [hiddenWindow setLevel:NSNormalWindowLevel];
+            [hiddenWindow setIgnoresMouseEvents:YES];
+            [hiddenWindow setAlphaValue:0.0];
+            [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
+            [alert beginSheetModalForWindow:hiddenWindow modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
             [alert release];
+            [hiddenWindow release]; 
         }
 
        

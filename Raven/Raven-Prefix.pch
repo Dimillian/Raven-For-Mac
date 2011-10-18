@@ -20,6 +20,7 @@
 #define LOGIN_INSTAPAPER @"LoginInstapaper"
 #define PASSWORD_INSTAPAPER @"PasswordInstapaper"
 #define OPPENED_TABS_BADGE @"OpennedTabsBadge"
+#define SHOW_FAVICON_TAB @"showFavicon"
 
 
 #define application_support_path @"~/Library/Application Support/RavenApp/app/"

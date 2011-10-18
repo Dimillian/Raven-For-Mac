@@ -75,7 +75,7 @@
 						<string key="NSFrame">{{-1, 738}, {1073, 22}}</string>
 						<reference key="NSSuperview" ref="9645336"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="213251502"/>
+						<reference key="NSNextKeyView"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:499</string>
 						<string key="NSClassName">NSView</string>
@@ -306,6 +306,9 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">386</int>
 						<reference key="object" ref="796994459"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+						</object>
 						<reference key="parent" ref="9645336"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -401,7 +404,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">436</int>
+			<int key="maxID">437</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

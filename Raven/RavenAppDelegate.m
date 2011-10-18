@@ -77,10 +77,14 @@
             if ([standardUserDefaults objectForKey:OPPENED_TABS_BADGE] == nil) {
                 [standardUserDefaults setInteger:1 forKey:OPPENED_TABS_BADGE]; 
             }
+            if ([standardUserDefaults objectForKey:SHOW_FAVICON_TAB] == nil) {
+                [standardUserDefaults setInteger:1 forKey:SHOW_FAVICON_TAB]; 
+            }
             //enable web inspector for webview, we are a browser afterall
             if  ([standardUserDefaults objectForKey:@"WebKitDeveloperExtras"] == nil){
                 [standardUserDefaults setInteger:1 forKey:@"WebKitDeveloperExtras"];
             }
+            
                 
             [standardUserDefaults synchronize];
             

@@ -72,7 +72,7 @@
 -(void)windowResize:(id)sender
 {
     if ([sender object] == [tabController window]){
-        [self redrawTabs];
+        [self redrawTabs:YES];
     }
     /*
     NSRect windowSize = [[allTabsButton window]frame];
@@ -155,33 +155,54 @@
 
 
 
--(void)redrawTabs
+-(void)redrawTabs:(BOOL)fromWindow
 {
     if (localWindow == nil) {
         localWindow = [NSApp keyWindow];
     }
-    CGFloat x = 0;
-    for (int i =0; i<[tabsArray count]; i++) {
-        RAWebViewController *aTab = [tabsArray objectAtIndex:i];
-        CGFloat w = (localWindow.frame.size.width-80)/[tabsArray count];
-        if (w > tabButtonSize){
-            w=tabButtonSize;
-            if (i==0){
-                x=0;
-            }
-            else{
-                x = x + tabButtonSize;   
-            }
+    if ([tabsArray count] <= 1 && !fromWindow) {
+        for (RAWebViewController *aTab in tabsArray) {
+            [[aTab tabHolder]setHidden:YES];
+            [[aTab tabview]setHidden:YES]; 
+            [[aTab webview]setFrame:NSMakeRect(aTab.webview.frame.origin.x, aTab.webview.frame.origin.y, aTab.webview.frame.size.width, aTab.webview.frame.size.height+22)];
         }
-        else {
-            if (i==0){
-                x=0;
+        
+    }
+    else
+    {
+        CGFloat x = 0;
+        for (int i =0; i<[tabsArray count]; i++) {
+            RAWebViewController *aTab = [tabsArray objectAtIndex:i];
+            [[aTab tabHolder]setHidden:NO];
+            CGFloat w = (localWindow.frame.size.width-80)/[tabsArray count];
+            if (w > tabButtonSize){
+                w=tabButtonSize;
+                if (i==0){
+                    x=0;
+                }
+                else{
+                    x = x + tabButtonSize;   
+                }
             }
-            else{
-             x = x + (localWindow.frame.size.width - 80)/[tabsArray count];
+            else {
+                if (i==0){
+                    x=0;
+                }
+                else{
+                    x = x + (localWindow.frame.size.width - 80)/[tabsArray count];
+                }
             }
-        }
-        [[[aTab tabview]animator]setFrame:NSMakeRect(x, 0, w, 22)];
+            if (i == 0) {
+                if ([[aTab tabview]isHidden] == YES && !fromWindow) {
+                    [[aTab webview]setFrame:NSMakeRect(aTab.webview.frame.origin.x, aTab.webview.frame.origin.y, aTab.webview.frame.size.width, aTab.webview.frame.size.height - 22)];
+                }
+            }
+            [[[aTab tabview]animator]setFrame:NSMakeRect(x, 0, w, 22)];
+            if (!fromWindow) {
+                [[aTab tabview]setHidden:NO]; 
+                [[aTab tabview]setAlphaValue:1.0]; 
+            }
+    }
     }
     localWindow = nil; 
 }
@@ -255,7 +276,6 @@
 
     //Add created elements to the view
     [tabPlaceHolder addSubview:[newtab tabview]];
-    [[newtab tabview]setAlphaValue:1.0]; 
     
     //increment the position and the tag value for the next button placement
     buttonId = buttonId +1;
@@ -311,7 +331,7 @@
     
     [item release]; 
     [newtab release]; 
-    [self redrawTabs];
+    [self redrawTabs:NO];
     //reset the value
     PassedUrl = nil; 
     [[NSNotificationCenter defaultCenter]postNotificationName:@"updateTabNumber" object:nil];
@@ -365,7 +385,7 @@
 -(void)resetAllTabsButon
 {
     for (RAWebViewController *tpsbutton in tabsArray) {
-        [[tpsbutton boxTab]setFillColor:[NSColor grayColor]];
+        [[tpsbutton boxTab]setFillColor:[NSColor scrollBarColor]];
         [[tpsbutton boxTab]setBorderWidth:1.0]; 
         [[tpsbutton boxTab]setBorderColor:[NSColor darkGrayColor]];
     }
@@ -416,7 +436,7 @@
         [[tpstab tabButtonTab]setTag:buttonId]; 
         [[tpstab closeButtonTab]setTag:buttonId]; 
         [[tpstab closeButtonTabShortcut]setTag:buttonId]; 
-        [self redrawTabs];
+        [self redrawTabs:NO];
         buttonId = buttonId +1; 
         [tpstabarray addObject:tpstab]; 
     }
@@ -480,7 +500,7 @@
     }
     [tabsArray removeAllObjects];
     buttonId = 0; 
-    [self redrawTabs];
+    [self redrawTabs:NO];
     @synchronized(self){
         [self addtabs:tabsButton]; 
     }

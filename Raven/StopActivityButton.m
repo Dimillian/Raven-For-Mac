@@ -24,7 +24,7 @@
     {
         [self removeTrackingArea:trackingArea];
     }
-    NSTrackingArea * area = [[NSTrackingArea alloc] initWithRect:[self bounds]
+    NSTrackingArea * area = [[NSTrackingArea alloc] initWithRect:NSMakeRect(-self.superview.frame.size.width + 15, self.superview.frame.origin.y, self.superview.frame.size.width, self.superview.frame.size.height)
                                                          options:NSTrackingMouseEnteredAndExited|NSTrackingMouseMoved|NSTrackingActiveInKeyWindow
                                                            owner:self
                                                         userInfo:nil];

@@ -57,6 +57,7 @@
     IBOutlet NSProgressIndicator *progressTab;
     IBOutlet NSView *addressBarView;
     IBOutlet NSBox *boxTab; 
+    IBOutlet NSBox *tabHolder; 
     
     NSData *downloadBlob; 
     NSNumber *totalByes; 
@@ -109,6 +110,7 @@
 @property (nonatomic, retain) IBOutlet NSView *tabview;
 @property (nonatomic, retain) NSProgressIndicator *progressTab; 
 @property (nonatomic, retain) NSBox *boxTab;
+@property (nonatomic, retain) NSBox *tabHolder;
 @property (nonatomic, retain) NSButton *tabButtonTab;
 @property (nonatomic, retain) NSButton *closeButtonTab; 
 @property (nonatomic, retain) NSButton *closeButtonTabShortcut; 

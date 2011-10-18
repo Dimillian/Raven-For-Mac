@@ -10,13 +10,14 @@
 #import "RavenAppDelegate.h"
 #import "RAMainWindowController.h"
 #import "NSString+Raven.h"
+#import "RAHiddenWindow.h"
 
 
 #define GOOGLE_SEARCH_URL @"http://www.google.com/search?q="
 
 @implementation RAWebViewController
 @synthesize passedUrl, switchView, tabsButton, webview, address, tabview; 
-@synthesize tabButtonTab, backgroundTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, closeButtonTabShortcut, addressBarView, boxTab; 
+@synthesize tabButtonTab, backgroundTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, closeButtonTabShortcut, addressBarView, boxTab, tabHolder; 
 
 #pragma -
 #pragma mark action
@@ -197,8 +198,15 @@
     [favoritePanel setTempFavico:[webview mainFrameIcon]]; 
     [favoritePanel setState:1];
     [favoritePanel setType:0];
-    [NSApp beginSheet:[favoritePanel window] modalForWindow:[sender window] modalDelegate:self didEndSelector:NULL contextInfo:nil];
+    RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
+    [hiddenWindow setLevel:NSNormalWindowLevel];
+    [hiddenWindow setIgnoresMouseEvents:YES];
+    [hiddenWindow setAlphaValue:0.0];
+    [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
+    [NSApp beginSheet:[favoritePanel window] modalForWindow:hiddenWindow modalDelegate:self didEndSelector:NULL contextInfo:nil];
     //[NSApp runModalForWindow:[favoritePanel window]];
+    [hiddenWindow release]; 
+    
 }
 
 -(void)gotopage:(id)sender
@@ -272,7 +280,7 @@
     if ([UA isEqualToString:@"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A5302b Safari/7534.48.3"]) {
         [self setDesktopUserAgent];
         //set the mobile button to a new image
-        NSImage *iphone = [NSImage imageNamed:@"narrow.png"]; 
+        NSImage *iphone = [NSImage imageNamed:@"narrow_off.png"]; 
         [mobileButton setImage:iphone];
         //resize the window
         //[[sender window] setContentSize:NSMakeSize(1152,772)];
@@ -437,18 +445,20 @@
         }
         
         else if (doRegisterHistory == 2) {
-            NSDate *currentDate = [[NSDate alloc]initWithTimeIntervalSinceNow:0]; 
-            NSString *currentUrl= [webview mainFrameURL];
-            NSImage *currentFavicon = [webview mainFrameIcon];
-            NSString *udid = currentUrl;
-            udid = [udid createFileNameFromString:udid];
-            [[currentFavicon TIFFRepresentation] writeToFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", udid]stringByExpandingTildeInPath] atomically:YES];
-            [controller insetHistoryItem:[webview mainFrameTitle] 
-                                     url:currentUrl 
-                                    data:[udid dataUsingEncoding:NSStringEncodingConversionAllowLossy] 
-                                    date:currentDate];
-            [controller updateBookmarkFavicon:[currentFavicon TIFFRepresentation] forUrl:currentUrl];
-            [currentDate release]; 
+            if (frame == [sender mainFrame]){
+                NSDate *currentDate = [[NSDate alloc]initWithTimeIntervalSinceNow:0]; 
+                NSString *currentUrl= [webview mainFrameURL];
+                NSImage *currentFavicon = [webview mainFrameIcon];
+                NSString *udid = currentUrl;
+                udid = [udid createFileNameFromString:udid];
+                [[currentFavicon TIFFRepresentation] writeToFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", udid]stringByExpandingTildeInPath] atomically:YES];
+                [controller insetHistoryItem:[webview mainFrameTitle] 
+                                         url:currentUrl 
+                                        data:[udid dataUsingEncoding:NSStringEncodingConversionAllowLossy] 
+                                        date:currentDate];
+                [controller updateBookmarkFavicon:[currentFavicon TIFFRepresentation] forUrl:currentUrl];
+                [currentDate release]; 
+            }
             
         }
     }

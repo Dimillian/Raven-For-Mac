@@ -10,6 +10,7 @@
 #import "RABookmarkCell.h"
 #import "RAMainWindowController.h"
 #import "RAHistoryCell.h"
+#import "RAHiddenWindow.h"
 
 
 @implementation RABookmarkViewController
@@ -51,6 +52,7 @@
     [self check:nil];
     [selectorButton setSelectedSegment:1];
     [newtab initWithBookmarkPage];
+    [[newtab tabHolder]setHidden:YES];
     [[newtab webview]setFrame:NSMakeRect(newtab.webview.frame.origin.x, newtab.webview.frame.origin.y, newtab.webview.frame.size.width, newtab.webview.frame.size.height+22)];
     [[newtab webview]setUIDelegate:self];
 
@@ -261,8 +263,14 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         NSAlert *alert = [[NSAlert alloc]init];
         [alert setInformativeText:@"Please try on another page"]; 
         [alert setMessageText:@"The page can not be parsed"]; 
-        [alert beginSheetModalForWindow:[readButton window] modalDelegate:self didEndSelector:nil contextInfo:nil];
+        RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
+        [hiddenWindow setLevel:NSNormalWindowLevel];
+        [hiddenWindow setIgnoresMouseEvents:YES];
+        [hiddenWindow setAlphaValue:0.0];
+        [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
+        [alert beginSheetModalForWindow:hiddenWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
         [alert release]; 
+        [hiddenWindow release];
         [readButton setState:0];
     }
     else
@@ -284,8 +292,14 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     NSAlert *alert = [[NSAlert alloc]init];
     [alert setInformativeText:@"Please try on another page"]; 
     [alert setMessageText:@"The page can not be parsed"]; 
-    [alert beginSheetModalForWindow:[readButton window] modalDelegate:self didEndSelector:nil contextInfo:nil];
+    RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
+    [hiddenWindow setLevel:NSNormalWindowLevel];
+    [hiddenWindow setIgnoresMouseEvents:YES];
+    [hiddenWindow setAlphaValue:0.0];
+    [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
+    [alert beginSheetModalForWindow:hiddenWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
     [alert release]; 
+    [hiddenWindow release];
     
 }
 -(void)listView:(PXListView *)aListView rowDoubleClicked:(NSUInteger)rowIndex
@@ -309,7 +323,13 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     [favoritePanel setIndex:bookmark.udid];
     [favoritePanel setType:bookmark.type];
     [favoritePanel setState:2];
-    [NSApp beginSheet:[favoritePanel window] modalForWindow:[listView window] modalDelegate:self didEndSelector:@selector(reselectRow:) contextInfo:nil];
+    RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
+    [hiddenWindow setLevel:NSNormalWindowLevel];
+    [hiddenWindow setIgnoresMouseEvents:YES];
+    [hiddenWindow setAlphaValue:0.0];
+    [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
+    [NSApp beginSheet:[favoritePanel window] modalForWindow:hiddenWindow modalDelegate:self didEndSelector:@selector(reselectRow:) contextInfo:nil];
+    [hiddenWindow release];
 }
 
 -(IBAction)addFavorite:(id)sender;
@@ -320,7 +340,13 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     [favoritePanel setTempFavico:[NSImage imageNamed:@"MediumSiteIcon.png"]]; 
     [favoritePanel setState:1];
     [favoritePanel setType:0];
-    [NSApp beginSheet:[favoritePanel window] modalForWindow:[listView window] modalDelegate:self didEndSelector:@selector(check:) contextInfo:nil];
+    RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
+    [hiddenWindow setLevel:NSNormalWindowLevel];
+    [hiddenWindow setIgnoresMouseEvents:YES];
+    [hiddenWindow setAlphaValue:0.0];
+    [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
+    [NSApp beginSheet:[favoritePanel window] modalForWindow:hiddenWindow modalDelegate:self didEndSelector:@selector(check:) contextInfo:nil];
+    [hiddenWindow release];
 }
 
 
@@ -333,8 +359,14 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         [alert setMessageText:NSLocalizedString(@"Please select a bookmark", @"bookmarkPromptError")];
         [alert setInformativeText:NSLocalizedString(@"To view, delete or edit an item you first need to select an item in the list.", @"BookmarkPromptErrorMessage")];
         [alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Ok")];
-        [alert beginSheetModalForWindow:[sender window] modalDelegate:self didEndSelector:nil contextInfo:nil];
+        RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
+        [hiddenWindow setLevel:NSNormalWindowLevel];
+        [hiddenWindow setIgnoresMouseEvents:YES];
+        [hiddenWindow setAlphaValue:0.0];
+        [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
+        [alert beginSheetModalForWindow:hiddenWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
         [alert release];
+        [hiddenWindow release];
     }
     else
     {
@@ -346,15 +378,22 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         }
         else
         {
-        [alert setMessageText:NSLocalizedString(@"Are you sure you want to delete?", @"bookmarkPrompt")];
-        [alert setInformativeText:NSLocalizedString(@"You can not undo this.", @"Continue")];
-        [alert addButtonWithTitle:NSLocalizedString(@"Yes", @"Yeah")];
-        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
-        [alert setShowsSuppressionButton:YES];
-        [alert setIcon:[NSImage imageNamed:@"delete_big.png"]];
-    //call the alert and check the selected button
-        [alert beginSheetModalForWindow:[sender window] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
-        [alert release];
+            [alert setMessageText:NSLocalizedString(@"Are you sure you want to delete?", @"bookmarkPrompt")];
+            [alert setInformativeText:NSLocalizedString(@"You can not undo this.", @"Continue")];
+            [alert addButtonWithTitle:NSLocalizedString(@"Yes", @"Yeah")];
+            [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
+            [alert setShowsSuppressionButton:YES];
+            [alert setIcon:[NSImage imageNamed:@"delete_big.png"]];
+            //call the alert and check the selected button
+            RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
+            [hiddenWindow setLevel:NSNormalWindowLevel];
+            [hiddenWindow setIgnoresMouseEvents:YES];
+            [hiddenWindow setAlphaValue:0.0];
+            [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
+            
+            [alert beginSheetModalForWindow:hiddenWindow modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+            [alert release];
+            [hiddenWindow release]; 
         }
     }
     

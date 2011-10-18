@@ -8,7 +8,7 @@
 
 #import "RAlistManager.h"
 #import "RavenAppDelegate.h"
-
+#import "RAHiddenWindow.h"
 @implementation RAlistManager
 @synthesize downloadPath;
 
@@ -56,8 +56,14 @@
         //[alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
         //call the alert and check the selected button
         [alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Ok")];
-        [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:nil didEndSelector:nil contextInfo:nil];
+        RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
+        [hiddenWindow setLevel:NSNormalWindowLevel];
+        [hiddenWindow setIgnoresMouseEvents:YES];
+        [hiddenWindow setAlphaValue:0.0];
+        [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
+        [alert beginSheetModalForWindow:hiddenWindow modalDelegate:nil didEndSelector:nil contextInfo:nil];
         [alert release]; 
+        [hiddenWindow release];
         return NO;
     }
     else {
@@ -144,11 +150,18 @@
         //call the alert and check the selected button
         [alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Yeah")];
         [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
-        [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+        RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
+        [hiddenWindow setLevel:NSNormalWindowLevel];
+        [hiddenWindow setIgnoresMouseEvents:YES];
+        [hiddenWindow setAlphaValue:0.0];
+        [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
+        [alert beginSheetModalForWindow:hiddenWindow modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
         [alert release]; 
+        [hiddenWindow release];
         [icon release]; 
     }
 }
+
 
 -(void)checkforDuplicateFromApp:(NSString *)sourcePath
 {

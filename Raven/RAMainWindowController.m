@@ -10,6 +10,7 @@
 #import "RavenAppDelegate.h"
 #import "RASettingViewController.h"
 #import "INAppStoreWindow.h"
+#import "RAHiddenWindow.h"
 
 //smart bar app positioning constante
 #define retracted_app_height 55
@@ -18,7 +19,7 @@
 #define app_position_x -7
 #define app_view_w 108
 #define app_view_h 278
-#define initial_app_space 518
+#define initial_app_space 513
 #define bottom_bar_size 40
 #define number_h 21
 
@@ -88,8 +89,14 @@
         [alert setShowsSuppressionButton:YES];
         [alert setIcon:[NSImage imageNamed:@"tab-close-warning.png"]];
         //call the alert and check the selected button
-        [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+        RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
+        [hiddenWindow setLevel:NSNormalWindowLevel];
+        [hiddenWindow setIgnoresMouseEvents:YES];
+        [hiddenWindow setAlphaValue:0.0];
+        [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
+        [alert beginSheetModalForWindow:hiddenWindow modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
         [alert release];
+        [hiddenWindow release]; 
         return NO; 
     }
 
