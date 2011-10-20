@@ -247,7 +247,7 @@
 											<reference key="NSSupport" ref="574613330"/>
 											<reference key="NSControlView" ref="171024281"/>
 											<int key="NSButtonFlags">138690815</int>
-											<int key="NSButtonFlags2">134</int>
+											<int key="NSButtonFlags2">268435590</int>
 											<object class="NSCustomResource" key="NSNormalImage">
 												<string key="NSClassName">NSImage</string>
 												<string key="NSResourceName">forward_off</string>
@@ -257,7 +257,7 @@
 												<string key="NSResourceName">forward_on</string>
 											</object>
 											<string key="NSAlternateContents"/>
-											<string key="NSKeyEquivalent"/>
+											<string key="NSKeyEquivalent"></string>
 											<int key="NSPeriodicDelay">400</int>
 											<int key="NSPeriodicInterval">75</int>
 										</object>

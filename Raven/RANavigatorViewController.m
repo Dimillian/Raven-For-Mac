@@ -321,6 +321,7 @@
                 //reset all tabs button position
                 [self resetAllTabsButon]; 
                 [tabController selectTabViewItem:item]; 
+                [newtab setMenu]; 
                 //If the new tab object is diffrent of null then show it (it should be alway different of null)
                 if (newtab != nil)
                 {
@@ -334,7 +335,6 @@
     
     //RAMainWindowController *mainWindow = [[tabController window]windowController];
     //[mainWindow replaceTitleBarViewWith:[newtab addressBarView]];
-    [newtab setMenu]; 
     [item release]; 
     [newtab release]; 
     [self redrawTabs:NO];
