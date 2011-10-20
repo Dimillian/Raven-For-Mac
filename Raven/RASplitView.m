@@ -22,12 +22,12 @@
 
 -(CGFloat)dividerThickness
 {
-    return 0.5; 
+    return 0.0; 
 }
 
 -(NSColor *)dividerColor
 {
-    return [NSColor grayColor]; 
+    return [NSColor blackColor]; 
 }
 
 -(NSSplitViewDividerStyle)dividerStyle

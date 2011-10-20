@@ -49,6 +49,8 @@
     
     NSMutableArray *appList; 
     
+    
+    
     //button
     IBOutlet NSButton *ravenMenuButton; 
     IBOutlet NSButton *homeButton; 

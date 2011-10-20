@@ -137,6 +137,7 @@
     
 }
 
+
 -(void)calculateUrlNumber{
     if ([secondURL isEqualToString:@""]) {
         appNumber = 1; 
@@ -271,7 +272,7 @@
         mainWindow.myCurrentViewController = firstNavigatorView;
         
     }
-    
+    [firstNavigatorView setMenu];
     
     [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
     [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
@@ -298,7 +299,7 @@
         mainWindow.myCurrentViewController = SecondNavigatorView;
         
     }
-
+    [SecondNavigatorView setMenu];
     [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
     [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
     selectedButton = 2;
@@ -325,7 +326,7 @@
         mainWindow.myCurrentViewController = ThirdtNavigatorView;
         
     }
-    
+    [ThirdtNavigatorView setMenu];
     [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
     [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
     selectedButton = 3;
@@ -353,7 +354,7 @@
         mainWindow.myCurrentViewController = FourthNavigatorView;
         
     }
-
+    [FourthNavigatorView setMenu];
     [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
     [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
     selectedButton = 4;

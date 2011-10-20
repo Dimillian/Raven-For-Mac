@@ -95,6 +95,12 @@
     
 }
 
+-(void)setMenu{
+    NSMenu *topMenu = [NSApp mainMenu]; 
+    [topMenu setSubmenu:navigatorMenu forItem:[topMenu itemAtIndex:7]];
+    //[NSApp setMenu:topMenu];
+}
+
 
 #pragma mark -
 #pragma mark tab management
@@ -105,6 +111,7 @@
     [tabController selectTabViewItemAtIndex:[sender tag]]; 
     //Instansiate the webviewcontroller with the object in the array at the button tag index
     RAWebViewController *clickedtab = [tabsArray objectAtIndex:[sender tag]];
+    [clickedtab setMenu]; 
     curentSelectedTab = [sender tag];
     //load the clicked button
     //TabButtonControlle *clickedbutton = [buttonTabsArray objectAtIndex:[sender tag]];
@@ -189,7 +196,7 @@
                     x=0;
                 }
                 else{
-                    x = x + (localWindow.frame.size.width - 80)/[tabsArray count];
+                    x = x + (localWindow.frame.size.width - 77)/[tabsArray count];
                 }
             }
             if (i == 0) {
@@ -197,12 +204,18 @@
                     [[aTab webview]setFrame:NSMakeRect(aTab.webview.frame.origin.x, aTab.webview.frame.origin.y, aTab.webview.frame.size.width, aTab.webview.frame.size.height - 22)];
                 }
             }
-            [[[aTab tabview]animator]setFrame:NSMakeRect(x, 0, w, 22)];
             if (!fromWindow) {
                 [[aTab tabview]setHidden:NO]; 
                 [[aTab tabview]setAlphaValue:1.0]; 
+                [NSAnimationContext beginGrouping];
+                [[NSAnimationContext currentContext] setDuration:0.2];  
+                [[[aTab tabview]animator]setFrame:NSMakeRect(x, 0, w, 22)];
+                [NSAnimationContext endGrouping];
             }
-    }
+            else{
+                [[aTab tabview]setFrame:NSMakeRect(x, 0, w, 22)];   
+            }
+        }
     }
     localWindow = nil; 
 }
@@ -243,17 +256,9 @@
     [[newtab webview]setUIDelegate:self]; 
     [[newtab webview]setPolicyDelegate:self]; 
     //Set the host window to the actual window for plugin 
-    [[newtab webview]setHostWindow:[tabController window]];
+    [[newtab webview]setHostWindow:localWindow];
     
-    
-    /*
-    NSMenu *mainMenu = [[NSApplication sharedApplication]mainMenu];
-    NSMenuItem *iTem = [mainMenu itemAtIndex:1];
-    NSMenu *submenu = [iTem submenu];
-    NSMenuItem *addTab = [submenu itemAtIndex:1];
-    [addTab setAction:@selector(addtabs:)];
-    [addTab setTarget:self]; 
-    */
+
     
     NSRect windowSize = [[sender window]frame];
     CGFloat size = windowSize.size.width;  
@@ -276,6 +281,7 @@
 
     //Add created elements to the view
     [tabPlaceHolder addSubview:[newtab tabview]];
+    [[newtab tabview]setFrame:NSMakeRect(buttonId*tabButtonSize, 22, tabButtonSize, 22)];
     
     //increment the position and the tag value for the next button placement
     buttonId = buttonId +1;
@@ -328,7 +334,7 @@
     
     //RAMainWindowController *mainWindow = [[tabController window]windowController];
     //[mainWindow replaceTitleBarViewWith:[newtab addressBarView]];
-    
+    [newtab setMenu]; 
     [item release]; 
     [newtab release]; 
     [self redrawTabs:NO];

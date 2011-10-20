@@ -89,17 +89,17 @@
         [alert setShowsSuppressionButton:YES];
         [alert setIcon:[NSImage imageNamed:@"tab-close-warning.png"]];
         //call the alert and check the selected button
-        RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
-        [hiddenWindow setLevel:NSNormalWindowLevel];
-        [hiddenWindow setIgnoresMouseEvents:YES];
-        [hiddenWindow setAlphaValue:0.0];
-        [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
-        [alert beginSheetModalForWindow:hiddenWindow modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+        [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
         [alert release];
-        [hiddenWindow release]; 
         return NO; 
     }
 
+}
+
+-(NSRect)window:(NSWindow *)window willPositionSheet:(NSWindow *)sheet usingRect:(NSRect)rect
+{
+    rect.origin.y = rect.origin.y + 27; 
+    return rect;
 }
 
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
@@ -285,6 +285,12 @@
         }
     }
     [folder release];
+    NSMenu *topMenu = [NSApp menu]; 
+    NSMenu *smartBarMenu = [[topMenu itemAtIndex:4]submenu];
+    NSInteger count = smartBarMenu.itemArray.count;
+    for (NSInteger sb=13; sb < count; sb++) {
+        [smartBarMenu removeItemAtIndex:13];
+    }
     int x = 0;
     for (NSDictionary *item in folders) {
         NSArray *URL = [[item objectForKey:PLIST_KEY_URL]copy];
@@ -295,6 +301,18 @@
         smartApp.secondURL = [URL objectAtIndex:1]; 
         smartApp.thirdURL = [URL objectAtIndex:2]; 
         smartApp.fourthURL = [URL objectAtIndex:3];
+        //dirty menu part
+        NSString *homeButtonPath = [NSString stringWithFormat:application_support_path@"%@/main.png", [item objectForKey:PLIST_KEY_FOLDER]];
+        NSImage *homeButtonImage = [[NSImage alloc]initWithContentsOfFile:[homeButtonPath stringByExpandingTildeInPath]];
+        [homeButtonImage setSize:NSMakeSize(20, 20)];
+        NSMenuItem *appMenu = [[NSMenuItem alloc]initWithTitle:[item objectForKey:PLIST_KEY_APPNAME] action:@selector(expandApp:) keyEquivalent:[NSString stringWithFormat:@"%d", x]]; 
+        [appMenu setTarget:smartApp];
+        [appMenu setImage:homeButtonImage];
+        [smartBarMenu addItem:appMenu];
+        [appMenu release];
+        [homeButtonImage release];
+        //
+        
         [appList addObject:smartApp]; 
         [[appList objectAtIndex:x]view];
         [rightView addSubview:[[appList objectAtIndex:x]view]];
@@ -303,7 +321,12 @@
         [smartApp release];
         x+=1;
     }
+    [topMenu setSubmenu:smartBarMenu forItem:[topMenu itemAtIndex:4]];
+    //[NSApp setMenu:topMenu];
     [folders release];
+    
+    //generate the menu 
+
 }
  
 //update UI when an app expand, Delegate sent from RASmartBarViewController
@@ -447,6 +470,7 @@
             [NSAnimationContext beginGrouping];
             [[NSAnimationContext currentContext] setDuration:0.3];
             [[settingButton animator]setAlphaValue:1.0];
+            [[cornerBox animator]setFrame:NSMakeRect(-17, cornerBox.frame.origin.y, cornerBox.frame.size.width, cornerBox.frame.size.height)];
             [[smartBarScrollView animator]setFrame:NSMakeRect(-17, smartBarScrollView.frame.origin.y, smartBarScrollView.frame.size.width, smartBarScrollView.frame.size.height)];
             [NSAnimationContext endGrouping];
         }
@@ -461,6 +485,7 @@
             [NSAnimationContext beginGrouping];
             [[NSAnimationContext currentContext] setDuration:0.3];
             [[smartBarScrollView animator]setFrame:NSMakeRect(smartBarScrollView.frame.origin.x - 76, smartBarScrollView.frame.origin.y, smartBarScrollView.frame.size.width, smartBarScrollView.frame.size.height)];
+            [[cornerBox animator]setFrame:NSMakeRect(cornerBox.frame.origin.x - 76, cornerBox.frame.origin.y, cornerBox.frame.size.width, cornerBox.frame.size.height)];
             [[settingButton animator]setAlphaValue:0.0];
             [NSAnimationContext endGrouping];
         }
@@ -535,8 +560,9 @@
     }
     if ([[navigatorview tabsArray]count] == 0) {
         [navigatorview view];
-        [navigatorview addtabs:self]; 
-    }    
+        [navigatorview addtabs:self];
+    } 
+    [navigatorview setMenu];
     [centeredView addSubview: [myCurrentViewController view]];
     [[myCurrentViewController view]setFrame:[centeredView bounds]];
     [self hideall]; 

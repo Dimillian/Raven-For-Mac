@@ -263,14 +263,8 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         NSAlert *alert = [[NSAlert alloc]init];
         [alert setInformativeText:@"Please try on another page"]; 
         [alert setMessageText:@"The page can not be parsed"]; 
-        RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
-        [hiddenWindow setLevel:NSNormalWindowLevel];
-        [hiddenWindow setIgnoresMouseEvents:YES];
-        [hiddenWindow setAlphaValue:0.0];
-        [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
-        [alert beginSheetModalForWindow:hiddenWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+        [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:nil contextInfo:nil];
         [alert release]; 
-        [hiddenWindow release];
         [readButton setState:0];
     }
     else
@@ -292,14 +286,8 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     NSAlert *alert = [[NSAlert alloc]init];
     [alert setInformativeText:@"Please try on another page"]; 
     [alert setMessageText:@"The page can not be parsed"]; 
-    RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
-    [hiddenWindow setLevel:NSNormalWindowLevel];
-    [hiddenWindow setIgnoresMouseEvents:YES];
-    [hiddenWindow setAlphaValue:0.0];
-    [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
-    [alert beginSheetModalForWindow:hiddenWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+    [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:nil contextInfo:nil];
     [alert release]; 
-    [hiddenWindow release];
     
 }
 -(void)listView:(PXListView *)aListView rowDoubleClicked:(NSUInteger)rowIndex
@@ -323,13 +311,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     [favoritePanel setIndex:bookmark.udid];
     [favoritePanel setType:bookmark.type];
     [favoritePanel setState:2];
-    RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
-    [hiddenWindow setLevel:NSNormalWindowLevel];
-    [hiddenWindow setIgnoresMouseEvents:YES];
-    [hiddenWindow setAlphaValue:0.0];
-    [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
-    [NSApp beginSheet:[favoritePanel window] modalForWindow:hiddenWindow modalDelegate:self didEndSelector:@selector(reselectRow:) contextInfo:nil];
-    [hiddenWindow release];
+    [NSApp beginSheet:[favoritePanel window] modalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(reselectRow:) contextInfo:nil];
 }
 
 -(IBAction)addFavorite:(id)sender;
@@ -359,14 +341,8 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         [alert setMessageText:NSLocalizedString(@"Please select a bookmark", @"bookmarkPromptError")];
         [alert setInformativeText:NSLocalizedString(@"To view, delete or edit an item you first need to select an item in the list.", @"BookmarkPromptErrorMessage")];
         [alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Ok")];
-        RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
-        [hiddenWindow setLevel:NSNormalWindowLevel];
-        [hiddenWindow setIgnoresMouseEvents:YES];
-        [hiddenWindow setAlphaValue:0.0];
-        [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
-        [alert beginSheetModalForWindow:hiddenWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+        [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:nil contextInfo:nil];
         [alert release];
-        [hiddenWindow release];
     }
     else
     {

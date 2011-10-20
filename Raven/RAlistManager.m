@@ -56,14 +56,8 @@
         //[alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
         //call the alert and check the selected button
         [alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Ok")];
-        RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
-        [hiddenWindow setLevel:NSNormalWindowLevel];
-        [hiddenWindow setIgnoresMouseEvents:YES];
-        [hiddenWindow setAlphaValue:0.0];
-        [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
-        [alert beginSheetModalForWindow:hiddenWindow modalDelegate:nil didEndSelector:nil contextInfo:nil];
+        [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:nil didEndSelector:nil contextInfo:nil];
         [alert release]; 
-        [hiddenWindow release];
         return NO;
     }
     else {
@@ -88,7 +82,10 @@
             [item setObject:[NSNumber numberWithInt:1] forKey:PLIST_KEY_ENABLE];
         }
         if ([item objectForKey:PLIST_KEY_CATEGORY] == nil) {
-            [item setObject:@"No categorie" forKey:PLIST_KEY_CATEGORY];
+            [item setObject:@"No category" forKey:PLIST_KEY_CATEGORY];
+        }
+        if ([[item objectForKey:PLIST_KEY_CATEGORY]isEqualToString:@"No categorie"]) {
+            [item setObject:@"No category" forKey:PLIST_KEY_CATEGORY];
         }
         if ([item objectForKey:PLIST_KEY_OFFICIAL] == nil) {
             [item setObject:@"Unofficial" forKey:PLIST_KEY_OFFICIAL];
@@ -150,14 +147,8 @@
         //call the alert and check the selected button
         [alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Yeah")];
         [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
-        RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
-        [hiddenWindow setLevel:NSNormalWindowLevel];
-        [hiddenWindow setIgnoresMouseEvents:YES];
-        [hiddenWindow setAlphaValue:0.0];
-        [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
-        [alert beginSheetModalForWindow:hiddenWindow modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+        [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
         [alert release]; 
-        [hiddenWindow release];
         [icon release]; 
     }
 }

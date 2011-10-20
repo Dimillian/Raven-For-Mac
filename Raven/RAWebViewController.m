@@ -13,6 +13,7 @@
 #import "RAHiddenWindow.h"
 
 
+
 #define GOOGLE_SEARCH_URL @"http://www.google.com/search?q="
 
 @implementation RAWebViewController
@@ -26,7 +27,7 @@
     self = [super init]; 
     if (self !=nil)
     {
-        [self initWithNibName:@"NavigatorNoBottom" bundle:nil]; 
+        [self initWithNibName:@"NavigatorNoBottom" bundle:nil];
     }
     
     return self; 
@@ -53,6 +54,16 @@
     NSLog(@"JavaScript: %@",logText);
 }
 */
+-(void)setMenu
+{
+    NSMenu *topMenu = [NSApp menu]; 
+    [webviewMenu setTitle:@"View"]; 
+    NSMenu *favortieMenu = [self getFavoriteMenu]; 
+    [favortieMenu setTitle:@"Favorites"]; 
+    [topMenu setSubmenu:webviewMenu forItem:[topMenu itemAtIndex:3]]; 
+    [topMenu setSubmenu:favortieMenu forItem:[topMenu itemAtIndex:6]];
+    //[NSApp setMenu:topMenu]; 
+}
 -(void)awakeFromNib
 {
     WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"]; 
@@ -61,7 +72,10 @@
     [self setDoRegisterHistory:2];
     //Hide the stop loading button
     [stopLoading setHidden:YES];
+    [webview setContinuousSpellCheckingEnabled:YES]; 
     //Setup the delegate of the webview
+    RANSURLDownloadDelegate *downloadDL = [[RANSURLDownloadDelegate alloc]init]; 
+    [webview setDownloadDelegate:downloadDL]; 
     [webview setShouldCloseWithWindow:YES]; 
     [address setDelegate:self]; 
     [webview setUIDelegate:self];
@@ -203,7 +217,7 @@
     [hiddenWindow setIgnoresMouseEvents:YES];
     [hiddenWindow setAlphaValue:0.0];
     [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
-    [NSApp beginSheet:[favoritePanel window] modalForWindow:hiddenWindow modalDelegate:self didEndSelector:NULL contextInfo:nil];
+    [NSApp beginSheet:[favoritePanel window] modalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:NULL contextInfo:nil];
     //[NSApp runModalForWindow:[favoritePanel window]];
     [hiddenWindow release]; 
     
@@ -217,7 +231,27 @@
 
 -(void)favoriteMenu:(id)sender
 {
+    NSMenu *menu = [self getFavoriteMenu];
+    NSRect frame = [(NSButton *)sender frame];
+    NSPoint menuOrigin = [[(NSButton *)sender superview] convertPoint:NSMakePoint(frame.origin.x, frame.origin.y+frame.size.height-25)
+                                                               toView:nil];
     
+    NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
+                                         location:menuOrigin
+                                    modifierFlags:NSLeftMouseDownMask // 0x100
+                                        timestamp:0
+                                     windowNumber:[[(NSButton *)sender window] windowNumber]
+                                          context:[[(NSButton *)sender window] graphicsContext]
+                                      eventNumber:0
+                                       clickCount:1
+                                         pressure:1]; 
+    
+    [NSMenu popUpContextMenu:menu withEvent:event forView:(NSButton *)sender];
+    
+}
+
+-(NSMenu *)getFavoriteMenu
+{
     int i=0; 
     NSUInteger b; 
     NSMenu *menu = [[NSMenu alloc]init]; 
@@ -241,7 +275,7 @@
         [menu addItem:item]; 
         [item release]; 
     }
-    RAMainWindowController *mainWindow = [[sender window]windowController]; 
+    RAMainWindowController *mainWindow = [[NSApp keyWindow]windowController]; 
     [menu addItem:[NSMenuItem separatorItem]];
     NSMenuItem *item = [[NSMenuItem alloc]init];
     [item setTarget:mainWindow];
@@ -251,26 +285,7 @@
     [menu addItem:item]; 
     [item release]; 
     
-    
-    
-    NSRect frame = [(NSButton *)sender frame];
-    NSPoint menuOrigin = [[(NSButton *)sender superview] convertPoint:NSMakePoint(frame.origin.x, frame.origin.y+frame.size.height-25)
-                                                               toView:nil];
-    
-    NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
-                                         location:menuOrigin
-                                    modifierFlags:NSLeftMouseDownMask // 0x100
-                                        timestamp:0
-                                     windowNumber:[[(NSButton *)sender window] windowNumber]
-                                          context:[[(NSButton *)sender window] graphicsContext]
-                                      eventNumber:0
-                                       clickCount:1
-                                         pressure:1]; 
-    
-    [NSMenu popUpContextMenu:menu withEvent:event forView:(NSButton *)sender];
-    
-    [menu release]; 
-    
+    return [menu autorelease]; 
 }
 //mobile button, change the UA and the window sier
 -(void)mobile:(id)sender
@@ -469,17 +484,28 @@
 //If the webview fail load and receive error
 - (void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
 {
-    if ([error code] == - 999) {
-
+    if ([error code] == - 1009) {
+        NSAlert *alert = [[NSAlert alloc]init];
+        [alert setMessageText:@"Please check your internet connection"];
+        [alert setInformativeText:@"It appear that you don't have any active internet connection"]; 
+        [alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Yeah")];
+        [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:nil didEndSelector:nil contextInfo:nil];
+        [alert release]; 
     }
-    if (frame == [sender mainFrame]){
-        //get the current address in the address bar
-        NSString *addressTo = [address stringValue];
+    else
+    {
+        if ([error code] == - 999) {
+            
+        }
+        if (frame == [sender mainFrame]){
+            //get the current address in the address bar
+            NSString *addressTo = [address stringValue];
             addressTo = [addressTo stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        if (addressTo != nil) {
-            addressTo = [NSString stringWithFormat:GOOGLE_SEARCH_URL@"%@", addressTo];
-            //launch a google search
-            [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:addressTo]]];
+            if (addressTo != nil) {
+                addressTo = [NSString stringWithFormat:GOOGLE_SEARCH_URL@"%@", addressTo];
+                //launch a google search
+                [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:addressTo]]];
+            }
         }
     }
 }

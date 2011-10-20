@@ -70,6 +70,8 @@
     
     IBOutlet RAAddressFieldBox *addressBox; 
     
+    IBOutlet NSMenu *webviewMenu;
+    
     
     
 
@@ -86,6 +88,8 @@
 -(IBAction)gotopage:(id)sender;
 -(IBAction)search:(id)sender;
 //method
+-(void)setMenu;
+-(NSMenu *)getFavoriteMenu; 
 -(void)initWithUrl:(NSString *)url;
 -(void)initWithWelcomePage; 
 -(void)initWithPreferredUrl; 

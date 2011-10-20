@@ -34,6 +34,7 @@
     BOOL istab; 
     int fromOtherViews; 
     NSWindow *localWindow; 
+    IBOutlet NSMenu *navigatorMenu; 
 }
 //Bouton action
 -(IBAction)tabs:(id)sender; 
@@ -46,6 +47,7 @@
 -(void)windowResize:(id)sender; 
 -(void)setImageOnSelectedTab; 
 -(void)redrawTabs:(BOOL)fromWindow;
+-(void)setMenu; 
 //method
 -(void)checkua; 
 -(void)resetAllTabsButon; 

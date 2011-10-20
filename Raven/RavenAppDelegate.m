@@ -125,6 +125,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 
+
 -(void)showSettingsWindow:(id)sender
 {
     [setting showWindow:self]; 
