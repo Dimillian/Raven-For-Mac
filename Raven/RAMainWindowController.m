@@ -51,6 +51,28 @@
 
 - (void)dealloc
 {
+    NSMenu *topMenu = [NSApp menu]; 
+    NSMenu *smartBarMenu = [[topMenu itemAtIndex:4]submenu];
+    NSInteger count = smartBarMenu.itemArray.count;
+    for (NSInteger sb=13; sb < count; sb++) {
+        [smartBarMenu removeItemAtIndex:13];
+    }
+    for (NSMenuItem *item in [[[topMenu itemAtIndex:3]submenu]itemArray]) {
+        [[[topMenu itemAtIndex:3]submenu]removeItem:item];
+    }
+    for (NSMenuItem *item in [[[topMenu itemAtIndex:6]submenu]itemArray]) {
+        [[[topMenu itemAtIndex:6]submenu]removeItem:item];
+    }
+    for (NSMenuItem *item in [[[topMenu itemAtIndex:3]submenu]itemArray]) {
+        [[[topMenu itemAtIndex:3]submenu]removeItem:item];
+    }
+    for (NSMenuItem *item in [[[topMenu itemAtIndex:6]submenu]itemArray]) {
+        [[[topMenu itemAtIndex:6]submenu]removeItem:item];
+    }
+    NSMenu *windowMenu = [[topMenu itemAtIndex:7]submenu];
+    for (NSMenuItem *item in windowMenu.itemArray) {
+        [windowMenu removeItem:item];
+    }
     
     [navigatorview release];
     //Raven view

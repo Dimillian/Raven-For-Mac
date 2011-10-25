@@ -33,16 +33,24 @@
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
-    [[self animator]setBorderWidth:2.0];
-    [self setBorderColor:[NSColor keyboardFocusIndicatorColor]];
-    
+    [self setFocusColor];
 }
 
 -(void)mouseExited:(NSEvent *)theEvent
 {
+    [self setNormalColor];
+}
+
+-(void)setFocusColor
+{
+    [[self animator]setBorderWidth:2.0];
+    [self setBorderColor:[NSColor keyboardFocusIndicatorColor]];
+}
+
+-(void)setNormalColor
+{
     [[self animator]setBorderWidth:1.0];
-     [self setBorderColor:[NSColor disabledControlTextColor]];
-    
+    [self setBorderColor:[NSColor disabledControlTextColor]];
 }
 
 

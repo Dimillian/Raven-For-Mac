@@ -13,7 +13,6 @@
 #import "RAHiddenWindow.h"
 
 
-
 #define GOOGLE_SEARCH_URL @"http://www.google.com/search?q="
 
 @implementation RAWebViewController
@@ -68,6 +67,21 @@
 {
     WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"]; 
     [myPreference setUsesPageCache:NO]; 
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+	if (standardUserDefaults) 
+    {
+        if ([standardUserDefaults integerForKey:ADBLOCK_CSS] == 1) {
+            [myPreference setUserStyleSheetLocation:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"userContent"
+                                                                                                 ofType:@"css"]]];
+            [myPreference setUserStyleSheetEnabled:YES]; 
+        }
+        else
+        {
+            [myPreference setUserStyleSheetEnabled:NO]; 
+        }
+    }
+
+    
     [self setDesktopUserAgent];
     [self setDoRegisterHistory:2];
     //Hide the stop loading button
@@ -97,6 +111,7 @@
     isNewTab = YES; 
     [progressMain setMinValue:0.0]; 
     [progressMain setMaxValue:1.0]; 
+
     
     
 
@@ -456,7 +471,6 @@
     else
     {
         if ([title isEqualToString:@""]) {
-            NSLog(@"blank title");
         }
         
         else if (doRegisterHistory == 2) {
@@ -477,6 +491,19 @@
             
         }
     }
+    
+//Idea to auto fill a form, could be usefull for credentials manager and auto login feature
+    //Currently made for gmail
+/*
+ DOMHTMLFormElement *form = (DOMHTMLFormElement *)[[frame DOMDocument] getElementById:@"gaia_loginform"];
+ DOMHTMLInputElement *username = (DOMHTMLInputElement *)[[form elements] namedItem:@"Email"];
+ [username setValue:@"myemailacct"];
+ 
+ DOMHTMLInputElement *password = (DOMHTMLInputElement *)[[form elements] namedItem:@"Passwd"];
+ [password setValue:@"omghi"];
+ 
+ [form submit];
+ */
      
 }
 
@@ -519,6 +546,8 @@
 //Bad memory maanagement for now ! 
 - (void)dealloc
 {  
+    
+
     [webview stopLoading:webview]; 
     [webview setUIDelegate:nil];
     [webview setDownloadDelegate:nil]; 

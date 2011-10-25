@@ -80,6 +80,9 @@
             if ([standardUserDefaults objectForKey:SHOW_FAVICON_TAB] == nil) {
                 [standardUserDefaults setInteger:1 forKey:SHOW_FAVICON_TAB]; 
             }
+            if ([standardUserDefaults objectForKey:ADBLOCK_CSS] == nil) {
+                [standardUserDefaults setInteger:0 forKey:ADBLOCK_CSS]; 
+            }
             //enable web inspector for webview, we are a browser afterall
             if  ([standardUserDefaults objectForKey:@"WebKitDeveloperExtras"] == nil){
                 [standardUserDefaults setInteger:1 forKey:@"WebKitDeveloperExtras"];

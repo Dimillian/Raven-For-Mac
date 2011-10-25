@@ -21,7 +21,38 @@
     //[tableview setAllowsEmptySelection:NO]; 
 }
 
+/*
+-(BOOL)becomeFirstResponder
+{
+    [super becomeFirstResponder];
+    NSView *superview = [self superview];
+    NSArray *subviews =[superview subviews];
+    for (id view in subviews)
+    {
+        if ([view isKindOfClass:[RAAddressFieldBox class]]) {
+            RAAddressFieldBox *box = view; 
+            [box setFocusColor];
+        }
+    }
+    return YES; 
+}
 
+
+-(BOOL)resignFirstResponder
+{
+    NSView *superview = [self superview];
+    NSArray *subviews =[superview subviews];
+    for (id view in subviews)
+    {
+        if ([view isKindOfClass:[RAAddressFieldBox class]]) {
+            RAAddressFieldBox *box = view; 
+            [box setNormalColor];
+        }
+    }
+    [super resignFirstResponder];
+    return YES;
+}
+*/
 
 //log enter key and reset index
 - (void)keyUp:(NSEvent *)theEvent
@@ -37,6 +68,7 @@
             
     }
 }
+
 
 -(void)windowDidResize:(NSNotification *)notification
 {

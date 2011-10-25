@@ -165,7 +165,7 @@ static RADatabaseController *sharedUserManager = nil;
         // Open the database from the users filessytem
         if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
             // Setup the SQL Statement and compile it for faster access
-            const char *sqlStatement = "SELECT * FROM History ORDER BY History_date DESC LIMIT 1400";
+            const char *sqlStatement = "SELECT * FROM History ORDER BY History_date DESC LIMIT 1500";
             sqlite3_stmt *compiledStatement;
             if(sqlite3_prepare_v2(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) {
                 // Loop through the results and add them to the feeds array
@@ -199,6 +199,11 @@ static RADatabaseController *sharedUserManager = nil;
             sqlite3_close(database); 
         }
     }
+}
+
+-(void)loadAsynchImage:(NSImage *)image
+{
+    
 }
 
 //Insert the bookmark into the database

@@ -263,6 +263,9 @@
 		9FB6999013CD8505002EAEBA /* RAAboutPanelWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6998F13CD8505002EAEBA /* RAAboutPanelWindowController.m */; };
 		9FB6999413CD8566002EAEBA /* RAAboutPanelWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FB6999313CD8566002EAEBA /* RAAboutPanelWindowController.xib */; };
 		9FB6999E13CDA190002EAEBA /* about-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FB6999D13CDA190002EAEBA /* about-background.png */; };
+		9FB7A3A714514B91009AB771 /* userContent.css in Resources */ = {isa = PBXBuildFile; fileRef = 9FB7A3A614514B91009AB771 /* userContent.css */; };
+		9FB8482B1455FBD300530138 /* WebView+search.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8482A1455FBD300530138 /* WebView+search.m */; };
+		9FB8482D1455FC3F00530138 /* SearchWebView.js in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8482C1455FC3F00530138 /* SearchWebView.js */; };
 		9FC2709314101E8100EAFD3C /* GGReadability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FC2709214101E8100EAFD3C /* GGReadability.m */; };
 		9FC2709514102B5C00EAFD3C /* typography.css in Resources */ = {isa = PBXBuildFile; fileRef = 9FC2709414102B5C00EAFD3C /* typography.css */; };
 		9FC2709814102F1F00EAFD3C /* text_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FC2709614102F1F00EAFD3C /* text_off.png */; };
@@ -628,6 +631,10 @@
 		9FB6998F13CD8505002EAEBA /* RAAboutPanelWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAAboutPanelWindowController.m; sourceTree = "<group>"; };
 		9FB6999313CD8566002EAEBA /* RAAboutPanelWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RAAboutPanelWindowController.xib; sourceTree = "<group>"; };
 		9FB6999D13CDA190002EAEBA /* about-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-background.png"; sourceTree = "<group>"; };
+		9FB7A3A614514B91009AB771 /* userContent.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = userContent.css; sourceTree = "<group>"; };
+		9FB848291455FBD300530138 /* WebView+search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebView+search.h"; sourceTree = "<group>"; };
+		9FB8482A1455FBD300530138 /* WebView+search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebView+search.m"; sourceTree = "<group>"; };
+		9FB8482C1455FC3F00530138 /* SearchWebView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SearchWebView.js; sourceTree = "<group>"; };
 		9FC2709114101E8100EAFD3C /* GGReadability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGReadability.h; sourceTree = "<group>"; };
 		9FC2709214101E8100EAFD3C /* GGReadability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGReadability.m; sourceTree = "<group>"; };
 		9FC2709414102B5C00EAFD3C /* typography.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = typography.css; sourceTree = "<group>"; };
@@ -1085,6 +1092,8 @@
 		69F8A084133CD50300E32E6D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9FB8482C1455FC3F00530138 /* SearchWebView.js */,
+				9FB7A3A614514B91009AB771 /* userContent.css */,
 				9F8654071423348B00F32B77 /* app */,
 				9FC2709414102B5C00EAFD3C /* typography.css */,
 				9F1ABB8E140670E7009F68B3 /* database */,
@@ -1250,6 +1259,8 @@
 				9F2BEE6F140FBF170090AD70 /* NSData+Base64.m */,
 				9F5BF673143CEDB20033E18B /* NSString+Raven.h */,
 				9F5BF674143CEDB20033E18B /* NSString+Raven.m */,
+				9FB848291455FBD300530138 /* WebView+search.h */,
+				9FB8482A1455FBD300530138 /* WebView+search.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1684,6 +1695,7 @@
 				9F76D081144D5EB7007C819F /* favorite_off_toolbar.png in Resources */,
 				9F76D082144D5EB7007C819F /* home_off_toolbar.png in Resources */,
 				9F76D084144D5ED2007C819F /* line.png in Resources */,
+				9FB7A3A714514B91009AB771 /* userContent.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1779,6 +1791,8 @@
 				9F4954011446D56A00EED6BE /* RAInstapaperSubmit.m in Sources */,
 				9F14147C144AF82800503344 /* RAAddressFieldBox.m in Sources */,
 				9F76D05E144CDBA6007C819F /* RAHiddenWindow.m in Sources */,
+				9FB8482B1455FBD300530138 /* WebView+search.m in Sources */,
+				9FB8482D1455FC3F00530138 /* SearchWebView.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

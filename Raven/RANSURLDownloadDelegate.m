@@ -82,9 +82,10 @@
     destinationFilename = [[homeDirectory stringByAppendingPathComponent:@"Downloads"]
                            stringByAppendingPathComponent:filename];
     [download setDestination:destinationFilename allowOverwrite:NO];
-    downloadName = filename; 
+    if(filename != nil){downloadName = filename;}
     downloadPath = destinationFilename;
     [downloadPath retain];
+    [downloadName retain];
 }
 
 - (void)download:(NSURLDownload *)download didCreateDestination:(NSString *)path
@@ -118,13 +119,13 @@
         //[progressBytes retain]; 
         //[percentage retain]; 
         //[totalByes retain]; 
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"downloadDidUpdate" object:nil];
         [self updateDownloadInformation];
     }
 }
 
 -(void)updateDownloadInformation
 {
+    NSLog(@"%@:%@", downloadName, aDownload.name);
     NSNumber *key = [NSNumber numberWithUnsignedInteger:downloadIndex]; 
     if (key != nil && downloadName != nil && percentage != nil && totalByes != nil && downloadPath != nil && progressBytes != nil && downloadUrl != nil) {
         aDownload.key = key; 
@@ -137,6 +138,7 @@
         RADownloadController *controller = [[RADownloadController alloc]init]; 
         [controller replaceDownloadAtIndex:downloadIndex withDownload:aDownload];
         [controller release]; 
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"downloadDidUpdate" object:nil];
     }
 
 }

@@ -99,7 +99,12 @@
     NSMenu *topMenu = [NSApp mainMenu]; 
     [topMenu setSubmenu:navigatorMenu forItem:[topMenu itemAtIndex:7]];
     //[NSApp setMenu:topMenu];
+    RAWebViewController *selectedTab = [tabsArray objectAtIndex:
+                                        [tabController indexOfTabViewItem:
+                                         [tabController selectedTabViewItem]]];
+    [selectedTab setMenu];
 }
+
 
 
 #pragma mark -
@@ -144,6 +149,7 @@
         [tabController selectPreviousTabViewItem:self]; 
     }
     [self setImageOnSelectedTab];
+    [self setMenu];
 }
 -(void)nextTab:(id)sender
 {
@@ -155,6 +161,7 @@
     [tabController selectNextTabViewItem:self];
     }
     [self setImageOnSelectedTab];
+    [self setMenu];
 }
 
 //Add a new tabs
@@ -211,6 +218,8 @@
                 [[NSAnimationContext currentContext] setDuration:0.2];  
                 [[[aTab tabview]animator]setFrame:NSMakeRect(x, 0, w, 22)];
                 [NSAnimationContext endGrouping];
+                [[aTab faviconTab]setHidden:NO];
+                [[aTab progressTab]setHidden:NO];
             }
             else{
                 [[aTab tabview]setFrame:NSMakeRect(x, 0, w, 22)];   
@@ -245,7 +254,9 @@
     [[newtab closeButtonTabShortcut]setTag:buttonId]; 
     [[newtab closeButtonTabShortcut]setAction:@selector(closeSelectedTab:)]; 
     [[newtab closeButtonTabShortcut]setTarget:self];
-    [[newtab closeButtonTabShortcut]setEnabled:YES]; 
+    [[newtab closeButtonTabShortcut]setEnabled:YES];
+    [[newtab progressTab]setHidden:YES];
+    [[newtab faviconTab]setHidden:YES];
     
     //Bind the addtabd button to the current object action
     [[newtab tabsButton]setAction:@selector(addtabs:)];
@@ -331,8 +342,8 @@
                 }
         }
     }
+    [self resetAllTabsButon];
     [self setImageOnSelectedTab];
-    
     //RAMainWindowController *mainWindow = [[tabController window]windowController];
     //[mainWindow replaceTitleBarViewWith:[newtab addressBarView]];
     [item release]; 
@@ -399,8 +410,9 @@
 }
 -(void)setImageOnSelectedTab
 {
-    RAWebViewController *clickedtab = [tabsArray objectAtIndex:[tabController indexOfTabViewItem:[tabController selectedTabViewItem]]];
-    //[[clickedtab backgroundTab]setImage:[NSImage imageNamed:@"active_tab.png"]];
+    RAWebViewController *clickedtab = [tabsArray objectAtIndex:
+                                       [tabController indexOfTabViewItem:
+                                        [tabController selectedTabViewItem]]];
     [[clickedtab boxTab]setBorderWidth:0.0]; 
     [[clickedtab boxTab]setBorderColor:[NSColor blackColor]];
     [[clickedtab boxTab]setFillColor:[NSColor windowBackgroundColor]];
@@ -470,7 +482,9 @@
             [button setTag:nb]; 
             [self tabs:button]; 
             [button release]; 
-            [tabController selectTabViewItemAtIndex:nb]; 
+            [tabController selectTabViewItemAtIndex:nb];
+            
+            
         }
         else {
             NSButton *button = [[NSButton alloc]init]; 
@@ -483,6 +497,7 @@
         }
     }
     [self setImageOnSelectedTab];
+    [self setMenu];
      [[NSNotificationCenter defaultCenter]postNotificationName:@"updateTabNumber" object:nil];
     
     
@@ -746,7 +761,7 @@ if (frame == [sender mainFrame]){
         [[newtab webview]setUIDelegate:nil]; 
         [[newtab webview]setPolicyDelegate:nil];
         [[newtab webview]removeFromSuperview];
-    }
+    } 
     [tabsArray removeAllObjects];
     [tabsArray release], tabsArray = nil;
     [[NSNotificationCenter defaultCenter]removeObserver:self]; 

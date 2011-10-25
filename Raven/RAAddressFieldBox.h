@@ -10,4 +10,7 @@
 
 @interface RAAddressFieldBox : NSBox
 
+
+-(void)setFocusColor; 
+-(void)setNormalColor; 
 @end

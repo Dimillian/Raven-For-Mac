@@ -49,6 +49,7 @@
 -(void)removehistorySinceDate:(NSInteger)choice;
 -(void)importBookmarkFromSafari;
 -(void)importHistoryFromSafari; 
+-(void)loadAsynchImage:(NSImage *)image; 
 -(void)vacuum; 
 
 
