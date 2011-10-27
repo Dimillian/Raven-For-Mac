@@ -71,6 +71,7 @@
 							<string key="NSFrame">{{59, -1}, {991, 701}}</string>
 							<reference key="NSSuperview" ref="325673232"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<string key="NSClassName">NSView</string>
 						</object>
@@ -379,7 +380,7 @@
 											<string key="NSFrameSize">{75, 674}</string>
 											<reference key="NSSuperview" ref="383234069"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="809745902"/>
+											<reference key="NSNextKeyView" ref="277808243"/>
 											<bool key="NSViewIsLayerTreeHost">YES</bool>
 											<int key="NSViewLayerContentsRedrawPolicy">2</int>
 											<string key="NSReuseIdentifierKey">_NS:414</string>
@@ -428,7 +429,7 @@
 							<string key="NSFrame">{{-17, 20}, {76, 674}}</string>
 							<reference key="NSSuperview" ref="325673232"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="383234069"/>
+							<reference key="NSNextKeyView" ref="809745902"/>
 							<bool key="NSViewIsLayerTreeHost">YES</bool>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<string key="NSReuseIdentifierKey">_NS:410</string>
@@ -516,7 +517,7 @@
 					<reference key="NSNextKeyView" ref="20956555"/>
 					<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{350, 522}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">RavenWindowSize</string>

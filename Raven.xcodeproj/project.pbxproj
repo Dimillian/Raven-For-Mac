@@ -184,6 +184,7 @@
 		9F2BEE73140FC1240090AD70 /* RAInstapaperWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2BEE72140FC1230090AD70 /* RAInstapaperWindow.m */; };
 		9F2BEE75140FC7890090AD70 /* InstaSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F2BEE74140FC7890090AD70 /* InstaSheet.xib */; };
 		9F2BF6BE13FDAD1000F809E6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F2BF6C013FDAD1000F809E6 /* Localizable.strings */; };
+		9F2E837714595E80007C0982 /* SearchWebView.js in Resources */ = {isa = PBXBuildFile; fileRef = 9FB8482C1455FC3F00530138 /* SearchWebView.js */; };
 		9F2F458E140D198C00BAB731 /* RASmartBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2F458C140D198C00BAB731 /* RASmartBarViewController.m */; };
 		9F2F458F140D198C00BAB731 /* RASmartBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F2F458D140D198C00BAB731 /* RASmartBarViewController.xib */; };
 		9F4954011446D56A00EED6BE /* RAInstapaperSubmit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4954001446D56A00EED6BE /* RAInstapaperSubmit.m */; };
@@ -265,7 +266,6 @@
 		9FB6999E13CDA190002EAEBA /* about-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FB6999D13CDA190002EAEBA /* about-background.png */; };
 		9FB7A3A714514B91009AB771 /* userContent.css in Resources */ = {isa = PBXBuildFile; fileRef = 9FB7A3A614514B91009AB771 /* userContent.css */; };
 		9FB8482B1455FBD300530138 /* WebView+search.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8482A1455FBD300530138 /* WebView+search.m */; };
-		9FB8482D1455FC3F00530138 /* SearchWebView.js in Sources */ = {isa = PBXBuildFile; fileRef = 9FB8482C1455FC3F00530138 /* SearchWebView.js */; };
 		9FC2709314101E8100EAFD3C /* GGReadability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FC2709214101E8100EAFD3C /* GGReadability.m */; };
 		9FC2709514102B5C00EAFD3C /* typography.css in Resources */ = {isa = PBXBuildFile; fileRef = 9FC2709414102B5C00EAFD3C /* typography.css */; };
 		9FC2709814102F1F00EAFD3C /* text_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FC2709614102F1F00EAFD3C /* text_off.png */; };
@@ -1001,7 +1001,7 @@
 			name = "Reusable Subclass";
 			sourceTree = "<group>";
 		};
-		69F4485F138A24B300432BC7 /* Main Views */ = {
+		69F4485F138A24B300432BC7 /* Main Views Controller */ = {
 			isa = PBXGroup;
 			children = (
 				6914E6BA133E51430054D6D7 /* RANavigatorViewController.h */,
@@ -1017,7 +1017,7 @@
 				69D902F9134B9F990097F30F /* RADownloadViewController.h */,
 				69D902FA134B9F990097F30F /* RADownloadViewController.m */,
 			);
-			name = "Main Views";
+			name = "Main Views Controller";
 			sourceTree = "<group>";
 		};
 		69F8A06E133CD50300E32E6D = {
@@ -1076,7 +1076,7 @@
 				9FC3B79D14038C7300E28D71 /* Specific object */,
 				9FC3B79C14038C5700E28D71 /* Other controller */,
 				9FC3B79B14038C5500E28D71 /* Windows */,
-				69F4485F138A24B300432BC7 /* Main Views */,
+				69F4485F138A24B300432BC7 /* Main Views Controller */,
 				9F69AB6F14272A79003AE44B /* Delegate */,
 				69F4485E138A249000432BC7 /* Reusable Subclass */,
 				9F03B6CE1402D8EF00985D32 /* Bookmark cell */,
@@ -1696,6 +1696,7 @@
 				9F76D082144D5EB7007C819F /* home_off_toolbar.png in Resources */,
 				9F76D084144D5ED2007C819F /* line.png in Resources */,
 				9FB7A3A714514B91009AB771 /* userContent.css in Resources */,
+				9F2E837714595E80007C0982 /* SearchWebView.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1792,7 +1793,6 @@
 				9F14147C144AF82800503344 /* RAAddressFieldBox.m in Sources */,
 				9F76D05E144CDBA6007C819F /* RAHiddenWindow.m in Sources */,
 				9FB8482B1455FBD300530138 /* WebView+search.m in Sources */,
-				9FB8482D1455FC3F00530138 /* SearchWebView.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

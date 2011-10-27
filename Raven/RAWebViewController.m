@@ -11,13 +11,14 @@
 #import "RAMainWindowController.h"
 #import "NSString+Raven.h"
 #import "RAHiddenWindow.h"
+#import "WebView+search.h"
 
 
 #define GOOGLE_SEARCH_URL @"http://www.google.com/search?q="
 #define YANDEX_SEARCH_URL @"http://yandex.com/yandsearch?text="
 
 @implementation RAWebViewController
-@synthesize passedUrl, switchView, tabsButton, webview, address, tabview; 
+@synthesize passedUrl, switchView, tabsButton, webview, address, tabview, searchWebView; 
 @synthesize tabButtonTab, backgroundTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, closeButtonTabShortcut, addressBarView, boxTab, tabHolder; 
 
 #pragma -
@@ -112,6 +113,7 @@
     isNewTab = YES; 
     [progressMain setMinValue:0.0]; 
     [progressMain setMaxValue:1.0]; 
+    [searchWebView setHidden:YES];
 
     
     
@@ -186,9 +188,26 @@
 }
 
 
--(void)search:(id)sender
+-(IBAction)enableSearch:(id)sender
 {
-    [webview searchFor:@"Hello" direction:YES caseSensitive:NO wrap:NO]; 
+    if ([searchWebView isHidden]) {
+        [searchWebView setHidden:NO];
+        [searchWebView selectText:self];
+    }
+    else{
+        [searchWebView setHidden:YES];
+        [webview removeAllHighlights];
+    }
+}
+
+-(IBAction)doASearchOnWebView:(id)sender
+{
+    if (![[searchWebView stringValue]isEqualToString:@""]) {
+        [webview highlightAllOccurencesOfString:[searchWebView stringValue]];
+    }
+    else{
+        [webview removeAllHighlights];
+    }
 }
 
 //Enter pressed in address field
@@ -228,14 +247,8 @@
     [favoritePanel setTempFavico:[webview mainFrameIcon]]; 
     [favoritePanel setState:1];
     [favoritePanel setType:0];
-    RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
-    [hiddenWindow setLevel:NSNormalWindowLevel];
-    [hiddenWindow setIgnoresMouseEvents:YES];
-    [hiddenWindow setAlphaValue:0.0];
-    [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
     [NSApp beginSheet:[favoritePanel window] modalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:NULL contextInfo:nil];
     //[NSApp runModalForWindow:[favoritePanel window]];
-    [hiddenWindow release]; 
     
 }
 
@@ -247,6 +260,7 @@
 
 -(void)favoriteMenu:(id)sender
 {
+    //[webview highlightAllOccurencesOfString:@"google"];
     NSMenu *menu = [self getFavoriteMenu];
     NSRect frame = [(NSButton *)sender frame];
     NSPoint menuOrigin = [[(NSButton *)sender superview] convertPoint:NSMakePoint(frame.origin.x, frame.origin.y+frame.size.height-25)

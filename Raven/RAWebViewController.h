@@ -58,6 +58,7 @@
     IBOutlet NSView *addressBarView;
     IBOutlet NSBox *boxTab; 
     IBOutlet NSBox *tabHolder; 
+    IBOutlet NSSearchField *searchWebView; 
     
     NSData *downloadBlob; 
     NSNumber *totalByes; 
@@ -86,7 +87,8 @@
 -(IBAction)home:(id)sender; 
 -(IBAction)favoriteMenu:(id)sender; 
 -(IBAction)gotopage:(id)sender;
--(IBAction)search:(id)sender;
+-(IBAction)doASearchOnWebView:(id)sender; 
+-(IBAction)enableSearch:(id)sender; 
 //method
 -(void)setMenu;
 -(NSMenu *)getFavoriteMenu; 
@@ -102,6 +104,7 @@
 -(id)infoValueForKey:(NSString*)key;
 -(void)setMobileUserAgent;
 -(void)setDesktopUserAgent; 
+@property (nonatomic, retain) NSSearchField *searchWebView;
 @property (nonatomic, retain) NSString *passedUrl;
 @property (nonatomic, retain) NSView *switchView;
 @property (nonatomic, retain) NSView *addressBarView;

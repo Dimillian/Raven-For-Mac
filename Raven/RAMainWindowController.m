@@ -51,6 +51,7 @@
 
 - (void)dealloc
 {
+    NSLog(@"Dealloc");
     NSMenu *topMenu = [NSApp menu]; 
     NSMenu *smartBarMenu = [[topMenu itemAtIndex:4]submenu];
     NSInteger count = smartBarMenu.itemArray.count;
@@ -90,7 +91,6 @@
 {   
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self autorelease]; 
-     
 }
 
 - (BOOL)windowShouldClose:(id)sender
