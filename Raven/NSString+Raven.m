@@ -12,18 +12,24 @@
 
 -(NSString *)createFileNameFromString:(NSString *)string
 {
-    string = [string stringByReplacingOccurrencesOfString:@":" withString:@"-"];
-    string = [string stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-    string = [string stringByReplacingOccurrencesOfString:@"." withString:@"-"];
-    string = [string stringByReplacingOccurrencesOfString:@"+" withString:@"-"];
-    string = [string stringByReplacingOccurrencesOfString:@"%" withString:@"-"];
-    string = [string stringByReplacingOccurrencesOfString:@"&" withString:@"-"];
-    string = [string stringByReplacingOccurrencesOfString:@"?" withString:@"-"];
-    string = [string stringByReplacingOccurrencesOfString:@"_" withString:@"-"];
-    string = [string stringByReplacingOccurrencesOfString:@"=" withString:@"-"];
-    string = [string stringByReplacingOccurrencesOfString:@"+" withString:@"-"];
-    string = [string stringByPaddingToLength:253 withString: @"." startingAtIndex:0];
-    string = [string stringByReplacingOccurrencesOfString:@"." withString:@""];   
+    string = [string stringByReplacingOccurrencesOfString:@"http" withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"https" withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"www" withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@":" withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"/" withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"." withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"+" withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"%" withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"&" withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"?" withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"_" withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"=" withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"+" withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    if (string.length > 16) {
+            string = [string substringToIndex:15];
+    }
+
     
     return string;
 

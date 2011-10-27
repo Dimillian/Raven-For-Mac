@@ -5,9 +5,14 @@
 //  Created by Thomas Ricouard on 27/05/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
+//*****THA Databae controller*****
+// Ok, this use C API, but it is cool and optimized. It need a new layer to cache data and works directly in memory. 
+// If you want to use CoreData, do it... 
+//Also it is not very dynamic. FMDB anyone ? 
+//*****YOU CAN START READING THE CODE IF YOU WANT*****
 
 #import "RADatabaseController.h"
-
+#import "NSString+Raven.h"
 
 @implementation RADatabaseController
 @synthesize history, bookmarks, suggestion, preciseSuggestion, historySearch; 
@@ -150,6 +155,11 @@ static RADatabaseController *sharedUserManager = nil;
     
 }
 
+- (BOOL)fileManager:(NSFileManager *)fileManager shouldProceedAfterError:(NSError *)error movingItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath
+{
+    NSLog(@"%@", error);
+    return YES;
+}
 //read the history table and load it in the history array
 -(void)readHistoryFromDatabase
 {
@@ -157,7 +167,7 @@ static RADatabaseController *sharedUserManager = nil;
 	sqlite3 *database;
     @synchronized(self){
         [history removeAllObjects]; 
-        if( history )
+        if( !history )
         {
             [history release], history = nil;
         }
@@ -348,7 +358,7 @@ static RADatabaseController *sharedUserManager = nil;
         }
         
         [databasePath retain]; 
-        [databaseName retain]; 
+        [databaseName retain];
     }
     sqlite3_close(database);
     

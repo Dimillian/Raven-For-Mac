@@ -12,7 +12,7 @@
 #import "RAItemObject.h"
 
 
-@interface RADatabaseController : NSObject {
+@interface RADatabaseController : NSObject <NSFileManagerDelegate>{
 
      NSMutableArray *bookmarks;
      NSMutableArray *history;

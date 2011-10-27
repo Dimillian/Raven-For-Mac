@@ -125,7 +125,6 @@
 
 -(void)updateDownloadInformation
 {
-    NSLog(@"%@:%@", downloadName, aDownload.name);
     NSNumber *key = [NSNumber numberWithUnsignedInteger:downloadIndex]; 
     if (key != nil && downloadName != nil && percentage != nil && totalByes != nil && downloadPath != nil && progressBytes != nil && downloadUrl != nil) {
         aDownload.key = key; 

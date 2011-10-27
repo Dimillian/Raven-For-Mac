@@ -53,6 +53,7 @@
     [allTabsButton setHidden:NO]; 
     [allTabsButton setAction:@selector(menutabs:)]; 
     [allTabsButton setTarget:self];
+    inBackground = NO;
 }
 
 //Depreciated
@@ -231,6 +232,7 @@
 
 -(void)addtabs:(id)sender
 {
+    
     localWindow = [sender window];
     if (localWindow == nil) {
         localWindow = [NSApp keyWindow];
@@ -328,7 +330,7 @@
     [tabController addTabViewItem:item]; 
     NSUserDefaults *standardUserDefault = [NSUserDefaults standardUserDefaults]; 
     if (standardUserDefault) {
-        if ([standardUserDefault integerForKey:@"OpenTabInBackground"] == 0) {
+        if ([standardUserDefault integerForKey:@"OpenTabInBackground"] == 0 && !inBackground) {
                 //reset all tabs button position
                 [self resetAllTabsButon]; 
                 [tabController selectTabViewItem:item]; 
@@ -340,6 +342,9 @@
                     //[newtab setCurrentButtonClicked:buttonview]; 
                     //Set the clicked button alpha value to show it activated
                 }
+        }
+        else{
+            inBackground = NO;
         }
     }
     [self resetAllTabsButon];
@@ -358,7 +363,7 @@
 //THe action when the tab menu button is clicked
 -(void)menutabs:(id)sender
 {
-    NSMenu *menu = [[NSMenu alloc]init]; 
+    NSMenu *menu = [self getTabsMenu];
     for (int i=0;i<[tabsArray count];i++)
     {
         RAWebViewController *button =  [tabsArray objectAtIndex:i];
@@ -393,8 +398,31 @@
     
     [NSMenu popUpContextMenu:menu withEvent:event forView:(NSButton *)sender];
     
-    [menu release]; 
 
+}
+
+-(NSMenu *)getTabsMenu
+{
+    NSMenu *menu = [[NSMenu alloc]init]; 
+    for (int i=0;i<[tabsArray count];i++)
+    {
+        RAWebViewController *button =  [tabsArray objectAtIndex:i];
+        //Create a menu and set the different items of the menu
+        NSMenuItem *item = [[NSMenuItem alloc]init];
+        [item setTarget:self]; 
+        NSString *tempTitle = [button.pageTitleTab stringValue];
+        tempTitle = [tempTitle stringByPaddingToLength:35 withString:@" " startingAtIndex:0];
+        [item setTitle:tempTitle]; 
+        [item setImage:[button.faviconTab image]];
+        [item setTag:i]; 
+        [item setAction:@selector(tabs:)];
+        [item setEnabled:YES];
+        [menu addItem:item];
+        [item release]; 
+    }
+    
+    return [menu autorelease];
+    
 }
 
 
@@ -526,6 +554,13 @@
         [self addtabs:tabsButton]; 
     }
 }
+
+-(void)openTabInBackgroundWithUrl:(id)sender
+{
+    PassedUrl = [[sender representedObject]absoluteString];
+    inBackground = YES;
+    [self addtabs:tabsButton];
+}
 #pragma mark -
 #pragma mark webview Delegate
 
@@ -536,6 +571,18 @@
         NSMenuItem *item = [defaultMenuItems objectAtIndex:1]; 
         [item setTitle:@"Open in a new tab"];
         [newItem replaceObjectAtIndex:1 withObject:item]; 
+        NSUserDefaults *standardUserDefault = [NSUserDefaults standardUserDefaults]; 
+        if (standardUserDefault) {
+            if ([standardUserDefault integerForKey:@"OpenTabInBackground"] == 0){
+                NSMenuItem *backGroundTab = [[NSMenuItem alloc]initWithTitle:@"Open in a new tab in background" 
+                                                                      action:@selector(openTabInBackgroundWithUrl:) 
+                                                               keyEquivalent:@""];
+                [backGroundTab setTarget:self];
+                [backGroundTab setRepresentedObject:[element objectForKey:@"WebElementLinkURL"]];
+                [newItem insertObject:backGroundTab atIndex:2];
+                [backGroundTab release];
+            }
+        }
         return newItem; 
     }
     else

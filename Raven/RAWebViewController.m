@@ -14,6 +14,7 @@
 
 
 #define GOOGLE_SEARCH_URL @"http://www.google.com/search?q="
+#define YANDEX_SEARCH_URL @"http://yandex.com/yandsearch?text="
 
 @implementation RAWebViewController
 @synthesize passedUrl, switchView, tabsButton, webview, address, tabview; 
@@ -492,7 +493,7 @@
         }
     }
     
-//Idea to auto fill a form, could be usefull for credentials manager and auto login feature
+//Idea to auto fill a form à la other browsers, could be useful for credentials manager and auto login feature
     //Currently made for gmail
 /*
  DOMHTMLFormElement *form = (DOMHTMLFormElement *)[[frame DOMDocument] getElementById:@"gaia_loginform"];

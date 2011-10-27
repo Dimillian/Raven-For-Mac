@@ -35,6 +35,7 @@
     int fromOtherViews; 
     NSWindow *localWindow; 
     IBOutlet NSMenu *navigatorMenu; 
+    BOOL inBackground;
 }
 //Bouton action
 -(IBAction)tabs:(id)sender; 
@@ -44,6 +45,8 @@
 -(IBAction)closeAllTabs:(id)sender; 
 -(IBAction)nextTab:(id)sender;
 -(IBAction)previousTab:(id)sender;
+-(NSMenu *)getTabsMenu;
+-(void)openTabInBackgroundWithUrl:(id)sender;
 -(void)windowResize:(id)sender; 
 -(void)setImageOnSelectedTab; 
 -(void)redrawTabs:(BOOL)fromWindow;
