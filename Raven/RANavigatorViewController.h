@@ -16,21 +16,17 @@
 #import "RADatabaseController.h"
 
 
-@interface RANavigatorViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSWindowDelegate>{
+@interface RANavigatorViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSWindowDelegate, RAWebViewControllerDelegate>{
     IBOutlet NSView *mainView; 
     IBOutlet NSView *tabPlaceHolder; 
-    //the view controller
-    IBOutlet NSText *text; 
     IBOutlet NSButton *tabsButton;  
     IBOutlet NSButton *allTabsButton; 
-    IBOutlet NSScrollView *scrollView; 
     IBOutlet NSTabView *tabController; 
     NSString *UA; 
     NSString *PassedUrl; //THIS variable is super important, it is a mess, but believe me or not it is super important
     NSMutableArray *tabsArray;
     NSInteger curentSelectedTab;
     NSInteger count; 
-    double buttonId;  
     BOOL istab; 
     int fromOtherViews; 
     NSWindow *localWindow; 
@@ -38,7 +34,6 @@
     BOOL inBackground;
 }
 //Bouton action
--(IBAction)tabs:(id)sender; 
 -(IBAction)addtabs:(id)sender;
 -(IBAction)closeSelectedTab:(id)sender; 
 -(IBAction)menutabs:(id)sender;

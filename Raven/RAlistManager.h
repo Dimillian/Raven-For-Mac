@@ -23,6 +23,7 @@
 -(void)changeStateOfAppAtIndex:(NSInteger)index withState:(NSInteger)state;
 -(NSInteger)returnStateOfAppAtIndex:(NSInteger)index;
 -(void)swapObjectAtIndex:(NSInteger)index upOrDown:(NSInteger)order;
+-(void)moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to;
 -(void)deleteAppAtIndex:(NSInteger)index;
 @property (copy) NSString *downloadPath;
 @end

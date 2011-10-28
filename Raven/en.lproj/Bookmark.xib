@@ -373,10 +373,10 @@
 							<object class="NSBox" id="575057560">
 								<reference key="NSNextResponder" ref="247421710"/>
 								<int key="NSvFlags">20</int>
-								<string key="NSFrame">{{-1, 1}, {5, 552}}</string>
+								<string key="NSFrame">{{-2, 1}, {5, 552}}</string>
 								<reference key="NSSuperview" ref="247421710"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
+								<reference key="NSNextKeyView" ref="403065429"/>
 								<string key="NSReuseIdentifierKey">_NS:2168</string>
 								<string key="NSOffsets">{0, 0}</string>
 								<object class="NSTextFieldCell" key="NSTitleCell">
@@ -410,7 +410,7 @@
 										<string>NeXT TIFF v4.0 pasteboard type</string>
 									</object>
 								</object>
-								<string key="NSFrame">{{1, 553}, {2, 31}}</string>
+								<string key="NSFrame">{{0, 553}, {2, 31}}</string>
 								<reference key="NSSuperview" ref="247421710"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="575057560"/>
@@ -434,10 +434,10 @@
 							<object class="NSCustomView" id="403065429">
 								<reference key="NSNextResponder" ref="247421710"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{0, 1}, {515, 584}}</string>
+								<string key="NSFrame">{{1, 1}, {515, 584}}</string>
 								<reference key="NSSuperview" ref="247421710"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="97471316"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:499</string>
 								<string key="NSClassName">NSView</string>
 							</object>
@@ -445,7 +445,7 @@
 						<string key="NSFrame">{{230, 0}, {515, 586}}</string>
 						<reference key="NSSuperview" ref="671873148"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="403065429"/>
+						<reference key="NSNextKeyView" ref="97471316"/>
 						<string key="NSReuseIdentifierKey">_NS:601</string>
 						<string key="NSClassName">NSView</string>
 					</object>
@@ -701,9 +701,9 @@
 						<reference key="object" ref="247421710"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="403065429"/>
 							<reference ref="97471316"/>
 							<reference ref="575057560"/>
+							<reference ref="403065429"/>
 						</object>
 						<reference key="parent" ref="671873148"/>
 					</object>

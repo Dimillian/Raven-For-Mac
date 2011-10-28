@@ -19,10 +19,10 @@
 
 @implementation RAWebViewController
 @synthesize passedUrl, switchView, tabsButton, webview, address, tabview, searchWebView; 
-@synthesize tabButtonTab, backgroundTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, closeButtonTabShortcut, addressBarView, boxTab, tabHolder; 
+@synthesize tabButtonTab, backgroundTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, addressBarView, boxTab, tabHolder, delegate; 
 
 #pragma -
-#pragma mark action
+#pragma mark init
 -(id)init
 {
     self = [super init]; 
@@ -32,6 +32,18 @@
     }
     
     return self; 
+}
+
+-(id)initWithDelegate:(id<RAWebViewControllerDelegate>)dgate
+{
+    self = [super init]; 
+    if (self !=nil)
+    {
+        [self initWithNibName:@"NavigatorNoBottom" bundle:nil]; 
+        self.delegate = dgate;
+    }
+    
+    return self;  
 }
 /*
 +(NSString*)webScriptNameForSelector:(SEL)sel
@@ -187,7 +199,19 @@
 
 }
 
+#pragma mark -
+#pragma mark Tab
+-(IBAction)tabsButtonClicked:(id)sender{
+    [delegate tabDidSelect:self];
+}
 
+-(IBAction)closeButtonTabClicked:(id)sender{
+    [delegate tabWillClose:self];
+    
+}
+
+#pragma mark -
+#pragma mark action
 -(IBAction)enableSearch:(id)sender
 {
     if ([searchWebView isHidden]) {
@@ -197,16 +221,19 @@
     else{
         [searchWebView setHidden:YES];
         [webview removeAllHighlights];
+        [searchResults setStringValue:@""];
     }
 }
 
 -(IBAction)doASearchOnWebView:(id)sender
 {
     if (![[searchWebView stringValue]isEqualToString:@""]) {
-        [webview highlightAllOccurencesOfString:[searchWebView stringValue]];
+        NSInteger results = [webview highlightAllOccurencesOfString:[searchWebView stringValue]];
+        [searchResults setStringValue:[NSString stringWithFormat:@"%d results", results]];
     }
     else{
         [webview removeAllHighlights];
+        [searchResults setStringValue:@""];
     }
 }
 
@@ -397,6 +424,7 @@
     }
 }
 
+
 #pragma -
 #pragma mark webview Delegate
 - (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
@@ -451,7 +479,8 @@
 - (void)webView:(WebView *)sender didReceiveIcon:(NSImage *)image forFrame:(WebFrame *)frame
 {
     [temp setImage:[webview mainFrameIcon]];
-    [[self faviconTab]setImage:[webview mainFrameIcon]]; 
+    [[self faviconTab]setImage:[webview mainFrameIcon]];
+    
 }
 
 //set the favicon when the webview finished loading

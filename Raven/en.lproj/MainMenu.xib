@@ -1498,6 +1498,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">closeSelectedTab:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="683108693"/>
+					</object>
+					<int key="connectionID">1427</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">newWindow:</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="321744952"/>
@@ -2645,7 +2653,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1426</int>
+			<int key="maxID">1427</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2890,11 +2898,9 @@
 							<string>menutabs:</string>
 							<string>nextTab:</string>
 							<string>previousTab:</string>
-							<string>tabs:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -2913,7 +2919,6 @@
 							<string>menutabs:</string>
 							<string>nextTab:</string>
 							<string>previousTab:</string>
-							<string>tabs:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2939,10 +2944,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">previousTab:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">tabs:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -3034,6 +3035,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addbookmark:</string>
+							<string>closeButtonTabClicked:</string>
 							<string>doASearchOnWebView:</string>
 							<string>enableSearch:</string>
 							<string>favoriteMenu:</string>
@@ -3041,9 +3043,12 @@
 							<string>gotopage:</string>
 							<string>home:</string>
 							<string>mobile:</string>
+							<string>tabsButtonClicked:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -3059,6 +3064,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addbookmark:</string>
+							<string>closeButtonTabClicked:</string>
 							<string>doASearchOnWebView:</string>
 							<string>enableSearch:</string>
 							<string>favoriteMenu:</string>
@@ -3066,11 +3072,16 @@
 							<string>gotopage:</string>
 							<string>home:</string>
 							<string>mobile:</string>
+							<string>tabsButtonClicked:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
 								<string key="name">addbookmark:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">closeButtonTabClicked:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -3101,6 +3112,10 @@
 								<string key="name">mobile:</string>
 								<string key="candidateClassName">id</string>
 							</object>
+							<object class="IBActionInfo">
+								<string key="name">tabsButtonClicked:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
@@ -3113,7 +3128,6 @@
 							<string>backgroundTab</string>
 							<string>boxTab</string>
 							<string>closeButtonTab</string>
-							<string>closeButtonTabShortcut</string>
 							<string>favicon</string>
 							<string>faviconTab</string>
 							<string>mainView</string>
@@ -3124,6 +3138,7 @@
 							<string>progressMain</string>
 							<string>progressTab</string>
 							<string>scrollView</string>
+							<string>searchResults</string>
 							<string>searchWebView</string>
 							<string>secondTabButton</string>
 							<string>stopLoading</string>
@@ -3146,7 +3161,6 @@
 							<string>NSImageView</string>
 							<string>NSBox</string>
 							<string>NSButton</string>
-							<string>NSButton</string>
 							<string>NSImage</string>
 							<string>NSImageView</string>
 							<string>NSView</string>
@@ -3157,6 +3171,7 @@
 							<string>NSProgressIndicator</string>
 							<string>NSProgressIndicator</string>
 							<string>NSScrollView</string>
+							<string>NSTextField</string>
 							<string>NSSearchField</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
@@ -3182,7 +3197,6 @@
 							<string>backgroundTab</string>
 							<string>boxTab</string>
 							<string>closeButtonTab</string>
-							<string>closeButtonTabShortcut</string>
 							<string>favicon</string>
 							<string>faviconTab</string>
 							<string>mainView</string>
@@ -3193,6 +3207,7 @@
 							<string>progressMain</string>
 							<string>progressTab</string>
 							<string>scrollView</string>
+							<string>searchResults</string>
 							<string>searchWebView</string>
 							<string>secondTabButton</string>
 							<string>stopLoading</string>
@@ -3234,10 +3249,6 @@
 								<string key="candidateClassName">NSButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">closeButtonTabShortcut</string>
-								<string key="candidateClassName">NSButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">favicon</string>
 								<string key="candidateClassName">NSImage</string>
 							</object>
@@ -3276,6 +3287,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">scrollView</string>
 								<string key="candidateClassName">NSScrollView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">searchResults</string>
+								<string key="candidateClassName">NSTextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">searchWebView</string>

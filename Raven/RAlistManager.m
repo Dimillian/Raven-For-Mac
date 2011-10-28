@@ -184,6 +184,27 @@
     
 }
 
+- (void)moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to
+{
+    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY]mutableCopy];
+    if (to != from) {
+        id obj = [folders objectAtIndex:from];
+        [obj retain];
+        [folders removeObjectAtIndex:from];
+        if (to >= [folders count]) {
+            [folders addObject:obj];
+        } else {
+            [folders insertObject:obj atIndex:to];
+        }
+        [obj release];
+    }
+    [dict setObject:folders forKey:PLIST_KEY_DICTIONNARY];
+    [dict writeToFile:path atomically:YES];
+    [folders release];
+}
+
 -(void)changeStateOfAppAtIndex:(NSInteger)index withState:(NSInteger)state
 {
     NSString *path = [PLIST_PATH stringByExpandingTildeInPath];

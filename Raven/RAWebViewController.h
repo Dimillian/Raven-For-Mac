@@ -15,8 +15,9 @@
 #import "RAFavoritePanelWController.h"
 #import "RANSURLDownloadDelegate.h"
 #import "RAAddressFieldBox.h"
-
+@protocol RAWebViewControllerDelegate;
 @interface RAWebViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSTableViewDelegate, NSTableViewDataSource>{
+    id<RAWebViewControllerDelegate> delegate;
     
     IBOutlet NSTabView *tabs; 
     IBOutlet NSView *mainView; 
@@ -53,12 +54,12 @@
     IBOutlet NSTextField *pageTitleTab; 
     IBOutlet NSButton *tabButtonTab; 
     IBOutlet NSButton *closeButtonTab; 
-    IBOutlet NSButton *closeButtonTabShortcut; 
     IBOutlet NSProgressIndicator *progressTab;
     IBOutlet NSView *addressBarView;
     IBOutlet NSBox *boxTab; 
     IBOutlet NSBox *tabHolder; 
     IBOutlet NSSearchField *searchWebView; 
+    IBOutlet NSTextField *searchResults; 
     
     NSData *downloadBlob; 
     NSNumber *totalByes; 
@@ -80,7 +81,9 @@
     
     
 }
-    //Bouton action method
+-(id)initWithDelegate:(id<RAWebViewControllerDelegate>)dgate;
+
+//Bouton action method
 -(IBAction)go:(id)sender; 
 -(IBAction)mobile:(id)sender;
 -(IBAction)addbookmark:(id)sender; 
@@ -89,7 +92,12 @@
 -(IBAction)gotopage:(id)sender;
 -(IBAction)doASearchOnWebView:(id)sender; 
 -(IBAction)enableSearch:(id)sender; 
-//method
+
+//tabs
+-(IBAction)closeButtonTabClicked:(id)sender;
+-(IBAction)tabsButtonClicked:(id)sender;
+
+//Other method
 -(void)setMenu;
 -(NSMenu *)getFavoriteMenu; 
 -(void)initWithUrl:(NSString *)url;
@@ -104,6 +112,7 @@
 -(id)infoValueForKey:(NSString*)key;
 -(void)setMobileUserAgent;
 -(void)setDesktopUserAgent; 
+@property (nonatomic, assign) id<RAWebViewControllerDelegate> delegate;
 @property (nonatomic, retain) NSSearchField *searchWebView;
 @property (nonatomic, retain) NSString *passedUrl;
 @property (nonatomic, retain) NSView *switchView;
@@ -120,8 +129,13 @@
 @property (nonatomic, retain) NSBox *tabHolder;
 @property (nonatomic, retain) NSButton *tabButtonTab;
 @property (nonatomic, retain) NSButton *closeButtonTab; 
-@property (nonatomic, retain) NSButton *closeButtonTabShortcut; 
 @property (nonatomic, retain) NSImageView *backgroundTab; 
 @property (nonatomic, retain) NSImageView *faviconTab; 
 @property (nonatomic, retain) NSTextField *pageTitleTab;
+@end
+
+@protocol RAWebViewControllerDelegate
+@optional
+-(void)tabWillClose:(RAWebViewController *)RAWebView;
+-(void)tabDidSelect:(RAWebViewController *)RAWebView;
 @end

@@ -66,6 +66,7 @@
 								<string key="NSFrame">{{0, 18}, {230, 5}}</string>
 								<reference key="NSSuperview" ref="465713705"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="985113038"/>
 								<string key="NSReuseIdentifierKey">_NS:2411</string>
 								<string key="NSOffsets">{0, 0}</string>
 								<object class="NSTextFieldCell" key="NSTitleCell">
@@ -284,7 +285,7 @@
 								<string key="NSFrame">{{0, 15}, {228, 537}}</string>
 								<reference key="NSSuperview" ref="465713705"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="985113038"/>
+								<reference key="NSNextKeyView" ref="444166808"/>
 								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 								<string key="NSReuseIdentifierKey">_NS:499</string>
 								<string key="NSClassName">NSView</string>
@@ -403,7 +404,7 @@
 							<object class="NSCustomView" id="561241215">
 								<reference key="NSNextResponder" ref="1009142532"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{1, 1}, {524, 579}}</string>
+								<string key="NSFrame">{{1, 1}, {523, 579}}</string>
 								<reference key="NSSuperview" ref="1009142532"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
