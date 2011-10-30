@@ -19,37 +19,22 @@
 @interface RAWebViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSTableViewDelegate, NSTableViewDataSource>{
     id<RAWebViewControllerDelegate> delegate;
     
-    IBOutlet NSTabView *tabs; 
+    //MainView outlet 
     IBOutlet NSView *mainView; 
     IBOutlet NSView *switchView; 
-    //the view controller
-    IBOutlet NSViewController* myCurrentViewController;
     IBOutlet WebView *webview; 
     IBOutlet NSTextField *address; 
-    IBOutlet NSText *text; 
     IBOutlet NSProgressIndicator *progress;
     IBOutlet NSButton *mobileButton; 
     IBOutlet NSButton *stopLoading; 
-    IBOutlet NSImage *favicon; 
     IBOutlet NSImageView *temp; 
     IBOutlet NSButton *tabsButton; 
     IBOutlet NSButton *secondTabButton;
-    IBOutlet NSScrollView *scrollView; 
-    
     IBOutlet NSProgressIndicator *progressMain; 
+    IBOutlet NSMenu *webviewMenu;
     
-    BOOL isNewTab; 
-    NSInteger bytesReceived;
-    NSURLResponse *downloadResponse;
-    NSString *UA; 
-    NSString *passedUrl; 
-    NSInteger count; 
-    NSString *downloadPath;
-    NSString *downloadUrl; 
-    NSUInteger downloadIndex; 
-    
+    //TabView Outlet
     IBOutlet NSView *tabview; 
-    IBOutlet NSImageView *backgroundTab;
     IBOutlet NSImageView *faviconTab; 
     IBOutlet NSTextField *pageTitleTab; 
     IBOutlet NSButton *tabButtonTab; 
@@ -60,26 +45,17 @@
     IBOutlet NSBox *tabHolder; 
     IBOutlet NSSearchField *searchWebView; 
     IBOutlet NSTextField *searchResults; 
-    
-    NSData *downloadBlob; 
-    NSNumber *totalByes; 
-    NSNumber *progressBytes; 
-    NSNumber *percentage; 
-    NSString *downloadName;
-    
-    int doRegisterHistory;
-    int doComeFromHistoryOrBookmark; 
-    
     IBOutlet RAAddressFieldBox *addressBox; 
     
-    IBOutlet NSMenu *webviewMenu;
-    
-    
-    
+    BOOL isNewTab; 
+    NSString *UA; 
+    NSString *passedUrl; 
+    NSInteger count; 
+    NSImage *favicon; 
 
     
-    
-    
+    int doRegisterHistory;
+    int doComeFromHistoryOrBookmark;    
 }
 -(id)initWithDelegate:(id<RAWebViewControllerDelegate>)dgate;
 
@@ -112,6 +88,8 @@
 -(id)infoValueForKey:(NSString*)key;
 -(void)setMobileUserAgent;
 -(void)setDesktopUserAgent; 
+
+//Properties
 @property (nonatomic, assign) id<RAWebViewControllerDelegate> delegate;
 @property (nonatomic, retain) NSSearchField *searchWebView;
 @property (nonatomic, retain) NSString *passedUrl;
@@ -134,6 +112,7 @@
 @property (nonatomic, retain) NSTextField *pageTitleTab;
 @end
 
+//delegate
 @protocol RAWebViewControllerDelegate
 @optional
 -(void)tabWillClose:(RAWebViewController *)RAWebView;

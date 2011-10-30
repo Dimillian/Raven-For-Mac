@@ -56,18 +56,6 @@
     inBackground = NO;
 }
 
-//Depreciated
--(void)checkua
-{
-    //Check if the UA and change the windows size
-    if ([UA isEqualToString:@"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543 Safari/419.3"]) {
-        
-    }
-    else
-    {
-    
-    }
-}
 
 
 -(void)windowResize:(id)sender
@@ -116,10 +104,6 @@
     [self setImageOnSelectedTab];
     [self setMenu];
 }
-
-//Add a new tabs
-//Maybe a big piece of shit but it works. Need rewrite
-
 
 
 -(void)redrawTabs:(BOOL)fromWindow
@@ -229,14 +213,11 @@
     
     //Add the button and webview instance in array.
     [tabsArray addObject:newtab]; 
-    curentSelectedTab = [tabsArray indexOfObject:newtab]; 
-
-    //Add created elements to the view
+    
     [tabPlaceHolder addSubview:[newtab tabview]];
     [[newtab tabview]setFrame:NSMakeRect([tabsArray indexOfObject:newtab]*tabButtonSize, 22, tabButtonSize, 22)];
     
     
-    //Pre select the address for faster typing
     [[newtab address]selectText:self];
     
     //if the passed URL value is different of nil then load it in the webview 
@@ -272,12 +253,9 @@
                 [self resetAllTabsButon]; 
                 [tabController selectTabViewItem:item]; 
                 [newtab setMenu]; 
-                //If the new tab object is diffrent of null then show it (it should be alway different of null)
                 if (newtab != nil)
                 {
                     [newtab setWindowTitle:sender];
-                    //[newtab setCurrentButtonClicked:buttonview]; 
-                    //Set the clicked button alpha value to show it activated
                 }
         }
         else{
@@ -286,12 +264,9 @@
     }
     [self resetAllTabsButon];
     [self setImageOnSelectedTab];
-    //RAMainWindowController *mainWindow = [[tabController window]windowController];
-    //[mainWindow replaceTitleBarViewWith:[newtab addressBarView]];
     [item release]; 
     [newtab release]; 
     [self redrawTabs:NO];
-    //reset the value
     PassedUrl = nil; 
     [[NSNotificationCenter defaultCenter]postNotificationName:@"updateTabNumber" object:nil];
     
@@ -416,24 +391,12 @@
 -(void)tabDidSelect:(RAWebViewController *)RAWebView{
     NSInteger tag = [tabsArray indexOfObject:RAWebView];
     [tabController selectTabViewItemAtIndex:tag]; 
-    
     RAWebViewController *clickedtab = [tabsArray objectAtIndex:tag];
     [clickedtab setMenu]; 
-    curentSelectedTab = tag;
-    //load the clicked button
-    [[clickedtab backgroundTab]setAlphaValue:0.0]; 
+    [clickedtab setWindowTitle:allTabsButton];
     
-    //reset all button state
     [self resetAllTabsButon]; 
-    
-    if (clickedtab != nil)
-    {
-        [clickedtab setWindowTitle:allTabsButton];
-        [self setImageOnSelectedTab]; 
-    }
-    
-    [[[clickedtab backgroundTab]animator]setAlphaValue:1.0];
-
+    [self setImageOnSelectedTab]; 
 }
 
 -(void)tabWillClose:(RAWebViewController *)RAWebView{
@@ -451,25 +414,25 @@
     [[[clickedtab tabview]animator]setAlphaValue:0.0]; 
     [[clickedtab tabview]removeFromSuperview];
     [[clickedtab webview]removeFromSuperview];
-    [tabController removeTabViewItem:[tabController tabViewItemAtIndex:tag]]; 
-    if (tag == 0) {
-        @synchronized(self){
-            [self addtabs:tabsButton]; 
+    if (tag == 0 && tag == [tabController indexOfTabViewItem:
+                            [tabController selectedTabViewItem]]) {
+        if ([tabsArray count] == 1) {
+            @synchronized(self){
+                [self addtabs:tabsButton]; 
+            }
         }
         NSInteger nb = 0;
         [tabController selectTabViewItemAtIndex:nb];
-        [self resetAllTabsButon];
-        [self setImageOnSelectedTab];
-    
     }
-    else {
+    else if (tag == [tabController indexOfTabViewItem:
+                     [tabController selectedTabViewItem]]) {
         NSInteger nb = tag; 
         nb = nb -1; 
         [tabController selectTabViewItemAtIndex:nb];
-        [self resetAllTabsButon];
-        [self setImageOnSelectedTab];
     }
+    [tabController removeTabViewItem:[tabController tabViewItemAtIndex:tag]]; 
     [tabsArray removeObjectAtIndex:tag];
+    [self resetAllTabsButon];
     [self redrawTabs:NO];
     [self setImageOnSelectedTab];
     [self setMenu];

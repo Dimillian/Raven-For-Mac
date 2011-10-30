@@ -169,6 +169,15 @@
 						<reference key="NSOnImage" ref="248413888"/>
 						<reference key="NSMixedImage" ref="875667400"/>
 					</object>
+					<object class="NSMenuItem" id="391534172">
+						<reference key="NSMenu" ref="314868979"/>
+						<string key="NSTitle">Switch Tab</string>
+						<string type="base64-UTF8" key="NSKeyEquiv">CQ</string>
+						<int key="NSKeyEquivModMask">262144</int>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="248413888"/>
+						<reference key="NSMixedImage" ref="875667400"/>
+					</object>
 					<object class="NSMenuItem" id="702036262">
 						<reference key="NSMenu" ref="314868979"/>
 						<string key="NSTitle">Previous Tab</string>
@@ -183,14 +192,6 @@
 						<string key="NSTitle">Next Tab</string>
 						<string key="NSKeyEquiv"></string>
 						<int key="NSKeyEquivModMask">1572864</int>
-						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSOnImage" ref="248413888"/>
-						<reference key="NSMixedImage" ref="875667400"/>
-					</object>
-					<object class="NSMenuItem" id="541814770">
-						<reference key="NSMenu" ref="314868979"/>
-						<string key="NSTitle">Open Tab in Window...</string>
-						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="248413888"/>
 						<reference key="NSMixedImage" ref="875667400"/>
@@ -281,6 +282,14 @@
 						<reference key="destination" ref="702036262"/>
 					</object>
 					<int key="connectionID">459</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">nextTab:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="391534172"/>
+					</object>
+					<int key="connectionID">469</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -381,7 +390,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="556236258"/>
-							<reference ref="541814770"/>
 							<reference ref="323502431"/>
 							<reference ref="702036262"/>
 							<reference ref="842771936"/>
@@ -389,17 +397,13 @@
 							<reference ref="489316667"/>
 							<reference ref="361652443"/>
 							<reference ref="628245098"/>
+							<reference ref="391534172"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">440</int>
 						<reference key="object" ref="556236258"/>
-						<reference key="parent" ref="314868979"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">442</int>
-						<reference key="object" ref="541814770"/>
 						<reference key="parent" ref="314868979"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -437,6 +441,11 @@
 						<reference key="object" ref="489316667"/>
 						<reference key="parent" ref="314868979"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">468</int>
+						<reference key="object" ref="391534172"/>
+						<reference key="parent" ref="314868979"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -453,7 +462,6 @@
 					<string>397.IBPluginDependency</string>
 					<string>438.IBPluginDependency</string>
 					<string>440.IBPluginDependency</string>
-					<string>442.IBPluginDependency</string>
 					<string>443.IBPluginDependency</string>
 					<string>444.IBPluginDependency</string>
 					<string>445.IBPluginDependency</string>
@@ -461,6 +469,7 @@
 					<string>460.IBPluginDependency</string>
 					<string>461.IBPluginDependency</string>
 					<string>462.IBPluginDependency</string>
+					<string>468.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -496,7 +505,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">467</int>
+			<int key="maxID">469</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -514,11 +523,9 @@
 							<string>menutabs:</string>
 							<string>nextTab:</string>
 							<string>previousTab:</string>
-							<string>tabs:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -537,7 +544,6 @@
 							<string>menutabs:</string>
 							<string>nextTab:</string>
 							<string>previousTab:</string>
-							<string>tabs:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -565,10 +571,6 @@
 								<string key="name">previousTab:</string>
 								<string key="candidateClassName">id</string>
 							</object>
-							<object class="IBActionInfo">
-								<string key="name">tabs:</string>
-								<string key="candidateClassName">id</string>
-							</object>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
@@ -578,22 +580,18 @@
 							<string>allTabsButton</string>
 							<string>mainView</string>
 							<string>navigatorMenu</string>
-							<string>scrollView</string>
 							<string>tabController</string>
 							<string>tabPlaceHolder</string>
 							<string>tabsButton</string>
-							<string>text</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSButton</string>
 							<string>NSView</string>
 							<string>NSMenu</string>
-							<string>NSScrollView</string>
 							<string>NSTabView</string>
 							<string>NSView</string>
 							<string>NSButton</string>
-							<string>NSText</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -603,11 +601,9 @@
 							<string>allTabsButton</string>
 							<string>mainView</string>
 							<string>navigatorMenu</string>
-							<string>scrollView</string>
 							<string>tabController</string>
 							<string>tabPlaceHolder</string>
 							<string>tabsButton</string>
-							<string>text</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -624,10 +620,6 @@
 								<string key="candidateClassName">NSMenu</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">scrollView</string>
-								<string key="candidateClassName">NSScrollView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">tabController</string>
 								<string key="candidateClassName">NSTabView</string>
 							</object>
@@ -638,10 +630,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">tabsButton</string>
 								<string key="candidateClassName">NSButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">text</string>
-								<string key="candidateClassName">NSText</string>
 							</object>
 						</object>
 					</object>

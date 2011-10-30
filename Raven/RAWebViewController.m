@@ -118,7 +118,6 @@
     
     [tabButtonTab setToolTip:[self title]]; 
     RADownloadController *controller = [[RADownloadController alloc]init]; 
-    downloadIndex  = [controller.downloadArray count]; 
     [controller release];
     
     [myPreference release]; 

@@ -17,15 +17,16 @@
 
 
 @interface RANavigatorViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSWindowDelegate, RAWebViewControllerDelegate>{
+    
+    //Outlet
     IBOutlet NSView *mainView; 
     IBOutlet NSView *tabPlaceHolder; 
     IBOutlet NSButton *tabsButton;  
     IBOutlet NSButton *allTabsButton; 
     IBOutlet NSTabView *tabController; 
-    NSString *UA; 
+    
     NSString *PassedUrl; //THIS variable is super important, it is a mess, but believe me or not it is super important
     NSMutableArray *tabsArray;
-    NSInteger curentSelectedTab;
     NSInteger count; 
     BOOL istab; 
     int fromOtherViews; 
@@ -33,7 +34,7 @@
     IBOutlet NSMenu *navigatorMenu; 
     BOOL inBackground;
 }
-//Bouton action
+
 -(IBAction)addtabs:(id)sender;
 -(IBAction)closeSelectedTab:(id)sender; 
 -(IBAction)menutabs:(id)sender;
@@ -47,7 +48,6 @@
 -(void)redrawTabs:(BOOL)fromWindow;
 -(void)setMenu; 
 //method
--(void)checkua; 
 -(void)resetAllTabsButon; 
 
 @property int fromOtherViews;

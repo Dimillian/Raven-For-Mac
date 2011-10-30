@@ -154,6 +154,7 @@
 							<string key="NSFrame">{{410, 9}, {159, 25}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:161</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="538362710">
@@ -203,7 +204,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="320199096">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">272629760</int>
-								<string key="NSContents">Copyright © 2011-2012 RavenCo, Inc. All rights reserved. Raven and the Raven icon are trademarks of RavenCo, Inc., registered in the U.S., France and other countries.</string>
+								<string key="NSContents">Copyright © 2011-2012 RavenCo. All rights reserved. Raven and the Raven icon are trademarks of RavenCo, Inc., registered in the U.S., France and other countries.</string>
 								<object class="NSFont" key="NSSupport">
 									<string key="NSName">Helvetica</string>
 									<double key="NSSize">12</double>
