@@ -10,7 +10,7 @@
 
 @implementation LionClipView
 
-#define SHADOW_HEIGHT 10
+#define SHADOW_HEIGHT 5
 
 - (void)drawRect:(NSRect)dirtyRect
 {

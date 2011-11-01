@@ -171,6 +171,10 @@
 		9F03B6D41402D98900985D32 /* RABookmarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F03B6D31402D98900985D32 /* RABookmarkCell.xib */; };
 		9F087FEE13CC852C0075ACC1 /* StopActivityButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F087FED13CC852C0075ACC1 /* StopActivityButton.m */; };
 		9F0F5688140ECDD600FAB76C /* tab-close-warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F0F5687140ECDD600FAB76C /* tab-close-warning.png */; };
+		9F13E9B1145D6A7E00576566 /* Linen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F13E9B0145D6A7E00576566 /* Linen.png */; };
+		9F13E9B5145D6A8A00576566 /* LWVClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F13E9B4145D6A8A00576566 /* LWVClipView.m */; };
+		9F13E9BC145D781D00576566 /* LinenMiddle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9F13E9BA145D781D00576566 /* LinenMiddle.jpg */; };
+		9F13E9BD145D781D00576566 /* linenLight.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F13E9BB145D781D00576566 /* linenLight.png */; };
 		9F141476144ACCD900503344 /* active_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F141475144ACCD900503344 /* active_tab.png */; };
 		9F141479144AD71800503344 /* inactive_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F141478144AD71800503344 /* inactive_tab.png */; };
 		9F14147C144AF82800503344 /* RAAddressFieldBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F14147B144AF82800503344 /* RAAddressFieldBox.m */; };
@@ -187,6 +191,7 @@
 		9F2E837714595E80007C0982 /* SearchWebView.js in Resources */ = {isa = PBXBuildFile; fileRef = 9FB8482C1455FC3F00530138 /* SearchWebView.js */; };
 		9F2F458E140D198C00BAB731 /* RASmartBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2F458C140D198C00BAB731 /* RASmartBarViewController.m */; };
 		9F2F458F140D198C00BAB731 /* RASmartBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F2F458D140D198C00BAB731 /* RASmartBarViewController.xib */; };
+		9F4105D414600BC000CB33AC /* GrayLinen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4105D314600BBF00CB33AC /* GrayLinen.png */; };
 		9F4954011446D56A00EED6BE /* RAInstapaperSubmit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4954001446D56A00EED6BE /* RAInstapaperSubmit.m */; };
 		9F4A4CF71440CEDF004AD395 /* lights.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A4CF61440CEDF004AD395 /* lights.png */; };
 		9F53F8DD13F569BF0025C821 /* advanced_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F53F8CB13F569BF0025C821 /* advanced_icon.png */; };
@@ -523,6 +528,11 @@
 		9F087FEC13CC852C0075ACC1 /* StopActivityButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopActivityButton.h; sourceTree = "<group>"; };
 		9F087FED13CC852C0075ACC1 /* StopActivityButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopActivityButton.m; sourceTree = "<group>"; };
 		9F0F5687140ECDD600FAB76C /* tab-close-warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-close-warning.png"; sourceTree = "<group>"; };
+		9F13E9B0145D6A7E00576566 /* Linen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Linen.png; sourceTree = "<group>"; };
+		9F13E9B3145D6A8A00576566 /* LWVClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWVClipView.h; sourceTree = "<group>"; };
+		9F13E9B4145D6A8A00576566 /* LWVClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWVClipView.m; sourceTree = "<group>"; };
+		9F13E9BA145D781D00576566 /* LinenMiddle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LinenMiddle.jpg; sourceTree = "<group>"; };
+		9F13E9BB145D781D00576566 /* linenLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = linenLight.png; sourceTree = "<group>"; };
 		9F141475144ACCD900503344 /* active_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = active_tab.png; sourceTree = "<group>"; };
 		9F141478144AD71800503344 /* inactive_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inactive_tab.png; sourceTree = "<group>"; };
 		9F14147A144AF82800503344 /* RAAddressFieldBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAAddressFieldBox.h; sourceTree = "<group>"; };
@@ -546,6 +556,7 @@
 		9F2F458B140D198C00BAB731 /* RASmartBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RASmartBarViewController.h; sourceTree = "<group>"; };
 		9F2F458C140D198C00BAB731 /* RASmartBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RASmartBarViewController.m; sourceTree = "<group>"; };
 		9F2F458D140D198C00BAB731 /* RASmartBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RASmartBarViewController.xib; sourceTree = "<group>"; };
+		9F4105D314600BBF00CB33AC /* GrayLinen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GrayLinen.png; sourceTree = "<group>"; };
 		9F4953FF1446D56A00EED6BE /* RAInstapaperSubmit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAInstapaperSubmit.h; sourceTree = "<group>"; };
 		9F4954001446D56A00EED6BE /* RAInstapaperSubmit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAInstapaperSubmit.m; sourceTree = "<group>"; };
 		9F4A4CF61440CEDF004AD395 /* lights.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lights.png; sourceTree = "<group>"; };
@@ -722,6 +733,10 @@
 		690C5546133DCD27005D50B3 /* ressources */ = {
 			isa = PBXGroup;
 			children = (
+				9F4105D314600BBF00CB33AC /* GrayLinen.png */,
+				9F13E9BA145D781D00576566 /* LinenMiddle.jpg */,
+				9F13E9BB145D781D00576566 /* linenLight.png */,
+				9F13E9B0145D6A7E00576566 /* Linen.png */,
 				9F76D083144D5ED2007C819F /* line.png */,
 				9F76D060144D5CA0007C819F /* Toolbar icon */,
 				9F6C54D2144C9ABB00CE1AD9 /* shadow.png */,
@@ -971,6 +986,8 @@
 		69F4485E138A249000432BC7 /* Reusable Subclass */ = {
 			isa = PBXGroup;
 			children = (
+				9F13E9B3145D6A8A00576566 /* LWVClipView.h */,
+				9F13E9B4145D6A8A00576566 /* LWVClipView.m */,
 				9F2501E8141BC0B30094D79C /* INAppStoreWindow.h */,
 				9F2501E9141BC0B30094D79C /* INAppStoreWindow.m */,
 				69A15D62138702CB0097FD71 /* RAAddressField.h */,
@@ -1697,6 +1714,10 @@
 				9F76D084144D5ED2007C819F /* line.png in Resources */,
 				9FB7A3A714514B91009AB771 /* userContent.css in Resources */,
 				9F2E837714595E80007C0982 /* SearchWebView.js in Resources */,
+				9F13E9B1145D6A7E00576566 /* Linen.png in Resources */,
+				9F13E9BC145D781D00576566 /* LinenMiddle.jpg in Resources */,
+				9F13E9BD145D781D00576566 /* linenLight.png in Resources */,
+				9F4105D414600BC000CB33AC /* GrayLinen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1793,6 +1814,7 @@
 				9F14147C144AF82800503344 /* RAAddressFieldBox.m in Sources */,
 				9F76D05E144CDBA6007C819F /* RAHiddenWindow.m in Sources */,
 				9FB8482B1455FBD300530138 /* WebView+search.m in Sources */,
+				9F13E9B5145D6A8A00576566 /* LWVClipView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

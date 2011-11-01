@@ -12,14 +12,14 @@
 #import "INAppStoreWindow.h"
 #import "RAHiddenWindow.h"
 
-//smart bar app positioning constante
+//smart bar app positioning
 #define retracted_app_height 55
 #define app_expanded_height 200
 #define initial_position 228
 #define app_position_x -7
 #define app_view_w 108
 #define app_view_h 278
-#define initial_app_space 513
+#define initial_app_space 514
 #define bottom_bar_size 40
 #define number_h 21
 
@@ -31,6 +31,8 @@
 #define badge_y 238
 #define badge_w 30
 #define badge_h 30
+
+#define toolbarSize 26
 
 
 
@@ -138,20 +140,6 @@
 }
 
 
--(void)replaceTitleBarViewWith:(NSView *)view
-{
-        INAppStoreWindow *aWindow = (INAppStoreWindow *)self.window;
-        [view setFrame:NSMakeRect(titleBar.frame.origin.x, titleBar.frame.origin.y, self.window.frame.size.width - 20, titleBar.frame.size.height)];
-        aWindow.titleBarHeight = 40.0;
-        [view removeFromSuperview];
-        NSArray *subvbiews = [aWindow.titleBarView subviews];
-        for (NSView *subview in subvbiews) {
-            [subview removeFromSuperview];
-        }
-        [aWindow.titleBarView addSubview:view];  
-
-}
- 
 - (void)awakeFromNib
 {
 
@@ -162,7 +150,7 @@
         static int NSWindowAnimationBehaviorDocumentWindow = 3;
         [[self window]setAnimationBehavior:NSWindowAnimationBehaviorDocumentWindow];
     }
-    
+    isAdressBarHidden = NO; 
     //Listen to interesting notifications about GUI refresh
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
@@ -326,7 +314,7 @@
         NSString *homeButtonPath = [NSString stringWithFormat:application_support_path@"%@/main.png", [item objectForKey:PLIST_KEY_FOLDER]];
         NSImage *homeButtonImage = [[NSImage alloc]initWithContentsOfFile:[homeButtonPath stringByExpandingTildeInPath]];
         [homeButtonImage setSize:NSMakeSize(20, 20)];
-        NSMenuItem *appMenu = [[NSMenuItem alloc]initWithTitle:[item objectForKey:PLIST_KEY_APPNAME] action:@selector(expandApp:) keyEquivalent:[NSString stringWithFormat:@"%d", x]]; 
+        NSMenuItem *appMenu = [[NSMenuItem alloc]initWithTitle:[item objectForKey:PLIST_KEY_APPNAME] action:@selector(expandApp:) keyEquivalent:[NSString stringWithFormat:@"%d", x+1]]; 
         [appMenu setTarget:smartApp];
         [appMenu setImage:homeButtonImage];
         [smartBarMenu addItem:appMenu];
@@ -522,6 +510,23 @@
 {
     
 }
+
+#pragma mark -
+#pragma mark window UI
+-(void)hideShowAddressBar:(id)sender
+{
+    if (isAdressBarHidden) {
+        [[centeredView animator]setFrame:NSMakeRect(centeredView.frame.origin.x, centeredView.frame.origin.y, centeredView.frame.size.width, centeredView.frame.size.height - toolbarSize)];
+        isAdressBarHidden = NO; 
+    }
+    else{
+        [[centeredView animator]setFrame:NSMakeRect(centeredView.frame.origin.x, centeredView.frame.origin.y, centeredView.frame.size.width, centeredView.frame.size.height + toolbarSize)];
+        isAdressBarHidden = YES;
+    }
+
+}
+
+
 #pragma mark -
 #pragma mark viewswitch
 #pragma mark app menu button 

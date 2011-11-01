@@ -145,6 +145,21 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [self openAnInternalWindowWithUrl:@"http://start.raven.io"];
 }
 
+-(void)twitterProfile:(id)sender
+{
+    [self openAnInternalWindowWithUrl:@"http://twitter.com/ravenbrowser"];
+}
+
+-(void)officialWebsite:(id)sender
+{
+    [self openAnInternalWindowWithUrl:@"http://raven.io"];
+}
+
+-(void)websiteSupport:(id)sender
+{
+    [self openAnInternalWindowWithUrl:@"http://raven.io/support.html"];   
+}
+
 -(void)openAnInternalWindowWithUrl:(NSString *)URL
 {
     

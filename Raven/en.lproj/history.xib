@@ -135,7 +135,7 @@
 							<object class="NSSearchField" id="69193995">
 								<reference key="NSNextResponder" ref="465713705"/>
 								<int key="NSvFlags">266</int>
-								<string key="NSFrame">{{7, 553}, {190, 22}}</string>
+								<string key="NSFrame">{{7, 554}, {190, 22}}</string>
 								<reference key="NSSuperview" ref="465713705"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="796131559"/>
@@ -225,7 +225,7 @@
 												<string key="NSFrameSize">{240, 528}</string>
 												<reference key="NSSuperview" ref="170161463"/>
 												<reference key="NSWindow"/>
-												<reference key="NSNextKeyView" ref="620268379"/>
+												<reference key="NSNextKeyView" ref="1032450507"/>
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 											</object>
 										</object>
@@ -235,11 +235,9 @@
 										<reference key="NSNextKeyView" ref="54386567"/>
 										<int key="NSViewLayerContentsRedrawPolicy">2</int>
 										<reference key="NSDocView" ref="54386567"/>
-										<object class="NSColor" key="NSBGColor" id="163190178">
-											<int key="NSColorSpace">6</int>
-											<string key="NSCatalogName">System</string>
-											<string key="NSColorName">controlHighlightColor</string>
-											<reference key="NSColor" ref="1066429032"/>
+										<object class="NSColor" key="NSBGColor">
+											<int key="NSColorSpace">2</int>
+											<bytes key="NSRGB">MC45MDk4MDM5ODY1IDAuOTEzNzI1NTU0OSAwLjkwOTgwMzk4NjUAA</bytes>
 										</object>
 										<int key="NScvFlags">6</int>
 									</object>
@@ -272,7 +270,7 @@
 								<string key="NSFrame">{{-1, 18}, {229, 530}}</string>
 								<reference key="NSSuperview" ref="465713705"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="1032450507"/>
+								<reference key="NSNextKeyView" ref="170161463"/>
 								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 								<int key="NSsFlags">133778</int>
 								<reference key="NSVScroller" ref="620268379"/>
@@ -293,7 +291,7 @@
 							<object class="NSButton" id="263015207">
 								<reference key="NSNextResponder" ref="465713705"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{198, 556}, {23, 18}}</string>
+								<string key="NSFrame">{{198, 557}, {23, 18}}</string>
 								<reference key="NSSuperview" ref="465713705"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="55545963"/>
@@ -385,7 +383,12 @@
 								<int key="NSBoxType">4</int>
 								<int key="NSTitlePosition">0</int>
 								<bool key="NSTransparent">NO</bool>
-								<reference key="NSFillColor2" ref="163190178"/>
+								<object class="NSColor" key="NSFillColor2">
+									<int key="NSColorSpace">6</int>
+									<string key="NSCatalogName">System</string>
+									<string key="NSColorName">controlHighlightColor</string>
+									<reference key="NSColor" ref="1066429032"/>
+								</object>
 							</object>
 						</object>
 						<string key="NSFrameSize">{227, 580}</string>
@@ -407,7 +410,6 @@
 								<string key="NSFrame">{{1, 1}, {523, 579}}</string>
 								<reference key="NSSuperview" ref="1009142532"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSClassName">NSView</string>
 							</object>
 							<object class="NSBox" id="68799724">
@@ -540,7 +542,6 @@
 						<string key="NSFrame">{{54, 206}, {120, 120}}</string>
 						<reference key="NSSuperview" ref="152540935"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:1658</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSImageCell" key="NSCell" id="1013758462">
@@ -578,7 +579,6 @@
 						<string key="NSFrame">{{106, 257}, {16, 16}}</string>
 						<reference key="NSSuperview" ref="753460251"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:3954</string>
 						<int key="NSpiFlags">20746</int>
 						<double key="NSMaxValue">100</double>

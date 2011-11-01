@@ -476,7 +476,6 @@
 									<string key="NSFrame">{{1, 1}, {74, 18}}</string>
 									<reference key="NSSuperview" ref="20956555"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="535359061"/>
 									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<string key="NSReuseIdentifierKey">_NS:21</string>
 								</object>
@@ -514,7 +513,7 @@
 					<string key="NSFrameSize">{1050, 700}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
-					<reference key="NSNextKeyView" ref="20956555"/>
+					<reference key="NSNextKeyView" ref="535359061"/>
 					<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
@@ -675,19 +674,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">cornerBox</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="20956555"/>
-					</object>
-					<int key="connectionID">440</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">centeredView</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="485160451"/>
 					</object>
 					<int key="connectionID">441</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">cornerBox</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="20956555"/>
+					</object>
+					<int key="connectionID">440</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">

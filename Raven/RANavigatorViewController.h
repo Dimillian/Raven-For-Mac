@@ -33,6 +33,7 @@
     NSWindow *localWindow; 
     IBOutlet NSMenu *navigatorMenu; 
     BOOL inBackground;
+    BOOL isAdressBarHidden; 
 }
 
 -(IBAction)addtabs:(id)sender;

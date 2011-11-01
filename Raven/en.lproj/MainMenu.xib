@@ -745,8 +745,7 @@
 								<object class="NSMenuItem" id="128541136">
 									<reference key="NSMenu" ref="644817650"/>
 									<string key="NSTitle">Web App Shop</string>
-									<string key="NSKeyEquiv">0</string>
-									<int key="NSKeyEquivModMask">1048576</int>
+									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
@@ -775,7 +774,7 @@
 								<object class="NSMenuItem" id="643730912">
 									<reference key="NSMenu" ref="644817650"/>
 									<string key="NSTitle">Raven</string>
-									<string key="NSKeyEquiv">1</string>
+									<string key="NSKeyEquiv">0</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
@@ -1543,6 +1542,30 @@
 						<reference key="destination" ref="128541136"/>
 					</object>
 					<int key="connectionID">1408</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">websiteSupport:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="594837849"/>
+					</object>
+					<int key="connectionID">1428</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">officialWebsite:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="226124757"/>
+					</object>
+					<int key="connectionID">1429</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">twitterProfile:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="212491129"/>
+					</object>
+					<int key="connectionID">1430</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2653,7 +2676,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1427</int>
+			<int key="maxID">1430</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2895,12 +2918,14 @@
 							<string>addtabs:</string>
 							<string>closeAllTabs:</string>
 							<string>closeSelectedTab:</string>
+							<string>hiseShowAddressBar:</string>
 							<string>menutabs:</string>
 							<string>nextTab:</string>
 							<string>previousTab:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -2916,6 +2941,7 @@
 							<string>addtabs:</string>
 							<string>closeAllTabs:</string>
 							<string>closeSelectedTab:</string>
+							<string>hiseShowAddressBar:</string>
 							<string>menutabs:</string>
 							<string>nextTab:</string>
 							<string>previousTab:</string>
@@ -2932,6 +2958,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">closeSelectedTab:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">hiseShowAddressBar:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -2955,22 +2985,18 @@
 							<string>allTabsButton</string>
 							<string>mainView</string>
 							<string>navigatorMenu</string>
-							<string>scrollView</string>
 							<string>tabController</string>
 							<string>tabPlaceHolder</string>
 							<string>tabsButton</string>
-							<string>text</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSButton</string>
 							<string>NSView</string>
 							<string>NSMenu</string>
-							<string>NSScrollView</string>
 							<string>NSTabView</string>
 							<string>NSView</string>
 							<string>NSButton</string>
-							<string>NSText</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -2980,11 +3006,9 @@
 							<string>allTabsButton</string>
 							<string>mainView</string>
 							<string>navigatorMenu</string>
-							<string>scrollView</string>
 							<string>tabController</string>
 							<string>tabPlaceHolder</string>
 							<string>tabsButton</string>
-							<string>text</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3001,10 +3025,6 @@
 								<string key="candidateClassName">NSMenu</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">scrollView</string>
-								<string key="candidateClassName">NSScrollView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">tabController</string>
 								<string key="candidateClassName">NSTabView</string>
 							</object>
@@ -3015,10 +3035,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">tabsButton</string>
 								<string key="candidateClassName">NSButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">text</string>
-								<string key="candidateClassName">NSText</string>
 							</object>
 						</object>
 					</object>
@@ -3125,19 +3141,15 @@
 							<string>address</string>
 							<string>addressBarView</string>
 							<string>addressBox</string>
-							<string>backgroundTab</string>
 							<string>boxTab</string>
 							<string>closeButtonTab</string>
-							<string>favicon</string>
 							<string>faviconTab</string>
 							<string>mainView</string>
 							<string>mobileButton</string>
-							<string>myCurrentViewController</string>
 							<string>pageTitleTab</string>
 							<string>progress</string>
 							<string>progressMain</string>
 							<string>progressTab</string>
-							<string>scrollView</string>
 							<string>searchResults</string>
 							<string>searchWebView</string>
 							<string>secondTabButton</string>
@@ -3145,11 +3157,9 @@
 							<string>switchView</string>
 							<string>tabButtonTab</string>
 							<string>tabHolder</string>
-							<string>tabs</string>
 							<string>tabsButton</string>
 							<string>tabview</string>
 							<string>temp</string>
-							<string>text</string>
 							<string>webview</string>
 							<string>webviewMenu</string>
 						</object>
@@ -3158,19 +3168,15 @@
 							<string>NSTextField</string>
 							<string>NSView</string>
 							<string>RAAddressFieldBox</string>
-							<string>NSImageView</string>
 							<string>NSBox</string>
 							<string>NSButton</string>
-							<string>NSImage</string>
 							<string>NSImageView</string>
 							<string>NSView</string>
 							<string>NSButton</string>
-							<string>NSViewController</string>
 							<string>NSTextField</string>
 							<string>NSProgressIndicator</string>
 							<string>NSProgressIndicator</string>
 							<string>NSProgressIndicator</string>
-							<string>NSScrollView</string>
 							<string>NSTextField</string>
 							<string>NSSearchField</string>
 							<string>NSButton</string>
@@ -3178,11 +3184,9 @@
 							<string>NSView</string>
 							<string>NSButton</string>
 							<string>NSBox</string>
-							<string>NSTabView</string>
 							<string>NSButton</string>
 							<string>NSView</string>
 							<string>NSImageView</string>
-							<string>NSText</string>
 							<string>WebView</string>
 							<string>NSMenu</string>
 						</object>
@@ -3194,19 +3198,15 @@
 							<string>address</string>
 							<string>addressBarView</string>
 							<string>addressBox</string>
-							<string>backgroundTab</string>
 							<string>boxTab</string>
 							<string>closeButtonTab</string>
-							<string>favicon</string>
 							<string>faviconTab</string>
 							<string>mainView</string>
 							<string>mobileButton</string>
-							<string>myCurrentViewController</string>
 							<string>pageTitleTab</string>
 							<string>progress</string>
 							<string>progressMain</string>
 							<string>progressTab</string>
-							<string>scrollView</string>
 							<string>searchResults</string>
 							<string>searchWebView</string>
 							<string>secondTabButton</string>
@@ -3214,11 +3214,9 @@
 							<string>switchView</string>
 							<string>tabButtonTab</string>
 							<string>tabHolder</string>
-							<string>tabs</string>
 							<string>tabsButton</string>
 							<string>tabview</string>
 							<string>temp</string>
-							<string>text</string>
 							<string>webview</string>
 							<string>webviewMenu</string>
 						</object>
@@ -3237,20 +3235,12 @@
 								<string key="candidateClassName">RAAddressFieldBox</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">backgroundTab</string>
-								<string key="candidateClassName">NSImageView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">boxTab</string>
 								<string key="candidateClassName">NSBox</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">closeButtonTab</string>
 								<string key="candidateClassName">NSButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">favicon</string>
-								<string key="candidateClassName">NSImage</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">faviconTab</string>
@@ -3263,10 +3253,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">mobileButton</string>
 								<string key="candidateClassName">NSButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">myCurrentViewController</string>
-								<string key="candidateClassName">NSViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">pageTitleTab</string>
@@ -3283,10 +3269,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">progressTab</string>
 								<string key="candidateClassName">NSProgressIndicator</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">scrollView</string>
-								<string key="candidateClassName">NSScrollView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">searchResults</string>
@@ -3317,10 +3299,6 @@
 								<string key="candidateClassName">NSBox</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">tabs</string>
-								<string key="candidateClassName">NSTabView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">tabsButton</string>
 								<string key="candidateClassName">NSButton</string>
 							</object>
@@ -3331,10 +3309,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">temp</string>
 								<string key="candidateClassName">NSImageView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">text</string>
-								<string key="candidateClassName">NSText</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">webview</string>
@@ -3361,12 +3335,18 @@
 							<string>favoriteMenu:</string>
 							<string>importSelectedApp:</string>
 							<string>newWindow:</string>
+							<string>officialWebsite:</string>
 							<string>showAboutPanel:</string>
 							<string>showSettingsWindow:</string>
+							<string>twitterProfile:</string>
 							<string>webAppShop:</string>
+							<string>websiteSupport:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -3382,9 +3362,12 @@
 							<string>favoriteMenu:</string>
 							<string>importSelectedApp:</string>
 							<string>newWindow:</string>
+							<string>officialWebsite:</string>
 							<string>showAboutPanel:</string>
 							<string>showSettingsWindow:</string>
+							<string>twitterProfile:</string>
 							<string>webAppShop:</string>
+							<string>websiteSupport:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3401,6 +3384,10 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">officialWebsite:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">showAboutPanel:</string>
 								<string key="candidateClassName">id</string>
 							</object>
@@ -3409,7 +3396,15 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">twitterProfile:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">webAppShop:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">websiteSupport:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>

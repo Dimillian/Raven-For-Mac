@@ -107,7 +107,6 @@
 @property (nonatomic, retain) NSBox *tabHolder;
 @property (nonatomic, retain) NSButton *tabButtonTab;
 @property (nonatomic, retain) NSButton *closeButtonTab; 
-@property (nonatomic, retain) NSImageView *backgroundTab; 
 @property (nonatomic, retain) NSImageView *faviconTab; 
 @property (nonatomic, retain) NSTextField *pageTitleTab;
 @end

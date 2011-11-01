@@ -18,6 +18,7 @@
 
 //the size of a tab button
 #define tabButtonSize 190
+#define toolbarSize 26
 @implementation RANavigatorViewController
 
 @synthesize PassedUrl, tabsArray, fromOtherViews; 
@@ -54,6 +55,7 @@
     [allTabsButton setAction:@selector(menutabs:)]; 
     [allTabsButton setTarget:self];
     inBackground = NO;
+    isAdressBarHidden = NO; 
 }
 
 
@@ -164,6 +166,7 @@
         }
     }
     localWindow = nil; 
+    
 }
 
 -(void)addtabs:(id)sender
@@ -192,9 +195,7 @@
     [[newtab webview]setPolicyDelegate:self]; 
     //Set the host window to the actual window for plugin 
     [[newtab webview]setHostWindow:localWindow];
-    
-
-    
+        
     NSRect windowSize = [[sender window]frame];
     CGFloat size = windowSize.size.width;  
     
@@ -210,7 +211,6 @@
         [allTabsButton setHidden:YES];   
     }
 
-    
     //Add the button and webview instance in array.
     [tabsArray addObject:newtab]; 
     
@@ -262,6 +262,7 @@
             inBackground = NO;
         }
     }
+    
     [self resetAllTabsButon];
     [self setImageOnSelectedTab];
     [item release]; 
@@ -351,7 +352,7 @@
     [[clickedtab boxTab]setFillColor:[NSColor windowBackgroundColor]];
 }
 
-//called when click on the home tab button, bring back the first view
+
 
 //close all tabs
 -(void)closeAllTabs:(id)sender
@@ -399,6 +400,7 @@
     [self setImageOnSelectedTab]; 
 }
 
+//do all the memory clean up stuff here, it might be better to switch it within the RAWebview itself
 -(void)tabWillClose:(RAWebViewController *)RAWebView{
     NSInteger tag = [tabsArray indexOfObject:RAWebView];
     //The current webview remove
@@ -511,8 +513,6 @@ if (frame == [sender mainFrame]){
 
 - (void)webView:(WebView *)webView decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id < WebPolicyDecisionListener >)listener
 {
-    //PassedUrl = [[request URL]absoluteString]; 
-    //[self addtabs:nil];
     [listener use];
 }
 
@@ -596,25 +596,6 @@ if (frame == [sender mainFrame]){
     }
     
 }
-/*
-//UPload window
-- (void)webView:(WebView *)sender runOpenPanelForFileButtonWithResultListener:(id < WebOpenPanelResultListener >)resultListener
-{       
-    NSOpenPanel* openDlg = [NSOpenPanel openPanel];
-    
-    [openDlg setCanChooseFiles:YES];
-    
-    [openDlg setCanChooseDirectories:NO];
-    
-    // process the files.
-    if ( [openDlg runModal] == NSOKButton )
-    {
-        NSString* fileString = [[openDlg URL]absoluteString];
-        [resultListener chooseFilename:fileString]; 
-    }
-    
-}
- */
 
 - (void)webView:(WebView *)sender runOpenPanelForFileButtonWithResultListener:(id < WebOpenPanelResultListener >)resultListener
 {       
@@ -634,47 +615,6 @@ if (frame == [sender mainFrame]){
     }
     
 }
-/*
-- (void)webView:(WebView *)sender runOpenPanelForFileButtonWithResultListener:(id < WebOpenPanelResultListener >)resultListener allowMultipleFiles:(BOOL)allowMultipleFiles
-{
-        // Create the File Open Dialog class.
-        NSOpenPanel* openDlg = [NSOpenPanel openPanel];
-        
-        // Enable the selection of files in the dialog.
-        [openDlg setCanChooseFiles:YES];
-        
-        // Enable the selection of directories in the dialog.
-        [openDlg setCanChooseDirectories:NO];
-        
-        // Display the dialog.  If the OK button was pressed,
-        // process the files.
-        if ( [openDlg runModal] == NSOKButton )
-        {
-            // Get an array containing the full filenames of all
-            // files and directories selected.
-            NSArray* files = [openDlg URLs];
-            NSArray* finalFiles = [[NSArray alloc]init];
-            // Loop through all the files and process them.
-            for(int i = 0; i < [files count]; i++ )
-            {
-                NSString* fileName = [files objectAtIndex:i]; //i]; 
-                [finalFiles arrayByAddingObject:fileName];
-                // Do something with the filename.
-                [resultListener chooseFilenames:finalFiles]; 
-            }
-            [finalFiles release]; 
-        }
-        
-}
- */
-
-/*
-- (BOOL)webViewIsStatusBarVisible:(WebView *)sender
-{
-    return YES; 
-}
- */
-
 
 #pragma -
 #pragma mark memory management
@@ -684,6 +624,7 @@ if (frame == [sender mainFrame]){
 {   
     for (RAWebViewController *newtab in tabsArray) {
         [[newtab webview]setUIDelegate:nil]; 
+        [newtab setDelegate:nil];
         [[newtab webview]setPolicyDelegate:nil];
         [[newtab webview]removeFromSuperview];
     } 

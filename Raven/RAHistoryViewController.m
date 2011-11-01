@@ -12,6 +12,7 @@
 #import "RAHistoryCell.h"
 #import "RAMainWindowController.h"
 #import "RAHiddenWindow.h"
+#import "LWVClipView.h"
 
 @implementation RAHistoryViewController
 
@@ -40,6 +41,7 @@
     [[newtab tabHolder]setHidden:YES];
     [[newtab webview]setFrame:NSMakeRect(newtab.webview.frame.origin.x, newtab.webview.frame.origin.y, newtab.webview.frame.size.width, newtab.webview.frame.size.height+22)];
     [[newtab webview]setUIDelegate:self];
+    
 }
 
 

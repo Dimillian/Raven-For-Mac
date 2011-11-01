@@ -75,6 +75,7 @@
     
     
     NSString *passedUrl; 
+    BOOL isAdressBarHidden; 
     
     
     
@@ -95,6 +96,7 @@
 //method
 -(void)showSideBar; 
 -(void)hideSideBar; 
+-(IBAction)hideShowAddressBar:(id)sender;
 -(void)animate:(NSUInteger)setMode;
 -(void)hideall; 
 -(void)SetMenuButton; 
@@ -106,7 +108,6 @@
 -(void)launchRuntime;
 -(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs;
 -(void)receiveNotification:(NSNotification *)notification;
--(void)replaceTitleBarViewWith:(NSView *)view;
 @property (assign) NSString *passedUrl; 
 @property (assign) RANavigatorViewController *navigatorview; 
 @property (assign) NSButton *downloadButton; 

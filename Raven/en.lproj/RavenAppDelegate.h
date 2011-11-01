@@ -40,6 +40,9 @@
 -(IBAction)favoriteMenu:(id)sender;
 -(IBAction)importSelectedApp:(id)sender;
 -(IBAction)webAppShop:(id)sender; 
+-(IBAction)twitterProfile:(id)sender;
+-(IBAction)websiteSupport:(id)sender; 
+-(IBAction)officialWebsite:(id)sender;
 -(void)importAppAction;
 -(void)openAnInternalWindowWithUrl:(NSString *)URL; 
 @property (nonatomic, retain) RASettingWindowController *setting; 

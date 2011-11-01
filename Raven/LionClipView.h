@@ -13,5 +13,5 @@
 @interface LionClipView : NSClipView
 
 - (void)drawBackground;
-
 @end
+

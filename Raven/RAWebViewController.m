@@ -12,6 +12,7 @@
 #import "NSString+Raven.h"
 #import "RAHiddenWindow.h"
 #import "WebView+search.h"
+#import "LWVClipView.h"
 
 
 #define GOOGLE_SEARCH_URL @"http://www.google.com/search?q="
@@ -19,7 +20,7 @@
 
 @implementation RAWebViewController
 @synthesize passedUrl, switchView, tabsButton, webview, address, tabview, searchWebView; 
-@synthesize tabButtonTab, backgroundTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, addressBarView, boxTab, tabHolder, delegate; 
+@synthesize tabButtonTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, addressBarView, boxTab, tabHolder, delegate; 
 
 #pragma -
 #pragma mark init
@@ -78,7 +79,7 @@
     //[NSApp setMenu:topMenu]; 
 }
 -(void)awakeFromNib
-{
+{  
     WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"]; 
     [myPreference setUsesPageCache:NO]; 
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -97,6 +98,7 @@
 
     
     [self setDesktopUserAgent];
+    //register history item
     [self setDoRegisterHistory:2];
     //Hide the stop loading button
     [stopLoading setHidden:YES];
@@ -114,22 +116,27 @@
     [[webview preferences]setDefaultFontSize:16];
     [webview setMaintainsBackForwardList:YES]; 
     NSImage *homeicon = [NSImage imageNamed:@"welcome-favicon.png"]; 
-    [temp setImage:homeicon]; 
     
+    [temp setImage:homeicon];     
     [tabButtonTab setToolTip:[self title]]; 
-    RADownloadController *controller = [[RADownloadController alloc]init]; 
-    [controller release];
     
     [myPreference release]; 
     isNewTab = YES; 
+    
     [progressMain setMinValue:0.0]; 
     [progressMain setMaxValue:1.0]; 
     [searchWebView setHidden:YES];
-
     
+    if (IS_RUNNING_LION) {
+        id webDocView = [[[self.webview mainFrame] frameView] documentView];
+        NSScrollView *detailWebScrollView = (NSScrollView *)[[webDocView superview] superview];
+        LWVWebClipView *webClipView = [[LWVWebClipView alloc] initWithFrame:[[detailWebScrollView contentView] frame]];
+        [detailWebScrollView setContentView:webClipView];
+        [detailWebScrollView setDocumentView:webDocView];
+        [webClipView release];
+     }
     
-
-    
+     
 }
 
 -(id)infoValueForKey:(NSString*)key
