@@ -68,13 +68,14 @@
     CFStringRef defaultHandler = LSCopyDefaultHandlerForURLScheme((CFStringRef)@"http");
     NSString *defaultHandlerString  = (NSString *)defaultHandler; 
     if ([defaultHandlerString isEqualToString:@"com.ravenco.raven"]) {
-        [ravenAsDefault setStringValue:@"Raven is your default browser"]; 
+        [ravenAsDefault setStringValue:NSLocalizedString(@"Raven is your default browser", @"RavenIsDefaultBrowser")]; 
         [ravenAsDefault setTextColor:[NSColor blackColor]]; 
         
     }
     else
     {
-        [ravenAsDefault setStringValue:@"Raven is not your default browser"]; 
+        [ravenAsDefault setStringValue:
+         NSLocalizedString(@"Raven is not your default browser", @"RavenIsNotDefaultBrowser")];
         [ravenAsDefault setTextColor:[NSColor blackColor]];
     }
     [defaultHandlerString release]; 
@@ -147,13 +148,14 @@
     CFStringRef defaultHandler = LSCopyDefaultHandlerForURLScheme((CFStringRef)@"http");
     NSString *defaultHandlerString  = (NSString *)defaultHandler; 
     if ([defaultHandlerString isEqualToString:@"com.ravenco.raven"]) {
-        [ravenAsDefault setStringValue:@"Raven is your default browser"]; 
+        [ravenAsDefault setStringValue:NSLocalizedString(@"Raven is your default browser", @"RavenIsDefaultBrowser")]; 
         [ravenAsDefault setTextColor:[NSColor blackColor]]; 
         
     }
     else
     {
-        [ravenAsDefault setStringValue:@"Raven is not your default browser"]; 
+        [ravenAsDefault setStringValue:
+         NSLocalizedString(@"Raven is not your default browser", @"RavenIsNotDefaultBrowser")]; 
         [ravenAsDefault setTextColor:[NSColor blackColor]];
     }
     [defaultHandlerString release]; 

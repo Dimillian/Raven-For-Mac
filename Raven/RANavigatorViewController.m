@@ -19,6 +19,7 @@
 //the size of a tab button
 #define tabButtonSize 190
 #define toolbarSize 26
+#define tabHeight 22
 @implementation RANavigatorViewController
 
 @synthesize PassedUrl, tabsArray, fromOtherViews; 
@@ -107,33 +108,39 @@
     [self setMenu];
 }
 
-
+//redraw the tabs when one is added or deleted
+//If it is from window does not animate it so on window resize it resize tabs instantantly
 -(void)redrawTabs:(BOOL)fromWindow
 {
     if (localWindow == nil) {
         localWindow = [NSApp keyWindow];
     }
+    //If only 1 or 0 tabs then hide the webview tabbar, only do it when it does not come from window resize notification
     if ([tabsArray count] <= 1 && !fromWindow) {
         for (RAWebViewController *aTab in tabsArray) {
             [[aTab tabHolder]setHidden:YES];
             [[aTab tabview]setHidden:YES]; 
-            [[aTab webview]setFrame:NSMakeRect(aTab.webview.frame.origin.x, aTab.webview.frame.origin.y, aTab.webview.frame.size.width, aTab.webview.frame.size.height+22)];
+            [[aTab webview]setFrame:NSMakeRect(aTab.webview.frame.origin.x, aTab.webview.frame.origin.y, aTab.webview.frame.size.width, aTab.webview.frame.size.height+tabHeight)];
         }
         
     }
+    //show the tabbar and draw tabs
     else
     {
         CGFloat x = 0;
         for (int i =0; i<[tabsArray count]; i++) {
             RAWebViewController *aTab = [tabsArray objectAtIndex:i];
             [[aTab tabHolder]setHidden:NO];
+            //Calculate W according to the window width
             CGFloat w = (localWindow.frame.size.width-80)/[tabsArray count];
             if (w > tabButtonSize){
                 w=tabButtonSize;
                 if (i==0){
+                    //X represent the tab x position, if it is the first tab then position is first at 0
                     x=0;
                 }
                 else{
+                    //then x is incremented at each pass for the next tab to be next the previous one
                     x = x + tabButtonSize;   
                 }
             }
@@ -142,26 +149,29 @@
                     x=0;
                 }
                 else{
+                    //recalcuate x regarding the window size for the placement when window size is modified
                     x = x + (localWindow.frame.size.width - 77)/[tabsArray count];
                 }
             }
             if (i == 0) {
                 if ([[aTab tabview]isHidden] == YES && !fromWindow) {
-                    [[aTab webview]setFrame:NSMakeRect(aTab.webview.frame.origin.x, aTab.webview.frame.origin.y, aTab.webview.frame.size.width, aTab.webview.frame.size.height - 22)];
+                    [[aTab webview]setFrame:NSMakeRect(aTab.webview.frame.origin.x, aTab.webview.frame.origin.y, aTab.webview.frame.size.width, aTab.webview.frame.size.height - tabHeight)];
                 }
             }
+            //If it is not from window notification animate
             if (!fromWindow) {
                 [[aTab tabview]setHidden:NO]; 
                 [[aTab tabview]setAlphaValue:1.0]; 
                 [NSAnimationContext beginGrouping];
                 [[NSAnimationContext currentContext] setDuration:0.2];  
-                [[[aTab tabview]animator]setFrame:NSMakeRect(x, 0, w, 22)];
+                [[[aTab tabview]animator]setFrame:NSMakeRect(x, 0, w, tabHeight)];
                 [NSAnimationContext endGrouping];
                 [[aTab faviconTab]setHidden:NO];
                 [[aTab progressTab]setHidden:NO];
             }
+            //just redraw without animation if from window
             else{
-                [[aTab tabview]setFrame:NSMakeRect(x, 0, w, 22)];   
+                [[aTab tabview]setFrame:NSMakeRect(x, 0, w, tabHeight)];   
             }
         }
     }
@@ -177,13 +187,9 @@
     }
     //Instanciate a new webviewcontroller and the button tab view with the view
     RAWebViewController *newtab = [[RAWebViewController alloc]initWithDelegate:self];
-    //Set the Button view
-    //force the view to init
+    
+    //force the newtab view to call awakefromNib
     [newtab view];
-    [[newtab tabview]setAlphaValue:0.0]; 
-    [[newtab pageTitleTab]setStringValue:NSLocalizedString(@"New tab", @"NewTab")];
-    [[newtab progressTab]setHidden:YES];
-    [[newtab faviconTab]setHidden:YES];
     
     //Bind the addtabd button to the current object action
     [[newtab tabsButton]setAction:@selector(addtabs:)];
@@ -215,7 +221,7 @@
     [tabsArray addObject:newtab]; 
     
     [tabPlaceHolder addSubview:[newtab tabview]];
-    [[newtab tabview]setFrame:NSMakeRect([tabsArray indexOfObject:newtab]*tabButtonSize, 22, tabButtonSize, 22)];
+    [[newtab tabview]setFrame:NSMakeRect([tabsArray indexOfObject:newtab]*tabButtonSize, tabHeight, tabButtonSize, tabHeight)];
     
     
     [[newtab address]selectText:self];

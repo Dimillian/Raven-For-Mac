@@ -95,7 +95,6 @@
             [myPreference setUserStyleSheetEnabled:NO]; 
         }
     }
-
     
     [self setDesktopUserAgent];
     //register history item
@@ -136,6 +135,11 @@
         [webClipView release];
      }
     
+    
+    [tabview setAlphaValue:0.0]; 
+    [pageTitleTab setStringValue:NSLocalizedString(@"New tab", @"NewTab")];
+    [progressTab setHidden:YES];
+    [faviconTab setHidden:YES];
      
 }
 
@@ -443,7 +447,6 @@
         //animate the progressbar
         [progress startAnimation:self]; 
         [[temp animator]setAlphaValue:0.0];
-        [temp setImage:[webview mainFrameIcon]];
         [[[self faviconTab]animator]setAlphaValue:0.0];
         [[self progressTab]startAnimation:self];
         [progressMain setHidden:NO]; 
@@ -471,8 +474,8 @@
     if (frame == [sender mainFrame]){
         //get the current title and set it in the window title
         NSString *title = [webview mainFrameTitle];
-        [[self pageTitleTab]setStringValue:[webview mainFrameTitle]];
-        [[self pageTitleTab]setToolTip:[webview mainFrameTitle]]; 
+        [pageTitleTab setStringValue:[webview mainFrameTitle]];
+        [pageTitleTab setToolTip:[webview mainFrameTitle]]; 
         [[sender window] setTitle:title];
         if (isNewTab)
         {
@@ -484,28 +487,27 @@
 
 - (void)webView:(WebView *)sender didReceiveIcon:(NSImage *)image forFrame:(WebFrame *)frame
 {
-    [temp setImage:[webview mainFrameIcon]];
-    [[self faviconTab]setImage:[webview mainFrameIcon]];
-    
+    [temp setImage:image];
+    [faviconTab setImage:image];
 }
 
 //set the favicon when the webview finished loading
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
+    //Set favicons
+    [progress stopAnimation:self];
+    [progressTab stopAnimation:self];
+    [[faviconTab animator]setAlphaValue:1.0];
+    [[temp animator]setAlphaValue:1.0];
+    [temp setImage:[webview mainFrameIcon]];
+    [faviconTab setImage:[webview mainFrameIcon]]; 
+    
+    
     RADatabaseController *controller = [RADatabaseController sharedUser];
-    // Only report feedback for the main frame.
     [progressMain setHidden:YES]; 
     NSString *title =  [webview mainFrameTitle]; 
-    //get the current page icon
-    favicon = [webview mainFrameIcon];
-    [temp setImage:favicon]; 
     [stopLoading setHidden:YES];
-    [[self faviconTab]setImage:[webview mainFrameIcon]]; 
-    [[self pageTitleTab]setStringValue:[webview mainFrameTitle]];
-    [[self progressTab]stopAnimation:self];
-    [progress stopAnimation:self]; 
-    [[[self faviconTab]animator]setAlphaValue:1.0]; 
-    [[temp animator]setAlphaValue:1.0]; 
+    [pageTitleTab setStringValue:[webview mainFrameTitle]];
     /*
      if ([[webview mainFrameURL] hasPrefix:@"https"]) {
      [addressBox setBorderColor:[NSColor greenColor]]; 

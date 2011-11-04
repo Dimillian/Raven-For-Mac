@@ -39,6 +39,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 		_selectedRows = [[NSMutableIndexSet alloc] init];
 		_allowsEmptySelection = YES;
         _usesLiveResize = YES;
+        
 	}
 	
 	return self;

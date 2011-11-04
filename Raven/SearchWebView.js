@@ -1,3 +1,5 @@
+//Thanks to the iCab team for this useful trick
+
 // We're using a global variable to store the number of occurrences
 var MyApp_SearchResultCount = 0;
 

@@ -205,7 +205,7 @@
 									<object class="NSButton" id="127741863">
 										<reference key="NSNextResponder" ref="335387449"/>
 										<int key="NSvFlags">265</int>
-										<string key="NSFrame">{{941, 10}, {20, 20}}</string>
+										<string key="NSFrame">{{941, 10.542857142857088}, {20, 20}}</string>
 										<reference key="NSSuperview" ref="335387449"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="518533517"/>
@@ -768,6 +768,7 @@
 								<string key="NSFrame">{{942, 10}, {134, 12}}</string>
 								<reference key="NSSuperview" ref="928699272"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 								<string key="NSReuseIdentifierKey">_NS:2352</string>
 								<int key="NSpiFlags">24840</int>
@@ -999,6 +1000,7 @@
 								<string key="NSFrame">{{1, 1}, {0, 94}}</string>
 								<reference key="NSSuperview" ref="406450565"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							</object>
 						</object>
@@ -2491,20 +2493,41 @@
 					<string>185.IBPluginDependency</string>
 					<string>187.IBAttributePlaceholdersKey</string>
 					<string>187.IBPluginDependency</string>
+					<string>187.IBViewIntegration.shadowColor</string>
+					<string>187.IBViewIntegration.shadowOffsetHeight</string>
+					<string>187.IBViewIntegration.shadowOffsetWidth</string>
 					<string>188.IBAttributePlaceholdersKey</string>
 					<string>188.IBPluginDependency</string>
+					<string>188.IBViewIntegration.shadowColor</string>
+					<string>188.IBViewIntegration.shadowOffsetHeight</string>
+					<string>188.IBViewIntegration.shadowOffsetWidth</string>
 					<string>189.IBAttributePlaceholdersKey</string>
 					<string>189.IBPluginDependency</string>
+					<string>189.IBViewIntegration.shadowColor</string>
+					<string>189.IBViewIntegration.shadowOffsetHeight</string>
+					<string>189.IBViewIntegration.shadowOffsetWidth</string>
 					<string>190.IBAttributePlaceholdersKey</string>
 					<string>190.IBPluginDependency</string>
+					<string>190.IBViewIntegration.shadowColor</string>
+					<string>190.IBViewIntegration.shadowOffsetHeight</string>
+					<string>190.IBViewIntegration.shadowOffsetWidth</string>
 					<string>191.IBAttributePlaceholdersKey</string>
 					<string>191.IBPluginDependency</string>
+					<string>191.IBViewIntegration.shadowColor</string>
+					<string>191.IBViewIntegration.shadowOffsetHeight</string>
+					<string>191.IBViewIntegration.shadowOffsetWidth</string>
 					<string>192.IBAttributePlaceholdersKey</string>
 					<string>192.IBPluginDependency</string>
+					<string>192.IBViewIntegration.shadowColor</string>
+					<string>192.IBViewIntegration.shadowOffsetHeight</string>
+					<string>192.IBViewIntegration.shadowOffsetWidth</string>
 					<string>193.IBAttributePlaceholdersKey</string>
 					<string>193.IBPluginDependency</string>
 					<string>194.IBAttributePlaceholdersKey</string>
 					<string>194.IBPluginDependency</string>
+					<string>194.IBViewIntegration.shadowColor</string>
+					<string>194.IBViewIntegration.shadowOffsetHeight</string>
+					<string>194.IBViewIntegration.shadowOffsetWidth</string>
 					<string>195.CustomClassName</string>
 					<string>195.IBPluginDependency</string>
 					<string>196.CustomClassName</string>
@@ -2619,6 +2642,12 @@
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<object class="NSColor">
+						<int key="NSColorSpace">2</int>
+						<bytes key="NSRGB">MC4zNDExNzY0ODAxIDAuMzUyOTQxMTg1MiAwLjM2NDcwNTg5MDQAA</bytes>
+					</object>
+					<real value="-1"/>
+					<real value="1"/>
 					<object class="NSMutableDictionary">
 						<string key="NS.key.0">ToolTip</string>
 						<object class="IBToolTipAttribute" key="NS.object.0">
@@ -2628,6 +2657,12 @@
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<object class="NSColor">
+						<int key="NSColorSpace">2</int>
+						<bytes key="NSRGB">MC4zNDUwOTgwNDg0IDAuMzU2ODYyNzUzNiAwLjM2ODYyNzQ1ODgAA</bytes>
+					</object>
+					<real value="-1"/>
+					<real value="1"/>
 					<object class="NSMutableDictionary">
 						<string key="NS.key.0">ToolTip</string>
 						<object class="IBToolTipAttribute" key="NS.object.0">
@@ -2637,6 +2672,12 @@
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<object class="NSColor">
+						<int key="NSColorSpace">2</int>
+						<bytes key="NSRGB">MC40NjY2NjY2OTg1IDAuNDc4NDMxNDAzNiAwLjQ5NDExNzY3NzIAA</bytes>
+					</object>
+					<real value="-1"/>
+					<real value="1"/>
 					<object class="NSMutableDictionary">
 						<string key="NS.key.0">ToolTip</string>
 						<object class="IBToolTipAttribute" key="NS.object.0">
@@ -2646,6 +2687,12 @@
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<object class="NSColor">
+						<int key="NSColorSpace">2</int>
+						<bytes key="NSRGB">MC4zNzY0NzA2MjU0IDAuMzgwMzkyMTkzOCAwLjM5NjA3ODQ2NzQAA</bytes>
+					</object>
+					<real value="-1"/>
+					<real value="1"/>
 					<object class="NSMutableDictionary">
 						<string key="NS.key.0">ToolTip</string>
 						<object class="IBToolTipAttribute" key="NS.object.0">
@@ -2655,6 +2702,12 @@
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<object class="NSColor">
+						<int key="NSColorSpace">2</int>
+						<bytes key="NSRGB">MC4zNDkwMTk2MTY4IDAuMzU2ODYyNzUzNiAwLjM2ODYyNzQ1ODgAA</bytes>
+					</object>
+					<real value="-1"/>
+					<real value="1"/>
 					<object class="NSMutableDictionary">
 						<string key="NS.key.0">ToolTip</string>
 						<object class="IBToolTipAttribute" key="NS.object.0">
@@ -2664,6 +2717,12 @@
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<object class="NSColor">
+						<int key="NSColorSpace">2</int>
+						<bytes key="NSRGB">MC4zNzY0NzA2MjU0IDAuMzgwMzkyMTkzOCAwLjM5NjA3ODQ2NzQAA</bytes>
+					</object>
+					<real value="-1"/>
+					<real value="1"/>
 					<object class="NSMutableDictionary">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
@@ -2695,6 +2754,12 @@
 						</object>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<object class="NSColor">
+						<int key="NSColorSpace">2</int>
+						<bytes key="NSRGB">MC4zNzY0NzA2MjU0IDAuMzg4MjM1MzMwNiAwLjQwMDAwMDAzNTgAA</bytes>
+					</object>
+					<real value="-1"/>
+					<real value="1"/>
 					<string>RAAddressField</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>RASmartBarButton</string>
@@ -2753,21 +2818,21 @@
 					<real value="1"/>
 					<string>RAAddressFieldBox</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<real value="0.0"/>
+					<real value="10"/>
 					<object class="NSColor">
 						<int key="NSColorSpace">1</int>
-						<bytes key="NSRGB">MC45MDE5NjA3OTAyIDAuOTAxOTYwNzkwMiAwLjkwMTk2MDc5MDIgMC43OAA</bytes>
+						<bytes key="NSRGB">MC4yMTkzNDk5NzYyIDAuMjI5OTk0MzQ2NSAwLjI1NDEyMzI2MzkAA</bytes>
 					</object>
-					<real value="-1"/>
-					<real value="3"/>
+					<real value="1"/>
+					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<real value="0.0"/>
 					<object class="NSColor">
 						<int key="NSColorSpace">1</int>
 						<bytes key="NSRGB">MC40MjM1Mjk0MTE4IDAuNDIzNTI5NDExOCAwLjQyMzUyOTQxMTgAA</bytes>
 					</object>
-					<real value="0.0"/>
-					<real value="0.0"/>
+					<real value="1"/>
+					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<real value="0.0"/>
 					<reference ref="578193293"/>

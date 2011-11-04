@@ -322,13 +322,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     [favoritePanel setTempFavico:[NSImage imageNamed:@"MediumSiteIcon.png"]]; 
     [favoritePanel setState:1];
     [favoritePanel setType:0];
-    RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
-    [hiddenWindow setLevel:NSNormalWindowLevel];
-    [hiddenWindow setIgnoresMouseEvents:YES];
-    [hiddenWindow setAlphaValue:0.0];
-    [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
-    [NSApp beginSheet:[favoritePanel window] modalForWindow:hiddenWindow modalDelegate:self didEndSelector:@selector(check:) contextInfo:nil];
-    [hiddenWindow release];
+    [NSApp beginSheet:[favoritePanel window] modalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(check:) contextInfo:nil];
 }
 
 

@@ -34,7 +34,7 @@
     [self reloadDataSource];
 }
 
-//Smart reload
+//Smart reload, caching image
 -(void)reloadDataSource
 {
     NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
