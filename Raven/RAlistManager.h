@@ -19,7 +19,7 @@
 -(void)updateProcess; 
 -(void)installApp;
 -(void)UnzipFile:(NSString*)sourcePath;
--(void)checkforDuplicateFromApp:(NSString *)sourcePath; 
+-(NSInteger)checkForDuplicate:(NSString *)Identifier;  
 -(void)changeStateOfAppAtIndex:(NSInteger)index withState:(NSInteger)state;
 -(NSInteger)returnStateOfAppAtIndex:(NSInteger)index;
 -(void)swapObjectAtIndex:(NSInteger)index upOrDown:(NSInteger)order;

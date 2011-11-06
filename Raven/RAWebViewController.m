@@ -235,11 +235,17 @@
     }
 }
 
+-(IBAction)executeJSScript:(id)sender
+{
+
+}
+
 -(IBAction)doASearchOnWebView:(id)sender
 {
     if (![[searchWebView stringValue]isEqualToString:@""]) {
         NSInteger results = [webview highlightAllOccurencesOfString:[searchWebView stringValue]];
         [searchResults setStringValue:[NSString stringWithFormat:@"%d results", results]];
+        
     }
     else{
         [webview removeAllHighlights];

@@ -99,7 +99,7 @@
             [listManager updateProcess]; 
             [listManager release]; 
         }
-    
+    GreaseKit = [[CMController alloc]init];
     RAMainWindowController *MainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
     [MainWindow showWindow:self]; 
     

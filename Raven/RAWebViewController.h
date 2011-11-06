@@ -68,6 +68,7 @@
 -(IBAction)gotopage:(id)sender;
 -(IBAction)doASearchOnWebView:(id)sender; 
 -(IBAction)enableSearch:(id)sender; 
+-(IBAction)executeJSScript:(id)sender;
 
 //tabs
 -(IBAction)closeButtonTabClicked:(id)sender;

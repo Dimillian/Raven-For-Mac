@@ -71,6 +71,7 @@
     RADownloadViewController *downloadview; 
     RASettingViewController *settingview; 
     
+    
     IBOutlet NSView *titleBar;
     
     

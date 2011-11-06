@@ -24,15 +24,26 @@
 
 
 //Basically import app from separate app.plist to main app.plist after checking it is a real app.
+//Need to check for duplicate and replace if yes 
 -(void)importAppAthPath:(NSString *)path
 {
+    BOOL newApp; 
     NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", path];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
     NSString *appFolder = [dict objectForKey:PLIST_KEY_FOLDER];
     NSString *appPlist = [PLIST_PATH stringByExpandingTildeInPath];
     NSMutableDictionary *dictToEdit = [NSMutableDictionary dictionaryWithContentsOfFile:appPlist];
     NSMutableArray *folders = [[dictToEdit objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
-    [folders addObject:dict];
+    NSInteger indexIfExit = [self checkForDuplicate:[dict objectForKey:PLIST_KEY_UDID]];
+    if (indexIfExit == -1) {
+        [folders addObject:dict];
+        newApp = YES;
+    }
+    else
+    {
+        [folders replaceObjectAtIndex:indexIfExit withObject:dict];
+        newApp = NO;
+    }
     [dictToEdit setObject:folders forKey:PLIST_KEY_DICTIONNARY];
     [dictToEdit writeToFile:appPlist atomically:YES];
     [folders release];
@@ -41,7 +52,9 @@
     [fileManager copyItemAtPath:path toPath:applicationSupportPath error:nil];
     [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/app.plist", applicationSupportPath] error:nil];
     [self updateProcess];
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"newAppInstalled" object:nil];
+    if (newApp) {
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"newAppInstalled" object:nil];
+    }
 }
 
 //Check if the app is valid, if yes import it
@@ -139,6 +152,7 @@
         NSString *appname = [NSString stringWithFormat:@"Would you like to install this web app? %@",[dict objectForKey:PLIST_KEY_APPNAME]];
         NSAlert *alert = [[NSAlert alloc]init];
         [alert setMessageText:appname];
+        [alert setInformativeText:@"If you already have this app installed it will just be replaced and updated"];
         NSImage *icon = [[NSImage alloc]initWithContentsOfFile:
                          [NSString stringWithFormat:@"%@/main.png", destinationPath]];
         [destinationPath retain];
@@ -154,9 +168,20 @@
 }
 
 
--(void)checkforDuplicateFromApp:(NSString *)sourcePath
+-(NSInteger)checkForDuplicate:(NSString *)Identifier
 {
-    
+    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    for (int x=0; x<[folders count]; x++) {
+        NSMutableDictionary *item = [folders objectAtIndex:x];
+        if ([[item objectForKey:PLIST_KEY_UDID]isEqualToString:Identifier]) {
+            [folders release];
+            return x; 
+        }
+    }
+    [folders release];
+    return -1; 
 }
 
 

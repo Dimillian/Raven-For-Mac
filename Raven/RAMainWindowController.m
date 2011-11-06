@@ -71,7 +71,7 @@
     for (NSMenuItem *item in [[[topMenu itemAtIndex:6]submenu]itemArray]) {
         [[[topMenu itemAtIndex:6]submenu]removeItem:item];
     }
-    NSMenu *windowMenu = [[topMenu itemAtIndex:7]submenu];
+    NSMenu *windowMenu = [[topMenu itemAtIndex:8]submenu];
     for (NSMenuItem *item in windowMenu.itemArray) {
         [windowMenu removeItem:item];
     }
@@ -143,7 +143,6 @@
 - (void)awakeFromNib
 {
 
-    
     [super windowDidLoad];
     [[self window]setDelegate:self]; 
     if (IS_RUNNING_LION) {
@@ -178,7 +177,6 @@
                                                 name:@"updateTabNumber" 
                                               object:nil];
     
-    
     //init view controller with appropriate nib
     navigatorview =
     [[RANavigatorViewController alloc] init];
@@ -199,7 +197,6 @@
     previousAppNumber = 4; 
     [self launchRuntime];
     [[self window]display];
-    
     //[self replaceTitleBarViewWith:titleBar];
     
 }

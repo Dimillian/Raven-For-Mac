@@ -41,7 +41,7 @@
 }
 
 
-//WAKE UP
+//WAKE UP DRING DRING 
 -(void)awakeFromNib
 { 
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter]; 
@@ -70,7 +70,7 @@
 
 -(void)setMenu{
     NSMenu *topMenu = [NSApp mainMenu]; 
-    [topMenu setSubmenu:navigatorMenu forItem:[topMenu itemAtIndex:7]];
+    [topMenu setSubmenu:navigatorMenu forItem:[topMenu itemAtIndex:8]];
     RAWebViewController *selectedTab = [tabsArray objectAtIndex:
                                         [tabController indexOfTabViewItem:
                                          [tabController selectedTabViewItem]]];
@@ -237,8 +237,8 @@
     {
         NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
         if (standardUserDefaults) {
-            if ([standardUserDefaults integerForKey:@"doHaveLaunched"] == 0) {
-                [standardUserDefaults setInteger:1 forKey:@"doHaveLaunched"];
+            if ([standardUserDefaults integerForKey:DO_HAVE_LAUNCHED] == 0) {
+                [standardUserDefaults setInteger:1 forKey:DO_HAVE_LAUNCHED];
                 [standardUserDefaults synchronize];
                 [newtab initWithFirstTimeLaunchPage];
             }
@@ -254,7 +254,7 @@
     [tabController addTabViewItem:item]; 
     NSUserDefaults *standardUserDefault = [NSUserDefaults standardUserDefaults]; 
     if (standardUserDefault) {
-        if ([standardUserDefault integerForKey:@"OpenTabInBackground"] == 0 && !inBackground) {
+        if ([standardUserDefault integerForKey:OPEN_TAB_IN_BACKGROUND] == 0 && !inBackground) {
                 //reset all tabs button position
                 [self resetAllTabsButon]; 
                 [tabController selectTabViewItem:item]; 
@@ -504,11 +504,8 @@
 //Little hack to intercept URL, the webview start provisiosing with the previous request. Only way to catch the URL
 - (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
 {
-if (frame == [sender mainFrame]){
-    if ([[sender mainFrameURL]isEqualToString:@""]) {
-    }
-        else
-        {
+    if (frame == [sender mainFrame]){
+        if (![[sender mainFrameURL]isEqualToString:@""]) {
             PassedUrl = [sender mainFrameURL]; 
             [self addtabs:tabsButton];
             [sender stopLoading:sender]; 

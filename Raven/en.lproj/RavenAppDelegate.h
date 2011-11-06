@@ -10,20 +10,14 @@
 #import <WebKit/WebKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import <Carbon/Carbon.h>
-#import <sqlite3.h>
-#import "RAHistoryViewController.h"
-#import "RANavigatorViewController.h"
-#import "RABookmarkViewController.h"
-#import "RADownloadViewController.h"
 #import "RASettingViewController.h"
 #import "RAItemObject.h"
 #import "url.h"
 #import "RADatabaseController.h"
 #import "RAMainWindowController.h"
-#import "RADownloadController.h"
-#import "RADownloadObject.h"
 #import "RASettingWindowController.h"
 #import "RAAboutPanelWindowController.h"
+#import "CMController.h"
 
 @interface RavenAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, NSImageDelegate> {
     RASettingWindowController *setting;
@@ -31,6 +25,7 @@
     IBOutlet NSMenu *favoriteMenu; 
     NSMutableArray *mainWindowArray; 
     NSString *opennedDocumentPath;
+    CMController *GreaseKit; 
 }
 //button action
 -(IBAction)newWindow:(id)sender;
