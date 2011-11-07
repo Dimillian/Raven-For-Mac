@@ -22,11 +22,11 @@
 	[self check:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
-                                                name:@"downloadDidUpdate" 
+                                                name:DOWNLOAD_UPDATE 
                                               object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
-                                                name:@"downloadDidFinish" 
+                                                name:DOWNLOAD_FINISH
                                               object:nil];
     
 

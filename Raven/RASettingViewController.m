@@ -23,7 +23,7 @@
     [self reloadDataSource];
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
-                                                name:@"newAppInstalled" 
+                                                name:NEW_APP_INSTALLED 
                                               object:nil];;
 
     
@@ -211,7 +211,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 -(void)refreshSmartBar
 {
     [self reloadDataSource];
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"smartBarWasUpdated" object:nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
 }
 
 

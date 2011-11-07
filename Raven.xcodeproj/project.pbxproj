@@ -252,6 +252,7 @@
 		9F85275713CEDBCD00D26BCF /* RAFavoritePanelWController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F85275613CEDBCD00D26BCF /* RAFavoritePanelWController.m */; };
 		9F8653F414232FEA00F32B77 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F8653F314232FEA00F32B77 /* libz.1.2.5.dylib */; };
 		9F8654081423348B00F32B77 /* app in Resources */ = {isa = PBXBuildFile; fileRef = 9F8654071423348B00F32B77 /* app */; };
+		9F8899441467CCE100BBA017 /* RAGrowlDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8899431467CCE100BBA017 /* RAGrowlDispatcher.m */; };
 		9F8A1CC213FD9E7F00DD291C /* PreferenceWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F8A1CC413FD9E7F00DD291C /* PreferenceWindow.xib */; };
 		9F8A1CCC13FDA18C00DD291C /* AddtoFavorite.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F8A1CCE13FDA18C00DD291C /* AddtoFavorite.xib */; };
 		9F8A1CD113FDA36500DD291C /* Bookmark.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F8A1CD313FDA36500DD291C /* Bookmark.xib */; };
@@ -289,6 +290,8 @@
 		9FD7B27714668FEA007EFF15 /* Apps.nib in Resources */ = {isa = PBXBuildFile; fileRef = 9FD7B27414668FEA007EFF15 /* Apps.nib */; };
 		9FD7B27A14669010007EFF15 /* hello.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 9FD7B27814668FF4007EFF15 /* hello.user.js */; };
 		9FD7B27B1466901B007EFF15 /* template.js in Resources */ = {isa = PBXBuildFile; fileRef = 9FD7B27314668FEA007EFF15 /* template.js */; };
+		9FD7B27D1466F57E007EFF15 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD7B27C1466F57E007EFF15 /* Growl.framework */; };
+		9FD7B27E1466F5A2007EFF15 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9FD7B27C1466F57E007EFF15 /* Growl.framework */; };
 		9FE5DE3D1434A77D003614C3 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE5DE3B1434A77D003614C3 /* down.png */; };
 		9FE5DE3E1434A77D003614C3 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE5DE3C1434A77D003614C3 /* up.png */; };
 		9FEF52C7140E2F71004A16D0 /* delete_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FEF52C6140E2F71004A16D0 /* delete_big.png */; };
@@ -326,6 +329,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				69F711A813C05FB300B92932 /* Sparkle.framework in CopyFiles */,
+				9FD7B27E1466F5A2007EFF15 /* Growl.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +635,8 @@
 		9F85275613CEDBCD00D26BCF /* RAFavoritePanelWController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAFavoritePanelWController.m; sourceTree = "<group>"; };
 		9F8653F314232FEA00F32B77 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		9F8654071423348B00F32B77 /* app */ = {isa = PBXFileReference; lastKnownFileType = folder; path = app; sourceTree = "<group>"; };
+		9F8899421467CCE100BBA017 /* RAGrowlDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGrowlDispatcher.h; sourceTree = "<group>"; };
+		9F8899431467CCE100BBA017 /* RAGrowlDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAGrowlDispatcher.m; sourceTree = "<group>"; };
 		9F8A1CC313FD9E7F00DD291C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PreferenceWindow.xib; sourceTree = "<group>"; };
 		9F8A1CC913FD9E9B00DD291C /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/RavenAppDelegate.h; sourceTree = "<group>"; };
 		9F8A1CCD13FDA18C00DD291C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AddtoFavorite.xib; sourceTree = "<group>"; };
@@ -677,6 +683,7 @@
 		9FD7B27314668FEA007EFF15 /* template.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = template.js; sourceTree = "<group>"; };
 		9FD7B27414668FEA007EFF15 /* Apps.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = Apps.nib; sourceTree = "<group>"; };
 		9FD7B27814668FF4007EFF15 /* hello.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = hello.user.js; sourceTree = "<group>"; };
+		9FD7B27C1466F57E007EFF15 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Raven/Growl.framework; sourceTree = "<group>"; };
 		9FE5DE3B1434A77D003614C3 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		9FE5DE3C1434A77D003614C3 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		9FEF52C6140E2F71004A16D0 /* delete_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_big.png; sourceTree = "<group>"; };
@@ -711,6 +718,7 @@
 				69F8A0B2133CD52A00E32E6D /* WebKit.framework in Frameworks */,
 				69F8A07E133CD50300E32E6D /* Cocoa.framework in Frameworks */,
 				69F711A613C05F4700B92932 /* Sparkle.framework in Frameworks */,
+				9FD7B27D1466F57E007EFF15 /* Growl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1082,6 +1090,7 @@
 		69F8A07C133CD50300E32E6D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9FD7B27C1466F57E007EFF15 /* Growl.framework */,
 				9F8653F314232FEA00F32B77 /* libz.1.2.5.dylib */,
 				9FF75E2B141D570E00910A65 /* Security.framework */,
 				69F711A513C05F4700B92932 /* Sparkle.framework */,
@@ -1350,6 +1359,8 @@
 				69DF001113C0B26E006F92BD /* RADownloadController.m */,
 				9F4953FF1446D56A00EED6BE /* RAInstapaperSubmit.h */,
 				9F4954001446D56A00EED6BE /* RAInstapaperSubmit.m */,
+				9F8899421467CCE100BBA017 /* RAGrowlDispatcher.h */,
+				9F8899431467CCE100BBA017 /* RAGrowlDispatcher.m */,
 			);
 			name = "Other controller";
 			sourceTree = "<group>";
@@ -1863,6 +1874,7 @@
 				9FD7B26A14668FD5007EFF15 /* CMUserScript.m in Sources */,
 				9FD7B26B14668FD5007EFF15 /* WildcardPattern.m in Sources */,
 				9FD7B27114668FDF007EFF15 /* Utils.m in Sources */,
+				9F8899441467CCE100BBA017 /* RAGrowlDispatcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2026,6 +2038,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Raven\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -2050,6 +2063,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Raven\"",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_ENABLE_OBJC_GC = unsupported;

@@ -18,6 +18,8 @@
 #import "RASettingWindowController.h"
 #import "RAAboutPanelWindowController.h"
 #import "CMController.h"
+#import "RAGrowlDispatcher.h"
+
 
 @interface RavenAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, NSImageDelegate> {
     RASettingWindowController *setting;
@@ -26,6 +28,7 @@
     NSMutableArray *mainWindowArray; 
     NSString *opennedDocumentPath;
     CMController *GreaseKit; 
+    RAGrowlDispatcher *growlDispatcher; 
 }
 //button action
 -(IBAction)newWindow:(id)sender;

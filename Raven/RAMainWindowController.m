@@ -11,6 +11,8 @@
 #import "RASettingViewController.h"
 #import "INAppStoreWindow.h"
 #import "RAHiddenWindow.h"
+#import "Growl/Growl.h"
+#import "Growl/GrowlApplicationBridge.h"
 
 //smart bar app positioning
 #define retracted_app_height 55
@@ -119,6 +121,7 @@
 
 }
 
+
 -(NSRect)window:(NSWindow *)window willPositionSheet:(NSWindow *)sheet usingRect:(NSRect)rect
 {
     rect.origin.y = rect.origin.y + 27; 
@@ -153,20 +156,20 @@
     //Listen to interesting notifications about GUI refresh
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
-                                                name:@"smartBarWasUpdated" 
+                                                name:SMART_BAR_UPDATE 
                                               object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
-                                                name:@"newAppInstalled" 
+                                                name:NEW_APP_INSTALLED 
                                               object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
-                                                name:@"downloadDidBegin" 
+                                                name:DOWNLOAD_BEGIN 
                                               object:nil];
 
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
-                                                name:@"downloadDidFinish" 
+                                                name:DOWNLOAD_FINISH 
                                               object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(windowWillClose:) 
@@ -174,7 +177,7 @@
                                                object:self.window];
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
-                                                name:@"updateTabNumber" 
+                                                name:UPDATE_TAB_NUMBER 
                                               object:nil];
     
     //init view controller with appropriate nib
@@ -203,16 +206,16 @@
 
 -(void)receiveNotification:(NSNotification *)notification
 {   
-    if ([[notification name]isEqualToString:@"smartBarWasUpdated"]) {
+    if ([[notification name]isEqualToString:SMART_BAR_UPDATE]) {
         [self initSmartBar];
         [self updateSmartBarUi];
         [self resetSmartBarUiWithoutAnimation];
         [self animate:13];
     }
-    if ([[notification name]isEqualToString:@"newAppInstalled"]) {
+    if ([[notification name]isEqualToString:NEW_APP_INSTALLED]) {
         [self newAppInstalled];
     }
-    if ([[notification name]isEqualToString:@"downloadDidBegin"])
+    if ([[notification name]isEqualToString:DOWNLOAD_BEGIN])
     {
         [downloadButton setHidden:NO];
         [downloadButton setAlphaValue:1.0];
@@ -223,7 +226,7 @@
         [downloadButton setAlphaValue:1.0];
         [downloadButton setImage:[NSImage imageNamed:@"download_on.png"]];
     }
-    if ([[notification name]isEqualToString:@"updateTabNumber"]){
+    if ([[notification name]isEqualToString:UPDATE_TAB_NUMBER]){
         [firstButtonNumber setStringValue:[self numberOfDotToDisplay:[navigatorview.tabsArray count]]];
     }
 }

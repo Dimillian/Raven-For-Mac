@@ -9,7 +9,7 @@
 #import "RANSURLDownloadDelegate.h"
 #import "RAMainWindowController.h"
 #import "RAlistManager.h"
-
+#import "RavenAppDelegate.h"
 
 @implementation RANSURLDownloadDelegate
 
@@ -36,7 +36,7 @@
         downloadIndex  = [[controller downloadArray]count]; 
         [controller release];
         if (trackDownload) {
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"downloadDidBegin" object:nil];
+            [[NSNotificationCenter defaultCenter]postNotificationName:DOWNLOAD_BEGIN object:nil];
         }
         
         // Reset the progress, this might be called multiple times.
@@ -137,7 +137,7 @@
         RADownloadController *controller = [[RADownloadController alloc]init]; 
         [controller replaceDownloadAtIndex:downloadIndex withDownload:aDownload];
         [controller release]; 
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"downloadDidUpdate" object:nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:DOWNLOAD_UPDATE object:nil];
     }
 
 }
@@ -157,7 +157,7 @@
         [listManager installApp];
     }
     if (trackDownload) {
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"downloadDidFinish" object:nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:DOWNLOAD_FINISH object:downloadName];
     }
 
 }

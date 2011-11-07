@@ -74,7 +74,7 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
-                                                name:@"updateTabNumber" 
+                                                name:UPDATE_TAB_NUMBER 
                                               object:nil];
 
     

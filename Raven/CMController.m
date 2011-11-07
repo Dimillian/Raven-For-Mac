@@ -440,7 +440,7 @@ static NSString* SCRIPT_DIR_PATH = @"~/Library/Application Support/ravenapp/Grea
     NSMenuItem* item = [[NSMenuItem alloc] init];
     [[NSApp mainMenu] insertItem: item
                          atIndex: 7];
-    [topMenu setTitle: @"User Scripts"];
+    [topMenu setTitle: @"Userscripts"];
     [item setSubmenu: topMenu];
     [item release];
     // Notification

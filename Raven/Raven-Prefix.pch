@@ -23,6 +23,15 @@
 #define SHOW_FAVICON_TAB @"showFavicon"
 #define ADBLOCK_CSS @"adblockCss"
 
+//notifications
+#define DOWNLOAD_BEGIN @"downloadDidBegin"
+#define DOWNLOAD_UPDATE @"downloadDidUpdate"
+#define DOWNLOAD_FINISH @"downloadDidFinish"
+#define NEW_APP_INSTALLED @"newAppInstalled"
+#define APP_UPDATED @"appUpdated"
+#define SMART_BAR_UPDATE @"smartBarWasUpdated"
+#define UPDATE_TAB_NUMBER @"updateTabNumber"
+
 
 #define application_support_path @"~/Library/Application Support/RavenApp/app/"
 #define PLIST_KEY_APPNAME @"appname"

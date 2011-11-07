@@ -275,7 +275,7 @@
     [newtab release]; 
     [self redrawTabs:NO];
     PassedUrl = nil; 
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"updateTabNumber" object:nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:UPDATE_TAB_NUMBER object:nil];
     
 }
 
@@ -444,7 +444,7 @@
     [self redrawTabs:NO];
     [self setImageOnSelectedTab];
     [self setMenu];
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"updateTabNumber" object:nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:UPDATE_TAB_NUMBER object:nil];
 }
 
 #pragma mark -

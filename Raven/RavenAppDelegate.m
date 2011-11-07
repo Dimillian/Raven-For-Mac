@@ -8,7 +8,6 @@
 
 #import "RavenAppDelegate.h"
 #import "RAlistManager.h"
-
 @implementation RavenAppDelegate
 @synthesize setting, mainWindowArray; 
 #pragma mark -
@@ -22,13 +21,13 @@
    // NSDictionary *defaultsDict = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
    // for (NSString *key in [defaultsDict allKeys])
     //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
-    
     RADatabaseController *controler = [RADatabaseController sharedUser];
     [controler checkAndCreateDatabase];
     [controler vacuum];
     RADownloadController *downloadCenter = [[RADownloadController alloc]init]; 
     [downloadCenter checkAndCreatePlist];
     [downloadCenter release];
+    growlDispatcher = [[RAGrowlDispatcher alloc]init];
     //[downloadCenter writeDownloadInplist]; 
     mainWindowArray = [[NSMutableArray alloc]init]; 
      //NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
@@ -117,6 +116,8 @@
    
         
 }
+
+
 
 //Fired when external URL is clicked
 - (void)getUrl:(NSAppleEventDescriptor *)event 

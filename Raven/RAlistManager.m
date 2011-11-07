@@ -27,7 +27,7 @@
 //Need to check for duplicate and replace if yes 
 -(void)importAppAthPath:(NSString *)path
 {
-    BOOL newApp; 
+    BOOL newApp;
     NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", path];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
     NSString *appFolder = [dict objectForKey:PLIST_KEY_FOLDER];
@@ -53,7 +53,11 @@
     [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/app.plist", applicationSupportPath] error:nil];
     [self updateProcess];
     if (newApp) {
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"newAppInstalled" object:nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:NEW_APP_INSTALLED object:nil];
+    }
+    else{
+        [[NSNotificationCenter defaultCenter]postNotificationName:APP_UPDATED object:nil];
+
     }
 }
 
