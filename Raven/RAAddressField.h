@@ -10,9 +10,9 @@
 #import "RANavigatorViewController.h"
 #import "MAAttachedWindow.h"
 #import "RADatabaseController.h"
+#import "RAGoogleSuggestionsParser.h"
 
-
-@interface RAAddressField : NSTextField <NSTableViewDelegate, NSTableViewDataSource, NSWindowDelegate> {
+@interface RAAddressField : NSTextField <NSTableViewDelegate, NSTableViewDataSource, NSWindowDelegate, RAGoogleSuggestionDelegate> {
     
     NSTableView *tableViewEdit; 
     NSUInteger i; 
@@ -25,6 +25,8 @@
     IBOutlet NSTableColumn *urlColumn; 
     IBOutlet NSTableColumn *faviconColumn; 
     int ind; 
+    
+    RAGoogleSuggestionsParser *suggParser; 
 }
 -(IBAction)LoadSelectedRow:(id)sender; 
 -(void)closeSuggestionBox;

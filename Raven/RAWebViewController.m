@@ -46,28 +46,7 @@
     
     return self;  
 }
-/*
-+(NSString*)webScriptNameForSelector:(SEL)sel
-{
-    if(sel == @selector(logJavaScriptString:))
-        return @"log";
-    return nil;
-}
 
-//this allows JavaScript to call the -logJavaScriptString: method
-+ (BOOL)isSelectorExcludedFromWebScript:(SEL)sel
-{
-    if(sel == @selector(logJavaScriptString:))
-        return NO;
-    return YES;
-}
-
-
-- (void)logJavaScriptString:(NSString*) logText
-{
-    NSLog(@"JavaScript: %@",logText);
-}
-*/
 -(void)setMenu
 {
     NSMenu *topMenu = [NSApp menu]; 
@@ -621,7 +600,7 @@
 
 @end
 
-//Private API to accept untrunsted certificate, should be enhance or removed
+//Private API to accept untrunsted certificate, should be removed next time soemtime with a brain pass by here
 
 @implementation NSURLRequest(DataController)
 + (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host

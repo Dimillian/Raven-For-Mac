@@ -77,6 +77,9 @@
 //Other method
 -(void)setMenu;
 -(NSMenu *)getFavoriteMenu; 
+/////////////////////////////////////////////////////////////////////////////
+//Name are confuse, they are not initiliazer and should no be used to do this
+/////////////////////////////////////////////////////////////////////////////
 -(void)initWithUrl:(NSString *)url;
 -(void)initWithWelcomePage; 
 -(void)initWithPreferredUrl; 
@@ -84,6 +87,7 @@
 -(void)initWithBookmarkPage;
 -(void)initwithFavoritePage; 
 -(void)initWithFirstTimeLaunchPage; 
+///////////////////////////////////////////////////////////////////////////////
 -(void)checkua; 
 -(void)setWindowTitle:(id)sender; 
 -(id)infoValueForKey:(NSString*)key;

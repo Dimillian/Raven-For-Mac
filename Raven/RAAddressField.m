@@ -19,6 +19,8 @@
     ind = -1;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:) name:NSWindowDidResizeNotification object:nil]; 
     //[tableview setAllowsEmptySelection:NO]; 
+    //suggParser = [[RAGoogleSuggestionsParser alloc]initWithDelegate:self];
+
 }
 
 /*
@@ -224,6 +226,12 @@
 
 -(void)check:(id)sender
 {
+    /*
+    NSString *suggestion = [[self stringValue]stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    [suggParser setURLToParse:[NSURL URLWithString:
+                                [NSString stringWithFormat:@"http://google.com/complete/search?output=toolbar&q=%@", suggestion]]];
+    [suggParser startParsing];
+    */
     [self display];
     RADatabaseController *controller = [RADatabaseController sharedUser];
     [controller suggestionForString:[self stringValue]];
@@ -274,6 +282,13 @@
         
     } 
 }
+/*
+-(void)didFinishParsing:(RAGoogleSuggestionsParser *)parser
+{
+    //Do something with the array
+    NSLog(@"%@", [suggParser returnSuggestions] );
+}
+*/
 
 //return the number of row to dislay
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
