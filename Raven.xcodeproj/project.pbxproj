@@ -687,7 +687,6 @@
 		9FD7B27C1466F57E007EFF15 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Raven/Growl.framework; sourceTree = "<group>"; };
 		9FDD0CDA146814CA00865ACB /* RAGoogleSuggestionsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGoogleSuggestionsParser.h; sourceTree = "<group>"; };
 		9FDD0CDB146814CA00865ACB /* RAGoogleSuggestionsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAGoogleSuggestionsParser.m; sourceTree = "<group>"; };
-		9FDF1CE6146BDF8F009D3DAE /* Raven.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Raven.entitlements; sourceTree = "<group>"; };
 		9FE5DE3B1434A77D003614C3 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		9FE5DE3C1434A77D003614C3 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		9FEF52C6140E2F71004A16D0 /* delete_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_big.png; sourceTree = "<group>"; };
@@ -1121,7 +1120,6 @@
 		69F8A083133CD50300E32E6D /* Raven */ = {
 			isa = PBXGroup;
 			children = (
-				9FDF1CE6146BDF8F009D3DAE /* Raven.entitlements */,
 				9F87403F14140E9000D04281 /* Categories */,
 				9F2F4591140D19C600BAB731 /* SmartBarFork */,
 				9FC3B79D14038C7300E28D71 /* Specific object */,

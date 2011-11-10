@@ -10,5 +10,6 @@
 
 int main(int argc, char *argv[])
 {
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebIconDatabaseEnabled"];
     return NSApplicationMain(argc, (const char **)argv);
 }

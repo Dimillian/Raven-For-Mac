@@ -81,7 +81,6 @@
     
     destinationFilename = [[homeDirectory stringByAppendingPathComponent:@"Downloads"]
                            stringByAppendingPathComponent:filename];
-    
     [download setDestination:destinationFilename allowOverwrite:NO];
     if(filename != nil){downloadName = filename;}
     downloadPath = destinationFilename;

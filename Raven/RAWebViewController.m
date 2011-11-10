@@ -425,9 +425,16 @@
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     NSString *URL = [webview mainFrameURL];
+    NSString *URLPrefix; 
+    if ([URL hasPrefix:@"https"]) {
+        URLPrefix = @"https://";
+    }
+    else{
+        URLPrefix = @"http://";
+    }
     URL = [[NSURL URLWithString:URL]host];
     NSError * error;
-    NSString * html = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@",URL]]
+    NSString * html = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URLPrefix,URL]]
                                                encoding:NSUTF8StringEncoding
                                                   error:&error];  
     if( [html length] )
@@ -447,22 +454,22 @@
                 URL = href;
             } else {
                 if ([href hasPrefix:@"/"]) {
-                    URL = [NSString stringWithFormat:@"http://%@%@",URL,href];
+                    URL = [NSString stringWithFormat:@"%@%@%@",URLPrefix,URL,href];
                 }
                 else{
-                    URL = [NSString stringWithFormat:@"http://%@/%@",URL,href];
+                    URL = [NSString stringWithFormat:@"%@%@/%@",URLPrefix,URL,href];
                 }
             }
         } else {
-            URL = [NSString stringWithFormat:@"http://%@/favicon.ico",URL];
+            URL = [NSString stringWithFormat:@"%@%@/favicon.ico",URLPrefix,URL];
         }
         
         
     } else {
         URL = [NSString stringWithFormat:FAVICON_URL,URL];
-    }    
+    }
     NSData * blob = [NSData dataWithContentsOfURL:[NSURL URLWithString:URL]];
-    NSImage *tempIcon = [[NSImage alloc]initWithData:blob]; 
+    NSImage *tempIcon = [[NSImage alloc]initWithData:blob];
     if (!tempIcon) {
         tempIcon = [NSImage imageNamed:@"MediumSiteIcon"];
         favicon = tempIcon; 
@@ -503,13 +510,16 @@
         NSString *currentUrl= [webview mainFrameURL];
         NSImage *currentFavicon = favicon;
         NSString *udid = [[NSURL URLWithString:[webview mainFrameURL]]host];
-        udid = [udid createFileNameFromString:udid];
-        [[currentFavicon TIFFRepresentation] writeToFile:[[NSString stringWithFormat:FAVICON_PATH, udid]stringByExpandingTildeInPath] atomically:YES];
-        [controller insetHistoryItem:[webview mainFrameTitle] 
-                                 url:currentUrl 
-                                data:[udid dataUsingEncoding:NSStringEncodingConversionAllowLossy] 
-                                date:currentDate];
-        [controller updateBookmarkFavicon:[currentFavicon TIFFRepresentation] forUrl:currentUrl];
+        if (udid != nil) {
+            udid = [udid createFileNameFromString:udid];
+            [[currentFavicon TIFFRepresentation] writeToFile:[[NSString stringWithFormat:FAVICON_PATH, udid]stringByExpandingTildeInPath] atomically:YES];
+            [controller insetHistoryItem:[webview mainFrameTitle] 
+                                     url:currentUrl 
+                                    data:[udid dataUsingEncoding:NSStringEncodingConversionAllowLossy] 
+                                    date:currentDate];
+            [controller updateBookmarkFavicon:[currentFavicon TIFFRepresentation] forUrl:currentUrl];
+
+        }
         [currentDate release]; 
     }
     [pool release]; 
