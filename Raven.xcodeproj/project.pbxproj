@@ -687,6 +687,7 @@
 		9FD7B27C1466F57E007EFF15 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Raven/Growl.framework; sourceTree = "<group>"; };
 		9FDD0CDA146814CA00865ACB /* RAGoogleSuggestionsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGoogleSuggestionsParser.h; sourceTree = "<group>"; };
 		9FDD0CDB146814CA00865ACB /* RAGoogleSuggestionsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAGoogleSuggestionsParser.m; sourceTree = "<group>"; };
+		9FDF1CE6146BDF8F009D3DAE /* Raven.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Raven.entitlements; sourceTree = "<group>"; };
 		9FE5DE3B1434A77D003614C3 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		9FE5DE3C1434A77D003614C3 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		9FEF52C6140E2F71004A16D0 /* delete_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_big.png; sourceTree = "<group>"; };
@@ -803,13 +804,13 @@
 			name = ressources;
 			sourceTree = "<group>";
 		};
-		69360E3E13A8BC4A00EECA76 /* popover */ = {
+		69360E3E13A8BC4A00EECA76 /* Popover */ = {
 			isa = PBXGroup;
 			children = (
 				69360E3F13A8BC7600EECA76 /* MAAttachedWindow.h */,
 				69360E4013A8BC7600EECA76 /* MAAttachedWindow.m */,
 			);
-			name = popover;
+			name = Popover;
 			sourceTree = "<group>";
 		};
 		6952DE2B135A099B0016774E /* google */ = {
@@ -1120,6 +1121,7 @@
 		69F8A083133CD50300E32E6D /* Raven */ = {
 			isa = PBXGroup;
 			children = (
+				9FDF1CE6146BDF8F009D3DAE /* Raven.entitlements */,
 				9F87403F14140E9000D04281 /* Categories */,
 				9F2F4591140D19C600BAB731 /* SmartBarFork */,
 				9FC3B79D14038C7300E28D71 /* Specific object */,
@@ -1219,7 +1221,7 @@
 				9FD7B22914647B8B007EFF15 /* GreaseKit */,
 				9F2BEE6A140FBE930090AD70 /* Instapaper */,
 				9FC2708F14101E6900EAFD3C /* Readdibility */,
-				69360E3E13A8BC4A00EECA76 /* popover */,
+				69360E3E13A8BC4A00EECA76 /* Popover */,
 				6967C3DA139959E7004B8AAB /* PXListView */,
 				9FF75E27141D530900910A65 /* Keychain */,
 			);

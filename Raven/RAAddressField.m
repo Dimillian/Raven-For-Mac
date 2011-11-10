@@ -8,6 +8,7 @@
 
 #import "RAAddressField.h"
 #import "RAAddressFieldBox.h"
+#import "RAGoogleSuggestionsParser.h"
 
 
 @implementation RAAddressField 
@@ -204,6 +205,12 @@
         NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
         if (standardUserDefaults) {
             if ([standardUserDefaults integerForKey:SUGGESTION_BAR] == 1) {
+                /*
+                NSString *suggestion = [[self stringValue]stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+                [suggParser setURLToParse:[NSURL URLWithString:
+                                           [NSString stringWithFormat:@"http://google.com/complete/search?output=toolbar&q=%@", suggestion]]];
+                [suggParser startParsing];
+                 */
                 [self check:nil];
                 
                 
@@ -226,12 +233,6 @@
 
 -(void)check:(id)sender
 {
-    /*
-    NSString *suggestion = [[self stringValue]stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    [suggParser setURLToParse:[NSURL URLWithString:
-                                [NSString stringWithFormat:@"http://google.com/complete/search?output=toolbar&q=%@", suggestion]]];
-    [suggParser startParsing];
-    */
     [self display];
     RADatabaseController *controller = [RADatabaseController sharedUser];
     [controller suggestionForString:[self stringValue]];
@@ -282,13 +283,14 @@
         
     } 
 }
-/*
+
 -(void)didFinishParsing:(RAGoogleSuggestionsParser *)parser
 {
     //Do something with the array
-    NSLog(@"%@", [suggParser returnSuggestions] );
+    //NSLog(@"%@", [suggParser returnSuggestions]);
+    //[self check:nil];
 }
-*/
+
 
 //return the number of row to dislay
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView

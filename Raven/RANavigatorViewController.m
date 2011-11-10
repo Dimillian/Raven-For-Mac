@@ -325,6 +325,7 @@
         NSString *tempTitle = [button.pageTitleTab stringValue];
         tempTitle = [tempTitle stringByPaddingToLength:35 withString:@" " startingAtIndex:0];
         [item setTitle:tempTitle]; 
+        [[button.faviconTab image]setSize:NSMakeSize(16, 16)];
         [item setImage:[button.faviconTab image]];
         [item setAction:@selector(tabsButtonClicked:)];
         [item setEnabled:YES];

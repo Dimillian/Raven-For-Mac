@@ -39,6 +39,7 @@
     newtab = [[RAWebViewController alloc] initWithNibName:@"NavigatorNoBottom" bundle:nil];
     //cal the view
     [newtab view]; 
+    [newtab setDoRegisterHistory:1];
     //set the view on the viewcontroller
     myCurrentViewController = newtab;	// keep track of the current view controller
     
@@ -261,8 +262,8 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 {
     if ([contents isEqualToString:@""]) {
         NSAlert *alert = [[NSAlert alloc]init];
-        [alert setInformativeText:@"Please try on another page"]; 
-        [alert setMessageText:@"The page can not be parsed"]; 
+        [alert setInformativeText:NSLocalizedString(@"Please try on another page", @"readilityFailInformative")]; 
+        [alert setMessageText:NSLocalizedString(@"The page can not be parsed", @"readilityFailMessage")]; 
         [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:nil contextInfo:nil];
         [alert release]; 
         [readButton setState:0];
@@ -284,8 +285,8 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 {
     [readButton setState:0];
     NSAlert *alert = [[NSAlert alloc]init];
-    [alert setInformativeText:@"Please try on another page"]; 
-    [alert setMessageText:@"The page can not be parsed"]; 
+    [alert setInformativeText:NSLocalizedString(@"Please try on another page", @"readilityFailInformative")]; 
+    [alert setMessageText:NSLocalizedString(@"The page can not be parsed", @"readilityFailMessage")]; 
     [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:nil contextInfo:nil];
     [alert release]; 
     

@@ -17,6 +17,8 @@
 
 #define GOOGLE_SEARCH_URL @"http://www.google.com/search?q="
 #define YANDEX_SEARCH_URL @"http://yandex.com/yandsearch?text="
+#define FAVICON_URL @"http://s2.googleusercontent.com/s2/favicons?domain=%@"
+#define FAVICON_PATH @"~/Library/Application Support/RavenApp/favicon/%@"
 
 @implementation RAWebViewController
 @synthesize passedUrl, switchView, tabsButton, webview, address, tabview, searchWebView; 
@@ -266,7 +268,7 @@
     RAFavoritePanelWController *favoritePanel = [[RAFavoritePanelWController alloc]init];
     [favoritePanel setTempURL:[webview mainFrameURL]]; 
     [favoritePanel setTempTitle:[webview mainFrameTitle]]; 
-    [favoritePanel setTempFavico:[webview mainFrameIcon]]; 
+    [favoritePanel setTempFavico:favicon]; 
     [favoritePanel setState:1];
     [favoritePanel setType:0];
     [NSApp beginSheet:[favoritePanel window] modalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:NULL contextInfo:nil];
@@ -419,6 +421,100 @@
     }
 }
 
+-(void)getFavicon:(id)sender
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    NSString *URL = [webview mainFrameURL];
+    URL = [[NSURL URLWithString:URL]host];
+    NSError * error;
+    NSString * html = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@",URL]]
+                                               encoding:NSUTF8StringEncoding
+                                                  error:&error];  
+    if( [html length] )
+    {
+        
+        NSXMLDocument * DOM = [[[NSXMLDocument alloc] initWithXMLString:html
+                                                                options:NSXMLDocumentTidyHTML
+                                                                  error:&error] autorelease];
+        
+        NSArray * nodes = [[DOM rootElement]nodesForXPath:@"head/link[@rel='icon']"
+                                                     error:&error];
+        if( [nodes count] )
+        {
+            NSString * href = [[[nodes lastObject] attributeForName:@"href"] stringValue];
+            if( [href rangeOfString:@"http"].location != NSNotFound )
+            {
+                URL = href;
+            } else {
+                if ([href hasPrefix:@"/"]) {
+                    URL = [NSString stringWithFormat:@"http://%@%@",URL,href];
+                }
+                else{
+                    URL = [NSString stringWithFormat:@"http://%@/%@",URL,href];
+                }
+            }
+        } else {
+            URL = [NSString stringWithFormat:@"http://%@/favicon.ico",URL];
+        }
+        
+        
+    } else {
+        URL = [NSString stringWithFormat:FAVICON_URL,URL];
+    }    
+    NSData * blob = [NSData dataWithContentsOfURL:[NSURL URLWithString:URL]];
+    NSImage *tempIcon = [[NSImage alloc]initWithData:blob]; 
+    if (!tempIcon) {
+        tempIcon = [NSImage imageNamed:@"MediumSiteIcon"];
+        favicon = tempIcon; 
+    }
+    else{
+        favicon = tempIcon;  
+    }
+    [pool release]; 
+    [self performSelectorOnMainThread:@selector(setFaviconUI:) withObject:nil waitUntilDone:YES];
+    [self performSelectorInBackground:@selector(saveHistory:) withObject:nil];
+}
+
+-(void)setFaviconUI:(id)sender
+{
+    NSString *title = [webview mainFrameTitle];
+    if ([title isEqualToString:@"Raven Welcome Page"] || 
+        [title isEqualToString:@"Raven Internal Page"] ||            
+        [[webview mainFrameURL]isEqualToString:@"http://go.raven.io/"]){
+        [temp setImage:[NSImage imageNamed:@"ravenico.png"]]; 
+        [faviconTab setImage:[NSImage imageNamed:@"ravenico.png"]]; 
+    }
+    else{
+        [temp setImage:favicon]; 
+        [faviconTab setImage:favicon]; 
+    }
+}
+
+-(void)saveHistory:(id)sender
+{
+    
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    RADatabaseController *controller = [RADatabaseController sharedUser];
+    NSString *title = [webview mainFrameTitle];
+    if ([title isEqualToString:@""] || [[webview mainFrameURL]isEqualToString:@"http://go.raven.io/"]) {
+    }
+    else if (doRegisterHistory == 2) {
+        NSDate *currentDate = [[NSDate alloc]initWithTimeIntervalSinceNow:0]; 
+        NSString *currentUrl= [webview mainFrameURL];
+        NSImage *currentFavicon = favicon;
+        NSString *udid = [[NSURL URLWithString:[webview mainFrameURL]]host];
+        udid = [udid createFileNameFromString:udid];
+        [[currentFavicon TIFFRepresentation] writeToFile:[[NSString stringWithFormat:FAVICON_PATH, udid]stringByExpandingTildeInPath] atomically:YES];
+        [controller insetHistoryItem:[webview mainFrameTitle] 
+                                 url:currentUrl 
+                                data:[udid dataUsingEncoding:NSStringEncodingConversionAllowLossy] 
+                                date:currentDate];
+        [controller updateBookmarkFavicon:[currentFavicon TIFFRepresentation] forUrl:currentUrl];
+        [currentDate release]; 
+    }
+    [pool release]; 
+}
+
 
 #pragma -
 #pragma mark webview Delegate
@@ -447,6 +543,7 @@
     //get the current URL
     NSString *url = [webview mainFrameURL];
     //set the URl in the address bar
+    
     [address setStringValue:url];
     
 }
@@ -457,6 +554,7 @@
 {
     // Only report feedback for the main frame.
     if (frame == [sender mainFrame]){
+        [self performSelectorInBackground:@selector(getFavicon:) withObject:nil];
         //get the current title and set it in the window title
         NSString *title = [webview mainFrameTitle];
         [pageTitleTab setStringValue:[webview mainFrameTitle]];
@@ -467,14 +565,9 @@
             [address setStringValue:@""];
             isNewTab = NO; 
         }
-    }    
+    } 
 }
 
-- (void)webView:(WebView *)sender didReceiveIcon:(NSImage *)image forFrame:(WebFrame *)frame
-{
-    [temp setImage:image];
-    [faviconTab setImage:image];
-}
 
 //set the favicon when the webview finished loading
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
@@ -484,13 +577,7 @@
     [progressTab stopAnimation:self];
     [[faviconTab animator]setAlphaValue:1.0];
     [[temp animator]setAlphaValue:1.0];
-    [temp setImage:[webview mainFrameIcon]];
-    [faviconTab setImage:[webview mainFrameIcon]]; 
-    
-    
-    RADatabaseController *controller = [RADatabaseController sharedUser];
     [progressMain setHidden:YES]; 
-    NSString *title =  [webview mainFrameTitle]; 
     [stopLoading setHidden:YES];
     [pageTitleTab setStringValue:[webview mainFrameTitle]];
     /*
@@ -498,36 +585,7 @@
      [addressBox setBorderColor:[NSColor greenColor]]; 
      }
      */
-    if ([title isEqualToString:@"Raven Welcome Page"] || 
-        [title isEqualToString:@"Raven Internal Page"] ||            
-        [[webview mainFrameURL]isEqualToString:@"http://go.raven.io/"])
-    {
-        [temp setImage:[NSImage imageNamed:@"ravenico.png"]]; 
-        [faviconTab setImage:[NSImage imageNamed:@"ravenico.png"]]; 
-    }
-    else
-    {
-        if ([title isEqualToString:@""]) {
-        }
-        
-        else if (doRegisterHistory == 2) {
-            if (frame == [sender mainFrame]){
-                NSDate *currentDate = [[NSDate alloc]initWithTimeIntervalSinceNow:0]; 
-                NSString *currentUrl= [webview mainFrameURL];
-                NSImage *currentFavicon = [webview mainFrameIcon];
-                NSString *udid = currentUrl;
-                udid = [udid createFileNameFromString:udid];
-                [[currentFavicon TIFFRepresentation] writeToFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", udid]stringByExpandingTildeInPath] atomically:YES];
-                [controller insetHistoryItem:[webview mainFrameTitle] 
-                                         url:currentUrl 
-                                        data:[udid dataUsingEncoding:NSStringEncodingConversionAllowLossy] 
-                                        date:currentDate];
-                [controller updateBookmarkFavicon:[currentFavicon TIFFRepresentation] forUrl:currentUrl];
-                [currentDate release]; 
-            }
-            
-        }
-    }
+}
     
 //Idea to auto fill a form à la other browsers, could be useful for credentials manager and auto login feature
     //Currently made for gmail
@@ -542,7 +600,6 @@
  [form submit];
  */
      
-}
 
 
 //If the webview fail load and receive error

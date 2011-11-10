@@ -93,6 +93,9 @@
 -(id)infoValueForKey:(NSString*)key;
 -(void)setMobileUserAgent;
 -(void)setDesktopUserAgent; 
+-(void)getFavicon:(id)sender; 
+-(void)setFaviconUI:(id)sender; 
+-(void)saveHistory:(id)sender; 
 
 //Properties
 @property (nonatomic, assign) id<RAWebViewControllerDelegate> delegate;

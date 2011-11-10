@@ -289,7 +289,7 @@
 																	<string key="NSFrame">{{20, 311}, {21, 17}}</string>
 																	<reference key="NSSuperview" ref="667449050"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView" ref="771680320"/>
+																	<reference key="NSNextKeyView" ref="809745902"/>
 																	<int key="NSViewLayerContentsRedrawPolicy">2</int>
 																	<string key="NSReuseIdentifierKey">_NS:3944</string>
 																	<bool key="NSEnabled">YES</bool>
@@ -402,10 +402,10 @@
 								<object class="NSScroller" id="809745902">
 									<reference key="NSNextResponder" ref="535359061"/>
 									<int key="NSvFlags">-2147483392</int>
-									<string key="NSFrame">{{-100, -100}, {15, 752}}</string>
+									<string key="NSFrame">{{-100, -100}, {15, 674}}</string>
 									<reference key="NSSuperview" ref="535359061"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="483014308"/>
+									<reference key="NSNextKeyView" ref="771680320"/>
 									<string key="NSReuseIdentifierKey">_NS:419</string>
 									<reference key="NSTarget" ref="535359061"/>
 									<string key="NSAction">_doScroller:</string>
@@ -415,12 +415,12 @@
 								<object class="NSScroller" id="483014308">
 									<reference key="NSNextResponder" ref="535359061"/>
 									<int key="NSvFlags">-2147483392</int>
-									<string key="NSFrame">{{-100, -100}, {76, 15}}</string>
+									<string key="NSFrame">{{-100, -100}, {76, 11}}</string>
 									<reference key="NSSuperview" ref="535359061"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="383234069"/>
 									<string key="NSReuseIdentifierKey">_NS:423</string>
-									<int key="NSsFlags">1</int>
+									<int key="NSsFlags">513</int>
 									<reference key="NSTarget" ref="535359061"/>
 									<string key="NSAction">_doScroller:</string>
 									<double key="NSPercent">0.50602412223815918</double>
@@ -429,7 +429,7 @@
 							<string key="NSFrame">{{-17, 20}, {76, 674}}</string>
 							<reference key="NSSuperview" ref="325673232"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="809745902"/>
+							<reference key="NSNextKeyView" ref="483014308"/>
 							<bool key="NSViewIsLayerTreeHost">YES</bool>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<string key="NSReuseIdentifierKey">_NS:410</string>
@@ -476,6 +476,7 @@
 									<string key="NSFrame">{{1, 1}, {74, 18}}</string>
 									<reference key="NSSuperview" ref="20956555"/>
 									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView" ref="535359061"/>
 									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<string key="NSReuseIdentifierKey">_NS:21</string>
 								</object>
@@ -513,7 +514,7 @@
 					<string key="NSFrameSize">{1050, 700}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
-					<reference key="NSNextKeyView" ref="535359061"/>
+					<reference key="NSNextKeyView" ref="20956555"/>
 					<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
@@ -666,6 +667,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">cornerBox</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="20956555"/>
+					</object>
+					<int key="connectionID">440</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">backupView</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="101875026"/>
@@ -679,14 +688,6 @@
 						<reference key="destination" ref="485160451"/>
 					</object>
 					<int key="connectionID">441</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">cornerBox</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="20956555"/>
-					</object>
-					<int key="connectionID">440</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -885,18 +886,6 @@
 						<reference key="parent" ref="36030608"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">122</int>
-						<reference key="object" ref="101875026"/>
-						<reference key="parent" ref="325673232"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">5</int>
-						<reference key="object" ref="485160451"/>
-						<array class="NSMutableArray" key="children"/>
-						<reference key="parent" ref="325673232"/>
-						<string key="objectName">Custom View</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">35</int>
 						<reference key="object" ref="22212678"/>
 						<array class="NSMutableArray" key="children">
@@ -913,6 +902,17 @@
 						<int key="objectID">438</int>
 						<reference key="object" ref="20956555"/>
 						<reference key="parent" ref="325673232"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">122</int>
+						<reference key="object" ref="101875026"/>
+						<reference key="parent" ref="325673232"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">5</int>
+						<reference key="object" ref="485160451"/>
+						<reference key="parent" ref="325673232"/>
+						<string key="objectName">Custom View</string>
 					</object>
 				</array>
 			</object>
@@ -1014,6 +1014,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="bookmark:">id</string>
 						<string key="download:">id</string>
+						<string key="hideShowAddressBar:">id</string>
 						<string key="hideSideBar:">id</string>
 						<string key="history:">id</string>
 						<string key="home:">id</string>
@@ -1029,6 +1030,10 @@
 						</object>
 						<object class="IBActionInfo" key="download:">
 							<string key="name">download:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="hideShowAddressBar:">
+							<string key="name">hideShowAddressBar:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="hideSideBar:">
