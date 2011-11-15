@@ -478,6 +478,23 @@
     }
 }
 
+- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation modifierFlags:(NSUInteger)modifierFlags
+{
+    if (modifierFlags & NSCommandKeyMask && [[NSApp currentEvent] type] == NSLeftMouseDownMask)  {
+        if ([elementInformation objectForKey:@"WebElementLinkURL"]) {
+            RAWebViewController *tempController = [tabsArray objectAtIndex:
+                                                   [tabController indexOfTabViewItem:
+                                                    [tabController selectedTabViewItem]]];
+            [tempController.webview stopLoading:tempController.webview];
+            [tempController webView:tempController.webview didFinishLoadForFrame:[tempController.webview mainFrame]];
+            NSMenuItem *tempItem = [[NSMenuItem alloc]init];
+            [tempItem setRepresentedObject:[elementInformation objectForKey:@"WebElementLinkURL"]]; 
+            [self openTabInBackgroundWithUrl:tempItem]; 
+            [tempItem release]; 
+        }
+    }
+}
+
 - (void)webView:(WebView *)webView decidePolicyForMIMEType:(NSString *)type request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener
 {
     if ([type hasPrefix:@"application"]) {

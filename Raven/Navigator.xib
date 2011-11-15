@@ -51,6 +51,7 @@
 						<string key="NSFrame">{{1074, 737}, {15, 25}}</string>
 						<reference key="NSSuperview" ref="9645336"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="173416492">
@@ -187,6 +188,15 @@
 						<reference key="NSOnImage" ref="248413888"/>
 						<reference key="NSMixedImage" ref="875667400"/>
 					</object>
+					<object class="NSMenuItem" id="604475755">
+						<reference key="NSMenu" ref="314868979"/>
+						<string key="NSTitle">Switch Tab reverse</string>
+						<string type="base64-UTF8" key="NSKeyEquiv">GQ</string>
+						<int key="NSKeyEquivModMask">393216</int>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="248413888"/>
+						<reference key="NSMixedImage" ref="875667400"/>
+					</object>
 					<object class="NSMenuItem" id="702036262">
 						<reference key="NSMenu" ref="314868979"/>
 						<string key="NSTitle">Previous Tab</string>
@@ -305,6 +315,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">previousTab:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="604475755"/>
+					</object>
+					<int key="connectionID">485</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">performClose:</string>
 						<reference key="source" ref="1003"/>
 						<reference key="destination" ref="489316667"/>
@@ -419,6 +437,7 @@
 							<reference ref="628245098"/>
 							<reference ref="391534172"/>
 							<reference ref="103408117"/>
+							<reference ref="604475755"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -477,6 +496,11 @@
 						<reference key="object" ref="816494898"/>
 						<reference key="parent" ref="0"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">483</int>
+						<reference key="object" ref="604475755"/>
+						<reference key="parent" ref="314868979"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -503,9 +527,11 @@
 					<string>468.IBPluginDependency</string>
 					<string>470.IBPluginDependency</string>
 					<string>473.IBPluginDependency</string>
+					<string>483.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -540,7 +566,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">482</int>
+			<int key="maxID">485</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

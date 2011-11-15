@@ -293,6 +293,7 @@
 		9FD7B27D1466F57E007EFF15 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD7B27C1466F57E007EFF15 /* Growl.framework */; };
 		9FD7B27E1466F5A2007EFF15 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9FD7B27C1466F57E007EFF15 /* Growl.framework */; };
 		9FDD0CDC146814CA00865ACB /* RAGoogleSuggestionsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FDD0CDB146814CA00865ACB /* RAGoogleSuggestionsParser.m */; };
+		9FDF1CEB146D201B009D3DAE /* chromedefault in Resources */ = {isa = PBXBuildFile; fileRef = 9FDF1CEA146D201B009D3DAE /* chromedefault */; };
 		9FE5DE3D1434A77D003614C3 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE5DE3B1434A77D003614C3 /* down.png */; };
 		9FE5DE3E1434A77D003614C3 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE5DE3C1434A77D003614C3 /* up.png */; };
 		9FEF52C7140E2F71004A16D0 /* delete_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FEF52C6140E2F71004A16D0 /* delete_big.png */; };
@@ -687,6 +688,7 @@
 		9FD7B27C1466F57E007EFF15 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Raven/Growl.framework; sourceTree = "<group>"; };
 		9FDD0CDA146814CA00865ACB /* RAGoogleSuggestionsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGoogleSuggestionsParser.h; sourceTree = "<group>"; };
 		9FDD0CDB146814CA00865ACB /* RAGoogleSuggestionsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAGoogleSuggestionsParser.m; sourceTree = "<group>"; };
+		9FDF1CEA146D201B009D3DAE /* chromedefault */ = {isa = PBXFileReference; lastKnownFileType = file; path = chromedefault; sourceTree = "<group>"; };
 		9FE5DE3B1434A77D003614C3 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		9FE5DE3C1434A77D003614C3 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		9FEF52C6140E2F71004A16D0 /* delete_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_big.png; sourceTree = "<group>"; };
@@ -764,6 +766,7 @@
 		690C5546133DCD27005D50B3 /* ressources */ = {
 			isa = PBXGroup;
 			children = (
+				9FDF1CEA146D201B009D3DAE /* chromedefault */,
 				9F4105D314600BBF00CB33AC /* GrayLinen.png */,
 				9F13E9BA145D781D00576566 /* LinenMiddle.jpg */,
 				9F13E9BB145D781D00576566 /* linenLight.png */,
@@ -1786,6 +1789,7 @@
 				9FD7B27714668FEA007EFF15 /* Apps.nib in Resources */,
 				9FD7B27A14669010007EFF15 /* hello.user.js in Resources */,
 				9FD7B27B1466901B007EFF15 /* template.js in Resources */,
+				9FDF1CEB146D201B009D3DAE /* chromedefault in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -157,5 +157,19 @@
          landmarkName = "-setNextState:"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Raven/RANavigatorViewController.m"
+         timestampString = "343041740.803013"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "494"
+         endingLineNumber = "494"
+         landmarkName = "-webView:mouseDidMoveOverElement:modifierFlags:"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

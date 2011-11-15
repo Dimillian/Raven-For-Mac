@@ -13,6 +13,15 @@
 @implementation RAMainWebView
 @synthesize twoFingersTouches;
 
+
+/*
+- (void)mouseDown:(NSEvent *)theEvent {
+    NSLog(@"test");
+    if ([theEvent modifierFlags] & NSCommandKeyMask) {
+    }
+}
+*/
+
 - (void)swipeWithEvent:(NSEvent *)event {
     CGFloat x = [event deltaX];
     //CGFloat y = [event deltaY];
@@ -120,6 +129,8 @@
     RAMainWindowController *controller = [[self window]windowController];
     [controller hideSideBar];
 }
+
+
 
 - (void)dealloc
 {

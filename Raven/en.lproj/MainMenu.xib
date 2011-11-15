@@ -916,7 +916,7 @@
 								<object class="NSMenuItem" id="16695391">
 									<reference key="NSMenu" ref="949114493"/>
 									<string key="NSTitle">Forward</string>
-									<string key="NSKeyEquiv"></string>
+									<string key="NSKeyEquiv">]</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
@@ -925,7 +925,7 @@
 								<object class="NSMenuItem" id="582197178">
 									<reference key="NSMenu" ref="949114493"/>
 									<string key="NSTitle">Back</string>
-									<string key="NSKeyEquiv"></string>
+									<string key="NSKeyEquiv">[</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>

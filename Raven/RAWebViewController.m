@@ -434,9 +434,18 @@
     }
     URL = [[NSURL URLWithString:URL]host];
     NSError * error;
-    NSString * html = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URLPrefix,URL]]
+    NSString * html = [NSString stringWithContentsOfURL:
+                       [NSURL URLWithString:
+                        [NSString stringWithFormat:@"%@%@",URLPrefix,URL]]
                                                encoding:NSUTF8StringEncoding
                                                   error:&error];  
+    //second try, different encoding
+    if (![html length]) {
+        html = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URLPrefix,URL]]
+                                                   encoding:NSISOLatin1StringEncoding
+                                                      error:&error];  
+    }
+    
     if( [html length] )
     {
         
@@ -444,7 +453,7 @@
                                                                 options:NSXMLDocumentTidyHTML
                                                                   error:&error] autorelease];
         
-        NSArray * nodes = [[DOM rootElement]nodesForXPath:@"head/link[@rel='icon']"
+        NSArray * nodes = [[DOM rootElement]nodesForXPath:@"head/link[@rel='shortcut icon' or @rel='icon']"
                                                      error:&error];
         if( [nodes count] )
         {
@@ -463,7 +472,6 @@
         } else {
             URL = [NSString stringWithFormat:@"%@%@/favicon.ico",URLPrefix,URL];
         }
-        
         
     } else {
         URL = [NSString stringWithFormat:FAVICON_URL,URL];
@@ -617,8 +625,8 @@
 {
     if ([error code] == - 1009) {
         NSAlert *alert = [[NSAlert alloc]init];
-        [alert setMessageText:@"Please check your internet connection"];
-        [alert setInformativeText:@"It appear that you don't have any active internet connection"]; 
+        [alert setMessageText:@"Please check your Internet connection"];
+        [alert setInformativeText:@"It appear that you don't have any active Internet connection"]; 
         [alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Yeah")];
         [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:nil didEndSelector:nil contextInfo:nil];
         [alert release]; 

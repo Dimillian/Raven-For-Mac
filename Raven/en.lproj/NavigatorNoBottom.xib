@@ -768,7 +768,6 @@
 								<string key="NSFrame">{{942, 10}, {134, 12}}</string>
 								<reference key="NSSuperview" ref="928699272"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 								<string key="NSReuseIdentifierKey">_NS:2352</string>
 								<int key="NSpiFlags">24840</int>
@@ -1000,7 +999,6 @@
 								<string key="NSFrame">{{1, 1}, {0, 94}}</string>
 								<reference key="NSSuperview" ref="406450565"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							</object>
 						</object>
@@ -1254,7 +1252,7 @@
 					<object class="NSMenuItem" id="607722228">
 						<reference key="NSMenu" ref="439600831"/>
 						<string key="NSTitle">Forward</string>
-						<string key="NSKeyEquiv"></string>
+						<string key="NSKeyEquiv">]</string>
 						<int key="NSKeyEquivModMask">1048576</int>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="208983783"/>
@@ -1263,7 +1261,7 @@
 					<object class="NSMenuItem" id="107180616">
 						<reference key="NSMenu" ref="439600831"/>
 						<string key="NSTitle">Back</string>
-						<string key="NSKeyEquiv"></string>
+						<string key="NSKeyEquiv">[</string>
 						<int key="NSKeyEquivModMask">1048576</int>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="208983783"/>
