@@ -44,6 +44,7 @@
     {
         [self initWithNibName:@"NavigatorNoBottom" bundle:nil]; 
         self.delegate = dgate;
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage]setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     }
     
     return self;  
@@ -453,7 +454,7 @@
                                                                 options:NSXMLDocumentTidyHTML
                                                                   error:&error] autorelease];
         
-        NSArray * nodes = [[DOM rootElement]nodesForXPath:@"head/link[@rel='shortcut icon' or @rel='icon']"
+        NSArray * nodes = [[DOM rootElement]nodesForXPath:@"head/link[@rel='icon' or @rel='shortcut icon']"
                                                      error:&error];
         if( [nodes count] )
         {
@@ -462,7 +463,10 @@
             {
                 URL = href;
             } else {
-                if ([href hasPrefix:@"/"]) {
+                if ([href hasPrefix:@"//"]) {
+                    URL = [NSString stringWithFormat:@"http:%@", href];
+                }
+                else if ([href hasPrefix:@"/"]) {
                     URL = [NSString stringWithFormat:@"%@%@%@",URLPrefix,URL,href];
                 }
                 else{
@@ -561,7 +565,6 @@
     //get the current URL
     NSString *url = [webview mainFrameURL];
     //set the URl in the address bar
-    
     [address setStringValue:url];
     
 }
@@ -636,6 +639,7 @@
         if ([error code] == - 999) {
             
         }
+        
         if (frame == [sender mainFrame]){
             //get the current address in the address bar
             NSString *addressTo = [address stringValue];
@@ -648,6 +652,7 @@
         }
     }
 }
+
 
 
 #pragma -

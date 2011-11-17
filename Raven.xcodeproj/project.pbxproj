@@ -297,6 +297,8 @@
 		9FE5DE3D1434A77D003614C3 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE5DE3B1434A77D003614C3 /* down.png */; };
 		9FE5DE3E1434A77D003614C3 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE5DE3C1434A77D003614C3 /* up.png */; };
 		9FEF52C7140E2F71004A16D0 /* delete_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FEF52C6140E2F71004A16D0 /* delete_big.png */; };
+		9FEF7D3C147514CF006ADC7B /* RACookieWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF7D3B147514CF006ADC7B /* RACookieWindowController.m */; };
+		9FEF7D3F147514F9006ADC7B /* RACookieWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FEF7D3E147514F9006ADC7B /* RACookieWindow.xib */; };
 		9FF1017E13CCF03500B8F942 /* RATabFaviconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */; };
 		9FF4B9D31408D6DB005FCE7F /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D11408D6DB005FCE7F /* eye.png */; };
 		9FF4B9D41408D6DB005FCE7F /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D21408D6DB005FCE7F /* trash.png */; };
@@ -692,6 +694,9 @@
 		9FE5DE3B1434A77D003614C3 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		9FE5DE3C1434A77D003614C3 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		9FEF52C6140E2F71004A16D0 /* delete_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_big.png; sourceTree = "<group>"; };
+		9FEF7D3A147514CE006ADC7B /* RACookieWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACookieWindowController.h; sourceTree = "<group>"; };
+		9FEF7D3B147514CF006ADC7B /* RACookieWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACookieWindowController.m; sourceTree = "<group>"; };
+		9FEF7D3E147514F9006ADC7B /* RACookieWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RACookieWindow.xib; sourceTree = "<group>"; };
 		9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATabFaviconView.h; sourceTree = "<group>"; };
 		9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATabFaviconView.m; sourceTree = "<group>"; };
 		9FF4B9D11408D6DB005FCE7F /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
@@ -1340,6 +1345,7 @@
 				9FB6999313CD8566002EAEBA /* RAAboutPanelWindowController.xib */,
 				9F8A1CCE13FDA18C00DD291C /* AddtoFavorite.xib */,
 				9F2BEE74140FC7890090AD70 /* InstaSheet.xib */,
+				9FEF7D3E147514F9006ADC7B /* RACookieWindow.xib */,
 			);
 			name = Window;
 			sourceTree = "<group>";
@@ -1366,6 +1372,8 @@
 				9F85275613CEDBCD00D26BCF /* RAFavoritePanelWController.m */,
 				9F2BEE71140FC1230090AD70 /* RAInstapaperWindow.h */,
 				9F2BEE72140FC1230090AD70 /* RAInstapaperWindow.m */,
+				9FEF7D3A147514CE006ADC7B /* RACookieWindowController.h */,
+				9FEF7D3B147514CF006ADC7B /* RACookieWindowController.m */,
 			);
 			name = Windows;
 			sourceTree = "<group>";
@@ -1790,6 +1798,7 @@
 				9FD7B27A14669010007EFF15 /* hello.user.js in Resources */,
 				9FD7B27B1466901B007EFF15 /* template.js in Resources */,
 				9FDF1CEB146D201B009D3DAE /* chromedefault in Resources */,
+				9FEF7D3F147514F9006ADC7B /* RACookieWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1893,6 +1902,7 @@
 				9FD7B27114668FDF007EFF15 /* Utils.m in Sources */,
 				9F8899441467CCE100BBA017 /* RAGrowlDispatcher.m in Sources */,
 				9FDD0CDC146814CA00865ACB /* RAGoogleSuggestionsParser.m in Sources */,
+				9FEF7D3C147514CF006ADC7B /* RACookieWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

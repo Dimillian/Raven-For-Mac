@@ -88,8 +88,12 @@
     [fontButton removeAllItems];
     [fontButton addItemsWithTitles:fontlist];
     [fontlist release];
+    
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage]cookies];
+    [numberOfCookies setStringValue:[NSString stringWithFormat:@"Total number of cookies stored: %d", [cookies count]]];
+    
+    cookiesWindow = [[RACookieWindowController alloc]init];
 }
-
 
 -(void)setFirstTab:(id)sender
 {
@@ -181,6 +185,12 @@
 {
     RADatabaseController *controller = [RADatabaseController sharedUser]; 
     [controller purgeHistory];  
+}
+
+-(void)openCookiesManager:(id)sender
+{
+    [cookiesWindow showWindow:self];
+    [cookiesWindow fetchCookie];
 }
 
 -(void)importBookmarkFromSafari:(id)sender

@@ -10,6 +10,7 @@
 #import "RADatabaseController.h"
 #import "LTInstapaperAPI.h"
 #import "EMKeychainItem.h"
+#import "RACookieWindowController.h"
 
 @interface RASettingWindowController : NSWindowController <NSWindowDelegate, NSToolbarDelegate, NSTabViewDelegate, LTInstapaperAPIDelegate>
 {
@@ -22,7 +23,9 @@
     IBOutlet NSTextField *instapaperPassword; 
     IBOutlet NSProgressIndicator *isCheckingForInstapaperLogin; 
     IBOutlet NSTextField *ravenAsDefault; 
+    IBOutlet NSTextField *numberOfCookies; 
     LTInstapaperAPI *insta; 
+    RACookieWindowController *cookiesWindow;
 
 }
 
@@ -45,4 +48,5 @@
 -(IBAction)saveInstapaperCredential:(id)sender;
 -(IBAction)createInstapaperAccount:(id)sender;
 -(IBAction)setAsDefaultBrowser:(id)sender;
+-(IBAction)openCookiesManager:(id)sender; 
 @end

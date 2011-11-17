@@ -129,8 +129,7 @@ static RADatabaseController *sharedUserManager = nil;
     // Setup the database object
 	sqlite3 *database;
     @synchronized(self){
-        [history removeAllObjects]; 
-        if( !history )
+        if(history)
         {
             [history release], history = nil;
         }
