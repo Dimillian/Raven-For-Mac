@@ -69,11 +69,21 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     
     return nil;
     
-    
 
 }
 
+-(void)tableViewSelectionDidChange:(NSNotification *)notification
+{
+    NSHTTPCookie *aCookie = [localCookieStore objectAtIndex:[tableview selectedRow]]; 
+    [deleteButton setEnabled:YES]; 
+}
 
+-(void)deleteSelectedCookie:(id)sender
+{
+    NSHTTPCookie *aCookie = [localCookieStore objectAtIndex:[tableview selectedRow]]; 
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage]deleteCookie:aCookie]; 
+    [self fetchCookie]; 
+}
 - (void)windowDidLoad
 {
     [super windowDidLoad];

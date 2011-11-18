@@ -163,12 +163,26 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Raven/RANavigatorViewController.m"
-         timestampString = "343041740.803013"
+         timestampString = "343231426.410932"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "494"
-         endingLineNumber = "494"
+         startingLineNumber = "493"
+         endingLineNumber = "493"
          landmarkName = "-webView:mouseDidMoveOverElement:modifierFlags:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Raven/RAWebViewController.m"
+         timestampString = "343252552.696685"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "577"
+         endingLineNumber = "577"
+         landmarkName = "-webView:didReceiveTitle:forFrame:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

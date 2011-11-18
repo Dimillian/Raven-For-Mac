@@ -32,6 +32,8 @@
     IBOutlet NSButton *secondTabButton;
     IBOutlet NSProgressIndicator *progressMain; 
     IBOutlet NSMenu *webviewMenu;
+    IBOutlet NSButton *backButton; 
+    IBOutlet NSButton *forwardButton; 
     
     //TabView Outlet
     IBOutlet NSView *tabview; 

@@ -1667,6 +1667,22 @@
 					<int key="connectionID">556</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">backButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="596316421"/>
+					</object>
+					<int key="connectionID">570</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">forwardButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="171024281"/>
+					</object>
+					<int key="connectionID">571</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">hideShowAddressBar:</string>
 						<reference key="source" ref="1003"/>
@@ -2894,7 +2910,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">567</int>
+			<int key="maxID">571</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3373,9 +3389,11 @@
 							<string>address</string>
 							<string>addressBarView</string>
 							<string>addressBox</string>
+							<string>backButton</string>
 							<string>boxTab</string>
 							<string>closeButtonTab</string>
 							<string>faviconTab</string>
+							<string>forwardButton</string>
 							<string>mainView</string>
 							<string>mobileButton</string>
 							<string>pageTitleTab</string>
@@ -3400,9 +3418,11 @@
 							<string>NSTextField</string>
 							<string>NSView</string>
 							<string>RAAddressFieldBox</string>
+							<string>NSButton</string>
 							<string>NSBox</string>
 							<string>NSButton</string>
 							<string>NSImageView</string>
+							<string>NSButton</string>
 							<string>NSView</string>
 							<string>NSButton</string>
 							<string>NSTextField</string>
@@ -3430,9 +3450,11 @@
 							<string>address</string>
 							<string>addressBarView</string>
 							<string>addressBox</string>
+							<string>backButton</string>
 							<string>boxTab</string>
 							<string>closeButtonTab</string>
 							<string>faviconTab</string>
+							<string>forwardButton</string>
 							<string>mainView</string>
 							<string>mobileButton</string>
 							<string>pageTitleTab</string>
@@ -3467,6 +3489,10 @@
 								<string key="candidateClassName">RAAddressFieldBox</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">backButton</string>
+								<string key="candidateClassName">NSButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">boxTab</string>
 								<string key="candidateClassName">NSBox</string>
 							</object>
@@ -3477,6 +3503,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">faviconTab</string>
 								<string key="candidateClassName">NSImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">forwardButton</string>
+								<string key="candidateClassName">NSButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">mainView</string>

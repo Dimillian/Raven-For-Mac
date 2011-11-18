@@ -14,9 +14,11 @@
     IBOutlet NSTableColumn *titleColumn; 
     IBOutlet NSTableColumn *urlColumn; 
     IBOutlet NSTableColumn *commentColumn; 
+    IBOutlet NSButton *deleteButton; 
     NSMutableArray *localCookieStore; 
 }
 
 -(void)fetchCookie; 
+-(IBAction)deleteSelectedCookie:(id)sender; 
 
 @end

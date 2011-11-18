@@ -166,7 +166,6 @@
                 [[NSAnimationContext currentContext] setDuration:0.2];  
                 [[[aTab tabview]animator]setFrame:NSMakeRect(x, 0, w, tabHeight)];
                 [NSAnimationContext endGrouping];
-                [[aTab faviconTab]setHidden:NO];
                 [[aTab progressTab]setHidden:NO];
             }
             //just redraw without animation if from window
@@ -495,6 +494,11 @@
     }
 }
 
+- (void)webView:(WebView *)webView decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id < WebPolicyDecisionListener >)listener
+{
+    [listener use];
+}
+
 - (void)webView:(WebView *)webView decidePolicyForMIMEType:(NSString *)type request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener
 {
     if ([type hasPrefix:@"application"]) {
@@ -504,11 +508,19 @@
         [theDownload release]; 
         [dlDelegate release]; 
         if (![type isEqualToString:@"application/pdf"]) {
-            [webView stopLoading:nil];
+            [webView stopLoading:webView];
+            for (RAWebViewController *tempController in tabsArray) {
+                if (tempController.webview == webView) {
+                    [tempController webView:tempController.webview didFinishLoadForFrame:
+                     [tempController.webview mainFrame]];
+                }
+            }
         }
     }
+    else{
+        [listener use];
+    }
 }
-
 //create a new tab with the clicked URL
 //it create a temp webview, totally useless but necessary because webview API are broken in this part
 - (WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
@@ -516,6 +528,15 @@
     WebView *tempview = [[WebView alloc]init]; 
     [tempview setFrameLoadDelegate:self]; 
     [[tempview mainFrame]loadRequest:request]; 
+    return tempview; 
+}
+
+- (WebView *)webView:(WebView *)sender createWebViewModalDialogWithRequest:(NSURLRequest *)request
+{
+    WebView *tempview = [[WebView alloc]init]; 
+    [tempview setFrameLoadDelegate:self]; 
+    [[tempview mainFrame]loadRequest:request]; 
+    NSLog(@"test");
     return tempview; 
 }
 
@@ -532,10 +553,7 @@
 }
 
 
-- (void)webView:(WebView *)webView decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id < WebPolicyDecisionListener >)listener
-{
-    [listener use];
-}
+
 
 
 //Manage javascript altert message

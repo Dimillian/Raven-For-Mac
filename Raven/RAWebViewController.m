@@ -44,7 +44,6 @@
     {
         [self initWithNibName:@"NavigatorNoBottom" bundle:nil]; 
         self.delegate = dgate;
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage]setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     }
     
     return self;  
@@ -121,7 +120,6 @@
     [tabview setAlphaValue:0.0]; 
     [pageTitleTab setStringValue:NSLocalizedString(@"New tab", @"NewTab")];
     [progressTab setHidden:YES];
-    [faviconTab setHidden:YES];
      
 }
 
@@ -575,6 +573,8 @@
 {
     // Only report feedback for the main frame.
     if (frame == [sender mainFrame]){
+        ([[webview backForwardList]backListCount] < 1) ? [backButton setEnabled:NO] : [backButton setEnabled:YES];
+        ([[webview backForwardList]forwardListCount] < 1) ? [forwardButton setEnabled:NO] : [forwardButton setEnabled:YES];
         [self performSelectorInBackground:@selector(getFavicon:) withObject:nil];
         //get the current title and set it in the window title
         NSString *title = [webview mainFrameTitle];

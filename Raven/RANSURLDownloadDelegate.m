@@ -157,6 +157,7 @@
         [listManager installApp];
     }
     if (trackDownload) {
+        [self updateDownloadInformation];
         [[NSNotificationCenter defaultCenter]postNotificationName:DOWNLOAD_FINISH object:downloadName];
     }
 

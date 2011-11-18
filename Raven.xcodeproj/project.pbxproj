@@ -280,6 +280,7 @@
 		9FC3B7A51403B1AD00E28D71 /* bookmark_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FC3B7A31403B1AD00E28D71 /* bookmark_on.png */; };
 		9FC3B7A81403B1D400E28D71 /* Bookmark 16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FC3B7A61403B1D400E28D71 /* Bookmark 16x16.png */; };
 		9FC3B7A91403B1D400E28D71 /* Rate 16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FC3B7A71403B1D400E28D71 /* Rate 16x16.png */; };
+		9FC75F0714765403001842EC /* RACSSEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FC75F0614765403001842EC /* RACSSEditor.m */; };
 		9FD180FE1430B22C004B3F12 /* rSDk.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9FD180FD1430B22C004B3F12 /* rSDk.icns */; };
 		9FD1812C1430C57F004B3F12 /* Builder.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9FD1812B1430C57F004B3F12 /* Builder.icns */; };
 		9FD7B26914668FD5007EFF15 /* CMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD7B26114668FD5007EFF15 /* CMController.m */; };
@@ -673,6 +674,8 @@
 		9FC3B7A31403B1AD00E28D71 /* bookmark_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark_on.png; sourceTree = "<group>"; };
 		9FC3B7A61403B1D400E28D71 /* Bookmark 16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bookmark 16x16.png"; sourceTree = "<group>"; };
 		9FC3B7A71403B1D400E28D71 /* Rate 16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rate 16x16.png"; sourceTree = "<group>"; };
+		9FC75F0514765403001842EC /* RACSSEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACSSEditor.h; sourceTree = "<group>"; };
+		9FC75F0614765403001842EC /* RACSSEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACSSEditor.m; sourceTree = "<group>"; };
 		9FD180FD1430B22C004B3F12 /* rSDk.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = rSDk.icns; sourceTree = "<group>"; };
 		9FD1812B1430C57F004B3F12 /* Builder.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Builder.icns; sourceTree = "<group>"; };
 		9FD7B26014668FD5007EFF15 /* CMController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMController.h; sourceTree = "<group>"; };
@@ -1374,6 +1377,8 @@
 				9F2BEE72140FC1230090AD70 /* RAInstapaperWindow.m */,
 				9FEF7D3A147514CE006ADC7B /* RACookieWindowController.h */,
 				9FEF7D3B147514CF006ADC7B /* RACookieWindowController.m */,
+				9FC75F0514765403001842EC /* RACSSEditor.h */,
+				9FC75F0614765403001842EC /* RACSSEditor.m */,
 			);
 			name = Windows;
 			sourceTree = "<group>";
@@ -1903,6 +1908,7 @@
 				9F8899441467CCE100BBA017 /* RAGrowlDispatcher.m in Sources */,
 				9FDD0CDC146814CA00865ACB /* RAGoogleSuggestionsParser.m in Sources */,
 				9FEF7D3C147514CF006ADC7B /* RACookieWindowController.m in Sources */,
+				9FC75F0714765403001842EC /* RACSSEditor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
