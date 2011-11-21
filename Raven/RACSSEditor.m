@@ -20,6 +20,11 @@
     return self;
 }
 
+-(void)checkCSSForHost:(NSString *)host
+{
+    
+}
+
 - (void)windowDidLoad
 {
     [super windowDidLoad];

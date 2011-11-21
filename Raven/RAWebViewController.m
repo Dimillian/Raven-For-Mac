@@ -237,11 +237,11 @@
 -(IBAction)go:(id)sender
 {
     //cool workflow to check if user put http:// or not and put it if not
-    
     NSString *addressTo = [address stringValue];
     addressTo = [addressTo stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     if (addressTo != nil) {
             if ([addressTo hasPrefix:@"javascript:"]) {
+                addressTo = [addressTo stringByReplacingOccurrencesOfString:@"javascript:" withString:@""]; 
                 [webview stringByEvaluatingJavaScriptFromString:addressTo]; 
                 }
                 else
@@ -250,7 +250,6 @@
                     {
                         [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:addressTo]]];
                     }
-                    
                     else
                     {
                         NSString *parsedAdress = [NSString stringWithFormat:@"http://%@", addressTo];

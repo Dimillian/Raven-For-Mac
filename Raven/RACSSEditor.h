@@ -9,5 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 @interface RACSSEditor : NSWindowController
+{
+    
+}
 
+-(void)checkCSSForHost:(NSString *)host; 
 @end

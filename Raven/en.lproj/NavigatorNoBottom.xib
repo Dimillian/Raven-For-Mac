@@ -526,10 +526,6 @@
 												<int key="NSColorSpace">1</int>
 												<bytes key="NSRGB">MC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMAA</bytes>
 											</object>
-											<object class="NSArray" key="NSAllowedInputLocales">
-												<bool key="EncodedWithXMLCoder">YES</bool>
-												<string>NSAllRomanInputSourcesLocaleIdentifier</string>
-											</object>
 										</object>
 									</object>
 									<object class="NSBox" id="1012496959">
@@ -768,7 +764,6 @@
 								<string key="NSFrame">{{942, 10}, {134, 12}}</string>
 								<reference key="NSSuperview" ref="928699272"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 								<string key="NSReuseIdentifierKey">_NS:2352</string>
 								<int key="NSpiFlags">24840</int>
@@ -1000,7 +995,6 @@
 								<string key="NSFrame">{{1, 1}, {0, 94}}</string>
 								<reference key="NSSuperview" ref="406450565"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							</object>
 						</object>

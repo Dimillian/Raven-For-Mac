@@ -74,7 +74,6 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 
 -(void)tableViewSelectionDidChange:(NSNotification *)notification
 {
-    NSHTTPCookie *aCookie = [localCookieStore objectAtIndex:[tableview selectedRow]]; 
     [deleteButton setEnabled:YES]; 
 }
 
