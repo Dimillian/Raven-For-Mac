@@ -186,7 +186,8 @@
     }
     //Instanciate a new webviewcontroller and the button tab view with the view
     RAWebViewController *newtab = [[RAWebViewController alloc]initWithDelegate:self];
-    
+    //Add the button and webview instance in array.
+    [tabsArray addObject:newtab]; 
     //force the newtab view to call awakefromNib
     [newtab view];
     
@@ -216,8 +217,6 @@
         [allTabsButton setHidden:YES];   
     }
 
-    //Add the button and webview instance in array.
-    [tabsArray addObject:newtab]; 
     
     [tabPlaceHolder addSubview:[newtab tabview]];
     [[newtab tabview]setFrame:NSMakeRect([tabsArray indexOfObject:newtab]*tabButtonSize, tabHeight, tabButtonSize, tabHeight)];
@@ -250,10 +249,13 @@
     //[buttonview release]; 
     NSTabViewItem *item = [[NSTabViewItem alloc]init]; 
     [item setView:[newtab switchView]];
-    [tabController addTabViewItem:item]; 
+    [tabController addTabViewItem:item];
+    
     NSUserDefaults *standardUserDefault = [NSUserDefaults standardUserDefaults]; 
     if (standardUserDefault) {
-        if ([standardUserDefault integerForKey:OPEN_TAB_IN_BACKGROUND] == 0 && !inBackground) {
+        if (([standardUserDefault integerForKey:OPEN_TAB_IN_BACKGROUND] == 0 
+            && !inBackground)
+            || [sender class] == [NSButton class]) {
                 //reset all tabs button position
                 [self resetAllTabsButon]; 
                 [tabController selectTabViewItem:item]; 
@@ -480,7 +482,8 @@
 - (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation modifierFlags:(NSUInteger)modifierFlags
 {
     if (modifierFlags & NSCommandKeyMask && [[NSApp currentEvent] type] == NSLeftMouseDownMask)  {
-        if ([elementInformation objectForKey:@"WebElementLinkURL"]) {
+        if ([elementInformation objectForKey:@"WebElementLinkURL"] 
+            && [elementInformation objectForKey:@"WebElementTargetFrame"]) {
             RAWebViewController *tempController = [tabsArray objectAtIndex:
                                                    [tabController indexOfTabViewItem:
                                                     [tabController selectedTabViewItem]]];

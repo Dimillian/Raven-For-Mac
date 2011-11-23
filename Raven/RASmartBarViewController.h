@@ -6,6 +6,8 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 /*
+ TODO: Tied user script to an app. Load it at each webview did end loading. Use CM or not
+        Add app URL handler (full domain/subdomain). 
 */
 #import <Cocoa/Cocoa.h>
 #import "RANavigatorViewController.h"

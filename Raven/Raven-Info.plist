@@ -56,7 +56,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.6.11677</string>
+	<string>0.6.11699</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -97,9 +97,21 @@
 				<string>raven</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string>eye</string>
+			<key>CFBundleURLName</key>
+			<string>WWW URL</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>www</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>0.6.11677</string>
+	<string>0.6.11699</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.news</string>
 	<key>LSMinimumSystemVersion</key>
