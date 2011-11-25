@@ -41,7 +41,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSCustomView" id="9645336">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -50,8 +50,6 @@
 						<int key="NSvFlags">-2147483383</int>
 						<string key="NSFrame">{{1074, 737}, {15, 25}}</string>
 						<reference key="NSSuperview" ref="9645336"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="173416492">
@@ -77,18 +75,16 @@
 						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{-1, 738}, {1073, 22}}</string>
 						<reference key="NSSuperview" ref="9645336"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="213251502"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:499</string>
-						<string key="NSClassName">NSView</string>
+						<string key="NSClassName">RATabPlaceholderView</string>
 					</object>
 					<object class="NSTabView" id="152327820">
 						<reference key="NSNextResponder" ref="9645336"/>
 						<int key="NSvFlags">18</int>
 						<string key="NSFrame">{{-1, -5}, {1096, 797}}</string>
 						<reference key="NSSuperview" ref="9645336"/>
-						<reference key="NSWindow"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:461</string>
 						<object class="NSMutableArray" key="NSTabViewItems">
@@ -99,8 +95,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{1092, 792}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="152327820"/>
 				<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				<string key="NSClassName">NSView</string>
@@ -877,7 +871,7 @@
 							<string>NSView</string>
 							<string>NSMenu</string>
 							<string>NSTabView</string>
-							<string>NSView</string>
+							<string>RATabView</string>
 							<string>NSButton</string>
 						</object>
 					</object>
@@ -912,7 +906,7 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">tabPlaceHolder</string>
-								<string key="candidateClassName">NSView</string>
+								<string key="candidateClassName">RATabView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">tabsButton</string>
@@ -923,6 +917,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/RANavigatorViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">RATabView</string>
+					<string key="superclassName">NSView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/RATabView.h</string>
 					</object>
 				</object>
 			</object>

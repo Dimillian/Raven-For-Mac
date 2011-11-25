@@ -297,6 +297,9 @@
 		9FDF1CEB146D201B009D3DAE /* chromedefault in Resources */ = {isa = PBXBuildFile; fileRef = 9FDF1CEA146D201B009D3DAE /* chromedefault */; };
 		9FE5DE3D1434A77D003614C3 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE5DE3B1434A77D003614C3 /* down.png */; };
 		9FE5DE3E1434A77D003614C3 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE5DE3C1434A77D003614C3 /* up.png */; };
+		9FEF2AAB147EEB26007BC286 /* RATabPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF2AAA147EEB26007BC286 /* RATabPlaceholderView.m */; };
+		9FEF2AAF147EEF19007BC286 /* RASBAPPMainButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF2AAE147EEF19007BC286 /* RASBAPPMainButton.m */; };
+		9FEF2AB8147F8D82007BC286 /* RASmartBarHolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF2AB7147F8D82007BC286 /* RASmartBarHolderView.m */; };
 		9FEF52C7140E2F71004A16D0 /* delete_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FEF52C6140E2F71004A16D0 /* delete_big.png */; };
 		9FEF7D3C147514CF006ADC7B /* RACookieWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF7D3B147514CF006ADC7B /* RACookieWindowController.m */; };
 		9FEF7D3F147514F9006ADC7B /* RACookieWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FEF7D3E147514F9006ADC7B /* RACookieWindow.xib */; };
@@ -696,6 +699,12 @@
 		9FDF1CEA146D201B009D3DAE /* chromedefault */ = {isa = PBXFileReference; lastKnownFileType = file; path = chromedefault; sourceTree = "<group>"; };
 		9FE5DE3B1434A77D003614C3 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		9FE5DE3C1434A77D003614C3 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
+		9FEF2AA9147EEB26007BC286 /* RATabPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATabPlaceholderView.h; sourceTree = "<group>"; };
+		9FEF2AAA147EEB26007BC286 /* RATabPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATabPlaceholderView.m; sourceTree = "<group>"; };
+		9FEF2AAD147EEF19007BC286 /* RASBAPPMainButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RASBAPPMainButton.h; sourceTree = "<group>"; };
+		9FEF2AAE147EEF19007BC286 /* RASBAPPMainButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RASBAPPMainButton.m; sourceTree = "<group>"; };
+		9FEF2AB6147F8D82007BC286 /* RASmartBarHolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RASmartBarHolderView.h; sourceTree = "<group>"; };
+		9FEF2AB7147F8D82007BC286 /* RASmartBarHolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RASmartBarHolderView.m; sourceTree = "<group>"; };
 		9FEF52C6140E2F71004A16D0 /* delete_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_big.png; sourceTree = "<group>"; };
 		9FEF7D3A147514CE006ADC7B /* RACookieWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACookieWindowController.h; sourceTree = "<group>"; };
 		9FEF7D3B147514CF006ADC7B /* RACookieWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACookieWindowController.m; sourceTree = "<group>"; };
@@ -1028,34 +1037,11 @@
 		69F4485E138A249000432BC7 /* Reusable Subclass */ = {
 			isa = PBXGroup;
 			children = (
-				9F13E9B3145D6A8A00576566 /* LWVClipView.h */,
-				9F13E9B4145D6A8A00576566 /* LWVClipView.m */,
-				9F2501E8141BC0B30094D79C /* INAppStoreWindow.h */,
-				9F2501E9141BC0B30094D79C /* INAppStoreWindow.m */,
-				69A15D62138702CB0097FD71 /* RAAddressField.h */,
-				69A15D63138702CB0097FD71 /* RAAddressField.m */,
-				69F44860138A24E800432BC7 /* RASmartBarButton.h */,
-				69F44861138A24E800432BC7 /* RASmartBarButton.m */,
-				69C74D9C1392399700A9CBD8 /* RAMainWebView.h */,
-				69C74D9D1392399700A9CBD8 /* RAMainWebView.m */,
-				6984F67F13A93DAA00C113A4 /* RASuggestionBoxView.h */,
-				6984F68013A93DAA00C113A4 /* RASuggestionBoxView.m */,
-				69C6BA9E13BF87D60040658C /* RASplitView.h */,
-				69C6BA9F13BF87D60040658C /* RASplitView.m */,
-				6980775113BFBF6D0002D33C /* LionClipView.h */,
-				6980775213BFBF6D0002D33C /* LionClipView.m */,
-				69E8168F13C0F57100D8725C /* RALeftView.h */,
-				69E8169013C0F57100D8725C /* RALeftView.m */,
-				9F087FEC13CC852C0075ACC1 /* StopActivityButton.h */,
-				9F087FED13CC852C0075ACC1 /* StopActivityButton.m */,
-				9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */,
-				9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */,
-				9F54091B143F60FF0000D46D /* RABadgeField.h */,
-				9F54091C143F60FF0000D46D /* RABadgeField.m */,
-				9F14147A144AF82800503344 /* RAAddressFieldBox.h */,
-				9F14147B144AF82800503344 /* RAAddressFieldBox.m */,
-				9F76D05C144CDBA6007C819F /* RAHiddenWindow.h */,
-				9F76D05D144CDBA6007C819F /* RAHiddenWindow.m */,
+				9FEF2AB4147F8CBC007BC286 /* SplitView related */,
+				9FEF2AB3147F8C99007BC286 /* Window Related */,
+				9FEF2AB2147F8C7C007BC286 /* TabNavigator related */,
+				9FEF2AB1147F8C68007BC286 /* SmartBar related */,
+				9FEF2AB0147F8C63007BC286 /* WebNavigator related */,
 			);
 			name = "Reusable Subclass";
 			sourceTree = "<group>";
@@ -1422,6 +1408,83 @@
 				9FD7B27814668FF4007EFF15 /* hello.user.js */,
 			);
 			name = GreaseKit;
+			sourceTree = "<group>";
+		};
+		9FEF2AB0147F8C63007BC286 /* WebNavigator related */ = {
+			isa = PBXGroup;
+			children = (
+				9FEF2AB5147F8D1E007BC286 /* Address bar */,
+				6980775113BFBF6D0002D33C /* LionClipView.h */,
+				6980775213BFBF6D0002D33C /* LionClipView.m */,
+				69C74D9C1392399700A9CBD8 /* RAMainWebView.h */,
+				69C74D9D1392399700A9CBD8 /* RAMainWebView.m */,
+				6984F67F13A93DAA00C113A4 /* RASuggestionBoxView.h */,
+				6984F68013A93DAA00C113A4 /* RASuggestionBoxView.m */,
+				9F13E9B3145D6A8A00576566 /* LWVClipView.h */,
+				9F13E9B4145D6A8A00576566 /* LWVClipView.m */,
+			);
+			name = "WebNavigator related";
+			sourceTree = "<group>";
+		};
+		9FEF2AB1147F8C68007BC286 /* SmartBar related */ = {
+			isa = PBXGroup;
+			children = (
+				9FEF2AAD147EEF19007BC286 /* RASBAPPMainButton.h */,
+				9FEF2AAE147EEF19007BC286 /* RASBAPPMainButton.m */,
+				9F54091B143F60FF0000D46D /* RABadgeField.h */,
+				9F54091C143F60FF0000D46D /* RABadgeField.m */,
+				69F44860138A24E800432BC7 /* RASmartBarButton.h */,
+				69F44861138A24E800432BC7 /* RASmartBarButton.m */,
+				9FEF2AB6147F8D82007BC286 /* RASmartBarHolderView.h */,
+				9FEF2AB7147F8D82007BC286 /* RASmartBarHolderView.m */,
+			);
+			name = "SmartBar related";
+			sourceTree = "<group>";
+		};
+		9FEF2AB2147F8C7C007BC286 /* TabNavigator related */ = {
+			isa = PBXGroup;
+			children = (
+				9FEF2AA9147EEB26007BC286 /* RATabPlaceholderView.h */,
+				9FEF2AAA147EEB26007BC286 /* RATabPlaceholderView.m */,
+				9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */,
+				9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */,
+				9F087FEC13CC852C0075ACC1 /* StopActivityButton.h */,
+				9F087FED13CC852C0075ACC1 /* StopActivityButton.m */,
+			);
+			name = "TabNavigator related";
+			sourceTree = "<group>";
+		};
+		9FEF2AB3147F8C99007BC286 /* Window Related */ = {
+			isa = PBXGroup;
+			children = (
+				9F2501E8141BC0B30094D79C /* INAppStoreWindow.h */,
+				9F2501E9141BC0B30094D79C /* INAppStoreWindow.m */,
+				9F76D05C144CDBA6007C819F /* RAHiddenWindow.h */,
+				9F76D05D144CDBA6007C819F /* RAHiddenWindow.m */,
+			);
+			name = "Window Related";
+			sourceTree = "<group>";
+		};
+		9FEF2AB4147F8CBC007BC286 /* SplitView related */ = {
+			isa = PBXGroup;
+			children = (
+				69E8168F13C0F57100D8725C /* RALeftView.h */,
+				69E8169013C0F57100D8725C /* RALeftView.m */,
+				69C6BA9E13BF87D60040658C /* RASplitView.h */,
+				69C6BA9F13BF87D60040658C /* RASplitView.m */,
+			);
+			name = "SplitView related";
+			sourceTree = "<group>";
+		};
+		9FEF2AB5147F8D1E007BC286 /* Address bar */ = {
+			isa = PBXGroup;
+			children = (
+				9F14147A144AF82800503344 /* RAAddressFieldBox.h */,
+				9F14147B144AF82800503344 /* RAAddressFieldBox.m */,
+				69A15D62138702CB0097FD71 /* RAAddressField.h */,
+				69A15D63138702CB0097FD71 /* RAAddressField.m */,
+			);
+			name = "Address bar";
 			sourceTree = "<group>";
 		};
 		9FF4B9DC1408EDBD005FCE7F /* first start page */ = {
@@ -1909,6 +1972,9 @@
 				9FDD0CDC146814CA00865ACB /* RAGoogleSuggestionsParser.m in Sources */,
 				9FEF7D3C147514CF006ADC7B /* RACookieWindowController.m in Sources */,
 				9FC75F0714765403001842EC /* RACSSEditor.m in Sources */,
+				9FEF2AAB147EEB26007BC286 /* RATabPlaceholderView.m in Sources */,
+				9FEF2AAF147EEF19007BC286 /* RASBAPPMainButton.m in Sources */,
+				9FEF2AB8147F8D82007BC286 /* RASmartBarHolderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

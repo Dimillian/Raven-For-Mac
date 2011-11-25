@@ -12,9 +12,11 @@
 #import <Cocoa/Cocoa.h>
 #import "RANavigatorViewController.h"
 #import "RASmartBarButton.h"
+#import "RASBAPPMainButton.h"
+#import "RASmartBarHolderView.h"
 
 @protocol RASmartBarViewControllerDelegate;
-@interface RASmartBarViewController : NSViewController
+@interface RASmartBarViewController : NSViewController <RASBAPPMainButtonDelegate>
 {
     id<RASmartBarViewControllerDelegate> delegate;
     NSImage *mainIcon; 
@@ -32,17 +34,23 @@
     int state;
     int selectedButton; 
     
-    //google view
+    //Navigator hoder
     RANavigatorViewController *firstNavigatorView;
     RANavigatorViewController *SecondNavigatorView;
     RANavigatorViewController *ThirdtNavigatorView;
     RANavigatorViewController *FourthNavigatorView;
     
-    IBOutlet NSButton *mainButton; 
+    //self view outlet
+    IBOutlet RASmartBarHolderView *mainView; 
+    
+    //Button outlet
+    IBOutlet RASBAPPMainButton *mainButton; 
     IBOutlet RASmartBarButton *firstButton; 
     IBOutlet RASmartBarButton *secondButton; 
     IBOutlet RASmartBarButton *thirdButton;
     IBOutlet RASmartBarButton *fourthButton;
+    IBOutlet NSButton *closeAppButton; 
+    
     
     IBOutlet NSImageView *badgeView; 
     IBOutlet NSImageView *lightVIew; 
@@ -53,7 +61,6 @@
     IBOutlet NSTextField *thirdButtonNumber; 
     IBOutlet NSTextField *fourfthButtonNumber; 
     
-    IBOutlet NSView *mainView; 
     
     NSUInteger totalTabs;
     
@@ -67,10 +74,15 @@
 -(IBAction)secondItemClicked:(id)sender;
 -(IBAction)thirdItemClicked:(id)sender;
 -(IBAction)fourItemClicked:(id)sender;
+-(IBAction)closeAppButtonCliced:(id)sender; 
 -(void)resetAllButton; 
 -(void)setSelectedButton;
 -(void)updateTabsNumber; 
 -(void)calculateUrlNumber; 
+-(void)hideCloseAppButton; 
+-(void)showCloseAppButton; 
+-(void)hoverMainButton; 
+-(void)hideHoverMainButton; 
 -(void)receiveNotification:(NSNotification *)notification;
 -(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs; 
 

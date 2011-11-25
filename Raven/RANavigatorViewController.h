@@ -14,13 +14,14 @@
 #import "RAWebViewController.h"
 #import "RAAddressField.h"
 #import "RADatabaseController.h"
+#import "RATabPlaceholderView.h"
 
 
-@interface RANavigatorViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSWindowDelegate, RAWebViewControllerDelegate>{
+@interface RANavigatorViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSWindowDelegate, RAWebViewControllerDelegate, RATabViewDelegate>{
     
     //Outlet
     IBOutlet NSView *mainView; 
-    IBOutlet NSView *tabPlaceHolder; 
+    IBOutlet RATabPlaceholderView *tabPlaceHolder; 
     IBOutlet NSButton *tabsButton;  
     IBOutlet NSButton *allTabsButton; 
     IBOutlet NSTabView *tabController; 

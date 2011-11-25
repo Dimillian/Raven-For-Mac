@@ -22,6 +22,11 @@
 #define badge_w 26
 #define badge_h 26
 
+#define close_x 17
+#define close_y 238
+#define close_w 26
+#define close_h 26
+
 #define light_y 230
 #define light_x 75
 #define light_w 7
@@ -35,6 +40,8 @@
 @synthesize folderName, appName, firstURL, secondURL, thirdURL, fourthURL, state, delegate, selectedButton, mainButton, appNumber; 
 
 
+#pragma mark -
+#pragma mark init and dealloc
 -(id)init
 {
     self = [super init]; 
@@ -84,6 +91,9 @@
     SecondNavigatorView = [[RANavigatorViewController alloc]init];
     ThirdtNavigatorView = [[RANavigatorViewController alloc]init];
     FourthNavigatorView = [[RANavigatorViewController alloc]init];
+    
+    [mainButton setDelegate:self];
+    [closeAppButton setAlphaValue:0.0]; 
 
     NSString *homeButtonPath = [NSString stringWithFormat:application_support_path@"%@/main.png", folderName];
     NSString *firstImageOffPath = [NSString stringWithFormat:application_support_path@"%@/1_off.png", folderName];
@@ -137,29 +147,8 @@
     
 }
 
-
--(void)calculateUrlNumber{
-    if ([secondURL isEqualToString:@""]) {
-        appNumber = 1; 
-    }
-    else if ([thirdURL isEqualToString:@""]){
-        appNumber = 2; 
-    }
-    else if ([fourthURL isEqualToString:@""]){
-        appNumber = 3;
-    }
-    else
-    {
-        appNumber = 4; 
-    }
-    
-    
-}
-
--(void)receiveNotification:(NSNotification *)notification
-{
-    [self updateTabsNumber];
-}
+#pragma mark -
+#pragma mark animation
 
 //fired when main app button is clicked
 -(IBAction)expandApp:(id)sender
@@ -191,6 +180,7 @@
         [fourthButton setEnabled:YES];
         [[mainButton animator]setAlphaValue:1.0];
         [delegate itemDidExpand:self];
+        [self hideCloseAppButton];
         //[delegate selectionDidChange:self];
         state = 1;
 
@@ -226,6 +216,7 @@
     
     //[[totalTabsNumber animator]setFrame:NSMakeRect(badge_x-1, badge_y+1, badge_w, number_h)];
     //[[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
+    [[closeAppButton animator]setFrame:NSMakeRect(close_x, close_y, close_w, close_h)];
     [[lightVIew animator]setFrame:NSMakeRect(light_x, light_y , light_w, light_h)];
     [[firstButtonNumber animator]setFrame:NSMakeRect(button_x, 196, button_x, number_h)];
     [firstButtonNumber setAlphaValue:0.0];
@@ -251,7 +242,33 @@
     state = 0;
 }
 
+#pragma mark -
+#pragma mark other
+-(void)calculateUrlNumber{
+    if ([secondURL isEqualToString:@""]) {
+        appNumber = 1; 
+    }
+    else if ([thirdURL isEqualToString:@""]){
+        appNumber = 2; 
+    }
+    else if ([fourthURL isEqualToString:@""]){
+        appNumber = 3;
+    }
+    else
+    {
+        appNumber = 4; 
+    }
+    
+    
+}
 
+-(void)receiveNotification:(NSNotification *)notification
+{
+    [self updateTabsNumber];
+}
+
+#pragma mark -
+#pragma mark inside button action
 -(IBAction)firstItemClicked:(id)sender
 {
     [self resetAllButton]; 
@@ -270,7 +287,6 @@
     if (firstNavigatorView != nil)
     {
         mainWindow.myCurrentViewController = firstNavigatorView;
-        
     }
     [firstNavigatorView setMenu];
     
@@ -360,27 +376,27 @@
     selectedButton = 4;
 }
 
-//select previously selected button when switching app
--(void)setSelectedButton
+-(void)closeAppButtonCliced:(id)sender
 {
-    switch (selectedButton) {
-        case 1:
-            [self firstItemClicked:firstButton];
-            break;
-        case 2:
-            [self secondItemClicked:secondButton];
-            break;
-        case 3:
-            [self thirdItemClicked:thirdButton];
-            break;
-        case 4:
-            [self fourItemClicked:fourthButton];
-            break;
-            
-        default:
-            break;
+    if (state == 1){
+        RAMainWindowController *mainWindow = [[NSApp keyWindow]windowController]; 
+        [mainWindow raven:nil];
     }
+    
+    [firstNavigatorView release]; 
+    [SecondNavigatorView release]; 
+    [ThirdtNavigatorView release]; 
+    [FourthNavigatorView release]; 
+    
+    firstNavigatorView = [[RANavigatorViewController alloc]init];
+    SecondNavigatorView = [[RANavigatorViewController alloc]init];
+    ThirdtNavigatorView = [[RANavigatorViewController alloc]init];
+    FourthNavigatorView = [[RANavigatorViewController alloc]init];
+    
+    [[lightVIew animator]setAlphaValue:0.0];
+    [self hideCloseAppButton]; 
 }
+
 
 -(void)updateTabsNumber
 {
@@ -418,6 +434,8 @@
     }
     
 }
+#pragma mark -
+#pragma mark button management
 //reset all buttons state for image reset
 -(void)resetAllButton
 {
@@ -428,6 +446,81 @@
     [fourthButton setState:0]; 
 
 
+}
+
+-(void)hideCloseAppButton
+{
+    [[closeAppButton animator]setAlphaValue:0.0]; 
+    [closeAppButton setEnabled:NO];
+}
+
+-(void)showCloseAppButton
+{
+    if (firstNavigatorView.tabsArray.count >= 1 ||
+        SecondNavigatorView.tabsArray.count >= 1 ||
+        ThirdtNavigatorView.tabsArray.count >= 1 ||
+        FourthNavigatorView.tabsArray.count >= 1) {
+        
+        [closeAppButton setEnabled:YES];
+        [[closeAppButton animator]setAlphaValue:1.0]; 
+    }
+}
+
+-(void)hoverMainButton
+{
+    if (state == 0) {
+         [[mainButton animator]setAlphaValue:1.0];    
+    }
+}
+
+-(void)hideHoverMainButton
+{
+    if (state == 0){
+        [[mainButton animator]setAlphaValue:0.5]; 
+    }
+}
+
+//select previously selected button when switching app
+-(void)setSelectedButton
+{
+    switch (selectedButton) {
+        case 1:
+            [self firstItemClicked:firstButton];
+            break;
+        case 2:
+            [self secondItemClicked:secondButton];
+            break;
+        case 3:
+            [self thirdItemClicked:thirdButton];
+            break;
+        case 4:
+            [self fourItemClicked:fourthButton];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark -
+#pragma mark RASBAPPMainButtonDelegate
+
+-(void)mouseDidEntered:(RASBAPPMainButton *)button
+{
+    [self showCloseAppButton];
+    [self hoverMainButton]; 
+}
+
+-(void)mouseDidExited:(RASBAPPMainButton *)button
+{
+    [self hideCloseAppButton]; 
+    [self hideHoverMainButton]; 
+}
+
+-(void)mouseDidScroll:(RASBAPPMainButton *)button
+{
+    [self hideCloseAppButton]; 
+    [self hideHoverMainButton];
 }
 
 @end

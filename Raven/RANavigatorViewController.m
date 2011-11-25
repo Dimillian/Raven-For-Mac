@@ -56,7 +56,8 @@
     [allTabsButton setAction:@selector(menutabs:)]; 
     [allTabsButton setTarget:self];
     inBackground = NO;
-    isAdressBarHidden = NO; 
+    isAdressBarHidden = NO;
+    [tabPlaceHolder setDelegate:self];
 }
 
 
@@ -281,6 +282,7 @@
 }
 
 
+
 -(void)closeSelectedTab:(id)sender
 {
     RAWebViewController *close = [tabsArray objectAtIndex:
@@ -392,6 +394,14 @@
     PassedUrl = [[sender representedObject]absoluteString];
     inBackground = YES;
     [self addtabs:tabsButton];
+}
+
+#pragma mark -
+#pragma mark RATabViewDelegate
+
+-(void)didReceiveDoubleClick:(RATabPlaceholderView *)view
+{
+    [self addtabs:nil];
 }
 
 #pragma mark -

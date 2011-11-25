@@ -339,6 +339,7 @@
     
     return [menu autorelease]; 
 }
+
 //mobile button, change the UA and the window sier
 -(void)mobile:(id)sender
 {
@@ -663,14 +664,12 @@
 - (void)dealloc
 {  
     
-
     [webview stopLoading:webview]; 
     [webview setUIDelegate:nil];
     [webview setDownloadDelegate:nil]; 
     [webview setResourceLoadDelegate:nil]; 
     [webview setFrameLoadDelegate:nil];
     [webview setPolicyDelegate:nil]; 
-    [webview close];
     [webview removeFromSuperview];
     [webview release], webview = nil;
     
