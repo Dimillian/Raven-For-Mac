@@ -6,12 +6,12 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "RAAddressField.h"
+#import "RAAdressTextField.h"
 #import "RAAddressFieldBox.h"
 #import "RAGoogleSuggestionsParser.h"
 
 
-@implementation RAAddressField 
+@implementation RAAdressTextField 
 @synthesize tableViewEdit;
 
 

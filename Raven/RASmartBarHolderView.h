@@ -9,5 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 @interface RASmartBarHolderView : NSView
+{
+    //CGPoint lastDragLocation; 
+}
 
 @end

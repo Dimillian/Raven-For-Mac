@@ -12,9 +12,11 @@
 #import "RADatabaseController.h"
 #import "RADownloadController.h"
 #import "RADownloadObject.h"
+#import "RAMainWebView.h"
 #import "RAFavoritePanelWController.h"
 #import "RANSURLDownloadDelegate.h"
 #import "RAAddressFieldBox.h"
+
 @protocol RAWebViewControllerDelegate;
 @interface RAWebViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSTableViewDelegate, NSTableViewDataSource>{
     id<RAWebViewControllerDelegate> delegate;
@@ -22,8 +24,8 @@
     //MainView outlet 
     IBOutlet NSView *mainView; 
     IBOutlet NSView *switchView; 
-    IBOutlet WebView *webview; 
     IBOutlet NSTextField *address; 
+    IBOutlet RAMainWebView *webview; 
     IBOutlet NSProgressIndicator *progress;
     IBOutlet NSButton *mobileButton; 
     IBOutlet NSButton *stopLoading; 

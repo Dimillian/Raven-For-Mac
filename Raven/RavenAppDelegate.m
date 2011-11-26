@@ -184,6 +184,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         [MainWindow raven:nil]; 
         [[MainWindow navigatorview]setPassedUrl:URL]; 
         [[MainWindow navigatorview]addtabs:MainWindow]; 
+        [MainWindow.navigatorview closeFirtTab]; 
     }
 
 }
@@ -218,43 +219,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [MainWindow showWindow:self]; 
 }
 
-//Later, to be used for a top menu favorite menu
--(void)favoriteMenu:(id)sender
-{
-    
-    int i=0; 
-    NSUInteger b; 
-    //instancie l'app delegate
-    RADatabaseController *controller = [RADatabaseController sharedUser];
-    [controller readBookmarkFromDatabase:0 order:1]; 
-    b = controller.bookmarks.count; 
-    for (i=0;i<b;i++)
-    {
-        RAItemObject *bookmark = (RAItemObject *)[controller.bookmarks objectAtIndex:i];
-        
-        
-        NSMenuItem *item = [[NSMenuItem alloc]init];
-        [item setTarget:self]; 
-        [item setTitle:bookmark.title]; 
-        [item setRepresentedObject:bookmark.url]; 
-        [item setImage:bookmark.favico];
-        [item setAction:@selector(gotopage:)];
-        [item setEnabled:YES];
-        [favoriteMenu addItem:item]; 
-        [item release]; 
-    }
-    RAMainWindowController *mainWindow = [[sender window]windowController]; 
-    [favoriteMenu addItem:[NSMenuItem separatorItem]];
-    NSMenuItem *item = [[NSMenuItem alloc]init];
-    [item setTarget:mainWindow];
-    [item setTitle:@"Edit Favorites"];
-    [item setAction:@selector(bookmark:)];
-    [item setEnabled:YES]; 
-    [favoriteMenu addItem:item]; 
-    [item release]; 
-    
-    
-}
 //Method that fire the file browser to select an app to import
 -(void)importSelectedApp:(id)sender
 {
@@ -312,7 +276,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         opennedDocumentPath = filename;
         [opennedDocumentPath retain];
         [self importAppAction];
-           return YES;
+        return YES;
     }
     else
     {

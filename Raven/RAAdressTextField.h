@@ -12,7 +12,7 @@
 #import "RADatabaseController.h"
 #import "RAGoogleSuggestionsParser.h"
 
-@interface RAAddressField : NSTextField <NSTableViewDelegate, NSTableViewDataSource, NSWindowDelegate, RAGoogleSuggestionDelegate> {
+@interface RAAdressTextField : NSTextField <NSTableViewDelegate, NSTableViewDataSource, NSWindowDelegate, RAGoogleSuggestionDelegate> {
     
     NSTableView *tableViewEdit; 
     NSUInteger i; 

@@ -35,7 +35,6 @@
 -(void)newWindowsFromOther:(NSString *)url; 
 -(IBAction)showSettingsWindow:(id)sender;
 -(IBAction)showAboutPanel:(id)sender;
--(IBAction)favoriteMenu:(id)sender;
 -(IBAction)importSelectedApp:(id)sender;
 -(IBAction)webAppShop:(id)sender; 
 -(IBAction)twitterProfile:(id)sender;

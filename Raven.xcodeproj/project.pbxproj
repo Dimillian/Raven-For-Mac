@@ -91,7 +91,7 @@
 		6984F68113A93DAA00C113A4 /* RASuggestionBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F68013A93DAA00C113A4 /* RASuggestionBoxView.m */; };
 		698BAC31133D5289003DA8EE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698BAC30133D5289003DA8EE /* QuartzCore.framework */; };
 		699A14031372C8850017E625 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 699A14021372C8850017E625 /* dsa_pub.pem */; };
-		69A15D64138702CB0097FD71 /* RAAddressField.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A15D63138702CB0097FD71 /* RAAddressField.m */; };
+		69A15D64138702CB0097FD71 /* RAAdressTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A15D63138702CB0097FD71 /* RAAdressTextField.m */; };
 		69A78B931356D90C0094926C /* raven_app.png in Resources */ = {isa = PBXBuildFile; fileRef = 69A78B921356D90C0094926C /* raven_app.png */; };
 		69B0B9F913BE2A5D007491CB /* smartbar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69B0B9F813BE2A5D007491CB /* smartbar.plist */; };
 		69B313551356395100F3DCFD /* RASettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B313541356395000F3DCFD /* RASettingViewController.m */; };
@@ -447,8 +447,8 @@
 		6984F68013A93DAA00C113A4 /* RASuggestionBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RASuggestionBoxView.m; sourceTree = "<group>"; };
 		698BAC30133D5289003DA8EE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		699A14021372C8850017E625 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
-		69A15D62138702CB0097FD71 /* RAAddressField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAAddressField.h; sourceTree = "<group>"; };
-		69A15D63138702CB0097FD71 /* RAAddressField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAAddressField.m; sourceTree = "<group>"; };
+		69A15D62138702CB0097FD71 /* RAAdressTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; path = RAAdressTextField.h; sourceTree = "<group>"; };
+		69A15D63138702CB0097FD71 /* RAAdressTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAAdressTextField.m; sourceTree = "<group>"; };
 		69A78B921356D90C0094926C /* raven_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = raven_app.png; sourceTree = "<group>"; };
 		69B0B9F813BE2A5D007491CB /* smartbar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = smartbar.plist; sourceTree = "<group>"; };
 		69B313531356395000F3DCFD /* RASettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RASettingViewController.h; sourceTree = "<group>"; };
@@ -1481,8 +1481,8 @@
 			children = (
 				9F14147A144AF82800503344 /* RAAddressFieldBox.h */,
 				9F14147B144AF82800503344 /* RAAddressFieldBox.m */,
-				69A15D62138702CB0097FD71 /* RAAddressField.h */,
-				69A15D63138702CB0097FD71 /* RAAddressField.m */,
+				69A15D62138702CB0097FD71 /* RAAdressTextField.h */,
+				69A15D63138702CB0097FD71 /* RAAdressTextField.m */,
 			);
 			name = "Address bar";
 			sourceTree = "<group>";
@@ -1924,7 +1924,7 @@
 				69D902FB134B9F990097F30F /* RADownloadViewController.m in Sources */,
 				69B313551356395100F3DCFD /* RASettingViewController.m in Sources */,
 				693A0AC51361F8DB001C309F /* RAWebViewController.m in Sources */,
-				69A15D64138702CB0097FD71 /* RAAddressField.m in Sources */,
+				69A15D64138702CB0097FD71 /* RAAdressTextField.m in Sources */,
 				69F44862138A24E800432BC7 /* RASmartBarButton.m in Sources */,
 				69EDA394138FFDA3000AED59 /* RADatabaseController.m in Sources */,
 				69C74D9E1392399700A9CBD8 /* RAMainWebView.m in Sources */,

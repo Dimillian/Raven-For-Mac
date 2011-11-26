@@ -291,6 +291,12 @@
     [close closeButtonTabClicked:close];
 }
 
+-(void)closeFirtTab
+{
+    RAWebViewController *close = [tabsArray objectAtIndex:0]; 
+    [close closeButtonTabClicked:close]; 
+}
+
 
 //THe action when the tab menu button is clicked
 -(void)menutabs:(id)sender

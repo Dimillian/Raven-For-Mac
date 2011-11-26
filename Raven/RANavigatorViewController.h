@@ -11,10 +11,10 @@
 #import <WebKit/WebFrameLoadDelegate.h>
 #import "RAItemObject.h"
 #import "url.h"
-#import "RAWebViewController.h"
-#import "RAAddressField.h"
+#import "RAAdressTextField.h"
 #import "RADatabaseController.h"
 #import "RATabPlaceholderView.h"
+#import "RAWebViewController.h"
 
 
 @interface RANavigatorViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSWindowDelegate, RAWebViewControllerDelegate, RATabViewDelegate>{
@@ -42,7 +42,8 @@
 -(IBAction)menutabs:(id)sender;
 -(IBAction)closeAllTabs:(id)sender; 
 -(IBAction)nextTab:(id)sender;
--(IBAction)previousTab:(id)sender;
+-(IBAction)previousTab:(id)sender; 
+-(void)closeFirtTab; 
 -(NSMenu *)getTabsMenu;
 -(void)openTabInBackgroundWithUrl:(id)sender;
 -(void)windowResize:(id)sender; 
