@@ -507,7 +507,6 @@
 
 -(void)mouseDidEntered:(RASBAPPMainButton *)button
 {
-    [self showCloseAppButton];
     [self hoverMainButton]; 
 }
 
@@ -517,10 +516,25 @@
     [self hideHoverMainButton]; 
 }
 
+-(void)shouldDisplayCloseButton:(RASBAPPMainButton *)button
+{
+    [self showCloseAppButton];
+}
+
 -(void)mouseDidScroll:(RASBAPPMainButton *)button
 {
     [self hideCloseAppButton]; 
     [self hideHoverMainButton];
+}
+
+-(void)mouseDidClicked:(RASBAPPMainButton *)button
+{
+    [self hideCloseAppButton]; 
+}
+
+-(void)shouldDisplayHideButton:(RASBAPPMainButton *)button
+{
+    
 }
 
 @end

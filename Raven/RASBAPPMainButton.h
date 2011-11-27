@@ -12,7 +12,11 @@
 @interface RASBAPPMainButton : NSButton
 {
     id<RASBAPPMainButtonDelegate> delegate;
+    NSTimer *timer; 
+    BOOL isDown;
 }
+-(void)sendMouseEntered:(id)sender; 
+-(void)mouseDownLongPress:(id)sender; 
 @property (nonatomic, assign) id<RASBAPPMainButtonDelegate> delegate;
 @end
 
@@ -21,4 +25,7 @@
 - (void)mouseDidEntered:(RASBAPPMainButton *)button;
 - (void)mouseDidExited:(RASBAPPMainButton *)button;
 - (void)mouseDidScroll:(RASBAPPMainButton *)button; 
+- (void)mouseDidClicked:(RASBAPPMainButton *)button; 
+- (void)shouldDisplayCloseButton:(RASBAPPMainButton *)button;
+- (void)shouldDisplayHideButton:(RASBAPPMainButton *)button; 
 @end
