@@ -16,7 +16,10 @@
     BOOL isDown;
 }
 -(void)sendMouseEntered:(id)sender; 
--(void)mouseDownLongPress:(id)sender; 
+-(void)mouseDownLongPress:(id)sender;
+-(void)sendCloseDelegate:(id)sender; 
+-(void)sendHideDelegate:(id)sender; 
+-(NSMenu *)getMenu; 
 @property (nonatomic, assign) id<RASBAPPMainButtonDelegate> delegate;
 @end
 
@@ -25,7 +28,9 @@
 - (void)mouseDidEntered:(RASBAPPMainButton *)button;
 - (void)mouseDidExited:(RASBAPPMainButton *)button;
 - (void)mouseDidScroll:(RASBAPPMainButton *)button; 
-- (void)mouseDidClicked:(RASBAPPMainButton *)button; 
+- (void)mouseDidClicked:(RASBAPPMainButton *)button;
 - (void)shouldDisplayCloseButton:(RASBAPPMainButton *)button;
 - (void)shouldDisplayHideButton:(RASBAPPMainButton *)button; 
+- (void)shouldCloseApp:(RASBAPPMainButton *)button; 
+- (void)shouldHideApp:(RASBAPPMainButton *)button; 
 @end

@@ -516,7 +516,7 @@
 					<reference key="NSNextKeyView" ref="20956555"/>
 					<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMinSize">{350, 522}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">RavenWindowSize</string>
@@ -551,94 +551,6 @@
 						<reference key="destination" ref="771680320"/>
 					</object>
 					<int key="connectionID">118</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">firstButtonNumber</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="371557155"/>
-					</object>
-					<int key="connectionID">186</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">home:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="1032335943"/>
-					</object>
-					<int key="connectionID">76</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">homeButton</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="1032335943"/>
-					</object>
-					<int key="connectionID">77</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">download:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="799682938"/>
-					</object>
-					<int key="connectionID">82</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">downloadButton</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="799682938"/>
-					</object>
-					<int key="connectionID">83</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">bookmark:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="258752713"/>
-					</object>
-					<int key="connectionID">80</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">bookmarkButton</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="258752713"/>
-					</object>
-					<int key="connectionID">81</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">history:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="511754323"/>
-					</object>
-					<int key="connectionID">78</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">historyButton</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="511754323"/>
-					</object>
-					<int key="connectionID">79</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">raven:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="36030608"/>
-					</object>
-					<int key="connectionID">86</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">ravenMenuButton</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="36030608"/>
-					</object>
-					<int key="connectionID">87</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -687,6 +599,94 @@
 						<reference key="destination" ref="485160451"/>
 					</object>
 					<int key="connectionID">441</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">firstButtonNumber</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="371557155"/>
+					</object>
+					<int key="connectionID">186</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">homeButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="1032335943"/>
+					</object>
+					<int key="connectionID">77</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">home:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="1032335943"/>
+					</object>
+					<int key="connectionID">76</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">download:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="799682938"/>
+					</object>
+					<int key="connectionID">82</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">downloadButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="799682938"/>
+					</object>
+					<int key="connectionID">83</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">bookmarkButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="258752713"/>
+					</object>
+					<int key="connectionID">81</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">bookmark:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="258752713"/>
+					</object>
+					<int key="connectionID">80</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">history:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="511754323"/>
+					</object>
+					<int key="connectionID">78</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">historyButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="511754323"/>
+					</object>
+					<int key="connectionID">79</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">ravenMenuButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="36030608"/>
+					</object>
+					<int key="connectionID">87</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">raven:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="36030608"/>
+					</object>
+					<int key="connectionID">86</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -790,6 +790,22 @@
 						<string key="objectName">Side Bar View</string>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">438</int>
+						<reference key="object" ref="20956555"/>
+						<reference key="parent" ref="325673232"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">122</int>
+						<reference key="object" ref="101875026"/>
+						<reference key="parent" ref="325673232"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">5</int>
+						<reference key="object" ref="485160451"/>
+						<reference key="parent" ref="325673232"/>
+						<string key="objectName">Custom View</string>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">8</int>
 						<reference key="object" ref="277808243"/>
 						<array class="NSMutableArray" key="children">
@@ -803,6 +819,19 @@
 						</array>
 						<reference key="parent" ref="549827444"/>
 						<string key="objectName">Box - Box</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">35</int>
+						<reference key="object" ref="22212678"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="202223439"/>
+						</array>
+						<reference key="parent" ref="277808243"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">38</int>
+						<reference key="object" ref="202223439"/>
+						<reference key="parent" ref="22212678"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">184</int>
@@ -883,35 +912,6 @@
 						<int key="objectID">62</int>
 						<reference key="object" ref="868340240"/>
 						<reference key="parent" ref="36030608"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">35</int>
-						<reference key="object" ref="22212678"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="202223439"/>
-						</array>
-						<reference key="parent" ref="277808243"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">38</int>
-						<reference key="object" ref="202223439"/>
-						<reference key="parent" ref="22212678"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">438</int>
-						<reference key="object" ref="20956555"/>
-						<reference key="parent" ref="325673232"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">122</int>
-						<reference key="object" ref="101875026"/>
-						<reference key="parent" ref="325673232"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">5</int>
-						<reference key="object" ref="485160451"/>
-						<reference key="parent" ref="325673232"/>
-						<string key="objectName">Custom View</string>
 					</object>
 				</array>
 			</object>

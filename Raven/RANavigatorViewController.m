@@ -10,6 +10,7 @@
 //*****BEFORE YOU READ*****
 //THIS CLASS IS FAT, IT IS A MESS, YOU DON'T WANT TO READ IT, YOU SHOULD REWRITE IT NOW
 //*****YOU CAN START READING THE CODE IF YOU WANT*****
+//Ah also, it is full of ninja comment.... really
 
 #import "RANavigatorViewController.h"
 #import "RavenAppDelegate.h"

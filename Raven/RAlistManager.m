@@ -245,9 +245,6 @@
     [dict setObject:folders forKey:PLIST_KEY_DICTIONNARY]; 
     [dict writeToFile:path atomically:YES];
     [folders release]; 
-    
-    
-    
 }
 
 

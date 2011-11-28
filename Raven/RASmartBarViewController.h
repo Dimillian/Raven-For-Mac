@@ -33,6 +33,7 @@
     NSInteger *type; 
     int state;
     int selectedButton; 
+    int index; 
     
     //Navigator hoder
     RANavigatorViewController *firstNavigatorView;
@@ -67,7 +68,7 @@
     int appNumber; 
 
 }
--(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate;
+-(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate andDictionnary:(NSDictionary *)dictionnary;
 -(IBAction)expandApp:(id)sender;
 -(IBAction)retractApp:(id)sender;
 -(IBAction)firstItemClicked:(id)sender;
@@ -98,6 +99,7 @@
 @property int selectedButton;
 @property int state;
 @property int appNumber;
+@property int index; 
 @end
 
 @protocol RASmartBarViewControllerDelegate

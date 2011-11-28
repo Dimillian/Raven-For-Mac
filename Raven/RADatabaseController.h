@@ -28,6 +28,7 @@
 @property (nonatomic, assign) NSMutableArray *suggestion; 
 @property (nonatomic, assign) NSMutableArray *preciseSuggestion;
 @property (nonatomic, assign) NSMutableArray *historySearch; 
+
 +(RADatabaseController *)sharedUser;
 -(void)checkAndCreateDatabase;
 -(void)readBookmarkFromDatabase:(int)type order:(int)order; 

@@ -24,7 +24,12 @@
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
                                                 name:NEW_APP_INSTALLED 
-                                              object:nil];;
+                                              object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:SMART_BAR_UPDATE 
+                                              object:nil];
+
 
     
 }

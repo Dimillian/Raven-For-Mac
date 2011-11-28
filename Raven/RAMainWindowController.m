@@ -289,9 +289,8 @@
     NSArray *folder = [[dict objectForKey:PLIST_KEY_DICTIONNARY]copy];
     NSMutableArray *folders = [[NSMutableArray alloc]init]; 
     for (NSDictionary *item in folder) {
-        if ([[item objectForKey:PLIST_KEY_ENABLE]intValue] == 1) {
-            [folders addObject:item];
-        }
+        [folders addObject:item];
+        
     }
     [folder release];
     NSMenu *topMenu = [NSApp menu]; 
@@ -301,34 +300,32 @@
         [smartBarMenu removeItemAtIndex:13];
     }
     int x = 0;
+    int b = 0; 
     for (NSDictionary *item in folders) {
-        NSArray *URL = [[item objectForKey:PLIST_KEY_URL]copy];
-        RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self];
-        smartApp.folderName = [item objectForKey:PLIST_KEY_FOLDER];
-        smartApp.state = [[item objectForKey:PLIST_KEY_ENABLE]intValue];
-        smartApp.firstURL = [URL objectAtIndex:0];
-        smartApp.secondURL = [URL objectAtIndex:1]; 
-        smartApp.thirdURL = [URL objectAtIndex:2]; 
-        smartApp.fourthURL = [URL objectAtIndex:3];
+        RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self andDictionnary:item];
+        smartApp.index = b; 
         //dirty menu part
-        NSString *homeButtonPath = [NSString stringWithFormat:application_support_path@"%@/main.png", [item objectForKey:PLIST_KEY_FOLDER]];
-        NSImage *homeButtonImage = [[NSImage alloc]initWithContentsOfFile:[homeButtonPath stringByExpandingTildeInPath]];
-        [homeButtonImage setSize:NSMakeSize(20, 20)];
-        NSMenuItem *appMenu = [[NSMenuItem alloc]initWithTitle:[item objectForKey:PLIST_KEY_APPNAME] action:@selector(expandApp:) keyEquivalent:[NSString stringWithFormat:@"%d", x+1]]; 
-        [appMenu setTarget:smartApp];
-        [appMenu setImage:homeButtonImage];
-        [smartBarMenu addItem:appMenu];
-        [appMenu release];
-        [homeButtonImage release];
+        if (smartApp.state == 1) {
+            NSString *homeButtonPath = [NSString stringWithFormat:application_support_path@"%@/main.png", [item objectForKey:PLIST_KEY_FOLDER]];
+            NSImage *homeButtonImage = [[NSImage alloc]initWithContentsOfFile:[homeButtonPath stringByExpandingTildeInPath]];
+            [homeButtonImage setSize:NSMakeSize(20, 20)];
+            NSMenuItem *appMenu = [[NSMenuItem alloc]initWithTitle:[item objectForKey:PLIST_KEY_APPNAME] action:@selector(expandApp:) keyEquivalent:[NSString stringWithFormat:@"%d", x+1]]; 
+            [appMenu setTarget:smartApp];
+            [appMenu setImage:homeButtonImage];
+            [smartBarMenu addItem:appMenu];
+            [appMenu release];
+            [homeButtonImage release];
+        }
         //
-        
-        [appList addObject:smartApp]; 
-        [[appList objectAtIndex:x]view];
-        [rightView addSubview:[[appList objectAtIndex:x]view]];
-        [smartApp retractApp:nil];
-        [URL release]; 
+        if (smartApp.state == 1) {
+            [appList addObject:smartApp]; 
+            [[appList objectAtIndex:x]view];
+            [rightView addSubview:[[appList objectAtIndex:x]view]];
+            [smartApp retractApp:nil];
+            x+=1;
+        }
         [smartApp release];
-        x+=1;
+        b+=1; 
     }
     [topMenu setSubmenu:smartBarMenu forItem:[topMenu itemAtIndex:4]];
     //[NSApp setMenu:topMenu];
@@ -385,12 +382,8 @@
     NSArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
     NSDictionary *item = [folders lastObject];
     NSArray *URL = [[item objectForKey:PLIST_KEY_URL]mutableCopy];
-    RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self];
-    smartApp.folderName = [item objectForKey:PLIST_KEY_FOLDER];
-    smartApp.firstURL = [URL objectAtIndex:0];
-    smartApp.secondURL = [URL objectAtIndex:1]; 
-    smartApp.thirdURL = [URL objectAtIndex:2]; 
-    smartApp.fourthURL = [URL objectAtIndex:3];
+    RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self andDictionnary:item];
+    smartApp.index = [folders count]-1; 
     [appList addObject:smartApp]; 
     [[appList lastObject]view];
     [rightView addSubview:[[appList lastObject]view]];
@@ -643,14 +636,6 @@
 {
     if (myCurrentViewController == settingview) {
         [self raven:nil]; 
-        /*
-        [rightView setHidden:NO];
-        [[centeredView animator]setFrame:[backupView frame]]; 
-        [NSAnimationContext beginGrouping];
-        [[NSAnimationContext currentContext] setDuration:0.3];
-        [[rightView animator]setAlphaValue:1.0];
-        [NSAnimationContext endGrouping];
-         */
 
     }
     else{
@@ -660,13 +645,7 @@
     
     if (settingview != nil)
     {
-        /*
-        [NSAnimationContext beginGrouping];
-        [[NSAnimationContext currentContext] setDuration:0.3];  
-        [[centeredView animator]setFrame:[mainView bounds]]; 
-        [[rightView animator]setAlphaValue:0.0];
-        [NSAnimationContext endGrouping];
-         */
+
         myCurrentViewController = settingview;
         
         

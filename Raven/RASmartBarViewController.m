@@ -8,6 +8,7 @@
 
 #import "RASmartBarViewController.h"
 #import "RAMainWindowController.h"
+#import "RAlistManager.h"
 
 
 //button size and position
@@ -37,7 +38,7 @@
 //[[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
 
 @implementation RASmartBarViewController
-@synthesize folderName, appName, firstURL, secondURL, thirdURL, fourthURL, state, delegate, selectedButton, mainButton, appNumber; 
+@synthesize folderName, appName, firstURL, secondURL, thirdURL, fourthURL, state, delegate, selectedButton, mainButton, appNumber, index; 
 
 
 #pragma mark -
@@ -53,13 +54,21 @@
     return self; 
 }
 
--(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate
+-(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate andDictionnary:(NSDictionary *)dictionnary
 {
     self = [super init]; 
     if (self !=nil)
     {
         [self initWithNibName:@"RASmartBarViewController" bundle:nil]; 
         self.delegate = dgate;
+        NSArray *URL = [[dictionnary objectForKey:PLIST_KEY_URL]copy];
+        self.folderName = [dictionnary objectForKey:PLIST_KEY_FOLDER];
+        self.state = [[dictionnary objectForKey:PLIST_KEY_ENABLE]intValue];
+        self.firstURL = [URL objectAtIndex:0];
+        self.secondURL = [URL objectAtIndex:1]; 
+        self.thirdURL = [URL objectAtIndex:2]; 
+        self.fourthURL = [URL objectAtIndex:3];
+        [URL release];
     }
     
     return self;  
@@ -67,6 +76,8 @@
 
 -(void)dealloc
 {
+    [mainButton setDelegate:nil];
+    [mainButton release];
     [firstNavigatorView release]; 
     [SecondNavigatorView release]; 
     [ThirdtNavigatorView release]; 
@@ -535,6 +546,23 @@
 -(void)shouldDisplayHideButton:(RASBAPPMainButton *)button
 {
     
+}
+
+-(void)shouldHideApp:(RASBAPPMainButton *)button
+{
+    RAlistManager *listManager = [[RAlistManager alloc]init]; 
+    if (state == 1) {
+        RAMainWindowController *windowController = self.view.window.windowController; 
+        [windowController raven:nil];
+    }
+    [listManager changeStateOfAppAtIndex:index withState:0];
+    [listManager release]; 
+    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
+}
+
+-(void)shouldCloseApp:(RASBAPPMainButton *)button
+{
+    [self closeAppButtonCliced:self];
 }
 
 @end
