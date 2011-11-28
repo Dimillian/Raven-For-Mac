@@ -22,6 +22,21 @@
     return self;
 }
 
+-(NSMutableArray *)readAppList
+{
+    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    return [folders autorelease];
+}
+
+-(void)writeNewAppList:(NSMutableArray *)appList
+{
+    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    [dict setObject:appList forKey:PLIST_KEY_DICTIONNARY];
+    [dict writeToFile:path atomically:YES];
+}
 
 //Basically import app from separate app.plist to main app.plist after checking it is a real app.
 //Need to check for duplicate and replace if yes 
@@ -86,9 +101,7 @@
 //used to update plist and maintain it up to date with all latest key pair, fired at each launch for beta period
 -(void)updateProcess
 {
-    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    NSMutableArray *folders = [self readAppList];
     for (int x=0; x<[folders count]; x++) {
         NSMutableDictionary *item = [folders objectAtIndex:x];
         if ([item objectForKey:PLIST_KEY_UDID] == nil) {
@@ -109,9 +122,7 @@
         }
         [folders replaceObjectAtIndex:x withObject:item];
     }
-    [dict setObject:folders forKey:PLIST_KEY_DICTIONNARY];
-    [dict writeToFile:path atomically:YES];
-    [folders release]; 
+    [self writeNewAppList:folders];
 
 
 }
@@ -174,26 +185,20 @@
 
 -(NSInteger)checkForDuplicate:(NSString *)Identifier
 {
-    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    NSMutableArray *folders = [self readAppList];
     for (int x=0; x<[folders count]; x++) {
         NSMutableDictionary *item = [folders objectAtIndex:x];
         if ([[item objectForKey:PLIST_KEY_UDID]isEqualToString:Identifier]) {
-            [folders release];
             return x; 
         }
     }
-    [folders release];
     return -1; 
 }
 
 
 -(void)swapObjectAtIndex:(NSInteger)index upOrDown:(NSInteger)order
 {
-    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY]mutableCopy];
+    NSMutableArray *folders = [self readAppList];
     if (order == 1 && index+1 < [folders count]) {
         id tempA = [folders objectAtIndex:index];
         id tempB = [folders objectAtIndex:index + 1];
@@ -207,17 +212,12 @@
         [folders replaceObjectAtIndex:index withObject:tempB];
         [folders replaceObjectAtIndex:index-1 withObject:tempA];
     }
-    [dict setObject:folders forKey:PLIST_KEY_DICTIONNARY];
-    [dict writeToFile:path atomically:YES];
-    [folders release];
-    
+    [self writeNewAppList:folders];
 }
 
 - (void)moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to
 {
-    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY]mutableCopy];
+    NSMutableArray *folders = [self readAppList];
     if (to != from) {
         id obj = [folders objectAtIndex:from];
         [obj retain];
@@ -229,50 +229,37 @@
         }
         [obj release];
     }
-    [dict setObject:folders forKey:PLIST_KEY_DICTIONNARY];
-    [dict writeToFile:path atomically:YES];
-    [folders release];
+    [self writeNewAppList:folders];
 }
 
 -(void)changeStateOfAppAtIndex:(NSInteger)index withState:(NSInteger)state
 {
-    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    NSMutableArray *folders = [self readAppList];
     NSMutableDictionary *item = [folders objectAtIndex:index]; 
     [item setObject:[NSNumber numberWithInteger:state] forKey:PLIST_KEY_ENABLE];
     [folders replaceObjectAtIndex:index withObject:item];
-    [dict setObject:folders forKey:PLIST_KEY_DICTIONNARY]; 
-    [dict writeToFile:path atomically:YES];
-    [folders release]; 
+    [self writeNewAppList:folders];
 }
 
 
 -(NSInteger)returnStateOfAppAtIndex:(NSInteger)index
 {
-    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    NSMutableArray *folders = [self readAppList];
     NSMutableDictionary *item = [folders objectAtIndex:index]; 
     NSNumber *state = [item objectForKey:PLIST_KEY_ENABLE]; 
-    [folders release];
     return [state integerValue];
     
 }
 
 -(void)deleteAppAtIndex:(NSInteger)index
 {
-    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    NSMutableArray *folders = [self readAppList];
     NSMutableDictionary *appToDelete = [folders objectAtIndex:index];
     NSString *folderName = [appToDelete objectForKey:PLIST_KEY_FOLDER];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:[[NSString stringWithFormat:application_support_path@"%@", folderName]stringByExpandingTildeInPath] error:nil];
     [folders removeObjectAtIndex:index];
-    [dict setObject:folders forKey:PLIST_KEY_DICTIONNARY];
-    [dict writeToFile:path atomically:YES];
-    [folders release]; 
+    [self writeNewAppList:folders];
     
 }
 

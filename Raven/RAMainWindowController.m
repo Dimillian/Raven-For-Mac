@@ -276,6 +276,7 @@
 //Also reset it totally
 -(void)initSmartBar
 {
+    //Cleaning stuff
     if( appList )
     { 
         for (NSInteger g=0; g<[appList count]; g++) {
@@ -284,6 +285,8 @@
         [appList release], appList = nil;
     }
 	appList = [[NSMutableArray alloc]init];
+    //
+    
     NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
     NSDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
     NSArray *folder = [[dict objectForKey:PLIST_KEY_DICTIONNARY]copy];
@@ -317,6 +320,7 @@
             [homeButtonImage release];
         }
         //
+        //Only add on item to the main array
         if (smartApp.state == 1) {
             [appList addObject:smartApp]; 
             [[appList objectAtIndex:x]view];
@@ -331,7 +335,6 @@
     //[NSApp setMenu:topMenu];
     [folders release];
     
-    //generate the menu 
 
 }
  
@@ -381,14 +384,12 @@
     NSDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
     NSArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
     NSDictionary *item = [folders lastObject];
-    NSArray *URL = [[item objectForKey:PLIST_KEY_URL]mutableCopy];
     RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self andDictionnary:item];
     smartApp.index = [folders count]-1; 
     [appList addObject:smartApp]; 
     [[appList lastObject]view];
     [rightView addSubview:[[appList lastObject]view]];
     [smartApp retractApp:nil];
-    [URL release]; 
     [smartApp release]; 
     [folders release];
     [self updateSmartBarUi];

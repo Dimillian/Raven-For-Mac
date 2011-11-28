@@ -14,6 +14,9 @@
     NSString *destinationPath;
 }
 
+-(NSMutableArray *)readAppList; 
+-(void)writeNewAppList:(NSMutableArray *)appList; 
+
 -(void)importAppAthPath:(NSString *)path;
 -(BOOL)checkifAppIsValide:(NSString *)path;
 -(void)updateProcess; 
