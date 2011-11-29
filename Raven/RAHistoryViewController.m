@@ -9,10 +9,7 @@
 
 #import "RANavigatorViewController.h"
 #import "RavenAppDelegate.h"
-#import "RAHistoryCell.h"
 #import "RAMainWindowController.h"
-#import "RAHiddenWindow.h"
-#import "LWVClipView.h"
 
 @implementation RAHistoryViewController
 

@@ -10,7 +10,6 @@
 #import <sqlite3.h>
 #import "RavenAppDelegate.h"
 #import "RAMainWindowController.h"
-#import "RAlistManager.h"
 
 @implementation RASettingViewController
 

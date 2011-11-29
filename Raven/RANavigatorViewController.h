@@ -15,8 +15,9 @@
 #import "RADatabaseController.h"
 #import "RATabPlaceholderView.h"
 #import "RAWebViewController.h"
+#import "RANSURLDownloadDelegate.h"
 
-
+@class RavenAppDelegate;
 @interface RANavigatorViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSWindowDelegate, RAWebViewControllerDelegate, RATabViewDelegate>{
     
     //Outlet

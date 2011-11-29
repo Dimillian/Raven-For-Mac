@@ -16,7 +16,8 @@
 #import "RAFavoritePanelWController.h"
 #import "RANSURLDownloadDelegate.h"
 #import "RAAddressFieldBox.h"
-
+ 
+@class RAAdressTextField, RAMainWindowController, RavenAppDelegate; 
 @protocol RAWebViewControllerDelegate;
 @interface RAWebViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSTableViewDelegate, NSTableViewDataSource>{
     id<RAWebViewControllerDelegate> delegate;
@@ -24,7 +25,7 @@
     //MainView outlet 
     IBOutlet NSView *mainView; 
     IBOutlet NSView *switchView; 
-    IBOutlet NSTextField *address; 
+    IBOutlet RAAdressTextField *address; 
     IBOutlet RAMainWebView *webview; 
     IBOutlet NSProgressIndicator *progress;
     IBOutlet NSButton *mobileButton; 

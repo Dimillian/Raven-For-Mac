@@ -14,7 +14,9 @@
 #import "RASmartBarButton.h"
 #import "RASBAPPMainButton.h"
 #import "RASmartBarHolderView.h"
+#import "RAlistManager.h"
 
+@class RAMainWindowController; 
 @protocol RASmartBarViewControllerDelegate;
 @interface RASmartBarViewController : NSViewController <RASBAPPMainButtonDelegate>
 {
@@ -33,7 +35,8 @@
     NSInteger *type; 
     int state;
     int selectedButton; 
-    int index; 
+    int localPlistIndex; 
+    int localArrayIndex; 
     
     //Navigator hoder
     RANavigatorViewController *firstNavigatorView;
@@ -68,7 +71,11 @@
     int appNumber; 
 
 }
--(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate withDictionnary:(NSDictionary *)dictionnary andWithIndex:(int)localIndex;
+-(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate 
+      withDictionnary:(NSDictionary *)dictionnary
+         withArrayIndex:(int)localIndex
+   andWithPlistIndex:(int)globalIndex; 
+
 -(IBAction)expandApp:(id)sender;
 -(IBAction)retractApp:(id)sender;
 -(IBAction)firstItemClicked:(id)sender;
@@ -97,9 +104,10 @@
 @property (copy) NSString *thirdURL;
 @property (copy) NSString *fourthURL;
 @property int selectedButton;
+@property int localArrayIndex;
 @property int state;
 @property int appNumber;
-@property int index; 
+@property int localPlistIndex; 
 @end
 
 @protocol RASmartBarViewControllerDelegate

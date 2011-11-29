@@ -7,7 +7,7 @@
 //
 
 #import "RavenAppDelegate.h"
-#import "RAlistManager.h"
+
 @implementation RavenAppDelegate
 @synthesize setting, mainWindowArray; 
 #pragma mark -
@@ -119,7 +119,12 @@
 -(void)applicationWillTerminate:(NSNotification *)notification
 {
     RAlistManager *listManager = [RAlistManager sharedUser]; 
-    [listManager writeNewAppListToPlist]; 
+    [listManager writeNewAppListInMemory:nil writeToFile:YES]; 
+}
+
+-(NSMenu *)applicationDockMenu:(NSApplication *)sender
+{
+    return sender.menu; 
 }
 //Fired when external URL is clicked
 - (void)getUrl:(NSAppleEventDescriptor *)event 

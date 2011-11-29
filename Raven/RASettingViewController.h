@@ -9,8 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 #import "RADatabaseController.h"
+#import "RAlistManager.h"
 
-
+@class RAMainWindowController; 
 @interface RASettingViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
     
     IBOutlet NSTableView *tableview; 

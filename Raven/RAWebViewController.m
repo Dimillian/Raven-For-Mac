@@ -9,6 +9,7 @@
 #import "RAWebViewController.h"
 #import "RavenAppDelegate.h"
 #import "RAMainWindowController.h"
+#import "RAAdressTextField.h"
 #import "NSString+Raven.h"
 #import "RAHiddenWindow.h"
 #import "WebView+search.h"

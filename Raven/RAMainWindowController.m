@@ -7,13 +7,8 @@
 //
 
 #import "RAMainWindowController.h"
-#import "RavenAppDelegate.h"
-#import "RAlistManager.h"
-#import "RASettingViewController.h"
-#import "INAppStoreWindow.h"
-#import "RAHiddenWindow.h"
-#import "Growl/Growl.h"
-#import "Growl/GrowlApplicationBridge.h"
+
+
 
 //smart bar app positioning
 #define retracted_app_height 55
@@ -93,7 +88,7 @@
 
 -(void)windowWillClose:(NSNotification *)notification
 {   
-    [[RAlistManager sharedUser]writeNewAppListToPlist]; 
+    [[RAlistManager sharedUser]writeNewAppListInMemory:nil writeToFile:YES];
     [[RAlistManager sharedUser]forceReadApplist];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self autorelease]; 
@@ -299,12 +294,17 @@
     for (NSInteger sb=13; sb < count; sb++) {
         [smartBarMenu removeItemAtIndex:13];
     }
+    
+    //local array index
     int x = 0;
+    //global plist index
     int b = 0; 
     for (NSDictionary *item in folders) {
         RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self 
                                                                                withDictionnary:item 
-                                                                                  andWithIndex:b];
+                                                                                withArrayIndex:x 
+                                                                             andWithPlistIndex:b];                          
+
         if (smartApp.state == 1) {
             //dirty menu part
             NSString *homeButtonPath = [NSString stringWithFormat:application_support_path@"%@/main.png", [item objectForKey:PLIST_KEY_FOLDER]];
@@ -380,7 +380,7 @@
     NSDictionary *item = [folders lastObject];
     RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self 
                                                                            withDictionnary:item 
-                                                                              andWithIndex:[folders count]];
+                                                                            withArrayIndex:[folders count]+1 andWithPlistIndex:[folders count]];
     [appList addObject:smartApp]; 
     [[appList lastObject]view];
     [rightView addSubview:[[appList lastObject]view]];
@@ -482,6 +482,29 @@
 -(void)previousApp:(id)sender
 {
     
+}
+
+-(void)addAppAtIndex:(int)index
+{
+    [self resetSmartBarUi];
+}
+
+-(void)hideAppAtIndex:(int)index
+{
+    id tps;
+    for (RASmartBarViewController *app in appList) {
+        if (app.localPlistIndex == index) {
+             tps = app; 
+        }
+    }
+    [[[appList objectAtIndex:[appList indexOfObject:tps]]view]removeFromSuperview];
+    [appList removeObject:tps];
+    [self resetSmartBarUi];
+}
+
+-(void)moveAppFromIndex:(int)from toIndex:(int)to
+{
+    [self resetSmartBarUi];
 }
 
 #pragma mark -

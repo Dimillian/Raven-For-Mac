@@ -16,8 +16,10 @@
 #import "RAFavoritePanelWController.h"
 #import "RANavigatorViewController.h"
 #import "GGReadability.h"
+#import "RABookmarkCell.h"
+#import "RAHistoryCell.h"
 
-
+@class RAMainWindowController; 
 @interface RABookmarkViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource, PXListViewDelegate, NSWindowDelegate, GGReadabilityDelegate> {
     IBOutlet NSView *mainView; 
     //IBOutlet NSScrollView *scrollview; 

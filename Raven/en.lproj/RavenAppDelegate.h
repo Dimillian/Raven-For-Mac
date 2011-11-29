@@ -19,6 +19,7 @@
 #import "RAAboutPanelWindowController.h"
 #import "CMController.h"
 #import "RAGrowlDispatcher.h"
+#import "RAlistManager.h"
 
 
 @interface RavenAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, NSImageDelegate> {

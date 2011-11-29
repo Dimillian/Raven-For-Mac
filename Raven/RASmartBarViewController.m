@@ -8,8 +8,6 @@
 
 #import "RASmartBarViewController.h"
 #import "RAMainWindowController.h"
-#import "RAlistManager.h"
-
 
 //button size and position
 #define button_x 36
@@ -38,7 +36,7 @@
 //[[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
 
 @implementation RASmartBarViewController
-@synthesize folderName, appName, firstURL, secondURL, thirdURL, fourthURL, state, delegate, selectedButton, mainButton, appNumber, index; 
+@synthesize folderName, appName, firstURL, secondURL, thirdURL, fourthURL, state, delegate, selectedButton, mainButton, appNumber, localArrayIndex, localPlistIndex; 
 
 
 #pragma mark -
@@ -54,7 +52,10 @@
     return self; 
 }
 
--(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate withDictionnary:(NSDictionary *)dictionnary andWithIndex:(int)localIndex
+-(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate 
+      withDictionnary:(NSDictionary *)dictionnary
+       withArrayIndex:(int)localIndex
+    andWithPlistIndex:(int)globalIndex
 {
     self = [super init]; 
     if (self !=nil)
@@ -62,7 +63,8 @@
         [self initWithNibName:@"RASmartBarViewController" bundle:nil]; 
         self.delegate = dgate;
         NSArray *URL = [dictionnary objectForKey:PLIST_KEY_URL];
-        self.index = localIndex; 
+        self.localArrayIndex = localIndex; 
+        self.localPlistIndex = globalIndex; 
         self.folderName = [dictionnary objectForKey:PLIST_KEY_FOLDER];
         self.state = [[dictionnary objectForKey:PLIST_KEY_ENABLE]intValue];
         self.firstURL = [URL objectAtIndex:0];
@@ -555,7 +557,7 @@
         RAMainWindowController *windowController = self.view.window.windowController; 
         [windowController raven:nil];
     }
-    [listManager changeStateOfAppAtIndex:index withState:0];
+    [listManager changeStateOfAppAtIndex:localPlistIndex withState:0];
     [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
 }
 

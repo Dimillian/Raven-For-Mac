@@ -16,10 +16,14 @@
 #import "RABookmarkViewController.h"
 #import "RADownloadViewController.h"
 #import "RASettingViewController.h"
-#import "RAItemObject.h"
-#import "url.h"
 #import "RADatabaseController.h"
 #import "RASmartBarViewController.h"
+#import "RavenAppDelegate.h"
+#import "RAlistManager.h"
+#import "RASettingViewController.h"
+#import "Growl/Growl.h"
+#import "Growl/GrowlApplicationBridge.h"
+
 
 
 @interface RAMainWindowController : NSWindowController <NSWindowDelegate, RASmartBarViewControllerDelegate>{
@@ -105,6 +109,9 @@
 -(void)updateSmartBarUi;
 -(void)resetSmartBarUi;
 -(void)newAppInstalled;
+-(void)hideAppAtIndex:(int)index; 
+-(void)addAppAtIndex:(int)index; 
+-(void)moveAppFromIndex:(int)from toIndex:(int)to; 
 -(void)launchRuntime;
 -(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs;
 -(void)receiveNotification:(NSNotification *)notification;

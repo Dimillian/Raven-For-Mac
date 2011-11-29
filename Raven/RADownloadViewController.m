@@ -7,7 +7,6 @@
 //
 
 #import "RADownloadViewController.h"
-#import "RADownloadCell.h"
 
 
 @implementation RADownloadViewController

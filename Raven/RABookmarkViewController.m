@@ -7,10 +7,7 @@
 //
 
 #import "RABookmarkViewController.h"
-#import "RABookmarkCell.h"
 #import "RAMainWindowController.h"
-#import "RAHistoryCell.h"
-#import "RAHiddenWindow.h"
 
 
 @implementation RABookmarkViewController
@@ -356,15 +353,9 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
             [alert setShowsSuppressionButton:YES];
             [alert setIcon:[NSImage imageNamed:@"delete_big.png"]];
             //call the alert and check the selected button
-            RAHiddenWindow *hiddenWindow = [[RAHiddenWindow alloc]initWithContentRect:[[NSApp keyWindow]frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
-            [hiddenWindow setLevel:NSNormalWindowLevel];
-            [hiddenWindow setIgnoresMouseEvents:YES];
-            [hiddenWindow setAlphaValue:0.0];
-            [[NSApp keyWindow]addChildWindow:hiddenWindow ordered:NSWindowAbove];
             
-            [alert beginSheetModalForWindow:hiddenWindow modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+            [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
             [alert release];
-            [hiddenWindow release]; 
         }
     }
     

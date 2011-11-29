@@ -14,8 +14,9 @@
 #import "PXListView.h"
 #import "PXListDocumentView.h"
 #import "LionClipView.h"
+#import "RAHistoryCell.h"
 
-
+@class RAMainWindowController, RavenAppDelegate; 
 @interface RAHistoryViewController : NSViewController <NSTextFieldDelegate, NSTableViewDelegate, NSTableViewDataSource, PXListViewDelegate> {
     IBOutlet NSView *mainView; 
     IBOutlet NSViewController *myCurrentViewController; 

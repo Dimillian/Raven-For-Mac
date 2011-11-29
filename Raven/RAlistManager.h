@@ -19,8 +19,7 @@
 
 -(NSMutableArray *)readAppList; 
 -(void)forceReadApplist; 
--(void)writeNewAppListInMemory:(NSMutableArray *)appList; 
--(void)writeNewAppListToPlist;
+-(void)writeNewAppListInMemory:(NSMutableArray *)appList writeToFile:(BOOL)flag;
 
 -(void)importAppAthPath:(NSString *)path;
 -(BOOL)checkifAppIsValide:(NSString *)path;

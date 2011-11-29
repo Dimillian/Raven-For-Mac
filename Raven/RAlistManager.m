@@ -48,40 +48,39 @@ static RAlistManager *sharedUserManager = nil;
         NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
         appPlistDictionnary = [[NSMutableDictionary alloc]initWithContentsOfFile:path];
     }
-    @synchronized(self){
-        if (appPlistArray) { 
-            [appPlistArray release];
-            appPlistArray = nil; 
-        }
-        appPlistArray = [[NSMutableArray alloc]initWithArray:
-                         [appPlistDictionnary objectForKey:PLIST_KEY_DICTIONNARY]];
-    return appPlistArray;
+    if (appPlistArray) { 
+        [appPlistArray release], appPlistArray = nil; 
     }
+    appPlistArray = [[NSMutableArray alloc]initWithArray:
+                     [appPlistDictionnary objectForKey:PLIST_KEY_DICTIONNARY]];
+    return appPlistArray;
+    
 }
 
 -(void)forceReadApplist
 {
-      @synchronized(self){
-          [appPlistDictionnary release];
-          appPlistDictionnary = nil; 
-          NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-          appPlistDictionnary = [[NSMutableDictionary alloc]initWithContentsOfFile:path];
-          [appPlistArray release];
-          appPlistArray = nil; 
-          appPlistArray = [[NSMutableArray alloc]initWithArray:
-                           [appPlistDictionnary objectForKey:PLIST_KEY_DICTIONNARY]];
-      }
-}
-
--(void)writeNewAppListInMemory:(NSMutableArray *)appList
-{
-    [appPlistDictionnary setObject:appList forKey:PLIST_KEY_DICTIONNARY];
-}
-
--(void)writeNewAppListToPlist
-{
+    if (!appPlistDictionnary) {
+        [appPlistDictionnary release], appPlistDictionnary = nil; 
+    }
     NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    [appPlistDictionnary writeToFile:path atomically:NO];
+    appPlistDictionnary = [[NSMutableDictionary alloc]initWithContentsOfFile:path];
+    if (appPlistArray) { 
+        [appPlistArray release], appPlistArray = nil; 
+    }
+    appPlistArray = [[NSMutableArray alloc]initWithArray:
+                     [appPlistDictionnary objectForKey:PLIST_KEY_DICTIONNARY]];
+      
+}
+
+-(void)writeNewAppListInMemory:(NSMutableArray *)appList writeToFile:(BOOL)flag
+{
+    if (appList) {
+        [appPlistDictionnary setObject:appList forKey:PLIST_KEY_DICTIONNARY];
+    }
+    if(flag){
+        NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
+        [appPlistDictionnary writeToFile:path atomically:NO];
+    }
 }
 
 #pragma mark -
@@ -92,7 +91,7 @@ static RAlistManager *sharedUserManager = nil;
 -(void)importAppAthPath:(NSString *)path
 {
     @synchronized(self){
-        [self writeNewAppListToPlist];
+        [self writeNewAppListInMemory:nil writeToFile:YES];
         [self forceReadApplist];
     }
     BOOL newApp;
@@ -176,8 +175,7 @@ static RAlistManager *sharedUserManager = nil;
         }
         [folders replaceObjectAtIndex:x withObject:item];
     }
-    [self writeNewAppListInMemory:folders];
-    [self writeNewAppListToPlist];
+    [self writeNewAppListInMemory:folders writeToFile:YES];
     [self forceReadApplist];
 
 
@@ -268,7 +266,7 @@ static RAlistManager *sharedUserManager = nil;
         [folders replaceObjectAtIndex:index withObject:tempB];
         [folders replaceObjectAtIndex:index-1 withObject:tempA];
     }
-    [self writeNewAppListInMemory:folders];
+    [self writeNewAppListInMemory:folders writeToFile:NO];
 }
 
 - (void)moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to
@@ -285,8 +283,8 @@ static RAlistManager *sharedUserManager = nil;
         }
         [obj release];
     }
-    [self writeNewAppListInMemory:folders];
-}
+    [self writeNewAppListInMemory:folders writeToFile:NO];
+} 
 
 -(void)changeStateOfAppAtIndex:(NSInteger)index withState:(NSInteger)state
 {
@@ -294,7 +292,9 @@ static RAlistManager *sharedUserManager = nil;
     NSMutableDictionary *item = [folders objectAtIndex:index]; 
     [item setObject:[NSNumber numberWithInteger:state] forKey:PLIST_KEY_ENABLE];
     [folders replaceObjectAtIndex:index withObject:item];
-    [self writeNewAppListInMemory:folders];
+    [self writeNewAppListInMemory:folders writeToFile:NO];
+    //RAMainWindowController *mainWindow = [[NSApp keyWindow]windowController];
+    //[mainWindow hideAppAtIndex:index];
 }
 
 
@@ -315,8 +315,7 @@ static RAlistManager *sharedUserManager = nil;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:[[NSString stringWithFormat:application_support_path@"%@", folderName]stringByExpandingTildeInPath] error:nil];
     [folders removeObjectAtIndex:index];
-    [self writeNewAppListInMemory:folders];
-    [self writeNewAppListToPlist];
+    [self writeNewAppListInMemory:folders writeToFile:YES];
     [self forceReadApplist];
     
 }

@@ -20,7 +20,7 @@
      NSMutableArray *suggestion; 
      NSMutableArray *preciseSuggestion; 
      NSString *databasePath;
-    NSString *archivePath;
+     NSString *archivePath;
 
 }
 @property (nonatomic, assign) NSMutableArray *bookmarks; 

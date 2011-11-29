@@ -11,6 +11,7 @@
 #import "url.h"
 #import "PXListView.h"
 #import "RADownloadController.h"
+#import "RADownloadCell.h"
 
 @interface RADownloadViewController : NSViewController <PXListViewDelegate, NSTableViewDelegate, NSTableViewDataSource> {
     IBOutlet PXListView	*listView;
