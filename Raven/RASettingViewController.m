@@ -42,13 +42,9 @@
 //Smart reload, caching image
 -(void)reloadDataSource
 {
-    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    
+    RAlistManager *listManager = [RAlistManager sharedUser];
     if(folders) [folders release], folders = nil;
-    
-    folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY]mutableCopy];
-    
+    folders = [[listManager readAppList]copy];
     if(images)[images release], images = nil;
     
 	images = [[NSMutableArray alloc]init];
@@ -84,11 +80,10 @@
 
 -(IBAction)setNextState:(id)sender
 {
-    RAlistManager *listManager = [[RAlistManager alloc]init];
+    RAlistManager *listManager = [RAlistManager sharedUser];
     [[stateColumn dataCell]setNextState];
     NSCell *cell = [stateColumn dataCell];
     [listManager changeStateOfAppAtIndex:[tableview selectedRow] withState:[cell state]];
-    [listManager release]; 
     [self refreshSmartBar];
 }
 
@@ -137,9 +132,8 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     else
     {
         
-        RAlistManager *listManager = [[RAlistManager alloc]init];
+        RAlistManager *listManager = [RAlistManager sharedUser];
         [listManager swapObjectAtIndex:[tableview selectedRow] upOrDown:0];
-        [listManager release];
         [self refreshSmartBar];
         if (IS_RUNNING_LION) {
             [tableview beginUpdates];
@@ -161,9 +155,9 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     }
     else
     {
-        RAlistManager *listManager = [[RAlistManager alloc]init];
+        RAlistManager *listManager = [RAlistManager sharedUser];
         [listManager swapObjectAtIndex:[tableview selectedRow] upOrDown:1];
-        [listManager release];
+        ;
         [self refreshSmartBar];
         if (IS_RUNNING_LION) {
             [tableview beginUpdates];
@@ -193,10 +187,9 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     if (returnCode == NSAlertFirstButtonReturn) {
         NSInteger selectedRow = [tableview selectedRow];
-        RAlistManager *listManager = [[RAlistManager alloc]init];
+        RAlistManager *listManager = [RAlistManager sharedUser];
         [listManager deleteAppAtIndex:selectedRow];
 
-        [listManager release];
         [self refreshSmartBar];
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:selectedRow-1];
         [tableview selectRowIndexes:indexSet byExtendingSelection:NO];
@@ -222,6 +215,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter]removeObserver:self]; 
     [super dealloc];
 }
 

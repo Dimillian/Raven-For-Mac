@@ -104,7 +104,6 @@
 -(void)initSmartBar; 
 -(void)updateSmartBarUi;
 -(void)resetSmartBarUi;
--(void)resetSmartBarUiWithoutAnimation;
 -(void)newAppInstalled;
 -(void)launchRuntime;
 -(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs;

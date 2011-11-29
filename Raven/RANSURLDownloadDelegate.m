@@ -152,7 +152,7 @@
 {   
     //NSLog(@"Finish"); 
     if ([downloadPath hasSuffix:@"rpa.zip"] || [downloadPath hasSuffix:@"sba.zip"]) {
-        RAlistManager *listManager = [[RAlistManager alloc]init];
+        RAlistManager *listManager = [RAlistManager sharedUser];
         listManager.downloadPath = downloadPath;
         [listManager installApp];
     }

@@ -11,37 +11,90 @@
 #import "RAHiddenWindow.h"
 @implementation RAlistManager
 @synthesize downloadPath;
+static RAlistManager *sharedUserManager = nil;
 
-- (id)init
+#pragma mark Singleton management
++(RAlistManager *)sharedUser
 {
-    self = [super init];
-    if (self) {
-        // Initialization code here.
+    if (sharedUserManager == nil) {
+        sharedUserManager = [[super allocWithZone:NULL] init];
     }
-    
+    return sharedUserManager; 
+}
+
++ (id)allocWithZone:(NSZone *)zone {
+    return [[self sharedUser] retain];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
     return self;
 }
 
--(NSMutableArray *)readAppList
-{
-    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSMutableArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
-    return [folders autorelease];
+- (id)retain {
+    return self;
 }
 
--(void)writeNewAppList:(NSMutableArray *)appList
+-(void)dealloc
+{
+    [appPlistArray release]; 
+    [appPlistDictionnary release]; 
+}
+
+#pragma mark -
+#pragma mark File and memory management
+-(NSMutableArray *)readAppList
+{
+    if (!appPlistDictionnary) {
+        NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
+        appPlistDictionnary = [[NSMutableDictionary alloc]initWithContentsOfFile:path];
+    }
+    @synchronized(self){
+        if (appPlistArray) { 
+            [appPlistArray release];
+            appPlistArray = nil; 
+        }
+        appPlistArray = [[NSMutableArray alloc]initWithArray:
+                         [appPlistDictionnary objectForKey:PLIST_KEY_DICTIONNARY]];
+    return appPlistArray;
+    }
+}
+
+-(void)forceReadApplist
+{
+      @synchronized(self){
+          [appPlistDictionnary release];
+          appPlistDictionnary = nil; 
+          NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
+          appPlistDictionnary = [[NSMutableDictionary alloc]initWithContentsOfFile:path];
+          [appPlistArray release];
+          appPlistArray = nil; 
+          appPlistArray = [[NSMutableArray alloc]initWithArray:
+                           [appPlistDictionnary objectForKey:PLIST_KEY_DICTIONNARY]];
+      }
+}
+
+-(void)writeNewAppListInMemory:(NSMutableArray *)appList
+{
+    [appPlistDictionnary setObject:appList forKey:PLIST_KEY_DICTIONNARY];
+}
+
+-(void)writeNewAppListToPlist
 {
     NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    [dict setObject:appList forKey:PLIST_KEY_DICTIONNARY];
-    [dict writeToFile:path atomically:YES];
+    [appPlistDictionnary writeToFile:path atomically:NO];
 }
+
+#pragma mark -
+#pragma mark Standard Operation
 
 //Basically import app from separate app.plist to main app.plist after checking it is a real app.
 //Need to check for duplicate and replace if yes 
 -(void)importAppAthPath:(NSString *)path
 {
+    @synchronized(self){
+        [self writeNewAppListToPlist];
+        [self forceReadApplist];
+    }
     BOOL newApp;
     NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", path];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
@@ -101,6 +154,7 @@
 //used to update plist and maintain it up to date with all latest key pair, fired at each launch for beta period
 -(void)updateProcess
 {
+    [self forceReadApplist];
     NSMutableArray *folders = [self readAppList];
     for (int x=0; x<[folders count]; x++) {
         NSMutableDictionary *item = [folders objectAtIndex:x];
@@ -122,7 +176,9 @@
         }
         [folders replaceObjectAtIndex:x withObject:item];
     }
-    [self writeNewAppList:folders];
+    [self writeNewAppListInMemory:folders];
+    [self writeNewAppListToPlist];
+    [self forceReadApplist];
 
 
 }
@@ -212,7 +268,7 @@
         [folders replaceObjectAtIndex:index withObject:tempB];
         [folders replaceObjectAtIndex:index-1 withObject:tempA];
     }
-    [self writeNewAppList:folders];
+    [self writeNewAppListInMemory:folders];
 }
 
 - (void)moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to
@@ -229,7 +285,7 @@
         }
         [obj release];
     }
-    [self writeNewAppList:folders];
+    [self writeNewAppListInMemory:folders];
 }
 
 -(void)changeStateOfAppAtIndex:(NSInteger)index withState:(NSInteger)state
@@ -238,7 +294,7 @@
     NSMutableDictionary *item = [folders objectAtIndex:index]; 
     [item setObject:[NSNumber numberWithInteger:state] forKey:PLIST_KEY_ENABLE];
     [folders replaceObjectAtIndex:index withObject:item];
-    [self writeNewAppList:folders];
+    [self writeNewAppListInMemory:folders];
 }
 
 
@@ -259,7 +315,9 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:[[NSString stringWithFormat:application_support_path@"%@", folderName]stringByExpandingTildeInPath] error:nil];
     [folders removeObjectAtIndex:index];
-    [self writeNewAppList:folders];
+    [self writeNewAppListInMemory:folders];
+    [self writeNewAppListToPlist];
+    [self forceReadApplist];
     
 }
 

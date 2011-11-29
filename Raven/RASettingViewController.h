@@ -23,7 +23,6 @@
     IBOutlet NSTableColumn *buttonDownColumn; 
     NSArray *folders;
     NSMutableArray *images; 
-    NSDictionary *dict;
     
     
     

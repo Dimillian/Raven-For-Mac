@@ -426,7 +426,7 @@ static NSString* SCRIPT_DIR_PATH = @"~/Library/Application Support/ravenapp/Grea
 - (void) dealloc
 {
     NSLog(@"CMController - dealloc");
-
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [scripts_ release];
 
     [super dealloc];

@@ -93,6 +93,8 @@
 
 -(void)windowWillClose:(NSNotification *)notification
 {   
+    [[RAlistManager sharedUser]writeNewAppListToPlist]; 
+    [[RAlistManager sharedUser]forceReadApplist];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self autorelease]; 
 }
@@ -146,7 +148,6 @@
 
 - (void)awakeFromNib
 {
-
     [super windowDidLoad];
     [[self window]setDelegate:self]; 
     if (IS_RUNNING_LION) {
@@ -210,7 +211,7 @@
     if ([[notification name]isEqualToString:SMART_BAR_UPDATE]) {
         [self initSmartBar];
         [self updateSmartBarUi];
-        [self resetSmartBarUiWithoutAnimation];
+        [self resetSmartBarUi];
         [self animate:13];
     }
     if ([[notification name]isEqualToString:NEW_APP_INSTALLED]) {
@@ -285,9 +286,8 @@
         [appList release], appList = nil;
     }
 	appList = [[NSMutableArray alloc]init];
-    RAlistManager *listManager = [[RAlistManager alloc]init];
+    RAlistManager *listManager = [RAlistManager sharedUser];
     NSArray *folder = [listManager readAppList];
-    [listManager release];
     NSMutableArray *folders = [[NSMutableArray alloc]init]; 
     for (NSDictionary *item in folder) {
         [folders addObject:item];
@@ -375,12 +375,12 @@
 //Read the latest app installed and place it on the view
 -(void)newAppInstalled
 {
-    RAlistManager *listManager = [[RAlistManager alloc]init];
+    RAlistManager *listManager = [RAlistManager sharedUser];
     NSArray *folders = [listManager readAppList];
     NSDictionary *item = [folders lastObject];
     RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self 
                                                                            withDictionnary:item 
-                                                                              andWithIndex:[folders count] - 1];
+                                                                              andWithIndex:[folders count]];
     [appList addObject:smartApp]; 
     [[appList lastObject]view];
     [rightView addSubview:[[appList lastObject]view]];
@@ -393,21 +393,6 @@
 
 //reset the smartbar UI, place item at their initial state
 -(void)resetSmartBarUi
-{
-    for (NSInteger x=0; x<[appList count]; x++) {
-         RASmartBarViewController *smartApp = [appList objectAtIndex:x]; 
-         [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, rightView.frame.size.height - initial_app_space - (retracted_app_height*x), app_view_w, app_view_h)];
-         [smartApp retractApp:nil];
-     }
-    previousIndex = -1;
-    previousAppNumber = 4; 
-    NSPoint pt = NSMakePoint(0.0, [[smartBarScrollView documentView]
-                                   bounds].size.height);
-    [[smartBarScrollView documentView] scrollPoint:pt];
-    [smartBarScrollView reflectScrolledClipView: [smartBarScrollView contentView]]; 
-}
-
--(void)resetSmartBarUiWithoutAnimation
 {
     for (NSInteger x=0; x<[appList count]; x++) {
         RASmartBarViewController *smartApp = [appList objectAtIndex:x]; 

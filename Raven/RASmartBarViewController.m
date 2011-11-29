@@ -61,7 +61,7 @@
     {
         [self initWithNibName:@"RASmartBarViewController" bundle:nil]; 
         self.delegate = dgate;
-        NSArray *URL = [[dictionnary objectForKey:PLIST_KEY_URL]copy];
+        NSArray *URL = [dictionnary objectForKey:PLIST_KEY_URL];
         self.index = localIndex; 
         self.folderName = [dictionnary objectForKey:PLIST_KEY_FOLDER];
         self.state = [[dictionnary objectForKey:PLIST_KEY_ENABLE]intValue];
@@ -69,7 +69,6 @@
         self.secondURL = [URL objectAtIndex:1]; 
         self.thirdURL = [URL objectAtIndex:2]; 
         self.fourthURL = [URL objectAtIndex:3];
-        [URL release];
     }
     
     return self;  
@@ -551,13 +550,12 @@
 
 -(void)shouldHideApp:(RASBAPPMainButton *)button
 {
-    RAlistManager *listManager = [[RAlistManager alloc]init]; 
+    RAlistManager *listManager = [RAlistManager sharedUser];
     if (state == 1) {
         RAMainWindowController *windowController = self.view.window.windowController; 
         [windowController raven:nil];
     }
     [listManager changeStateOfAppAtIndex:index withState:0];
-    [listManager release]; 
     [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
 }
 

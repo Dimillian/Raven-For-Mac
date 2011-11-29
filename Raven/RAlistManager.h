@@ -12,10 +12,15 @@
 {
     NSString *downloadPath;
     NSString *destinationPath;
+    NSMutableArray *appPlistArray; 
+    NSMutableDictionary *appPlistDictionnary;
 }
++(RAlistManager *)sharedUser;
 
 -(NSMutableArray *)readAppList; 
--(void)writeNewAppList:(NSMutableArray *)appList; 
+-(void)forceReadApplist; 
+-(void)writeNewAppListInMemory:(NSMutableArray *)appList; 
+-(void)writeNewAppListToPlist;
 
 -(void)importAppAthPath:(NSString *)path;
 -(BOOL)checkifAppIsValide:(NSString *)path;

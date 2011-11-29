@@ -94,9 +94,8 @@
             [controler removehistorySinceDate:[standardUserDefaults integerForKey:REMOVE_HISTORY_BUTTON]];
             
             //update process, might create a standard default after beta period
-            RAlistManager *listManager = [[RAlistManager alloc]init]; 
+            RAlistManager *listManager = [RAlistManager sharedUser]; 
             [listManager updateProcess]; 
-            [listManager release]; 
         }
     GreaseKit = [[CMController alloc]init];
     RAMainWindowController *MainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
@@ -117,8 +116,11 @@
         
 }
 
-
-
+-(void)applicationWillTerminate:(NSNotification *)notification
+{
+    RAlistManager *listManager = [RAlistManager sharedUser]; 
+    [listManager writeNewAppListToPlist]; 
+}
 //Fired when external URL is clicked
 - (void)getUrl:(NSAppleEventDescriptor *)event 
 withReplyEvent:(NSAppleEventDescriptor *)replyEvent
@@ -245,7 +247,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 //Import an if user agree
 -(void)importAppAction
 {
-    RAlistManager *listManager = [[RAlistManager alloc]init];
+    RAlistManager *listManager = [RAlistManager sharedUser];
     BOOL success =  [listManager checkifAppIsValide:opennedDocumentPath];
     if (success) {
         NSAlert *alert = [[NSAlert alloc]init];
@@ -264,7 +266,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         [alert beginSheetModalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
         [alert release];
     }
-    [listManager release]; 
  
 }
 
@@ -287,9 +288,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 //if sheet is ok and app is valid then install
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     if (returnCode == NSAlertFirstButtonReturn) {
-        RAlistManager *listManager = [[RAlistManager alloc]init]; 
-        [listManager importAppAthPath:opennedDocumentPath]; 
-        [listManager release]; 
+        RAlistManager *listManager = [RAlistManager sharedUser];
+        [listManager importAppAthPath:opennedDocumentPath];
     
         
     }

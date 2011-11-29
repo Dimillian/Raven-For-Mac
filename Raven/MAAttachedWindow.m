@@ -175,7 +175,7 @@
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
     [borderColor release];
     [_MABackgroundColor release];
     
