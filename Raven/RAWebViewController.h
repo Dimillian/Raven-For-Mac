@@ -77,6 +77,7 @@
 //tabs
 -(IBAction)closeButtonTabClicked:(id)sender;
 -(IBAction)tabsButtonClicked:(id)sender;
+-(IBAction)addTabButtonClicked:(id)sender; 
 
 //Other method
 -(void)setMenu;
@@ -128,4 +129,5 @@
 @optional
 -(void)tabWillClose:(RAWebViewController *)RAWebView;
 -(void)tabDidSelect:(RAWebViewController *)RAWebView;
+-(void)shouldCreateNewTab:(RAWebViewController *)RAWebView; 
 @end

@@ -54,7 +54,7 @@
     return self; 
 }
 
--(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate andDictionnary:(NSDictionary *)dictionnary
+-(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate withDictionnary:(NSDictionary *)dictionnary andWithIndex:(int)localIndex
 {
     self = [super init]; 
     if (self !=nil)
@@ -62,6 +62,7 @@
         [self initWithNibName:@"RASmartBarViewController" bundle:nil]; 
         self.delegate = dgate;
         NSArray *URL = [[dictionnary objectForKey:PLIST_KEY_URL]copy];
+        self.index = localIndex; 
         self.folderName = [dictionnary objectForKey:PLIST_KEY_FOLDER];
         self.state = [[dictionnary objectForKey:PLIST_KEY_ENABLE]intValue];
         self.firstURL = [URL objectAtIndex:0];

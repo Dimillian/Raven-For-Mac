@@ -200,6 +200,10 @@
     
 }
 
+-(IBAction)addTabButtonClicked:(id)sender
+{
+    [delegate shouldCreateNewTab:self];
+}
 #pragma mark -
 #pragma mark action
 -(IBAction)enableSearch:(id)sender

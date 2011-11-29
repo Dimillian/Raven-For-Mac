@@ -8,6 +8,7 @@
 
 #import "RAMainWindowController.h"
 #import "RavenAppDelegate.h"
+#import "RAlistManager.h"
 #import "RASettingViewController.h"
 #import "INAppStoreWindow.h"
 #import "RAHiddenWindow.h"
@@ -276,7 +277,6 @@
 //Also reset it totally
 -(void)initSmartBar
 {
-    //Cleaning stuff
     if( appList )
     { 
         for (NSInteger g=0; g<[appList count]; g++) {
@@ -285,17 +285,14 @@
         [appList release], appList = nil;
     }
 	appList = [[NSMutableArray alloc]init];
-    //
-    
-    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    NSDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSArray *folder = [[dict objectForKey:PLIST_KEY_DICTIONNARY]copy];
+    RAlistManager *listManager = [[RAlistManager alloc]init];
+    NSArray *folder = [listManager readAppList];
+    [listManager release];
     NSMutableArray *folders = [[NSMutableArray alloc]init]; 
     for (NSDictionary *item in folder) {
         [folders addObject:item];
         
     }
-    [folder release];
     NSMenu *topMenu = [NSApp menu]; 
     NSMenu *smartBarMenu = [[topMenu itemAtIndex:4]submenu];
     NSInteger count = smartBarMenu.itemArray.count;
@@ -305,10 +302,11 @@
     int x = 0;
     int b = 0; 
     for (NSDictionary *item in folders) {
-        RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self andDictionnary:item];
-        smartApp.index = b; 
-        //dirty menu part
+        RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self 
+                                                                               withDictionnary:item 
+                                                                                  andWithIndex:b];
         if (smartApp.state == 1) {
+            //dirty menu part
             NSString *homeButtonPath = [NSString stringWithFormat:application_support_path@"%@/main.png", [item objectForKey:PLIST_KEY_FOLDER]];
             NSImage *homeButtonImage = [[NSImage alloc]initWithContentsOfFile:[homeButtonPath stringByExpandingTildeInPath]];
             [homeButtonImage setSize:NSMakeSize(20, 20)];
@@ -318,10 +316,7 @@
             [smartBarMenu addItem:appMenu];
             [appMenu release];
             [homeButtonImage release];
-        }
-        //
-        //Only add on item to the main array
-        if (smartApp.state == 1) {
+            //
             [appList addObject:smartApp]; 
             [[appList objectAtIndex:x]view];
             [rightView addSubview:[[appList objectAtIndex:x]view]];
@@ -380,18 +375,17 @@
 //Read the latest app installed and place it on the view
 -(void)newAppInstalled
 {
-    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    NSDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    NSArray *folders = [[dict objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];
+    RAlistManager *listManager = [[RAlistManager alloc]init];
+    NSArray *folders = [listManager readAppList];
     NSDictionary *item = [folders lastObject];
-    RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self andDictionnary:item];
-    smartApp.index = [folders count]-1; 
+    RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self 
+                                                                           withDictionnary:item 
+                                                                              andWithIndex:[folders count] - 1];
     [appList addObject:smartApp]; 
     [[appList lastObject]view];
     [rightView addSubview:[[appList lastObject]view]];
     [smartApp retractApp:nil];
     [smartApp release]; 
-    [folders release];
     [self updateSmartBarUi];
     [self raven:nil];
 

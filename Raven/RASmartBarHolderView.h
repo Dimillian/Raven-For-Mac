@@ -13,4 +13,6 @@
     //CGPoint lastDragLocation; 
 }
 
+-(NSMenu *)getMenu; 
+
 @end

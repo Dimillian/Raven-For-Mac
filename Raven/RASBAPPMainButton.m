@@ -62,16 +62,8 @@
 
 -(void)rightMouseUp:(NSEvent *)theEvent
 {
-    
-    NSMenu *menu = [self getMenu];
-    
-    //Draw the menu on a frame 
-    NSRect frame = [self frame];
-    NSPoint menuOrigin = [[self superview] convertPoint:NSMakePoint(frame.origin.x+20, frame.origin.y+frame.size.height-25)
-                                                               toView:nil];
-    
     NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
-                                         location:menuOrigin
+                                         location:[theEvent locationInWindow]
                                     modifierFlags:NSLeftMouseDownMask // 0x100
                                         timestamp:0
                                      windowNumber:[[self window] windowNumber]
@@ -80,7 +72,7 @@
                                        clickCount:1
                                          pressure:1]; 
     
-    [NSMenu popUpContextMenu:menu withEvent:event forView:self];
+    [NSMenu popUpContextMenu:[self getMenu] withEvent:event forView:self];
     [super rightMouseUp:theEvent]; 
 }
 
@@ -128,7 +120,7 @@
     [firstItem release]; 
     [menu addItem:[NSMenuItem separatorItem]]; 
     NSMenuItem *secondItem = [[NSMenuItem alloc]init];
-    [secondItem setTitle:@"Hide from Smart Bar"];
+    [secondItem setTitle:@"Remove from Smart Bar"];
     [secondItem setTarget:self];
     [secondItem setAction:@selector(sendHideDelegate:)];
     [secondItem setEnabled:YES];
@@ -136,7 +128,7 @@
     [secondItem release]; 
     [menu addItem:[NSMenuItem separatorItem]];
     NSMenuItem *thirdItem = [[NSMenuItem alloc]init];
-    [thirdItem setTitle:@"Hide/Show Smart Bar"];
+    [thirdItem setTitle:@"Hide Smart Bar"];
     [thirdItem setTarget:self.window.windowController];
     [thirdItem setAction:@selector(hideSideBar:)];
     [thirdItem setEnabled:YES];

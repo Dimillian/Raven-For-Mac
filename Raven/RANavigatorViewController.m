@@ -15,6 +15,7 @@
 #import "RANavigatorViewController.h"
 #import "RavenAppDelegate.h"
 #import "RANSURLDownloadDelegate.h"
+#import <math.h>
 
 
 //the size of a tab button
@@ -53,7 +54,7 @@
     
     istab = NO; 
     fromOtherViews = 2; 
-    [allTabsButton setHidden:NO]; 
+    [allTabsButton setHidden:YES]; 
     [allTabsButton setAction:@selector(menutabs:)]; 
     [allTabsButton setTarget:self];
     inBackground = NO;
@@ -120,6 +121,7 @@
     //If only 1 or 0 tabs then hide the webview tabbar, only do it when it does not come from window resize notification
     if ([tabsArray count] <= 1 && !fromWindow) {
         for (RAWebViewController *aTab in tabsArray) {
+            [allTabsButton setHidden:YES];
             [[aTab tabHolder]setHidden:YES];
             [[aTab tabview]setHidden:YES]; 
             [[aTab webview]setFrame:NSMakeRect(aTab.webview.frame.origin.x, aTab.webview.frame.origin.y, aTab.webview.frame.size.width, aTab.webview.frame.size.height+tabHeight)];
@@ -130,9 +132,11 @@
     else
     {
         CGFloat x = 0;
+        float rest = 0; 
         for (int i =0; i<[tabsArray count]; i++) {
             RAWebViewController *aTab = [tabsArray objectAtIndex:i];
             [[aTab tabHolder]setHidden:NO];
+            [allTabsButton setHidden:NO];
             //Calculate W according to the window width
             CGFloat w = (localWindow.frame.size.width-80)/[tabsArray count];
             if (w > tabButtonSize){
@@ -153,6 +157,7 @@
                 else{
                     //recalcuate x regarding the window size for the placement when window size is modified
                     x = x + (localWindow.frame.size.width - 77)/[tabsArray count];
+                    rest = fmodf((localWindow.frame.size.width - 77), [tabsArray count])/[tabsArray count];
                 }
             }
             if (i == 0) {
@@ -166,13 +171,13 @@
                 [[aTab tabview]setAlphaValue:1.0]; 
                 [NSAnimationContext beginGrouping];
                 [[NSAnimationContext currentContext] setDuration:0.2];  
-                [[[aTab tabview]animator]setFrame:NSMakeRect(x, 0, w, tabHeight)];
+                [[[aTab tabview]animator]setFrame:NSMakeRect(x + rest, 0, w, tabHeight)];
                 [NSAnimationContext endGrouping];
                 [[aTab progressTab]setHidden:NO];
             }
             //just redraw without animation if from window
             else{
-                [[aTab tabview]setFrame:NSMakeRect(x, 0, w, tabHeight)];   
+                [[aTab tabview]setFrame:NSMakeRect(x + rest, 0, w, tabHeight)];   
             }
         }
     }
@@ -193,37 +198,14 @@
     //force the newtab view to call awakefromNib
     [newtab view];
     
-    //Bind the addtabd button to the current object action
-    [[newtab tabsButton]setAction:@selector(addtabs:)];
-    [[newtab tabsButton]setTarget:self]; 
-    [[newtab secondTabButton]setAction:@selector(addtabs:)];
-    [[newtab secondTabButton]setTarget:self]; 
     //set the new webview delegate to this class method
     [[newtab webview]setUIDelegate:self]; 
     [[newtab webview]setPolicyDelegate:self]; 
     //Set the host window to the actual window for plugin 
     [[newtab webview]setHostWindow:localWindow];
         
-    NSRect windowSize = [[sender window]frame];
-    CGFloat size = windowSize.size.width;  
-    
-    //If the buttposition is over 900 then display a button which will list tabs
-    if ([tabController numberOfTabViewItems]*tabButtonSize > size - 250)
-    {
-        [allTabsButton setHidden:NO]; 
-        [allTabsButton setAction:@selector(menutabs:)]; 
-        [allTabsButton setTarget:self];
-    }
-    else
-    {
-        [allTabsButton setHidden:YES];   
-    }
-
-    
     [tabPlaceHolder addSubview:[newtab tabview]];
     [[newtab tabview]setFrame:NSMakeRect([tabsArray indexOfObject:newtab]*tabButtonSize, tabHeight, tabButtonSize, tabHeight)];
-    
-    
     [[newtab address]selectText:self];
     
     //if the passed URL value is different of nil then load it in the webview 
@@ -320,7 +302,6 @@
                                          pressure:1]; 
     
     [NSMenu popUpContextMenu:menu withEvent:event forView:(NSButton *)sender];
-    
 
 }
 
@@ -464,6 +445,11 @@
     [self setImageOnSelectedTab];
     [self setMenu];
     [[NSNotificationCenter defaultCenter]postNotificationName:UPDATE_TAB_NUMBER object:nil];
+}
+
+-(void)shouldCreateNewTab:(RAWebViewController *)RAWebView
+{
+    [self addtabs:[RAWebView tabsButton]];
 }
 
 #pragma mark -

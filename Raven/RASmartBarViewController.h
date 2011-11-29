@@ -68,7 +68,7 @@
     int appNumber; 
 
 }
--(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate andDictionnary:(NSDictionary *)dictionnary;
+-(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate withDictionnary:(NSDictionary *)dictionnary andWithIndex:(int)localIndex;
 -(IBAction)expandApp:(id)sender;
 -(IBAction)retractApp:(id)sender;
 -(IBAction)firstItemClicked:(id)sender;
