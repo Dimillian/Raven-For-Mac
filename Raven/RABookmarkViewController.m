@@ -49,7 +49,7 @@
     [listView registerForDraggedTypes:[NSArray arrayWithObjects: NSStringPboardType, nil]];
     [self check:nil];
     [selectorButton setSelectedSegment:1];
-    [newtab initWithBookmarkPage];
+    [newtab loadWithBookmarkPage];
     [[newtab tabHolder]setHidden:YES];
     [[newtab webview]setFrame:NSMakeRect(newtab.webview.frame.origin.x, newtab.webview.frame.origin.y, newtab.webview.frame.size.width, newtab.webview.frame.size.height+22)];
     [[newtab webview]setUIDelegate:self];
@@ -71,7 +71,7 @@
     if (count == 0) {
         [leftView addSubview:labelView];
         [labelView bounds];
-        [newtab initWithBookmarkPage];
+        [newtab loadWithBookmarkPage];
         if ([selectorButton selectedSegment] == 0) {
             [placeholder setImage:[NSImage imageNamed:@"favorites_empty.png"]];
         }
@@ -205,7 +205,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     RAItemObject *bookmark = (RAItemObject *)[controller.bookmarks objectAtIndex:row];
     if (![URL isEqualToString:bookmark.url])
     {
-        [newtab initWithUrl:bookmark.url];
+        [newtab loadWithUrl:bookmark.url];
  
     }
     
@@ -232,7 +232,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         NSInteger row = [listView selectedRow]; 
         RADatabaseController *controller = [RADatabaseController sharedUser];  
         RAItemObject *bookmark = (RAItemObject *)[controller.bookmarks objectAtIndex:row];
-        [newtab initWithUrl:bookmark.url];
+        [newtab loadWithUrl:bookmark.url];
         
     }
 }

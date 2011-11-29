@@ -22,10 +22,10 @@
 }
 @property int type; 
 @property int udid; 
-@property (copy) NSString *title; 
-@property (copy) NSString *url; 
-@property (retain) NSImage *favico; 
-@property (retain) NSDate *date; 
+@property (nonatomic, copy) NSString *title; 
+@property (nonatomic, copy) NSString *url; 
+@property (nonatomic, retain) NSImage *favico; 
+@property (nonatomic, retain) NSDate *date; 
 -(id)initWithName:(NSString *)n url:(NSString *)d favico:(NSImage *)v udid:(int)q;
 -(id)initBookmarkAndFavoriteWithName:(NSString *)n url:(NSString *)d favico:(NSImage *)v udid:(int)q type:(int)t date:(NSDate *)da;
 -(id)initHistoryInitWithName:(NSString *)n url:(NSString *)d favico:(NSImage *)v date:(NSDate *)x udid:(int)q;

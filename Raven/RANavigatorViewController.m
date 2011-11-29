@@ -210,7 +210,7 @@
     //if the passed URL value is different of nil then load it in the webview 
     if (PassedUrl != nil) {
         [newtab setIsNewTab:NO]; 
-        [newtab initWithUrl:PassedUrl]; 
+        [newtab loadWithUrl:PassedUrl]; 
 
     }
     //if null then inti the webview with tthe welcom page
@@ -221,11 +221,11 @@
             if ([standardUserDefaults integerForKey:DO_HAVE_LAUNCHED] == 0) {
                 [standardUserDefaults setInteger:1 forKey:DO_HAVE_LAUNCHED];
                 [standardUserDefaults synchronize];
-                [newtab initWithFirstTimeLaunchPage];
+                [newtab loadWithFirstTimeLaunchPage];
             }
                 else
                 {
-                    [newtab initWithPreferredUrl]; 
+                    [newtab loadWithPreferredUrl]; 
                 }
             }
         }

@@ -34,7 +34,7 @@
 
     [search setDelegate:self]; 
     isSearching = NO; 
-    [newtab initWithHistoryPage];
+    [newtab loadWithHistoryPage];
     [[newtab tabHolder]setHidden:YES];
     [[newtab webview]setFrame:NSMakeRect(newtab.webview.frame.origin.x, newtab.webview.frame.origin.y, newtab.webview.frame.size.width, newtab.webview.frame.size.height+22)];
     [[newtab webview]setUIDelegate:self];
@@ -76,7 +76,7 @@
             [leftView addSubview:labelView];
             [labelView setFrame:[tempview bounds]];
             [search setEnabled:NO];
-            [newtab initWithHistoryPage];
+            [newtab loadWithHistoryPage];
         }
         else
         {
@@ -141,7 +141,7 @@
     //send the url to the class instancied webview
     if (![URL isEqualToString:history.url])
     {
-        [newtab initWithUrl:history.url];
+        [newtab loadWithUrl:history.url];
     }
 }
 

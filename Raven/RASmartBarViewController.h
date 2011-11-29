@@ -97,12 +97,12 @@
 
 @property (nonatomic, assign) id<RASmartBarViewControllerDelegate> delegate;
 @property (nonatomic, retain) NSButton *mainButton; 
-@property (copy) NSString *folderName; 
-@property (copy) NSString *appName; 
-@property (copy) NSString *firstURL;
-@property (copy) NSString *secondURL;
-@property (copy) NSString *thirdURL;
-@property (copy) NSString *fourthURL;
+@property (nonatomic, copy) NSString *folderName; 
+@property (nonatomic, copy) NSString *appName; 
+@property (nonatomic, copy) NSString *firstURL;
+@property (nonatomic, copy) NSString *secondURL;
+@property (nonatomic, copy) NSString *thirdURL;
+@property (nonatomic, copy) NSString *fourthURL;
 @property int selectedButton;
 @property int localArrayIndex;
 @property int state;

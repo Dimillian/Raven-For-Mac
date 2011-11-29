@@ -133,43 +133,43 @@
 }
 
 
--(void)initWithUrl:(NSString *)url
+-(void)loadWithUrl:(NSString *)url
 {
     //load the lading home page
     [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     
 }
 
--(void)initWithWelcomePage
+-(void)loadWithWelcomePage
 {
     NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
     [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:indexPath]]]; 
     
 }
 
--(void)initWithHistoryPage
+-(void)loadWithHistoryPage
 {
     NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"history" ofType:@"html"];
     [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:indexPath]]];   
 }
 
--(void)initWithBookmarkPage
+-(void)loadWithBookmarkPage
 {
     NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"Bookmarks" ofType:@"html"];
     [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:indexPath]]]; 
 }
 
--(void)initwithFavoritePage
+-(void)loadWithFavoritePage
 {
     
 }
 
--(void)initWithFirstTimeLaunchPage
+-(void)loadWithFirstTimeLaunchPage
 {
     NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"Start" ofType:@"html"];
     [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:indexPath]]]; 
 }
--(void)initWithPreferredUrl
+-(void)loadWithPreferredUrl
 {
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
 	if (standardUserDefaults) 

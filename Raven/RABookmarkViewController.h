@@ -56,5 +56,5 @@
 -(IBAction)addFavorite:(id)sender;
 -(IBAction)changeSegment:(id)sender;
 -(IBAction)readabilityButton:(id)sender;
-@property (assign) NSSegmentedControl *selectorButton;
+@property (nonatomic, assign) NSSegmentedControl *selectorButton;
 @end

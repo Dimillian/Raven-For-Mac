@@ -37,6 +37,10 @@
     IBOutlet NSMenu *webviewMenu;
     IBOutlet NSButton *backButton; 
     IBOutlet NSButton *forwardButton; 
+    IBOutlet NSSearchField *searchWebView; 
+    IBOutlet NSTextField *searchResults; 
+    IBOutlet RAAddressFieldBox *addressBox; 
+    IBOutlet NSView *addressBarView;
     
     //TabView Outlet
     IBOutlet NSView *tabview; 
@@ -45,12 +49,8 @@
     IBOutlet NSButton *tabButtonTab; 
     IBOutlet NSButton *closeButtonTab; 
     IBOutlet NSProgressIndicator *progressTab;
-    IBOutlet NSView *addressBarView;
     IBOutlet NSBox *boxTab; 
     IBOutlet NSBox *tabHolder; 
-    IBOutlet NSSearchField *searchWebView; 
-    IBOutlet NSTextField *searchResults; 
-    IBOutlet RAAddressFieldBox *addressBox; 
     
     BOOL isNewTab; 
     NSString *UA; 
@@ -83,17 +83,15 @@
 //Other method
 -(void)setMenu;
 -(NSMenu *)getFavoriteMenu; 
-/////////////////////////////////////////////////////////////////////////////
-//Name are confuse, they are not initiliazer and should no be used to do this
-/////////////////////////////////////////////////////////////////////////////
--(void)initWithUrl:(NSString *)url;
--(void)initWithWelcomePage; 
--(void)initWithPreferredUrl; 
--(void)initWithHistoryPage;;
--(void)initWithBookmarkPage;
--(void)initwithFavoritePage; 
--(void)initWithFirstTimeLaunchPage; 
-///////////////////////////////////////////////////////////////////////////////
+
+-(void)loadWithUrl:(NSString *)url;
+-(void)loadWithWelcomePage; 
+-(void)loadWithPreferredUrl; 
+-(void)loadWithHistoryPage;
+-(void)loadWithBookmarkPage;
+-(void)loadWithFavoritePage; 
+-(void)loadWithFirstTimeLaunchPage; 
+
 -(void)checkua; 
 -(void)setWindowTitle:(id)sender; 
 -(id)infoValueForKey:(NSString*)key;
