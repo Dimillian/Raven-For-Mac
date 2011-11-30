@@ -119,6 +119,7 @@
     }
     //If only 1 or 0 tabs then hide the webview tabbar, only do it when it does not come from window resize notification
     if ([tabsArray count] <= 1 && !fromWindow) {
+        [tabPlaceHolder setHidden:YES];
         for (RAWebViewController *aTab in tabsArray) {
             [allTabsButton setHidden:YES];
             [[aTab tabHolder]setHidden:YES];
@@ -130,6 +131,7 @@
     //show the tabbar and draw tabs
     else
     {
+        [tabPlaceHolder setHidden:NO];
         CGFloat x = 0;
         float rest = 0; 
         for (int i =0; i<[tabsArray count]; i++) {

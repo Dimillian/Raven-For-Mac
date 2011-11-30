@@ -22,22 +22,11 @@ static RADatabaseController *sharedUserManager = nil;
 +(RADatabaseController *)sharedUser
 {
     if (sharedUserManager == nil) {
-        sharedUserManager = [[super allocWithZone:NULL] init];
+        sharedUserManager = [[[self class] alloc] init];
     }
     return sharedUserManager; 
 }
 
-+ (id)allocWithZone:(NSZone *)zone {
-    return [[self sharedUser] retain];
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    return self;
-}
-
-- (id)retain {
-    return self;
-}
 
 
 -(void) checkAndCreateDatabase{

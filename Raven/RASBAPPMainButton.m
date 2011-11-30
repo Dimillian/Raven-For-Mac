@@ -23,6 +23,7 @@
     }
     return self; 
 }
+
 - (void)updateTrackingAreas
 {
     for( NSTrackingArea * trackingArea in [self trackingAreas] )
@@ -55,9 +56,30 @@
 
 -(void)mouseDown:(NSEvent *)theEvent
 {
-    [delegate mouseDidClicked:self]; 
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    [super mouseDown:theEvent]; 
+    if(([[NSApp currentEvent] modifierFlags] & NSControlKeyMask)){
+        NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
+                                             location:[theEvent locationInWindow]
+                                        modifierFlags:NSLeftMouseDownMask // 0x100
+                                            timestamp:0
+                                         windowNumber:[[self window] windowNumber]
+                                              context:[[self window] graphicsContext]
+                                          eventNumber:0
+                                           clickCount:1
+                                             pressure:1]; 
+        
+        [NSMenu popUpContextMenu:[self getMenu] withEvent:event forView:self]; 
+        
+    }
+    else{
+        [delegate mouseDidClicked:self]; 
+        [super mouseDown:theEvent]; 
+    }
+}
+
+-(void)mouseUp:(NSEvent *)theEvent
+{
+    [super mouseUp:theEvent]; 
 }
 
 -(void)rightMouseUp:(NSEvent *)theEvent
@@ -76,10 +98,6 @@
     [super rightMouseUp:theEvent]; 
 }
 
--(void)mouseUp:(NSEvent *)theEvent
-{
-    [super mouseUp:theEvent]; 
-}
 
 -(void)scrollWheel:(NSEvent *)theEvent
 {

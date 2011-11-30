@@ -17,27 +17,9 @@ static RAlistManager *sharedUserManager = nil;
 +(RAlistManager *)sharedUser
 {
     if (sharedUserManager == nil) {
-        sharedUserManager = [[super allocWithZone:NULL] init];
+        sharedUserManager = [[[self class] alloc] init];
     }
     return sharedUserManager; 
-}
-
-+ (id)allocWithZone:(NSZone *)zone {
-    return [[self sharedUser] retain];
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    return self;
-}
-
-- (id)retain {
-    return self;
-}
-
--(void)dealloc
-{
-    [appPlistArray release]; 
-    [appPlistDictionnary release]; 
 }
 
 #pragma mark -
@@ -59,7 +41,7 @@ static RAlistManager *sharedUserManager = nil;
 
 -(void)forceReadApplist
 {
-    if (!appPlistDictionnary) {
+    if (appPlistDictionnary) {
         [appPlistDictionnary release], appPlistDictionnary = nil; 
     }
     NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
@@ -69,12 +51,13 @@ static RAlistManager *sharedUserManager = nil;
     }
     appPlistArray = [[NSMutableArray alloc]initWithArray:
                      [appPlistDictionnary objectForKey:PLIST_KEY_DICTIONNARY]];
+    
       
 }
 
 -(void)writeNewAppListInMemory:(NSMutableArray *)appList writeToFile:(BOOL)flag
 {
-    if (appList) {
+    if (appList != nil) {
         [appPlistDictionnary setObject:appList forKey:PLIST_KEY_DICTIONNARY];
     }
     if(flag){
@@ -90,10 +73,8 @@ static RAlistManager *sharedUserManager = nil;
 //Need to check for duplicate and replace if yes 
 -(void)importAppAthPath:(NSString *)path
 {
-    @synchronized(self){
-        [self writeNewAppListInMemory:nil writeToFile:YES];
-        [self forceReadApplist];
-    }
+    [self writeNewAppListInMemory:[self readAppList] writeToFile:YES];
+
     BOOL newApp;
     NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", path];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
@@ -111,8 +92,7 @@ static RAlistManager *sharedUserManager = nil;
         [folders replaceObjectAtIndex:indexIfExit withObject:dict];
         newApp = NO;
     }
-    [dictToEdit setObject:folders forKey:PLIST_KEY_DICTIONNARY];
-    [dictToEdit writeToFile:appPlist atomically:YES];
+    [self writeNewAppListInMemory:folders writeToFile:YES];
     [folders release];
     NSString *applicationSupportPath = [[NSString stringWithFormat:application_support_path@"%@", appFolder]stringByExpandingTildeInPath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -177,8 +157,6 @@ static RAlistManager *sharedUserManager = nil;
     }
     [self writeNewAppListInMemory:folders writeToFile:YES];
     [self forceReadApplist];
-
-
 }
 
 //Fired by the download view, once app unziped, delete the zip
