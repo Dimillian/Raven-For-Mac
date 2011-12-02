@@ -18,8 +18,9 @@
 #import "RAAddressFieldBox.h"
  
 @class RAAdressTextField, RAMainWindowController, RavenAppDelegate; 
+
 @protocol RAWebViewControllerDelegate;
-@interface RAWebViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSTableViewDelegate, NSTableViewDataSource>{
+@interface RAWebViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSTableViewDelegate, NSTableViewDataSource, RAFavoritePanelControllerDelegate>{
     id<RAWebViewControllerDelegate> delegate;
     
     //MainView outlet 
@@ -58,6 +59,7 @@
     NSInteger count; 
     NSImage *favicon; 
 
+    NSMutableArray *fPanelArray; 
     
     int doRegisterHistory;
     int doComeFromHistoryOrBookmark;    

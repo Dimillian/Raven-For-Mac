@@ -10,11 +10,11 @@
 #import "RavenAppDelegate.h"
 
 @implementation RAInstapaperSubmit
-
+@synthesize thisDelegate; 
 
 -(void)dealloc{
     [localeTitle release]; 
-    [localeTitle release]; 
+    [localeURL release]; 
     [localInsta release]; 
     [super dealloc];
 }
@@ -65,8 +65,9 @@
 
 -(void)instapaper:(LTInstapaperAPI *)instapaper addDidFinishWithCode:(NSUInteger)code
 {
-    
+    [thisDelegate didFinishAddingBookmarkToInstapaper:self];
 }
+
 
 -(void)succeeded
 {

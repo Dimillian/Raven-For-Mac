@@ -20,7 +20,7 @@
 #import "RAHistoryCell.h"
 
 @class RAMainWindowController; 
-@interface RABookmarkViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource, PXListViewDelegate, NSWindowDelegate, GGReadabilityDelegate> {
+@interface RABookmarkViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource, PXListViewDelegate, NSWindowDelegate, GGReadabilityDelegate, RAFavoritePanelControllerDelegate> {
     IBOutlet NSView *mainView; 
     //IBOutlet NSScrollView *scrollview; 
     //IBOutlet NSTableView *tableview;
@@ -44,6 +44,8 @@
       IBOutlet NSDateFormatter *formater; 
     IBOutlet NSButton *readButton; 
     IBOutlet NSProgressIndicator *parsingRead; 
+    
+    NSMutableArray *fPanelArray; 
     
 }
 

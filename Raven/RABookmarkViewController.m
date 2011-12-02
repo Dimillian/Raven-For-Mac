@@ -53,6 +53,8 @@
     [[newtab tabHolder]setHidden:YES];
     [[newtab webview]setFrame:NSMakeRect(newtab.webview.frame.origin.x, newtab.webview.frame.origin.y, newtab.webview.frame.size.width, newtab.webview.frame.size.height+22)];
     [[newtab webview]setUIDelegate:self];
+    
+    fPanelArray = [[NSMutableArray alloc]init]; 
 
 }
 
@@ -302,6 +304,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     RADatabaseController *controller = [RADatabaseController sharedUser];
     RAItemObject *bookmark = (RAItemObject *)[controller.bookmarks objectAtIndex:rowIndex]; 
     RAFavoritePanelWController *favoritePanel = [[RAFavoritePanelWController alloc]init];
+    [favoritePanel setThisDelegate:self];
     selectedDefaultRow = rowIndex; 
     [favoritePanel setTempURL:bookmark.url]; 
     [favoritePanel setTempTitle:bookmark.title]; 
@@ -310,17 +313,22 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     [favoritePanel setType:bookmark.type];
     [favoritePanel setState:2];
     [NSApp beginSheet:[favoritePanel window] modalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(reselectRow:) contextInfo:nil];
+    [fPanelArray addObject:favoritePanel];
+    [favoritePanel release]; 
 }
 
 -(IBAction)addFavorite:(id)sender;
 {
     RAFavoritePanelWController *favoritePanel = [[RAFavoritePanelWController alloc]init];
+    [favoritePanel setThisDelegate:self];
     [favoritePanel setTempURL:@""]; 
     [favoritePanel setTempTitle:@""]; 
     [favoritePanel setTempFavico:[NSImage imageNamed:@"MediumSiteIcon.png"]]; 
     [favoritePanel setState:1];
     [favoritePanel setType:0];
     [NSApp beginSheet:[favoritePanel window] modalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:@selector(check:) contextInfo:nil];
+    [fPanelArray addObject:favoritePanel]; 
+    [favoritePanel release]; 
 }
 
 
@@ -409,6 +417,11 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     }
 }
 
+-(void)favoritePanelDidClose:(RAFavoritePanelWController *)fpanel
+{
+    [fPanelArray removeObject:fpanel]; 
+}
+
 
 - (WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
@@ -449,6 +462,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 
 - (void)dealloc
 {
+    [fPanelArray release]; 
 	[super dealloc];
 }
 

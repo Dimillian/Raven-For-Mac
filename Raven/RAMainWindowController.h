@@ -18,16 +18,17 @@
 #import "RASettingViewController.h"
 #import "RADatabaseController.h"
 #import "RASmartBarViewController.h"
-#import "RavenAppDelegate.h"
 #import "RAlistManager.h"
 #import "RASettingViewController.h"
 #import "Growl/Growl.h"
 #import "Growl/GrowlApplicationBridge.h"
 
 
-
+@protocol RAMainDelegate; 
+@class RavenAppDelegate; 
 @interface RAMainWindowController : NSWindowController <NSWindowDelegate, RASmartBarViewControllerDelegate>{
     //the view controller
+    id<RAMainDelegate>delegate; 
     IBOutlet NSViewController* myCurrentViewController;
     IBOutlet NSViewController *titleBarViewController; 
     
@@ -115,11 +116,17 @@
 -(void)launchRuntime;
 -(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs;
 -(void)receiveNotification:(NSNotification *)notification;
+@property (nonatomic, assign) id<RAMainDelegate> delegate;
 @property (assign) NSString *passedUrl; 
 @property (assign) RANavigatorViewController *navigatorview; 
 @property (assign) NSButton *downloadButton; 
 @property (assign) NSView *centeredView;
 @property (assign) NSViewController *myCurrentViewController;
 @property (nonatomic, assign) NSMutableArray *appList;
+@end
 
+//delegate
+@protocol RAMainDelegate
+@optional
+-(void)closeButtonClicked:(RAMainWindowController *)thisWindow; 
 @end

@@ -121,6 +121,8 @@
     [tabview setAlphaValue:0.0]; 
     [pageTitleTab setStringValue:NSLocalizedString(@"New tab", @"NewTab")];
     [progressTab setHidden:YES];
+    
+    fPanelArray = [[NSMutableArray alloc]init]; 
      
 }
 
@@ -274,9 +276,11 @@
     [favoritePanel setTempFavico:favicon]; 
     [favoritePanel setState:1];
     [favoritePanel setType:0];
+    [favoritePanel setThisDelegate:self]; 
     [NSApp beginSheet:[favoritePanel window] modalForWindow:[NSApp keyWindow] modalDelegate:self didEndSelector:NULL contextInfo:nil];
     //[NSApp runModalForWindow:[favoritePanel window]];
-    
+    [fPanelArray addObject:favoritePanel]; 
+    [favoritePanel release]; 
 }
 
 -(void)gotopage:(id)sender
@@ -540,6 +544,13 @@
     [pool release]; 
 }
 
+#pragma mark -
+#pragma mark FavoritePanel Delegate
+
+-(void)favoritePanelDidClose:(RAFavoritePanelWController *)fpanel
+{
+    [fPanelArray removeObject:fpanel]; 
+}
 
 #pragma -
 #pragma mark webview Delegate
@@ -677,7 +688,7 @@
     [webview setPolicyDelegate:nil]; 
     [webview removeFromSuperview];
     [webview release], webview = nil;
-    
+    [fPanelArray release]; 
     [super dealloc];
 }
 

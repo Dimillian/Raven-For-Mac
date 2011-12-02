@@ -12,8 +12,10 @@
 #import "EMKeychainItem.h"
 #import "RAInstapaperSubmit.h"
 
-@interface RAFavoritePanelWController : NSWindowController <NSWindowDelegate>
+@protocol RAFavoritePanelControllerDelegate; 
+@interface RAFavoritePanelWController : NSWindowController <NSWindowDelegate, RAInstapaperDelegate>
 {
+    id<RAFavoritePanelControllerDelegate>thisDelegate; 
     IBOutlet NSTextField *title; 
     IBOutlet NSTextField *URL; 
     NSString *tempTitle; 
@@ -31,6 +33,7 @@
 @property int state; 
 @property int index; 
 @property int type; 
+@property (nonatomic, assign) id<RAFavoritePanelControllerDelegate>thisDelegate;  
 @property (nonatomic, retain) NSString *tempTitle; 
 @property (nonatomic, retain) NSString *tempURL; 
 @property (nonatomic, retain) NSImage *tempFavico; 
@@ -39,4 +42,8 @@
 -(IBAction)InstapButtonpresse:(id)sender; 
 -(IBAction)matriceChange:(id)sender;
 
+@end
+
+@protocol RAFavoritePanelControllerDelegate
+-(void)favoritePanelDidClose:(RAFavoritePanelWController *)fpanel; 
 @end

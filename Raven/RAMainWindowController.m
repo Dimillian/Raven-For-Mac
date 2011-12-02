@@ -7,6 +7,7 @@
 //
 
 #import "RAMainWindowController.h"
+#import "RavenAppDelegate.h"
 
 
 
@@ -36,7 +37,7 @@
 
 
 @implementation RAMainWindowController
-@synthesize passedUrl, navigatorview, downloadButton, centeredView, myCurrentViewController, appList;
+@synthesize passedUrl, navigatorview, downloadButton, centeredView, myCurrentViewController, appList, delegate;
 #pragma mark -
 #pragma mark init and close
 - (id)initWithWindow:(NSWindow *)window
@@ -48,6 +49,7 @@
     
     return self;
 }
+
 
 - (void)dealloc
 {
@@ -82,6 +84,7 @@
     [settingview release]; 
     [appList release], appList = nil; 
     [[NSNotificationCenter defaultCenter]removeObserver:self];
+    [delegate closeButtonClicked:self];
     [super dealloc];
 }
 
@@ -341,6 +344,7 @@
     for (NSInteger x=0; x<[appList count]; x++) {
         RASmartBarViewController *smartApp = [appList objectAtIndex:x]; 
         NSRect frame = [[smartApp view]frame];
+        
         if (previousIndex == x ) {
             [smartApp retractApp:nil];
         }
@@ -355,6 +359,7 @@
     [self animate:12]; 
     previousIndex = index;
     previousAppNumber = currentNumber; 
+     
 }
 
 //Update the smart bar scrollview height to get the right scroll

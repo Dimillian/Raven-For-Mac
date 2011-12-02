@@ -98,9 +98,7 @@
             [listManager updateProcess]; 
         }
     GreaseKit = [[CMController alloc]init];
-    RAMainWindowController *MainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
-    [MainWindow showWindow:self]; 
-    
+    [self openAndShowANewWindow];   
     //init the event that will intercept external URL
     NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
     [em 
@@ -186,8 +184,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         }
     }
     if (i>=count) {
-        RAMainWindowController *MainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
-        [MainWindow showWindow:self];  
+        RAMainWindowController *MainWindow =  [self openAndShowANewWindow];        
         [MainWindow raven:nil]; 
         [[MainWindow navigatorview]setPassedUrl:URL]; 
         [[MainWindow navigatorview]addtabs:MainWindow]; 
@@ -203,8 +200,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 					hasVisibleWindows:(BOOL)flag
 {
     if (flag == NO) {
-        RAMainWindowController *MainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
-        [MainWindow showWindow:self];  
+        [self openAndShowANewWindow];   
     }
     
     return YES; 
@@ -216,16 +212,30 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 //Open a new window
 -(void)newWindow:(id)sender
 {
-    RAMainWindowController *MainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
-    [MainWindow showWindow:self]; 
+    [self openAndShowANewWindow];
 }
 //
 -(void)newWindowsFromOther:(NSString *)url
 {
-    RAMainWindowController *MainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"]; 
-    [MainWindow showWindow:self]; 
+    [self openAndShowANewWindow];
 }
 
+
+-(RAMainWindowController *)openAndShowANewWindow
+{
+    RAMainWindowController *MainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"];
+    [MainWindow setDelegate:self];
+    [MainWindow showWindow:self];
+    [mainWindowArray addObject:MainWindow];
+    int x = [mainWindowArray indexOfObject:MainWindow];
+    [MainWindow release]; 
+    return [mainWindowArray objectAtIndex:x]; 
+}
+
+-(void)closeButtonClicked:(RAMainWindowController *)thisWindow
+{
+    [mainWindowArray removeObject:thisWindow];
+}
 //Method that fire the file browser to select an app to import
 -(void)importSelectedApp:(id)sender
 {
@@ -283,6 +293,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         [opennedDocumentPath retain];
         [self importAppAction];
         return YES;
+    }
+    if([filename hasPrefix:@".html"]){
+        return YES;  
     }
     else
     {

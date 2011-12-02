@@ -12,13 +12,12 @@
 
 
 @implementation RAFavoritePanelWController
-@synthesize tempURL, tempTitle, tempFavico, state, index, type; 
+@synthesize tempURL, tempTitle, tempFavico, state, index, type, thisDelegate; 
 - (id)init
 {
     self = [super init];
     if (self) {
         [self initWithWindowNibName:@"AddtoFavorite"]; 
-        
     }
     
     return self;
@@ -33,26 +32,14 @@
     [buttonChoice selectCellWithTag:type];
     [instapaperButton setState:0]; 
     instapaper = [[RAInstapaperSubmit alloc]init]; 
+    [instapaper setThisDelegate:self];
 
     
 }
 
 -(void)dealloc
 {
-    [title release]; 
-    [URL release]; 
-    [favico release]; 
-    [tempFavico release]; 
-    [tempTitle release]; 
-    [tempURL release]; 
-    [buttonChoice release]; 
-    [instapaperButton release]; 
-    [instapaper release];
     [super dealloc]; 
-}
--(void)windowWillClose:(NSNotification *)notification
-{
-    [self autorelease]; 
 }
 
 - (void)windowDidLoad
@@ -80,7 +67,6 @@
 {
     //adding
     if (state == 1) {
-        
         RADatabaseController *controller = [RADatabaseController sharedUser];
         //set the dabatase field with the field entered by the user
         [controller insertBookmark:[title stringValue] 
@@ -89,19 +75,21 @@
                               type:[buttonChoice selectedTag]]; 
     }
     //editing
-    else
-    {
+    else{
         RADatabaseController *controller = [RADatabaseController sharedUser]; 
         [controller editFavorite:index title:[title stringValue] url:[URL stringValue] type:[buttonChoice selectedTag]];
         
     }
-    if ([instapaperButton state] == 1) 
-        {
-            [instapaper setTitle:[title stringValue] URL:[URL stringValue]];
-            [instapaper submitToInsta];
-        }
-    [NSApp endSheet:[self window]];
-    [[self window]orderOut:self]; 
+    if ([instapaperButton state] == 1) {
+        [instapaper setTitle:[title stringValue] URL:[URL stringValue]];
+        [instapaper submitToInsta];
+        [NSApp endSheet:[self window]];
+        [[self window]orderOut:self];
+    }
+    else{
+        [NSApp endSheet:[self window]];
+        [[self window]orderOut:self];
+    }
 }
 
 -(void)InstapButtonpresse:(id)sender
@@ -124,6 +112,11 @@
 {
     [[self window]orderOut:self]; 
     [NSApp endSheet:[self window]]; 
+    [thisDelegate favoritePanelDidClose:self];
 }
 
+-(void)didFinishAddingBookmarkToInstapaper:(RAInstapaperSubmit *)RAInstapaper
+{
+    [thisDelegate favoritePanelDidClose:self];
+}
 @end

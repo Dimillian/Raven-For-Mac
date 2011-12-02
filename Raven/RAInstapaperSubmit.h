@@ -10,8 +10,10 @@
 #import "LTInstapaperAPI.h"
 #import "EMKeychainItem.h"
 
+@protocol RAInstapaperDelegate; 
 @interface RAInstapaperSubmit : NSObject <LTInstapaperAPIDelegate>
 {
+    id<RAInstapaperDelegate>thisDelegate; 
     LTInstapaperAPI *localInsta; 
     NSString *localeTitle; 
     NSString *localeURL; 
@@ -20,4 +22,9 @@
 -(void)submitToInsta;
 -(void)succeeded;
 
+@property (nonatomic, assign) id<RAInstapaperDelegate>thisDelegate; 
+@end
+
+@protocol RAInstapaperDelegate 
+-(void)didFinishAddingBookmarkToInstapaper:(RAInstapaperSubmit *)RAInstapaper; 
 @end

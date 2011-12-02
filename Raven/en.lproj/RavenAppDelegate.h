@@ -14,15 +14,15 @@
 #import "RAItemObject.h"
 #import "url.h"
 #import "RADatabaseController.h"
-#import "RAMainWindowController.h"
 #import "RASettingWindowController.h"
 #import "RAAboutPanelWindowController.h"
 #import "CMController.h"
 #import "RAGrowlDispatcher.h"
 #import "RAlistManager.h"
+#import "RAMainWindowController.h"
 
-
-@interface RavenAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, NSImageDelegate> {
+@interface RavenAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, NSImageDelegate, RAMainDelegate> {
+    
     RASettingWindowController *setting;
     RAAboutPanelWindowController *about; 
     IBOutlet NSMenu *favoriteMenu; 
@@ -42,6 +42,7 @@
 -(IBAction)websiteSupport:(id)sender; 
 -(IBAction)officialWebsite:(id)sender;
 -(void)importAppAction;
+-(RAMainWindowController *)openAndShowANewWindow; 
 -(void)openAnInternalWindowWithUrl:(NSString *)URL; 
 @property (nonatomic, retain) RASettingWindowController *setting; 
 @property (nonatomic, retain) NSMutableArray *mainWindowArray;  
