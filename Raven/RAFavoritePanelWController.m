@@ -12,7 +12,7 @@
 
 
 @implementation RAFavoritePanelWController
-@synthesize tempURL, tempTitle, tempFavico, state, index, type, thisDelegate; 
+@synthesize tempURL = _tempURL, tempTitle = _tempTitle, tempFavico = _tempFavico, state = _state, index = _index, type = _type, thisDelegate; 
 - (id)init
 {
     self = [super init];
@@ -26,10 +26,10 @@
 -(void)awakeFromNib
 {
     [[self window]setDelegate:self]; 
-    title.stringValue = tempTitle;
-    URL.stringValue = tempURL; 
-    favico = tempFavico; 
-    [buttonChoice selectCellWithTag:type];
+    title.stringValue = _tempTitle;
+    URL.stringValue = _tempURL; 
+    favico = _tempFavico; 
+    [buttonChoice selectCellWithTag:_type];
     [instapaperButton setState:0]; 
     instapaper = [[RAInstapaperSubmit alloc]init]; 
     [instapaper setThisDelegate:self];
@@ -39,6 +39,7 @@
 
 -(void)dealloc
 {
+    [instapaper setThisDelegate:nil];
     [super dealloc]; 
 }
 
@@ -66,7 +67,7 @@
 -(void)AddFavorite:(id)sender
 {
     //adding
-    if (state == 1) {
+    if (_state == 1) {
         RADatabaseController *controller = [RADatabaseController sharedUser];
         //set the dabatase field with the field entered by the user
         [controller insertBookmark:[title stringValue] 
@@ -77,7 +78,7 @@
     //editing
     else{
         RADatabaseController *controller = [RADatabaseController sharedUser]; 
-        [controller editFavorite:index title:[title stringValue] url:[URL stringValue] type:[buttonChoice selectedTag]];
+        [controller editFavorite:_index title:[title stringValue] url:[URL stringValue] type:[buttonChoice selectedTag]];
         
     }
     if ([instapaperButton state] == 1) {

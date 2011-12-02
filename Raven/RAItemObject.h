@@ -13,12 +13,12 @@
 
 @interface RAItemObject : NSObject  {
     
-    int udid; 
-    int type; 
-    NSString *title; 
-    NSString *url; 
-    NSImage *favico; 
-    NSDate *date;
+    int _udid; 
+    int _type; 
+    NSString *_title; 
+    NSString *_url; 
+    NSImage *_favico; 
+    NSDate *_date;
 }
 @property int type; 
 @property int udid; 

@@ -9,7 +9,7 @@
 #import "RADownloadObject.h"
 
 @implementation RADownloadObject
-@synthesize size, progress, name, key, path, progressBytes, downloadUrl;
+@synthesize size = _size, progress = _progress, name = _name, key = _key, path = _path, progressBytes = _progressBytes, downloadUrl = _downloadUrl;
 
 -(id)initWithKey:(NSNumber *)k name:(NSString *)n progress:(NSNumber *)pro size:(NSNumber *)s path:(NSString *)p progressBytes:(NSNumber *)pb source:(NSString *)sc  
 {
@@ -55,13 +55,13 @@
 
 -(void)dealloc
 {
-    [key release]; 
-    [name release]; 
-    [size release]; 
-    [progress release]; 
-    [path release]; 
-    [progressBytes release]; 
-    [downloadUrl release]; 
+    [_key release]; 
+    [_name release]; 
+    [_size release]; 
+    [_progress release]; 
+    [_path release]; 
+    [_progressBytes release]; 
+    [_downloadUrl release]; 
     [super dealloc]; 
 }
 

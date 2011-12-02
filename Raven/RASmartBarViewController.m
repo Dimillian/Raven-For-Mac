@@ -36,7 +36,7 @@
 //[[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
 
 @implementation RASmartBarViewController
-@synthesize folderName, appName, firstURL, secondURL, thirdURL, fourthURL, state, delegate, selectedButton, mainButton, appNumber, localArrayIndex, localPlistIndex; 
+@synthesize state = _state, delegate, selectedButton = _selectedButton, appNumber = _appNumber, localArrayIndex = _localArrayIndex, localPlistIndex = _localPlistIndex; 
 
 
 #pragma mark -
@@ -61,16 +61,16 @@
     if (self !=nil)
     {
         [self initWithNibName:@"RASmartBarViewController" bundle:nil]; 
-        self.delegate = dgate;
+        delegate = dgate;
         NSArray *URL = [dictionnary objectForKey:PLIST_KEY_URL];
-        self.localArrayIndex = localIndex; 
-        self.localPlistIndex = globalIndex; 
-        self.folderName = [dictionnary objectForKey:PLIST_KEY_FOLDER];
-        self.state = [[dictionnary objectForKey:PLIST_KEY_ENABLE]intValue];
-        self.firstURL = [URL objectAtIndex:0];
-        self.secondURL = [URL objectAtIndex:1]; 
-        self.thirdURL = [URL objectAtIndex:2]; 
-        self.fourthURL = [URL objectAtIndex:3];
+        _localArrayIndex = localIndex; 
+        _localPlistIndex = globalIndex; 
+        folderName = [dictionnary objectForKey:PLIST_KEY_FOLDER];
+        _state = [[dictionnary objectForKey:PLIST_KEY_ENABLE]intValue];
+        firstURL = [URL objectAtIndex:0];
+        secondURL = [URL objectAtIndex:1]; 
+        thirdURL = [URL objectAtIndex:2]; 
+        fourthURL = [URL objectAtIndex:3];
     }
     
     return self;  
@@ -78,12 +78,14 @@
 
 -(void)dealloc
 {
-    [mainButton setDelegate:nil];
-    [mainButton release];
     [firstNavigatorView release]; 
     [SecondNavigatorView release]; 
     [ThirdtNavigatorView release]; 
     [FourthNavigatorView release];
+    [firstURL release]; 
+    [secondURL release]; 
+    [thirdURL release]; 
+    [fourthURL release]; 
     [[NSNotificationCenter defaultCenter]removeObserver:self];
     [super dealloc];
 }
@@ -98,8 +100,8 @@
                                               object:nil];
 
     
-    state = 0;
-    selectedButton = 1; 
+    _state = 0;
+    _selectedButton = 1; 
     firstNavigatorView = [[RANavigatorViewController alloc]init];
     SecondNavigatorView = [[RANavigatorViewController alloc]init];
     ThirdtNavigatorView = [[RANavigatorViewController alloc]init];
@@ -166,7 +168,7 @@
 //fired when main app button is clicked
 -(IBAction)expandApp:(id)sender
 {
-    if (state == 0) {
+    if (_state == 0) {
         [self setSelectedButton];
         //[[totalTabsNumber animator]setAlphaValue:0.0];
         //[[badgeView animator]setAlphaValue:0.0];
@@ -195,7 +197,7 @@
         [delegate itemDidExpand:self];
         [self hideCloseAppButton];
         //[delegate selectionDidChange:self];
-        state = 1;
+        _state = 1;
 
     
     //MainWindowController *mainWindow = [[sender window]windowController]; 
@@ -252,24 +254,24 @@
     [fourthButton setEnabled:NO];
     [[mainButton animator]setAlphaValue:0.5];
     //[delegate itemDidRetract:self];
-    state = 0;
+    _state = 0;
 }
 
 #pragma mark -
 #pragma mark other
 -(void)calculateUrlNumber{
     if ([secondURL isEqualToString:@""]) {
-        appNumber = 1; 
+        _appNumber = 1; 
     }
     else if ([thirdURL isEqualToString:@""]){
-        appNumber = 2; 
+        _appNumber = 2; 
     }
     else if ([fourthURL isEqualToString:@""]){
-        appNumber = 3;
+        _appNumber = 3;
     }
     else
     {
-        appNumber = 4; 
+        _appNumber = 4; 
     }
     
     
@@ -291,7 +293,7 @@
 		[[mainWindow.myCurrentViewController view] removeFromSuperview];
     
     if ([[firstNavigatorView tabsArray]count] == 0 || 
-        (selectedButton == 1 && mainWindow.myCurrentViewController == firstNavigatorView)) {
+        (_selectedButton == 1 && mainWindow.myCurrentViewController == firstNavigatorView)) {
         [firstNavigatorView view];
         [firstNavigatorView setPassedUrl:firstURL];
         [firstNavigatorView addtabs:mainButton]; 
@@ -305,7 +307,7 @@
     
     [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
     [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
-    selectedButton = 1;
+    _selectedButton = 1;
 }
 
 -(IBAction)secondItemClicked:(id)sender
@@ -317,7 +319,7 @@
 		[[mainWindow.myCurrentViewController view] removeFromSuperview];
     
     if ([[SecondNavigatorView tabsArray]count] == 0 || 
-        (selectedButton == 2 && mainWindow.myCurrentViewController == SecondNavigatorView)) {
+        (_selectedButton == 2 && mainWindow.myCurrentViewController == SecondNavigatorView)) {
         [SecondNavigatorView view];
         [SecondNavigatorView setPassedUrl:secondURL];
         [SecondNavigatorView addtabs:mainButton]; 
@@ -331,7 +333,7 @@
     [SecondNavigatorView setMenu];
     [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
     [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
-    selectedButton = 2;
+    _selectedButton = 2;
 }
 
 -(IBAction)thirdItemClicked:(id)sender
@@ -343,7 +345,7 @@
 		[[mainWindow.myCurrentViewController view] removeFromSuperview];
     
     if ([[ThirdtNavigatorView tabsArray]count] == 0 || 
-        (selectedButton == 3 && mainWindow.myCurrentViewController == ThirdtNavigatorView)) {
+        (_selectedButton == 3 && mainWindow.myCurrentViewController == ThirdtNavigatorView)) {
         [ThirdtNavigatorView view];
         [ThirdtNavigatorView setPassedUrl:thirdURL];
         [ThirdtNavigatorView addtabs:mainButton]; 
@@ -358,7 +360,7 @@
     [ThirdtNavigatorView setMenu];
     [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
     [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
-    selectedButton = 3;
+    _selectedButton = 3;
 
 }
 
@@ -372,7 +374,7 @@
     
     
     if ([[FourthNavigatorView tabsArray]count] == 0 || 
-        (selectedButton == 4 && mainWindow.myCurrentViewController == FourthNavigatorView)) {
+        (_selectedButton == 4 && mainWindow.myCurrentViewController == FourthNavigatorView)) {
         [FourthNavigatorView view];
         [FourthNavigatorView setPassedUrl:fourthURL];
         [FourthNavigatorView addtabs:mainButton]; 
@@ -386,12 +388,12 @@
     [FourthNavigatorView setMenu];
     [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
     [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
-    selectedButton = 4;
+    _selectedButton = 4;
 }
 
 -(void)closeAppButtonCliced:(id)sender
 {
-    if (state == 1){
+    if (_state == 1){
         RAMainWindowController *mainWindow = [[NSApp keyWindow]windowController]; 
         [mainWindow raven:nil];
     }
@@ -481,14 +483,14 @@
 
 -(void)hoverMainButton
 {
-    if (state == 0) {
+    if (_state == 0) {
          [[mainButton animator]setAlphaValue:1.0];    
     }
 }
 
 -(void)hideHoverMainButton
 {
-    if (state == 0){
+    if (_state == 0){
         [[mainButton animator]setAlphaValue:0.5]; 
     }
 }
@@ -496,7 +498,7 @@
 //select previously selected button when switching app
 -(void)setSelectedButton
 {
-    switch (selectedButton) {
+    switch (_selectedButton) {
         case 1:
             [self firstItemClicked:firstButton];
             break;
@@ -553,11 +555,11 @@
 -(void)shouldHideApp:(RASBAPPMainButton *)button
 {
     RAlistManager *listManager = [RAlistManager sharedUser];
-    if (state == 1) {
+    if (_state == 1) {
         RAMainWindowController *windowController = self.view.window.windowController; 
         [windowController raven:nil];
     }
-    [listManager changeStateOfAppAtIndex:localPlistIndex withState:0];
+    [listManager changeStateOfAppAtIndex:_localPlistIndex withState:0];
     [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
 }
 

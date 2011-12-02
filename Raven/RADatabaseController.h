@@ -14,11 +14,11 @@
 
 @interface RADatabaseController : NSObject <NSFileManagerDelegate>{
 
-     NSMutableArray *bookmarks;
-     NSMutableArray *history;
-     NSMutableArray *historySearch; 
-     NSMutableArray *suggestion; 
-     NSMutableArray *preciseSuggestion; 
+     NSMutableArray *_bookmarks;
+     NSMutableArray *_history;
+     NSMutableArray *_historySearch; 
+     NSMutableArray *_suggestion; 
+     NSMutableArray *_preciseSuggestion; 
      NSString *databasePath;
      NSString *archivePath;
 

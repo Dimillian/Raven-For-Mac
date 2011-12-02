@@ -55,7 +55,6 @@
     
     BOOL isNewTab; 
     NSString *UA; 
-    NSString *passedUrl; 
     NSInteger count; 
     NSImage *favicon; 
 
@@ -106,7 +105,6 @@
 //Properties
 @property (nonatomic, assign) id<RAWebViewControllerDelegate> delegate;
 @property (nonatomic, retain) NSSearchField *searchWebView;
-@property (nonatomic, retain) NSString *passedUrl;
 @property (nonatomic, retain) NSView *switchView;
 @property (nonatomic, retain) NSView *addressBarView;
 @property (nonatomic, retain) NSButton *tabsButton; 

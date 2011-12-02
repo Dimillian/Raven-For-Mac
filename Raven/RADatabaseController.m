@@ -15,7 +15,7 @@
 #import "NSString+Raven.h"
 
 @implementation RADatabaseController
-@synthesize history, bookmarks, suggestion, preciseSuggestion, historySearch; 
+@synthesize history = _history, bookmarks = _bookmarks, suggestion = _suggestion, preciseSuggestion = _preciseSuggestion, historySearch = _historySearch; 
 static RADatabaseController *sharedUserManager = nil;
 
 #pragma mark init
@@ -118,11 +118,11 @@ static RADatabaseController *sharedUserManager = nil;
     // Setup the database object
 	sqlite3 *database;
     @synchronized(self){
-        if(history)
+        if(_history)
         {
-            [history release], history = nil;
+            [_history release], _history = nil;
         }
-        history = [[NSMutableArray alloc]init];
+        _history = [[NSMutableArray alloc]init];
         // Open the database from the users filessytem
         if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
             // Setup the SQL Statement and compile it for faster access
@@ -146,7 +146,7 @@ static RADatabaseController *sharedUserManager = nil;
                                                                                         date:aDate
                                                                                         udid:udid]; 
                     //add the created history object to our array
-                    [history addObject:historyItem];
+                    [_history addObject:historyItem];
                     [historyItem release];
                     [aDate release];
                     [image release];
@@ -308,11 +308,11 @@ static RADatabaseController *sharedUserManager = nil;
 {
     // Setup the database object
 	sqlite3 *database;
-    if( history )
+    if(_history )
     {
-        [history release], history = nil;
+        [_history release], _history = nil;
     }
-	history = [[[NSMutableArray alloc]init]retain];
+	_history = [[[NSMutableArray alloc]init]retain];
     
 	// Open the database from the users filessytem
 	if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
@@ -340,7 +340,7 @@ static RADatabaseController *sharedUserManager = nil;
                                                                                      udid:udid]; 
                 
                 //add the created boomark object into our bookmark array
-				[history addObject:historyItem];
+				[_history addObject:historyItem];
                 [historyItem release];
                 [data release]; 
                 [image release];
@@ -403,11 +403,11 @@ static RADatabaseController *sharedUserManager = nil;
 	// Setup the database object
 	sqlite3 *database;
     
-    if( bookmarks )
+    if(_bookmarks )
     {
-        [bookmarks release], bookmarks = nil;
+        [_bookmarks release], _bookmarks = nil;
     }
-	bookmarks = [[NSMutableArray alloc]init];
+	_bookmarks = [[NSMutableArray alloc]init];
     
 	// Open the database from the users filessytem
 	if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
@@ -447,7 +447,7 @@ static RADatabaseController *sharedUserManager = nil;
                 
                 
                 //add the created boomark object into our bookmark array
-				[bookmarks addObject:bookmark];
+				[_bookmarks addObject:bookmark];
                 [bookmark release];
                 [data release];
                 [image release]; 
@@ -667,11 +667,11 @@ static RADatabaseController *sharedUserManager = nil;
     url = [url stringByReplacingOccurrencesOfString:@"http://" withString:@""];
     // Setup the database object
 	sqlite3 *database;
-    if( suggestion )
+    if(_suggestion )
     {
-        [suggestion release], suggestion = nil;
+        [_suggestion release], _suggestion = nil;
     }
-	suggestion = [[NSMutableArray alloc]init];
+	_suggestion = [[NSMutableArray alloc]init];
     
 	// Open the database from the users filessytem
 	if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
@@ -694,7 +694,7 @@ static RADatabaseController *sharedUserManager = nil;
 				RAItemObject *aSuggestion = [[RAItemObject alloc] initWithName:aTitle url:aUrl favico:image udid:udid]; 
                 
                 //add the created boomark object into our bookmark array
-				[suggestion addObject:aSuggestion];
+				[_suggestion addObject:aSuggestion];
                 [aSuggestion release];
                 [image release];
                 
@@ -710,11 +710,11 @@ static RADatabaseController *sharedUserManager = nil;
 {
     // Setup the database object
 	sqlite3 *database;
-    if( preciseSuggestion )
+    if(_preciseSuggestion )
     {
-        [preciseSuggestion release], preciseSuggestion = nil;
+        [_preciseSuggestion release], _preciseSuggestion = nil;
     }
-	preciseSuggestion = [[NSMutableArray alloc]init];
+	_preciseSuggestion = [[NSMutableArray alloc]init];
     
 	// Open the database from the users filessytem
 	if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
@@ -739,7 +739,7 @@ static RADatabaseController *sharedUserManager = nil;
 				RAItemObject *aSuggestion = [[RAItemObject alloc] initWithName:aTitle url:aUrl favico:image udid:udid]; 
                 
                 //add the created boomark object into our bookmark array
-				[preciseSuggestion addObject:aSuggestion];
+				[_preciseSuggestion addObject:aSuggestion];
                 [aSuggestion release];
                 [data release];
                 [image release]; 
@@ -869,10 +869,10 @@ static RADatabaseController *sharedUserManager = nil;
 }
 - (void)dealloc
 {
-    [history release];
-    [suggestion release];
-    [bookmarks release];
-    [preciseSuggestion release];
+    [_history release];
+    [_suggestion release];
+    [_bookmarks release];
+    [_preciseSuggestion release];
     [databasePath release]; 
     [super dealloc];
 }

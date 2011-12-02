@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface RADownloadObject : NSObject{
-    NSNumber *key; 
-    NSString *name; 
-    NSNumber *progress; 
-    NSNumber *progressBytes; 
-    NSNumber *size; 
-    NSString *path; 
-    NSString *downloadUrl; 
+    NSNumber *_key; 
+    NSString *_name; 
+    NSNumber *_progress; 
+    NSNumber *_progressBytes; 
+    NSNumber *_size; 
+    NSString *_path; 
+    NSString *_downloadUrl; 
 }
 @property (nonatomic, retain) NSNumber *key; 
 @property (nonatomic, copy) NSString *name; 

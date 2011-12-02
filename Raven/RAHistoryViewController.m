@@ -119,7 +119,7 @@
     //Get the bookmark at the index from the selected row
     RAItemObject *history = (RAItemObject *)[controler.history objectAtIndex:row]; 
 
-	[[cell titleLabel] setStringValue:[history title]];
+	[[cell titleLabel]setStringValue:[history title]];
     [[cell url]setStringValue:[history url]];
     NSString *strDate = [formater stringFromDate:[history date]];
     [[cell date]setStringValue:strDate];

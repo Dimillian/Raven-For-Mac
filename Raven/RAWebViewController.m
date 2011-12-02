@@ -22,7 +22,7 @@
 #define FAVICON_PATH @"~/Library/Application Support/RavenApp/favicon/%@"
 
 @implementation RAWebViewController
-@synthesize passedUrl, switchView, tabsButton, webview, address, tabview, searchWebView; 
+@synthesize switchView, tabsButton, webview, address, tabview, searchWebView; 
 @synthesize tabButtonTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, addressBarView, boxTab, tabHolder, delegate; 
 
 #pragma -

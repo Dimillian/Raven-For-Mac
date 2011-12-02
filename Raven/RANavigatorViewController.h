@@ -27,11 +27,11 @@
     IBOutlet NSButton *allTabsButton; 
     IBOutlet NSTabView *tabController; 
     
-    NSString *PassedUrl; //THIS variable is super important, it is a mess, but believe me or not it is super important
-    NSMutableArray *tabsArray;
+    NSString *_PassedUrl; //THIS variable is super important, it is a mess, but believe me or not it is super important
+    NSMutableArray *_tabsArray;
     NSInteger count; 
     BOOL istab; 
-    int fromOtherViews; 
+    int _fromOtherViews; 
     NSWindow *localWindow; 
     IBOutlet NSMenu *navigatorMenu; 
     BOOL inBackground;

@@ -10,11 +10,11 @@
 
 
 @implementation RAItemObject
-@synthesize title, url, favico, date, udid, type; 
+@synthesize title = _title, url = _url, favico =_favico, date = _date, udid = _udid, type = _type; 
 
 -(id)initWithName:(NSString *)n url:(NSString *)d favico:(NSImage *)v udid:(int)q;
 {
-    udid = q;
+    _udid = q;
     self.title = n; 
     self.url = d; 
     self.favico = v; 
@@ -23,8 +23,8 @@
 -(id)initBookmarkAndFavoriteWithName:(NSString *)n url:(NSString *)d favico:(NSImage *)v udid:(int)q type:(int)t date:(NSDate *)da
 {
   if (self = [super init]) {
-      udid = q;
-      type = t;
+      _udid = q;
+      _type = t;
       self.title = n; 
       self.url = d; 
       self.favico = v; 
@@ -36,7 +36,7 @@
 -(id)initHistoryInitWithName:(NSString *)n url:(NSString *)d favico:(NSImage *)v date:(NSDate *)x udid:(int)q;
 {
     if (self = [super init]) {
-        udid = q;
+        _udid = q;
         self.title = n; 
         self.url = d; 
         self.favico = v; 
@@ -47,10 +47,10 @@
 
 -(void)dealloc
 {
-    [title release]; 
-    [url release];
-    [favico release]; 
-    [date release]; 
+    [_title release]; 
+    [_url release];
+    [_favico release]; 
+    [_date release]; 
     [super dealloc]; 
 }
 

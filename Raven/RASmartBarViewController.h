@@ -33,10 +33,10 @@
     NSString *thirdURL; 
     NSString *fourthURL; 
     NSInteger *type; 
-    int state;
-    int selectedButton; 
-    int localPlistIndex; 
-    int localArrayIndex; 
+    int _state;
+    int _selectedButton; 
+    int _localPlistIndex; 
+    int _localArrayIndex; 
     
     //Navigator hoder
     RANavigatorViewController *firstNavigatorView;
@@ -68,7 +68,7 @@
     
     NSUInteger totalTabs;
     
-    int appNumber; 
+    int _appNumber; 
 
 }
 -(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate 
@@ -96,13 +96,6 @@
 
 
 @property (nonatomic, assign) id<RASmartBarViewControllerDelegate> delegate;
-@property (nonatomic, retain) NSButton *mainButton; 
-@property (nonatomic, copy) NSString *folderName; 
-@property (nonatomic, copy) NSString *appName; 
-@property (nonatomic, copy) NSString *firstURL;
-@property (nonatomic, copy) NSString *secondURL;
-@property (nonatomic, copy) NSString *thirdURL;
-@property (nonatomic, copy) NSString *fourthURL;
 @property int selectedButton;
 @property int localArrayIndex;
 @property int state;
