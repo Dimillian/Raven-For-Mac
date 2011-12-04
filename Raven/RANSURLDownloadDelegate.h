@@ -11,15 +11,17 @@
 #import "RADownloadController.h"
 #import "RADownloadObject.h"
 
+@protocol RANSURLDownloadActionDelegate;
 @interface RANSURLDownloadDelegate : NSObject <NSAlertDelegate, NSURLDownloadDelegate>{
-    NSString *downloadPath;
-    NSString *downloadUrl; 
+    id<RANSURLDownloadActionDelegate>delegate; 
+    NSString *_downloadPath;
+    NSString *_downloadUrl; 
     NSUInteger downloadIndex; 
     NSData *downloadBlob; 
-    NSNumber *totalByes; 
-    NSNumber *progressBytes; 
-    NSNumber *percentage; 
-    NSString *downloadName;
+    NSNumber *_totalByes; 
+    NSNumber *_progressBytes; 
+    NSNumber *_percentage; 
+    NSString *_downloadName;
     NSInteger bytesReceived;
     NSURLResponse *downloadResponse;
     NSTimeInterval startTime; 
@@ -28,4 +30,17 @@
 }
 -(void)setDownloadResponse:(NSURLResponse *)aDownloadResponse;
 -(void)updateDownloadInformation; 
+@property (nonatomic, assign) id<RANSURLDownloadActionDelegate>delegate; 
+@property (nonatomic, retain) NSString *downloadPath; 
+@property (nonatomic, retain) NSString *downloadName;
+@property (nonatomic, retain) NSString *downloadUrl; 
+@property (nonatomic, retain) NSNumber *totalByes; 
+@property (nonatomic, retain) NSNumber *ProgressBytes; 
+@property (nonatomic, retain) NSNumber *percentage; 
+
+
+@end
+
+@protocol RANSURLDownloadActionDelegate
+-(void)DownloadDelegateDidFinishJob:(RANSURLDownloadDelegate *)RAdownloadDelegate; 
 @end

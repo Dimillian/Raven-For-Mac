@@ -36,7 +36,7 @@
 //[[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
 
 @implementation RASmartBarViewController
-@synthesize state = _state, delegate, selectedButton = _selectedButton, appNumber = _appNumber, localArrayIndex = _localArrayIndex, localPlistIndex = _localPlistIndex; 
+@synthesize state = _state, delegate, selectedButton = _selectedButton, appNumber = _appNumber, localArrayIndex = _localArrayIndex, localPlistIndex = _localPlistIndex, firstURL = _firstURL, secondURL = _secondURL, thirdURL = _thirdURL, fourthURL = _fourthURL, appName = _appName, folderName = _folderName; 
 
 
 #pragma mark -
@@ -65,12 +65,18 @@
         NSArray *URL = [dictionnary objectForKey:PLIST_KEY_URL];
         _localArrayIndex = localIndex; 
         _localPlistIndex = globalIndex; 
-        folderName = [dictionnary objectForKey:PLIST_KEY_FOLDER];
+        self.folderName = [dictionnary objectForKey:PLIST_KEY_FOLDER];
         _state = [[dictionnary objectForKey:PLIST_KEY_ENABLE]intValue];
-        firstURL = [URL objectAtIndex:0];
-        secondURL = [URL objectAtIndex:1]; 
-        thirdURL = [URL objectAtIndex:2]; 
-        fourthURL = [URL objectAtIndex:3];
+        self.firstURL = [URL objectAtIndex:0];
+        self.secondURL = [URL objectAtIndex:1]; 
+        self.thirdURL = [URL objectAtIndex:2]; 
+        self.fourthURL = [URL objectAtIndex:3];
+        
+        firstNavigatorView = [[RANavigatorViewController alloc]init];
+        SecondNavigatorView = [[RANavigatorViewController alloc]init];
+        ThirdtNavigatorView = [[RANavigatorViewController alloc]init];
+        FourthNavigatorView = [[RANavigatorViewController alloc]init];
+
     }
     
     return self;  
@@ -82,10 +88,12 @@
     [SecondNavigatorView release]; 
     [ThirdtNavigatorView release]; 
     [FourthNavigatorView release];
-    [firstURL release]; 
-    [secondURL release]; 
-    [thirdURL release]; 
-    [fourthURL release]; 
+    [_firstURL release]; 
+    [_secondURL release]; 
+    [_thirdURL release]; 
+    [_fourthURL release]; 
+    [_folderName release]; 
+    [_appName release]; 
     [[NSNotificationCenter defaultCenter]removeObserver:self];
     [super dealloc];
 }
@@ -102,23 +110,19 @@
     
     _state = 0;
     _selectedButton = 1; 
-    firstNavigatorView = [[RANavigatorViewController alloc]init];
-    SecondNavigatorView = [[RANavigatorViewController alloc]init];
-    ThirdtNavigatorView = [[RANavigatorViewController alloc]init];
-    FourthNavigatorView = [[RANavigatorViewController alloc]init];
-    
+
     [mainButton setDelegate:self];
     [closeAppButton setAlphaValue:0.0]; 
 
-    NSString *homeButtonPath = [NSString stringWithFormat:application_support_path@"%@/main.png", folderName];
-    NSString *firstImageOffPath = [NSString stringWithFormat:application_support_path@"%@/1_off.png", folderName];
-    NSString *firstImageOnPath = [NSString stringWithFormat:application_support_path@"%@/1_on.png", folderName];
-    NSString *secondImageOffPath = [NSString stringWithFormat:application_support_path@"%@/2_off.png", folderName]; 
-    NSString *secondImageOnPath = [NSString stringWithFormat:application_support_path@"%@/2_on.png", folderName]; 
-    NSString *thirdImageOffPath = [NSString stringWithFormat:application_support_path@"%@/3_off.png", folderName]; 
-    NSString *thirdImageOnPath = [NSString stringWithFormat:application_support_path@"%@/3_on.png", folderName]; 
-    NSString *fourImageOffPath = [NSString stringWithFormat:application_support_path@"%@/4_off.png", folderName]; 
-    NSString *fourImageOnPath = [NSString stringWithFormat:application_support_path@"%@/4_on.png", folderName];
+    NSString *homeButtonPath = [NSString stringWithFormat:application_support_path@"%@/main.png", self.folderName];
+    NSString *firstImageOffPath = [NSString stringWithFormat:application_support_path@"%@/1_off.png", self.folderName];
+    NSString *firstImageOnPath = [NSString stringWithFormat:application_support_path@"%@/1_on.png", self.folderName];
+    NSString *secondImageOffPath = [NSString stringWithFormat:application_support_path@"%@/2_off.png", self.folderName]; 
+    NSString *secondImageOnPath = [NSString stringWithFormat:application_support_path@"%@/2_on.png", self.folderName]; 
+    NSString *thirdImageOffPath = [NSString stringWithFormat:application_support_path@"%@/3_off.png", self.folderName]; 
+    NSString *thirdImageOnPath = [NSString stringWithFormat:application_support_path@"%@/3_on.png", self.folderName]; 
+    NSString *fourImageOffPath = [NSString stringWithFormat:application_support_path@"%@/4_off.png", self.folderName]; 
+    NSString *fourImageOnPath = [NSString stringWithFormat:application_support_path@"%@/4_on.png", self.folderName];
 
     NSImage *homeButtonImage = [[NSImage alloc]initWithContentsOfFile:[homeButtonPath stringByExpandingTildeInPath]];
     NSImage *firstImageOff = [[NSImage alloc]initWithContentsOfFile:[firstImageOffPath stringByExpandingTildeInPath]];
@@ -153,11 +157,6 @@
     [fourImageOff release]; 
     [fourImageOn release]; 
     [homeButtonImage release]; 
-    [firstURL retain]; 
-    [secondURL retain]; 
-    [thirdURL retain]; 
-    [fourthURL retain]; 
-    
     [self calculateUrlNumber];
     
 }
@@ -260,13 +259,13 @@
 #pragma mark -
 #pragma mark other
 -(void)calculateUrlNumber{
-    if ([secondURL isEqualToString:@""]) {
+    if ([self.secondURL isEqualToString:@""]) {
         _appNumber = 1; 
     }
-    else if ([thirdURL isEqualToString:@""]){
+    else if ([self.thirdURL isEqualToString:@""]){
         _appNumber = 2; 
     }
-    else if ([fourthURL isEqualToString:@""]){
+    else if ([self.fourthURL isEqualToString:@""]){
         _appNumber = 3;
     }
     else
@@ -295,7 +294,7 @@
     if ([[firstNavigatorView tabsArray]count] == 0 || 
         (_selectedButton == 1 && mainWindow.myCurrentViewController == firstNavigatorView)) {
         [firstNavigatorView view];
-        [firstNavigatorView setPassedUrl:firstURL];
+        [firstNavigatorView setPassedUrl:self.firstURL];
         [firstNavigatorView addtabs:mainButton]; 
     }
     
@@ -321,7 +320,7 @@
     if ([[SecondNavigatorView tabsArray]count] == 0 || 
         (_selectedButton == 2 && mainWindow.myCurrentViewController == SecondNavigatorView)) {
         [SecondNavigatorView view];
-        [SecondNavigatorView setPassedUrl:secondURL];
+        [SecondNavigatorView setPassedUrl:self.secondURL];
         [SecondNavigatorView addtabs:mainButton]; 
     }    
         
@@ -347,7 +346,7 @@
     if ([[ThirdtNavigatorView tabsArray]count] == 0 || 
         (_selectedButton == 3 && mainWindow.myCurrentViewController == ThirdtNavigatorView)) {
         [ThirdtNavigatorView view];
-        [ThirdtNavigatorView setPassedUrl:thirdURL];
+        [ThirdtNavigatorView setPassedUrl:self.thirdURL];
         [ThirdtNavigatorView addtabs:mainButton]; 
 
     }    
@@ -376,7 +375,7 @@
     if ([[FourthNavigatorView tabsArray]count] == 0 || 
         (_selectedButton == 4 && mainWindow.myCurrentViewController == FourthNavigatorView)) {
         [FourthNavigatorView view];
-        [FourthNavigatorView setPassedUrl:fourthURL];
+        [FourthNavigatorView setPassedUrl:self.fourthURL];
         [FourthNavigatorView addtabs:mainButton]; 
     }  
     

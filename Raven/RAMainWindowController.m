@@ -502,8 +502,10 @@
              tps = app; 
         }
     }
-    [[[appList objectAtIndex:[appList indexOfObject:tps]]view]removeFromSuperview];
-    [appList removeObject:tps];
+    if (tps != nil) {
+        [[[appList objectAtIndex:[appList indexOfObject:tps]]view]removeFromSuperview];
+        [appList removeObject:tps];
+    }
     [self resetSmartBarUi];
 }
 

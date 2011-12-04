@@ -13,9 +13,6 @@
 @synthesize thisDelegate; 
 
 -(void)dealloc{
-    [localeTitle release]; 
-    [localeURL release]; 
-    [localInsta release]; 
     [super dealloc];
 }
 -(void)setTitle:(NSString *)title URL:(NSString *)URL

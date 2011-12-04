@@ -210,9 +210,9 @@
     [[newtab address]selectText:self];
     
     //if the passed URL value is different of nil then load it in the webview 
-    if (_PassedUrl != nil) {
+    if (self.PassedUrl != nil) {
         [newtab setIsNewTab:NO]; 
-        [newtab loadWithUrl:_PassedUrl]; 
+        [newtab loadWithUrl:self.PassedUrl]; 
 
     }
     //if null then inti the webview with tthe welcom page
@@ -260,7 +260,7 @@
     [item release]; 
     [newtab release]; 
     [self redrawTabs:NO];
-    _PassedUrl = nil; 
+    self.PassedUrl = nil; 
     [[NSNotificationCenter defaultCenter]postNotificationName:UPDATE_TAB_NUMBER object:nil];
     
 }

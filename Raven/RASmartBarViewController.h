@@ -21,17 +21,12 @@
 @interface RASmartBarViewController : NSViewController <RASBAPPMainButtonDelegate>
 {
     id<RASmartBarViewControllerDelegate> delegate;
-    NSImage *mainIcon; 
-    NSImage *firstIcon; 
-    NSImage *secondIcon; 
-    NSImage *thirdIcon; 
-    NSImage *fourthIcon; 
-    NSString *folderName; 
-    NSString *appName; 
-    NSString *firstURL; 
-    NSString *secondURL; 
-    NSString *thirdURL; 
-    NSString *fourthURL; 
+    NSString *_folderName; 
+    NSString *_appName; 
+    NSString *_firstURL; 
+    NSString *_secondURL; 
+    NSString *_thirdURL; 
+    NSString *_fourthURL; 
     NSInteger *type; 
     int _state;
     int _selectedButton; 
@@ -54,7 +49,6 @@
     IBOutlet RASmartBarButton *thirdButton;
     IBOutlet RASmartBarButton *fourthButton;
     IBOutlet NSButton *closeAppButton; 
-    
     
     IBOutlet NSImageView *badgeView; 
     IBOutlet NSImageView *lightVIew; 
@@ -101,6 +95,12 @@
 @property int state;
 @property int appNumber;
 @property int localPlistIndex; 
+@property (nonatomic, copy) NSString *firstURL; 
+@property (nonatomic, copy) NSString *secondURL; 
+@property (nonatomic, copy) NSString *thirdURL; 
+@property (nonatomic, copy) NSString *fourthURL; 
+@property (nonatomic, copy) NSString *folderName; 
+@property (nonatomic, copy) NSString *appName; 
 @end
 
 @protocol RASmartBarViewControllerDelegate

@@ -11,19 +11,28 @@
 #import "LTInstapaperAPI.h"
 #import "EMKeychainItem.h"
 #import "RACookieWindowController.h"
+#import <WebKit/WebKit.h>
 
 @interface RASettingWindowController : NSWindowController <NSWindowDelegate, NSToolbarDelegate, NSTabViewDelegate, LTInstapaperAPIDelegate>
 {
     IBOutlet NSToolbar *toolbar; 
     IBOutlet NSTabView *tabview; 
     IBOutlet NSPopUpButton *removeHistoryButton;
-    IBOutlet NSPopUpButton *fontButton; 
+    IBOutlet NSPopUpButton *fontStandardButton; 
+    IBOutlet NSPopUpButton *fontStandardSizeButton; 
+    IBOutlet NSPopUpButton *fontFixedButton; 
+    IBOutlet NSPopUpButton *fontFixedSizeButton; 
     NSMutableArray *fontlist; 
     IBOutlet NSTextField *instapaperLogin; 
     IBOutlet NSTextField *instapaperPassword; 
     IBOutlet NSProgressIndicator *isCheckingForInstapaperLogin; 
     IBOutlet NSTextField *ravenAsDefault; 
     IBOutlet NSTextField *numberOfCookies; 
+    IBOutlet NSButton *adblockButton;
+    IBOutlet NSButton *javascriptButton; 
+    IBOutlet NSButton *javaButton; 
+    IBOutlet NSButton *pluginButton; 
+    IBOutlet NSButton *popupButton; 
     LTInstapaperAPI *insta; 
     RACookieWindowController *cookiesWindow;
 
@@ -49,4 +58,13 @@
 -(IBAction)createInstapaperAccount:(id)sender;
 -(IBAction)setAsDefaultBrowser:(id)sender;
 -(IBAction)openCookiesManager:(id)sender; 
+-(IBAction)adblock:(id)sender; 
+-(IBAction)setFontStandardSize:(id)sender;
+-(IBAction)setFontStandardStyle:(id)sender;
+-(IBAction)setFontFixedSize:(id)sender;
+-(IBAction)setFontFixedStyle:(id)sender;
+-(IBAction)javascript:(id)sender; 
+-(IBAction)java:(id)sender;
+-(IBAction)plugin:(id)sender;
+-(IBAction)popup:(id)sender;
 @end

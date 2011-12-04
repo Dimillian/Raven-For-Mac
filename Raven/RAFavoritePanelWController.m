@@ -40,6 +40,7 @@
 -(void)dealloc
 {
     [instapaper setThisDelegate:nil];
+    [instapaper release]; 
     [super dealloc]; 
 }
 

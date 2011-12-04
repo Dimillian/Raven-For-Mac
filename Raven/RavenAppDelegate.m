@@ -17,10 +17,6 @@
 #define store_url @"http://start.raven.io"
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {    
-    
-   // NSDictionary *defaultsDict = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
-   // for (NSString *key in [defaultsDict allKeys])
-    //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
     RADatabaseController *controler = [RADatabaseController sharedUser];
     [controler checkAndCreateDatabase];
     [controler vacuum];
@@ -28,9 +24,7 @@
     [downloadCenter checkAndCreatePlist];
     [downloadCenter release];
     growlDispatcher = [[RAGrowlDispatcher alloc]init];
-    //[downloadCenter writeDownloadInplist]; 
     mainWindowArray = [[NSMutableArray alloc]init]; 
-     //NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
     //Take care of the default setting
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
 	if (standardUserDefaults) 
@@ -81,6 +75,47 @@
             }
             if ([standardUserDefaults objectForKey:ADBLOCK_CSS] == nil) {
                 [standardUserDefaults setInteger:0 forKey:ADBLOCK_CSS]; 
+            }
+            //We use this key to define default webpreference setting
+            if ([standardUserDefaults objectForKey:JAVA_WEBVIEW] == nil) {
+                [standardUserDefaults setInteger:1 forKey:JAVA_WEBVIEW]; 
+                WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
+                [myPreference setDefaultFontSize:16];
+                [myPreference setDefaultFixedFontSize:13];
+                [myPreference setSerifFontFamily:@"Times"];
+                [myPreference setSansSerifFontFamily:@"Helvetica"];
+                [myPreference setStandardFontFamily:@"Times"]; 
+                [myPreference setFixedFontFamily:@"Courier"];
+                [myPreference setUserStyleSheetEnabled:NO];
+                [myPreference setJavaEnabled:YES];
+                [myPreference setJavaScriptEnabled:YES];
+                [myPreference setPlugInsEnabled:YES];
+                [myPreference setUsesPageCache:NO];
+                [myPreference setJavaScriptCanOpenWindowsAutomatically:NO];
+                [myPreference setAutosaves:YES];
+                [myPreference release];
+
+            }
+            if ([standardUserDefaults objectForKey:JAVASCRIPT_WEBVIEW] == nil) {
+                [standardUserDefaults setInteger:1 forKey:JAVASCRIPT_WEBVIEW]; 
+            }
+            if ([standardUserDefaults objectForKey:PLUGIN_WEBVIEW] == nil) {
+                [standardUserDefaults setInteger:1 forKey:PLUGIN_WEBVIEW]; 
+            }
+            if ([standardUserDefaults objectForKey:BLOCKPOPUP_WEBVIEW] == nil) {
+                [standardUserDefaults setInteger:1 forKey:BLOCKPOPUP_WEBVIEW]; 
+            }
+            if ([standardUserDefaults objectForKey:FONTSIZESTANDARD_WEBVIEW] == nil) {
+                [standardUserDefaults setInteger:3 forKey:FONTSIZESTANDARD_WEBVIEW]; 
+            }
+            if ([standardUserDefaults objectForKey:FONTFAMILYSTANDARD_WEBVIEW] == nil) {
+                [standardUserDefaults setObject:@"Times" forKey:FONTFAMILYSTANDARD_WEBVIEW]; 
+            }
+            if ([standardUserDefaults objectForKey:FONTSIZEFIXED_WEBVIEW] == nil) {
+                [standardUserDefaults setInteger:0 forKey:FONTSIZEFIXED_WEBVIEW]; 
+            }
+            if ([standardUserDefaults objectForKey:FONTFAMILYFIXED_WEBVIEW] == nil) {
+                [standardUserDefaults setObject:@"Courier" forKey:FONTFAMILYFIXED_WEBVIEW]; 
             }
             //enable web inspector for webview, we are a browser afterall
             if  ([standardUserDefaults objectForKey:@"WebKitDeveloperExtras"] == nil){

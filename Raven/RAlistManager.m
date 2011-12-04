@@ -10,7 +10,7 @@
 #import "RavenAppDelegate.h"
 #import "RAHiddenWindow.h"
 @implementation RAlistManager
-@synthesize downloadPath;
+@synthesize downloadPath = _downloadPath, destinationPath = _destinationPath;
 static RAlistManager *sharedUserManager = nil;
 
 #pragma mark Singleton management
@@ -162,9 +162,9 @@ static RAlistManager *sharedUserManager = nil;
 //Fired by the download view, once app unziped, delete the zip
 -(void)installApp
 {
-    [self UnzipFile:downloadPath];
+    [self UnzipFile:self.downloadPath];
     NSFileManager *fileManager = [NSFileManager defaultManager]; 
-    [fileManager removeItemAtPath:downloadPath error:nil];
+    [fileManager removeItemAtPath:self.downloadPath error:nil];
 
 }
 
@@ -172,12 +172,12 @@ static RAlistManager *sharedUserManager = nil;
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     NSFileManager *fileManager = [NSFileManager defaultManager]; 
     if (returnCode == NSAlertFirstButtonReturn) {
-        [self importAppAthPath:destinationPath];
-        [fileManager removeItemAtPath:destinationPath error:nil];
+        [self importAppAthPath:self.destinationPath];
+        [fileManager removeItemAtPath:self.destinationPath error:nil];
     }
     else
     {
-       [fileManager removeItemAtPath:destinationPath error:nil];  
+       [fileManager removeItemAtPath:self.destinationPath error:nil];  
     }
 }
 
@@ -185,24 +185,22 @@ static RAlistManager *sharedUserManager = nil;
 - (void)UnzipFile:(NSString*)sourcePath
 {
     NSString *downloadFolder = [@"~/Downloads" stringByExpandingTildeInPath];
-    destinationPath = [sourcePath stringByReplacingOccurrencesOfString:@".zip" withString:@""];
+    self.destinationPath = [sourcePath stringByReplacingOccurrencesOfString:@".zip" withString:@""];
     NSTask    *unzip = [[[NSTask alloc] init] autorelease];
     [unzip setLaunchPath:@"/usr/bin/unzip"];
     [unzip setArguments:[NSArray arrayWithObjects:@"-o", sourcePath, @"-d", downloadFolder, nil]];
     [unzip launch];
     [unzip waitUntilExit];
-    BOOL success = [self checkifAppIsValide:destinationPath]; 
+    BOOL success = [self checkifAppIsValide:self.destinationPath]; 
     if (success) {
-        NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", destinationPath];
-        [destinationPath retain];
+        NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", self.destinationPath];
         NSDictionary*dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
         NSString *appname = [NSString stringWithFormat:@"Would you like to install this web app? %@",[dict objectForKey:PLIST_KEY_APPNAME]];
         NSAlert *alert = [[NSAlert alloc]init];
         [alert setMessageText:appname];
         [alert setInformativeText:@"If you already have this app installed it will just be replaced and updated"];
         NSImage *icon = [[NSImage alloc]initWithContentsOfFile:
-                         [NSString stringWithFormat:@"%@/main.png", destinationPath]];
-        [destinationPath retain];
+                         [NSString stringWithFormat:@"%@/main.png", self.destinationPath]];
         [alert setIcon:icon];
         //[alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
         //call the alert and check the selected button

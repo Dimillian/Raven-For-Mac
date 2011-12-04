@@ -27,7 +27,7 @@
     [tabview release]; 
     [removeHistoryButton release]; 
     [fontlist release]; 
-    [fontButton release];
+    [fontStandardButton release];
     [instapaperLogin release];
     [instapaperPassword release]; 
     [insta release];
@@ -51,18 +51,38 @@
     [toolbar setSelectedItemIdentifier:@"general"]; 
     //put the setting for preferred url in a var
     //Set the initial window setting
-	if (standardUserDefaults) 
-        {
+	if (standardUserDefaults) {
         [removeHistoryButton selectItemAtIndex:[standardUserDefaults integerForKey:REMOVE_HISTORY_BUTTON]];
-            if ([standardUserDefaults objectForKey:LOGIN_INSTAPAPER] != nil)
-            {
-                [instapaperLogin setStringValue:[standardUserDefaults stringForKey:LOGIN_INSTAPAPER]];
-                EMGenericKeychainItem *key = [EMGenericKeychainItem genericKeychainItemForService:@"raven.instapaper" withUsername:[instapaperLogin stringValue]];
+        if ([standardUserDefaults objectForKey:LOGIN_INSTAPAPER] != nil)
+        {
+            [instapaperLogin setStringValue:[standardUserDefaults stringForKey:LOGIN_INSTAPAPER]];
+            EMGenericKeychainItem *key = [EMGenericKeychainItem genericKeychainItemForService:@"raven.instapaper" withUsername:[instapaperLogin stringValue]];
             if (key.password != nil) {
                 [instapaperPassword setStringValue:key.password];
             }
-            }
         }
+        if ([standardUserDefaults objectForKey:FONTFAMILYSTANDARD_WEBVIEW] != nil) {
+            fontlist = [[NSMutableArray alloc]
+                        initWithArray:[[NSFontManager sharedFontManager]
+                                       availableFontFamilies]];
+            [fontlist sortUsingSelector:@selector(caseInsensitiveCompare:)];
+            [fontStandardButton removeAllItems];
+            [fontStandardButton addItemsWithTitles:fontlist];
+            [fontlist release];
+            [fontStandardButton selectItemWithTitle:[standardUserDefaults objectForKey:FONTFAMILYSTANDARD_WEBVIEW]];
+            
+        }
+        if ([standardUserDefaults objectForKey:FONTFAMILYFIXED_WEBVIEW] != nil) {
+            fontlist = [[NSMutableArray alloc]
+                        initWithArray:[[NSFontManager sharedFontManager]
+                                       availableFontFamilies]];
+            [fontlist sortUsingSelector:@selector(caseInsensitiveCompare:)];
+            [fontFixedButton removeAllItems];
+            [fontFixedButton addItemsWithTitles:fontlist];
+            [fontlist release];
+            [fontFixedButton selectItemWithTitle:[standardUserDefaults objectForKey:FONTFAMILYFIXED_WEBVIEW]];
+        }
+    }
     
     //check the default browser
     CFStringRef defaultHandler = LSCopyDefaultHandlerForURLScheme((CFStringRef)@"http");
@@ -72,8 +92,7 @@
         [ravenAsDefault setTextColor:[NSColor blackColor]]; 
         
     }
-    else
-    {
+    else{
         [ravenAsDefault setStringValue:
          NSLocalizedString(@"Raven is not your default browser", @"RavenIsNotDefaultBrowser")];
         [ravenAsDefault setTextColor:[NSColor blackColor]];
@@ -81,18 +100,12 @@
     [defaultHandlerString release]; 
 
     //set the font list
-    fontlist = [[NSMutableArray alloc]
-                initWithArray:[[NSFontManager sharedFontManager]
-                                availableFontFamilies]];
-    [fontlist sortUsingSelector:@selector(caseInsensitiveCompare:)];
-    [fontButton removeAllItems];
-    [fontButton addItemsWithTitles:fontlist];
-    [fontlist release];
-    
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage]cookies];
     [numberOfCookies setStringValue:[NSString stringWithFormat:@"Total number of cookies stored: %d", [cookies count]]];
     
     cookiesWindow = [[RACookieWindowController alloc]init];
+    
+    
 }
 
 -(void)setFirstTab:(id)sender
@@ -293,5 +306,107 @@
     [workspace openURL:[NSURL URLWithString:@"http://instapaper.com"]]; 
     
 }
+
+-(void)adblock:(id)sender
+{
+    WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
+    [myPreference setAutosaves:YES];
+    if (adblockButton.state == 1) {
+        [myPreference setUserStyleSheetLocation:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"userContent"
+                                                                                                       ofType:@"css"]]];
+        [myPreference setUserStyleSheetEnabled:YES]; 
+    }
+    else{
+        [myPreference setUserStyleSheetEnabled:NO];
+    }
+    [myPreference release]; 
+}
+
+
+-(void)java:(id)sender
+{
+    WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
+    [myPreference setAutosaves:YES];
+    if (javaButton.state == 1) {
+        [myPreference setJavaEnabled:YES];
+    }
+    else{
+        [myPreference setJavaEnabled:NO];
+    }
+    [myPreference release]; 
+}
+
+-(void)javascript:(id)sender
+{
+    WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
+    [myPreference setAutosaves:YES];
+    if (javascriptButton.state == 1) {
+        [myPreference setJavaScriptEnabled:YES];
+    }
+    else{
+        [myPreference setJavaScriptEnabled:NO];
+    }
+    [myPreference release]; 
+}
+
+-(void)plugin:(id)sender
+{
+    WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
+    [myPreference setAutosaves:YES];
+    if (pluginButton.state == 1) {
+        [myPreference setPlugInsEnabled:YES];
+    }
+    else{
+        [myPreference setPlugInsEnabled:NO];
+    }
+    [myPreference release]; 
+}
+
+-(void)popup:(id)sender
+{
+    WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
+    [myPreference setAutosaves:YES];
+    if (popupButton.state == 1) {
+        [myPreference setJavaScriptCanOpenWindowsAutomatically:NO];
+    }
+    else{
+        [myPreference setJavaScriptCanOpenWindowsAutomatically:YES];
+    }
+    [myPreference release]; 
+}
+
+-(void)setFontStandardSize:(id)sender
+{
+    WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
+    [myPreference setAutosaves:YES];
+    [myPreference setDefaultFontSize:[fontStandardSizeButton selectedTag]];
+    [myPreference release];  
+}
+
+-(void)setFontStandardStyle:(id)sender
+{
+    WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
+    [myPreference setAutosaves:YES];
+    [myPreference setStandardFontFamily:fontStandardButton.selectedItem.title];
+    [myPreference release]; 
+}
+
+-(void)setFontFixedSize:(id)sender
+{
+    WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
+    [myPreference setAutosaves:YES];
+    [myPreference setDefaultFixedFontSize:[fontFixedSizeButton selectedTag]];
+    [myPreference release];  
+}
+
+-(void)setFontFixedStyle:(id)sender
+{
+    WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
+    [myPreference setAutosaves:YES];
+    [myPreference setFixedFontFamily:fontFixedButton.selectedItem.title];
+    [myPreference release]; 
+}
+    
+
 
 @end

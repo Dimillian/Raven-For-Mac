@@ -62,22 +62,11 @@
 }
 -(void)awakeFromNib
 {  
-    WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"]; 
-    [myPreference setUsesPageCache:NO]; 
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-	if (standardUserDefaults) 
-    {
-        if ([standardUserDefaults integerForKey:ADBLOCK_CSS] == 1) {
-            [myPreference setUserStyleSheetLocation:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"userContent"
-                                                                                                 ofType:@"css"]]];
-            [myPreference setUserStyleSheetEnabled:YES]; 
-        }
-        else
-        {
-            [myPreference setUserStyleSheetEnabled:NO]; 
-        }
-    }
-    
+    WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
+    [myPreference setAutosaves:YES];
+    [webview setPreferences:myPreference];
+    [myPreference release];
+  
     [self setDesktopUserAgent];
     //register history item
     [self setDoRegisterHistory:2];
@@ -93,15 +82,12 @@
     [webview setResourceLoadDelegate:self]; 
     [webview setFrameLoadDelegate:self]; 
     [webview setPolicyDelegate:self]; 
-    [webview setPreferences:myPreference]; 
-    [[webview preferences]setDefaultFontSize:16];
     [webview setMaintainsBackForwardList:YES]; 
     NSImage *homeicon = [NSImage imageNamed:@"welcome-favicon.png"]; 
     
     [temp setImage:homeicon];     
     [tabButtonTab setToolTip:[self title]]; 
     
-    [myPreference release]; 
     isNewTab = YES; 
     
     [progressMain setMinValue:0.0]; 

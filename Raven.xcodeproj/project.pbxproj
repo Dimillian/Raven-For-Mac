@@ -1124,7 +1124,7 @@
 				9F889947146813DF00BBA017 /* other */,
 				9FC3B79B14038C5500E28D71 /* Windows */,
 				69F4485F138A24B300432BC7 /* Main Views Controller */,
-				9F69AB6F14272A79003AE44B /* Delegate */,
+				9F69AB6F14272A79003AE44B /* PureDelegate */,
 				69F4485E138A249000432BC7 /* Reusable Subclass */,
 				9F03B6CE1402D8EF00985D32 /* Bookmark cell */,
 				6967C3EB13995A17004B8AAB /* History Cell */,
@@ -1251,7 +1251,7 @@
 			name = "setting window";
 			sourceTree = "<group>";
 		};
-		9F69AB6F14272A79003AE44B /* Delegate */ = {
+		9F69AB6F14272A79003AE44B /* PureDelegate */ = {
 			isa = PBXGroup;
 			children = (
 				9F8A1CCA13FD9E9B00DD291C /* RavenAppDelegate.h */,
@@ -1259,7 +1259,7 @@
 				9F79C1E113D0CA160039A1CB /* RANSURLDownloadDelegate.h */,
 				9F79C1E213D0CA160039A1CB /* RANSURLDownloadDelegate.m */,
 			);
-			name = Delegate;
+			name = PureDelegate;
 			sourceTree = "<group>";
 		};
 		9F70414713C658B40068C85F /* Home Screen */ = {

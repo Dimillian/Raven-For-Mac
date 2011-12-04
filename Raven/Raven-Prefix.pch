@@ -22,6 +22,14 @@
 #define OPPENED_TABS_BADGE @"OpennedTabsBadge"
 #define SHOW_FAVICON_TAB @"showFavicon"
 #define ADBLOCK_CSS @"adblockCss"
+#define JAVASCRIPT_WEBVIEW @"javascriptEnabled"
+#define JAVA_WEBVIEW @"javaEnabled"
+#define PLUGIN_WEBVIEW @"pluginEnabled"
+#define BLOCKPOPUP_WEBVIEW @"popupEnabled"
+#define FONTSIZESTANDARD_WEBVIEW @"fontSize"
+#define FONTSIZEFIXED_WEBVIEW @"fontSizeFixed"
+#define FONTFAMILYSTANDARD_WEBVIEW @"fontFamily"
+#define FONTFAMILYFIXED_WEBVIEW @"fontFamilyFixed"
 
 //notifications
 #define DOWNLOAD_BEGIN @"downloadDidBegin"

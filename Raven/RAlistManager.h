@@ -10,8 +10,8 @@
 
 @interface RAlistManager : NSObject
 {
-    NSString *downloadPath;
-    NSString *destinationPath;
+    NSString *_downloadPath;
+    NSString *_destinationPath;
     NSMutableArray *appPlistArray; 
     NSMutableDictionary *appPlistDictionnary;
 }
@@ -32,5 +32,6 @@
 -(void)swapObjectAtIndex:(NSInteger)index upOrDown:(NSInteger)order;
 -(void)moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to;
 -(void)deleteAppAtIndex:(NSInteger)index;
-@property (copy) NSString *downloadPath;
+@property (nonatomic, copy) NSString *downloadPath;
+@property (nonatomic, copy) NSString *destinationPath; 
 @end

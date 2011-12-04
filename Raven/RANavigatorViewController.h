@@ -55,7 +55,7 @@
 -(void)resetAllTabsButon; 
 
 @property int fromOtherViews;
-@property (nonatomic, assign) NSString *PassedUrl;
+@property (nonatomic, copy) NSString *PassedUrl;
 @property (nonatomic, assign) NSMutableArray *tabsArray; 
 
 
