@@ -77,24 +77,10 @@
                 [standardUserDefaults setInteger:0 forKey:ADBLOCK_CSS]; 
             }
             //We use this key to define default webpreference setting
+            //Only done one time at first launch
             if ([standardUserDefaults objectForKey:JAVA_WEBVIEW] == nil) {
                 [standardUserDefaults setInteger:1 forKey:JAVA_WEBVIEW]; 
-                WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
-                [myPreference setDefaultFontSize:16];
-                [myPreference setDefaultFixedFontSize:13];
-                [myPreference setSerifFontFamily:@"Times"];
-                [myPreference setSansSerifFontFamily:@"Helvetica"];
-                [myPreference setStandardFontFamily:@"Times"]; 
-                [myPreference setFixedFontFamily:@"Courier"];
-                [myPreference setUserStyleSheetEnabled:NO];
-                [myPreference setJavaEnabled:YES];
-                [myPreference setJavaScriptEnabled:YES];
-                [myPreference setPlugInsEnabled:YES];
-                [myPreference setUsesPageCache:NO];
-                [myPreference setJavaScriptCanOpenWindowsAutomatically:NO];
-                [myPreference setAutosaves:YES];
-                [myPreference release];
-
+                [self setDefaultWebPreference];
             }
             if ([standardUserDefaults objectForKey:JAVASCRIPT_WEBVIEW] == nil) {
                 [standardUserDefaults setInteger:1 forKey:JAVASCRIPT_WEBVIEW]; 
@@ -149,10 +135,30 @@
         
 }
 
+-(void)setDefaultWebPreference
+{
+    WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
+    [myPreference setDefaultFontSize:16];
+    [myPreference setDefaultFixedFontSize:13];
+    [myPreference setSerifFontFamily:@"Times"];
+    [myPreference setSansSerifFontFamily:@"Helvetica"];
+    [myPreference setStandardFontFamily:@"Times"]; 
+    [myPreference setFixedFontFamily:@"Courier"];
+    [myPreference setUserStyleSheetEnabled:NO];
+    [myPreference setJavaEnabled:YES];
+    [myPreference setJavaScriptEnabled:YES];
+    [myPreference setPlugInsEnabled:YES];
+    [myPreference setUsesPageCache:NO];
+    [myPreference setJavaScriptCanOpenWindowsAutomatically:NO];
+    [myPreference setAutosaves:YES];
+    [myPreference release];
+}
+
 -(void)applicationWillTerminate:(NSNotification *)notification
 {
     RAlistManager *listManager = [RAlistManager sharedUser]; 
     [listManager writeNewAppListInMemory:nil writeToFile:YES]; 
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 -(NSMenu *)applicationDockMenu:(NSApplication *)sender

@@ -217,6 +217,7 @@
 		9F540919143F4B570000D46D /* badge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F540918143F4B570000D46D /* badge.png */; };
 		9F54091D143F60FF0000D46D /* RABadgeField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F54091C143F60FF0000D46D /* RABadgeField.m */; };
 		9F5BF675143CEDB20033E18B /* NSString+Raven.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5BF674143CEDB20033E18B /* NSString+Raven.m */; };
+		9F634B83148E8C8C005AAE43 /* RASmartBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F634B82148E8C8C005AAE43 /* RASmartBarItem.m */; };
 		9F6B90D413D7722E006277E3 /* plus-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F6B90D213D7722E006277E3 /* plus-off.png */; };
 		9F6B90D513D7722E006277E3 /* plus-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F6B90D313D7722E006277E3 /* plus-on.png */; };
 		9F6C54D3144C9ABB00CE1AD9 /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F6C54D2144C9ABB00CE1AD9 /* shadow.png */; };
@@ -605,6 +606,8 @@
 		9F54091C143F60FF0000D46D /* RABadgeField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RABadgeField.m; sourceTree = "<group>"; };
 		9F5BF673143CEDB20033E18B /* NSString+Raven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Raven.h"; sourceTree = "<group>"; };
 		9F5BF674143CEDB20033E18B /* NSString+Raven.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Raven.m"; sourceTree = "<group>"; };
+		9F634B81148E8C8B005AAE43 /* RASmartBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RASmartBarItem.h; sourceTree = "<group>"; };
+		9F634B82148E8C8C005AAE43 /* RASmartBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RASmartBarItem.m; sourceTree = "<group>"; };
 		9F6B90D213D7722E006277E3 /* plus-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-off.png"; sourceTree = "<group>"; };
 		9F6B90D313D7722E006277E3 /* plus-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-on.png"; sourceTree = "<group>"; };
 		9F6C54D2144C9ABB00CE1AD9 /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
@@ -1206,6 +1209,8 @@
 				9F2F458D140D198C00BAB731 /* RASmartBarViewController.xib */,
 				9F16852E1431AC5E00C112A1 /* RAlistManager.h */,
 				9F16852F1431AC5E00C112A1 /* RAlistManager.m */,
+				9F634B81148E8C8B005AAE43 /* RASmartBarItem.h */,
+				9F634B82148E8C8C005AAE43 /* RASmartBarItem.m */,
 			);
 			name = SmartBarFork;
 			sourceTree = "<group>";
@@ -1975,6 +1980,7 @@
 				9FEF2AAF147EEF19007BC286 /* RASBAPPMainButton.m in Sources */,
 				9FEF2AB8147F8D82007BC286 /* RASmartBarHolderView.m in Sources */,
 				9F37D77F148689EB0011B90F /* PXListView+UserInteraction.m in Sources */,
+				9F634B83148E8C8C005AAE43 /* RASmartBarItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

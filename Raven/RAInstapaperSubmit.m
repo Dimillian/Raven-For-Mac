@@ -10,15 +10,15 @@
 #import "RavenAppDelegate.h"
 
 @implementation RAInstapaperSubmit
-@synthesize thisDelegate; 
+@synthesize thisDelegate, localURL = _localURL, localTitle = _localTitle; 
 
 -(void)dealloc{
     [super dealloc];
 }
 -(void)setTitle:(NSString *)title URL:(NSString *)URL
 {
-    localeTitle = title; 
-    localeURL = URL; 
+    self.localTitle = title; 
+    self.localURL = URL; 
     
 }
 -(void)submitToInsta
@@ -68,7 +68,7 @@
 
 -(void)succeeded
 {
-    [localInsta addURL:localeURL title:localeTitle]; 
+    [localInsta addURL:self.localURL title:self.localTitle]; 
 }
 
 

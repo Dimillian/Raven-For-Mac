@@ -36,8 +36,7 @@
 //[[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
 
 @implementation RASmartBarViewController
-@synthesize state = _state, delegate, selectedButton = _selectedButton, appNumber = _appNumber, localArrayIndex = _localArrayIndex, localPlistIndex = _localPlistIndex, firstURL = _firstURL, secondURL = _secondURL, thirdURL = _thirdURL, fourthURL = _fourthURL, appName = _appName, folderName = _folderName; 
-
+@synthesize state = _state, delegate, selectedButton = _selectedButton, localArrayIndex = _localArrayIndex, smartBarItem = _smartBarItem;
 
 #pragma mark -
 #pragma mark init and dealloc
@@ -62,21 +61,17 @@
     {
         [self initWithNibName:@"RASmartBarViewController" bundle:nil]; 
         delegate = dgate;
-        NSArray *URL = [dictionnary objectForKey:PLIST_KEY_URL];
-        _localArrayIndex = localIndex; 
-        _localPlistIndex = globalIndex; 
-        self.folderName = [dictionnary objectForKey:PLIST_KEY_FOLDER];
+        _localArrayIndex = localIndex;
         _state = [[dictionnary objectForKey:PLIST_KEY_ENABLE]intValue];
-        self.firstURL = [URL objectAtIndex:0];
-        self.secondURL = [URL objectAtIndex:1]; 
-        self.thirdURL = [URL objectAtIndex:2]; 
-        self.fourthURL = [URL objectAtIndex:3];
-        
-        firstNavigatorView = [[RANavigatorViewController alloc]init];
-        SecondNavigatorView = [[RANavigatorViewController alloc]init];
-        ThirdtNavigatorView = [[RANavigatorViewController alloc]init];
-        FourthNavigatorView = [[RANavigatorViewController alloc]init];
 
+        
+        _smartBarItem = [[RASmartBarItem alloc]initWithAppName:[dictionnary objectForKey:PLIST_KEY_APPNAME] 
+                                               withFolderName:[dictionnary objectForKey:PLIST_KEY_FOLDER] 
+                                                 withUrlArray:[dictionnary objectForKey:PLIST_KEY_URL] 
+                                                andPlistIndex:globalIndex];
+        buttonArray = [[NSMutableArray alloc]init];
+        tabNumberFieldArray = [[NSMutableArray alloc]init];
+                
     }
     
     return self;  
@@ -84,16 +79,9 @@
 
 -(void)dealloc
 {
-    [firstNavigatorView release]; 
-    [SecondNavigatorView release]; 
-    [ThirdtNavigatorView release]; 
-    [FourthNavigatorView release];
-    [_firstURL release]; 
-    [_secondURL release]; 
-    [_thirdURL release]; 
-    [_fourthURL release]; 
-    [_folderName release]; 
-    [_appName release]; 
+    [buttonArray release]; 
+    [tabNumberFieldArray release]; 
+    [_smartBarItem release]; 
     [[NSNotificationCenter defaultCenter]removeObserver:self];
     [super dealloc];
 }
@@ -101,63 +89,48 @@
 
 -(void)awakeFromNib
 {
+    [mainButton setImage:_smartBarItem.mainIcon]; 
     
+    NSUInteger i = 0; 
+    for (NSString *URL in _smartBarItem.URLArray) {
+        RASmartBarButton *aButton = [[RASmartBarButton alloc]initWithFrame:NSMakeRect(button_x, button_x, button_w, button_h)];
+        NSTextField *aField = [[NSTextField alloc]init]; 
+        [aButton setImage:[_smartBarItem.buttonImageArrayOff objectAtIndex:i]]; 
+        [aButton setAlternateImage:[_smartBarItem.buttonImageArrayOn objectAtIndex:i]]; 
+        [aButton setTag:i];
+        [aButton setTarget:self]; 
+        [aButton setAction:@selector(buttonDidClicked:)]; 
+        [aButton setButtonType:NSSwitchButton];
+        [aButton setTitle:nil]; 
+        [aButton setToolTip:_smartBarItem.appName]; 
+        
+        [aField setEditable:NO];
+        [aField setDrawsBackground:NO];
+        [aField setFocusRingType:0];
+        [aField setBordered:NO]; 
+        [aField setRefusesFirstResponder:YES]; 
+        [aField setTextColor:[NSColor disabledControlTextColor]];
+        [aField setFont:[NSFont fontWithName:@"Helvetica" size:11]];
+        [aField setAlignment:NSCenterTextAlignment];
+        [self.view addSubview:aButton];
+        [self.view addSubview:aField];
+        [buttonArray addObject:aButton]; 
+        [tabNumberFieldArray addObject:aField]; 
+        [aButton release]; 
+        [aField release]; 
+        i++;
+    }
+
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
                                                 name:UPDATE_TAB_NUMBER 
                                               object:nil];
 
-    
     _state = 0;
-    _selectedButton = 1; 
+    _selectedButton = 0; 
 
     [mainButton setDelegate:self];
     [closeAppButton setAlphaValue:0.0]; 
-
-    NSString *homeButtonPath = [NSString stringWithFormat:application_support_path@"%@/main.png", self.folderName];
-    NSString *firstImageOffPath = [NSString stringWithFormat:application_support_path@"%@/1_off.png", self.folderName];
-    NSString *firstImageOnPath = [NSString stringWithFormat:application_support_path@"%@/1_on.png", self.folderName];
-    NSString *secondImageOffPath = [NSString stringWithFormat:application_support_path@"%@/2_off.png", self.folderName]; 
-    NSString *secondImageOnPath = [NSString stringWithFormat:application_support_path@"%@/2_on.png", self.folderName]; 
-    NSString *thirdImageOffPath = [NSString stringWithFormat:application_support_path@"%@/3_off.png", self.folderName]; 
-    NSString *thirdImageOnPath = [NSString stringWithFormat:application_support_path@"%@/3_on.png", self.folderName]; 
-    NSString *fourImageOffPath = [NSString stringWithFormat:application_support_path@"%@/4_off.png", self.folderName]; 
-    NSString *fourImageOnPath = [NSString stringWithFormat:application_support_path@"%@/4_on.png", self.folderName];
-
-    NSImage *homeButtonImage = [[NSImage alloc]initWithContentsOfFile:[homeButtonPath stringByExpandingTildeInPath]];
-    NSImage *firstImageOff = [[NSImage alloc]initWithContentsOfFile:[firstImageOffPath stringByExpandingTildeInPath]];
-    NSImage *firstImageOn = [[NSImage alloc]initWithContentsOfFile:[firstImageOnPath stringByExpandingTildeInPath]];
-    NSImage *secondImageOff = [[NSImage alloc]initWithContentsOfFile:[secondImageOffPath stringByExpandingTildeInPath]];
-    NSImage *secondImageOn = [[NSImage alloc]initWithContentsOfFile:[secondImageOnPath stringByExpandingTildeInPath]];
-    NSImage *thirdImageOff = [[NSImage alloc]initWithContentsOfFile:[thirdImageOffPath stringByExpandingTildeInPath]];
-    NSImage *thirdImageOn = [[NSImage alloc]initWithContentsOfFile:[thirdImageOnPath stringByExpandingTildeInPath]];
-    NSImage *fourImageOff = [[NSImage alloc]initWithContentsOfFile:[fourImageOffPath stringByExpandingTildeInPath]];
-    NSImage *fourImageOn = [[NSImage alloc]initWithContentsOfFile:[fourImageOnPath stringByExpandingTildeInPath]];
-    
-    [mainButton setImage:homeButtonImage]; 
-    
-    [firstButton setImage:firstImageOff];
-    [firstButton setAlternateImage:firstImageOn];
-    
-    [secondButton setImage:secondImageOff];
-    [secondButton setAlternateImage:secondImageOn];
-    
-    [thirdButton setImage:thirdImageOff];
-    [thirdButton setAlternateImage:thirdImageOn];
-    
-    [fourthButton setImage:fourImageOff];
-    [fourthButton setAlternateImage:fourImageOn];
-    
-    [firstImageOff release]; 
-    [firstImageOn release]; 
-    [secondImageOff release]; 
-    [secondImageOn release]; 
-    [thirdImageOff release]; 
-    [thirdImageOn release]; 
-    [fourImageOff release]; 
-    [fourImageOn release]; 
-    [homeButtonImage release]; 
-    [self calculateUrlNumber];
     
 }
 
@@ -169,88 +142,66 @@
 {
     if (_state == 0) {
         [self setSelectedButton];
-        //[[totalTabsNumber animator]setAlphaValue:0.0];
-        //[[badgeView animator]setAlphaValue:0.0];
+        NSUInteger i = 0; 
+        int h_button = 166; 
+        int h_field =  150; 
+         for (NSString *URL in _smartBarItem.URLArray) {
+            RASmartBarButton *abutton = [buttonArray objectAtIndex:i]; 
+             NSTextField *aField = [tabNumberFieldArray objectAtIndex:i];
+            [[abutton animator]setFrame:NSMakeRect(button_x, h_button, button_w, button_h)];
+            [[aField animator]setFrame:NSMakeRect(button_x, h_field, button_w, number_h)];
+            [NSAnimationContext beginGrouping];
+             [[NSAnimationContext currentContext] setDuration:0.4];
+            [[abutton animator]setAlphaValue:1.0]; 
+            [[aField animator]setAlphaValue:1.0]; 
+            [NSAnimationContext endGrouping]; 
+            [abutton setEnabled:YES]; 
+            h_button = h_button - 50; 
+            h_field = h_field - 50; 
+            i++; 
+        }
         [[lightVIew animator]setAlphaValue:0.0];
-        [[firstButton animator]setFrame:NSMakeRect(button_x, 166, button_w, button_h)];
-        [[firstButtonNumber animator]setFrame:NSMakeRect(button_x, 150, button_w, number_h)];
-        [firstButtonNumber setAlphaValue:1.0];
-        [[firstButton animator]setAlphaValue:1.0]; 
-        [[secondButton animator] setFrame:NSMakeRect(button_x, 116, button_w, button_h)]; 
-        [[secondButtonNumber animator]setFrame:NSMakeRect(button_x, 100, button_w, number_h)];
-        [[secondButtonNumber animator]setAlphaValue:1.0];
-        [secondButton setAlphaValue:1.0];
-        [[thirdButton animator]setFrame:NSMakeRect(button_x, 66, button_w, button_h)];
-        [[thirdButtonNumber animator]setFrame:NSMakeRect(button_x, 50, button_w, number_h)];
-        [[thirdButton animator]setAlphaValue:1.0];
-        [thirdButtonNumber setAlphaValue:1.0];
-        [[fourthButton animator]setFrame:NSMakeRect(button_x, 16, button_w, button_h)];
-        [[fourfthButtonNumber animator]setFrame:NSMakeRect(button_x, 0, button_w, number_h)];
-        [[fourthButton animator]setAlphaValue:1.0];
-        [fourfthButtonNumber setAlphaValue:1.0];
-        [firstButton setEnabled:YES];
-        [secondButton setEnabled:YES];
-        [thirdButton setEnabled:YES];
-        [fourthButton setEnabled:YES];
         [[mainButton animator]setAlphaValue:1.0];
         [delegate itemDidExpand:self];
         [self hideCloseAppButton];
         //[delegate selectionDidChange:self];
         _state = 1;
-
-    
     //MainWindowController *mainWindow = [[sender window]windowController]; 
     }
-    
-
 }
 
 //fired to retract app
 -(IBAction)retractApp:(id)sender
-{
-    
-    [[firstButton animator]setFrame:NSMakeRect(button_x, 196, button_w, button_h)]; 
-    [[firstButton animator]setAlphaValue:0.0]; 
-    
+{   
+    [self calculateTotalTab];
     NSUserDefaults *standardDefault = [NSUserDefaults standardUserDefaults];
     if (standardDefault) {
-        if( totalTabs == 0 || [standardDefault integerForKey:OPPENED_TABS_BADGE] == 0)
+        if(totalTabs == 0 || [standardDefault integerForKey:OPPENED_TABS_BADGE] == 0)
         {
-            //[[totalTabsNumber animator]setAlphaValue:0.0];
-            //[[badgeView animator]setAlphaValue:0.0];
             [[lightVIew animator]setAlphaValue:0.0];
         }
         else
         {
-            //[[totalTabsNumber animator]setAlphaValue:1.0];
-            //[[badgeView animator]setAlphaValue:1.0];
             [[lightVIew animator]setAlphaValue:1.0];
         }
     }
-    
-    //[[totalTabsNumber animator]setFrame:NSMakeRect(badge_x-1, badge_y+1, badge_w, number_h)];
-    //[[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
+    NSUInteger i = 0; 
+    int h_button = 196; 
+    int h_field =  196; 
+    for (NSString *URL in _smartBarItem.URLArray) {
+        RASmartBarButton *abutton = [buttonArray objectAtIndex:i]; 
+        NSTextField *aField = [tabNumberFieldArray objectAtIndex:i]; 
+        [[abutton animator]setFrame:NSMakeRect(button_x, h_button, button_w, button_h)];
+        [[aField animator]setFrame:NSMakeRect(button_x, h_field, button_w, number_h)];
+        [abutton setEnabled:NO]; 
+        [[abutton animator]setAlphaValue:0.0]; 
+        [[aField animator]setAlphaValue:0.0]; 
+        h_button = h_button - 50; 
+        h_field = h_field - 50; 
+        i++; 
+    }
     [[closeAppButton animator]setFrame:NSMakeRect(close_x, close_y, close_w, close_h)];
     [[lightVIew animator]setFrame:NSMakeRect(light_x, light_y , light_w, light_h)];
-    [[firstButtonNumber animator]setFrame:NSMakeRect(button_x, 196, button_x, number_h)];
-    [firstButtonNumber setAlphaValue:0.0];
-    [[secondButton animator] setFrame:NSMakeRect(button_x, 196, button_w, button_h)]; 
-    [[secondButton animator]setAlphaValue:0.0]; 
-    [[secondButtonNumber animator]setFrame:NSMakeRect(button_x, 196, button_x, number_h)];
-    [secondButtonNumber setAlphaValue:0.0];
-    [[thirdButton animator]setFrame:NSMakeRect(button_x, 196, button_w, button_h)];
-    [[thirdButton animator]setAlphaValue:0.0]; 
-    [[thirdButtonNumber animator]setFrame:NSMakeRect(button_x, 196, button_x, number_h)];
-    [thirdButtonNumber setAlphaValue:0.0];
-    [[fourthButton animator]setFrame:NSMakeRect(button_x, 196, button_w, button_h)];
-    [[fourthButton animator]setAlphaValue:0.0]; 
-    [[fourfthButtonNumber animator]setFrame:NSMakeRect(button_x, 196, button_x, number_h)];
-    [fourfthButtonNumber setAlphaValue:0.0];
-    
-    [firstButton setEnabled:NO];
-    [secondButton setEnabled:NO];
-    [thirdButton setEnabled:NO];
-    [fourthButton setEnabled:NO];
     [[mainButton animator]setAlphaValue:0.5];
     //[delegate itemDidRetract:self];
     _state = 0;
@@ -258,24 +209,6 @@
 
 #pragma mark -
 #pragma mark other
--(void)calculateUrlNumber{
-    if ([self.secondURL isEqualToString:@""]) {
-        _appNumber = 1; 
-    }
-    else if ([self.thirdURL isEqualToString:@""]){
-        _appNumber = 2; 
-    }
-    else if ([self.fourthURL isEqualToString:@""]){
-        _appNumber = 3;
-    }
-    else
-    {
-        _appNumber = 4; 
-    }
-    
-    
-}
-
 -(void)receiveNotification:(NSNotification *)notification
 {
     [self updateTabsNumber];
@@ -283,111 +216,33 @@
 
 #pragma mark -
 #pragma mark inside button action
--(IBAction)firstItemClicked:(id)sender
+
+-(void)buttonDidClicked:(id)sender
 {
     [self resetAllButton]; 
-    [firstButton setState:1]; 
-    RAMainWindowController *mainWindow = [[sender window]windowController];
+    RASmartBarButton *button = [buttonArray objectAtIndex:[sender tag]];
+    RANavigatorViewController *navController = [_smartBarItem.navigatorViewControllerArray objectAtIndex:[sender tag]];
+    [button setState:1];
+    RAMainWindowController *mainWindow = [[NSApp keyWindow]windowController];
     if ([mainWindow.myCurrentViewController view] != nil)
 		[[mainWindow.myCurrentViewController view] removeFromSuperview];
     
-    if ([[firstNavigatorView tabsArray]count] == 0 || 
-        (_selectedButton == 1 && mainWindow.myCurrentViewController == firstNavigatorView)) {
-        [firstNavigatorView view];
-        [firstNavigatorView setPassedUrl:self.firstURL];
-        [firstNavigatorView addtabs:mainButton]; 
+    if ([[navController tabsArray]count] == 0 || 
+        (_selectedButton == [sender tag] && mainWindow.myCurrentViewController == navController)) {
+        [navController view];
+        [navController setPassedUrl:[_smartBarItem.URLArray objectAtIndex:[sender tag]]];
+        [navController addtabs:mainButton]; 
     }
     
-    if (firstNavigatorView != nil)
+    if (navController != nil)
     {
-        mainWindow.myCurrentViewController = firstNavigatorView;
+        mainWindow.myCurrentViewController = navController;
     }
-    [firstNavigatorView setMenu];
+    [navController setMenu];
     
     [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
     [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
-    _selectedButton = 1;
-}
-
--(IBAction)secondItemClicked:(id)sender
-{
-    [self resetAllButton]; 
-    [secondButton setState:1]; 
-    RAMainWindowController *mainWindow = [[sender window]windowController];
-    if ([mainWindow.myCurrentViewController view] != nil)
-		[[mainWindow.myCurrentViewController view] removeFromSuperview];
-    
-    if ([[SecondNavigatorView tabsArray]count] == 0 || 
-        (_selectedButton == 2 && mainWindow.myCurrentViewController == SecondNavigatorView)) {
-        [SecondNavigatorView view];
-        [SecondNavigatorView setPassedUrl:self.secondURL];
-        [SecondNavigatorView addtabs:mainButton]; 
-    }    
-        
-    if (SecondNavigatorView != nil)
-    {
-        mainWindow.myCurrentViewController = SecondNavigatorView;
-        
-    }
-    [SecondNavigatorView setMenu];
-    [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
-    [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
-    _selectedButton = 2;
-}
-
--(IBAction)thirdItemClicked:(id)sender
-{
-    [self resetAllButton]; 
-    [thirdButton setState:1]; 
-    RAMainWindowController *mainWindow = [[sender window]windowController];
-    if ([mainWindow.myCurrentViewController view] != nil)
-		[[mainWindow.myCurrentViewController view] removeFromSuperview];
-    
-    if ([[ThirdtNavigatorView tabsArray]count] == 0 || 
-        (_selectedButton == 3 && mainWindow.myCurrentViewController == ThirdtNavigatorView)) {
-        [ThirdtNavigatorView view];
-        [ThirdtNavigatorView setPassedUrl:self.thirdURL];
-        [ThirdtNavigatorView addtabs:mainButton]; 
-
-    }    
-    
-    if (ThirdtNavigatorView != nil)
-    {
-        mainWindow.myCurrentViewController = ThirdtNavigatorView;
-        
-    }
-    [ThirdtNavigatorView setMenu];
-    [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
-    [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
-    _selectedButton = 3;
-
-}
-
--(IBAction)fourItemClicked:(id)sender
-{
-    [self resetAllButton]; 
-    [fourthButton setState:1];
-    RAMainWindowController *mainWindow = [[sender window]windowController];
-    if ([mainWindow.myCurrentViewController view] != nil)
-		[[mainWindow.myCurrentViewController view] removeFromSuperview];
-    
-    
-    if ([[FourthNavigatorView tabsArray]count] == 0 || 
-        (_selectedButton == 4 && mainWindow.myCurrentViewController == FourthNavigatorView)) {
-        [FourthNavigatorView view];
-        [FourthNavigatorView setPassedUrl:self.fourthURL];
-        [FourthNavigatorView addtabs:mainButton]; 
-    }  
-    
-    if (FourthNavigatorView != nil)
-    {
-        mainWindow.myCurrentViewController = FourthNavigatorView;
-        
-    }
-    [FourthNavigatorView setMenu];
-    [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
-    [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
-    _selectedButton = 4;
+    _selectedButton = [sender tag];
 }
 
 -(void)closeAppButtonCliced:(id)sender
@@ -397,30 +252,30 @@
         [mainWindow raven:nil];
     }
     
-    [firstNavigatorView release]; 
-    [SecondNavigatorView release]; 
-    [ThirdtNavigatorView release]; 
-    [FourthNavigatorView release]; 
     
-    firstNavigatorView = [[RANavigatorViewController alloc]init];
-    SecondNavigatorView = [[RANavigatorViewController alloc]init];
-    ThirdtNavigatorView = [[RANavigatorViewController alloc]init];
-    FourthNavigatorView = [[RANavigatorViewController alloc]init];
+    [_smartBarItem cleanNavigatorController];
     
     [[lightVIew animator]setAlphaValue:0.0];
     [self hideCloseAppButton]; 
 }
 
 
+-(void)calculateTotalTab
+{
+    totalTabs = 0; 
+    for (RANavigatorViewController *nav in self.smartBarItem.navigatorViewControllerArray) {
+        totalTabs = totalTabs + nav.tabsArray.count; 
+    }
+}
 -(void)updateTabsNumber
 {
-     totalTabs = [[firstNavigatorView tabsArray]count] + [[SecondNavigatorView tabsArray]count] 
-    +[[ThirdtNavigatorView tabsArray]count] + [[FourthNavigatorView tabsArray]count];
-    //[totalTabsNumber setStringValue:[NSString stringWithFormat:@"%d", totalTabs]];
-    [firstButtonNumber setStringValue:[self numberOfDotToDisplay:[firstNavigatorView.tabsArray count]]];
-    [secondButtonNumber setStringValue:[self numberOfDotToDisplay:[SecondNavigatorView.tabsArray count]]];
-    [thirdButtonNumber setStringValue:[self numberOfDotToDisplay:[ThirdtNavigatorView.tabsArray count]]];
-    [fourfthButtonNumber setStringValue:[self numberOfDotToDisplay:[FourthNavigatorView.tabsArray count]]];
+    [self calculateTotalTab];
+    NSUInteger i = 0;
+    for (NSTextField *aField in tabNumberFieldArray){
+        RANavigatorViewController *nav = [_smartBarItem.navigatorViewControllerArray objectAtIndex:i]; 
+        i++;
+        [aField setStringValue:[self numberOfDotToDisplay:nav.tabsArray.count]]; 
+    }
 }
 
 
@@ -453,13 +308,9 @@
 //reset all buttons state for image reset
 -(void)resetAllButton
 {
-    
-    [firstButton setState:0]; 
-    [secondButton setState:0]; 
-    [thirdButton setState:0]; 
-    [fourthButton setState:0]; 
-
-
+    for (RASmartBarButton *button in buttonArray) {
+        [button setState:0];
+    }
 }
 
 -(void)hideCloseAppButton
@@ -470,13 +321,12 @@
 
 -(void)showCloseAppButton
 {
-    if (firstNavigatorView.tabsArray.count >= 1 ||
-        SecondNavigatorView.tabsArray.count >= 1 ||
-        ThirdtNavigatorView.tabsArray.count >= 1 ||
-        FourthNavigatorView.tabsArray.count >= 1) {
-        
-        [closeAppButton setEnabled:YES];
-        [[closeAppButton animator]setAlphaValue:1.0]; 
+     [self calculateTotalTab];
+    for (RANavigatorViewController *nav in _smartBarItem.navigatorViewControllerArray) {
+        if (nav.tabsArray.count >= 1) {
+            [closeAppButton setEnabled:YES];
+            [[closeAppButton animator]setAlphaValue:1.0]; 
+        }
     }
 }
 
@@ -497,23 +347,8 @@
 //select previously selected button when switching app
 -(void)setSelectedButton
 {
-    switch (_selectedButton) {
-        case 1:
-            [self firstItemClicked:firstButton];
-            break;
-        case 2:
-            [self secondItemClicked:secondButton];
-            break;
-        case 3:
-            [self thirdItemClicked:thirdButton];
-            break;
-        case 4:
-            [self fourItemClicked:fourthButton];
-            break;
-            
-        default:
-            break;
-    }
+    RASmartBarButton *button = [buttonArray objectAtIndex:_selectedButton]; 
+    [self buttonDidClicked:button]; 
 }
 
 #pragma mark -
@@ -558,7 +393,7 @@
         RAMainWindowController *windowController = self.view.window.windowController; 
         [windowController raven:nil];
     }
-    [listManager changeStateOfAppAtIndex:_localPlistIndex withState:0];
+    [listManager changeStateOfAppAtIndex:_smartBarItem.index withState:0];
     [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
 }
 

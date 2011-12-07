@@ -5,61 +5,38 @@
 //  Created by Thomas Ricouard on 30/08/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
-/*
- TODO: Tied user script to an app. Load it at each webview did end loading. Use CM or not
-        Add app URL handler (full domain/subdomain). 
-*/
+
 #import <Cocoa/Cocoa.h>
 #import "RANavigatorViewController.h"
 #import "RASmartBarButton.h"
 #import "RASBAPPMainButton.h"
 #import "RASmartBarHolderView.h"
 #import "RAlistManager.h"
+#import "RASmartBarItem.h"
 
 @class RAMainWindowController; 
 @protocol RASmartBarViewControllerDelegate;
 @interface RASmartBarViewController : NSViewController <RASBAPPMainButtonDelegate>
 {
     id<RASmartBarViewControllerDelegate> delegate;
-    NSString *_folderName; 
-    NSString *_appName; 
-    NSString *_firstURL; 
-    NSString *_secondURL; 
-    NSString *_thirdURL; 
-    NSString *_fourthURL; 
-    NSInteger *type; 
+    RASmartBarItem *_smartBarItem; 
+    NSMutableArray *buttonArray; 
+    NSMutableArray *tabNumberFieldArray; 
     int _state;
     int _selectedButton; 
-    int _localPlistIndex; 
     int _localArrayIndex; 
-    
-    //Navigator hoder
-    RANavigatorViewController *firstNavigatorView;
-    RANavigatorViewController *SecondNavigatorView;
-    RANavigatorViewController *ThirdtNavigatorView;
-    RANavigatorViewController *FourthNavigatorView;
+
     
     //self view outlet
     IBOutlet RASmartBarHolderView *mainView; 
     
     //Button outlet
     IBOutlet RASBAPPMainButton *mainButton; 
-    IBOutlet RASmartBarButton *firstButton; 
-    IBOutlet RASmartBarButton *secondButton; 
-    IBOutlet RASmartBarButton *thirdButton;
-    IBOutlet RASmartBarButton *fourthButton;
     IBOutlet NSButton *closeAppButton; 
     
     IBOutlet NSImageView *badgeView; 
     IBOutlet NSImageView *lightVIew; 
-    
-    IBOutlet NSTextField *totalTabsNumber; 
-    IBOutlet NSTextField *firstButtonNumber; 
-    IBOutlet NSTextField *secondButtonNumber; 
-    IBOutlet NSTextField *thirdButtonNumber; 
-    IBOutlet NSTextField *fourfthButtonNumber; 
-    
-    
+
     NSUInteger totalTabs;
     
     int _appNumber; 
@@ -70,17 +47,14 @@
          withArrayIndex:(int)localIndex
    andWithPlistIndex:(int)globalIndex; 
 
+-(void)buttonDidClicked:(id)sender; 
+-(void)calculateTotalTab;
 -(IBAction)expandApp:(id)sender;
--(IBAction)retractApp:(id)sender;
--(IBAction)firstItemClicked:(id)sender;
--(IBAction)secondItemClicked:(id)sender;
--(IBAction)thirdItemClicked:(id)sender;
--(IBAction)fourItemClicked:(id)sender;
+-(void)retractApp:(id)sender;
 -(IBAction)closeAppButtonCliced:(id)sender; 
 -(void)resetAllButton; 
 -(void)setSelectedButton;
 -(void)updateTabsNumber; 
--(void)calculateUrlNumber; 
 -(void)hideCloseAppButton; 
 -(void)showCloseAppButton; 
 -(void)hoverMainButton; 
@@ -90,17 +64,10 @@
 
 
 @property (nonatomic, assign) id<RASmartBarViewControllerDelegate> delegate;
+@property (nonatomic, retain) RASmartBarItem *smartBarItem; 
 @property int selectedButton;
 @property int localArrayIndex;
 @property int state;
-@property int appNumber;
-@property int localPlistIndex; 
-@property (nonatomic, copy) NSString *firstURL; 
-@property (nonatomic, copy) NSString *secondURL; 
-@property (nonatomic, copy) NSString *thirdURL; 
-@property (nonatomic, copy) NSString *fourthURL; 
-@property (nonatomic, copy) NSString *folderName; 
-@property (nonatomic, copy) NSString *appName; 
 @end
 
 @protocol RASmartBarViewControllerDelegate

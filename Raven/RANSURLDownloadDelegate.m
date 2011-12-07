@@ -37,8 +37,7 @@
         if (trackDownload) {
             [[NSNotificationCenter defaultCenter]postNotificationName:DOWNLOAD_BEGIN object:nil];
         }
-        // Reset the progress, this might be called multiple times.
-        // bytesReceived is an instance variable defined elsewhere.
+        
         bytesReceived = 0;
         self.ProgressBytes = 0; 
         self.downloadName = @"Waiting for the filename..."; 
@@ -67,7 +66,6 @@
 {
     [aDownloadResponse retain];
     
-    // downloadResponse is an instance variable defined elsewhere.
     [downloadResponse release];
     downloadResponse = aDownloadResponse;
 }
@@ -105,15 +103,8 @@
             //int speed = [progressBytes doubleValue] / ([NSDate timeIntervalSinceReferenceDate] - startTime);
             //speed = speed / 1024; 
             self.percentage = [NSNumber numberWithFloat:percentComplete]; 
-            //NSLog(@"Percent complete - %@",percentage);
         } else {
-            // If the expected content length is
-            // unknown, just log the progress.
-            //NSLog(@"Bytes received - %d",bytesReceived);
         }
-        //[progressBytes retain]; 
-        //[percentage retain]; 
-        //[totalByes retain]; 
         [self updateDownloadInformation];
     }
 }

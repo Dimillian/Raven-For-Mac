@@ -339,7 +339,7 @@
 //update UI when an app expand, Delegate sent from RASmartBarViewController
 -(void)itemDidExpand:(RASmartBarViewController *)smartBarApp
 {
-    int currentNumber  = [smartBarApp appNumber];
+    int currentNumber  = smartBarApp.smartBarItem.URLArray.count;
     NSInteger index = [appList indexOfObject:smartBarApp]; 
     for (NSInteger x=0; x<[appList count]; x++) {
         RASmartBarViewController *smartApp = [appList objectAtIndex:x]; 
@@ -498,7 +498,7 @@
 {
     id tps;
     for (RASmartBarViewController *app in appList) {
-        if (app.localPlistIndex == index) {
+        if (app.smartBarItem.index == index) {
              tps = app; 
         }
     }

@@ -136,7 +136,7 @@ static RADatabaseController *sharedUserManager = nil;
                     NSString *aTitle = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 1)];
                     NSString *aUrl = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 2)];
                     NSString *imagePath = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 3)];
-                    NSImage *image = [[NSImage alloc]initWithContentsOfFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", imagePath]stringByExpandingTildeInPath]];
+                    NSImage *image = [[NSImage alloc]initByReferencingFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", imagePath]stringByExpandingTildeInPath]];
                     int timesptamp = sqlite3_column_int(compiledStatement, 4);
                     NSDate *aDate = [[NSDate alloc]initWithTimeIntervalSince1970:timesptamp];
                     //Create an history object
@@ -329,7 +329,7 @@ static RADatabaseController *sharedUserManager = nil;
 				NSString *aUrl = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 2)];
                 NSData *data = [[NSData alloc] initWithBytes:sqlite3_column_blob(compiledStatement, 3) length:sqlite3_column_bytes(compiledStatement, 3)];
                 NSString *decoded = [[NSString alloc]initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-                NSImage *image = [[NSImage alloc]initWithContentsOfFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", decoded]stringByExpandingTildeInPath]];
+                NSImage *image = [[NSImage alloc]initByReferencingFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", decoded]stringByExpandingTildeInPath]];
                 int timesptamp = sqlite3_column_int(compiledStatement, 4);
                 NSDate *aDate = [[NSDate alloc]initWithTimeIntervalSince1970:timesptamp];
                 //Create an history object
@@ -688,7 +688,7 @@ static RADatabaseController *sharedUserManager = nil;
 				NSString *aTitle = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 1)];
 				NSString *aUrl = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 0)];
                 NSString *imagePath = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 2)];
-                NSImage *image = [[NSImage alloc]initWithContentsOfFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", imagePath]stringByExpandingTildeInPath]];
+                NSImage *image = [[NSImage alloc]initByReferencingFile:[[NSString stringWithFormat:@"~/Library/Application Support/RavenApp/favicon/%@", imagePath]stringByExpandingTildeInPath]];
                 [image setSize:NSMakeSize(16, 16)]; 
                 //Create a bookmark object with the database lavue
 				RAItemObject *aSuggestion = [[RAItemObject alloc] initWithName:aTitle url:aUrl favico:image udid:udid]; 
