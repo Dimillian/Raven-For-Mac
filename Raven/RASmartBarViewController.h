@@ -22,9 +22,10 @@
     RASmartBarItem *_smartBarItem; 
     NSMutableArray *buttonArray; 
     NSMutableArray *tabNumberFieldArray; 
-    int _state;
-    int _selectedButton; 
-    int _localArrayIndex; 
+    NSInteger _state;
+    NSInteger _isEnable; 
+    NSInteger _selectedButton; 
+    NSInteger _index; 
 
     
     //self view outlet
@@ -39,19 +40,19 @@
 
     NSUInteger totalTabs;
     
-    int _appNumber; 
+    NSInteger _appNumber; 
 
 }
 -(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate 
       withDictionnary:(NSDictionary *)dictionnary
-         withArrayIndex:(int)localIndex
-   andWithPlistIndex:(int)globalIndex; 
+       withArrayIndex:(int)localIndex;
 
 -(void)buttonDidClicked:(id)sender; 
 -(void)calculateTotalTab;
 -(IBAction)expandApp:(id)sender;
 -(void)retractApp:(id)sender;
 -(IBAction)closeAppButtonCliced:(id)sender; 
+-(void)updateStatusAndCleanMemory;
 -(void)resetAllButton; 
 -(void)setSelectedButton;
 -(void)updateTabsNumber; 
@@ -65,9 +66,11 @@
 
 @property (nonatomic, assign) id<RASmartBarViewControllerDelegate> delegate;
 @property (nonatomic, retain) RASmartBarItem *smartBarItem; 
-@property int selectedButton;
-@property int localArrayIndex;
-@property int state;
+@property NSInteger selectedButton;
+@property NSInteger index;
+@property NSInteger state;
+@property NSInteger isEnable;
+
 @end
 
 @protocol RASmartBarViewControllerDelegate

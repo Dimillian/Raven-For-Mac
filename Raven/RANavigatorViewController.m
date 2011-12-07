@@ -23,7 +23,7 @@
 #define tabHeight 22
 @implementation RANavigatorViewController
 
-@synthesize PassedUrl = _PassedUrl, tabsArray = _tabsArray, fromOtherViews = _fromOtherViews; 
+@synthesize PassedUrl = _PassedUrl, tabsArray = _tabsArray, fromOtherViews = _fromOtherViews, baseUrl = _baseURL; 
 
 #pragma -
 #pragma mark init
@@ -227,7 +227,12 @@
             }
                 else
                 {
-                    [newtab loadWithPreferredUrl]; 
+                    if (self.baseUrl && [standardUserDefaults integerForKey:OPEN_NEW_TAB_BASE_URL] == 1) {
+                        [newtab loadWithUrl:self.baseUrl];  
+                    }
+                    else{
+                        [newtab loadWithPreferredUrl]; 
+                    }
                 }
             }
         }

@@ -10,7 +10,7 @@
 #import "RANavigatorViewController.h"
 
 @implementation RASmartBarItem
-@synthesize folder = _folder, appName = _appName, URLArray = _URLArray, buttonImageArrayOn = _buttonImageArrayOn, buttonImageArrayOff = _buttonImageArrayOff, isHidden = _isHidden, mainIcon = _mainIcon, mainIconBig = _mainIconBig, index = _index, navigatorViewControllerArray =_navigatorViewControllerArray; 
+@synthesize folder = _folder, appName = _appName, URLArray = _URLArray, buttonImageArrayOn = _buttonImageArrayOn, buttonImageArrayOff = _buttonImageArrayOff, isHidden = _isHidden, mainIcon = _mainIcon, mainIconBig = _mainIconBig, index = _index, navigatorViewControllerArray =_navigatorViewControllerArray, context = _context; 
 
 -(id)init
 {
@@ -39,14 +39,15 @@
         NSImage *mainImageBig = [[NSImage alloc]initByReferencingFile:
                                  [[NSString stringWithFormat:application_support_path@"%@/main_big.png", self.folder]stringByExpandingTildeInPath]];
         self.mainIconBig = mainImageBig; 
-        _URLArray = [[NSMutableArray alloc]initWithArray:urlArray]; 
+        _URLArray = [[NSMutableArray alloc]initWithArray:urlArray];
         _navigatorViewControllerArray = [[NSMutableArray alloc]init]; 
         _buttonImageArrayOn = [[NSMutableArray alloc]init]; 
         _buttonImageArrayOff = [[NSMutableArray alloc]init]; 
         
         NSUInteger i = 1;
         for (NSString *URL in _URLArray) {
-            RANavigatorViewController *navView = [[RANavigatorViewController alloc]init]; 
+            RANavigatorViewController *navView = [[RANavigatorViewController alloc]init];
+            [navView setBaseUrl:[_URLArray objectAtIndex:i-1]]; 
             [_navigatorViewControllerArray addObject:navView];
             NSImage *imageOn = [[NSImage alloc]initByReferencingFile:
                                 [[NSString stringWithFormat:application_support_path@"%@/%d_on.png", self.folder, i]stringByExpandingTildeInPath]];
@@ -61,6 +62,9 @@
             [navView release]; 
             i++;
         }
+        
+        NSURL *URL = [NSURL URLWithString:[_URLArray objectAtIndex:0]];
+        self.context = [URL host];
         [mainImage release]; 
         [mainImageBig release]; 
     }
@@ -81,6 +85,7 @@
 -(void)dealloc
 {
     [_URLArray release]; 
+    [_context release]; 
     [_navigatorViewControllerArray release]; 
     [_buttonImageArrayOn release]; 
     [_buttonImageArrayOff release]; 

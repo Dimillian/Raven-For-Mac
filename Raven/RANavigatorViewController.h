@@ -27,6 +27,7 @@
     IBOutlet NSButton *allTabsButton; 
     IBOutlet NSTabView *tabController; 
     
+    NSString *_baseURL; 
     NSString *_PassedUrl; //THIS variable is super important, it is a mess, but believe me or not it is super important
     NSMutableArray *_tabsArray;
     NSInteger count; 
@@ -56,6 +57,7 @@
 
 @property int fromOtherViews;
 @property (nonatomic, copy) NSString *PassedUrl;
+@property (nonatomic, copy) NSString *baseUrl;
 @property (nonatomic, assign) NSMutableArray *tabsArray; 
 
 

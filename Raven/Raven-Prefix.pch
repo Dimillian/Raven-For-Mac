@@ -31,6 +31,8 @@
 #define FONTFAMILYSTANDARD_WEBVIEW @"fontFamily"
 #define FONTFAMILYFIXED_WEBVIEW @"fontFamilyFixed"
 
+#define OPEN_NEW_TAB_BASE_URL @"openNewTabWithBaseUrl"
+
 //notifications
 #define DOWNLOAD_BEGIN @"downloadDidBegin"
 #define DOWNLOAD_UPDATE @"downloadDidUpdate"

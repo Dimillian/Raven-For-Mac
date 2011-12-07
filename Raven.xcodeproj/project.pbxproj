@@ -1121,7 +1121,7 @@
 			isa = PBXGroup;
 			children = (
 				9F87403F14140E9000D04281 /* Categories */,
-				9F2F4591140D19C600BAB731 /* SmartBarFork */,
+				9F2F4591140D19C600BAB731 /* Smart Bar */,
 				9FC3B79D14038C7300E28D71 /* Specific object */,
 				9FC3B79C14038C5700E28D71 /* Other controller */,
 				9F889947146813DF00BBA017 /* other */,
@@ -1201,18 +1201,18 @@
 			name = Instapaper;
 			sourceTree = "<group>";
 		};
-		9F2F4591140D19C600BAB731 /* SmartBarFork */ = {
+		9F2F4591140D19C600BAB731 /* Smart Bar */ = {
 			isa = PBXGroup;
 			children = (
+				9F2F458D140D198C00BAB731 /* RASmartBarViewController.xib */,
 				9F2F458B140D198C00BAB731 /* RASmartBarViewController.h */,
 				9F2F458C140D198C00BAB731 /* RASmartBarViewController.m */,
-				9F2F458D140D198C00BAB731 /* RASmartBarViewController.xib */,
 				9F16852E1431AC5E00C112A1 /* RAlistManager.h */,
 				9F16852F1431AC5E00C112A1 /* RAlistManager.m */,
 				9F634B81148E8C8B005AAE43 /* RASmartBarItem.h */,
 				9F634B82148E8C8C005AAE43 /* RASmartBarItem.m */,
 			);
-			name = SmartBarFork;
+			name = "Smart Bar";
 			sourceTree = "<group>";
 		};
 		9F38239A141E7B4600EE4CE3 /* External Framework */ = {

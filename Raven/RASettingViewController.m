@@ -83,6 +83,18 @@
     [[stateColumn dataCell]setNextState];
     NSCell *cell = [stateColumn dataCell];
     [listManager changeStateOfAppAtIndex:[tableview selectedRow] withState:[cell state]];
+    for (NSWindow *window in [NSApp windows]) {
+        if ([window.windowController isKindOfClass:[RAMainWindowController class]]) {
+            RAMainWindowController *mainWindow = [window windowController];
+            if (cell.state == 1) {
+                [mainWindow showAppAtIndex:[tableview selectedRow]];     
+            }
+            else{
+                [mainWindow hideAppAtIndex:[tableview selectedRow]];   
+            }
+            
+        }
+    }
     [self refreshSmartBar];
 }
 
@@ -130,19 +142,26 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     }
     else
     {
-        
-        RAlistManager *listManager = [RAlistManager sharedUser];
-        [listManager swapObjectAtIndex:[tableview selectedRow] upOrDown:0];
-        [self refreshSmartBar];
-        if (IS_RUNNING_LION) {
-            [tableview beginUpdates];
-            [tableview moveRowAtIndex:[tableview selectedRow] toIndex:[tableview selectedRow]-1];
-            [tableview endUpdates];
-        }
-        else
-        {
-            NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[tableview selectedRow]-1];
-            [tableview selectRowIndexes:indexSet byExtendingSelection:NO];
+        if ([tableview selectedRow] != 0) {
+            for (NSWindow *window in [NSApp windows]) {
+                if ([window.windowController isKindOfClass:[RAMainWindowController class]]) {
+                    RAMainWindowController *mainWindow = [window windowController];
+                    [mainWindow moveAppFromIndex:[tableview selectedRow] toIndex:[tableview selectedRow]-1];
+                }
+            }
+            RAlistManager *listManager = [RAlistManager sharedUser];
+            [listManager swapObjectAtIndex:[tableview selectedRow] upOrDown:0];
+            [self refreshSmartBar];
+            if (IS_RUNNING_LION) {
+                [tableview beginUpdates];
+                [tableview moveRowAtIndex:[tableview selectedRow] toIndex:[tableview selectedRow]-1];
+                [tableview endUpdates];
+            }
+            else
+            {
+                NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[tableview selectedRow]-1];
+                [tableview selectRowIndexes:indexSet byExtendingSelection:NO];
+            }
         }
     }
 }
@@ -154,6 +173,13 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     }
     else
     {
+        for (NSWindow *window in [NSApp windows]) {
+            if ([window.windowController isKindOfClass:[RAMainWindowController class]]) {
+                RAMainWindowController *mainwindow = [window windowController];
+                [mainwindow moveAppFromIndex:[tableview selectedRow] toIndex:[tableview selectedRow]+1];
+            }
+        }
+
         RAlistManager *listManager = [RAlistManager sharedUser];
         [listManager swapObjectAtIndex:[tableview selectedRow] upOrDown:1];
         ;
@@ -188,7 +214,12 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         NSInteger selectedRow = [tableview selectedRow];
         RAlistManager *listManager = [RAlistManager sharedUser];
         [listManager deleteAppAtIndex:selectedRow];
-
+        for (NSWindow *window in [NSApp windows]) {
+            if ([window.windowController isKindOfClass:[RAMainWindowController class]]) {
+                RAMainWindowController *mainWindow = [window windowController];
+                [mainWindow removeAppAtIndex:selectedRow];
+            }
+        }
         [self refreshSmartBar];
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:selectedRow-1];
         [tableview selectRowIndexes:indexSet byExtendingSelection:NO];

@@ -82,6 +82,7 @@
     
     NSString *passedUrl; 
     BOOL isAdressBarHidden; 
+    BOOL isAnimated; 
     
     
     
@@ -105,14 +106,16 @@
 -(IBAction)hideShowAddressBar:(id)sender;
 -(void)animate:(NSUInteger)setMode;
 -(void)hideall; 
--(void)SetMenuButton; 
+-(void)SetMenuButton;
+-(void)updateMenu; 
 -(void)initSmartBar; 
 -(void)updateSmartBarUi;
--(void)resetSmartBarUi;
+-(void)resetSmartBarUi:(BOOL)animated;
 -(void)newAppInstalled;
--(void)hideAppAtIndex:(int)index; 
--(void)addAppAtIndex:(int)index; 
--(void)moveAppFromIndex:(int)from toIndex:(int)to; 
+-(void)removeAppAtIndex:(NSUInteger)index; 
+-(void)hideAppAtIndex:(NSUInteger)index; 
+-(void)showAppAtIndex:(NSUInteger)index; 
+-(void)moveAppFromIndex:(NSUInteger)from toIndex:(NSUInteger)to; 
 -(void)launchRuntime;
 -(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs;
 -(void)receiveNotification:(NSNotification *)notification;
@@ -123,6 +126,7 @@
 @property (assign) NSView *centeredView;
 @property (assign) NSViewController *myCurrentViewController;
 @property (nonatomic, assign) NSMutableArray *appList;
+@property BOOL isAnimated; 
 @end
 
 //delegate

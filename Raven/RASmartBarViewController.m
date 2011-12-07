@@ -36,7 +36,7 @@
 //[[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
 
 @implementation RASmartBarViewController
-@synthesize state = _state, delegate, selectedButton = _selectedButton, localArrayIndex = _localArrayIndex, smartBarItem = _smartBarItem;
+@synthesize state = _state, delegate, selectedButton = _selectedButton, index = _index, smartBarItem = _smartBarItem, isEnable = _isEnable;
 
 #pragma mark -
 #pragma mark init and dealloc
@@ -54,24 +54,20 @@
 -(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate 
       withDictionnary:(NSDictionary *)dictionnary
        withArrayIndex:(int)localIndex
-    andWithPlistIndex:(int)globalIndex
 {
     self = [super init]; 
     if (self !=nil)
     {
         [self initWithNibName:@"RASmartBarViewController" bundle:nil]; 
         delegate = dgate;
-        _localArrayIndex = localIndex;
-        _state = [[dictionnary objectForKey:PLIST_KEY_ENABLE]intValue];
-
-        
+        _index = localIndex;
+        _isEnable = [[dictionnary objectForKey:PLIST_KEY_ENABLE]integerValue];
         _smartBarItem = [[RASmartBarItem alloc]initWithAppName:[dictionnary objectForKey:PLIST_KEY_APPNAME] 
                                                withFolderName:[dictionnary objectForKey:PLIST_KEY_FOLDER] 
-                                                 withUrlArray:[dictionnary objectForKey:PLIST_KEY_URL] 
-                                                andPlistIndex:globalIndex];
+                                                 withUrlArray:[dictionnary objectForKey:PLIST_KEY_URL]
+                                                andPlistIndex:_index];
         buttonArray = [[NSMutableArray alloc]init];
         tabNumberFieldArray = [[NSMutableArray alloc]init];
-                
     }
     
     return self;  
@@ -145,7 +141,7 @@
         NSUInteger i = 0; 
         int h_button = 166; 
         int h_field =  150; 
-         for (NSString *URL in _smartBarItem.URLArray) {
+        for (NSString *URL in _smartBarItem.URLArray) {
             RASmartBarButton *abutton = [buttonArray objectAtIndex:i]; 
              NSTextField *aField = [tabNumberFieldArray objectAtIndex:i];
             [[abutton animator]setFrame:NSMakeRect(button_x, h_button, button_w, button_h)];
@@ -212,6 +208,11 @@
 -(void)receiveNotification:(NSNotification *)notification
 {
     [self updateTabsNumber];
+}
+
+-(void)updateStatusAndCleanMemory
+{
+    
 }
 
 #pragma mark -
@@ -321,7 +322,7 @@
 
 -(void)showCloseAppButton
 {
-     [self calculateTotalTab];
+    [self calculateTotalTab];
     for (RANavigatorViewController *nav in _smartBarItem.navigatorViewControllerArray) {
         if (nav.tabsArray.count >= 1) {
             [closeAppButton setEnabled:YES];
@@ -389,10 +390,11 @@
 -(void)shouldHideApp:(RASBAPPMainButton *)button
 {
     RAlistManager *listManager = [RAlistManager sharedUser];
+    RAMainWindowController *windowController = self.view.window.windowController; 
     if (_state == 1) {
-        RAMainWindowController *windowController = self.view.window.windowController; 
         [windowController raven:nil];
     }
+    [windowController hideAppAtIndex:_smartBarItem.index];
     [listManager changeStateOfAppAtIndex:_smartBarItem.index withState:0];
     [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
 }

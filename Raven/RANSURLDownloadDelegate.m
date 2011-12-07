@@ -44,7 +44,7 @@
         self.percentage = [NSNumber numberWithInt:0]; 
         self.totalByes = [NSNumber numberWithInt:0]; 
         self.downloadPath = @"Waiting for the path...";
-        self.progressBytes = [NSNumber numberWithInt:0]; 
+        self.ProgressBytes = [NSNumber numberWithInt:0]; 
         startTime = [NSDate timeIntervalSinceReferenceDate]; 
         NSNumber *key = [NSNumber numberWithUnsignedInteger:downloadIndex]; 
         if (key != nil && self.downloadName != nil && self.percentage != nil && self.totalByes != nil && self.downloadPath != nil && self.ProgressBytes != nil && self.downloadUrl != nil) {
@@ -95,7 +95,7 @@
         long long expectedLength = [downloadResponse expectedContentLength];
         self.totalByes = [NSNumber numberWithLongLong:expectedLength]; 
         bytesReceived = bytesReceived + length;
-        self.progressBytes = [NSNumber numberWithInteger:bytesReceived];  
+        self.ProgressBytes = [NSNumber numberWithInteger:bytesReceived];  
         if (expectedLength != NSURLResponseUnknownLength) {
             // If the expected content length is
             // available, display percent complete.

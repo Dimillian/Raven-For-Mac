@@ -12,6 +12,7 @@
 {
     NSString *_appName; 
     NSString *_folder; 
+    NSString *_context;
     NSImage *_mainIcon; 
     NSImage *_mainIconBig; 
     NSMutableArray *_URLArray; 
@@ -19,7 +20,7 @@
     NSMutableArray *_buttonImageArrayOff; 
     NSMutableArray *_navigatorViewControllerArray; 
     BOOL _isHidden; 
-    int _index; 
+    NSInteger _index; 
 }
 
 -(id)initWithAppName:(NSString *)name 
@@ -31,6 +32,7 @@
 
 @property (nonatomic, copy) NSString *appName; 
 @property (nonatomic, copy) NSString *folder; 
+@property (nonatomic, copy) NSString *context; 
 @property (nonatomic, retain) NSImage *mainIcon; 
 @property (nonatomic, retain) NSImage *mainIconBig; 
 @property (nonatomic, assign) NSMutableArray *URLArray; 
@@ -38,6 +40,6 @@
 @property (nonatomic, assign) NSMutableArray *buttonImageArrayOff; 
 @property (nonatomic, assign) NSMutableArray *navigatorViewControllerArray; 
 @property BOOL isHidden; 
-@property int index; 
+@property NSInteger index; 
 
 @end
