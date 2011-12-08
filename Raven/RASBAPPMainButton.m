@@ -82,7 +82,7 @@
     [super mouseUp:theEvent]; 
 }
 
--(void)rightMouseUp:(NSEvent *)theEvent
+-(void)rightMouseDown:(NSEvent *)theEvent
 {
     NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
                                          location:[theEvent locationInWindow]
@@ -95,7 +95,7 @@
                                          pressure:1]; 
     
     [NSMenu popUpContextMenu:[self getMenu] withEvent:event forView:self];
-    [super rightMouseUp:theEvent]; 
+    [super rightMouseDown:theEvent]; 
 }
 
 

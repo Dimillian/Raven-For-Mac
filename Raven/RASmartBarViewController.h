@@ -23,10 +23,7 @@
     NSMutableArray *buttonArray; 
     NSMutableArray *tabNumberFieldArray; 
     NSInteger _state;
-    NSInteger _isEnable; 
     NSInteger _selectedButton; 
-    NSInteger _index; 
-
     
     //self view outlet
     IBOutlet RASmartBarHolderView *mainView; 
@@ -44,8 +41,7 @@
 
 }
 -(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate 
-      withDictionnary:(NSDictionary *)dictionnary
-       withArrayIndex:(int)localIndex;
+            withRASmartBarItem:(RASmartBarItem *)item;
 
 -(void)buttonDidClicked:(id)sender; 
 -(void)calculateTotalTab;
@@ -67,9 +63,7 @@
 @property (nonatomic, assign) id<RASmartBarViewControllerDelegate> delegate;
 @property (nonatomic, retain) RASmartBarItem *smartBarItem; 
 @property NSInteger selectedButton;
-@property NSInteger index;
 @property NSInteger state;
-@property NSInteger isEnable;
 
 @end
 

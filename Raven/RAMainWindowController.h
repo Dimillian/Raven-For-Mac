@@ -20,6 +20,7 @@
 #import "RASmartBarViewController.h"
 #import "RAlistManager.h"
 #import "RASettingViewController.h"
+#import "RASmartBarItem.h"
 #import "Growl/Growl.h"
 #import "Growl/GrowlApplicationBridge.h"
 

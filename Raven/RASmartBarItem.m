@@ -10,7 +10,7 @@
 #import "RANavigatorViewController.h"
 
 @implementation RASmartBarItem
-@synthesize folder = _folder, appName = _appName, URLArray = _URLArray, buttonImageArrayOn = _buttonImageArrayOn, buttonImageArrayOff = _buttonImageArrayOff, isHidden = _isHidden, mainIcon = _mainIcon, mainIconBig = _mainIconBig, index = _index, navigatorViewControllerArray =_navigatorViewControllerArray, context = _context; 
+@synthesize folder = _folder, appName = _appName, URLArray = _URLArray, buttonImageArrayOn = _buttonImageArrayOn, buttonImageArrayOff = _buttonImageArrayOff, isVisible = _isVisible, mainIcon = _mainIcon, mainIconBig = _mainIconBig, index = _index, navigatorViewControllerArray =_navigatorViewControllerArray, context = _context; 
 
 -(id)init
 {
@@ -23,15 +23,14 @@
     return self; 
 }
 
--(id)initWithAppName:(NSString *)name 
-      withFolderName:(NSString *)folder 
-        withUrlArray:(NSArray *)urlArray 
-       andPlistIndex:(int)plistIndex
+-(id)initWithDictionnary:(NSDictionary *)dictionnary andPlistIndex:(int)plistIndex
 {
     self = [super init]; 
     if (self != nil) {
-        self.appName = name; 
-        self.folder = folder; 
+
+        self.appName = [dictionnary objectForKey:PLIST_KEY_APPNAME]; 
+        self.folder = [dictionnary objectForKey:PLIST_KEY_FOLDER]; 
+        self.isVisible = [[dictionnary objectForKey:PLIST_KEY_ENABLE]intValue];
         self.index = plistIndex;
         NSImage *mainImage = [[NSImage alloc]initByReferencingFile:
                               [[NSString stringWithFormat:application_support_path@"%@/main.png", self.folder]stringByExpandingTildeInPath]];
@@ -39,7 +38,7 @@
         NSImage *mainImageBig = [[NSImage alloc]initByReferencingFile:
                                  [[NSString stringWithFormat:application_support_path@"%@/main_big.png", self.folder]stringByExpandingTildeInPath]];
         self.mainIconBig = mainImageBig; 
-        _URLArray = [[NSMutableArray alloc]initWithArray:urlArray];
+        _URLArray = [[dictionnary objectForKey:PLIST_KEY_URL]mutableCopy];
         _navigatorViewControllerArray = [[NSMutableArray alloc]init]; 
         _buttonImageArrayOn = [[NSMutableArray alloc]init]; 
         _buttonImageArrayOff = [[NSMutableArray alloc]init]; 

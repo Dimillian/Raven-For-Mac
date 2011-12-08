@@ -44,8 +44,7 @@ static RAlistManager *sharedUserManager = nil;
     if (appPlistDictionnary) {
         [appPlistDictionnary release], appPlistDictionnary = nil; 
     }
-    NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
-    appPlistDictionnary = [[NSMutableDictionary alloc]initWithContentsOfFile:path];
+    appPlistDictionnary = [[NSMutableDictionary alloc]initWithContentsOfFile:[PLIST_PATH stringByExpandingTildeInPath]];
     if (appPlistArray) { 
         [appPlistArray release], appPlistArray = nil; 
     }
@@ -60,6 +59,7 @@ static RAlistManager *sharedUserManager = nil;
     if (appList != nil) {
         [appPlistDictionnary setObject:appList forKey:PLIST_KEY_DICTIONNARY];
     }
+
     if(flag){
         NSString *path = [PLIST_PATH stringByExpandingTildeInPath];
         [appPlistDictionnary writeToFile:path atomically:NO];

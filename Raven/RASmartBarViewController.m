@@ -36,7 +36,7 @@
 //[[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
 
 @implementation RASmartBarViewController
-@synthesize state = _state, delegate, selectedButton = _selectedButton, index = _index, smartBarItem = _smartBarItem, isEnable = _isEnable;
+@synthesize state = _state, delegate, selectedButton = _selectedButton, smartBarItem = _smartBarItem;
 
 #pragma mark -
 #pragma mark init and dealloc
@@ -52,20 +52,14 @@
 }
 
 -(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate 
-      withDictionnary:(NSDictionary *)dictionnary
-       withArrayIndex:(int)localIndex
+   withRASmartBarItem:(RASmartBarItem *)item
 {
     self = [super init]; 
     if (self !=nil)
     {
         [self initWithNibName:@"RASmartBarViewController" bundle:nil]; 
         delegate = dgate;
-        _index = localIndex;
-        _isEnable = [[dictionnary objectForKey:PLIST_KEY_ENABLE]integerValue];
-        _smartBarItem = [[RASmartBarItem alloc]initWithAppName:[dictionnary objectForKey:PLIST_KEY_APPNAME] 
-                                               withFolderName:[dictionnary objectForKey:PLIST_KEY_FOLDER] 
-                                                 withUrlArray:[dictionnary objectForKey:PLIST_KEY_URL]
-                                                andPlistIndex:_index];
+        self.smartBarItem = item;
         buttonArray = [[NSMutableArray alloc]init];
         tabNumberFieldArray = [[NSMutableArray alloc]init];
     }

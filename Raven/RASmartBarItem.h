@@ -19,14 +19,11 @@
     NSMutableArray *_buttonImageArrayOn; 
     NSMutableArray *_buttonImageArrayOff; 
     NSMutableArray *_navigatorViewControllerArray; 
-    BOOL _isHidden; 
+    BOOL _isVisible; 
     NSInteger _index; 
 }
 
--(id)initWithAppName:(NSString *)name 
-      withFolderName:(NSString *)folder 
-        withUrlArray:(NSArray *)urlArray 
-       andPlistIndex:(int)plistIndex; 
+-(id)initWithDictionnary:(NSDictionary *)dictionnary andPlistIndex:(int)plistIndex; 
 
 -(void)cleanNavigatorController; 
 
@@ -39,7 +36,7 @@
 @property (nonatomic, assign) NSMutableArray *buttonImageArrayOn; 
 @property (nonatomic, assign) NSMutableArray *buttonImageArrayOff; 
 @property (nonatomic, assign) NSMutableArray *navigatorViewControllerArray; 
-@property BOOL isHidden; 
+@property BOOL isVisible; 
 @property NSInteger index; 
 
 @end
