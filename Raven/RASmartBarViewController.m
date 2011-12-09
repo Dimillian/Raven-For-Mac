@@ -79,8 +79,9 @@
 
 -(void)awakeFromNib
 {
+    [self.view setWantsLayer:NO]; 
     [mainButton setImage:_smartBarItem.mainIcon]; 
-    
+
     NSUInteger i = 0; 
     for (NSString *URL in _smartBarItem.URLArray) {
         RASmartBarButton *aButton = [[RASmartBarButton alloc]initWithFrame:NSMakeRect(button_x, button_x, button_w, button_h)];
@@ -235,8 +236,22 @@
     }
     [navController setMenu];
     
-    [mainWindow.centeredView addSubview: [mainWindow.myCurrentViewController view]];
-    [[mainWindow.myCurrentViewController view]setFrame:[mainWindow.centeredView bounds]];
+    
+    
+    /*
+    [mainWindow.myCurrentViewController.view setWantsLayer:YES];
+    transition = [CATransition animation];
+    [transition setType:kCATransitionPush];
+    [transition setSubtype:kCATransitionFromTop];
+    
+    NSDictionary *ani = [NSDictionary dictionaryWithObject:transition 
+                                                    forKey:@"subviews"];
+    [mainWindow.myCurrentViewController.view setAnimations:ani]; 
+    
+    [self.view setAnimations:ani];
+    */
+    [mainWindow.centeredView addSubview:[mainWindow.myCurrentViewController view]];
+    [mainWindow.myCurrentViewController.view setFrame:[mainWindow.centeredView bounds]];
     _selectedButton = [sender tag];
 }
 
@@ -246,10 +261,7 @@
         RAMainWindowController *mainWindow = [[NSApp keyWindow]windowController]; 
         [mainWindow raven:nil];
     }
-    
-    
     [_smartBarItem cleanNavigatorController];
-    
     [[lightVIew animator]setAlphaValue:0.0];
     [self hideCloseAppButton]; 
 }

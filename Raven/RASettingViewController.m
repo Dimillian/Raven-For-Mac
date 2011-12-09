@@ -41,25 +41,7 @@
 //Smart reload, caching image
 -(void)reloadDataSource
 {
-    RAlistManager *listManager = [RAlistManager sharedUser];
-    if(folders) [folders release], folders = nil;
-    folders = [[listManager readAppList]copy];
-    if(images)[images release], images = nil;
-    
-	images = [[NSMutableArray alloc]init];
-    for (int i=0; i<[folders count]; i++) {
-        NSDictionary *item = [folders objectAtIndex:i];
-        NSString *folderNameTemp = [item objectForKey:PLIST_KEY_FOLDER];
-        NSString *imagePath = [NSString stringWithFormat:application_support_path@"%@/main.png", folderNameTemp];
-        NSImage *tempImage = [[[NSImage alloc]initWithContentsOfFile:[imagePath stringByExpandingTildeInPath]]autorelease];
-        if(tempImage == nil)
-        {
-            tempImage = [NSImage imageNamed:@"app_shelf.png"];
-        }
-        [images addObject:tempImage];
-
-    }
-       [tableview reloadData]; 
+    [tableview reloadData]; 
 }
 
 - (WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
@@ -72,8 +54,8 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    NSUInteger count = [folders count]; 
-    return count;
+    RAMainWindowController *windowController = [[NSApp mainWindow]windowController]; 
+    return windowController.appList.count;
     
 }
 
@@ -83,17 +65,11 @@
     [[stateColumn dataCell]setNextState];
     NSCell *cell = [stateColumn dataCell];
     [listManager changeStateOfAppAtIndex:[tableview selectedRow] withState:[cell state]];
-    for (NSWindow *window in [NSApp windows]) {
-        if ([window.windowController isKindOfClass:[RAMainWindowController class]]) {
-            RAMainWindowController *mainWindow = [window windowController];
-            if (cell.state == 1) {
-                [mainWindow showAppAtIndex:[tableview selectedRow]];     
-            }
-            else{
-                [mainWindow hideAppAtIndex:[tableview selectedRow]];   
-            }
-            
-        }
+    if (cell.state == 1) {
+        [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_SHOW object:tableview];   
+    }
+    else{
+        [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_HIDDEN object:tableview];   
     }
     [self refreshSmartBar];
 }
@@ -104,26 +80,23 @@
 objectValueForTableColumn:(NSTableColumn *)tableColumn
             row:(NSInteger)row
 {  
-    
-    NSDictionary *item = [folders objectAtIndex:row];
-    NSString *appName = [item objectForKey:PLIST_KEY_APPNAME];
-    NSNumber *buttonState = [item objectForKey:PLIST_KEY_ENABLE];
-    NSString *categoryName = [NSString stringWithFormat:@"\n%@",[item objectForKey:PLIST_KEY_CATEGORY]];
-    NSString *officialState = [NSString stringWithFormat:@"\n%@",[item objectForKey:PLIST_KEY_OFFICIAL]];
+    RAMainWindowController *windowController = [[NSApp mainWindow]windowController]; 
+    RASmartBarItem *item = [[windowController.appList objectAtIndex:row]smartBarItem]; 
+    NSNumber *state = [NSNumber numberWithBool:item.isVisible];   
     if (tableColumn == iconColumn) {
-        return [images objectAtIndex:row];
+        return item.mainIcon;
     }
     if (tableColumn == appNameColumn) {
-        return [NSString stringWithFormat:@"\n%@",appName];
+        return item.appName;
     }
     if (tableColumn == stateColumn) {
-        return buttonState;
+        return state; 
     }
     if (tableColumn == appCategoryColumn) {
-        return categoryName;
+        return item.category; 
     }
     if (tableColumn == appCompanyColumn) {
-        return officialState;
+        return item.makerName;
     }
     if (tableColumn == buttonUpColumn) {
         if (row == 0)
@@ -143,12 +116,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     else
     {
         if ([tableview selectedRow] != 0) {
-            for (NSWindow *window in [NSApp windows]) {
-                if ([window.windowController isKindOfClass:[RAMainWindowController class]]) {
-                    RAMainWindowController *mainWindow = [window windowController];
-                    [mainWindow moveAppFromIndex:[tableview selectedRow] toIndex:[tableview selectedRow]-1];
-                }
-            }
+            [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_UP object:tableview];
             RAlistManager *listManager = [RAlistManager sharedUser];
             [listManager swapObjectAtIndex:[tableview selectedRow] upOrDown:0];
             [self refreshSmartBar];
@@ -173,12 +141,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     }
     else
     {
-        for (NSWindow *window in [NSApp windows]) {
-            if ([window.windowController isKindOfClass:[RAMainWindowController class]]) {
-                RAMainWindowController *mainwindow = [window windowController];
-                [mainwindow moveAppFromIndex:[tableview selectedRow] toIndex:[tableview selectedRow]+1];
-            }
-        }
+        [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_DOWN object:tableview];
 
         RAlistManager *listManager = [RAlistManager sharedUser];
         [listManager swapObjectAtIndex:[tableview selectedRow] upOrDown:1];
@@ -214,12 +177,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         NSInteger selectedRow = [tableview selectedRow];
         RAlistManager *listManager = [RAlistManager sharedUser];
         [listManager deleteAppAtIndex:selectedRow];
-        for (NSWindow *window in [NSApp windows]) {
-            if ([window.windowController isKindOfClass:[RAMainWindowController class]]) {
-                RAMainWindowController *mainWindow = [window windowController];
-                [mainWindow removeAppAtIndex:selectedRow];
-            }
-        }
+        [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_REMOVE object:tableview]; 
         [self refreshSmartBar];
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:selectedRow-1];
         [tableview selectRowIndexes:indexSet byExtendingSelection:NO];

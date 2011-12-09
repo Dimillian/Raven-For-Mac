@@ -179,16 +179,36 @@
                                             selector:@selector(receiveNotification:) 
                                                 name:UPDATE_TAB_NUMBER 
                                               object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:SMART_BAR_UPDATE_ITEM_DOWN 
+                                              object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:SMART_BAR_UPDATE_ITEM_UP 
+                                              object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:SMART_BAR_UPDATE_ITEM_HIDDEN 
+                                              object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:SMART_BAR_UPDATE_ITEM_SHOW 
+                                              object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:SMART_BAR_UPDATE_ITEM_REMOVE
+                                              object:nil];
     
     //init view controller with appropriate nib
     navigatorview =
-    [[RANavigatorViewController alloc] init];
+    [[RANavigatorViewController alloc]init];
     
     historyviewcontroller =
-    [[RAHistoryViewController alloc] initWithNibName:@"history" bundle:nil];
+    [[RAHistoryViewController alloc]initWithNibName:@"history" bundle:nil];
     
     bookmarkview =
-    [[RABookmarkViewController alloc] initWithNibName:@"Bookmark" bundle:nil];
+    [[RABookmarkViewController alloc]initWithNibName:@"Bookmark" bundle:nil];
     
     downloadview = 
     [[RADownloadViewController alloc]initWithNibName:@"Download" bundle:nil]; 
@@ -213,6 +233,22 @@
         [self updateMenu];
         [self animate:13];
     }
+    if ([[notification name]isEqualToString:SMART_BAR_UPDATE_ITEM_UP]) {
+        [self moveAppFromIndex:[[notification object]selectedRow] toIndex:[[notification object]selectedRow]-1]; 
+    }
+    if ([[notification name]isEqualToString:SMART_BAR_UPDATE_ITEM_DOWN]) {
+        [self moveAppFromIndex:[[notification object]selectedRow] toIndex:[[notification object]selectedRow]+1]; 
+    }
+    if ([[notification name]isEqualToString:SMART_BAR_UPDATE_ITEM_HIDDEN]) {
+        [self hideAppAtIndex:[[notification object]selectedRow]]; 
+    }
+    if ([[notification name]isEqualToString:SMART_BAR_UPDATE_ITEM_SHOW]) {
+        [self showAppAtIndex:[[notification object]selectedRow]]; 
+    }
+    if ([[notification name]isEqualToString:SMART_BAR_UPDATE_ITEM_REMOVE]) {
+        [self removeAppAtIndex:[[notification object]selectedRow]];
+    }
+    
     if ([[notification name]isEqualToString:NEW_APP_INSTALLED]) {
         [self newAppInstalled];
     }

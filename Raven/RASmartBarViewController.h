@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <Quartz/Quartz.h>
 #import "RANavigatorViewController.h"
 #import "RASmartBarButton.h"
 #import "RASBAPPMainButton.h"
@@ -38,6 +39,8 @@
     NSUInteger totalTabs;
     
     NSInteger _appNumber; 
+    
+    CATransition *transition;
 
 }
 -(id)initWithDelegate:(id<RASmartBarViewControllerDelegate>)dgate 

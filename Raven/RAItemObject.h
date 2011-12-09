@@ -29,5 +29,7 @@
 -(id)initWithName:(NSString *)n url:(NSString *)d favico:(NSImage *)v udid:(int)q;
 -(id)initBookmarkAndFavoriteWithName:(NSString *)n url:(NSString *)d favico:(NSImage *)v udid:(int)q type:(int)t date:(NSDate *)da;
 -(id)initHistoryInitWithName:(NSString *)n url:(NSString *)d favico:(NSImage *)v date:(NSDate *)x udid:(int)q;
+
+
 @end
 

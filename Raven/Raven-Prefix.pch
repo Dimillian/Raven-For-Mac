@@ -40,6 +40,11 @@
 #define NEW_APP_INSTALLED @"newAppInstalled"
 #define APP_UPDATED @"appUpdated"
 #define SMART_BAR_UPDATE @"smartBarWasUpdated"
+#define SMART_BAR_UPDATE_ITEM_UP @"smartBarWasUpdatedItemUp"
+#define SMART_BAR_UPDATE_ITEM_DOWN @"smartBarWasUpdatedItemDown"
+#define SMART_BAR_UPDATE_ITEM_HIDDEN @"smartBarWasUpdatedDidHide"
+#define SMART_BAR_UPDATE_ITEM_SHOW @"smartBarWasUpdatedDidShow"
+#define SMART_BAR_UPDATE_ITEM_REMOVE @"smartBarWasUpdatedDidRemove"
 #define UPDATE_TAB_NUMBER @"updateTabNumber"
 
 

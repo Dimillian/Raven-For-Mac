@@ -13,6 +13,8 @@
     NSString *_appName; 
     NSString *_folder; 
     NSString *_context;
+    NSString *_makerName; 
+    NSString *_category; 
     NSImage *_mainIcon; 
     NSImage *_mainIconBig; 
     NSMutableArray *_URLArray; 
@@ -24,12 +26,15 @@
 }
 
 -(id)initWithDictionnary:(NSDictionary *)dictionnary andPlistIndex:(int)plistIndex; 
-
 -(void)cleanNavigatorController; 
+-(void)hideSmartBarItem; 
+-(void)showSmartBarItem; 
 
 @property (nonatomic, copy) NSString *appName; 
 @property (nonatomic, copy) NSString *folder; 
 @property (nonatomic, copy) NSString *context; 
+@property (nonatomic, copy) NSString *makerName; 
+@property (nonatomic, copy) NSString *category; 
 @property (nonatomic, retain) NSImage *mainIcon; 
 @property (nonatomic, retain) NSImage *mainIconBig; 
 @property (nonatomic, assign) NSMutableArray *URLArray; 

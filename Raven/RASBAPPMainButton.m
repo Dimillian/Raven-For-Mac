@@ -109,6 +109,7 @@
 
 -(void)mouseMoved:(NSEvent *)theEvent
 {
+    //[self setFrameOrigin:theEvent.locationInWindow];
     [super mouseMoved:theEvent]; 
 }
 
