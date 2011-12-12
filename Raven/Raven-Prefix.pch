@@ -30,6 +30,7 @@
 #define FONTSIZEFIXED_WEBVIEW @"fontSizeFixed"
 #define FONTFAMILYSTANDARD_WEBVIEW @"fontFamily"
 #define FONTFAMILYFIXED_WEBVIEW @"fontFamilyFixed"
+#define WEBPREFERENCE_DEFAULT @"webPreferenceDefaultIsSet"
 
 #define OPEN_NEW_TAB_BASE_URL @"openNewTabWithBaseUrl"
 

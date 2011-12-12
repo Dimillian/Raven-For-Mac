@@ -62,10 +62,7 @@
 }
 -(void)awakeFromNib
 {  
-    WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
-    [myPreference setAutosaves:YES];
-    [webview setPreferences:myPreference];
-    [myPreference release];
+    [webview setPreferencesIdentifier:@"PreferenceWeb"]; 
   
     [self setDesktopUserAgent];
     //register history item
@@ -128,40 +125,27 @@
     
 }
 
--(void)loadWithWelcomePage
-{
-    NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
-    [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:indexPath]]]; 
-    
-}
-
--(void)loadWithHistoryPage
-{
-    NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"history" ofType:@"html"];
-    [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:indexPath]]];   
-}
-
--(void)loadWithBookmarkPage
-{
-    NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"Bookmarks" ofType:@"html"];
-    [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:indexPath]]]; 
-}
-
--(void)loadWithFavoritePage
-{
-    
-}
-
--(void)loadWithFirstTimeLaunchPage
-{
-    NSString *indexPath = [[NSBundle mainBundle] pathForResource:@"Start" ofType:@"html"];
-    [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:indexPath]]]; 
-}
 -(void)loadWithPreferredUrl
 {
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
 	if (standardUserDefaults) 
     [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[standardUserDefaults objectForKey:@"NewTabUrl"]]]];
+}
+
+-(void)loadInternalPage:(NSString *)page
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:page ofType:@"html"];
+    if (path){
+        [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
+        [address setStringValue:[NSString stringWithFormat:@"raven://%@", page]]; 
+    }
+    else{
+        NSAlert *alert = [[NSAlert alloc]init]; 
+        [alert setMessageText:@"Invalid internal URL"]; 
+        [alert setInformativeText:@"No document to display for this intern URL"];
+        [alert beginSheetModalForWindow:[webview hostWindow] modalDelegate:nil didEndSelector:nil contextInfo:nil]; 
+        [alert release]; 
+    }
 }
 
 -(void)checkua
@@ -171,8 +155,7 @@
     if ([UA isEqualToString:@"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543 Safari/419.3"]) {
         
     }
-    else
-    {
+    else{
         
     }
 
@@ -232,25 +215,34 @@
     //cool workflow to check if user put http:// or not and put it if not
     NSString *addressTo = [address stringValue];
     addressTo = [addressTo stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    if (addressTo != nil) {
+    if ([addressTo hasPrefix:@"raven://"]) {
+        isInternal = YES;
+        addressTo = [addressTo substringFromIndex:8]; 
+        [self loadInternalPage:addressTo]; 
+        
+    }
+    else{
+        isInternal = NO; 
+        if (addressTo != nil) {
             if ([addressTo hasPrefix:@"javascript:"]) {
                 addressTo = [addressTo stringByReplacingOccurrencesOfString:@"javascript:" withString:@""]; 
                 [webview stringByEvaluatingJavaScriptFromString:addressTo]; 
+            }
+            else
+            {
+                if ([addressTo hasPrefix:@"http://"] || [addressTo hasPrefix:@"https://"])
+                {
+                    [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:addressTo]]];
                 }
                 else
                 {
-                    if ([addressTo hasPrefix:@"http://"] || [addressTo hasPrefix:@"https://"])
-                    {
-                        [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:addressTo]]];
-                    }
-                    else
-                    {
-                        NSString *parsedAdress = [NSString stringWithFormat:@"http://%@", addressTo];
-                        [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:parsedAdress]]];
-        
-                    }
+                    NSString *parsedAdress = [NSString stringWithFormat:@"http://%@", addressTo];
+                    [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:parsedAdress]]];
+                    
                 }
+            }
         }
+    }
     
 }
 
@@ -565,7 +557,9 @@
     //get the current URL
     NSString *url = [webview mainFrameURL];
     //set the URl in the address bar
-    [address setStringValue:url];
+    if (!isInternal) {
+        [address setStringValue:url];
+    }
     
 }
 

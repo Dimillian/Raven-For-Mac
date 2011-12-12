@@ -305,6 +305,8 @@
 		9FEF7D3C147514CF006ADC7B /* RACookieWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF7D3B147514CF006ADC7B /* RACookieWindowController.m */; };
 		9FEF7D3F147514F9006ADC7B /* RACookieWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FEF7D3E147514F9006ADC7B /* RACookieWindow.xib */; };
 		9FF1017E13CCF03500B8F942 /* RATabFaviconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */; };
+		9FF2D46D1493975100A5CE48 /* RAShelfView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2D46B1493975100A5CE48 /* RAShelfView.m */; };
+		9FF2D46E1493975100A5CE48 /* RAShelfView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FF2D46C1493975100A5CE48 /* RAShelfView.xib */; };
 		9FF4B9D31408D6DB005FCE7F /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D11408D6DB005FCE7F /* eye.png */; };
 		9FF4B9D41408D6DB005FCE7F /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D21408D6DB005FCE7F /* trash.png */; };
 		9FF4B9D91408D84C005FCE7F /* bookmarks_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D61408D84C005FCE7F /* bookmarks_empty.png */; };
@@ -714,6 +716,9 @@
 		9FEF7D3E147514F9006ADC7B /* RACookieWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RACookieWindow.xib; sourceTree = "<group>"; };
 		9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATabFaviconView.h; sourceTree = "<group>"; };
 		9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATabFaviconView.m; sourceTree = "<group>"; };
+		9FF2D46A1493975100A5CE48 /* RAShelfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAShelfView.h; sourceTree = "<group>"; };
+		9FF2D46B1493975100A5CE48 /* RAShelfView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAShelfView.m; sourceTree = "<group>"; };
+		9FF2D46C1493975100A5CE48 /* RAShelfView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RAShelfView.xib; sourceTree = "<group>"; };
 		9FF4B9D11408D6DB005FCE7F /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
 		9FF4B9D21408D6DB005FCE7F /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		9FF4B9D61408D84C005FCE7F /* bookmarks_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmarks_empty.png; sourceTree = "<group>"; };
@@ -761,6 +766,7 @@
 		690A79BE138B056B001AB4DE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9FF2D46C1493975100A5CE48 /* RAShelfView.xib */,
 				69F8A092133CD50300E32E6D /* MainMenu.xib */,
 				6914E6B1133E4AAB0054D6D7 /* Navigator.xib */,
 				9F8A1CD313FDA36500DD291C /* Bookmark.xib */,
@@ -1064,6 +1070,8 @@
 				693A0AC31361F8DB001C309F /* RAWebViewController.m */,
 				69D902F9134B9F990097F30F /* RADownloadViewController.h */,
 				69D902FA134B9F990097F30F /* RADownloadViewController.m */,
+				9FF2D46A1493975100A5CE48 /* RAShelfView.h */,
+				9FF2D46B1493975100A5CE48 /* RAShelfView.m */,
 			);
 			name = "Main Views Controller";
 			sourceTree = "<group>";
@@ -1872,6 +1880,7 @@
 				9FD7B27B1466901B007EFF15 /* template.js in Resources */,
 				9FDF1CEB146D201B009D3DAE /* chromedefault in Resources */,
 				9FEF7D3F147514F9006ADC7B /* RACookieWindow.xib in Resources */,
+				9FF2D46E1493975100A5CE48 /* RAShelfView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1981,6 +1990,7 @@
 				9FEF2AB8147F8D82007BC286 /* RASmartBarHolderView.m in Sources */,
 				9F37D77F148689EB0011B90F /* PXListView+UserInteraction.m in Sources */,
 				9F634B83148E8C8C005AAE43 /* RASmartBarItem.m in Sources */,
+				9FF2D46D1493975100A5CE48 /* RAShelfView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

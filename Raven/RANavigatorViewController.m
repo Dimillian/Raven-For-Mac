@@ -223,7 +223,7 @@
             if ([standardUserDefaults integerForKey:DO_HAVE_LAUNCHED] == 0) {
                 [standardUserDefaults setInteger:1 forKey:DO_HAVE_LAUNCHED];
                 [standardUserDefaults synchronize];
-                [newtab loadWithFirstTimeLaunchPage];
+                [newtab loadInternalPage:@"Start"];
             }
                 else
                 {

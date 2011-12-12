@@ -11,6 +11,7 @@
 
 
 
+
 //smart bar app positioning
 #define retracted_app_height 55
 #define app_expanded_height 200
@@ -84,7 +85,7 @@
     [settingview release]; 
     [appList release], appList = nil; 
     [[NSNotificationCenter defaultCenter]removeObserver:self];
-    [delegate closeButtonClicked:self];
+    [delegate closeButtonClicked:nil];
     [super dealloc];
 }
 
@@ -215,6 +216,9 @@
     
     settingview = 
     [[RASettingViewController alloc]initWithNibName:@"Settings" bundle:nil]; 
+    
+    shelfView = 
+    [[RAShelfView alloc]initWithNibName:@"RAShelfView" bundle:nil]; 
     
     previousIndex = -1;
     previousAppNumber = 4; 
@@ -367,7 +371,7 @@
 
 -(void)updateMenu
 {
-     int x = 0;
+    int x = 0;
     NSMenu *topMenu = [NSApp menu]; 
     NSMenu *smartBarMenu = [[topMenu itemAtIndex:4]submenu];
     NSInteger count = smartBarMenu.itemArray.count;
@@ -403,6 +407,7 @@
         if (previousIndex == x ) {
             [smartApp retractApp:nil];
         }
+        
         if (x<=index && [smartBarApp state] == 0 && x > previousIndex) {
             [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, frame.origin.y + app_expanded_height, app_view_w, app_view_h)]; 
         }
@@ -423,7 +428,7 @@
     NSUInteger count = 0; 
     for (RASmartBarViewController *smarBarApp in appList) {
         if (smarBarApp.smartBarItem.isVisible) {
-            count = count +1; 
+            count++;
         }
     }
     NSInteger totalSize = initial_position + (count * retracted_app_height);
@@ -771,6 +776,7 @@
 {
     [[ravenMenuButton animator]setAlphaValue:0.5]; 
 }
+
 -(void)hideall
 {
     [homeButton setImage:[NSImage imageNamed:@"home_off.png"]];

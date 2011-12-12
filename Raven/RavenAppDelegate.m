@@ -83,7 +83,6 @@
             //Only done one time at first launch
             if ([standardUserDefaults objectForKey:JAVA_WEBVIEW] == nil) {
                 [standardUserDefaults setInteger:1 forKey:JAVA_WEBVIEW]; 
-                [self setDefaultWebPreference];
             }
             if ([standardUserDefaults objectForKey:JAVASCRIPT_WEBVIEW] == nil) {
                 [standardUserDefaults setInteger:1 forKey:JAVASCRIPT_WEBVIEW]; 
@@ -105,6 +104,10 @@
             }
             if ([standardUserDefaults objectForKey:FONTFAMILYFIXED_WEBVIEW] == nil) {
                 [standardUserDefaults setObject:@"Courier" forKey:FONTFAMILYFIXED_WEBVIEW]; 
+            }
+            if ([standardUserDefaults objectForKey:WEBPREFERENCE_DEFAULT] == nil){
+                [standardUserDefaults setInteger:1 forKey:WEBPREFERENCE_DEFAULT]; 
+                [self setDefaultWebPreference]; 
             }
             //enable web inspector for webview, we are a browser afterall
             if  ([standardUserDefaults objectForKey:@"WebKitDeveloperExtras"] == nil){
@@ -140,21 +143,23 @@
 
 -(void)setDefaultWebPreference
 {
-    WebPreferences *myPreference = [[WebPreferences alloc]initWithIdentifier:@"PreferenceWeb"];
-    [myPreference setDefaultFontSize:16];
-    [myPreference setDefaultFixedFontSize:13];
-    [myPreference setSerifFontFamily:@"Times"];
-    [myPreference setSansSerifFontFamily:@"Helvetica"];
-    [myPreference setStandardFontFamily:@"Times"]; 
-    [myPreference setFixedFontFamily:@"Courier"];
-    [myPreference setUserStyleSheetEnabled:NO];
-    [myPreference setJavaEnabled:YES];
-    [myPreference setJavaScriptEnabled:YES];
-    [myPreference setPlugInsEnabled:YES];
-    [myPreference setUsesPageCache:NO];
-    [myPreference setJavaScriptCanOpenWindowsAutomatically:NO];
-    [myPreference setAutosaves:YES];
-    [myPreference release];
+    WebView *webview = [[WebView alloc]init];
+    [webview setPreferencesIdentifier:@"PreferenceWeb"]; 
+    [[webview preferences]setAutosaves:YES];
+    [[webview preferences]setDefaultFontSize:16];
+    [[webview preferences]setDefaultFixedFontSize:13];
+    [[webview preferences]setCacheModel:1]; 
+    [[webview preferences]setSerifFontFamily:@"Times"];
+    [[webview preferences]setSansSerifFontFamily:@"Helvetica"];
+    [[webview preferences]setStandardFontFamily:@"Times"]; 
+    [[webview preferences]setFixedFontFamily:@"Courier"];
+    [[webview preferences]setUserStyleSheetEnabled:NO];
+    [[webview preferences]setJavaEnabled:YES];
+    [[webview preferences]setJavaScriptEnabled:YES];
+    [[webview preferences]setPlugInsEnabled:YES];
+    [[webview preferences]setUsesPageCache:NO];
+    [[webview preferences]setJavaScriptCanOpenWindowsAutomatically:NO];
+    [webview release];
 }
 
 -(void)applicationWillTerminate:(NSNotification *)notification

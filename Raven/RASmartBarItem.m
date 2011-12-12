@@ -43,7 +43,14 @@
         _URLArray = [[dictionnary objectForKey:PLIST_KEY_URL]mutableCopy];
         _navigatorViewControllerArray = [[NSMutableArray alloc]init]; 
         _buttonImageArrayOn = [[NSMutableArray alloc]init]; 
-        _buttonImageArrayOff = [[NSMutableArray alloc]init]; 
+        _buttonImageArrayOff = [[NSMutableArray alloc]init];
+        NSMutableArray *tmpArray = [[NSMutableArray alloc]initWithArray:_URLArray]; 
+        for (NSString *URL in tmpArray) {
+            if ([URL isEqualToString:@""]) {
+                [_URLArray removeObject:URL]; 
+            }
+        }
+        [tmpArray release]; 
         NSUInteger i = 1;
         for (NSString *URL in _URLArray) {
             RANavigatorViewController *navView = [[RANavigatorViewController alloc]init];

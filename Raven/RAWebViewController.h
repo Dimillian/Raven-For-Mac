@@ -54,6 +54,7 @@
     IBOutlet NSBox *tabHolder; 
     
     BOOL isNewTab; 
+    BOOL isInternal; 
     NSString *UA; 
     NSInteger count; 
     NSImage *favicon; 
@@ -86,12 +87,8 @@
 -(NSMenu *)getFavoriteMenu; 
 
 -(void)loadWithUrl:(NSString *)url;
--(void)loadWithWelcomePage; 
--(void)loadWithPreferredUrl; 
--(void)loadWithHistoryPage;
--(void)loadWithBookmarkPage;
--(void)loadWithFavoritePage; 
--(void)loadWithFirstTimeLaunchPage; 
+-(void)loadWithPreferredUrl;
+-(void)loadInternalPage:(NSString *)page; 
 
 -(void)checkua; 
 -(void)setWindowTitle:(id)sender; 
@@ -100,7 +97,7 @@
 -(void)setDesktopUserAgent; 
 -(void)getFavicon:(id)sender; 
 -(void)setFaviconUI:(id)sender; 
--(void)saveHistory:(id)sender; 
+-(void)saveHistory:(id)sender;
 
 //Properties
 @property (nonatomic, assign) id<RAWebViewControllerDelegate> delegate;

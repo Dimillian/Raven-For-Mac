@@ -23,6 +23,7 @@
 #import "RASmartBarItem.h"
 #import "Growl/Growl.h"
 #import "Growl/GrowlApplicationBridge.h"
+#import "RAShelfView.h"
 
 
 @protocol RAMainDelegate; 
@@ -53,7 +54,7 @@
     int previousAppNumber; 
     BOOL isHidden; 
     
-    NSMutableArray *appList; 
+    NSMutableArray *appList;
     
     
     
@@ -76,6 +77,7 @@
     RABookmarkViewController *bookmarkview; 
     RADownloadViewController *downloadview; 
     RASettingViewController *settingview; 
+    RAShelfView *shelfView; 
     
     
     IBOutlet NSView *titleBar;

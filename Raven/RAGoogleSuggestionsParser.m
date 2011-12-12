@@ -73,7 +73,6 @@
 
 -(void)dealloc
 {
-    [suggestionResults removeAllObjects]; 
     [suggestionResults release];
     [URLToParse release];
     [super dealloc];
