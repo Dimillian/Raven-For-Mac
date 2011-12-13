@@ -17,7 +17,7 @@
 #import "RADownloadViewController.h"
 #import "RASettingViewController.h"
 #import "RADatabaseController.h"
-#import "RASmartBarViewController.h"
+#import "RASmartBarItemViewController.h"
 #import "RAlistManager.h"
 #import "RASettingViewController.h"
 #import "RASmartBarItem.h"
@@ -28,7 +28,7 @@
 
 @protocol RAMainDelegate; 
 @class RavenAppDelegate; 
-@interface RAMainWindowController : NSWindowController <NSWindowDelegate, RASmartBarViewControllerDelegate>{
+@interface RAMainWindowController : NSWindowController <NSWindowDelegate, RASmartBarViewItemControllerDelegate>{
     //the view controller
     id<RAMainDelegate>delegate; 
     IBOutlet NSViewController* myCurrentViewController;
@@ -102,6 +102,7 @@
 
 -(IBAction)nextApp:(id)sender;
 -(IBAction)previousApp:(id)sender;
+
 
 //method
 -(void)showSideBar; 

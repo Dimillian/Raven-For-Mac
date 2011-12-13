@@ -188,8 +188,8 @@
 		9F2BEE75140FC7890090AD70 /* InstaSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F2BEE74140FC7890090AD70 /* InstaSheet.xib */; };
 		9F2BF6BE13FDAD1000F809E6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F2BF6C013FDAD1000F809E6 /* Localizable.strings */; };
 		9F2E837714595E80007C0982 /* SearchWebView.js in Resources */ = {isa = PBXBuildFile; fileRef = 9FB8482C1455FC3F00530138 /* SearchWebView.js */; };
-		9F2F458E140D198C00BAB731 /* RASmartBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2F458C140D198C00BAB731 /* RASmartBarViewController.m */; };
-		9F2F458F140D198C00BAB731 /* RASmartBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F2F458D140D198C00BAB731 /* RASmartBarViewController.xib */; };
+		9F2F458E140D198C00BAB731 /* RASmartBarItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2F458C140D198C00BAB731 /* RASmartBarItemViewController.m */; };
+		9F2F458F140D198C00BAB731 /* RASmartBarItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F2F458D140D198C00BAB731 /* RASmartBarItemViewController.xib */; };
 		9F37D77F148689EB0011B90F /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F37D77E148689EB0011B90F /* PXListView+UserInteraction.m */; };
 		9F4105D414600BC000CB33AC /* GrayLinen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4105D314600BBF00CB33AC /* GrayLinen.png */; };
 		9F4954011446D56A00EED6BE /* RAInstapaperSubmit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4954001446D56A00EED6BE /* RAInstapaperSubmit.m */; };
@@ -262,6 +262,7 @@
 		9F8A1CDD13FDA49C00DD291C /* NavigatorNoBottom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F8A1CDF13FDA49C00DD291C /* NavigatorNoBottom.xib */; };
 		9F8A1CE513FDA6EF00DD291C /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8A1CE613FDA6EF00DD291C /* PXListViewCell.m */; };
 		9F8A1CE713FDA99300DD291C /* RANavigatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8A1CE813FDA99300DD291C /* RANavigatorViewController.m */; };
+		9F94F84B14973B5600E53BEA /* RADotTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F94F84A14973B5500E53BEA /* RADotTextField.m */; };
 		9FA8F3F4143995F1004DD749 /* Arrow down 16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA8F3F0143995F1004DD749 /* Arrow down 16x16.png */; };
 		9FA8F3F5143995F1004DD749 /* Arrow up 16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA8F3F1143995F1004DD749 /* Arrow up 16x16.png */; };
 		9FA8F3F6143995F1004DD749 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA8F3F2143995F1004DD749 /* header.png */; };
@@ -574,9 +575,9 @@
 		9F2BEE74140FC7890090AD70 /* InstaSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstaSheet.xib; sourceTree = "<group>"; };
 		9F2BF6BF13FDAD1000F809E6 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9F2BF6C113FDAD1400F809E6 /* fr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		9F2F458B140D198C00BAB731 /* RASmartBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RASmartBarViewController.h; sourceTree = "<group>"; };
-		9F2F458C140D198C00BAB731 /* RASmartBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RASmartBarViewController.m; sourceTree = "<group>"; };
-		9F2F458D140D198C00BAB731 /* RASmartBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RASmartBarViewController.xib; sourceTree = "<group>"; };
+		9F2F458B140D198C00BAB731 /* RASmartBarItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RASmartBarItemViewController.h; sourceTree = "<group>"; };
+		9F2F458C140D198C00BAB731 /* RASmartBarItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RASmartBarItemViewController.m; sourceTree = "<group>"; };
+		9F2F458D140D198C00BAB731 /* RASmartBarItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RASmartBarItemViewController.xib; sourceTree = "<group>"; };
 		9F37D77D148689EB0011B90F /* PXListView+UserInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PXListView+UserInteraction.h"; sourceTree = "<group>"; };
 		9F37D77E148689EB0011B90F /* PXListView+UserInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PXListView+UserInteraction.m"; sourceTree = "<group>"; };
 		9F4105D314600BBF00CB33AC /* GrayLinen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GrayLinen.png; sourceTree = "<group>"; };
@@ -659,6 +660,8 @@
 		9F8A1CDE13FDA49C00DD291C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/NavigatorNoBottom.xib; sourceTree = "<group>"; };
 		9F8A1CE613FDA6EF00DD291C /* PXListViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PXListViewCell.m; sourceTree = "<group>"; };
 		9F8A1CE813FDA99300DD291C /* RANavigatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RANavigatorViewController.m; sourceTree = "<group>"; };
+		9F94F84914973B5500E53BEA /* RADotTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RADotTextField.h; sourceTree = "<group>"; };
+		9F94F84A14973B5500E53BEA /* RADotTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADotTextField.m; sourceTree = "<group>"; };
 		9FA8F3F0143995F1004DD749 /* Arrow down 16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow down 16x16.png"; sourceTree = "<group>"; };
 		9FA8F3F1143995F1004DD749 /* Arrow up 16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow up 16x16.png"; sourceTree = "<group>"; };
 		9FA8F3F2143995F1004DD749 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
@@ -1212,9 +1215,9 @@
 		9F2F4591140D19C600BAB731 /* Smart Bar */ = {
 			isa = PBXGroup;
 			children = (
-				9F2F458D140D198C00BAB731 /* RASmartBarViewController.xib */,
-				9F2F458B140D198C00BAB731 /* RASmartBarViewController.h */,
-				9F2F458C140D198C00BAB731 /* RASmartBarViewController.m */,
+				9F2F458D140D198C00BAB731 /* RASmartBarItemViewController.xib */,
+				9F2F458B140D198C00BAB731 /* RASmartBarItemViewController.h */,
+				9F2F458C140D198C00BAB731 /* RASmartBarItemViewController.m */,
 				9F16852E1431AC5E00C112A1 /* RAlistManager.h */,
 				9F16852F1431AC5E00C112A1 /* RAlistManager.m */,
 				9F634B81148E8C8B005AAE43 /* RASmartBarItem.h */,
@@ -1450,6 +1453,8 @@
 				69F44861138A24E800432BC7 /* RASmartBarButton.m */,
 				9FEF2AB6147F8D82007BC286 /* RASmartBarHolderView.h */,
 				9FEF2AB7147F8D82007BC286 /* RASmartBarHolderView.m */,
+				9F94F84914973B5500E53BEA /* RADotTextField.h */,
+				9F94F84A14973B5500E53BEA /* RADotTextField.m */,
 			);
 			name = "SmartBar related";
 			sourceTree = "<group>";
@@ -1826,7 +1831,7 @@
 				9FF4BA011408F061005FCE7F /* Start.html in Resources */,
 				9FF4BA041408F57D005FCE7F /* history_Resources in Resources */,
 				9FF4BA051408F57D005FCE7F /* history.html in Resources */,
-				9F2F458F140D198C00BAB731 /* RASmartBarViewController.xib in Resources */,
+				9F2F458F140D198C00BAB731 /* RASmartBarItemViewController.xib in Resources */,
 				9FEF52C7140E2F71004A16D0 /* delete_big.png in Resources */,
 				9F0F5688140ECDD600FAB76C /* tab-close-warning.png in Resources */,
 				9F2BEE75140FC7890090AD70 /* InstaSheet.xib in Resources */,
@@ -1962,7 +1967,7 @@
 				9F85275713CEDBCD00D26BCF /* RAFavoritePanelWController.m in Sources */,
 				9F79C1E313D0CA160039A1CB /* RANSURLDownloadDelegate.m in Sources */,
 				9F03B6D21402D92600985D32 /* RABookmarkCell.m in Sources */,
-				9F2F458E140D198C00BAB731 /* RASmartBarViewController.m in Sources */,
+				9F2F458E140D198C00BAB731 /* RASmartBarItemViewController.m in Sources */,
 				9F2BEE6D140FBEB60090AD70 /* LTInstapaperAPI.m in Sources */,
 				9F2BEE70140FBF170090AD70 /* NSData+Base64.m in Sources */,
 				9F2BEE73140FC1240090AD70 /* RAInstapaperWindow.m in Sources */,
@@ -1991,6 +1996,7 @@
 				9F37D77F148689EB0011B90F /* PXListView+UserInteraction.m in Sources */,
 				9F634B83148E8C8C005AAE43 /* RASmartBarItem.m in Sources */,
 				9FF2D46D1493975100A5CE48 /* RAShelfView.m in Sources */,
+				9F94F84B14973B5600E53BEA /* RADotTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

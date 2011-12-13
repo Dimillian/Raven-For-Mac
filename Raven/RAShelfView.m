@@ -9,7 +9,7 @@
 #import "RAShelfView.h"
 #import "RAMainWindowController.h"
 #import "RASmartBarItem.h"
-#import "RASmartBarViewController.h"
+#import "RASmartBarItemViewController.h"
 
 @implementation RAShelfView
 @synthesize appListShelf; 
@@ -28,7 +28,7 @@
 {
     RAMainWindowController *mainWindow = [[NSApp keyWindow]windowController];
     appListShelf = [[NSMutableArray alloc]init]; 
-    for (RASmartBarViewController *item in mainWindow.appList) {
+    for (RASmartBarItemViewController *item in mainWindow.appList) {
         [appListShelf addObject:item.smartBarItem]; 
     }
     [collectionView setDelegate:self]; 

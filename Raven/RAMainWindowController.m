@@ -343,7 +343,7 @@
     int x = 0;
     for (NSDictionary *item in folders) {
         RASmartBarItem *smartBarItem = [[RASmartBarItem alloc]initWithDictionnary:item andPlistIndex:x];
-        RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self withRASmartBarItem:smartBarItem];
+        RASmartBarItemViewController *smartApp = [[RASmartBarItemViewController alloc]initWithDelegate:self withRASmartBarItem:smartBarItem];
         [appList addObject:smartApp]; 
         [[appList objectAtIndex:x]view];
         if (smartApp.smartBarItem.isVisible) {
@@ -378,7 +378,7 @@
     for (NSInteger sb=13; sb < count; sb++) {
         [smartBarMenu removeItemAtIndex:13];
     }
-    for (RASmartBarViewController *smartApp in appList) {
+    for (RASmartBarItemViewController *smartApp in appList) {
         if (smartApp.smartBarItem.isVisible) {
             NSImage *homeButtonImage = [smartApp.smartBarItem.mainIcon copy];
             [homeButtonImage setSize:NSMakeSize(20, 20)];
@@ -396,37 +396,54 @@
 }
  
 //update UI when an app expand, Delegate sent from RASmartBarViewController
--(void)itemDidExpand:(RASmartBarViewController *)smartBarApp
+-(void)itemDidExpand:(RASmartBarItemViewController *)smartBarApp
 {
-    int currentNumber  = smartBarApp.smartBarItem.URLArray.count;
-    NSInteger index = [appList indexOfObject:smartBarApp]; 
-    for (NSInteger x=0; x<[appList count]; x++) {
-        RASmartBarViewController *smartApp = [appList objectAtIndex:x]; 
-        NSRect frame = [[smartApp view]frame];
-        
-        if (previousIndex == x ) {
-            [smartApp retractApp:nil];
+    int iconNumber  = smartBarApp.smartBarItem.URLArray.count;
+    NSUInteger index = [appList indexOfObject:smartBarApp]; 
+    NSUInteger x = -1; 
+    RASmartBarItemViewController *toRetract = nil; 
+    for (RASmartBarItemViewController *item in appList) {
+        if (++x > index) {
+            [[item.view animator]setFrameOrigin:
+             NSMakePoint(item.view.frame.origin.x, item.view.frame.origin.y - iconNumber * 50)]; 
         }
-        
-        if (x<=index && [smartBarApp state] == 0 && x > previousIndex) {
-            [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, frame.origin.y + app_expanded_height, app_view_w, app_view_h)]; 
+        if (item.state == 1) {
+            toRetract = item; 
         }
-        if (x > index && index <= previousIndex && x <= previousIndex) {
-            [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, frame.origin.y - app_expanded_height, app_view_w, app_view_h)];
+        if (previousIndex == -1) {
+            [[item.view animator]setFrameOrigin:
+             NSMakePoint(item.view.frame.origin.x, item.view.frame.origin.y + 200)]; 
         }
     }
+    if(toRetract){
+        [toRetract retractApp:nil]; 
+    }
     [self hideall]; 
-    [self animate:12]; 
-    previousIndex = index;
-    previousAppNumber = currentNumber; 
-     
+    [self animate:12];
+    previousIndex = x; 
 }
+
+-(void)itemDidRetract:(RASmartBarItemViewController *)smartBarApp
+{
+    int iconNumber  = smartBarApp.smartBarItem.URLArray.count;
+    NSUInteger index = [appList indexOfObject:smartBarApp]; 
+    NSUInteger x = -1; 
+    if (previousIndex != -1) {
+        for (RASmartBarItemViewController *item in appList) {
+            if (++x > index) {
+                [[item.view animator]setFrameOrigin:
+                 NSMakePoint(item.view.frame.origin.x, item.view.frame.origin.y + iconNumber * 50)]; 
+            }
+        }
+    }
+}
+
 
 //Update the smart bar scrollview height to get the right scroll
 -(void)updateSmartBarUi
 {
     NSUInteger count = 0; 
-    for (RASmartBarViewController *smarBarApp in appList) {
+    for (RASmartBarItemViewController *smarBarApp in appList) {
         if (smarBarApp.smartBarItem.isVisible) {
             count++;
         }
@@ -450,7 +467,7 @@
     NSArray *folders = [listManager readAppList];
     NSDictionary *item = [folders lastObject];
     RASmartBarItem *smartBarItem = [[RASmartBarItem alloc]initWithDictionnary:item andPlistIndex:[folders count]];
-    RASmartBarViewController *smartApp = [[RASmartBarViewController alloc]initWithDelegate:self 
+    RASmartBarItemViewController *smartApp = [[RASmartBarItemViewController alloc]initWithDelegate:self 
                                                                         withRASmartBarItem:smartBarItem];
     [appList addObject:smartApp]; 
     [[appList lastObject]view];
@@ -466,24 +483,28 @@
 //reset the smartbar UI, place item at their initial state
 -(void)resetSmartBarUi:(BOOL)animated
 {
+    previousIndex = -1;
     NSInteger y = 0; 
     for (NSInteger x=0; x<[appList count]; x++) {
-        RASmartBarViewController *smartApp = [appList objectAtIndex:x];
+        RASmartBarItemViewController *smartApp = [appList objectAtIndex:x];
         if (smartApp.smartBarItem.isVisible) {
             if (animated) {
                 [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, rightView.frame.size.height - initial_app_space - (retracted_app_height*y), app_view_w, app_view_h)];
-                [smartApp retractApp:nil];   
+                if (smartApp.state == 1) {
+                    [smartApp retractApp:nil]; 
+                } 
             }
             else{
                 [[smartApp view]setFrame:NSMakeRect(app_position_x, rightView.frame.size.height - initial_app_space - (retracted_app_height*y), app_view_w, app_view_h)];
-                [smartApp retractApp:nil]; 
+                if (smartApp.state == 1) {
+                    [smartApp retractApp:nil]; 
+                } 
             }
             y++; 
         }
         
         
     }
-    previousIndex = -1;
     NSPoint pt = NSMakePoint(0.0, [[smartBarScrollView documentView]
                                    bounds].size.height);
     [[smartBarScrollView documentView] scrollPoint:pt];
@@ -570,14 +591,14 @@
 #pragma mark Smart Bar action from home screen
 -(void)showAppAtIndex:(NSUInteger)index
 {
-    RASmartBarViewController *smarBarApp = [appList objectAtIndex:index];
+    RASmartBarItemViewController *smarBarApp = [appList objectAtIndex:index];
     smarBarApp.smartBarItem.isVisible = YES;
     [rightView addSubview:smarBarApp.view]; 
 }
 
 -(void)hideAppAtIndex:(NSUInteger)index
 {
-    RASmartBarViewController *smarBarApp = [appList objectAtIndex:index];
+    RASmartBarItemViewController *smarBarApp = [appList objectAtIndex:index];
     smarBarApp.smartBarItem.isVisible = NO;
     [smarBarApp.view removeFromSuperview];
     [smarBarApp closeAppButtonCliced:nil];
@@ -601,7 +622,7 @@
 
 -(void)removeAppAtIndex:(NSUInteger)index
 {
-    RASmartBarViewController *smartBarApp = [appList objectAtIndex:index]; 
+    RASmartBarItemViewController *smartBarApp = [appList objectAtIndex:index]; 
     [smartBarApp.view removeFromSuperview]; 
     [appList removeObject:smartBarApp]; 
 }
