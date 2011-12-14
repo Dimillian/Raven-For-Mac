@@ -5,6 +5,15 @@
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
 #endif
+
+//Utils
+#define RAHTTPPREFIX @"http://"
+#define RAHTTPSPREFIX @"https://"
+#define RAFTPPREFIX @"ftp://"
+#define RAJAVASCRIPTPREFIX @"javascript:"
+#define RAFILEPREFIX @"file://"
+#define RAINTERNALPREFIX @"raven://"
+
 //preference key
 #define SUGGESTION_BAR @"SuggestionBar"
 #define SELECT_URL_MOUSE_HOVER @"AutoSelectUrl"
@@ -31,7 +40,6 @@
 #define FONTFAMILYSTANDARD_WEBVIEW @"fontFamily"
 #define FONTFAMILYFIXED_WEBVIEW @"fontFamilyFixed"
 #define WEBPREFERENCE_DEFAULT @"webPreferenceDefaultIsSet"
-
 #define OPEN_NEW_TAB_BASE_URL @"openNewTabWithBaseUrl"
 
 //notifications
@@ -49,6 +57,7 @@
 #define UPDATE_TAB_NUMBER @"updateTabNumber"
 
 
+//Plist Key
 #define application_support_path @"~/Library/Application Support/RavenApp/app/"
 #define PLIST_KEY_APPNAME @"appname"
 #define PLIST_KEY_FOLDER @"foldername"
@@ -59,6 +68,8 @@
 #define PLIST_KEY_CATEGORY @"category"
 #define PLIST_KEY_OFFICIAL @"offical"
 #define PLIST_PATH @"~/Library/Application Support/RavenApp/app/app.plist"
+
+//Lion or Not
 #ifndef IS_RUNNING_LION
 #define IS_RUNNING_LION ((int)kCFCoreFoundationVersionNumber > (int)550)
 #endif

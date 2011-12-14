@@ -268,6 +268,8 @@
 		9FA8F3F6143995F1004DD749 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA8F3F2143995F1004DD749 /* header.png */; };
 		9FA8F3F7143995F1004DD749 /* lists.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA8F3F3143995F1004DD749 /* lists.png */; };
 		9FA8F3FE1439A99D004DD749 /* dialog_app.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA8F3FD1439A99D004DD749 /* dialog_app.png */; };
+		9FAC887D1498E63000CF650F /* WebView+Growl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC887C1498E63000CF650F /* WebView+Growl.m */; };
+		9FAC88811498E92900CF650F /* growlWebView.js in Resources */ = {isa = PBXBuildFile; fileRef = 9FAC887F1498E71A00CF650F /* growlWebView.js */; };
 		9FAFB8DE14053517005B94F5 /* MediumSiteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FAFB8DD14053517005B94F5 /* MediumSiteIcon.png */; };
 		9FB6999013CD8505002EAEBA /* RAAboutPanelWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6998F13CD8505002EAEBA /* RAAboutPanelWindowController.m */; };
 		9FB6999413CD8566002EAEBA /* RAAboutPanelWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FB6999313CD8566002EAEBA /* RAAboutPanelWindowController.xib */; };
@@ -667,6 +669,9 @@
 		9FA8F3F2143995F1004DD749 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
 		9FA8F3F3143995F1004DD749 /* lists.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lists.png; sourceTree = "<group>"; };
 		9FA8F3FD1439A99D004DD749 /* dialog_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dialog_app.png; sourceTree = "<group>"; };
+		9FAC887B1498E63000CF650F /* WebView+Growl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebView+Growl.h"; sourceTree = "<group>"; };
+		9FAC887C1498E63000CF650F /* WebView+Growl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebView+Growl.m"; sourceTree = "<group>"; };
+		9FAC887F1498E71A00CF650F /* growlWebView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = growlWebView.js; sourceTree = "<group>"; };
 		9FAFB8DD14053517005B94F5 /* MediumSiteIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MediumSiteIcon.png; sourceTree = "<group>"; };
 		9FB6998E13CD8505002EAEBA /* RAAboutPanelWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAAboutPanelWindowController.h; sourceTree = "<group>"; };
 		9FB6998F13CD8505002EAEBA /* RAAboutPanelWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAAboutPanelWindowController.m; sourceTree = "<group>"; };
@@ -1154,6 +1159,7 @@
 			isa = PBXGroup;
 			children = (
 				9FB8482C1455FC3F00530138 /* SearchWebView.js */,
+				9FAC887F1498E71A00CF650F /* growlWebView.js */,
 				9FB7A3A614514B91009AB771 /* userContent.css */,
 				9F8654071423348B00F32B77 /* app */,
 				9FC2709414102B5C00EAFD3C /* typography.css */,
@@ -1325,6 +1331,8 @@
 				9F5BF674143CEDB20033E18B /* NSString+Raven.m */,
 				9FB848291455FBD300530138 /* WebView+search.h */,
 				9FB8482A1455FBD300530138 /* WebView+search.m */,
+				9FAC887B1498E63000CF650F /* WebView+Growl.h */,
+				9FAC887C1498E63000CF650F /* WebView+Growl.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1883,6 +1891,7 @@
 				9FD7B27714668FEA007EFF15 /* Apps.nib in Resources */,
 				9FD7B27A14669010007EFF15 /* hello.user.js in Resources */,
 				9FD7B27B1466901B007EFF15 /* template.js in Resources */,
+				9FAC88811498E92900CF650F /* growlWebView.js in Resources */,
 				9FDF1CEB146D201B009D3DAE /* chromedefault in Resources */,
 				9FEF7D3F147514F9006ADC7B /* RACookieWindow.xib in Resources */,
 				9FF2D46E1493975100A5CE48 /* RAShelfView.xib in Resources */,
@@ -1997,6 +2006,7 @@
 				9F634B83148E8C8C005AAE43 /* RASmartBarItem.m in Sources */,
 				9FF2D46D1493975100A5CE48 /* RAShelfView.m in Sources */,
 				9F94F84B14973B5600E53BEA /* RADotTextField.m in Sources */,
+				9FAC887D1498E63000CF650F /* WebView+Growl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

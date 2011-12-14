@@ -43,7 +43,7 @@
 -(IBAction)officialWebsite:(id)sender;
 -(void)importAppAction;
 -(void)setDefaultWebPreference; 
--(RAMainWindowController *)openAndShowANewWindow; 
+-(void)openAndShowANewWindow; 
 -(void)openAnInternalWindowWithUrl:(NSString *)URL; 
 @property (nonatomic, retain) RASettingWindowController *setting; 
 @property (nonatomic, retain) NSMutableArray *mainWindowArray;  

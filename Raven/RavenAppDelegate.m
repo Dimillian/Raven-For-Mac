@@ -233,11 +233,15 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         }
     }
     if (i>=count) {
-        RAMainWindowController *MainWindow =  [self openAndShowANewWindow];        
-        [MainWindow raven:nil]; 
-        [[MainWindow navigatorview]setPassedUrl:URL]; 
-        [[MainWindow navigatorview]addtabs:MainWindow]; 
-        [MainWindow.navigatorview closeFirtTab]; 
+        RAMainWindowController *mainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"];
+        [mainWindow setDelegate:self];
+        [mainWindow showWindow:self];
+        [mainWindow raven:nil]; 
+        [[mainWindow navigatorview]setPassedUrl:URL]; 
+        [[mainWindow navigatorview]addtabs:mainWindow]; 
+        [mainWindow.navigatorview closeFirtTab]; 
+        [mainWindowArray addObject:mainWindow];
+        [mainWindow release]; 
     }
 
 }
@@ -270,19 +274,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 
--(RAMainWindowController *)openAndShowANewWindow
+-(void)openAndShowANewWindow
 {
-    RAMainWindowController *MainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"];
-    [MainWindow setDelegate:self];
-    [MainWindow showWindow:self];
-    [mainWindowArray addObject:MainWindow];
-    int x = [mainWindowArray indexOfObject:MainWindow];
-    [MainWindow release]; 
-    return [mainWindowArray objectAtIndex:x]; 
+    RAMainWindowController *mainWindow = [[RAMainWindowController alloc]initWithWindowNibName:@"MainWindow"];
+    [mainWindow setDelegate:self];
+    [mainWindow showWindow:self];
+    [mainWindowArray addObject:mainWindow];
+    if(IS_RUNNING_LION){
+        [mainWindow release]; 
+    }
 }
 
 -(void)closeButtonClicked:(RAMainWindowController *)thisWindow
-{
+{ 
     [mainWindowArray removeObject:thisWindow];
 }
 //Method that fire the file browser to select an app to import

@@ -13,6 +13,7 @@
 #import "NSString+Raven.h"
 #import "RAHiddenWindow.h"
 #import "WebView+search.h"
+#import "WebView+Growl.h"
 #import "LWVClipView.h"
 
 
@@ -106,6 +107,8 @@
     [progressTab setHidden:YES];
     
     fPanelArray = [[NSMutableArray alloc]init]; 
+    
+    //[webview displayGrowlNotification]; 
      
 }
 
@@ -137,7 +140,7 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:page ofType:@"html"];
     if (path){
         [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
-        [address setStringValue:[NSString stringWithFormat:@"raven://%@", page]]; 
+        [address setStringValue:[NSString stringWithFormat:RAINTERNALPREFIX"%@", page]]; 
     }
     else{
         NSAlert *alert = [[NSAlert alloc]init]; 
@@ -215,7 +218,7 @@
     //cool workflow to check if user put http:// or not and put it if not
     NSString *addressTo = [address stringValue];
     addressTo = [addressTo stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    if ([addressTo hasPrefix:@"raven://"]) {
+    if ([addressTo hasPrefix:RAINTERNALPREFIX]) {
         isInternal = YES;
         addressTo = [addressTo substringFromIndex:8]; 
         [self loadInternalPage:addressTo]; 
@@ -224,13 +227,13 @@
     else{
         isInternal = NO; 
         if (addressTo != nil) {
-            if ([addressTo hasPrefix:@"javascript:"]) {
-                addressTo = [addressTo stringByReplacingOccurrencesOfString:@"javascript:" withString:@""]; 
+            if ([addressTo hasPrefix:RAJAVASCRIPTPREFIX]) {
+                addressTo = [addressTo stringByReplacingOccurrencesOfString:RAJAVASCRIPTPREFIX withString:@""]; 
                 [webview stringByEvaluatingJavaScriptFromString:addressTo]; 
             }
             else
             {
-                if ([addressTo hasPrefix:@"http://"] || [addressTo hasPrefix:@"https://"])
+                if ([addressTo hasPrefix:RAHTTPPREFIX] || [addressTo hasPrefix:RAHTTPSPREFIX])
                 {
                     [[webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:addressTo]]];
                 }
@@ -413,10 +416,10 @@
     NSString *URL = [webview mainFrameURL];
     NSString *URLPrefix; 
     if ([URL hasPrefix:@"https"]) {
-        URLPrefix = @"https://";
+        URLPrefix = RAHTTPSPREFIX;
     }
     else{
-        URLPrefix = @"http://";
+        URLPrefix = RAHTTPPREFIX;
     }
     URL = [[NSURL URLWithString:URL]host];
     NSError * error;
