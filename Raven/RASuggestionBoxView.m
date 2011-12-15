@@ -37,7 +37,7 @@
 
 -(void)mouseDown:(id)sender
 {
-NSLog(@"hello"); 
+    NSLog(@"hello"); 
     // this blocks until the button is released
     [super mouseDown:sender];
     // we know the button was released, so we can send this

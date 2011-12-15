@@ -82,33 +82,7 @@
 
 
 #pragma mark -
-#pragma mark tab management
-
-//Called once a tab button is clicked
--(void)previousTab:(id)sender
-{
-    [self resetAllTabsButon]; 
-    if ([tabController indexOfTabViewItem:[tabController selectedTabViewItem]] == 0){
-        [tabController selectLastTabViewItem:self];
-    }
-    else{
-        [tabController selectPreviousTabViewItem:self]; 
-    }
-    [self setImageOnSelectedTab];
-    [self setMenu];
-}
--(void)nextTab:(id)sender
-{
-    [self resetAllTabsButon];
-    if ([tabController indexOfTabViewItem:[tabController selectedTabViewItem]] == [tabController numberOfTabViewItems] -1) {
-        [tabController selectFirstTabViewItem:self];
-    }
-    else{
-    [tabController selectNextTabViewItem:self];
-    }
-    [self setImageOnSelectedTab];
-    [self setMenu];
-}
+#pragma mark Tab UI
 
 //redraw the tabs when one is added or deleted
 //If it is from window does not animate it so on window resize it resize tabs instantantly
@@ -119,14 +93,7 @@
     }
     //If only 1 or 0 tabs then hide the webview tabbar, only do it when it does not come from window resize notification
     if ([_tabsArray count] <= 1 && !fromWindow) {
-        [tabPlaceHolder setHidden:YES];
-        for (RAWebViewController *aTab in _tabsArray) {
-            [allTabsButton setHidden:YES];
-            [[aTab tabHolder]setHidden:YES];
-            [[aTab tabview]setHidden:YES]; 
-            [[aTab webview]setFrame:NSMakeRect(aTab.webview.frame.origin.x, aTab.webview.frame.origin.y, aTab.webview.frame.size.width, aTab.webview.frame.size.height+tabHeight)];
-        }
-        
+        [self hideTabHolder];         
     }
     //show the tabbar and draw tabs
     else
@@ -184,6 +151,47 @@
     }
     localWindow = nil; 
     
+}
+
+-(void)hideTabHolder
+{
+    [tabPlaceHolder setHidden:YES];
+    for (RAWebViewController *aTab in _tabsArray) {
+        [allTabsButton setHidden:YES];
+        [[aTab tabHolder]setHidden:YES];
+        [[aTab tabview]setHidden:YES]; 
+        [[aTab webview]setFrame:NSMakeRect(aTab.webview.frame.origin.x, aTab.webview.frame.origin.y, aTab.webview.frame.size.width, aTab.webview.frame.size.height+tabHeight)];
+    }
+    
+}
+
+
+#pragma mark -
+#pragma mark tab method
+//Called once a tab button is clicked
+-(void)previousTab:(id)sender
+{
+    [self resetAllTabsButon]; 
+    if ([tabController indexOfTabViewItem:[tabController selectedTabViewItem]] == 0){
+        [tabController selectLastTabViewItem:self];
+    }
+    else{
+        [tabController selectPreviousTabViewItem:self]; 
+    }
+    [self setTabSelectedState];
+    [self setMenu];
+}
+-(void)nextTab:(id)sender
+{
+    [self resetAllTabsButon];
+    if ([tabController indexOfTabViewItem:[tabController selectedTabViewItem]] == [tabController numberOfTabViewItems] -1) {
+        [tabController selectFirstTabViewItem:self];
+    }
+    else{
+        [tabController selectNextTabViewItem:self];
+    }
+    [self setTabSelectedState];
+    [self setMenu];
 }
 
 -(void)addtabs:(id)sender
@@ -261,7 +269,7 @@
     }
     
     [self resetAllTabsButon];
-    [self setImageOnSelectedTab];
+    [self setTabSelectedState];
     [item release]; 
     [newtab release]; 
     [self redrawTabs:NO];
@@ -346,7 +354,7 @@
     }
 
 }
--(void)setImageOnSelectedTab
+-(void)setTabSelectedState
 {
     RAWebViewController *clickedtab = [_tabsArray objectAtIndex:
                                        [tabController indexOfTabViewItem:
@@ -409,7 +417,7 @@
     [clickedtab setWindowTitle:allTabsButton];
     
     [self resetAllTabsButon]; 
-    [self setImageOnSelectedTab]; 
+    [self setTabSelectedState]; 
 }
 
 //do all the memory clean up stuff here, it might be better to switch it within the RAWebview itself
@@ -448,7 +456,7 @@
     [_tabsArray removeObjectAtIndex:tag];
     [self resetAllTabsButon];
     [self redrawTabs:NO];
-    [self setImageOnSelectedTab];
+    [self setTabSelectedState];
     [self setMenu];
     [[NSNotificationCenter defaultCenter]postNotificationName:UPDATE_TAB_NUMBER object:nil];
 }

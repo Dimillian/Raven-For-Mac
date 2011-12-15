@@ -18,6 +18,7 @@ static NSGradient *gradient = nil;
 - (void)drawRect:(NSRect)dirtyRect{
     [super drawRect:dirtyRect];
 
+    [[NSGraphicsContext currentContext] setPatternPhase:NSMakePoint( 0, [self bounds].size.height )];
     NSColor *backgroundColor = [NSColor colorWithPatternImage:
                            [NSImage imageNamed:@"linenLight"]];
     [backgroundColor set];
@@ -25,7 +26,6 @@ static NSGradient *gradient = nil;
     NSRectFill(self.bounds);
     NSRect rect = [self documentVisibleRect];
     rect.size.height = [[self documentView] frame].size.height;
-    
     
     // shadow
     if(gradient == nil){

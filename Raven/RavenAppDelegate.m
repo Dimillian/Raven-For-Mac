@@ -286,7 +286,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 -(void)closeButtonClicked:(RAMainWindowController *)thisWindow
-{ 
+{
     [mainWindowArray removeObject:thisWindow];
 }
 //Method that fire the file browser to select an app to import

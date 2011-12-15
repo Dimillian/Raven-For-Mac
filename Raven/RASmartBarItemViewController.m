@@ -141,9 +141,9 @@
             h_field = h_field - 50; 
             i++; 
         }
+        [delegate itemDidExpand:self];
         [[lightVIew animator]setAlphaValue:0.0];
         [[mainButton animator]setAlphaValue:1.0];
-        [delegate itemDidExpand:self];
         [self hideCloseAppButton];
         //[delegate selectionDidChange:self];
         _state = 1;

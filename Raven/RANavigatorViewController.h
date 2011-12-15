@@ -49,8 +49,10 @@
 -(NSMenu *)getTabsMenu;
 -(void)openTabInBackgroundWithUrl:(id)sender;
 -(void)windowResize:(id)sender; 
--(void)setImageOnSelectedTab; 
+-(void)setTabSelectedState; 
+
 -(void)redrawTabs:(BOOL)fromWindow;
+-(void)hideTabHolder; 
 -(void)setMenu; 
 //method
 -(void)resetAllTabsButon; 

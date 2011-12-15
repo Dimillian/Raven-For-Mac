@@ -475,7 +475,7 @@
 
 #pragma mark -
 #pragma mark RASmartBarItemViewController delegate
-//update UI when an app expand, Delegate sent from RASmartBarViewController
+//Make item goes down
 -(void)itemDidExpand:(RASmartBarItemViewController *)smartBarApp
 {
     int iconNumber  = smartBarApp.smartBarItem.URLArray.count;
@@ -490,6 +490,7 @@
         if (item.state == 1) {
             toRetract = item; 
         }
+        //if Raven is selected
         if (previousIndex == -1) {
             [[item.view animator]setFrameOrigin:
              NSMakePoint(item.view.frame.origin.x, item.view.frame.origin.y + 200)]; 
@@ -502,7 +503,7 @@
     [self animate:12];
     previousIndex = x; 
 }
-
+//make item goes up
 -(void)itemDidRetract:(RASmartBarItemViewController *)smartBarApp
 {
     int iconNumber  = smartBarApp.smartBarItem.URLArray.count;
