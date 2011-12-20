@@ -121,8 +121,9 @@
 -(void)mouseEntered:(NSEvent *)theEvent
 {
     RAMainWindowController *controller = [[self window]windowController];
-    [controller showSideBar];
+    [controller showSideBar];  
 }
+
 
 -(void)mouseExited:(NSEvent *)theEvent
 {

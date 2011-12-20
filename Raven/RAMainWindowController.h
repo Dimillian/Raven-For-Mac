@@ -91,7 +91,8 @@
     
     
 }
--(IBAction)hideSideBar:(id)sender;
+-(IBAction)toggleSmartBar:(id)sender;
+-(IBAction)toggleAddressBar:(id)sender;
 //button action
 -(IBAction)history:(id)sender; 
 -(IBAction)home:(id)sender; 
@@ -107,7 +108,6 @@
 //method
 -(void)showSideBar; 
 -(void)hideSideBar; 
--(IBAction)hideShowAddressBar:(id)sender;
 -(void)animate:(NSUInteger)setMode;
 -(void)hideall; 
 -(void)SetMenuButton;

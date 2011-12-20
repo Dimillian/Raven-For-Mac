@@ -1694,19 +1694,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">hideShowAddressBar:</string>
-						<reference key="source" ref="1003"/>
-						<reference key="destination" ref="949424393"/>
-					</object>
-					<int key="connectionID">560</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">hideSideBar:</string>
+						<string key="label">toggleSmartBar:</string>
 						<reference key="source" ref="1003"/>
 						<reference key="destination" ref="931701883"/>
 					</object>
-					<int key="connectionID">562</int>
+					<int key="connectionID">574</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleAddressBar:</string>
+						<reference key="source" ref="1003"/>
+						<reference key="destination" ref="949424393"/>
+					</object>
+					<int key="connectionID">575</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2920,7 +2920,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">573</int>
+			<int key="maxID">575</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3029,14 +3029,14 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>bookmark:</string>
 							<string>download:</string>
-							<string>hideShowAddressBar:</string>
-							<string>hideSideBar:</string>
 							<string>history:</string>
 							<string>home:</string>
 							<string>nextApp:</string>
 							<string>previousApp:</string>
 							<string>raven:</string>
 							<string>setting:</string>
+							<string>toggleAddressBar:</string>
+							<string>toggleSmartBar:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3058,14 +3058,14 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>bookmark:</string>
 							<string>download:</string>
-							<string>hideShowAddressBar:</string>
-							<string>hideSideBar:</string>
 							<string>history:</string>
 							<string>home:</string>
 							<string>nextApp:</string>
 							<string>previousApp:</string>
 							<string>raven:</string>
 							<string>setting:</string>
+							<string>toggleAddressBar:</string>
+							<string>toggleSmartBar:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3075,14 +3075,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">download:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">hideShowAddressBar:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">hideSideBar:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -3107,6 +3099,14 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">setting:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">toggleAddressBar:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">toggleSmartBar:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -3432,7 +3432,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>NSTextField</string>
+							<string>RAAdressTextField</string>
 							<string>NSView</string>
 							<string>RAAddressFieldBox</string>
 							<string>NSButton</string>
@@ -3495,7 +3495,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">address</string>
-								<string key="candidateClassName">NSTextField</string>
+								<string key="candidateClassName">RAAdressTextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">addressBarView</string>

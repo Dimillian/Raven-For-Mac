@@ -41,7 +41,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSCustomView" id="9645336">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -50,7 +50,6 @@
 						<int key="NSvFlags">-2147483383</int>
 						<string key="NSFrame">{{1074, 737}, {15, 25}}</string>
 						<reference key="NSSuperview" ref="9645336"/>
-						<reference key="NSWindow"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="173416492">
@@ -84,7 +83,6 @@
 						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{-1, 738}, {1073, 22}}</string>
 						<reference key="NSSuperview" ref="9645336"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="213251502"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:499</string>
@@ -95,7 +93,6 @@
 						<int key="NSvFlags">18</int>
 						<string key="NSFrame">{{-1, -5}, {1096, 797}}</string>
 						<reference key="NSSuperview" ref="9645336"/>
-						<reference key="NSWindow"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:461</string>
 						<object class="NSMutableArray" key="NSTabViewItems">
@@ -106,8 +103,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{1092, 792}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="152327820"/>
 				<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				<string key="NSClassName">NSView</string>

@@ -20,7 +20,7 @@
     return self; 
 }
 
-- (void)updateTrackingAreas
+-(void)updateTrackingAreas
 {
     for( NSTrackingArea * trackingArea in [self trackingAreas] )
     {

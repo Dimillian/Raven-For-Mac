@@ -10,7 +10,7 @@
 #import "RANavigatorViewController.h"
 
 @implementation RASmartBarItem
-@synthesize folder = _folder, appName = _appName, URLArray = _URLArray, buttonImageArrayOn = _buttonImageArrayOn, buttonImageArrayOff = _buttonImageArrayOff, isVisible = _isVisible, mainIcon = _mainIcon, mainIconBig = _mainIconBig, index = _index, navigatorViewControllerArray =_navigatorViewControllerArray, context = _context, category = _category, makerName = _makerName; 
+@synthesize folder = _folder, appName = _appName, URLArray = _URLArray, buttonImageArrayOn = _buttonImageArrayOn, buttonImageArrayOff = _buttonImageArrayOff, isVisible = _isVisible, mainIcon = _mainIcon, mainIconBig = _mainIconBig, index = _index, navigatorViewControllerArray =_navigatorViewControllerArray, context = _context, category = _category, makerName = _makerName, internalAppUrl = _internalAppUrl; 
 
 -(id)init
 {
@@ -72,6 +72,7 @@
         
         NSURL *URL = [NSURL URLWithString:[_URLArray objectAtIndex:0]];
         self.context = [URL host];
+        self.internalAppUrl = [NSString stringWithFormat:@"%@://", _appName]; 
         [mainImage release]; 
         [mainImageBig release]; 
     }
@@ -89,6 +90,7 @@
         [navView release]; 
     }
 }
+
 
 -(void)hideSmartBarItem
 {

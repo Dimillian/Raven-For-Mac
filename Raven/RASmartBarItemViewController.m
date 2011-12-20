@@ -90,7 +90,7 @@
         [aButton setAlternateImage:[_smartBarItem.buttonImageArrayOn objectAtIndex:i]]; 
         [aButton setTag:i];
         [aButton setTarget:self]; 
-        [aButton setAction:@selector(buttonDidClicked:)]; 
+        [aButton setAction:@selector(onButtonClick:)]; 
         [aButton setButtonType:NSSwitchButton];
         [aButton setTitle:nil]; 
         [aButton setToolTip:_smartBarItem.appName]; 
@@ -121,7 +121,7 @@
 #pragma mark animation
 
 //fired when main app button is clicked
--(IBAction)expandApp:(id)sender
+-(IBAction)onMainButtonClick:(id)sender
 {
     
     if (_state == 0) {
@@ -151,7 +151,7 @@
 }
 
 //fired to retract app
--(IBAction)retractApp:(id)sender
+-(IBAction)onOtherAppClick:(id)sender
 {   
     [self calculateTotalTab];
     NSUserDefaults *standardDefault = [NSUserDefaults standardUserDefaults];
@@ -203,7 +203,7 @@
 #pragma mark -
 #pragma mark inside button action
 
--(void)buttonDidClicked:(id)sender
+-(void)onButtonClick:(id)sender
 {
     [self resetAllButton]; 
     RASmartBarButton *button = [buttonArray objectAtIndex:[sender tag]];
@@ -245,10 +245,10 @@
     _selectedButton = [sender tag];
 }
 
--(void)closeAppButtonCliced:(id)sender
+-(void)onCloseAppButtonClick:(id)sender
 {
     if (_state == 1){
-        RAMainWindowController *mainWindow = [[NSApp keyWindow]windowController]; 
+        RAMainWindowController *mainWindow = self.view.window.windowController;
         [mainWindow raven:nil];
     }
     [_smartBarItem cleanNavigatorController];
@@ -345,7 +345,7 @@
 -(void)setSelectedButton
 {
     RASmartBarButton *button = [buttonArray objectAtIndex:_selectedButton]; 
-    [self buttonDidClicked:button]; 
+    [self onButtonClick:button]; 
 }
 
 #pragma mark -
@@ -397,7 +397,7 @@
 
 -(void)shouldCloseApp:(RASBAPPMainButton *)button
 {
-    [self closeAppButtonCliced:self];
+    [self onCloseAppButtonClick:self];
 }
 
 @end

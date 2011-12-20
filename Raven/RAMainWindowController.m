@@ -348,16 +348,7 @@
         [[appList objectAtIndex:x]view];
         if (smartApp.smartBarItem.isVisible) {
             [rightView addSubview:[[appList objectAtIndex:x]view]];
-            [smartApp retractApp:nil];
-            NSImage *homeButtonImage = [smartApp.smartBarItem.mainIcon copy];
-            [homeButtonImage setSize:NSMakeSize(20, 20)];
-            NSMenuItem *appMenu = [[NSMenuItem alloc]initWithTitle:smartApp.smartBarItem.appName action:@selector(expandApp:) keyEquivalent:[NSString stringWithFormat:@"%d", x+1]]; 
-            [appMenu setTarget:smartApp];
-            [appMenu setImage:homeButtonImage];
-            [smartBarMenu addItem:appMenu];
-            [appMenu release];
-            [homeButtonImage release];
-
+            [smartApp onOtherAppClick:nil];
         }
         x+=1;
         [smartApp release];
@@ -366,6 +357,7 @@
     [topMenu setSubmenu:smartBarMenu forItem:[topMenu itemAtIndex:4]];
     //[NSApp setMenu:topMenu];
     [folders release];
+    [self updateMenu]; 
 
 }
 
@@ -382,7 +374,7 @@
         if (smartApp.smartBarItem.isVisible) {
             NSImage *homeButtonImage = [smartApp.smartBarItem.mainIcon copy];
             [homeButtonImage setSize:NSMakeSize(20, 20)];
-            NSMenuItem *appMenu = [[NSMenuItem alloc]initWithTitle:smartApp.smartBarItem.appName action:@selector(expandApp:) keyEquivalent:[NSString stringWithFormat:@"%d", x+1]]; 
+            NSMenuItem *appMenu = [[NSMenuItem alloc]initWithTitle:smartApp.smartBarItem.appName action:@selector(onMainButtonClick:) keyEquivalent:[NSString stringWithFormat:@"%d", x+1]]; 
             [appMenu setTarget:smartApp];
             [appMenu setImage:homeButtonImage];
             [smartBarMenu addItem:appMenu];
@@ -433,7 +425,7 @@
     [appList addObject:smartApp]; 
     [[appList lastObject]view];
     [rightView addSubview:[[appList lastObject]view]];
-    [smartApp retractApp:nil];
+    [smartApp onOtherAppClick:nil];
     [smartApp release]; 
     [smartBarItem release]; 
     [self updateSmartBarUi];
@@ -452,13 +444,13 @@
             if (animated) {
                 [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, rightView.frame.size.height - initial_app_space - (retracted_app_height*y), app_view_w, app_view_h)];
                 if (smartApp.state == 1) {
-                    [smartApp retractApp:nil]; 
+                    [smartApp onOtherAppClick:nil]; 
                 } 
             }
             else{
                 [[smartApp view]setFrame:NSMakeRect(app_position_x, rightView.frame.size.height - initial_app_space - (retracted_app_height*y), app_view_w, app_view_h)];
                 if (smartApp.state == 1) {
-                    [smartApp retractApp:nil]; 
+                    [smartApp onOtherAppClick:nil]; 
                 } 
             }
             y++; 
@@ -480,12 +472,12 @@
 {
     int iconNumber  = smartBarApp.smartBarItem.URLArray.count;
     NSUInteger index = [appList indexOfObject:smartBarApp]; 
-    NSUInteger x = -1; 
+    NSUInteger x = -1;
     RASmartBarItemViewController *toRetract = nil; 
     for (RASmartBarItemViewController *item in appList) {
         if (++x > index) {
             [[item.view animator]setFrameOrigin:
-             NSMakePoint(item.view.frame.origin.x, item.view.frame.origin.y - iconNumber * 50)]; 
+             NSMakePoint(item.view.frame.origin.x, item.view.frame.origin.y - iconNumber * 50)];
         }
         if (item.state == 1) {
             toRetract = item; 
@@ -497,12 +489,14 @@
         }
     }
     if(toRetract){
-        [toRetract retractApp:nil]; 
+        [toRetract onOtherAppClick:nil]; 
     }
     [self hideall]; 
     [self animate:12];
-    previousIndex = x; 
+    previousIndex = index; 
 }
+
+
 //make item goes up
 -(void)itemDidRetract:(RASmartBarItemViewController *)smartBarApp
 {
@@ -524,10 +518,10 @@
 #pragma mark Other Methods
 
 
--(IBAction)hideSideBar:(id)sender
+-(IBAction)toggleSmartBar:(id)sender
 {
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    if ([settingButton alphaValue] == 0.0) {
+    if (isHidden == YES) {
         [settingButton setHidden:NO];
         [NSAnimationContext beginGrouping];
         [[NSAnimationContext currentContext] setDuration:0.3];
@@ -537,6 +531,7 @@
         [[settingButton animator]setAlphaValue:1.0];
         [NSAnimationContext endGrouping];
         isHidden = NO;
+        isAdressBarHidden = NO; 
         
     }
     else{
@@ -553,6 +548,7 @@
         }
         [NSAnimationContext endGrouping];
         isHidden = YES;
+        isAdressBarHidden = NO; 
         
     }
     
@@ -590,12 +586,21 @@
 
 -(void)nextApp:(id)sender
 {
-   
+    if (previousIndex <= [appList count] || previousIndex == -1) {
+        RASmartBarItemViewController *aItem = [appList objectAtIndex:previousIndex+1];
+        [aItem onMainButtonClick:nil]; 
+    }
 }
 
 -(void)previousApp:(id)sender
 {
-    
+    if (previousIndex > 0) {
+        RASmartBarItemViewController *aItem = [appList objectAtIndex:previousIndex-1];
+        [aItem onMainButtonClick:nil];  
+    }
+    else{
+        [self raven:nil]; 
+    }
 }
 
 #pragma mark -
@@ -612,7 +617,7 @@
     RASmartBarItemViewController *smarBarApp = [appList objectAtIndex:index];
     smarBarApp.smartBarItem.isVisible = NO;
     [smarBarApp.view removeFromSuperview];
-    [smarBarApp closeAppButtonCliced:nil];
+    [smarBarApp onCloseAppButtonClick:nil];
 }
 
 -(void)moveAppFromIndex:(NSUInteger)from toIndex:(NSUInteger)to
@@ -640,7 +645,7 @@
 
 #pragma mark -
 #pragma mark window UI
--(void)hideShowAddressBar:(id)sender
+-(void)toggleAddressBar:(id)sender
 {
     if (isAdressBarHidden) {
         [[centeredView animator]setFrame:NSMakeRect(centeredView.frame.origin.x, centeredView.frame.origin.y, centeredView.frame.size.width, centeredView.frame.size.height - toolbarSize)];

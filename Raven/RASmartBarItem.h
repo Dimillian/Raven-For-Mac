@@ -14,6 +14,7 @@
     NSString *_folder; 
     NSString *_context;
     NSString *_makerName; 
+    NSString *_internalAppUrl; 
     NSString *_category; 
     NSImage *_mainIcon; 
     NSImage *_mainIconBig; 
@@ -35,6 +36,7 @@
 @property (nonatomic, copy) NSString *context; 
 @property (nonatomic, copy) NSString *makerName; 
 @property (nonatomic, copy) NSString *category; 
+@property (nonatomic, copy) NSString *internalAppUrl; 
 @property (nonatomic, retain) NSImage *mainIcon; 
 @property (nonatomic, retain) NSImage *mainIconBig; 
 @property (nonatomic, assign) NSMutableArray *URLArray; 

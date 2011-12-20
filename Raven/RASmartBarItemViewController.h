@@ -47,12 +47,12 @@
 -(id)initWithDelegate:(id<RASmartBarViewItemControllerDelegate>)dgate 
             withRASmartBarItem:(RASmartBarItem *)item;
 
--(void)buttonDidClicked:(id)sender; 
--(void)calculateTotalTab;
--(IBAction)expandApp:(id)sender;
--(void)retractApp:(id)sender;
--(IBAction)closeAppButtonCliced:(id)sender; 
+-(void)onButtonClick:(id)sender; 
+-(IBAction)onMainButtonClick:(id)sender;
+-(void)onOtherAppClick:(id)sender;
+-(IBAction)onCloseAppButtonClick:(id)sender; 
 -(void)updateStatusAndCleanMemory;
+-(void)calculateTotalTab;
 -(void)resetAllButton; 
 -(void)setSelectedButton;
 -(void)updateTabsNumber; 

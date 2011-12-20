@@ -128,7 +128,7 @@
 #pragma mark -
 #pragma mark MENU
 -(NSMenu *)getMenu
-{ 
+{
     NSMenu *menu = [[NSMenu alloc]initWithTitle:@"Smart Bar App Menu"];
     NSMenuItem *firstItem = [[NSMenuItem alloc]init];
     [firstItem setTitle:@"Close Web App"];
@@ -147,9 +147,9 @@
     [secondItem release]; 
     [menu addItem:[NSMenuItem separatorItem]];
     NSMenuItem *thirdItem = [[NSMenuItem alloc]init];
-    [thirdItem setTitle:@"Hide Smart Bar"];
+    [thirdItem setTitle:@"Hide/Show Smart bar"];
     [thirdItem setTarget:self.window.windowController];
-    [thirdItem setAction:@selector(hideSideBar:)];
+    [thirdItem setAction:@selector(toggleSmartBar:)];
     [thirdItem setEnabled:YES];
     [menu addItem:thirdItem]; 
     [thirdItem release]; 
@@ -164,11 +164,11 @@
     [fiveItem setTitle:@"Visit Web App Shop"];
     [fiveItem setTarget:[[NSApplication sharedApplication]delegate]];
     [fiveItem setAction:@selector(webAppShop:)];
-    [fiveItem setEnabled:YES];
+    [fiveItem setEnabled:YES]; 
     [menu addItem:fiveItem]; 
     [fiveItem release]; 
-    
     return [menu autorelease]; 
+
 }
 
 #pragma mark -
