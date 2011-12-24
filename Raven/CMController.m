@@ -438,10 +438,10 @@ static NSString* SCRIPT_DIR_PATH = @"~/Library/Application Support/ravenapp/Grea
     [self reloadUserScripts: nil];
 
     NSMenuItem* item = [[NSMenuItem alloc] init];
-    [[NSApp mainMenu] insertItem: item
-                         atIndex: 7];
     [topMenu setTitle: @"Userscripts"];
     [item setSubmenu: topMenu];
+    [[NSApp menu]insertItem: item
+                    atIndex: 7];
     [item release];
     // Notification
     NSNotificationCenter* center = [NSNotificationCenter defaultCenter];

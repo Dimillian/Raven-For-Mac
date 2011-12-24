@@ -24,6 +24,8 @@
     RASmartBarItem *_smartBarItem; 
     NSMutableArray *buttonArray; 
     NSMutableArray *tabNumberFieldArray; 
+    
+    //Controller should not hold state, but it simply better here
     NSInteger _state;
     NSInteger _selectedButton; 
     
@@ -45,7 +47,7 @@
 
 }
 -(id)initWithDelegate:(id<RASmartBarViewItemControllerDelegate>)dgate 
-            withRASmartBarItem:(RASmartBarItem *)item;
+            andRASmartBarItem:(RASmartBarItem *)item;
 
 -(void)onButtonClick:(id)sender; 
 -(IBAction)onMainButtonClick:(id)sender;

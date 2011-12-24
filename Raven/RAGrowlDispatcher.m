@@ -56,16 +56,16 @@
 -(void)receiveNotification:(NSNotification *)notification
 {   
     if ([[notification name]isEqualToString:NEW_APP_INSTALLED]) {
-        [self growlAlert:@"New application installed with success" title:@"New app installed"];
+        [self growlAlert:NSLocalizedString(@"New application installed with success", @"Growl_App_Install_text") title:NSLocalizedString(@"New app installed", @"Growl_App_Install_Title")];
     }
     if ([[notification name]isEqualToString:APP_UPDATED]) {
-        [self growlAlert:@"Application updated with success" title:@"Application updated"];
+        [self growlAlert:NSLocalizedString(@"Application updated with success", @"Growl_App_Update_text") title:NSLocalizedString(@"Application updated", @"Growl_App_Update_Title")];
     }
     if ([[notification name]isEqualToString:DOWNLOAD_BEGIN]) {
-        [self growlAlert:@"A file is downloading" title:@"A new download has begun"];
+        [self growlAlert:NSLocalizedString(@"A file is downloading", @"Growl_Download_begin_Text") title:NSLocalizedString(@"A new download has begun", @"Growl_Download_Begin_Title")];
     }
     if ([[notification name]isEqualToString:DOWNLOAD_FINISH]) {
-        [self growlAlert:[NSString stringWithFormat:@"The file %@ have finished downloading", [notification object]] title:@"A download is done"];
+        [self growlAlert:[NSString stringWithFormat:NSLocalizedString(@"The file %@ have finished downloading", @"Growl_Download_Finish_Text"), [notification object]] title:NSLocalizedString(@"A download is done", @"Growl_Download_Finish_Title")];
     }
 }
 

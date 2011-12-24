@@ -137,6 +137,7 @@
     [_mainIconBig release]; 
     [_appName release]; 
     [_folder release]; 
+    [_internalAppUrl release]; 
     [super dealloc]; 
 }
 @end

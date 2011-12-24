@@ -15,6 +15,7 @@
 #import "WebView+search.h"
 #import "WebView+Growl.h"
 #import "LWVClipView.h"
+#import "RAAdressTextField.h"
 
 
 #define GOOGLE_SEARCH_URL @"http://www.google.com/search?q="
@@ -561,7 +562,9 @@
     NSString *url = [webview mainFrameURL];
     //set the URl in the address bar
     if (!isInternal) {
-        [address setStringValue:url];
+         if(![[[address window]firstResponder]isKindOfClass:[address class]]){
+            [address setStringValue:url];
+        }
     }
     
 }
@@ -582,7 +585,9 @@
         [[sender window] setTitle:title];
         if (isNewTab)
         {
-            [address setStringValue:@""];
+            if(![[[address window]firstResponder]isKindOfClass:[address class]]){
+                [address setStringValue:@""];
+            }
             isNewTab = NO; 
         }
     } 

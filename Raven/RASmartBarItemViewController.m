@@ -52,7 +52,7 @@
 }
 
 -(id)initWithDelegate:(id<RASmartBarViewItemControllerDelegate>)dgate 
-   withRASmartBarItem:(RASmartBarItem *)item
+   andRASmartBarItem:(RASmartBarItem *)item
 {
     self = [super init]; 
     if (self !=nil)

@@ -2356,9 +2356,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">1499</int>
 						<reference key="object" ref="636220746"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-						</object>
 						<reference key="parent" ref="649796088"/>
 					</object>
 				</object>

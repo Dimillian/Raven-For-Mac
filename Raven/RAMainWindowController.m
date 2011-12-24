@@ -83,9 +83,9 @@
     [bookmarkview release]; 
     [downloadview release]; 
     [settingview release]; 
-    [appList release], appList = nil; 
     [[NSNotificationCenter defaultCenter]removeObserver:self];
     [delegate closeButtonClicked:self];
+    [appList release], appList = nil; 
     [super dealloc];
 }
 
@@ -93,7 +93,6 @@
 -(void)windowWillClose:(NSNotification *)notification
 {   
     [[RAlistManager sharedUser]writeNewAppListInMemory:nil writeToFile:YES];
-    [[RAlistManager sharedUser]forceReadApplist];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self autorelease]; 
 }
@@ -343,7 +342,7 @@
     int x = 0;
     for (NSDictionary *item in folders) {
         RASmartBarItem *smartBarItem = [[RASmartBarItem alloc]initWithDictionnary:item andPlistIndex:x];
-        RASmartBarItemViewController *smartApp = [[RASmartBarItemViewController alloc]initWithDelegate:self withRASmartBarItem:smartBarItem];
+        RASmartBarItemViewController *smartApp = [[RASmartBarItemViewController alloc]initWithDelegate:self andRASmartBarItem:smartBarItem];
         [appList addObject:smartApp]; 
         [[appList objectAtIndex:x]view];
         if (smartApp.smartBarItem.isVisible) {
@@ -421,7 +420,7 @@
     NSDictionary *item = [folders lastObject];
     RASmartBarItem *smartBarItem = [[RASmartBarItem alloc]initWithDictionnary:item andPlistIndex:[folders count]];
     RASmartBarItemViewController *smartApp = [[RASmartBarItemViewController alloc]initWithDelegate:self 
-                                                                                withRASmartBarItem:smartBarItem];
+                                                                                andRASmartBarItem:smartBarItem];
     [appList addObject:smartApp]; 
     [[appList lastObject]view];
     [rightView addSubview:[[appList lastObject]view]];
@@ -584,19 +583,30 @@
     }
 }
 
+//If, for, if, break. Sorry.
 -(void)nextApp:(id)sender
 {
     if (previousIndex <= [appList count] || previousIndex == -1) {
-        RASmartBarItemViewController *aItem = [appList objectAtIndex:previousIndex+1];
-        [aItem onMainButtonClick:nil]; 
+        for (NSUInteger a = previousIndex+1; a<[appList count]; a++) {
+            RASmartBarItemViewController *aItem = [appList objectAtIndex:a];
+            if (aItem.smartBarItem.isVisible) {
+                [aItem onMainButtonClick:nil]; 
+                break; 
+            }
+        }
     }
 }
 
 -(void)previousApp:(id)sender
 {
     if (previousIndex > 0) {
-        RASmartBarItemViewController *aItem = [appList objectAtIndex:previousIndex-1];
-        [aItem onMainButtonClick:nil];  
+        for (NSUInteger a = previousIndex-1; a<[appList count]; a--) {
+            RASmartBarItemViewController *aItem = [appList objectAtIndex:a];
+            if (aItem.smartBarItem.isVisible) {
+                [aItem onMainButtonClick:nil]; 
+                break; 
+            }
+        }
     }
     else{
         [self raven:nil]; 
@@ -605,6 +615,8 @@
 
 #pragma mark -
 #pragma mark Smart Bar Applist Action
+//Basically this are called on notification, from setting or whatever. 
+//State are later replicated into the plis file configurations. 
 -(void)showAppAtIndex:(NSUInteger)index
 {
     RASmartBarItemViewController *smarBarApp = [appList objectAtIndex:index];

@@ -137,6 +137,7 @@
     //instanciate about and setting window
     setting = [[RASettingWindowController alloc]initWithWindowNibName:@"PreferenceWindow"];
     about = [[RAAboutPanelWindowController alloc]initWithWindowNibName:@"RAAboutPanelWindowController"]; 
+    
    
         
 }
