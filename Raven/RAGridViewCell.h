@@ -20,6 +20,9 @@
     NSButton *closeButton; 
     NSButton *removeButton; 
     NSButton *addButton; 
+    NSButton *moveUp; 
+    NSButton *moveDown; 
+    
     NSTextField *textView; 
     RASmartBarItem *data; 
 }
@@ -31,6 +34,8 @@
 -(void)closeButtonClicked:(id)sender; 
 -(void)removeButtonClicked:(id)sender; 
 -(void)addButtonClicked:(id)sender; 
+-(void)moveUpClicked:(id)sender; 
+-(void)moveDownclicked:(id)sender; 
 
 @property (nonatomic, assign) id<RAGridViewCellDelegate> delegate;
 @end
@@ -40,5 +45,7 @@
 -(void)onCloseButtonClick:(RASmartBarItem *)item; 
 -(void)onRemoveButtonClick:(RASmartBarItem *)item; 
 -(void)onAddButtonClick:(RASmartBarItem *)item; 
+-(void)onMoveUpClick:(RASmartBarItem *)item; 
+-(void)onMoveDownClick:(RASmartBarItem *)item; 
 @end
 

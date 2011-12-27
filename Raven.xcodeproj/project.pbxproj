@@ -182,6 +182,9 @@
 		9F1685301431AC5E00C112A1 /* RAlistManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F16852F1431AC5E00C112A1 /* RAlistManager.m */; };
 		9F1ABB8F140670E7009F68B3 /* database in Resources */ = {isa = PBXBuildFile; fileRef = 9F1ABB8E140670E7009F68B3 /* database */; };
 		9F20FAC514A9D6FC0036CCCE /* RAGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F20FAC414A9D6FC0036CCCE /* RAGridViewCell.m */; };
+		9F20FACF14AA5CD30036CCCE /* RAGridViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F20FACE14AA5CD30036CCCE /* RAGridViewContentView.m */; };
+		9F20FAD614AA68960036CCCE /* grid_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F20FAD414AA68960036CCCE /* grid_left.png */; };
+		9F20FAD714AA68960036CCCE /* grid_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F20FAD514AA68960036CCCE /* grid_right.png */; };
 		9F2501EA141BC0B30094D79C /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2501E9141BC0B30094D79C /* INAppStoreWindow.m */; };
 		9F2BEE6D140FBEB60090AD70 /* LTInstapaperAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2BEE6C140FBEB60090AD70 /* LTInstapaperAPI.m */; };
 		9F2BEE70140FBF170090AD70 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2BEE6F140FBF170090AD70 /* NSData+Base64.m */; };
@@ -573,6 +576,10 @@
 		9F1ABB8E140670E7009F68B3 /* database */ = {isa = PBXFileReference; lastKnownFileType = file; path = database; sourceTree = "<group>"; };
 		9F20FAC314A9D6FC0036CCCE /* RAGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGridViewCell.h; sourceTree = "<group>"; };
 		9F20FAC414A9D6FC0036CCCE /* RAGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAGridViewCell.m; sourceTree = "<group>"; };
+		9F20FACD14AA5CD30036CCCE /* RAGridViewContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGridViewContentView.h; sourceTree = "<group>"; };
+		9F20FACE14AA5CD30036CCCE /* RAGridViewContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAGridViewContentView.m; sourceTree = "<group>"; };
+		9F20FAD414AA68960036CCCE /* grid_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid_left.png; sourceTree = "<group>"; };
+		9F20FAD514AA68960036CCCE /* grid_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid_right.png; sourceTree = "<group>"; };
 		9F2501E8141BC0B30094D79C /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindow.h; sourceTree = "<group>"; };
 		9F2501E9141BC0B30094D79C /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAppStoreWindow.m; sourceTree = "<group>"; };
 		9F2BEE6B140FBEB60090AD70 /* LTInstapaperAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTInstapaperAPI.h; sourceTree = "<group>"; };
@@ -1679,6 +1686,8 @@
 				69B313541356395000F3DCFD /* RASettingViewController.m */,
 				9F20FAC314A9D6FC0036CCCE /* RAGridViewCell.h */,
 				9F20FAC414A9D6FC0036CCCE /* RAGridViewCell.m */,
+				9F20FACD14AA5CD30036CCCE /* RAGridViewContentView.h */,
+				9F20FACE14AA5CD30036CCCE /* RAGridViewContentView.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1767,6 +1776,8 @@
 		9FB638B014A9295300E4E5A5 /* Shelf */ = {
 			isa = PBXGroup;
 			children = (
+				9F20FAD414AA68960036CCCE /* grid_left.png */,
+				9F20FAD514AA68960036CCCE /* grid_right.png */,
 				9FB638B114A9296500E4E5A5 /* close_app.png */,
 				9FB638B214A9296500E4E5A5 /* delete_app.png */,
 				9FB638B314A9296500E4E5A5 /* overlay_app.png */,
@@ -2236,6 +2247,8 @@
 				9FB638B414A9296500E4E5A5 /* close_app.png in Resources */,
 				9FB638B514A9296500E4E5A5 /* delete_app.png in Resources */,
 				9FB638B614A9296500E4E5A5 /* overlay_app.png in Resources */,
+				9F20FAD614AA68960036CCCE /* grid_left.png in Resources */,
+				9F20FAD714AA68960036CCCE /* grid_right.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2349,6 +2362,7 @@
 				9F94F84B14973B5600E53BEA /* RADotTextField.m in Sources */,
 				9FAC887D1498E63000CF650F /* WebView+Growl.m in Sources */,
 				9F20FAC514A9D6FC0036CCCE /* RAGridViewCell.m in Sources */,
+				9F20FACF14AA5CD30036CCCE /* RAGridViewContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

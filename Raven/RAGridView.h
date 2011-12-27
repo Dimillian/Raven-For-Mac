@@ -8,18 +8,21 @@
 
 #import <Cocoa/Cocoa.h>
 #import "RAGridViewCell.h"
+#import "RAGridViewContentView.h"
 
 @class RAMainWindowController;
-@interface RAGridView : NSViewController <NSCollectionViewDelegate, RAGridViewCellDelegate>
+@interface RAGridView : NSViewController <NSCollectionViewDelegate, RAGridViewCellDelegate, NSWindowDelegate>
 {
     IBOutlet NSScrollView *scrollView; 
-    IBOutlet NSView *contentView; 
+    IBOutlet RAGridViewContentView *contentView; 
     NSMutableArray *cellArray; 
     RAMainWindowController *mainWindow; 
 }
+-(void)resetView; 
 -(void)receiveNotification:(NSNotification *)notification;
 -(void)reDrawView;
 -(void)sizeContentView; 
+-(void)deleteItem:(RASmartBarItem *)item; 
 
 
 @end
