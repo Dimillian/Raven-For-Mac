@@ -74,7 +74,7 @@
         self.context = [URL host];
         self.internalAppUrl = [NSString stringWithFormat:@"%@://", _appName]; 
         [mainImage release]; 
-        [mainImageBig release]; 
+        [mainImageBig release];
     }
     
     return self; 

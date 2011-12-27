@@ -23,7 +23,7 @@
 #import "RASmartBarItem.h"
 #import "Growl/Growl.h"
 #import "Growl/GrowlApplicationBridge.h"
-#import "RAShelfView.h"
+#import "RAGridView.h"
 
 
 @protocol RAMainDelegate; 
@@ -77,7 +77,7 @@
     RABookmarkViewController *bookmarkview; 
     RADownloadViewController *downloadview; 
     RASettingViewController *settingview; 
-    RAShelfView *shelfView; 
+    RAGridView *shelfView; 
     
     
     IBOutlet NSView *titleBar;
@@ -120,6 +120,7 @@
 -(void)hideAppAtIndex:(NSUInteger)index; 
 -(void)showAppAtIndex:(NSUInteger)index; 
 -(void)moveAppFromIndex:(NSUInteger)from toIndex:(NSUInteger)to; 
+-(void)resetIndex; 
 -(void)launchRuntime;
 -(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs;
 -(void)receiveNotification:(NSNotification *)notification;

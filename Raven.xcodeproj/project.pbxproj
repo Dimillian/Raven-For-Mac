@@ -181,6 +181,7 @@
 		9F150649140FF31100C97149 /* instapaper-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F150647140FF31100C97149 /* instapaper-small.png */; };
 		9F1685301431AC5E00C112A1 /* RAlistManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F16852F1431AC5E00C112A1 /* RAlistManager.m */; };
 		9F1ABB8F140670E7009F68B3 /* database in Resources */ = {isa = PBXBuildFile; fileRef = 9F1ABB8E140670E7009F68B3 /* database */; };
+		9F20FAC514A9D6FC0036CCCE /* RAGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F20FAC414A9D6FC0036CCCE /* RAGridViewCell.m */; };
 		9F2501EA141BC0B30094D79C /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2501E9141BC0B30094D79C /* INAppStoreWindow.m */; };
 		9F2BEE6D140FBEB60090AD70 /* LTInstapaperAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2BEE6C140FBEB60090AD70 /* LTInstapaperAPI.m */; };
 		9F2BEE70140FBF170090AD70 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2BEE6F140FBF170090AD70 /* NSData+Base64.m */; };
@@ -271,6 +272,10 @@
 		9FAC887D1498E63000CF650F /* WebView+Growl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC887C1498E63000CF650F /* WebView+Growl.m */; };
 		9FAC88811498E92900CF650F /* growlWebView.js in Resources */ = {isa = PBXBuildFile; fileRef = 9FAC887F1498E71A00CF650F /* growlWebView.js */; };
 		9FAFB8DE14053517005B94F5 /* MediumSiteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FAFB8DD14053517005B94F5 /* MediumSiteIcon.png */; };
+		9FB638AF14A9282700E4E5A5 /* shadow_shelf.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FB638AE14A9282700E4E5A5 /* shadow_shelf.png */; };
+		9FB638B414A9296500E4E5A5 /* close_app.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FB638B114A9296500E4E5A5 /* close_app.png */; };
+		9FB638B514A9296500E4E5A5 /* delete_app.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FB638B214A9296500E4E5A5 /* delete_app.png */; };
+		9FB638B614A9296500E4E5A5 /* overlay_app.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FB638B314A9296500E4E5A5 /* overlay_app.png */; };
 		9FB6999013CD8505002EAEBA /* RAAboutPanelWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6998F13CD8505002EAEBA /* RAAboutPanelWindowController.m */; };
 		9FB6999413CD8566002EAEBA /* RAAboutPanelWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FB6999313CD8566002EAEBA /* RAAboutPanelWindowController.xib */; };
 		9FB6999E13CDA190002EAEBA /* about-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FB6999D13CDA190002EAEBA /* about-background.png */; };
@@ -308,8 +313,8 @@
 		9FEF7D3C147514CF006ADC7B /* RACookieWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF7D3B147514CF006ADC7B /* RACookieWindowController.m */; };
 		9FEF7D3F147514F9006ADC7B /* RACookieWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FEF7D3E147514F9006ADC7B /* RACookieWindow.xib */; };
 		9FF1017E13CCF03500B8F942 /* RATabFaviconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */; };
-		9FF2D46D1493975100A5CE48 /* RAShelfView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2D46B1493975100A5CE48 /* RAShelfView.m */; };
-		9FF2D46E1493975100A5CE48 /* RAShelfView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FF2D46C1493975100A5CE48 /* RAShelfView.xib */; };
+		9FF2D46D1493975100A5CE48 /* RAGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2D46B1493975100A5CE48 /* RAGridView.m */; };
+		9FF2D46E1493975100A5CE48 /* RAGridView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FF2D46C1493975100A5CE48 /* RAGridView.xib */; };
 		9FF4B9D31408D6DB005FCE7F /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D11408D6DB005FCE7F /* eye.png */; };
 		9FF4B9D41408D6DB005FCE7F /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D21408D6DB005FCE7F /* trash.png */; };
 		9FF4B9D91408D84C005FCE7F /* bookmarks_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D61408D84C005FCE7F /* bookmarks_empty.png */; };
@@ -566,6 +571,8 @@
 		9F16852E1431AC5E00C112A1 /* RAlistManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAlistManager.h; sourceTree = "<group>"; };
 		9F16852F1431AC5E00C112A1 /* RAlistManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAlistManager.m; sourceTree = "<group>"; };
 		9F1ABB8E140670E7009F68B3 /* database */ = {isa = PBXFileReference; lastKnownFileType = file; path = database; sourceTree = "<group>"; };
+		9F20FAC314A9D6FC0036CCCE /* RAGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGridViewCell.h; sourceTree = "<group>"; };
+		9F20FAC414A9D6FC0036CCCE /* RAGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAGridViewCell.m; sourceTree = "<group>"; };
 		9F2501E8141BC0B30094D79C /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindow.h; sourceTree = "<group>"; };
 		9F2501E9141BC0B30094D79C /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAppStoreWindow.m; sourceTree = "<group>"; };
 		9F2BEE6B140FBEB60090AD70 /* LTInstapaperAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTInstapaperAPI.h; sourceTree = "<group>"; };
@@ -673,6 +680,10 @@
 		9FAC887C1498E63000CF650F /* WebView+Growl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebView+Growl.m"; sourceTree = "<group>"; };
 		9FAC887F1498E71A00CF650F /* growlWebView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = growlWebView.js; sourceTree = "<group>"; };
 		9FAFB8DD14053517005B94F5 /* MediumSiteIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MediumSiteIcon.png; sourceTree = "<group>"; };
+		9FB638AE14A9282700E4E5A5 /* shadow_shelf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow_shelf.png; sourceTree = "<group>"; };
+		9FB638B114A9296500E4E5A5 /* close_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_app.png; sourceTree = "<group>"; };
+		9FB638B214A9296500E4E5A5 /* delete_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_app.png; sourceTree = "<group>"; };
+		9FB638B314A9296500E4E5A5 /* overlay_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlay_app.png; sourceTree = "<group>"; };
 		9FB6998E13CD8505002EAEBA /* RAAboutPanelWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAAboutPanelWindowController.h; sourceTree = "<group>"; };
 		9FB6998F13CD8505002EAEBA /* RAAboutPanelWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAAboutPanelWindowController.m; sourceTree = "<group>"; };
 		9FB6999313CD8566002EAEBA /* RAAboutPanelWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RAAboutPanelWindowController.xib; sourceTree = "<group>"; };
@@ -724,9 +735,9 @@
 		9FEF7D3E147514F9006ADC7B /* RACookieWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RACookieWindow.xib; sourceTree = "<group>"; };
 		9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATabFaviconView.h; sourceTree = "<group>"; };
 		9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATabFaviconView.m; sourceTree = "<group>"; };
-		9FF2D46A1493975100A5CE48 /* RAShelfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAShelfView.h; sourceTree = "<group>"; };
-		9FF2D46B1493975100A5CE48 /* RAShelfView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAShelfView.m; sourceTree = "<group>"; };
-		9FF2D46C1493975100A5CE48 /* RAShelfView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RAShelfView.xib; sourceTree = "<group>"; };
+		9FF2D46A1493975100A5CE48 /* RAGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGridView.h; sourceTree = "<group>"; };
+		9FF2D46B1493975100A5CE48 /* RAGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAGridView.m; sourceTree = "<group>"; };
+		9FF2D46C1493975100A5CE48 /* RAGridView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RAGridView.xib; sourceTree = "<group>"; };
 		9FF4B9D11408D6DB005FCE7F /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
 		9FF4B9D21408D6DB005FCE7F /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		9FF4B9D61408D84C005FCE7F /* bookmarks_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmarks_empty.png; sourceTree = "<group>"; };
@@ -771,21 +782,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		690A79BE138B056B001AB4DE /* View */ = {
+		690A79BE138B056B001AB4DE /* Main Menu */ = {
 			isa = PBXGroup;
 			children = (
-				9FF2D46C1493975100A5CE48 /* RAShelfView.xib */,
 				69F8A092133CD50300E32E6D /* MainMenu.xib */,
-				6914E6B1133E4AAB0054D6D7 /* Navigator.xib */,
-				9F8A1CD313FDA36500DD291C /* Bookmark.xib */,
-				9F8A1CD713FDA38200DD291C /* history.xib */,
-				9F8A1CDB13FDA3B100DD291C /* Download.xib */,
-				69B313571356396C00F3DCFD /* Settings.xib */,
-				9F8A1CDF13FDA49C00DD291C /* NavigatorNoBottom.xib */,
-				6977CF2113A9F67400C2C5DD /* SuggestionBox.xib */,
-				695831EE13AA7B09009D3725 /* tooltip.xib */,
 			);
-			name = View;
+			name = "Main Menu";
 			sourceTree = "<group>";
 		};
 		690A79C0138B0594001AB4DE /* Conf */ = {
@@ -800,6 +802,7 @@
 		690C5546133DCD27005D50B3 /* ressources */ = {
 			isa = PBXGroup;
 			children = (
+				9FB638B014A9295300E4E5A5 /* Shelf */,
 				9FDF1CEA146D201B009D3DAE /* chromedefault */,
 				9F4105D314600BBF00CB33AC /* GrayLinen.png */,
 				9F13E9BA145D781D00576566 /* LinenMiddle.jpg */,
@@ -1056,39 +1059,14 @@
 			children = (
 				9FEF2AB4147F8CBC007BC286 /* SplitView related */,
 				9FEF2AB3147F8C99007BC286 /* Window Related */,
-				9FEF2AB2147F8C7C007BC286 /* TabNavigator related */,
-				9FEF2AB1147F8C68007BC286 /* SmartBar related */,
-				9FEF2AB0147F8C63007BC286 /* WebNavigator related */,
 			);
 			name = "Reusable Subclass";
-			sourceTree = "<group>";
-		};
-		69F4485F138A24B300432BC7 /* Main Views Controller */ = {
-			isa = PBXGroup;
-			children = (
-				6914E6BA133E51430054D6D7 /* RANavigatorViewController.h */,
-				9F8A1CE813FDA99300DD291C /* RANavigatorViewController.m */,
-				6914E6B5133E4BB70054D6D7 /* RABookmarkViewController.h */,
-				6914E6B6133E4BB70054D6D7 /* RABookmarkViewController.m */,
-				6914E6BF133E57CF0054D6D7 /* RAHistoryViewController.h */,
-				6914E6C0133E57CF0054D6D7 /* RAHistoryViewController.m */,
-				69B313531356395000F3DCFD /* RASettingViewController.h */,
-				69B313541356395000F3DCFD /* RASettingViewController.m */,
-				693A0AC21361F8DB001C309F /* RAWebViewController.h */,
-				693A0AC31361F8DB001C309F /* RAWebViewController.m */,
-				69D902F9134B9F990097F30F /* RADownloadViewController.h */,
-				69D902FA134B9F990097F30F /* RADownloadViewController.m */,
-				9FF2D46A1493975100A5CE48 /* RAShelfView.h */,
-				9FF2D46B1493975100A5CE48 /* RAShelfView.m */,
-			);
-			name = "Main Views Controller";
 			sourceTree = "<group>";
 		};
 		69F8A06E133CD50300E32E6D = {
 			isa = PBXGroup;
 			children = (
-				69F8A083133CD50300E32E6D /* Raven */,
-				9F38239A141E7B4600EE4CE3 /* External Framework */,
+				69F8A083133CD50300E32E6D /* Codebase */,
 				69F8A084133CD50300E32E6D /* Supporting Files */,
 				690C5546133DCD27005D50B3 /* ressources */,
 				69F8A09E133CD50300E32E6D /* RavenTests */,
@@ -1133,25 +1111,28 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		69F8A083133CD50300E32E6D /* Raven */ = {
+		69F8A083133CD50300E32E6D /* Codebase */ = {
 			isa = PBXGroup;
 			children = (
-				9F87403F14140E9000D04281 /* Categories */,
 				9F2F4591140D19C600BAB731 /* Smart Bar */,
-				9FC3B79D14038C7300E28D71 /* Specific object */,
-				9FC3B79C14038C5700E28D71 /* Other controller */,
-				9F889947146813DF00BBA017 /* other */,
-				9FC3B79B14038C5500E28D71 /* Windows */,
-				69F4485F138A24B300432BC7 /* Main Views Controller */,
+				9FB6388A14A79C4C00E4E5A5 /* About  */,
+				9FB6388514A79C2600E4E5A5 /* Setting */,
+				9FB6388414A79C2000E4E5A5 /* Home screen */,
+				9FB6387B14A79B9600E4E5A5 /* Main Window */,
+				9FB6387514A79B4200E4E5A5 /* Utiliy */,
+				9FB6387214A79B1C00E4E5A5 /* Bookmarks */,
+				9FB6386514A79AAB00E4E5A5 /* WevIew */,
+				9FB6386414A79AA900E4E5A5 /* Tabs */,
+				9FB6386314A79AA600E4E5A5 /* Download */,
+				9FB6386214A79AA500E4E5A5 /* History */,
+				9FC3B79B14038C5500E28D71 /* Work in progress */,
 				9F69AB6F14272A79003AE44B /* PureDelegate */,
 				69F4485E138A249000432BC7 /* Reusable Subclass */,
-				9F03B6CE1402D8EF00985D32 /* Bookmark cell */,
-				6967C3EB13995A17004B8AAB /* History Cell */,
-				69EA579A13B388BA00C8E12F /* Download cell */,
-				9FB6999213CD8544002EAEBA /* Window */,
-				690A79BE138B056B001AB4DE /* View */,
+				690A79BE138B056B001AB4DE /* Main Menu */,
+				9F38239A141E7B4600EE4CE3 /* External Framework */,
 				690A79C0138B0594001AB4DE /* Conf */,
 			);
+			name = Codebase;
 			path = Raven;
 			sourceTree = "<group>";
 		};
@@ -1221,13 +1202,11 @@
 		9F2F4591140D19C600BAB731 /* Smart Bar */ = {
 			isa = PBXGroup;
 			children = (
-				9F2F458D140D198C00BAB731 /* RASmartBarItemViewController.xib */,
-				9F2F458B140D198C00BAB731 /* RASmartBarItemViewController.h */,
-				9F2F458C140D198C00BAB731 /* RASmartBarItemViewController.m */,
-				9F16852E1431AC5E00C112A1 /* RAlistManager.h */,
-				9F16852F1431AC5E00C112A1 /* RAlistManager.m */,
-				9F634B81148E8C8B005AAE43 /* RASmartBarItem.h */,
-				9F634B82148E8C8C005AAE43 /* RASmartBarItem.m */,
+				9FB6386114A79A8C00E4E5A5 /* Custom sub */,
+				9FB6386014A79A5400E4E5A5 /* Singleton */,
+				9FB6385F14A79A4D00E4E5A5 /* Controller */,
+				9FB6385E14A79A4600E4E5A5 /* Model */,
+				9FB6385C14A79A3F00E4E5A5 /* View */,
 			);
 			name = "Smart Bar";
 			sourceTree = "<group>";
@@ -1243,7 +1222,6 @@
 				9FF75E27141D530900910A65 /* Keychain */,
 			);
 			name = "External Framework";
-			path = Raven;
 			sourceTree = "<group>";
 		};
 		9F53F8C913F569150025C821 /* setting window */ = {
@@ -1322,7 +1300,246 @@
 			name = "Toolbar icon";
 			sourceTree = "<group>";
 		};
-		9F87403F14140E9000D04281 /* Categories */ = {
+		9FB6385C14A79A3F00E4E5A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				695831EE13AA7B09009D3725 /* tooltip.xib */,
+				9F2F458D140D198C00BAB731 /* RASmartBarItemViewController.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9FB6385E14A79A4600E4E5A5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9F634B81148E8C8B005AAE43 /* RASmartBarItem.h */,
+				9F634B82148E8C8C005AAE43 /* RASmartBarItem.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		9FB6385F14A79A4D00E4E5A5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9F2F458B140D198C00BAB731 /* RASmartBarItemViewController.h */,
+				9F2F458C140D198C00BAB731 /* RASmartBarItemViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9FB6386014A79A5400E4E5A5 /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				9F16852E1431AC5E00C112A1 /* RAlistManager.h */,
+				9F16852F1431AC5E00C112A1 /* RAlistManager.m */,
+			);
+			name = Singleton;
+			sourceTree = "<group>";
+		};
+		9FB6386114A79A8C00E4E5A5 /* Custom sub */ = {
+			isa = PBXGroup;
+			children = (
+				9FEF2AAD147EEF19007BC286 /* RASBAPPMainButton.h */,
+				9FEF2AAE147EEF19007BC286 /* RASBAPPMainButton.m */,
+				69F44860138A24E800432BC7 /* RASmartBarButton.h */,
+				69F44861138A24E800432BC7 /* RASmartBarButton.m */,
+				9FEF2AB6147F8D82007BC286 /* RASmartBarHolderView.h */,
+				9FEF2AB7147F8D82007BC286 /* RASmartBarHolderView.m */,
+				9F54091B143F60FF0000D46D /* RABadgeField.h */,
+				9F54091C143F60FF0000D46D /* RABadgeField.m */,
+				9F94F84914973B5500E53BEA /* RADotTextField.h */,
+				9F94F84A14973B5500E53BEA /* RADotTextField.m */,
+			);
+			name = "Custom sub";
+			sourceTree = "<group>";
+		};
+		9FB6386214A79AA500E4E5A5 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				6967C3EB13995A17004B8AAB /* History Cell */,
+				9FB6386814A79AC300E4E5A5 /* Model */,
+				9FB6386714A79AB500E4E5A5 /* View */,
+				9FB6386614A79AB200E4E5A5 /* Controller */,
+			);
+			name = History;
+			sourceTree = "<group>";
+		};
+		9FB6386314A79AA600E4E5A5 /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				69EA579A13B388BA00C8E12F /* Download cell */,
+				9FB6387814A79B5900E4E5A5 /* Singleton */,
+				9FB6386B14A79AEA00E4E5A5 /* View */,
+				9FB6386A14A79AE900E4E5A5 /* Model */,
+				9FB6386914A79AE800E4E5A5 /* Controller */,
+			);
+			name = Download;
+			sourceTree = "<group>";
+		};
+		9FB6386414A79AA900E4E5A5 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				9FB6388D14A79D5800E4E5A5 /* Custom */,
+				9FB6386E14A79AED00E4E5A5 /* Model */,
+				9FB6386D14A79AEC00E4E5A5 /* View */,
+				9FB6386C14A79AEC00E4E5A5 /* Controller */,
+			);
+			name = Tabs;
+			sourceTree = "<group>";
+		};
+		9FB6386514A79AAB00E4E5A5 /* WevIew */ = {
+			isa = PBXGroup;
+			children = (
+				9FB6388E14A79D7500E4E5A5 /* Custom */,
+				9FB6387114A79AF100E4E5A5 /* Model */,
+				9FB6387014A79AF000E4E5A5 /* View */,
+				9FB6386F14A79AEF00E4E5A5 /* Controller */,
+			);
+			name = WevIew;
+			sourceTree = "<group>";
+		};
+		9FB6386614A79AB200E4E5A5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6914E6BF133E57CF0054D6D7 /* RAHistoryViewController.h */,
+				6914E6C0133E57CF0054D6D7 /* RAHistoryViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9FB6386714A79AB500E4E5A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9F8A1CD713FDA38200DD291C /* history.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9FB6386814A79AC300E4E5A5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				69B8418313450C4D007CCA61 /* RAItemObject.h */,
+				69B8418413450C4D007CCA61 /* RAItemObject.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		9FB6386914A79AE800E4E5A5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				69DF001013C0B26E006F92BD /* RADownloadController.h */,
+				69DF001113C0B26E006F92BD /* RADownloadController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9FB6386A14A79AE900E4E5A5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				69DF001313C0B280006F92BD /* RADownloadObject.h */,
+				69DF001413C0B280006F92BD /* RADownloadObject.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		9FB6386B14A79AEA00E4E5A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9F8A1CDB13FDA3B100DD291C /* Download.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9FB6386C14A79AEC00E4E5A5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6914E6BA133E51430054D6D7 /* RANavigatorViewController.h */,
+				9F8A1CE813FDA99300DD291C /* RANavigatorViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9FB6386D14A79AEC00E4E5A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6914E6B1133E4AAB0054D6D7 /* Navigator.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9FB6386E14A79AED00E4E5A5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		9FB6386F14A79AEF00E4E5A5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				693A0AC21361F8DB001C309F /* RAWebViewController.h */,
+				693A0AC31361F8DB001C309F /* RAWebViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9FB6387014A79AF000E4E5A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6977CF2113A9F67400C2C5DD /* SuggestionBox.xib */,
+				9F8A1CDF13FDA49C00DD291C /* NavigatorNoBottom.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9FB6387114A79AF100E4E5A5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		9FB6387214A79B1C00E4E5A5 /* Bookmarks */ = {
+			isa = PBXGroup;
+			children = (
+				9F03B6CE1402D8EF00985D32 /* Bookmark cell */,
+				9FB6387C14A79BAD00E4E5A5 /* Add Bookmark */,
+				9FB6387414A79B2A00E4E5A5 /* View */,
+				9FB6387314A79B2800E4E5A5 /* Controller */,
+			);
+			name = Bookmarks;
+			sourceTree = "<group>";
+		};
+		9FB6387314A79B2800E4E5A5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6914E6B5133E4BB70054D6D7 /* RABookmarkViewController.h */,
+				6914E6B6133E4BB70054D6D7 /* RABookmarkViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9FB6387414A79B2A00E4E5A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9F8A1CD313FDA36500DD291C /* Bookmark.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9FB6387514A79B4200E4E5A5 /* Utiliy */ = {
+			isa = PBXGroup;
+			children = (
+				9FB6388114A79BF700E4E5A5 /* Google */,
+				9FB6388014A79BF100E4E5A5 /* Growl */,
+				9FB6387F14A79BD300E4E5A5 /* Instapaper */,
+				9FB6387914A79B5F00E4E5A5 /* Database */,
+				9FB6387614A79B4900E4E5A5 /* Categories */,
+			);
+			name = Utiliy;
+			sourceTree = "<group>";
+		};
+		9FB6387614A79B4900E4E5A5 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
 				9F2BEE6E140FBF170090AD70 /* NSData+Base64.h */,
@@ -1337,30 +1554,225 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
-		9F889947146813DF00BBA017 /* other */ = {
+		9FB6387814A79B5900E4E5A5 /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				69D902F9134B9F990097F30F /* RADownloadViewController.h */,
+				69D902FA134B9F990097F30F /* RADownloadViewController.m */,
+			);
+			name = Singleton;
+			sourceTree = "<group>";
+		};
+		9FB6387914A79B5F00E4E5A5 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				69EDA392138FFDA3000AED59 /* RADatabaseController.h */,
+				69EDA393138FFDA3000AED59 /* RADatabaseController.m */,
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		9FB6387B14A79B9600E4E5A5 /* Main Window */ = {
+			isa = PBXGroup;
+			children = (
+				9FB6388314A79C0E00E4E5A5 /* Controller */,
+				9FB6388214A79C0900E4E5A5 /* View */,
+			);
+			name = "Main Window";
+			sourceTree = "<group>";
+		};
+		9FB6387C14A79BAD00E4E5A5 /* Add Bookmark */ = {
+			isa = PBXGroup;
+			children = (
+				9FB6387E14A79BC800E4E5A5 /* Controller */,
+				9FB6387D14A79BC200E4E5A5 /* View */,
+			);
+			name = "Add Bookmark";
+			sourceTree = "<group>";
+		};
+		9FB6387D14A79BC200E4E5A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9F8A1CCE13FDA18C00DD291C /* AddtoFavorite.xib */,
+				9F2BEE74140FC7890090AD70 /* InstaSheet.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9FB6387E14A79BC800E4E5A5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9F85275513CEDBCD00D26BCF /* RAFavoritePanelWController.h */,
+				9F85275613CEDBCD00D26BCF /* RAFavoritePanelWController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9FB6387F14A79BD300E4E5A5 /* Instapaper */ = {
 			isa = PBXGroup;
 			children = (
 				9F4953FF1446D56A00EED6BE /* RAInstapaperSubmit.h */,
 				9F4954001446D56A00EED6BE /* RAInstapaperSubmit.m */,
+			);
+			name = Instapaper;
+			sourceTree = "<group>";
+		};
+		9FB6388014A79BF100E4E5A5 /* Growl */ = {
+			isa = PBXGroup;
+			children = (
 				9F8899421467CCE100BBA017 /* RAGrowlDispatcher.h */,
 				9F8899431467CCE100BBA017 /* RAGrowlDispatcher.m */,
+			);
+			name = Growl;
+			sourceTree = "<group>";
+		};
+		9FB6388114A79BF700E4E5A5 /* Google */ = {
+			isa = PBXGroup;
+			children = (
 				9FDD0CDA146814CA00865ACB /* RAGoogleSuggestionsParser.h */,
 				9FDD0CDB146814CA00865ACB /* RAGoogleSuggestionsParser.m */,
 			);
-			name = other;
+			name = Google;
 			sourceTree = "<group>";
 		};
-		9FB6999213CD8544002EAEBA /* Window */ = {
+		9FB6388214A79C0900E4E5A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				6900ACC613B4BABD0043BF83 /* MainWindow.xib */,
-				9F8A1CC413FD9E7F00DD291C /* PreferenceWindow.xib */,
-				9FB6999313CD8566002EAEBA /* RAAboutPanelWindowController.xib */,
-				9F8A1CCE13FDA18C00DD291C /* AddtoFavorite.xib */,
-				9F2BEE74140FC7890090AD70 /* InstaSheet.xib */,
-				9FEF7D3E147514F9006ADC7B /* RACookieWindow.xib */,
 			);
-			name = Window;
+			name = View;
+			sourceTree = "<group>";
+		};
+		9FB6388314A79C0E00E4E5A5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6900ACC213B4B9570043BF83 /* RAMainWindowController.h */,
+				6900ACC313B4B9570043BF83 /* RAMainWindowController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9FB6388414A79C2000E4E5A5 /* Home screen */ = {
+			isa = PBXGroup;
+			children = (
+				9FB6388714A79C2D00E4E5A5 /* View */,
+				9FB6388614A79C2C00E4E5A5 /* Controller */,
+			);
+			name = "Home screen";
+			sourceTree = "<group>";
+		};
+		9FB6388514A79C2600E4E5A5 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				9FB6388914A79C2F00E4E5A5 /* View */,
+				9FB6388814A79C2E00E4E5A5 /* Controller */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
+		9FB6388614A79C2C00E4E5A5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9FF2D46A1493975100A5CE48 /* RAGridView.h */,
+				9FF2D46B1493975100A5CE48 /* RAGridView.m */,
+				69B313531356395000F3DCFD /* RASettingViewController.h */,
+				69B313541356395000F3DCFD /* RASettingViewController.m */,
+				9F20FAC314A9D6FC0036CCCE /* RAGridViewCell.h */,
+				9F20FAC414A9D6FC0036CCCE /* RAGridViewCell.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9FB6388714A79C2D00E4E5A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				69B313571356396C00F3DCFD /* Settings.xib */,
+				9FF2D46C1493975100A5CE48 /* RAGridView.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9FB6388814A79C2E00E4E5A5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6969EF8713C46D6300D9B6EB /* RASettingWindowController.h */,
+				6969EF8813C46D6300D9B6EB /* RASettingWindowController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9FB6388914A79C2F00E4E5A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9F8A1CC413FD9E7F00DD291C /* PreferenceWindow.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9FB6388A14A79C4C00E4E5A5 /* About  */ = {
+			isa = PBXGroup;
+			children = (
+				9FB6388C14A79C5300E4E5A5 /* View */,
+				9FB6388B14A79C5200E4E5A5 /* Controller */,
+			);
+			name = "About ";
+			sourceTree = "<group>";
+		};
+		9FB6388B14A79C5200E4E5A5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9FB6998E13CD8505002EAEBA /* RAAboutPanelWindowController.h */,
+				9FB6998F13CD8505002EAEBA /* RAAboutPanelWindowController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9FB6388C14A79C5300E4E5A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9FB6999313CD8566002EAEBA /* RAAboutPanelWindowController.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9FB6388D14A79D5800E4E5A5 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				9FEF2AA9147EEB26007BC286 /* RATabPlaceholderView.h */,
+				9FEF2AAA147EEB26007BC286 /* RATabPlaceholderView.m */,
+				9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */,
+				9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */,
+				9F087FEC13CC852C0075ACC1 /* StopActivityButton.h */,
+				9F087FED13CC852C0075ACC1 /* StopActivityButton.m */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
+		9FB6388E14A79D7500E4E5A5 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				9FEF2AB5147F8D1E007BC286 /* Address bar */,
+				6980775113BFBF6D0002D33C /* LionClipView.h */,
+				6980775213BFBF6D0002D33C /* LionClipView.m */,
+				69C74D9C1392399700A9CBD8 /* RAMainWebView.h */,
+				69C74D9D1392399700A9CBD8 /* RAMainWebView.m */,
+				6984F67F13A93DAA00C113A4 /* RASuggestionBoxView.h */,
+				6984F68013A93DAA00C113A4 /* RASuggestionBoxView.m */,
+				9F13E9B3145D6A8A00576566 /* LWVClipView.h */,
+				9F13E9B4145D6A8A00576566 /* LWVClipView.m */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
+		9FB638B014A9295300E4E5A5 /* Shelf */ = {
+			isa = PBXGroup;
+			children = (
+				9FB638B114A9296500E4E5A5 /* close_app.png */,
+				9FB638B214A9296500E4E5A5 /* delete_app.png */,
+				9FB638B314A9296500E4E5A5 /* overlay_app.png */,
+				9FB638AE14A9282700E4E5A5 /* shadow_shelf.png */,
+			);
+			name = Shelf;
 			sourceTree = "<group>";
 		};
 		9FC2708F14101E6900EAFD3C /* Readdibility */ = {
@@ -1372,17 +1784,10 @@
 			name = Readdibility;
 			sourceTree = "<group>";
 		};
-		9FC3B79B14038C5500E28D71 /* Windows */ = {
+		9FC3B79B14038C5500E28D71 /* Work in progress */ = {
 			isa = PBXGroup;
 			children = (
-				6900ACC213B4B9570043BF83 /* RAMainWindowController.h */,
-				6900ACC313B4B9570043BF83 /* RAMainWindowController.m */,
-				6969EF8713C46D6300D9B6EB /* RASettingWindowController.h */,
-				6969EF8813C46D6300D9B6EB /* RASettingWindowController.m */,
-				9FB6998E13CD8505002EAEBA /* RAAboutPanelWindowController.h */,
-				9FB6998F13CD8505002EAEBA /* RAAboutPanelWindowController.m */,
-				9F85275513CEDBCD00D26BCF /* RAFavoritePanelWController.h */,
-				9F85275613CEDBCD00D26BCF /* RAFavoritePanelWController.m */,
+				9FEF7D3E147514F9006ADC7B /* RACookieWindow.xib */,
 				9F2BEE71140FC1230090AD70 /* RAInstapaperWindow.h */,
 				9F2BEE72140FC1230090AD70 /* RAInstapaperWindow.m */,
 				9FEF7D3A147514CE006ADC7B /* RACookieWindowController.h */,
@@ -1390,29 +1795,7 @@
 				9FC75F0514765403001842EC /* RACSSEditor.h */,
 				9FC75F0614765403001842EC /* RACSSEditor.m */,
 			);
-			name = Windows;
-			sourceTree = "<group>";
-		};
-		9FC3B79C14038C5700E28D71 /* Other controller */ = {
-			isa = PBXGroup;
-			children = (
-				69EDA392138FFDA3000AED59 /* RADatabaseController.h */,
-				69EDA393138FFDA3000AED59 /* RADatabaseController.m */,
-				69DF001013C0B26E006F92BD /* RADownloadController.h */,
-				69DF001113C0B26E006F92BD /* RADownloadController.m */,
-			);
-			name = "Other controller";
-			sourceTree = "<group>";
-		};
-		9FC3B79D14038C7300E28D71 /* Specific object */ = {
-			isa = PBXGroup;
-			children = (
-				69B8418313450C4D007CCA61 /* RAItemObject.h */,
-				69B8418413450C4D007CCA61 /* RAItemObject.m */,
-				69DF001313C0B280006F92BD /* RADownloadObject.h */,
-				69DF001413C0B280006F92BD /* RADownloadObject.m */,
-			);
-			name = "Specific object";
+			name = "Work in progress";
 			sourceTree = "<group>";
 		};
 		9FD7B22914647B8B007EFF15 /* GreaseKit */ = {
@@ -1432,52 +1815,6 @@
 				9FD7B27814668FF4007EFF15 /* hello.user.js */,
 			);
 			name = GreaseKit;
-			sourceTree = "<group>";
-		};
-		9FEF2AB0147F8C63007BC286 /* WebNavigator related */ = {
-			isa = PBXGroup;
-			children = (
-				9FEF2AB5147F8D1E007BC286 /* Address bar */,
-				6980775113BFBF6D0002D33C /* LionClipView.h */,
-				6980775213BFBF6D0002D33C /* LionClipView.m */,
-				69C74D9C1392399700A9CBD8 /* RAMainWebView.h */,
-				69C74D9D1392399700A9CBD8 /* RAMainWebView.m */,
-				6984F67F13A93DAA00C113A4 /* RASuggestionBoxView.h */,
-				6984F68013A93DAA00C113A4 /* RASuggestionBoxView.m */,
-				9F13E9B3145D6A8A00576566 /* LWVClipView.h */,
-				9F13E9B4145D6A8A00576566 /* LWVClipView.m */,
-			);
-			name = "WebNavigator related";
-			sourceTree = "<group>";
-		};
-		9FEF2AB1147F8C68007BC286 /* SmartBar related */ = {
-			isa = PBXGroup;
-			children = (
-				9FEF2AAD147EEF19007BC286 /* RASBAPPMainButton.h */,
-				9FEF2AAE147EEF19007BC286 /* RASBAPPMainButton.m */,
-				9F54091B143F60FF0000D46D /* RABadgeField.h */,
-				9F54091C143F60FF0000D46D /* RABadgeField.m */,
-				69F44860138A24E800432BC7 /* RASmartBarButton.h */,
-				69F44861138A24E800432BC7 /* RASmartBarButton.m */,
-				9FEF2AB6147F8D82007BC286 /* RASmartBarHolderView.h */,
-				9FEF2AB7147F8D82007BC286 /* RASmartBarHolderView.m */,
-				9F94F84914973B5500E53BEA /* RADotTextField.h */,
-				9F94F84A14973B5500E53BEA /* RADotTextField.m */,
-			);
-			name = "SmartBar related";
-			sourceTree = "<group>";
-		};
-		9FEF2AB2147F8C7C007BC286 /* TabNavigator related */ = {
-			isa = PBXGroup;
-			children = (
-				9FEF2AA9147EEB26007BC286 /* RATabPlaceholderView.h */,
-				9FEF2AAA147EEB26007BC286 /* RATabPlaceholderView.m */,
-				9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */,
-				9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */,
-				9F087FEC13CC852C0075ACC1 /* StopActivityButton.h */,
-				9F087FED13CC852C0075ACC1 /* StopActivityButton.m */,
-			);
-			name = "TabNavigator related";
 			sourceTree = "<group>";
 		};
 		9FEF2AB3147F8C99007BC286 /* Window Related */ = {
@@ -1894,7 +2231,11 @@
 				9FAC88811498E92900CF650F /* growlWebView.js in Resources */,
 				9FDF1CEB146D201B009D3DAE /* chromedefault in Resources */,
 				9FEF7D3F147514F9006ADC7B /* RACookieWindow.xib in Resources */,
-				9FF2D46E1493975100A5CE48 /* RAShelfView.xib in Resources */,
+				9FF2D46E1493975100A5CE48 /* RAGridView.xib in Resources */,
+				9FB638AF14A9282700E4E5A5 /* shadow_shelf.png in Resources */,
+				9FB638B414A9296500E4E5A5 /* close_app.png in Resources */,
+				9FB638B514A9296500E4E5A5 /* delete_app.png in Resources */,
+				9FB638B614A9296500E4E5A5 /* overlay_app.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2004,9 +2345,10 @@
 				9FEF2AB8147F8D82007BC286 /* RASmartBarHolderView.m in Sources */,
 				9F37D77F148689EB0011B90F /* PXListView+UserInteraction.m in Sources */,
 				9F634B83148E8C8C005AAE43 /* RASmartBarItem.m in Sources */,
-				9FF2D46D1493975100A5CE48 /* RAShelfView.m in Sources */,
+				9FF2D46D1493975100A5CE48 /* RAGridView.m in Sources */,
 				9F94F84B14973B5600E53BEA /* RADotTextField.m in Sources */,
 				9FAC887D1498E63000CF650F /* WebView+Growl.m in Sources */,
+				9F20FAC514A9D6FC0036CCCE /* RAGridViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

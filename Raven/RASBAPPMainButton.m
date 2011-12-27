@@ -7,6 +7,7 @@
 //
 
 #import "RASBAPPMainButton.h"
+#import <math.h>
 
 @implementation RASBAPPMainButton
 @synthesize delegate; 
@@ -17,11 +18,22 @@
 {
     self = [super init]; 
     if (self){
-        [self acceptsTouchEvents]; 
-        isDown = NO; 
         
     }
     return self; 
+}
+
+-(void)awakeFromNib
+{
+    [self acceptsTouchEvents]; 
+    isDown = NO; 
+    originalSuperView = [self superview]; 
+    originaleFrame = [self frame]; 
+}
+
+-(void)setNewOriginaleFrame
+{
+    originaleFrame = [self frame]; 
 }
 
 - (void)updateTrackingAreas
@@ -56,25 +68,104 @@
 
 -(void)mouseDown:(NSEvent *)theEvent
 {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    if(([[NSApp currentEvent] modifierFlags] & NSControlKeyMask)){
-        NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
-                                             location:[theEvent locationInWindow]
-                                        modifierFlags:NSLeftMouseDownMask // 0x100
-                                            timestamp:0
-                                         windowNumber:[[self window] windowNumber]
-                                              context:[[self window] graphicsContext]
-                                          eventNumber:0
-                                           clickCount:1
-                                             pressure:1]; 
+
+    BOOL keepOn = YES;
+    BOOL isInside = YES;
+    NSPoint mouseLoc;
+    initialMousePosition = [theEvent locationInWindow]; 
+    while (keepOn) {
+        theEvent = [[self window] nextEventMatchingMask: NSLeftMouseUpMask |
+                    NSLeftMouseDraggedMask];
+        mouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+        isInside = [self mouse:mouseLoc inRect:[self bounds]];
+
+        switch ([theEvent type]) {
+            case NSLeftMouseDragged:
+                [self moveToLocation:theEvent.locationInWindow withInitialMousePosition:initialMousePosition]; 
+                [self displayDraggingMod]; 
+                break;
+            case NSLeftMouseUp:
+                if (isInside) {
+                    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+                    if(([[NSApp currentEvent] modifierFlags] & NSControlKeyMask)){
+                        [self popupMenuWithLocation:[theEvent locationInWindow]];
+                    }
+                    else if (!isDragging){
+                        [delegate mouseDidClicked:self]; 
+                        [super mouseDown:theEvent]; 
+                    }  
+                }
+                keepOn = NO;
+                isDragging = NO; 
+                [originalSuperView addSubview:self];
+                [delegate endDrag:self]; 
+                [self displayNormalMod]; 
+                [self setFrame:originaleFrame]; 
+                break;
+            default:
+            
+                break;
+        }
         
-        [NSMenu popUpContextMenu:[self getMenu] withEvent:event forView:self]; 
-        
+    };
+    
+    return;
+
+}
+
+//Need to review the formula, compare previous with new location and see how many time 60 fit in the rest. 
+//Then send the delegate X time, X is the rest
+-(void)moveToLocation:(NSPoint)location withInitialMousePosition:(NSPoint)position
+{
+    isDragging = YES; 
+    windowContentView = [[self window]contentView]; 
+    
+    if (isDragging) {
+        //down
+        if (location.y < position.y) {
+            float rest = fmodf(initialMousePosition.y, location.y);
+            float result = fmodf(rest, 60); 
+            if(result > 59) {
+                [delegate swapDown:self];
+            }
+        }
+        //up
+        else{
+            float rest = fmodf(location.y, initialMousePosition.y);
+            float result = fmodf(rest, 60); 
+            if(result > 59) {
+                [delegate swapUp:self];
+            }
+        }
     }
-    else{
-        [delegate mouseDidClicked:self]; 
-        [super mouseDown:theEvent]; 
-    }
+    [self setFrameOrigin:NSMakePoint(0, location.y-25)];
+    [windowContentView addSubview:self];
+    previousMousePosition = location; 
+}
+
+-(void)displayNormalMod
+{
+    [[self animator]setAlphaValue:1.0];  
+}
+
+-(void)displayDraggingMod
+{
+    [[self animator]setAlphaValue:0.8];  
+}
+
+-(void)popupMenuWithLocation:(NSPoint)location
+{
+    NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
+                                         location:location
+                                    modifierFlags:NSLeftMouseDownMask // 0x100
+                                        timestamp:0
+                                     windowNumber:[[self window] windowNumber]
+                                          context:[[self window] graphicsContext]
+                                      eventNumber:0
+                                       clickCount:1
+                                         pressure:1]; 
+    
+    [NSMenu popUpContextMenu:[self getMenu] withEvent:event forView:self];    
 }
 
 -(void)mouseUp:(NSEvent *)theEvent
@@ -84,17 +175,7 @@
 
 -(void)rightMouseDown:(NSEvent *)theEvent
 {
-    NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
-                                         location:[theEvent locationInWindow]
-                                    modifierFlags:NSLeftMouseDownMask // 0x100
-                                        timestamp:0
-                                     windowNumber:[[self window] windowNumber]
-                                          context:[[self window] graphicsContext]
-                                      eventNumber:0
-                                       clickCount:1
-                                         pressure:1]; 
-    
-    [NSMenu popUpContextMenu:[self getMenu] withEvent:event forView:self];
+    [self popupMenuWithLocation:[theEvent locationInWindow]]; 
     [super rightMouseDown:theEvent]; 
 }
 
@@ -105,14 +186,6 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [super scrollWheel:theEvent];
 }
-
-
--(void)mouseMoved:(NSEvent *)theEvent
-{
-    //[self setFrameOrigin:theEvent.locationInWindow];
-    [super mouseMoved:theEvent]; 
-}
-
 
 -(void)sendMouseEntered:(id)sender
 {

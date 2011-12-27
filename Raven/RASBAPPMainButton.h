@@ -14,11 +14,23 @@
     id<RASBAPPMainButtonDelegate> delegate;
     NSTimer *timer; 
     BOOL isDown;
+    BOOL isDragging; 
+    NSView *originalSuperView; 
+    NSView *windowContentView; 
+    NSRect originaleFrame; 
+    NSPoint initialMousePosition; 
+    NSPoint previousMousePosition;
+    float progress; 
 }
+-(void)setNewOriginaleFrame; 
 -(void)sendMouseEntered:(id)sender; 
 -(void)mouseDownLongPress:(id)sender;
 -(void)sendCloseDelegate:(id)sender; 
 -(void)sendHideDelegate:(id)sender; 
+-(void)displayDraggingMod; 
+-(void)displayNormalMod; 
+-(void)moveToLocation:(NSPoint)location withInitialMousePosition:(NSPoint)position; 
+-(void)popupMenuWithLocation:(NSPoint)location; 
 -(NSMenu *)getMenu; 
 @property (nonatomic, assign) id<RASBAPPMainButtonDelegate> delegate;
 @end
@@ -33,4 +45,11 @@
 - (void)shouldDisplayHideButton:(RASBAPPMainButton *)button; 
 - (void)shouldCloseApp:(RASBAPPMainButton *)button; 
 - (void)shouldHideApp:(RASBAPPMainButton *)button; 
+
+//dragging
+-(void)beginDrag:(RASBAPPMainButton *)button; 
+-(void)endDrag:(RASBAPPMainButton *)button; 
+-(void)swapWithOtherButton:(RASBAPPMainButton *)button; 
+-(void)swapUp:(RASBAPPMainButton *)button; 
+-(void)swapDown:(RASBAPPMainButton *)button; 
 @end

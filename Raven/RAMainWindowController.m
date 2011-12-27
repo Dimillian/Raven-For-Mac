@@ -217,7 +217,7 @@
     [[RASettingViewController alloc]initWithNibName:@"Settings" bundle:nil]; 
     
     shelfView = 
-    [[RAShelfView alloc]initWithNibName:@"RAShelfView" bundle:nil]; 
+    [[RAGridView alloc]initWithNibName:@"RAGridView" bundle:nil]; 
     
     previousIndex = -1;
     previousAppNumber = 4; 
@@ -237,19 +237,50 @@
         [self animate:13];
     }
     if ([[notification name]isEqualToString:SMART_BAR_UPDATE_ITEM_UP]) {
-        [self moveAppFromIndex:[[notification object]selectedRow] toIndex:[[notification object]selectedRow]-1]; 
+        if([[notification object]isKindOfClass:[NSTableView class]]){
+            [self moveAppFromIndex:[[notification object]selectedRow] toIndex:[[notification object]selectedRow]-1]; 
+        }
+        if([[notification object]isKindOfClass:[RASmartBarItem class]]){
+            RASmartBarItem *smartBarItem = [notification object]; 
+            [self moveAppFromIndex:smartBarItem.index toIndex:smartBarItem.index -1]; 
+        }
+        
     }
     if ([[notification name]isEqualToString:SMART_BAR_UPDATE_ITEM_DOWN]) {
-        [self moveAppFromIndex:[[notification object]selectedRow] toIndex:[[notification object]selectedRow]+1]; 
+        if([[notification object]isKindOfClass:[NSTableView class]]){
+            [self moveAppFromIndex:[[notification object]selectedRow] toIndex:[[notification object]selectedRow]+1]; 
+        }
+        if([[notification object]isKindOfClass:[RASmartBarItem class]]){
+             RASmartBarItem *smartBarItem = [notification object]; 
+            [self moveAppFromIndex:smartBarItem.index toIndex:smartBarItem.index + 1]; 
+        }
     }
     if ([[notification name]isEqualToString:SMART_BAR_UPDATE_ITEM_HIDDEN]) {
-        [self hideAppAtIndex:[[notification object]selectedRow]]; 
+        if([[notification object]isKindOfClass:[NSTableView class]]){
+            [self hideAppAtIndex:[[notification object]selectedRow]]; 
+        }
+        if([[notification object]isKindOfClass:[RASmartBarItem class]]){
+            RASmartBarItem *smartBarItem = [notification object]; 
+            [self hideAppAtIndex:smartBarItem.index];
+        }
     }
     if ([[notification name]isEqualToString:SMART_BAR_UPDATE_ITEM_SHOW]) {
-        [self showAppAtIndex:[[notification object]selectedRow]]; 
+        if([[notification object]isKindOfClass:[NSTableView class]]){
+            [self showAppAtIndex:[[notification object]selectedRow]]; 
+        }
+        if([[notification object]isKindOfClass:[RASmartBarItem class]]){
+            RASmartBarItem *smartBarItem = [notification object]; 
+            [self showAppAtIndex:smartBarItem.index];
+        }
     }
     if ([[notification name]isEqualToString:SMART_BAR_UPDATE_ITEM_REMOVE]) {
-        [self removeAppAtIndex:[[notification object]selectedRow]];
+        if([[notification object]isKindOfClass:[NSTableView class]]){
+            [self removeAppAtIndex:[[notification object]selectedRow]];
+        }
+        if([[notification object]isKindOfClass:[RASmartBarItem class]]){
+            RASmartBarItem *smartBarItem = [notification object]; 
+            [self removeAppAtIndex:smartBarItem.index];
+        }
     }
     
     if ([[notification name]isEqualToString:NEW_APP_INSTALLED]) {
@@ -622,6 +653,7 @@
     RASmartBarItemViewController *smarBarApp = [appList objectAtIndex:index];
     smarBarApp.smartBarItem.isVisible = YES;
     [rightView addSubview:smarBarApp.view]; 
+    [self resetIndex];
 }
 
 -(void)hideAppAtIndex:(NSUInteger)index
@@ -630,6 +662,7 @@
     smarBarApp.smartBarItem.isVisible = NO;
     [smarBarApp.view removeFromSuperview];
     [smarBarApp onCloseAppButtonClick:nil];
+    [self resetIndex];
 }
 
 -(void)moveAppFromIndex:(NSUInteger)from toIndex:(NSUInteger)to
@@ -645,14 +678,22 @@
         }
         [obj release];
     }
-
+    [self resetIndex]; 
 }
 
 -(void)removeAppAtIndex:(NSUInteger)index
 {
     RASmartBarItemViewController *smartBarApp = [appList objectAtIndex:index]; 
     [smartBarApp.view removeFromSuperview]; 
-    [appList removeObject:smartBarApp]; 
+    [appList removeObject:smartBarApp];
+    [self resetIndex]; 
+}
+
+-(void)resetIndex
+{
+    for (RASmartBarItemViewController *item in appList){
+        item.smartBarItem.index = [appList indexOfObject:item]; 
+    }
 }
 
 #pragma mark -
@@ -791,7 +832,7 @@
 
 -(void)setting:(id)sender
 {
-    if (myCurrentViewController == settingview) {
+    if (myCurrentViewController == shelfView) {
         [self raven:nil]; 
         
     }
@@ -800,10 +841,10 @@
         if ([myCurrentViewController view] != nil)
             [[myCurrentViewController view] removeFromSuperview];
         
-        if (settingview != nil)
+        if (shelfView != nil)
         {
             
-            myCurrentViewController = settingview;
+            myCurrentViewController = shelfView;
             
             
         }

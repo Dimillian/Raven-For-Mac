@@ -71,7 +71,6 @@
 							<string key="NSFrame">{{59, -1}, {991, 701}}</string>
 							<reference key="NSSuperview" ref="325673232"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<string key="NSClassName">NSView</string>
 						</object>
@@ -380,7 +379,7 @@
 											<string key="NSFrameSize">{75, 674}</string>
 											<reference key="NSSuperview" ref="383234069"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="277808243"/>
+											<reference key="NSNextKeyView" ref="809745902"/>
 											<bool key="NSViewIsLayerTreeHost">YES</bool>
 											<int key="NSViewLayerContentsRedrawPolicy">2</int>
 											<string key="NSReuseIdentifierKey">_NS:414</string>
@@ -429,7 +428,7 @@
 							<string key="NSFrame">{{-17, 20}, {76, 674}}</string>
 							<reference key="NSSuperview" ref="325673232"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="809745902"/>
+							<reference key="NSNextKeyView" ref="383234069"/>
 							<bool key="NSViewIsLayerTreeHost">YES</bool>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<string key="NSReuseIdentifierKey">_NS:410</string>
@@ -1014,14 +1013,14 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="bookmark:">id</string>
 						<string key="download:">id</string>
-						<string key="hideShowAddressBar:">id</string>
-						<string key="hideSideBar:">id</string>
 						<string key="history:">id</string>
 						<string key="home:">id</string>
 						<string key="nextApp:">id</string>
 						<string key="previousApp:">id</string>
 						<string key="raven:">id</string>
 						<string key="setting:">id</string>
+						<string key="toggleAddressBar:">id</string>
+						<string key="toggleSmartBar:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="bookmark:">
@@ -1030,14 +1029,6 @@
 						</object>
 						<object class="IBActionInfo" key="download:">
 							<string key="name">download:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="hideShowAddressBar:">
-							<string key="name">hideShowAddressBar:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="hideSideBar:">
-							<string key="name">hideSideBar:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="history:">
@@ -1062,6 +1053,14 @@
 						</object>
 						<object class="IBActionInfo" key="setting:">
 							<string key="name">setting:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleAddressBar:">
+							<string key="name">toggleAddressBar:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleSmartBar:">
+							<string key="name">toggleSmartBar:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

@@ -400,4 +400,33 @@
     [self onCloseAppButtonClick:self];
 }
 
+-(void)beginDrag:(RASBAPPMainButton *)button
+{
+ 
+}
+
+-(void)endDrag:(RASBAPPMainButton *)button
+{
+    [closeAppButton removeFromSuperview]; 
+    [self.view addSubview:closeAppButton]; 
+    
+}
+
+-(void)swapWithOtherButton:(RASBAPPMainButton *)button
+{
+    
+}
+
+-(void)swapUp:(RASBAPPMainButton *)button
+{
+    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_UP object:self.smartBarItem]; 
+    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
+}
+
+-(void)swapDown:(RASBAPPMainButton *)button
+{
+    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_DOWN object:self.smartBarItem]; 
+    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
+}
+
 @end
