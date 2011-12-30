@@ -13,7 +13,7 @@
 #import "RAMainWindowController.h"
 #import "RAlistManager.h"
 
-
+#define top_margin 50
 #define left_margin 50; 
 #define x_space 200; 
 #define y_space 150; 
@@ -26,7 +26,8 @@
 -(void)awakeFromNib
 {
     mainWindow = [[NSApp keyWindow]windowController];
-    
+    [scrollView awakeFromNib]; 
+    [contentView awakeFromNib]; 
     [self resetView];
     [self sizeContentView];
     [self reDrawView]; 
@@ -44,6 +45,11 @@
     
 }
 
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self]; 
+    [cellArray release]; 
+    [super dealloc]; 
+}
 -(void)receiveNotification:(NSNotification *)notification
 {
     [self resetView];
@@ -74,7 +80,7 @@
 -(void)reDrawView
 {
     CGFloat x_iconView = left_margin;
-    CGFloat y_iconView = 0;
+    CGFloat y_iconView = top_margin;
     NSInteger row = 0; 
     for (RAGridViewCell *cell in cellArray) {
         x_iconView = x_iconView + x_space; 
@@ -93,23 +99,28 @@
 {
     NSInteger row = 0; 
     CGFloat h = 0; 
+    CGFloat x_iconView = left_margin;
     for (RAGridViewCell *cell in cellArray) {
+        x_iconView = x_iconView + x_space; 
+        [cell setFrameOrigin:NSMakePoint(x_iconView, cell.frame.origin.y)];
         row = row +1;
         if (row == icon_per_row) {
-            h = h + y_space; 
+            h = h + y_space;
+            x_iconView = left_margin;
             row = 0; 
         }
     }
-    h = h + y_space; 
-    if (scrollView.frame.size.height < h) {
-        [contentView setFrameSize:NSMakeSize(content_view_width, h)];
-    }
-    else{
-        [contentView setFrameSize:NSMakeSize(content_view_width, scrollView.frame.size.height)];
-    }
+    h = h + y_space;
+    CGFloat final_h = 0; 
+    CGFloat final_w = 0; 
+    
+    (scrollView.frame.size.height < h) ? (final_h = h + top_margin) : (final_h = scrollView.frame.size.height); 
+    (scrollView.frame.size.width < content_view_width) ? (final_w = content_view_width) : (final_w = scrollView.frame.size.width);
+
+    [contentView setFrameSize:NSMakeSize(final_w, final_h)]; 
 }
 
-
+#pragma mark - alert sheet
 -(void)deleteItem:(RASmartBarItem *)item
 {
     NSAlert *alert = [[NSAlert alloc]init];

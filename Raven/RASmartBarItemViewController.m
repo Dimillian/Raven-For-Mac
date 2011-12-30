@@ -429,4 +429,10 @@
     [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
 }
 
+-(void)dragout:(RASBAPPMainButton *)button
+{
+    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_HIDDEN object:self.smartBarItem]; 
+    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
+}
+
 @end

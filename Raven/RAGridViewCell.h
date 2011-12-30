@@ -23,6 +23,8 @@
     NSButton *moveUp; 
     NSButton *moveDown; 
     
+    NSTimer *timer; 
+    
     NSTextField *textView; 
     RASmartBarItem *data; 
 }

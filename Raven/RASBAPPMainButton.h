@@ -15,12 +15,15 @@
     NSTimer *timer; 
     BOOL isDown;
     BOOL isDragging; 
+    BOOL wantHide; 
     NSView *originalSuperView; 
     NSView *windowContentView; 
     NSRect originaleFrame; 
     NSPoint initialMousePosition; 
-    NSPoint previousMousePosition;
-    float progress; 
+    NSPoint previousMousePosition; 
+    NSImage *originaleImage; 
+    int swapForce; 
+    int previousSwapForce; 
 }
 -(void)setNewOriginaleFrame; 
 -(void)sendMouseEntered:(id)sender; 
@@ -31,8 +34,10 @@
 -(void)displayNormalMod; 
 -(void)moveToLocation:(NSPoint)location withInitialMousePosition:(NSPoint)position; 
 -(void)popupMenuWithLocation:(NSPoint)location; 
+-(void)setHideAfterDragginOperation:(BOOL)op; 
 -(NSMenu *)getMenu; 
 @property (nonatomic, assign) id<RASBAPPMainButtonDelegate> delegate;
+@property int swapForce;
 @end
 
 @protocol RASBAPPMainButtonDelegate
@@ -52,4 +57,5 @@
 -(void)swapWithOtherButton:(RASBAPPMainButton *)button; 
 -(void)swapUp:(RASBAPPMainButton *)button; 
 -(void)swapDown:(RASBAPPMainButton *)button; 
+-(void)dragout:(RASBAPPMainButton *)button; 
 @end

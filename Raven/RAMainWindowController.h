@@ -86,6 +86,7 @@
     NSString *passedUrl; 
     BOOL isAdressBarHidden; 
     BOOL isAnimated; 
+    BOOL firstScroll; 
     
     
     

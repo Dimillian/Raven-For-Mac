@@ -83,6 +83,7 @@
     [bookmarkview release]; 
     [downloadview release]; 
     [settingview release]; 
+    [shelfView release]; 
     [[NSNotificationCenter defaultCenter]removeObserver:self];
     [delegate closeButtonClicked:self];
     [appList release], appList = nil; 
@@ -221,6 +222,7 @@
     
     previousIndex = -1;
     previousAppNumber = 4; 
+    firstScroll = YES; 
     [self launchRuntime];
     [[self window]display];
     //[self replaceTitleBarViewWith:titleBar];
@@ -447,6 +449,7 @@
 -(void)newAppInstalled
 {
     RAlistManager *listManager = [RAlistManager sharedUser];
+    [listManager forceReadApplist];
     NSArray *folders = [listManager readAppList];
     NSDictionary *item = [folders lastObject];
     RASmartBarItem *smartBarItem = [[RASmartBarItem alloc]initWithDictionnary:item andPlistIndex:[folders count]];
@@ -488,10 +491,13 @@
         
         
     }
-    NSPoint pt = NSMakePoint(0.0, [[smartBarScrollView documentView]
-                                   bounds].size.height);
-    [[smartBarScrollView documentView] scrollPoint:pt];
-    [smartBarScrollView reflectScrolledClipView: [smartBarScrollView contentView]]; 
+    if (firstScroll){
+        NSPoint pt = NSMakePoint(0.0, [[smartBarScrollView documentView]
+                                       bounds].size.height);
+        [[smartBarScrollView documentView] scrollPoint:pt];
+        [smartBarScrollView reflectScrolledClipView: [smartBarScrollView contentView]]; 
+        firstScroll = NO; 
+    }
     
 }
 
@@ -654,6 +660,8 @@
     smarBarApp.smartBarItem.isVisible = YES;
     [rightView addSubview:smarBarApp.view]; 
     [self resetIndex];
+    RAlistManager *listManager = [RAlistManager sharedUser];
+    [listManager changeStateOfAppAtIndex:index withState:1];
 }
 
 -(void)hideAppAtIndex:(NSUInteger)index
@@ -663,6 +671,8 @@
     [smarBarApp.view removeFromSuperview];
     [smarBarApp onCloseAppButtonClick:nil];
     [self resetIndex];
+    RAlistManager *listManager = [RAlistManager sharedUser];
+    [listManager changeStateOfAppAtIndex:index withState:0];
 }
 
 -(void)moveAppFromIndex:(NSUInteger)from toIndex:(NSUInteger)to
@@ -679,6 +689,8 @@
         [obj release];
     }
     [self resetIndex]; 
+    RAlistManager *listManager = [RAlistManager sharedUser];
+    [listManager moveObjectFromIndex:from toIndex:to];
 }
 
 -(void)removeAppAtIndex:(NSUInteger)index

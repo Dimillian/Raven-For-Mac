@@ -106,6 +106,7 @@ static RAlistManager *sharedUserManager = nil;
         [[NSNotificationCenter defaultCenter]postNotificationName:APP_UPDATED object:nil];
 
     }
+    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
 }
 
 //Check if the app is valid, if yes import it

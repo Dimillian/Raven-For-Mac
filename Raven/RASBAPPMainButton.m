@@ -8,9 +8,11 @@
 
 #import "RASBAPPMainButton.h"
 #import <math.h>
+#define drop_height 60
+#define mouse_in_icon 25
 
 @implementation RASBAPPMainButton
-@synthesize delegate; 
+@synthesize delegate, swapForce; 
 
 #pragma mark -
 #pragma mark INIT
@@ -29,6 +31,8 @@
     isDown = NO; 
     originalSuperView = [self superview]; 
     originaleFrame = [self frame]; 
+    originaleImage = [self image]; 
+    
 }
 
 -(void)setNewOriginaleFrame
@@ -73,6 +77,7 @@
     BOOL isInside = YES;
     NSPoint mouseLoc;
     initialMousePosition = [theEvent locationInWindow]; 
+    swapForce = 0; 
     while (keepOn) {
         theEvent = [[self window] nextEventMatchingMask: NSLeftMouseUpMask |
                     NSLeftMouseDraggedMask];
@@ -101,6 +106,11 @@
                 [delegate endDrag:self]; 
                 [self displayNormalMod]; 
                 [self setFrame:originaleFrame]; 
+                /*
+                if (wantHide) {
+                    [delegate dragout:self]; 
+                }
+                 */
                 break;
             default:
             
@@ -119,30 +129,41 @@
 {
     isDragging = YES; 
     windowContentView = [[self window]contentView]; 
-    
     if (isDragging) {
         //down
-        if (location.y < position.y) {
-            float rest = fmodf(initialMousePosition.y, location.y);
-            float result = fmodf(rest, 60); 
-            if(result > 59) {
+        if (location.y < position.y &&  previousMousePosition.y > location.y) {
+            float current = position.y - location.y;
+            swapForce = round(current/drop_height); 
+            if (swapForce != 0 && swapForce != previousSwapForce) {
                 [delegate swapDown:self];
             }
         }
         //up
         else{
-            float rest = fmodf(location.y, initialMousePosition.y);
-            float result = fmodf(rest, 60); 
-            if(result > 59) {
+            float current = location.y - position.y;
+            swapForce = round(current/drop_height);
+            if (swapForce != 0 && swapForce != previousSwapForce) {
                 [delegate swapUp:self];
             }
         }
+        //(location.x > 85) ? [self setHideAfterDragginOperation:YES] : [self setHideAfterDragginOperation:NO]; 
     }
-    [self setFrameOrigin:NSMakePoint(0, location.y-25)];
+    [self setFrameOrigin:NSMakePoint(0, location.y-mouse_in_icon)];
     [windowContentView addSubview:self];
+    previousSwapForce = swapForce; 
     previousMousePosition = location; 
 }
 
+-(void)setHideAfterDragginOperation:(BOOL)op
+{
+    if (op) {
+        wantHide = YES; 
+    
+    }
+    else{
+        wantHide = NO; 
+    }
+}
 -(void)displayNormalMod
 {
     [[self animator]setAlphaValue:1.0];  
