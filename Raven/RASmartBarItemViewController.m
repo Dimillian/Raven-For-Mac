@@ -81,6 +81,7 @@
 {
     [self.view setWantsLayer:NO]; 
     [mainButton setImage:_smartBarItem.mainIcon]; 
+    [mainButton setAlphaValue:0.5]; 
 
     NSUInteger i = 0; 
     for (NSString *URL in _smartBarItem.URLArray) {
@@ -93,7 +94,7 @@
         [aButton setAction:@selector(onButtonClick:)]; 
         [aButton setButtonType:NSSwitchButton];
         [aButton setTitle:nil]; 
-        [aButton setToolTip:_smartBarItem.appName]; 
+        [aButton setToolTip:_smartBarItem.appName];
         
         [self.view addSubview:aButton];
         [self.view addSubview:aField];
@@ -198,6 +199,16 @@
 -(void)updateStatusAndCleanMemory
 {
     
+}
+
+-(void)hideView
+{
+    [self.smartBarItem setIsVisible:NO]; 
+}
+
+-(void)showView
+{
+    [self.smartBarItem setIsVisible:YES]; 
 }
 
 #pragma mark -
@@ -348,6 +359,7 @@
     [self onButtonClick:button]; 
 }
 
+
 #pragma mark -
 #pragma mark RASBAPPMainButtonDelegate
 
@@ -388,7 +400,7 @@
     RAlistManager *listManager = [RAlistManager sharedUser];
     RAMainWindowController *windowController = self.view.window.windowController; 
     if (_state == 1) {
-        [windowController raven:nil];
+        [windowController raven:self];
     }
     [windowController hideAppAtIndex:_smartBarItem.index];
     [listManager changeStateOfAppAtIndex:_smartBarItem.index withState:0];
@@ -431,8 +443,13 @@
 
 -(void)dragout:(RASBAPPMainButton *)button
 {
+    if( _state == 1) {
+        RAMainWindowController *windowController = self.view.window.windowController;
+        [windowController raven:self]; 
+    }
     [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_HIDDEN object:self.smartBarItem]; 
     [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
+
 }
 
 @end

@@ -34,7 +34,7 @@
             [iconView setImageScaling:NSImageScaleProportionallyUpOrDown];
             
             overlay = [[NSImageView alloc]initWithFrame:NSMakeRect(10, 30, 100, 100)];
-            [overlay setImage:[NSImage imageNamed:@"overlay_app.png"]];
+            [overlay setImage:[NSImage imageNamed:@"black_background.png"]];
             [overlay setImageFrameStyle:NSImageFrameNone];
             [overlay setImageScaling:NSImageScaleProportionallyUpOrDown];
             [overlay setAlphaValue:0.0]; 
@@ -67,28 +67,7 @@
             [removeButton setBordered:NO]; 
             [removeButton setAlphaValue:0.0]; 
             [removeButton setEnabled:NO]; 
-            
-            
-            moveUp = [[NSButton alloc]initWithFrame:NSMakeRect(0, 60, 20, 20)];
-            [moveUp setTitle:@""]; 
-            [moveUp setAction:@selector(moveDownclicked:)]; 
-            [moveUp setTarget:self]; 
-            [moveUp setImage:[NSImage imageNamed:@"grid_left.png"]]; 
-            [moveUp setButtonType:NSMomentaryChangeButton];
-            [moveUp setBordered:NO]; 
-            [moveUp setAlphaValue:0.0]; 
-            [moveUp setEnabled:NO]; 
-            
-            
-            moveDown = [[NSButton alloc]initWithFrame:NSMakeRect(100, 60, 20, 20)];
-            [moveDown setTitle:@""]; 
-            [moveDown setAction:@selector(moveUpClicked:)]; 
-            [moveDown setTarget:self]; 
-            [moveDown setImage:[NSImage imageNamed:@"grid_right.png"]]; 
-            [moveDown setButtonType:NSMomentaryChangeButton];
-            [moveDown setBordered:NO]; 
-            [moveDown setAlphaValue:0.0]; 
-            [moveDown setEnabled:NO]; 
+        
             
             shadowView = [[NSImageView alloc]initWithFrame:NSMakeRect(0, 17, 120, 30)]; 
             [shadowView setImage:[NSImage imageNamed:@"shadow_shelf.png"]]; 
@@ -111,11 +90,9 @@
             [self addSubview:iconView]; 
             [self addSubview:textView]; 
             [self addSubview:overlay];
+            [self addSubview:addButton];
             [self addSubview:closeButton];
             [self addSubview:removeButton]; 
-            [self addSubview:addButton];
-            [self addSubview:moveUp]; 
-            [self addSubview:moveDown]; 
         }
 
     
@@ -129,8 +106,6 @@
     [overlay release]; 
     [closeButton release]; 
     [removeButton release]; 
-    [moveUp release]; 
-    [moveDown release]; 
     [addButton release]; 
     [shadowView release]; 
     [textView release]; 
@@ -141,44 +116,52 @@
 #pragma mark - method
 -(void)enableOverlay:(BOOL)cond
 {
-    if (cond) {
-        [[iconView animator]setAlphaValue:0.5]; 
-        [[moveUp animator]setAlphaValue:1.0];
-        [[moveDown animator]setAlphaValue:1.0];
-        [moveUp setEnabled:YES]; 
-        [moveDown setEnabled:YES]; 
-        if (data.isVisible) {
-            [[closeButton animator]setAlphaValue:1.0]; 
-            [closeButton setEnabled:YES]; 
+    if (!inEditMod) {
+        if (cond) {
+            [[shadowView animator]setAlphaValue:0.5]; 
+            [[overlay animator]setAlphaValue:0.5];
+            if (data.isVisible) {
+                [[closeButton animator]setAlphaValue:1.0]; 
+                [closeButton setEnabled:YES]; 
+            }
+            else{
+                [[addButton animator]setAlphaValue:1.0];
+                [addButton setEnabled:YES]; 
+            }
         }
         else{
-            [[addButton animator]setAlphaValue:1.0];
-            [addButton setEnabled:YES]; 
+            [[overlay animator]setAlphaValue:0.0];
+            [[shadowView animator]setAlphaValue:1.0]; 
+            [[closeButton animator]setAlphaValue:0.0]; 
+            [[addButton animator]setAlphaValue:0.0]; 
+            [closeButton setEnabled:NO]; 
+            [addButton setEnabled:NO]; 
+            
+            [[removeButton animator]setAlphaValue:0.0]; 
+            [removeButton setEnabled:NO]; 
         }
-    }
-    else{
-        [[iconView animator]setAlphaValue:1.0]; 
-        [[closeButton animator]setAlphaValue:0.0]; 
-        [[addButton animator]setAlphaValue:0.0]; 
-        [[moveUp animator]setAlphaValue:0.0];
-        [[moveDown animator]setAlphaValue:0.0];
-        [moveUp setEnabled:NO]; 
-        [moveDown setEnabled:NO]; 
-        [closeButton setEnabled:NO]; 
-        [addButton setEnabled:NO]; 
-        
-        [[removeButton animator]setAlphaValue:0.0]; 
-        [removeButton setEnabled:NO]; 
     }
 }
 
--(void)displayRemoveButton
+
+-(void)toggleEditMod:(BOOL)cond
 {
-    [[closeButton animator]setAlphaValue:0.0]; 
-    [closeButton setEnabled:NO];
-    [[removeButton animator]setAlphaValue:1.0]; 
-    [removeButton setEnabled:YES]; 
-    
+    if (cond) {
+        [[addButton animator]setAlphaValue:1.0];
+        [addButton setEnabled:YES]; 
+        [[closeButton animator]setAlphaValue:0.0]; 
+        [closeButton setEnabled:NO];
+        [[removeButton animator]setAlphaValue:1.0]; 
+        [removeButton setEnabled:YES]; 
+        inEditMod = cond; 
+    }
+    else{
+        [[addButton animator]setAlphaValue:0.0];
+        [addButton setEnabled:NO]; 
+        [[removeButton animator]setAlphaValue:0.0]; 
+        [removeButton setEnabled:NO];  
+        inEditMod = cond; 
+    }
 }
 
 
@@ -198,15 +181,6 @@
     [delegate onAddButtonClick:data];
 }
 
--(void)moveUpClicked:(id)sender
-{
-    [delegate onMoveUpClick:data]; 
-}
-
--(void)moveDownclicked:(id)sender
-{
-    [delegate onMoveDownClick:data]; 
-}
 
 #pragma mark - view event
 - (void)updateTrackingAreas
@@ -224,32 +198,30 @@
 
 -(void)mouseEntered:(NSEvent *)theEvent
 {
-    [self performSelector:@selector(displayRemoveButton) withObject:nil afterDelay:1.0f];
     [self enableOverlay:YES]; 
     [super mouseEntered:theEvent]; 
 }
 
 -(void)mouseExited:(NSEvent *)theEvent
 {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self]; 
     [self enableOverlay:NO]; 
     [super mouseExited:theEvent]; 
 }
 
 -(void)mouseDown:(NSEvent *)theEvent
 {
+    [delegate onMouseDown:data];
+    [self enableOverlay:NO]; 
     [super mouseDown:theEvent]; 
 }
 
 -(void)mouseUp:(NSEvent *)theEvent
 {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self]; 
     [super mouseUp:theEvent];
 }
 
 -(void)scrollWheel:(NSEvent *)theEvent
 {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self]; 
     [self enableOverlay:NO]; 
     [super scrollWheel:theEvent]; 
 }

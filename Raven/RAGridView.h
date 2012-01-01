@@ -15,14 +15,21 @@
 {
     IBOutlet NSScrollView *scrollView; 
     IBOutlet RAGridViewContentView *contentView; 
+    IBOutlet NSButton *toggleEditButton; 
+    IBOutlet NSSegmentedControl *selectorButton;
     NSMutableArray *cellArray; 
     RAMainWindowController *mainWindow; 
+     
 }
+-(CGFloat)getXbase; 
 -(void)resetView; 
 -(void)receiveNotification:(NSNotification *)notification;
 -(void)reDrawView;
--(void)sizeContentView; 
 -(void)deleteItem:(RASmartBarItem *)item; 
+
+-(IBAction)toggleEditPressed:(id)sender; 
+-(IBAction)selectorButtonPressed:(id)sender; 
+-(IBAction)openAppStore:(id)sender;
 
 
 @end

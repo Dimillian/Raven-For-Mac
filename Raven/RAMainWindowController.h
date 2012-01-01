@@ -74,7 +74,7 @@
     //Raven view
     RANavigatorViewController *navigatorview;
     RAHistoryViewController *historyviewcontroller;
-    RABookmarkViewController *bookmarkview; 
+    RABookmarkViewController *bookmarkview;
     RADownloadViewController *downloadview; 
     RASettingViewController *settingview; 
     RAGridView *shelfView; 
@@ -121,6 +121,9 @@
 -(void)hideAppAtIndex:(NSUInteger)index; 
 -(void)showAppAtIndex:(NSUInteger)index; 
 -(void)moveAppFromIndex:(NSUInteger)from toIndex:(NSUInteger)to; 
+-(BOOL)visibilityForAppAtIndex:(NSUInteger)index;
+-(NSUInteger)moveUpUntilVisible:(NSUInteger)fromIndex; 
+-(NSUInteger)moveDownUntilVisible:(NSUInteger)fromindex;
 -(void)resetIndex; 
 -(void)launchRuntime;
 -(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs;

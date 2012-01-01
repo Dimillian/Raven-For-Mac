@@ -106,11 +106,13 @@
                 [delegate endDrag:self]; 
                 [self displayNormalMod]; 
                 [self setFrame:originaleFrame]; 
-                /*
+                
                 if (wantHide) {
                     [delegate dragout:self]; 
+                    NSSound *systemSound = [NSSound soundNamed:@"remove.aiff"];
+                    [systemSound play];
                 }
-                 */
+                 
                 break;
             default:
             
@@ -146,9 +148,9 @@
                 [delegate swapUp:self];
             }
         }
-        //(location.x > 85) ? [self setHideAfterDragginOperation:YES] : [self setHideAfterDragginOperation:NO]; 
+        (location.x > 85) ? [self setHideAfterDragginOperation:YES] : [self setHideAfterDragginOperation:NO]; 
     }
-    [self setFrameOrigin:NSMakePoint(0, location.y-mouse_in_icon)];
+    [self setFrameOrigin:NSMakePoint(location.x - mouse_in_icon, location.y-mouse_in_icon)];
     [windowContentView addSubview:self];
     previousSwapForce = swapForce; 
     previousMousePosition = location; 
@@ -158,10 +160,11 @@
 {
     if (op) {
         wantHide = YES; 
-    
+        [[NSCursor disappearingItemCursor]set]; 
     }
     else{
         wantHide = NO; 
+        [[NSCursor arrowCursor]set];
     }
 }
 -(void)displayNormalMod

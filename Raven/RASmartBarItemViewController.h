@@ -49,6 +49,8 @@
 -(id)initWithDelegate:(id<RASmartBarViewItemControllerDelegate>)dgate 
             andRASmartBarItem:(RASmartBarItem *)item;
 
+-(void)hideView; 
+-(void)showView; 
 -(void)onButtonClick:(id)sender; 
 -(IBAction)onMainButtonClick:(id)sender;
 -(void)onOtherAppClick:(id)sender;

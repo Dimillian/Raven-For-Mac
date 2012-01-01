@@ -12,12 +12,13 @@
 #import "RASmartBarItemViewController.h"
 #import "RAMainWindowController.h"
 #import "RAlistManager.h"
+#import "RavenAppDelegate.h"
 
 #define top_margin 50
-#define left_margin 50; 
+#define left_margin 0; 
 #define x_space 200; 
 #define y_space 150; 
-#define content_view_width 1200
+#define content_view_width 925
 #define icon_per_row 5
 
 @implementation RAGridView
@@ -25,13 +26,9 @@
 #pragma mark - init
 -(void)awakeFromNib
 {
-    mainWindow = [[NSApp keyWindow]windowController];
-    [scrollView awakeFromNib]; 
-    [contentView awakeFromNib]; 
-    [self resetView];
-    [self sizeContentView];
-    [self reDrawView]; 
-
+    mainWindow = [[NSApp keyWindow]windowController]; 
+    [self.view setFrameSize:mainWindow.window.frame.size]; 
+    [selectorButton setSelectedSegment:1]; 
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
                                                 name:SMART_BAR_UPDATE 
@@ -39,17 +36,21 @@
     
     
     [[NSNotificationCenter defaultCenter]addObserver:self 
-                                            selector:@selector(sizeContentView) 
+                                            selector:@selector(reDrawView) 
                                                 name:NSWindowDidResizeNotification 
                                               object:nil];
+    [self resetView];
+    [self reDrawView]; 
     
 }
+
 
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter]removeObserver:self]; 
     [cellArray release]; 
     [super dealloc]; 
 }
+
 -(void)receiveNotification:(NSNotification *)notification
 {
     [self resetView];
@@ -68,45 +69,35 @@
     }
     cellArray = [[NSMutableArray alloc]init]; 
     for (RASmartBarItemViewController *item in mainWindow.appList) {
-        RAGridViewCell *cell = [[RAGridViewCell alloc]initWithItem:item.smartBarItem]; 
-        [cellArray addObject:cell];
+        RAGridViewCell *cell = [[RAGridViewCell alloc]initWithItem:item.smartBarItem];
+        if (selectorButton.selectedSegment == 0) {
+            if (item.smartBarItem.isVisible) {
+                [cellArray addObject:cell];
+                [contentView addSubview:cell]; 
+            }
+        }
+        else{
+            [cellArray addObject:cell];
+            [contentView addSubview:cell]; 
+        }
         [cell setDelegate:self];
         [cell release]; 
     }
-
 }
 
 #pragma mark - drawing
 -(void)reDrawView
 {
-    CGFloat x_iconView = left_margin;
-    CGFloat y_iconView = top_margin;
     NSInteger row = 0; 
+    CGFloat h = top_margin; 
+    CGFloat x_iconView = [self getXbase]; 
     for (RAGridViewCell *cell in cellArray) {
+        [cell setFrameOrigin:NSMakePoint(x_iconView, h)];
         x_iconView = x_iconView + x_space; 
-        [cell setFrameOrigin:NSMakePoint(x_iconView, y_iconView)];
-        row = row +1;
-        if (row == icon_per_row) {
-            row = 0; 
-            y_iconView = y_iconView + y_space;
-            x_iconView = left_margin; 
-        }
-        [contentView addSubview:cell];
-    }
-}
-
--(void)sizeContentView
-{
-    NSInteger row = 0; 
-    CGFloat h = 0; 
-    CGFloat x_iconView = left_margin;
-    for (RAGridViewCell *cell in cellArray) {
-        x_iconView = x_iconView + x_space; 
-        [cell setFrameOrigin:NSMakePoint(x_iconView, cell.frame.origin.y)];
         row = row +1;
         if (row == icon_per_row) {
             h = h + y_space;
-            x_iconView = left_margin;
+            x_iconView = [self getXbase]; 
             row = 0; 
         }
     }
@@ -116,8 +107,47 @@
     
     (scrollView.frame.size.height < h) ? (final_h = h + top_margin) : (final_h = scrollView.frame.size.height); 
     (scrollView.frame.size.width < content_view_width) ? (final_w = content_view_width) : (final_w = scrollView.frame.size.width);
-
+    
     [contentView setFrameSize:NSMakeSize(final_w, final_h)]; 
+}
+
+-(CGFloat)getXbase
+{
+    CGFloat x_base_iconview; 
+    if (scrollView.frame.size.width > content_view_width) {
+        x_base_iconview = (scrollView.frame.size.width - content_view_width)/2;
+    }
+    else{
+        x_base_iconview = 0; 
+    }
+    return x_base_iconview; 
+}
+
+#pragma mark - IB action
+
+-(IBAction)toggleEditPressed:(id)sender
+{
+    for (RAGridViewCell *cell in cellArray) {
+        if (toggleEditButton.state == 1) {
+            [cell toggleEditMod:YES];  
+        }
+        else{
+            [cell toggleEditMod:NO]; 
+        }
+    }
+}
+
+-(IBAction)selectorButtonPressed:(id)sender
+{
+    [self resetView]; 
+    [self reDrawView];
+    [self toggleEditPressed:toggleEditButton]; 
+}
+
+-(IBAction)openAppStore:(id)sender
+{
+    RavenAppDelegate *delegate  = (RavenAppDelegate *)[[NSApplication sharedApplication]delegate]; 
+    [delegate webAppShop:sender]; 
 }
 
 #pragma mark - alert sheet
@@ -143,6 +173,7 @@
         [cellArray removeObjectAtIndex:item.index]; 
         [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_REMOVE object:item];
         [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
+        [self toggleEditPressed:toggleEditButton]; 
     }
 }
 
@@ -164,18 +195,16 @@
 {
     [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_SHOW object:item];
     [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
+    [self toggleEditPressed:toggleEditButton]; 
+    //[self onMouseDown:item]; 
+
 }
 
--(void)onMoveDownClick:(RASmartBarItem *)item
+-(void)onMouseDown:(RASmartBarItem *)item
 {
-    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_UP object:item]; 
-    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
+    RASmartBarItemViewController *itemView = [mainWindow.appList objectAtIndex:item.index]; 
+    [itemView onMainButtonClick:nil]; 
 }
 
--(void)onMoveUpClick:(RASmartBarItem *)item
-{
-    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_DOWN object:item]; 
-    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
-}
 
 @end
