@@ -55,6 +55,7 @@
 -(IBAction)onMainButtonClick:(id)sender;
 -(void)onOtherAppClick:(id)sender;
 -(IBAction)onCloseAppButtonClick:(id)sender; 
+-(void)checkForTabsAndLight; 
 -(void)updateStatusAndCleanMemory;
 -(void)calculateTotalTab;
 -(void)resetAllButton; 

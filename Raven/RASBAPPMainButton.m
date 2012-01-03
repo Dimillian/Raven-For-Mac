@@ -86,6 +86,7 @@
 
         switch ([theEvent type]) {
             case NSLeftMouseDragged:
+                [delegate beginDrag:self]; 
                 [self moveToLocation:theEvent.locationInWindow withInitialMousePosition:initialMousePosition]; 
                 [self displayDraggingMod]; 
                 break;

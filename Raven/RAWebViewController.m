@@ -165,6 +165,17 @@
 
 }
 
+- (BOOL)isTextFieldInFocus:(NSTextField *)textField
+{
+	BOOL inFocus = NO;
+	
+	inFocus = ([[[textField window] firstResponder] isKindOfClass:[NSTextView class]]
+			   && [[textField window] fieldEditor:NO forObject:nil]!=nil
+			   && [textField isEqualTo:(id)[(NSTextView *)[[textField window] firstResponder]delegate]]);
+	
+	return inFocus;
+}
+
 #pragma mark -
 #pragma mark Tab
 -(IBAction)tabsButtonClicked:(id)sender{
@@ -562,7 +573,7 @@
     NSString *url = [webview mainFrameURL];
     //set the URl in the address bar
     if (!isInternal) {
-         if(![[[address window]firstResponder]isKindOfClass:[address class]]){
+         if(![self isTextFieldInFocus:address]){
             [address setStringValue:url];
         }
     }
@@ -578,6 +589,7 @@
         ([[webview backForwardList]backListCount] < 1) ? [backButton setEnabled:NO] : [backButton setEnabled:YES];
         ([[webview backForwardList]forwardListCount] < 1) ? [forwardButton setEnabled:NO] : [forwardButton setEnabled:YES];
         [self performSelectorInBackground:@selector(getFavicon:) withObject:nil];
+        [address setStringValue:sender.mainFrameURL];
         //get the current title and set it in the window title
         NSString *title = [webview mainFrameTitle];
         [pageTitleTab setStringValue:[webview mainFrameTitle]];
@@ -585,9 +597,7 @@
         [[sender window] setTitle:title];
         if (isNewTab)
         {
-            if(![[[address window]firstResponder]isKindOfClass:[address class]]){
-                [address setStringValue:@""];
-            }
+            [address setStringValue:@""];
             isNewTab = NO; 
         }
     } 

@@ -154,18 +154,7 @@
 //fired to retract app
 -(IBAction)onOtherAppClick:(id)sender
 {   
-    [self calculateTotalTab];
-    NSUserDefaults *standardDefault = [NSUserDefaults standardUserDefaults];
-    if (standardDefault) {
-        if(totalTabs == 0 || [standardDefault integerForKey:OPPENED_TABS_BADGE] == 0)
-        {
-            [[lightVIew animator]setAlphaValue:0.0];
-        }
-        else
-        {
-            [[lightVIew animator]setAlphaValue:1.0];
-        }
-    }
+    [self checkForTabsAndLight]; 
     NSUInteger i = 0; 
     int h_button = 196; 
     int h_field =  196; 
@@ -189,8 +178,25 @@
     _state = 0;
 }
 
+-(void)checkForTabsAndLight
+{
+    [self calculateTotalTab];
+    NSUserDefaults *standardDefault = [NSUserDefaults standardUserDefaults];
+    if (standardDefault) {
+        if(totalTabs == 0 || [standardDefault integerForKey:OPPENED_TABS_BADGE] == 0)
+        {
+            [[lightVIew animator]setAlphaValue:0.0];
+        }
+        else
+        {
+            [[lightVIew animator]setAlphaValue:1.0];
+        }
+    }
+
+}
 #pragma mark -
 #pragma mark other
+
 -(void)receiveNotification:(NSNotification *)notification
 {
     [self updateTabsNumber];
@@ -414,13 +420,15 @@
 
 -(void)beginDrag:(RASBAPPMainButton *)button
 {
- 
+    [[closeAppButton animator]setAlphaValue:0.0]; 
+    [[lightVIew animator]setAlphaValue:0.0]; 
 }
 
 -(void)endDrag:(RASBAPPMainButton *)button
 {
     [closeAppButton removeFromSuperview]; 
     [self.view addSubview:closeAppButton]; 
+    [self checkForTabsAndLight]; 
     
 }
 

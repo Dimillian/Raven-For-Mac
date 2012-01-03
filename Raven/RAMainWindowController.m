@@ -235,7 +235,7 @@
     if ([[notification name]isEqualToString:SMART_BAR_UPDATE]) {
         //[self initSmartBar];
         [self updateSmartBarUi];
-        [self resetSmartBarUi:YES];
+        [self resetSmartBarUiWithAnimation:YES];
         [self updateMenu];
         [self animate:13];
     }
@@ -454,7 +454,7 @@
 }
 
 //reset the smartbar UI, place item at their initial state
--(void)resetSmartBarUi:(BOOL)animated
+-(void)resetSmartBarUiWithAnimation:(BOOL)animated
 {
     previousIndex = -1;
     NSInteger y = 0; 
@@ -646,10 +646,10 @@
     RASmartBarItemViewController *smarBarApp = [appList objectAtIndex:index];
     [smarBarApp showView]; 
     [smarBarApp onOtherAppClick:nil]; 
-    [rightView addSubview:smarBarApp.view]; 
     [self resetIndex];
     RAlistManager *listManager = [RAlistManager sharedUser];
     [listManager changeStateOfAppAtIndex:index withState:1];
+    [rightView addSubview:smarBarApp.view]; 
 }
 
 -(void)hideAppAtIndex:(NSUInteger)index
@@ -770,7 +770,7 @@
     [self home:sender]; 
     //Set the alphe value of the current button
     [[ravenMenuButton animator]setAlphaValue:1.0]; 
-    [self resetSmartBarUi:isAnimated];
+    [self resetSmartBarUiWithAnimation:isAnimated];
     [self animate:13]; 
 }
 
@@ -895,7 +895,7 @@
         [self hideall]; 
         [self animate:13]; 
         [self animate:11];
-        [self resetSmartBarUi:YES];
+        [self resetSmartBarUiWithAnimation:YES];
     }
     
 }

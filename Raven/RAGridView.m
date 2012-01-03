@@ -195,8 +195,8 @@
 {
     [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_SHOW object:item];
     [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
-    [self toggleEditPressed:toggleEditButton]; 
-    //[self onMouseDown:item]; 
+    [self performSelector:@selector(onMouseDown:) withObject:item afterDelay:0.5f];
+    
 
 }
 

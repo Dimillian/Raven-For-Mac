@@ -115,7 +115,7 @@
 -(void)updateMenu; 
 -(void)initSmartBar; 
 -(void)updateSmartBarUi;
--(void)resetSmartBarUi:(BOOL)animated;
+-(void)resetSmartBarUiWithAnimation:(BOOL)animated;
 -(void)newAppInstalled;
 -(void)removeAppAtIndex:(NSUInteger)index; 
 -(void)hideAppAtIndex:(NSUInteger)index; 
