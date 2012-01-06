@@ -47,6 +47,7 @@
     
     //keep the navigation mode (need to switch to enum)
     NSUInteger *mode; 
+    NSUInteger currentApp; 
     
     int i; 
     int f; 
@@ -117,6 +118,7 @@
 -(void)updateSmartBarUi;
 -(void)resetSmartBarUiWithAnimation:(BOOL)animated;
 -(void)newAppInstalled;
+-(void)reSelectCurrentApp; 
 -(void)removeAppAtIndex:(NSUInteger)index; 
 -(void)hideAppAtIndex:(NSUInteger)index; 
 -(void)showAppAtIndex:(NSUInteger)index; 

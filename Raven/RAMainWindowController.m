@@ -200,6 +200,10 @@
                                             selector:@selector(receiveNotification:) 
                                                 name:SMART_BAR_UPDATE_ITEM_REMOVE
                                               object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self 
+                                            selector:@selector(receiveNotification:) 
+                                                name:SMART_BAR_DID_END_DRAGGING
+                                              object:nil];
     
     //init view controller with appropriate nib
     navigatorview =
@@ -238,6 +242,7 @@
         [self resetSmartBarUiWithAnimation:YES];
         [self updateMenu];
         [self animate:13];
+        
     }
     if ([[notification name]isEqualToString:SMART_BAR_UPDATE_ITEM_UP]) {
         if([[notification object]isKindOfClass:[RASmartBarItem class]]){
@@ -273,6 +278,9 @@
     
     if ([[notification name]isEqualToString:NEW_APP_INSTALLED]) {
         [self newAppInstalled];
+    }
+    if ([[notification name]isEqualToString:SMART_BAR_DID_END_DRAGGING]) {
+        //[self reSelectCurrentApp];
     }
     if ([[notification name]isEqualToString:DOWNLOAD_BEGIN])
     {
@@ -516,7 +524,8 @@
     }
     [self hideall]; 
     [self animate:12];
-    previousIndex = index; 
+    previousIndex = index;
+    currentApp = index; 
 }
 
 
@@ -634,6 +643,14 @@
     }
     else{
         [self raven:nil]; 
+    }
+}
+
+-(void)reSelectCurrentApp
+{
+    if (currentApp != -1) {
+        RASmartBarItemViewController *item = [appList objectAtIndex:currentApp]; 
+        [item onMainButtonClick:item];
     }
 }
 
@@ -759,6 +776,7 @@
 //Method for big button
 -(IBAction)raven:(id)sender
 {
+    currentApp = -1; 
     if (sender == ravenMenuButton) {
         isAnimated = YES; 
     }

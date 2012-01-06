@@ -422,6 +422,7 @@
     }
 }
 
+//TODO Fetch in history first, if we go it, load it. 
 -(void)getFavicon:(id)sender
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];

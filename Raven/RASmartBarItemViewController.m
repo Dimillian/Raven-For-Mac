@@ -428,7 +428,9 @@
 {
     [closeAppButton removeFromSuperview]; 
     [self.view addSubview:closeAppButton]; 
-    [self checkForTabsAndLight]; 
+    [self checkForTabsAndLight];
+    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_DID_END_DRAGGING object:nil];
+    
     
 }
 

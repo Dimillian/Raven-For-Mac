@@ -54,6 +54,7 @@
 #define SMART_BAR_UPDATE_ITEM_HIDDEN @"smartBarWasUpdatedDidHide"
 #define SMART_BAR_UPDATE_ITEM_SHOW @"smartBarWasUpdatedDidShow"
 #define SMART_BAR_UPDATE_ITEM_REMOVE @"smartBarWasUpdatedDidRemove"
+#define SMART_BAR_DID_END_DRAGGING @"smartBarDidEndDragging"
 #define UPDATE_TAB_NUMBER @"updateTabNumber"
 
 
