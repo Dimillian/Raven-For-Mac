@@ -11,20 +11,38 @@
 @protocol RAGoogleSuggestionDelegate;
 @interface RAGoogleSuggestionsParser : NSObject <NSXMLParserDelegate>
 {
+    
     id<RAGoogleSuggestionDelegate> delegate;
-    NSURL *URLToParse;
-    NSMutableArray *suggestionResults; 
-    NSMutableData *receivedData;
+    NSURLConnection *urlConnection;
+	NSMutableData *asyncData;
+	NSString *asyncTextEncodingName;
+    NSURL *url; 
+    NSString *currentSuggestionString;
+
+	NSXMLParser *feedParser; 
+    NSString *currentElement; 
+    BOOL isParsing; 
 
 }
--(id)initWithDelegate:(id<RAGoogleSuggestionDelegate>)dgate;;
--(void)startParsing; 
--(NSMutableArray *)returnSuggestions; 
+-(id)initWithUrl:(NSURL *)feedUrl; 
+-(void)startParsingWithData:(NSData *)data; 
+-(void)parse; 
+-(void)reset; 
 @property (nonatomic, assign) id<RAGoogleSuggestionDelegate>delegate;
-@property (retain) NSURL *URLToParse; 
+@property (nonatomic, copy) NSURL *url;
+@property (nonatomic, retain) NSURLConnection *urlConnection;
+@property (nonatomic, retain) NSMutableData *asyncData;
+@property (nonatomic, retain) NSXMLParser *feedParser;
+@property (nonatomic, copy) NSString *currentElement; 
+@property (nonatomic, copy) NSString *currentSuggestionString; 
+
 @end
-@protocol RAGoogleSuggestionDelegate
+
+@protocol RAGoogleSuggestionDelegate 
 @optional
--(void)didFinishParsing:(RAGoogleSuggestionsParser *)parser;
+-(void)feedParserDidStartParsing:(RAGoogleSuggestionsParser *)parser; 
+-(void)feedParserDidParseAnItem:(NSString *)item; 
+-(void)feedParserDidFinishParsing:(RAGoogleSuggestionsParser *)parser; 
+-(void)feedParserDidFailParsingWithError:(RAGoogleSuggestionsParser *)parser; 
 @end
 

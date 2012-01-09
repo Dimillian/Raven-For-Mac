@@ -82,7 +82,6 @@
     [historyviewcontroller release];
     [bookmarkview release]; 
     [downloadview release]; 
-    [settingview release]; 
     [shelfView release]; 
     [[NSNotificationCenter defaultCenter]removeObserver:self];
     [delegate closeButtonClicked:self];
@@ -217,9 +216,7 @@
     
     downloadview = 
     [[RADownloadViewController alloc]initWithNibName:@"Download" bundle:nil]; 
-    
-    settingview = 
-    [[RASettingViewController alloc]initWithNibName:@"Settings" bundle:nil]; 
+
     
     shelfView = 
     [[RAGridView alloc]initWithNibName:@"RAGridView" bundle:nil]; 
@@ -331,6 +328,14 @@
     [self initSmartBar]; 
     [self updateSmartBarUi];
     [self raven:nil];
+    
+    //Experimental setting
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    if (standardUserDefaults) {
+        if ([standardUserDefaults integerForKey:OPEN_ALL_APP_ON_WINDOW_OPEN] == 1) {
+            [self loadAllApp]; 
+        }
+    }
 }
 
 //Called each time window is resized
@@ -654,6 +659,16 @@
     }
 }
 
+-(void)loadAllApp
+{
+    for (RASmartBarItemViewController *app in appList ) {
+        if ([self visibilityForApp:app]) {
+            [app onMainButtonClick:app]; 
+        }
+    }
+    [self raven:nil]; 
+}
+
 #pragma mark -
 #pragma mark Smart Bar App Array management
 //Basically this are called on notification, from setting or whatever. 
@@ -718,6 +733,11 @@
 {
     RASmartBarItem *item = [[appList objectAtIndex:index]smartBarItem]; 
     return item.isVisible; 
+}
+
+-(BOOL)visibilityForApp:(RASmartBarItemViewController *)app
+{
+    return app.smartBarItem.isVisible; 
 }
 
 -(NSUInteger)moveUpUntilVisible:(NSUInteger)fromIndex
@@ -904,6 +924,7 @@
         {
             
             myCurrentViewController = shelfView;
+            [shelfView reDrawView]; 
             
             
         }

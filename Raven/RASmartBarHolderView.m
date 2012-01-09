@@ -36,7 +36,7 @@
 
 -(void)rightMouseUp:(NSEvent *)theEvent
 {
-    /*
+    
     if (theEvent.locationInWindow.y > self.bounds.origin.y - 50) {
         NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
                                              location:theEvent.locationInWindow
@@ -52,7 +52,7 @@
         
     }
     [super rightMouseUp:theEvent];
-     */
+     
 }
 
 -(NSMenu *)getMenu

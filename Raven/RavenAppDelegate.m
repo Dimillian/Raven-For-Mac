@@ -79,6 +79,9 @@
             if ([standardUserDefaults objectForKey:OPEN_NEW_TAB_BASE_URL] == nil) {
                 [standardUserDefaults setInteger:0 forKey:OPEN_NEW_TAB_BASE_URL]; 
             }
+            if ([standardUserDefaults objectForKey:OPEN_ALL_APP_ON_WINDOW_OPEN] == nil) {
+                [standardUserDefaults setInteger:0 forKey:OPEN_ALL_APP_ON_WINDOW_OPEN]; 
+            }
             //We use this key to define default webpreference setting
             //Only done one time at first launch
             if ([standardUserDefaults objectForKey:JAVA_WEBVIEW] == nil) {

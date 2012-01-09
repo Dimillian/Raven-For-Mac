@@ -41,6 +41,7 @@
 #define FONTFAMILYFIXED_WEBVIEW @"fontFamilyFixed"
 #define WEBPREFERENCE_DEFAULT @"webPreferenceDefaultIsSet"
 #define OPEN_NEW_TAB_BASE_URL @"openNewTabWithBaseUrl"
+#define OPEN_ALL_APP_ON_WINDOW_OPEN @"openAllAppOnWindowOpen"
 
 //notifications
 #define DOWNLOAD_BEGIN @"downloadDidBegin"

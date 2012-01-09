@@ -106,7 +106,7 @@
 -(void)mouseExited:(NSEvent *)theEvent
 {
     if ([self isEnabled] == YES) {
-        [[self animator]setAlphaValue:1.0f]; 
+        [[self animator]setAlphaValue:1.0f];
     }
     [super mouseExited:theEvent];
     //[self closeSuggestionBox];

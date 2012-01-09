@@ -6,6 +6,11 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+//*************
+//Old home screen with NSTableView
+//Not used anymore, good to keep for archive
+//*************
+
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 #import "RADatabaseController.h"

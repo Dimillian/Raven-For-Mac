@@ -20,6 +20,7 @@
 #define y_space 150; 
 #define content_view_width 925
 #define icon_per_row 5
+#define scroller_size 10
 
 @implementation RAGridView
 
@@ -88,7 +89,7 @@
 #pragma mark - drawing
 -(void)reDrawView
 {
-    NSInteger row = 0; 
+    NSInteger row = 0;  
     CGFloat h = top_margin; 
     CGFloat x_iconView = [self getXbase]; 
     for (RAGridViewCell *cell in cellArray) {
@@ -105,8 +106,8 @@
     CGFloat final_h = 0; 
     CGFloat final_w = 0; 
     
-    (scrollView.frame.size.height < h) ? (final_h = h + top_margin) : (final_h = scrollView.frame.size.height); 
-    (scrollView.frame.size.width < content_view_width) ? (final_w = content_view_width) : (final_w = scrollView.frame.size.width);
+    (scrollView.frame.size.height < h) ? (final_h = h + top_margin) : (final_h = scrollView.frame.size.height - scroller_size); 
+    (scrollView.frame.size.width < content_view_width) ? (final_w = content_view_width) : (final_w = scrollView.frame.size.width - scroller_size);
     
     [contentView setFrameSize:NSMakeSize(final_w, final_h)]; 
 }

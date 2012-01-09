@@ -12,6 +12,8 @@
 //*****YOU CAN START READING THE CODE IF YOU WANT*****
 //Ah also, it is full of ninja comment.... really
 
+//This Class also Root new window and tab request from webview. It act as a WebUIDelegate
+
 #import "RANavigatorViewController.h"
 #import "RavenAppDelegate.h"
 #import <math.h>
@@ -556,7 +558,6 @@
     WebView *tempview = [[WebView alloc]init]; 
     [tempview setFrameLoadDelegate:self]; 
     [[tempview mainFrame]loadRequest:request]; 
-    NSLog(@"test");
     return tempview; 
 }
 

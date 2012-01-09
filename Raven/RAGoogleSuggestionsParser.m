@@ -9,73 +9,151 @@
 #import "RAGoogleSuggestionsParser.h"
 
 @implementation RAGoogleSuggestionsParser
-@synthesize delegate, URLToParse;
+@synthesize urlConnection, asyncData, url, feedParser, currentElement, delegate, currentSuggestionString;
 
--(id)initWithDelegate:(id<RAGoogleSuggestionDelegate>)dgate
-{
-    if (self = [super init]) {
-        self.delegate = dgate;
-        suggestionResults = [[NSMutableArray alloc]init];
+#pragma mark - init
+-(id)init{
+    self = [super init];
+    if (self) {
+        
     }
-    return self;
+    return self; 
 }
 
--(void)startParsing
+-(id)initWithUrl:(NSURL *)feedUrl
 {
-    receivedData = [[NSMutableData alloc] init];
-    [suggestionResults removeAllObjects];
-    NSURLConnection *urlConnection = [NSURLConnection connectionWithRequest:[NSURLRequest requestWithURL:URLToParse] delegate:self];
+    self = [super init]; 
+    if (self) {
+        self.url = feedUrl; 
+    }
+    return self; 
+}
+#pragma mark - parser method
+-(void)parse{
     
-    [urlConnection start];
+    [self reset]; 
+    isParsing = YES; 
+    [delegate feedParserDidStartParsing:self]; 
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url
+                                                                cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData 
+                                                            timeoutInterval:60];
+    urlConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (urlConnection) {
+        asyncData = [[NSMutableData alloc] init];
+    }
     
-}
-                                      
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    [receivedData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [receivedData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    NSXMLParser *parser = [[NSXMLParser alloc]initWithData:receivedData];
-    [parser setDelegate:self];
-    [parser parse];
+    [request release]; 
     
 }
 
+-(void)reset{
+    isParsing = NO;
+    [self.feedParser abortParsing]; 
+    // Stop downloading
+    [urlConnection cancel];
+    self.urlConnection = nil;
+    self.asyncData = nil;
+}
+
+#pragma mark - NSURLConnection delegate
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+	[asyncData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	[asyncData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+	
+	// Failed
+	[self reset]; 
+    
+    [delegate feedParserDidFailParsingWithError:self];
+    // Error
+	
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	
+	// Succeed
+	// Parse
+    [self startParsingWithData:asyncData]; 
+    isParsing = YES; 
+    // Cleanup
+    self.urlConnection = nil;
+    self.asyncData = nil;
+    
+}
+
+#pragma mark - NSXMLParser delegate
+-(void)startParsingWithData:(NSData *)data
+{
+    NSXMLParser *newFeedParser = [[NSXMLParser alloc] initWithData:data];
+    self.feedParser = newFeedParser;
+    [newFeedParser release];
+    if (feedParser) { 
+        self.feedParser.delegate = self;
+        [self.feedParser setShouldProcessNamespaces:YES];
+        [self.feedParser parse];
+    }
+}
 
 -(void)parserDidStartDocument:(NSXMLParser *)parser
 {
     
 }
 
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict
+-(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
+    self.currentElement = elementName; 
+    //new item
+    //else if ([currentElement isEqualToString:@"title"]){
+    //    self.currentTitleString = [[NSString alloc]init]; 
+   // }
     if ([attributeDict objectForKey:@"data"] != nil) {
-        [suggestionResults addObject:[attributeDict objectForKey:@"data"]];
+        [delegate feedParserDidParseAnItem:[attributeDict objectForKey:@"data"]];
     }
+
 }
 
+-(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
+{
+    //else if ([elementName isEqualToString:@"title"]){
+    //    self.currentTitleString = nil; 
+   // }
+
+    
+}
+
+-(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+    //parse current item
+   // if ([currentElement isEqualToString:@"title"]) {
+      //  self.currentTitleString = [currentTitleString stringByAppendingString:string]; 
+    //    aItem.title = currentTitleString; 
+    //}
+    
+}
+
+-(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
+{
+    [delegate feedParserDidFailParsingWithError:self]; 
+    isParsing = NO; 
+}
 -(void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    [delegate didFinishParsing:self];
+    [delegate feedParserDidFinishParsing:self]; 
+    isParsing = NO; 
 }
 
--(NSMutableArray *)returnSuggestions
-{
-    return suggestionResults; 
-}
-
+#pragma mark - Release
 -(void)dealloc
 {
-    [suggestionResults release];
-    [URLToParse release];
-    [super dealloc];
+    [urlConnection release]; 
+    [asyncData release]; 
+    [url release]; 
 }
+
 
 @end

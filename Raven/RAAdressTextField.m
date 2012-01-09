@@ -20,7 +20,8 @@
     ind = -1;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:) name:NSWindowDidResizeNotification object:nil]; 
     //[tableview setAllowsEmptySelection:NO]; 
-    //suggParser = [[RAGoogleSuggestionsParser alloc]initWithDelegate:self];
+    //suggParser = [[RAGoogleSuggestionsParser alloc]init]; 
+    //[suggParser setDelegate:self]; 
 
 }
 
@@ -205,12 +206,11 @@
         NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
         if (standardUserDefaults) {
             if ([standardUserDefaults integerForKey:SUGGESTION_BAR] == 1) {
-                /*
-                NSString *suggestion = [[self stringValue]stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-                [suggParser setURLToParse:[NSURL URLWithString:
-                                           [NSString stringWithFormat:@"http://google.com/complete/search?output=toolbar&q=%@", suggestion]]];
-                [suggParser startParsing];
-                 */
+                
+                //NSString *suggestion = [[self stringValue]stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+                //[suggParser setUrl:[NSURL URLWithString:
+                 //                          [NSString stringWithFormat:@"http://google.com/complete/search?output=toolbar&q=%@", suggestion]]];
+                //[self resetGoogleSuggestion]; 
                 [self check:nil];
                 
                 
@@ -219,7 +219,39 @@
     }
 }
 
+/*
+-(void)resetGoogleSuggestion
+{
+    if (googleSuggestionStringArray) {
+        [googleSuggestionStringArray release]; 
+    }
+    googleSuggestionStringArray = [[NSMutableArray alloc]init]; 
 
+    [suggParser parse]; 
+}
+*/
+/*
+-(void)feedParserDidParseAnItem:(NSString *)item
+{
+    [googleSuggestionStringArray addObject:item];
+    NSLog(@"%@", googleSuggestionStringArray); 
+}
+
+-(void)feedParserDidStartParsing:(RAGoogleSuggestionsParser *)parser
+{
+    
+}
+
+-(void)feedParserDidFinishParsing:(RAGoogleSuggestionsParser *)parser
+{
+    
+}
+
+-(void)feedParserDidFailParsingWithError:(RAGoogleSuggestionsParser *)parser
+{
+    
+}
+ */
 
 -(void)textDidEndEditing:(NSNotification *)notification
 {

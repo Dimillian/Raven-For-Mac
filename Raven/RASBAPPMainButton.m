@@ -134,7 +134,7 @@
     windowContentView = [[self window]contentView]; 
     if (isDragging) {
         //down
-        if (location.y < position.y &&  previousMousePosition.y > location.y) {
+        if (previousMousePosition.y > location.y) {
             float current = position.y - location.y;
             swapForce = round(current/drop_height); 
             if (swapForce != 0 && swapForce != previousSwapForce) {

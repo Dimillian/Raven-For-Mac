@@ -57,8 +57,6 @@
     
     NSMutableArray *appList;
     
-    
-    
     //button
     IBOutlet NSButton *ravenMenuButton; 
     IBOutlet NSButton *homeButton; 
@@ -77,7 +75,6 @@
     RAHistoryViewController *historyviewcontroller;
     RABookmarkViewController *bookmarkview;
     RADownloadViewController *downloadview; 
-    RASettingViewController *settingview; 
     RAGridView *shelfView; 
     
     
@@ -123,13 +120,17 @@
 -(void)hideAppAtIndex:(NSUInteger)index; 
 -(void)showAppAtIndex:(NSUInteger)index; 
 -(void)moveAppFromIndex:(NSUInteger)from toIndex:(NSUInteger)to; 
+-(void)loadAllApp; 
 -(BOOL)visibilityForAppAtIndex:(NSUInteger)index;
+-(BOOL)visibilityForApp:(RASmartBarItemViewController *)app; 
 -(NSUInteger)moveUpUntilVisible:(NSUInteger)fromIndex; 
 -(NSUInteger)moveDownUntilVisible:(NSUInteger)fromindex;
 -(void)resetIndex; 
 -(void)launchRuntime;
 -(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs;
 -(void)receiveNotification:(NSNotification *)notification;
+
+
 @property (nonatomic, assign) id<RAMainDelegate> delegate;
 @property (assign) NSString *passedUrl; 
 @property (assign) RANavigatorViewController *navigatorview; 

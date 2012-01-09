@@ -27,10 +27,12 @@
     int ind; 
     
     RAGoogleSuggestionsParser *suggParser; 
+   // NSMutableArray *googleSuggestionStringArray; 
 }
 -(IBAction)LoadSelectedRow:(id)sender; 
 -(void)closeSuggestionBox;
 -(void)check:(id)sender; 
+//-(void)resetGoogleSuggestion; 
 @property (nonatomic, retain) NSTableView *tableViewEdit; 
 
 @end
