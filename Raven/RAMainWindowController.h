@@ -42,7 +42,7 @@
     CGFloat staticRightViewHeight;
     
     
-    //The view under the button, later texture will be applied
+    //The view under the smart bar, later texture will be applied
     IBOutlet NSView *rightView;  
     
     //keep the navigation mode (need to switch to enum)

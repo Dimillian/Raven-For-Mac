@@ -81,6 +81,7 @@ static RADatabaseController *sharedUserManager = nil;
 //read the history table and load it in the history array
 -(void)readHistoryFromDatabase
 {
+    //EGODatabase framework test
     /*
      //Sample if I port it to ENORMEGO database. Not so fast
      @synchronized(self){

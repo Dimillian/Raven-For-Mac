@@ -51,6 +51,7 @@
     [nc addObserver:self selector:@selector(windowResize:) name:NSWindowDidResizeNotification object:nil]; 
     //Initialize the array which contain tabs
     _tabsArray = [[NSMutableArray alloc]init];
+    _popupWindowArray = [[NSMutableArray alloc]init]; 
     //Value for the tabs button position and tag (y)
     
     istab = NO; 
@@ -408,6 +409,13 @@
     [self addtabs:nil];
 }
 
+#pragma mark - RAPopupWindowDelegate
+
+-(void)onCloseButton:(RAPopupWindowController *)windowController
+{
+    [_popupWindowArray removeObject:windowController]; 
+}
+
 #pragma mark -
 #pragma mark RAWebviewControllerDelegate
 
@@ -516,10 +524,13 @@
     }
 }
 
+//IF ask for new window then open in a new tab
 - (void)webView:(WebView *)webView decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id < WebPolicyDecisionListener >)listener
 {
+    askForNewWindow = YES; 
     [listener use];
 }
+
 
 - (void)webView:(WebView *)webView decidePolicyForMIMEType:(NSString *)type request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener
 {
@@ -543,14 +554,30 @@
         [listener use];
     }
 }
-//create a new tab with the clicked URL
-//it create a temp webview, totally useless but necessary because webview API are broken in this part
+
 - (WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
     WebView *tempview = [[WebView alloc]init]; 
-    [tempview setFrameLoadDelegate:self]; 
-    [[tempview mainFrame]loadRequest:request]; 
+    [tempview setUIDelegate:self];
+    [[tempview mainFrame]loadRequest:request];
     return tempview; 
+}
+
+- (void)webViewShow:(WebView *)sender
+{
+        if (!askForNewWindow) {
+            RAPopupWindowController *popupWindow = [[RAPopupWindowController alloc]initWithWindowNibName:@"RAPopupWindow"];
+            [popupWindow.window makeKeyAndOrderFront:popupWindow.window];
+            [popupWindow replaceWebView:sender]; 
+            [popupWindow setDelegate:self]; 
+            [_popupWindowArray addObject:popupWindow]; 
+            [popupWindow release]; 
+            [sender stopLoading:sender];  
+        }
+        else{
+            //if new tab load the webview here to get the mainframeUrl
+            [sender setFrameLoadDelegate:self]; 
+        }
 }
 
 - (WebView *)webView:(WebView *)sender createWebViewModalDialogWithRequest:(NSURLRequest *)request
@@ -561,18 +588,17 @@
     return tempview; 
 }
 
-//Little hack to intercept URL, the webview start provisiosing with the previous request. Only way to catch the URL
-- (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
+//used to create a new tab
+-(void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)frame
 {
-    if (frame == [sender mainFrame]){
-        if (![[sender mainFrameURL]isEqualToString:@""]) {
-            self.PassedUrl = [sender mainFrameURL]; 
-            [self addtabs:tabsButton];
-            [sender stopLoading:sender]; 
-        }
+    if (frame == [sender mainFrame]) {
+        self.PassedUrl = [sender mainFrameURL]; 
+        [self addtabs:tabsButton];
+        [sender stopLoading:sender];  
+        askForNewWindow = NO;
+
     }
 }
-
 
 
 
@@ -690,6 +716,12 @@
     } 
     [_tabsArray removeAllObjects];
     [_tabsArray release], _tabsArray = nil;
+    for (RAPopupWindowController *popupWindow in _popupWindowArray) {
+        [popupWindow setDelegate:nil]; 
+        [popupWindow.window setDelegate:nil]; 
+        [popupWindow.window close]; 
+    }
+    [_popupWindowArray release], _popupWindowArray = nil; 
     [[NSNotificationCenter defaultCenter]removeObserver:self]; 
     [super dealloc];
 }

@@ -6,6 +6,17 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+//Manage an array containing dictionary of all apps in the app.plist
+//This Array is shared across all the app and is used by main window class
+//Main window create the smart bar derived from this array to generate the smart bar item
+//Any change made to the smart bar are later replicated here in memory and sometimes write to file
+//to update the .plist
+//The .plist is loaded at each launch and writen when you close a window
+//Most of the part is entierly managed in memory to make the thing speedier. 
+
+//On of my idea would be to "merge" this class with the app array in the main window, it will remove a layer 
+//And make replicate of operations easier, but each window need a separate state of the smart bar
+
 #import <Foundation/Foundation.h>
 
 @interface RAlistManager : NSObject

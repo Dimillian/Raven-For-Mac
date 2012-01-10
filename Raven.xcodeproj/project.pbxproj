@@ -224,6 +224,8 @@
 		9F634B83148E8C8C005AAE43 /* RASmartBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F634B82148E8C8C005AAE43 /* RASmartBarItem.m */; };
 		9F6A527C14AE7FAE006E164B /* black_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F6A527B14AE7FAE006E164B /* black_background.png */; };
 		9F6A527F14AE812C006E164B /* remove.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 9F6A527E14AE812C006E164B /* remove.aiff */; };
+		9F6A9C6014BB657D00A4F481 /* RAPopupWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6A9C5F14BB657D00A4F481 /* RAPopupWindowController.m */; };
+		9F6A9C6214BB658C00A4F481 /* RAPopupWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F6A9C6114BB658C00A4F481 /* RAPopupWindow.xib */; };
 		9F6B90D413D7722E006277E3 /* plus-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F6B90D213D7722E006277E3 /* plus-off.png */; };
 		9F6B90D513D7722E006277E3 /* plus-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F6B90D313D7722E006277E3 /* plus-on.png */; };
 		9F6C54D3144C9ABB00CE1AD9 /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F6C54D2144C9ABB00CE1AD9 /* shadow.png */; };
@@ -631,6 +633,9 @@
 		9F634B82148E8C8C005AAE43 /* RASmartBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RASmartBarItem.m; sourceTree = "<group>"; };
 		9F6A527B14AE7FAE006E164B /* black_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_background.png; sourceTree = "<group>"; };
 		9F6A527E14AE812C006E164B /* remove.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = remove.aiff; sourceTree = "<group>"; };
+		9F6A9C5E14BB657D00A4F481 /* RAPopupWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAPopupWindowController.h; sourceTree = "<group>"; };
+		9F6A9C5F14BB657D00A4F481 /* RAPopupWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAPopupWindowController.m; sourceTree = "<group>"; };
+		9F6A9C6114BB658C00A4F481 /* RAPopupWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RAPopupWindow.xib; sourceTree = "<group>"; };
 		9F6B90D213D7722E006277E3 /* plus-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-off.png"; sourceTree = "<group>"; };
 		9F6B90D313D7722E006277E3 /* plus-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-on.png"; sourceTree = "<group>"; };
 		9F6C54D2144C9ABB00CE1AD9 /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
@@ -1130,6 +1135,7 @@
 				9FB6388A14A79C4C00E4E5A5 /* About  */,
 				9FB6388514A79C2600E4E5A5 /* Setting */,
 				9FB6388414A79C2000E4E5A5 /* Home screen */,
+				9F6A9C5C14BB655100A4F481 /* Popup Window */,
 				9FB6387B14A79B9600E4E5A5 /* Main Window */,
 				9FB6387514A79B4200E4E5A5 /* Utiliy */,
 				9FB6387214A79B1C00E4E5A5 /* Bookmarks */,
@@ -1272,6 +1278,16 @@
 				9F79C1E213D0CA160039A1CB /* RANSURLDownloadDelegate.m */,
 			);
 			name = PureDelegate;
+			sourceTree = "<group>";
+		};
+		9F6A9C5C14BB655100A4F481 /* Popup Window */ = {
+			isa = PBXGroup;
+			children = (
+				9F6A9C5E14BB657D00A4F481 /* RAPopupWindowController.h */,
+				9F6A9C5F14BB657D00A4F481 /* RAPopupWindowController.m */,
+				9F6A9C6114BB658C00A4F481 /* RAPopupWindow.xib */,
+			);
+			name = "Popup Window";
 			sourceTree = "<group>";
 		};
 		9F70414713C658B40068C85F /* Home Screen */ = {
@@ -2257,6 +2273,7 @@
 				9F20FAD714AA68960036CCCE /* grid_right.png in Resources */,
 				9F6A527C14AE7FAE006E164B /* black_background.png in Resources */,
 				9F6A527F14AE812C006E164B /* remove.aiff in Resources */,
+				9F6A9C6214BB658C00A4F481 /* RAPopupWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2371,6 +2388,7 @@
 				9FAC887D1498E63000CF650F /* WebView+Growl.m in Sources */,
 				9F20FAC514A9D6FC0036CCCE /* RAGridViewCell.m in Sources */,
 				9F20FACF14AA5CD30036CCCE /* RAGridViewContentView.m in Sources */,
+				9F6A9C6014BB657D00A4F481 /* RAPopupWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

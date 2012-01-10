@@ -18,10 +18,11 @@
 #import "RATabPlaceholderView.h"
 #import "RAWebViewController.h"
 #import "RANSURLDownloadDelegate.h"
+#import "RAPopupWindowController.h"
 
 
 @class RavenAppDelegate;
-@interface RANavigatorViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSWindowDelegate, RAWebViewControllerDelegate, RATabViewDelegate>{
+@interface RANavigatorViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSWindowDelegate, RAWebViewControllerDelegate, RATabViewDelegate, RAPopupWindowDelegate>{
     
     //Outlet
     IBOutlet NSView *mainView; 
@@ -33,6 +34,7 @@
     NSString *_baseURL; 
     NSString *_PassedUrl; //THIS variable is super important, it is a mess, but believe me or not it is super important
     NSMutableArray *_tabsArray;
+    NSMutableArray *_popupWindowArray; 
     NSInteger count; 
     BOOL istab; 
     int _fromOtherViews; 
@@ -40,6 +42,7 @@
     IBOutlet NSMenu *navigatorMenu; 
     BOOL inBackground;
     BOOL isAdressBarHidden; 
+    BOOL askForNewWindow; 
 }
 
 -(IBAction)addtabs:(id)sender;

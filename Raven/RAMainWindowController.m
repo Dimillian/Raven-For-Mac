@@ -691,6 +691,7 @@
     [smarBarApp.view removeFromSuperview];
     [smarBarApp onCloseAppButtonClick:nil];
     [self resetIndex];
+    //replicate state in the plist, very important
     RAlistManager *listManager = [RAlistManager sharedUser];
     [listManager changeStateOfAppAtIndex:index withState:0];
 }
@@ -710,6 +711,7 @@
         [obj release];
     }
     [self resetIndex]; 
+    //replicate state in the plist, very important
     RAlistManager *listManager = [RAlistManager sharedUser];
     [listManager moveObjectFromIndex:from toIndex:to];
 }
