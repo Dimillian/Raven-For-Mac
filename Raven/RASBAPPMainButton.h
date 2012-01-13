@@ -17,7 +17,6 @@
     BOOL isDragging; 
     BOOL wantHide; 
     NSView *originalSuperView; 
-    NSView *windowContentView; 
     NSRect originaleFrame; 
     NSPoint initialMousePosition; 
     NSPoint previousMousePosition; 

@@ -366,8 +366,8 @@
     NSMenu *topMenu = [NSApp menu]; 
     NSMenu *smartBarMenu = [[topMenu itemAtIndex:4]submenu];
     NSInteger count = smartBarMenu.itemArray.count;
-    for (NSInteger sb=13; sb < count; sb++) {
-        [smartBarMenu removeItemAtIndex:13];
+    for (NSInteger sb= count; sb < count; sb++) {
+        [smartBarMenu removeItemAtIndex:count];
     }
     
     //local array index
@@ -398,8 +398,8 @@
     NSMenu *topMenu = [NSApp menu]; 
     NSMenu *smartBarMenu = [[topMenu itemAtIndex:4]submenu];
     NSInteger count = smartBarMenu.itemArray.count;
-    for (NSInteger sb=13; sb < count; sb++) {
-        [smartBarMenu removeItemAtIndex:13];
+    for (NSInteger sb=count; sb < count; sb++) {
+        [smartBarMenu removeItemAtIndex:count];
     }
     for (RASmartBarItemViewController *smartApp in appList) {
         if (smartApp.smartBarItem.isVisible) {
@@ -699,17 +699,7 @@
 
 -(void)moveAppFromIndex:(NSUInteger)from toIndex:(NSUInteger)to
 {
-    if (to != from) {
-        id obj = [appList objectAtIndex:from];
-        [obj retain];
-        [appList removeObjectAtIndex:from];
-        if (to >= [appList count]) {
-            [appList addObject:obj];
-        } else {
-            [appList insertObject:obj atIndex:to];
-        }
-        [obj release];
-    }
+    [appList moveObjectFromIndex:from toIndex:to]; 
     [self resetIndex]; 
     //replicate state in the plist, very important
     RAlistManager *listManager = [RAlistManager sharedUser];

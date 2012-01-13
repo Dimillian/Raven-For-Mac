@@ -15,7 +15,7 @@
 @synthesize delegate, swapForce; 
 
 #pragma mark -
-#pragma mark INIT
+#pragma mark INIT and DEALLOC
 -(id)init
 {
     self = [super init]; 
@@ -35,6 +35,7 @@
     
 }
 
+
 -(void)setNewOriginaleFrame
 {
     originaleFrame = [self frame]; 
@@ -51,6 +52,11 @@
                                                            owner:self
                                                         userInfo:nil];
     [self addTrackingArea:[area autorelease]];
+}
+
+-(void)dealloc
+{
+    [super dealloc]; 
 }
 
 #pragma mark -
@@ -131,7 +137,6 @@
 -(void)moveToLocation:(NSPoint)location withInitialMousePosition:(NSPoint)position
 {
     isDragging = YES; 
-    windowContentView = [[self window]contentView]; 
     if (isDragging) {
         //down
         if (previousMousePosition.y > location.y) {
@@ -152,7 +157,6 @@
         (location.x > 85) ? [self setHideAfterDragginOperation:YES] : [self setHideAfterDragginOperation:NO]; 
     }
     [self setFrameOrigin:NSMakePoint(location.x - mouse_in_icon, location.y-mouse_in_icon)];
-    [windowContentView addSubview:self];
     previousSwapForce = swapForce; 
     previousMousePosition = location; 
 }
@@ -281,4 +285,6 @@
 {
     [delegate shouldCloseApp:self];
 }
+
+
 @end

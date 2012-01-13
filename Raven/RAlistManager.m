@@ -249,17 +249,7 @@ static RAlistManager *sharedUserManager = nil;
 - (void)moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to
 {
     NSMutableArray *folders = [self readAppList];
-    if (to != from) {
-        id obj = [folders objectAtIndex:from];
-        [obj retain];
-        [folders removeObjectAtIndex:from];
-        if (to >= [folders count]) {
-            [folders addObject:obj];
-        } else {
-            [folders insertObject:obj atIndex:to];
-        }
-        [obj release];
-    }
+    [folders moveObjectFromIndex:from toIndex:to]; 
     [self writeNewAppListInMemory:folders writeToFile:NO];
 } 
 

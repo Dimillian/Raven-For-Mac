@@ -96,11 +96,10 @@
     }
     //If only 1 or 0 tabs then hide the webview tabbar, only do it when it does not come from window resize notification
     if ([_tabsArray count] <= 1 && !fromWindow) {
-        [self hideTabHolder];         
+        [self hideTabHolder];    
     }
     //show the tabbar and draw tabs
-    else
-    {
+    else if ([_tabsArray count] > 1){
         [tabPlaceHolder setHidden:NO];
         CGFloat x = 0;
         float rest = 0; 
@@ -159,8 +158,8 @@
 -(void)hideTabHolder
 {
     [tabPlaceHolder setHidden:YES];
+    [allTabsButton setHidden:YES];
     for (RAWebViewController *aTab in _tabsArray) {
-        [allTabsButton setHidden:YES];
         [[aTab tabHolder]setHidden:YES];
         [[aTab tabview]setHidden:YES]; 
         [[aTab webview]setFrame:NSMakeRect(aTab.webview.frame.origin.x, aTab.webview.frame.origin.y, aTab.webview.frame.size.width, aTab.webview.frame.size.height+tabHeight)];
@@ -409,6 +408,38 @@
     [self addtabs:nil];
 }
 
+#pragma mark - Handle tab swape
+
+-(void)tabDidStartDragging:(RAWebViewController *)RAWebView
+{
+    [self.view.window.contentView addSubview:RAWebView.tabview]; 
+}
+
+-(void)tabDidMoveLeft:(RAWebViewController *)RAWebView
+{
+    if ([_tabsArray indexOfObject:RAWebView] > 0) {
+        [_tabsArray moveObjectFromIndex:[_tabsArray indexOfObject:RAWebView] 
+                                toIndex:[_tabsArray indexOfObject:RAWebView]-1];
+        [self redrawTabs:YES]; 
+    }
+}
+
+-(void)tabDidMoveRight:(RAWebViewController *)RAWebView
+{
+    if ([_tabsArray indexOfObject:RAWebView] < [_tabsArray count]) {
+        [_tabsArray moveObjectFromIndex:[_tabsArray indexOfObject:RAWebView] 
+                                toIndex:[_tabsArray indexOfObject:RAWebView]+1];
+        [self redrawTabs:YES]; 
+    }
+}
+
+-(void)tabDidStopDragging:(RAWebViewController *)RAWebView
+{
+    [self redrawTabs:YES];
+    [tabPlaceHolder addSubview:RAWebView.tabview]; 
+}
+
+
 #pragma mark - RAPopupWindowDelegate
 
 -(void)onCloseButton:(RAPopupWindowController *)windowController
@@ -525,6 +556,8 @@
 }
 
 //IF ask for new window then open in a new tab
+//Default policy is to open popup in new tab
+//So if the popup gently ask the delegate we set the flag to yes
 - (void)webView:(WebView *)webView decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id < WebPolicyDecisionListener >)listener
 {
     askForNewWindow = YES; 
@@ -555,6 +588,13 @@
     }
 }
 
+-(void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
+{
+    [listener use]; 
+}
+
+//here in any case we init and load the request the Apple way, after the webview will be rooter depending
+//If it is a popup or a new tab
 - (WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
     WebView *tempview = [[WebView alloc]init]; 
@@ -563,6 +603,9 @@
     return tempview; 
 }
 
+//If the webview does not asked for a new window we consider it as a login form or a automatic ads
+//So we open it in a new window popup
+//if it previously asked we set the frameload delegate and load it to get the URL and open the tab with
 - (void)webViewShow:(WebView *)sender
 {
         if (!askForNewWindow) {
@@ -589,7 +632,8 @@
 }
 
 //used to create a new tab
--(void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)frame
+//we just get the main frame URL and pass it to the new tab
+-(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
 {
     if (frame == [sender mainFrame]) {
         self.PassedUrl = [sender mainFrameURL]; 

@@ -61,8 +61,7 @@
 //log enter key and reset index
 - (void)keyUp:(NSEvent *)theEvent
 {
-    NSUInteger event = [theEvent keyCode]; 
-    switch (event) {
+    switch ([theEvent keyCode]) {
         case 36: 
                 ind = 0;
                 [self performClick:self];

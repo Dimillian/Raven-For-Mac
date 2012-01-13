@@ -1534,14 +1534,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">progressMain</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="83341491"/>
-					</object>
-					<int key="connectionID">410</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">tabHolder</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="704294983"/>
@@ -1614,30 +1606,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">searchWebView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="633320538"/>
-					</object>
-					<int key="connectionID">534</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">doASearchOnWebView:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="245344560"/>
-					</object>
-					<int key="connectionID">530</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">enableSearch:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="942565447"/>
-					</object>
-					<int key="connectionID">547</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">searchResults</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="1010340255"/>
@@ -1691,6 +1659,38 @@
 						<reference key="destination" ref="651533376"/>
 					</object>
 					<int key="connectionID">573</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">progressMain</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="83341491"/>
+					</object>
+					<int key="connectionID">410</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">enableSearch:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="942565447"/>
+					</object>
+					<int key="connectionID">547</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">doASearchOnWebView:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="245344560"/>
+					</object>
+					<int key="connectionID">530</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">searchWebView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="633320538"/>
+					</object>
+					<int key="connectionID">534</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2039,11 +2039,6 @@
 						<reference key="parent" ref="662933798"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">414</int>
-						<reference key="object" ref="257127336"/>
-						<reference key="parent" ref="928699272"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">364</int>
 						<reference key="object" ref="335387449"/>
 						<object class="NSMutableArray" key="children">
@@ -2243,11 +2238,6 @@
 						<reference key="parent" ref="928699272"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">409</int>
-						<reference key="object" ref="83341491"/>
-						<reference key="parent" ref="928699272"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">294</int>
 						<reference key="object" ref="406450565"/>
 						<reference key="parent" ref="662933798"/>
@@ -2269,21 +2259,6 @@
 						<int key="objectID">436</int>
 						<reference key="object" ref="335566455"/>
 						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">415</int>
-						<reference key="object" ref="952129978"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="504105153"/>
-						</object>
-						<reference key="parent" ref="928699272"/>
-						<string key="objectName">Image View</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">416</int>
-						<reference key="object" ref="504105153"/>
-						<reference key="parent" ref="952129978"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">459</int>
@@ -2454,34 +2429,6 @@
 						<reference key="parent" ref="439600831"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">528</int>
-						<reference key="object" ref="633320538"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="245344560"/>
-						</object>
-						<reference key="parent" ref="928699272"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">529</int>
-						<reference key="object" ref="245344560"/>
-						<reference key="parent" ref="633320538"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">536</int>
-						<reference key="object" ref="97993967"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="942565447"/>
-						</object>
-						<reference key="parent" ref="928699272"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">537</int>
-						<reference key="object" ref="942565447"/>
-						<reference key="parent" ref="97993967"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">548</int>
 						<reference key="object" ref="1010340255"/>
 						<object class="NSMutableArray" key="children">
@@ -2504,6 +2451,59 @@
 						<int key="objectID">561</int>
 						<reference key="object" ref="931701883"/>
 						<reference key="parent" ref="439600831"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">414</int>
+						<reference key="object" ref="257127336"/>
+						<reference key="parent" ref="928699272"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">409</int>
+						<reference key="object" ref="83341491"/>
+						<reference key="parent" ref="928699272"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">415</int>
+						<reference key="object" ref="952129978"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="504105153"/>
+						</object>
+						<reference key="parent" ref="928699272"/>
+						<string key="objectName">Image View</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">416</int>
+						<reference key="object" ref="504105153"/>
+						<reference key="parent" ref="952129978"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">536</int>
+						<reference key="object" ref="97993967"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="942565447"/>
+						</object>
+						<reference key="parent" ref="928699272"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">537</int>
+						<reference key="object" ref="942565447"/>
+						<reference key="parent" ref="97993967"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">528</int>
+						<reference key="object" ref="633320538"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="245344560"/>
+						</object>
+						<reference key="parent" ref="928699272"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">529</int>
+						<reference key="object" ref="245344560"/>
+						<reference key="parent" ref="633320538"/>
 					</object>
 				</object>
 			</object>
@@ -2581,6 +2581,7 @@
 					<string>291.IBPluginDependency</string>
 					<string>292.CustomClassName</string>
 					<string>292.IBPluginDependency</string>
+					<string>293.CustomClassName</string>
 					<string>293.IBPluginDependency</string>
 					<string>294.IBPluginDependency</string>
 					<string>294.IBViewIntegration.shadowBlurRadius</string>
@@ -2819,6 +2820,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>StopActivityButton</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>RATabButton</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<real value="0.0"/>
@@ -3287,6 +3289,14 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">RATabButton</string>
+					<string key="superclassName">NSButton</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/RATabButton.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">RATabFaviconView</string>
 					<string key="superclassName">NSImageView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -3451,7 +3461,7 @@
 							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSView</string>
-							<string>NSButton</string>
+							<string>RATabButton</string>
 							<string>NSBox</string>
 							<string>NSButton</string>
 							<string>NSView</string>
@@ -3571,7 +3581,7 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">tabButtonTab</string>
-								<string key="candidateClassName">NSButton</string>
+								<string key="candidateClassName">RATabButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">tabHolder</string>

@@ -25,7 +25,7 @@
 
 @implementation RAWebViewController
 @synthesize switchView, tabsButton, webview, address, tabview, searchWebView; 
-@synthesize tabButtonTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, addressBarView, boxTab, tabHolder, delegate; 
+@synthesize tabButtonTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, addressBarView, boxTab, tabHolder, delegate, favicon = _favicon; 
 
 #pragma -
 #pragma mark init
@@ -109,6 +109,8 @@
     
     fPanelArray = [[NSMutableArray alloc]init]; 
     
+    [tabButtonTab setDelegate:self]; 
+    
     //[webview displayGrowlNotification]; 
      
 }
@@ -191,6 +193,29 @@
 {
     [delegate shouldCreateNewTab:self];
 }
+
+#pragma mark - RATabViewDelegate
+
+-(void)beginDrag:(RATabButton *)button
+{
+    [delegate tabDidStartDragging:self]; 
+}
+
+-(void)swapUp:(RATabButton *)button
+{
+    [delegate tabDidMoveRight:self]; 
+}
+
+-(void)swapDown:(RATabButton *)button
+{
+    [delegate tabDidMoveLeft:self]; 
+}
+
+-(void)endDrag:(RATabButton *)button
+{
+    [delegate tabDidStopDragging:self]; 
+}
+
 #pragma mark -
 #pragma mark action
 -(IBAction)enableSearch:(id)sender
@@ -266,7 +291,7 @@
     RAFavoritePanelWController *favoritePanel = [[RAFavoritePanelWController alloc]init];
     [favoritePanel setTempURL:[webview mainFrameURL]]; 
     [favoritePanel setTempTitle:[webview mainFrameTitle]]; 
-    [favoritePanel setTempFavico:favicon]; 
+    [favoritePanel setTempFavico:_favicon]; 
     [favoritePanel setState:1];
     [favoritePanel setType:0];
     [favoritePanel setThisDelegate:self]; 
@@ -485,10 +510,10 @@
     NSImage *tempIcon = [[NSImage alloc]initWithData:blob];
     if (!tempIcon) {
         tempIcon = [NSImage imageNamed:@"MediumSiteIcon"];
-        favicon = tempIcon; 
+        self.favicon = tempIcon; 
     }
     else{
-        favicon = tempIcon;  
+        self.favicon = tempIcon;  
     }
     [pool release]; 
     [self performSelectorOnMainThread:@selector(setFaviconUI:) withObject:nil waitUntilDone:YES];
@@ -505,8 +530,8 @@
         [faviconTab setImage:[NSImage imageNamed:@"ravenico.png"]]; 
     }
     else{
-        [temp setImage:favicon]; 
-        [faviconTab setImage:favicon]; 
+        [temp setImage:_favicon]; 
+        [faviconTab setImage:_favicon]; 
     }
 }
 
@@ -521,7 +546,7 @@
     else if (doRegisterHistory == 2) {
         NSDate *currentDate = [[NSDate alloc]initWithTimeIntervalSinceNow:0]; 
         NSString *currentUrl= [webview mainFrameURL];
-        NSImage *currentFavicon = favicon;
+        NSImage *currentFavicon = _favicon;
         NSString *udid = [[NSURL URLWithString:[webview mainFrameURL]]host];
         if (udid != nil) {
             udid = [udid createFileNameFromString:udid];

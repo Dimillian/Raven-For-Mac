@@ -16,11 +16,12 @@
 #import "RAFavoritePanelWController.h"
 #import "RANSURLDownloadDelegate.h"
 #import "RAAddressFieldBox.h"
+#import "RATabButton.h"
  
 @class RAAdressTextField, RAMainWindowController, RavenAppDelegate; 
 
 @protocol RAWebViewControllerDelegate;
-@interface RAWebViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSTableViewDelegate, NSTableViewDataSource, RAFavoritePanelControllerDelegate>{
+@interface RAWebViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSTableViewDelegate, NSTableViewDataSource, RAFavoritePanelControllerDelegate, RATabButtonDelegate>{
     id<RAWebViewControllerDelegate> delegate;
     
     //MainView outlet 
@@ -47,7 +48,7 @@
     IBOutlet NSView *tabview; 
     IBOutlet NSImageView *faviconTab; 
     IBOutlet NSTextField *pageTitleTab; 
-    IBOutlet NSButton *tabButtonTab; 
+    IBOutlet RATabButton *tabButtonTab; 
     IBOutlet NSButton *closeButtonTab; 
     IBOutlet NSProgressIndicator *progressTab;
     IBOutlet NSBox *boxTab; 
@@ -57,7 +58,7 @@
     BOOL isInternal; 
     NSString *UA; 
     NSInteger count; 
-    NSImage *favicon; 
+    NSImage *_favicon; 
 
     NSMutableArray *fPanelArray; 
     
@@ -108,6 +109,7 @@
 @property (nonatomic, retain) NSButton *secondTabButton; 
 @property (nonatomic, retain) WebView *webview; 
 @property (nonatomic, retain) NSTextField *address;
+@property (nonatomic, retain) NSImage *favicon; 
 @property int doRegisterHistory;
 @property BOOL isNewTab;
 @property (nonatomic, retain) IBOutlet NSView *tabview;
@@ -125,5 +127,9 @@
 @optional
 -(void)tabWillClose:(RAWebViewController *)RAWebView;
 -(void)tabDidSelect:(RAWebViewController *)RAWebView;
+-(void)tabDidMoveLeft:(RAWebViewController *)RAWebView; 
+-(void)tabDidMoveRight:(RAWebViewController *)RAWebView;
+-(void)tabDidStartDragging:(RAWebViewController *)RAWebView; 
+-(void)tabDidStopDragging:(RAWebViewController *)RAWebView; 
 -(void)shouldCreateNewTab:(RAWebViewController *)RAWebView; 
 @end

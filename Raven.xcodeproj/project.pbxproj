@@ -256,6 +256,7 @@
 		9F76D082144D5EB7007C819F /* home_off_toolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F76D080144D5EB7007C819F /* home_off_toolbar.png */; };
 		9F76D084144D5ED2007C819F /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F76D083144D5ED2007C819F /* line.png */; };
 		9F79C1E313D0CA160039A1CB /* RANSURLDownloadDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F79C1E213D0CA160039A1CB /* RANSURLDownloadDelegate.m */; };
+		9F7FD52814BF2B32002119BB /* NSMutableArray+Raven.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7FD52714BF2B32002119BB /* NSMutableArray+Raven.m */; };
 		9F85275013CED84700D26BCF /* favstar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F85274E13CED84700D26BCF /* favstar.png */; };
 		9F85275113CED84700D26BCF /* raven-black.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F85274F13CED84700D26BCF /* raven-black.png */; };
 		9F85275713CEDBCD00D26BCF /* RAFavoritePanelWController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F85275613CEDBCD00D26BCF /* RAFavoritePanelWController.m */; };
@@ -299,6 +300,7 @@
 		9FC75F0714765403001842EC /* RACSSEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FC75F0614765403001842EC /* RACSSEditor.m */; };
 		9FD180FE1430B22C004B3F12 /* rSDk.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9FD180FD1430B22C004B3F12 /* rSDk.icns */; };
 		9FD1812C1430C57F004B3F12 /* Builder.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9FD1812B1430C57F004B3F12 /* Builder.icns */; };
+		9FD5520C14BEE8EE00F2C9BE /* RATabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD5520B14BEE8EE00F2C9BE /* RATabButton.m */; };
 		9FD7B26914668FD5007EFF15 /* CMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD7B26114668FD5007EFF15 /* CMController.m */; };
 		9FD7B26A14668FD5007EFF15 /* CMUserScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD7B26314668FD5007EFF15 /* CMUserScript.m */; };
 		9FD7B26B14668FD5007EFF15 /* WildcardPattern.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD7B26514668FD5007EFF15 /* WildcardPattern.m */; };
@@ -668,6 +670,8 @@
 		9F76D083144D5ED2007C819F /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		9F79C1E113D0CA160039A1CB /* RANSURLDownloadDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RANSURLDownloadDelegate.h; sourceTree = "<group>"; };
 		9F79C1E213D0CA160039A1CB /* RANSURLDownloadDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RANSURLDownloadDelegate.m; sourceTree = "<group>"; };
+		9F7FD52614BF2B32002119BB /* NSMutableArray+Raven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Raven.h"; sourceTree = "<group>"; };
+		9F7FD52714BF2B32002119BB /* NSMutableArray+Raven.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Raven.m"; sourceTree = "<group>"; };
 		9F85274E13CED84700D26BCF /* favstar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favstar.png; sourceTree = "<group>"; };
 		9F85274F13CED84700D26BCF /* raven-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "raven-black.png"; sourceTree = "<group>"; };
 		9F85275513CEDBCD00D26BCF /* RAFavoritePanelWController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAFavoritePanelWController.h; sourceTree = "<group>"; };
@@ -721,6 +725,8 @@
 		9FC75F0614765403001842EC /* RACSSEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACSSEditor.m; sourceTree = "<group>"; };
 		9FD180FD1430B22C004B3F12 /* rSDk.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = rSDk.icns; sourceTree = "<group>"; };
 		9FD1812B1430C57F004B3F12 /* Builder.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Builder.icns; sourceTree = "<group>"; };
+		9FD5520A14BEE8EE00F2C9BE /* RATabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATabButton.h; sourceTree = "<group>"; };
+		9FD5520B14BEE8EE00F2C9BE /* RATabButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATabButton.m; sourceTree = "<group>"; };
 		9FD7B26014668FD5007EFF15 /* CMController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMController.h; sourceTree = "<group>"; };
 		9FD7B26114668FD5007EFF15 /* CMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMController.m; sourceTree = "<group>"; };
 		9FD7B26214668FD5007EFF15 /* CMUserScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMUserScript.h; sourceTree = "<group>"; };
@@ -1578,6 +1584,8 @@
 				9FB8482A1455FBD300530138 /* WebView+search.m */,
 				9FAC887B1498E63000CF650F /* WebView+Growl.h */,
 				9FAC887C1498E63000CF650F /* WebView+Growl.m */,
+				9F7FD52614BF2B32002119BB /* NSMutableArray+Raven.h */,
+				9F7FD52714BF2B32002119BB /* NSMutableArray+Raven.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1774,6 +1782,8 @@
 				9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */,
 				9F087FEC13CC852C0075ACC1 /* StopActivityButton.h */,
 				9F087FED13CC852C0075ACC1 /* StopActivityButton.m */,
+				9FD5520A14BEE8EE00F2C9BE /* RATabButton.h */,
+				9FD5520B14BEE8EE00F2C9BE /* RATabButton.m */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -2389,6 +2399,8 @@
 				9F20FAC514A9D6FC0036CCCE /* RAGridViewCell.m in Sources */,
 				9F20FACF14AA5CD30036CCCE /* RAGridViewContentView.m in Sources */,
 				9F6A9C6014BB657D00A4F481 /* RAPopupWindowController.m in Sources */,
+				9FD5520C14BEE8EE00F2C9BE /* RATabButton.m in Sources */,
+				9F7FD52814BF2B32002119BB /* NSMutableArray+Raven.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

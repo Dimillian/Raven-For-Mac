@@ -832,6 +832,15 @@
 								</object>
 								<object class="NSMenuItem" id="1060542590">
 									<reference key="NSMenu" ref="644817650"/>
+									<string key="NSTitle">Library</string>
+									<string key="NSKeyEquiv">~</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="364196472">
+									<reference key="NSMenu" ref="644817650"/>
 									<string key="NSTitle">History</string>
 									<string key="NSKeyEquiv">e</string>
 									<int key="NSKeyEquivModMask">1048576</int>
@@ -1439,14 +1448,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">history:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="1060542590"/>
-					</object>
-					<int key="connectionID">1425</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">raven:</string>
 						<reference key="source" ref="1014"/>
 						<reference key="destination" ref="643730912"/>
@@ -1476,6 +1477,22 @@
 						<reference key="destination" ref="1001497875"/>
 					</object>
 					<int key="connectionID">1523</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">history:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="364196472"/>
+					</object>
+					<int key="connectionID">1525</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">setting:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="1060542590"/>
+					</object>
+					<int key="connectionID">1526</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2259,6 +2276,7 @@
 							<reference ref="620606577"/>
 							<reference ref="343394567"/>
 							<reference ref="70570840"/>
+							<reference ref="364196472"/>
 						</object>
 						<reference key="parent" ref="935268334"/>
 					</object>
@@ -2358,6 +2376,11 @@
 						<reference key="object" ref="636220746"/>
 						<reference key="parent" ref="649796088"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1524</int>
+						<reference key="object" ref="364196472"/>
+						<reference key="parent" ref="644817650"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -2449,6 +2472,7 @@
 					<string>149.IBPluginDependency</string>
 					<string>1499.IBPluginDependency</string>
 					<string>150.IBPluginDependency</string>
+					<string>1524.IBPluginDependency</string>
 					<string>195.IBPluginDependency</string>
 					<string>196.IBPluginDependency</string>
 					<string>197.IBPluginDependency</string>
@@ -2609,6 +2633,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -2623,7 +2648,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1523</int>
+			<int key="maxID">1526</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3078,6 +3103,14 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">RATabButton</string>
+					<string key="superclassName">NSButton</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/RATabButton.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">RATabPlaceholderView</string>
 					<string key="superclassName">NSView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -3242,7 +3275,7 @@
 							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSView</string>
-							<string>NSButton</string>
+							<string>RATabButton</string>
 							<string>NSBox</string>
 							<string>NSButton</string>
 							<string>NSView</string>
@@ -3362,7 +3395,7 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">tabButtonTab</string>
-								<string key="candidateClassName">NSButton</string>
+								<string key="candidateClassName">RATabButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">tabHolder</string>

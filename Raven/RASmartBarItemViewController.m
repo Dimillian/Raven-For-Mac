@@ -420,6 +420,7 @@
 
 -(void)beginDrag:(RASBAPPMainButton *)button
 {
+    [self.view.window.contentView addSubview:button]; 
     [[closeAppButton animator]setAlphaValue:0.0]; 
     [[lightVIew animator]setAlphaValue:0.0]; 
 }
