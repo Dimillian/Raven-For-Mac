@@ -24,8 +24,8 @@
 #define FAVICON_PATH @"~/Library/Application Support/RavenApp/favicon/%@"
 
 @implementation RAWebViewController
-@synthesize switchView, tabsButton, webview, address, tabview, searchWebView; 
-@synthesize tabButtonTab, pageTitleTab, faviconTab, closeButtonTab, progressTab, doRegisterHistory, isNewTab, secondTabButton, addressBarView, boxTab, tabHolder, delegate, favicon = _favicon; 
+@synthesize switchView, webview, address, searchWebView, tabsButton; 
+@synthesize doRegisterHistory, isNewTab, secondTabButton, addressBarView, delegate, favicon = _favicon, tabView = _tabView; 
 
 #pragma -
 #pragma mark init
@@ -35,6 +35,7 @@
     if (self !=nil)
     {
         [self initWithNibName:@"NavigatorNoBottom" bundle:nil];
+        self.tabView = [[RATabView alloc]initWithNibName:@"RATabView" bundle:nil]; 
     }
     
     return self; 
@@ -47,6 +48,7 @@
     {
         [self initWithNibName:@"NavigatorNoBottom" bundle:nil]; 
         self.delegate = dgate;
+        self.tabView = [[RATabView alloc]initWithNibName:@"RATabView" bundle:nil]; 
     }
     
     return self;  
@@ -85,7 +87,7 @@
     NSImage *homeicon = [NSImage imageNamed:@"welcome-favicon.png"]; 
     
     [temp setImage:homeicon];     
-    [tabButtonTab setToolTip:[self title]]; 
+    [self.tabView setToolTip:[self title]]; 
     
     isNewTab = YES; 
     
@@ -102,14 +104,9 @@
         [webClipView release];
      }
     
-    
-    [tabview setAlphaValue:0.0]; 
-    [pageTitleTab setStringValue:NSLocalizedString(@"New tab", @"NewTab")];
-    [progressTab setHidden:YES];
+    [self.tabView setInitialState]; 
     
     fPanelArray = [[NSMutableArray alloc]init]; 
-    
-    [tabButtonTab setDelegate:self]; 
     
     //[webview displayGrowlNotification]; 
      
@@ -178,46 +175,16 @@
 	return inFocus;
 }
 
-#pragma mark -
-#pragma mark Tab
--(IBAction)tabsButtonClicked:(id)sender{
-    [delegate tabDidSelect:self];
-}
 
--(IBAction)closeButtonTabClicked:(id)sender{
-    [delegate tabWillClose:self];
-    
-}
-
--(IBAction)addTabButtonClicked:(id)sender
-{
-    [delegate shouldCreateNewTab:self];
-}
-
-#pragma mark - RATabViewDelegate
-
--(void)beginDrag:(RATabButton *)button
-{
-    [delegate tabDidStartDragging:self]; 
-}
-
--(void)swapUp:(RATabButton *)button
-{
-    [delegate tabDidMoveRight:self]; 
-}
-
--(void)swapDown:(RATabButton *)button
-{
-    [delegate tabDidMoveLeft:self]; 
-}
-
--(void)endDrag:(RATabButton *)button
-{
-    [delegate tabDidStopDragging:self]; 
-}
 
 #pragma mark -
 #pragma mark action
+
+-(IBAction)addTabButtonClicked:(id)sender
+{
+    [delegate webViewshouldCreateNewTab:self];
+}
+
 -(IBAction)enableSearch:(id)sender
 {
     if ([searchWebView isHidden]) {
@@ -513,7 +480,8 @@
         self.favicon = tempIcon; 
     }
     else{
-        self.favicon = tempIcon;  
+        self.favicon = tempIcon; 
+        [tempIcon release]; 
     }
     [pool release]; 
     [self performSelectorOnMainThread:@selector(setFaviconUI:) withObject:nil waitUntilDone:YES];
@@ -527,11 +495,11 @@
         [title isEqualToString:@"Raven Internal Page"] ||            
         [[webview mainFrameURL]isEqualToString:@"http://go.raven.io/"]){
         [temp setImage:[NSImage imageNamed:@"ravenico.png"]]; 
-        [faviconTab setImage:[NSImage imageNamed:@"ravenico.png"]]; 
+        [self.tabView updateFavicon:[NSImage imageNamed:@"ravenico.png"]]; 
     }
     else{
         [temp setImage:_favicon]; 
-        [faviconTab setImage:_favicon]; 
+        [self.tabView updateFavicon:_favicon]; 
     }
 }
 
@@ -583,8 +551,7 @@
         //animate the progressbar
         [progress startAnimation:self]; 
         [[temp animator]setAlphaValue:0.0];
-        [[[self faviconTab]animator]setAlphaValue:0.0];
-        [[self progressTab]startAnimation:self];
+        [self.tabView startLoading]; 
         [progressMain setHidden:NO]; 
         [progressMain setControlSize:NSMiniControlSize]; 
         
@@ -618,8 +585,7 @@
         [address setStringValue:sender.mainFrameURL];
         //get the current title and set it in the window title
         NSString *title = [webview mainFrameTitle];
-        [pageTitleTab setStringValue:[webview mainFrameTitle]];
-        [pageTitleTab setToolTip:[webview mainFrameTitle]]; 
+        [self.tabView updateTitleAndToolTip:[webview mainFrameTitle]]; 
         [[sender window] setTitle:title];
         if (isNewTab)
         {
@@ -635,12 +601,11 @@
 {
     //Set favicons
     [progress stopAnimation:self];
-    [progressTab stopAnimation:self];
-    [[faviconTab animator]setAlphaValue:1.0];
+    [self.tabView stopLoading]; 
     [[temp animator]setAlphaValue:1.0];
     [progressMain setHidden:YES]; 
     [stopLoading setHidden:YES];
-    [pageTitleTab setStringValue:[webview mainFrameTitle]];
+    [self.tabView updateTitleAndToolTip:[webview mainFrameTitle]]; 
     /*
      if ([[webview mainFrameURL] hasPrefix:@"https"]) {
      [addressBox setBorderColor:[NSColor greenColor]]; 
@@ -713,6 +678,7 @@
     [webview removeFromSuperview];
     [webview release], webview = nil;
     [fPanelArray release]; 
+    [self.tabView release]; 
     [super dealloc];
 }
 

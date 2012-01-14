@@ -21,7 +21,7 @@
     return self;
 }
 
--(id)initWithDelegate:(id<RATabViewDelegate>)dgate
+-(id)initWithDelegate:(id<RATabPlaceHolderDelegate>)dgate
 {
     self = [super init]; 
     if (self !=nil)

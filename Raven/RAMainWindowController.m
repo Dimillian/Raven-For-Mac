@@ -751,7 +751,7 @@
 
 -(NSUInteger)moveDownUntilVisible:(NSUInteger)fromindex
 {
-    NSUInteger toIndex; 
+    NSUInteger toIndex = 0; 
     if (appList.count > 0) {
         for (NSUInteger a = fromindex; a < appList.count; a++) {
             if ([self visibilityForAppAtIndex:a]) {

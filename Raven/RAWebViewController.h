@@ -17,11 +17,12 @@
 #import "RANSURLDownloadDelegate.h"
 #import "RAAddressFieldBox.h"
 #import "RATabButton.h"
+#import "RATabView.h"
  
 @class RAAdressTextField, RAMainWindowController, RavenAppDelegate; 
 
 @protocol RAWebViewControllerDelegate;
-@interface RAWebViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSTableViewDelegate, NSTableViewDataSource, RAFavoritePanelControllerDelegate, RATabButtonDelegate>{
+@interface RAWebViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSTableViewDelegate, NSTableViewDataSource, RAFavoritePanelControllerDelegate>{
     id<RAWebViewControllerDelegate> delegate;
     
     //MainView outlet 
@@ -44,15 +45,7 @@
     IBOutlet RAAddressFieldBox *addressBox; 
     IBOutlet NSView *addressBarView;
     
-    //TabView Outlet
-    IBOutlet NSView *tabview; 
-    IBOutlet NSImageView *faviconTab; 
-    IBOutlet NSTextField *pageTitleTab; 
-    IBOutlet RATabButton *tabButtonTab; 
-    IBOutlet NSButton *closeButtonTab; 
-    IBOutlet NSProgressIndicator *progressTab;
-    IBOutlet NSBox *boxTab; 
-    IBOutlet NSBox *tabHolder; 
+    RATabView *_tabView;  
     
     BOOL isNewTab; 
     BOOL isInternal; 
@@ -78,9 +71,6 @@
 -(IBAction)enableSearch:(id)sender; 
 -(IBAction)executeJSScript:(id)sender;
 
-//tabs
--(IBAction)closeButtonTabClicked:(id)sender;
--(IBAction)tabsButtonClicked:(id)sender;
 -(IBAction)addTabButtonClicked:(id)sender; 
 
 //Other method
@@ -105,31 +95,18 @@
 @property (nonatomic, retain) NSSearchField *searchWebView;
 @property (nonatomic, retain) NSView *switchView;
 @property (nonatomic, retain) NSView *addressBarView;
-@property (nonatomic, retain) NSButton *tabsButton; 
 @property (nonatomic, retain) NSButton *secondTabButton; 
 @property (nonatomic, retain) WebView *webview; 
 @property (nonatomic, retain) NSTextField *address;
 @property (nonatomic, retain) NSImage *favicon; 
+@property (nonatomic, retain) NSButton *tabsButton;
+@property (nonatomic, retain) RATabView *tabView; 
 @property int doRegisterHistory;
 @property BOOL isNewTab;
-@property (nonatomic, retain) IBOutlet NSView *tabview;
-@property (nonatomic, retain) NSProgressIndicator *progressTab; 
-@property (nonatomic, retain) NSBox *boxTab;
-@property (nonatomic, retain) NSBox *tabHolder;
-@property (nonatomic, retain) NSButton *tabButtonTab;
-@property (nonatomic, retain) NSButton *closeButtonTab; 
-@property (nonatomic, retain) NSImageView *faviconTab; 
-@property (nonatomic, retain) NSTextField *pageTitleTab;
 @end
 
 //delegate
 @protocol RAWebViewControllerDelegate
-@optional
--(void)tabWillClose:(RAWebViewController *)RAWebView;
--(void)tabDidSelect:(RAWebViewController *)RAWebView;
--(void)tabDidMoveLeft:(RAWebViewController *)RAWebView; 
--(void)tabDidMoveRight:(RAWebViewController *)RAWebView;
--(void)tabDidStartDragging:(RAWebViewController *)RAWebView; 
--(void)tabDidStopDragging:(RAWebViewController *)RAWebView; 
--(void)shouldCreateNewTab:(RAWebViewController *)RAWebView; 
+@required
+-(void)webViewshouldCreateNewTab:(RAWebViewController *)RAWebView; 
 @end

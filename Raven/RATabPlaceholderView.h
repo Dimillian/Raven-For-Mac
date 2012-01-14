@@ -8,18 +8,18 @@
 
 #import <Cocoa/Cocoa.h>
 
-@protocol RATabViewDelegate;
+@protocol RATabPlaceHolderDelegate;
 @interface RATabPlaceholderView : NSView
 {   
     
-     id<RATabViewDelegate> delegate;
+     id<RATabPlaceHolderDelegate> delegate;
 }
 
--(id)initWithDelegate:(id<RATabViewDelegate>)dgate;
-@property (nonatomic, assign) id<RATabViewDelegate> delegate;
+-(id)initWithDelegate:(id<RATabPlaceHolderDelegate>)dgate;
+@property (nonatomic, assign) id<RATabPlaceHolderDelegate> delegate;
 @end
 
-@protocol RATabViewDelegate
+@protocol RATabPlaceHolderDelegate
 @optional
 - (void)didReceiveDoubleClick:(RATabPlaceholderView *)view;
 @end

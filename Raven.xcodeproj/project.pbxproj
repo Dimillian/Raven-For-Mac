@@ -186,6 +186,9 @@
 		9F20FAD614AA68960036CCCE /* grid_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F20FAD414AA68960036CCCE /* grid_left.png */; };
 		9F20FAD714AA68960036CCCE /* grid_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F20FAD514AA68960036CCCE /* grid_right.png */; };
 		9F2501EA141BC0B30094D79C /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2501E9141BC0B30094D79C /* INAppStoreWindow.m */; };
+		9F263C5D14C073F4001B60B8 /* RATabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F263C5B14C073F4001B60B8 /* RATabView.m */; };
+		9F263C5E14C073F4001B60B8 /* RATabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F263C5C14C073F4001B60B8 /* RATabView.xib */; };
+		9F263C6214C17FD8001B60B8 /* RATabItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F263C6114C17FD8001B60B8 /* RATabItem.m */; };
 		9F2BEE6D140FBEB60090AD70 /* LTInstapaperAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2BEE6C140FBEB60090AD70 /* LTInstapaperAPI.m */; };
 		9F2BEE70140FBF170090AD70 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2BEE6F140FBF170090AD70 /* NSData+Base64.m */; };
 		9F2BEE73140FC1240090AD70 /* RAInstapaperWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2BEE72140FC1230090AD70 /* RAInstapaperWindow.m */; };
@@ -588,6 +591,11 @@
 		9F20FAD514AA68960036CCCE /* grid_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid_right.png; sourceTree = "<group>"; };
 		9F2501E8141BC0B30094D79C /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindow.h; sourceTree = "<group>"; };
 		9F2501E9141BC0B30094D79C /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAppStoreWindow.m; sourceTree = "<group>"; };
+		9F263C5A14C073F4001B60B8 /* RATabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATabView.h; sourceTree = "<group>"; };
+		9F263C5B14C073F4001B60B8 /* RATabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATabView.m; sourceTree = "<group>"; };
+		9F263C5C14C073F4001B60B8 /* RATabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RATabView.xib; sourceTree = "<group>"; };
+		9F263C6014C17FD8001B60B8 /* RATabItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATabItem.h; sourceTree = "<group>"; };
+		9F263C6114C17FD8001B60B8 /* RATabItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATabItem.m; sourceTree = "<group>"; };
 		9F2BEE6B140FBEB60090AD70 /* LTInstapaperAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTInstapaperAPI.h; sourceTree = "<group>"; };
 		9F2BEE6C140FBEB60090AD70 /* LTInstapaperAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTInstapaperAPI.m; sourceTree = "<group>"; };
 		9F2BEE6E140FBF170090AD70 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
@@ -1146,7 +1154,8 @@
 				9FB6387514A79B4200E4E5A5 /* Utiliy */,
 				9FB6387214A79B1C00E4E5A5 /* Bookmarks */,
 				9FB6386514A79AAB00E4E5A5 /* WevIew */,
-				9FB6386414A79AA900E4E5A5 /* Tabs */,
+				9F263C5214C07366001B60B8 /* Tab View */,
+				9FB6386414A79AA900E4E5A5 /* Tabs Controller */,
 				9FB6386314A79AA600E4E5A5 /* Download */,
 				9FB6386214A79AA500E4E5A5 /* History */,
 				9FC3B79B14038C5500E28D71 /* Work in progress */,
@@ -1212,6 +1221,46 @@
 				9F03B6D31402D98900985D32 /* RABookmarkCell.xib */,
 			);
 			name = "Bookmark cell";
+			sourceTree = "<group>";
+		};
+		9F263C5214C07366001B60B8 /* Tab View */ = {
+			isa = PBXGroup;
+			children = (
+				9F263C5F14C0872F001B60B8 /* Custom */,
+				9F263C5814C073C6001B60B8 /* Controller */,
+				9F263C5714C073A8001B60B8 /* View */,
+			);
+			name = "Tab View";
+			sourceTree = "<group>";
+		};
+		9F263C5714C073A8001B60B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9F263C5C14C073F4001B60B8 /* RATabView.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9F263C5814C073C6001B60B8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9F263C5A14C073F4001B60B8 /* RATabView.h */,
+				9F263C5B14C073F4001B60B8 /* RATabView.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9F263C5F14C0872F001B60B8 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */,
+				9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */,
+				9F087FEC13CC852C0075ACC1 /* StopActivityButton.h */,
+				9F087FED13CC852C0075ACC1 /* StopActivityButton.m */,
+				9FD5520A14BEE8EE00F2C9BE /* RATabButton.h */,
+				9FD5520B14BEE8EE00F2C9BE /* RATabButton.m */,
+			);
+			name = Custom;
 			sourceTree = "<group>";
 		};
 		9F2BEE6A140FBE930090AD70 /* Instapaper */ = {
@@ -1410,7 +1459,7 @@
 			name = Download;
 			sourceTree = "<group>";
 		};
-		9FB6386414A79AA900E4E5A5 /* Tabs */ = {
+		9FB6386414A79AA900E4E5A5 /* Tabs Controller */ = {
 			isa = PBXGroup;
 			children = (
 				9FB6388D14A79D5800E4E5A5 /* Custom */,
@@ -1418,7 +1467,7 @@
 				9FB6386D14A79AEC00E4E5A5 /* View */,
 				9FB6386C14A79AEC00E4E5A5 /* Controller */,
 			);
-			name = Tabs;
+			name = "Tabs Controller";
 			sourceTree = "<group>";
 		};
 		9FB6386514A79AAB00E4E5A5 /* WevIew */ = {
@@ -1504,6 +1553,8 @@
 		9FB6386E14A79AED00E4E5A5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9F263C6014C17FD8001B60B8 /* RATabItem.h */,
+				9F263C6114C17FD8001B60B8 /* RATabItem.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1778,12 +1829,6 @@
 			children = (
 				9FEF2AA9147EEB26007BC286 /* RATabPlaceholderView.h */,
 				9FEF2AAA147EEB26007BC286 /* RATabPlaceholderView.m */,
-				9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */,
-				9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */,
-				9F087FEC13CC852C0075ACC1 /* StopActivityButton.h */,
-				9F087FED13CC852C0075ACC1 /* StopActivityButton.m */,
-				9FD5520A14BEE8EE00F2C9BE /* RATabButton.h */,
-				9FD5520B14BEE8EE00F2C9BE /* RATabButton.m */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -2284,6 +2329,7 @@
 				9F6A527C14AE7FAE006E164B /* black_background.png in Resources */,
 				9F6A527F14AE812C006E164B /* remove.aiff in Resources */,
 				9F6A9C6214BB658C00A4F481 /* RAPopupWindow.xib in Resources */,
+				9F263C5E14C073F4001B60B8 /* RATabView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2401,6 +2447,8 @@
 				9F6A9C6014BB657D00A4F481 /* RAPopupWindowController.m in Sources */,
 				9FD5520C14BEE8EE00F2C9BE /* RATabButton.m in Sources */,
 				9F7FD52814BF2B32002119BB /* NSMutableArray+Raven.m in Sources */,
+				9F263C5D14C073F4001B60B8 /* RATabView.m in Sources */,
+				9F263C6214C17FD8001B60B8 /* RATabItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,10 +19,11 @@
 #import "RAWebViewController.h"
 #import "RANSURLDownloadDelegate.h"
 #import "RAPopupWindowController.h"
+#import "RATabItem.h"
 
 
 @class RavenAppDelegate;
-@interface RANavigatorViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSWindowDelegate, RAWebViewControllerDelegate, RATabViewDelegate, RAPopupWindowDelegate>{
+@interface RANavigatorViewController : NSViewController <NSMenuDelegate, NSTextFieldDelegate, NSWindowDelegate, RATabItemDelegate, RATabPlaceHolderDelegate, RAPopupWindowDelegate>{
     
     //Outlet
     IBOutlet NSView *mainView; 

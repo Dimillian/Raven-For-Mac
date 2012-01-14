@@ -50,7 +50,7 @@
     [self check:nil];
     [selectorButton setSelectedSegment:1];
     [newtab loadInternalPage:@"Bookmarks"];
-    [[newtab tabHolder]setHidden:YES];
+    [[newtab.tabView tabHolder]setHidden:YES];
     [[newtab webview]setFrame:NSMakeRect(newtab.webview.frame.origin.x, newtab.webview.frame.origin.y, newtab.webview.frame.size.width, newtab.webview.frame.size.height+22)];
     [[newtab webview]setUIDelegate:self];
     

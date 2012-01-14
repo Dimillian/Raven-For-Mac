@@ -76,10 +76,10 @@
 -(void)setMenu{
     NSMenu *topMenu = [NSApp mainMenu]; 
     [topMenu setSubmenu:navigatorMenu forItem:[topMenu itemAtIndex:8]];
-    RAWebViewController *selectedTab = [_tabsArray objectAtIndex:
+    RATabItem *selectedTab = [_tabsArray objectAtIndex:
                                         [tabController indexOfTabViewItem:
                                          [tabController selectedTabViewItem]]];
-    [selectedTab setMenu];
+    [selectedTab.webViewController setMenu];
 }
 
 
@@ -104,8 +104,8 @@
         CGFloat x = 0;
         float rest = 0; 
         for (int i =0; i<[_tabsArray count]; i++) {
-            RAWebViewController *aTab = [_tabsArray objectAtIndex:i];
-            [[aTab tabHolder]setHidden:NO];
+            RATabItem *aTab = [_tabsArray objectAtIndex:i];
+            [[aTab.tabView tabHolder]setHidden:NO];
             [allTabsButton setHidden:NO];
             //Calculate W according to the window width
             CGFloat w = (localWindow.frame.size.width-80)/[_tabsArray count];
@@ -131,23 +131,23 @@
                 }
             }
             if (i == 0) {
-                if ([[aTab tabview]isHidden] == YES && !fromWindow) {
-                    [[aTab webview]setFrame:NSMakeRect(aTab.webview.frame.origin.x, aTab.webview.frame.origin.y, aTab.webview.frame.size.width, aTab.webview.frame.size.height - tabHeight)];
+                if ([[aTab.tabView view]isHidden] == YES && !fromWindow) {
+                    [aTab.webViewController.webview setFrame:NSMakeRect(aTab.webViewController.webview.frame.origin.x, aTab.webViewController.webview.frame.origin.y, aTab.webViewController.webview.frame.size.width, aTab.webViewController.webview.frame.size.height - tabHeight)];
                 }
             }
             //If it is not from window notification animate
             if (!fromWindow) {
-                [[aTab tabview]setHidden:NO]; 
-                [[aTab tabview]setAlphaValue:1.0]; 
+                [[aTab.tabView view]setHidden:NO]; 
+                [[aTab.tabView view]setAlphaValue:1.0]; 
                 [NSAnimationContext beginGrouping];
                 [[NSAnimationContext currentContext] setDuration:0.2];  
-                [[[aTab tabview]animator]setFrame:NSMakeRect(x + rest, 0, w, tabHeight)];
+                [[[aTab.tabView view]animator]setFrame:NSMakeRect(x + rest, 0, w, tabHeight)];
                 [NSAnimationContext endGrouping];
-                [[aTab progressTab]setHidden:NO];
+                [[aTab.tabView progressTab]setHidden:NO];
             }
             //just redraw without animation if from window
             else{
-                [[aTab tabview]setFrame:NSMakeRect(x + rest, 0, w, tabHeight)];   
+                [[aTab.tabView view]setFrame:NSMakeRect(x + rest, 0, w, tabHeight)];   
             }
         }
     }
@@ -159,10 +159,10 @@
 {
     [tabPlaceHolder setHidden:YES];
     [allTabsButton setHidden:YES];
-    for (RAWebViewController *aTab in _tabsArray) {
-        [[aTab tabHolder]setHidden:YES];
-        [[aTab tabview]setHidden:YES]; 
-        [[aTab webview]setFrame:NSMakeRect(aTab.webview.frame.origin.x, aTab.webview.frame.origin.y, aTab.webview.frame.size.width, aTab.webview.frame.size.height+tabHeight)];
+    for (RATabItem *aTab in _tabsArray) {
+        [[aTab.tabView tabHolder]setHidden:YES];
+        [[aTab.tabView view]setHidden:YES]; 
+        [[aTab.webViewController webview]setFrame:NSMakeRect(aTab.webViewController.webview.frame.origin.x, aTab.webViewController.webview.frame.origin.y, aTab.webViewController.webview.frame.size.width, aTab.webViewController.webview.frame.size.height+tabHeight)];
     }
     
 }
@@ -202,27 +202,27 @@
     if (localWindow == nil) {
         localWindow = [NSApp keyWindow];
     }
-    //Instanciate a new webviewcontroller and the button tab view with the view
-    RAWebViewController *newtab = [[RAWebViewController alloc]initWithDelegate:self];
+    RATabItem *newtab = [[RATabItem alloc]init]; 
+    [newtab setDelegate:self]; 
     //Add the button and webview instance in array.
     [_tabsArray addObject:newtab]; 
     //force the newtab view to call awakefromNib
-    [newtab view];
+    [newtab callView];
     
     //set the new webview delegate to this class method
-    [[newtab webview]setUIDelegate:self]; 
-    [[newtab webview]setPolicyDelegate:self]; 
+    [[newtab.webViewController webview]setUIDelegate:self]; 
+    [[newtab.webViewController webview]setPolicyDelegate:self]; 
     //Set the host window to the actual window for plugin 
-    [[newtab webview]setHostWindow:localWindow];
+    [[newtab.webViewController webview]setHostWindow:localWindow];
         
-    [tabPlaceHolder addSubview:[newtab tabview]];
-    [[newtab tabview]setFrame:NSMakeRect([_tabsArray indexOfObject:newtab]*tabButtonSize, tabHeight, tabButtonSize, tabHeight)];
-    [[newtab address]selectText:self];
+    [tabPlaceHolder addSubview:[newtab.tabView view]];
+    [[newtab.tabView view]setFrame:NSMakeRect([_tabsArray indexOfObject:newtab]*tabButtonSize, tabHeight, tabButtonSize, tabHeight)];
+    [[newtab.webViewController address]selectText:self];
     
     //if the passed URL value is different of nil then load it in the webview 
     if (self.PassedUrl != nil) {
-        [newtab setIsNewTab:NO]; 
-        [newtab loadWithUrl:self.PassedUrl]; 
+        [newtab.webViewController setIsNewTab:NO]; 
+        [newtab.webViewController loadWithUrl:self.PassedUrl]; 
 
     }
     //if null then inti the webview with tthe welcom page
@@ -233,22 +233,22 @@
             if ([standardUserDefaults integerForKey:DO_HAVE_LAUNCHED] == 0) {
                 [standardUserDefaults setInteger:1 forKey:DO_HAVE_LAUNCHED];
                 [standardUserDefaults synchronize];
-                [newtab loadInternalPage:@"Start"];
+                [newtab.webViewController loadInternalPage:@"Start"];
             }
                 else
                 {
                     if (self.baseUrl && [standardUserDefaults integerForKey:OPEN_NEW_TAB_BASE_URL] == 1) {
-                        [newtab loadWithUrl:self.baseUrl];  
+                        [newtab.webViewController loadWithUrl:self.baseUrl];  
                     }
                     else{
-                        [newtab loadWithPreferredUrl]; 
+                        [newtab.webViewController loadWithPreferredUrl]; 
                     }
                 }
             }
         }
     //[buttonview release]; 
     NSTabViewItem *item = [[NSTabViewItem alloc]init]; 
-    [item setView:[newtab switchView]];
+    [item setView:[newtab.webViewController switchView]];
     [tabController addTabViewItem:item];
     
     NSUserDefaults *standardUserDefault = [NSUserDefaults standardUserDefaults]; 
@@ -259,10 +259,10 @@
                 //reset all tabs button position
                 [self resetAllTabsButon]; 
                 [tabController selectTabViewItem:item]; 
-                [newtab setMenu]; 
+                [newtab.webViewController setMenu]; 
                 if (newtab != nil)
                 {
-                    [newtab setWindowTitle:sender];
+                    [newtab.webViewController setWindowTitle:sender];
                 }
         }
         else{
@@ -284,16 +284,16 @@
 
 -(void)closeSelectedTab:(id)sender
 {
-    RAWebViewController *close = [_tabsArray objectAtIndex:
+    RATabItem *close = [_tabsArray objectAtIndex:
                                   [tabController indexOfTabViewItem:
                                    [tabController selectedTabViewItem]]];
-    [close closeButtonTabClicked:close];
+    [close.tabView closeButtonTabClicked:close];
 }
 
 -(void)closeFirtTab
 {
-    RAWebViewController *close = [_tabsArray objectAtIndex:0]; 
-    [close closeButtonTabClicked:close]; 
+    RATabItem *close = [_tabsArray objectAtIndex:0]; 
+    [close.tabView closeButtonTabClicked:close]; 
 }
 
 
@@ -326,14 +326,14 @@
     NSMenu *menu = [[NSMenu alloc]init]; 
     for (int i=0;i<[_tabsArray count];i++)
     {
-        RAWebViewController *button =  [_tabsArray objectAtIndex:i];
+        RATabItem *button =  [_tabsArray objectAtIndex:i];
         //Create a menu and set the different items of the menu
         NSMenuItem *item = [[NSMenuItem alloc]init];
-        NSString *tempTitle = [button.pageTitleTab stringValue];
+        NSString *tempTitle = [button.tabView.pageTitleTab stringValue];
         tempTitle = [tempTitle stringByPaddingToLength:35 withString:@" " startingAtIndex:0];
         [item setTitle:tempTitle]; 
-        [[button.faviconTab image]setSize:NSMakeSize(16, 16)];
-        [item setImage:[button.faviconTab image]];
+        [[button.tabView.faviconTab image]setSize:NSMakeSize(16, 16)];
+        [item setImage:[button.tabView.faviconTab image]];
         [item setAction:@selector(tabsButtonClicked:)];
         [item setEnabled:YES];
         [item setTarget:button];
@@ -349,21 +349,17 @@
 //Reset all tabs button state
 -(void)resetAllTabsButon
 {
-    for (RAWebViewController *tpsbutton in _tabsArray) {
-        [[tpsbutton boxTab]setFillColor:[NSColor scrollBarColor]];
-        [[tpsbutton boxTab]setBorderWidth:1.0]; 
-        [[tpsbutton boxTab]setBorderColor:[NSColor darkGrayColor]];
+    for (RATabItem *tpsbutton in _tabsArray) {
+        [tpsbutton.tabView setNormalState]; 
     }
 
 }
 -(void)setTabSelectedState
 {
-    RAWebViewController *clickedtab = [_tabsArray objectAtIndex:
+    RATabItem *clickedtab = [_tabsArray objectAtIndex:
                                        [tabController indexOfTabViewItem:
                                         [tabController selectedTabViewItem]]];
-    [[clickedtab boxTab]setBorderWidth:0.0]; 
-    [[clickedtab boxTab]setBorderColor:[NSColor blackColor]];
-    [[clickedtab boxTab]setFillColor:[NSColor windowBackgroundColor]];
+    [clickedtab.tabView setSelectedState]; 
 }
 
 
@@ -372,18 +368,8 @@
 -(void)closeAllTabs:(id)sender
 {
     int i = 0;
-    for (RAWebViewController *clickedtab in _tabsArray) {
-        [clickedtab view];
-        [clickedtab setDelegate:nil];
-        [[clickedtab webview]setHostWindow:nil];
-        [[clickedtab webview]setUIDelegate:nil]; 
-        [[clickedtab webview]setPolicyDelegate:nil];
-        [[clickedtab webview]stopLoading:[clickedtab webview]];
-        [[[clickedtab view]animator]setAlphaValue:0.0]; 
-        [[clickedtab view]removeFromSuperview];
-        [[[clickedtab tabview]animator]setAlphaValue:0.0]; 
-        [[clickedtab tabview]removeFromSuperview];
-        [[clickedtab webview]removeFromSuperview];
+    for (RATabItem *clickedtab in _tabsArray) {
+        [clickedtab prepareTabClose]; 
         [tabController removeTabViewItem:[tabController tabViewItemAtIndex:i]]; 
     }
     [_tabsArray removeAllObjects];
@@ -401,7 +387,7 @@
 }
 
 #pragma mark -
-#pragma mark RATabViewDelegate
+#pragma mark RATabPlaceholderDelegate
 
 -(void)didReceiveDoubleClick:(RATabPlaceholderView *)view
 {
@@ -410,33 +396,44 @@
 
 #pragma mark - Handle tab swape
 
--(void)tabDidStartDragging:(RAWebViewController *)RAWebView
+-(void)tabItemDidStartDragging:(RATabItem *)tab
 {
-    [self.view.window.contentView addSubview:RAWebView.tabview]; 
+    [self.view.window.contentView addSubview:tab.tabView.view]; 
 }
 
--(void)tabDidMoveLeft:(RAWebViewController *)RAWebView
+-(void)tabItemDidMoveLeft:(RATabItem *)tab
 {
-    if ([_tabsArray indexOfObject:RAWebView] > 0) {
-        [_tabsArray moveObjectFromIndex:[_tabsArray indexOfObject:RAWebView] 
-                                toIndex:[_tabsArray indexOfObject:RAWebView]-1];
+    if ([_tabsArray indexOfObject:tab] > 0) {
+        NSTabViewItem *tabItem = [tabController tabViewItemAtIndex:[_tabsArray indexOfObject:tab]];
+        [tabController removeTabViewItem:[tabController tabViewItemAtIndex:[_tabsArray indexOfObject:tab]]]; 
+        [tabController insertTabViewItem:tabItem atIndex:[_tabsArray indexOfObject:tab]-1]; 
+        [_tabsArray moveObjectFromIndex:[_tabsArray indexOfObject:tab] 
+                                toIndex:[_tabsArray indexOfObject:tab]-1];
+        [tab.tabView tabsButtonClicked:tab.webViewController.tabsButton]; 
+        
+        
+        
         [self redrawTabs:YES]; 
     }
 }
 
--(void)tabDidMoveRight:(RAWebViewController *)RAWebView
+-(void)tabItemDidMoveRight:(RATabItem *)tab
 {
-    if ([_tabsArray indexOfObject:RAWebView] < [_tabsArray count]) {
-        [_tabsArray moveObjectFromIndex:[_tabsArray indexOfObject:RAWebView] 
-                                toIndex:[_tabsArray indexOfObject:RAWebView]+1];
+    if ([_tabsArray indexOfObject:tab] < [_tabsArray count] - 1) {
+        NSTabViewItem *tabItem = [tabController tabViewItemAtIndex:[_tabsArray indexOfObject:tab]];
+        [tabController removeTabViewItem:[tabController tabViewItemAtIndex:[_tabsArray indexOfObject:tab]]]; 
+        [tabController insertTabViewItem:tabItem atIndex:[_tabsArray indexOfObject:tab]+1]; 
+        [_tabsArray moveObjectFromIndex:[_tabsArray indexOfObject:tab] 
+                                toIndex:[_tabsArray indexOfObject:tab]+1];
+        [tab.tabView tabsButtonClicked:tab.webViewController.tabsButton]; 
         [self redrawTabs:YES]; 
     }
 }
 
--(void)tabDidStopDragging:(RAWebViewController *)RAWebView
+-(void)tabItemDidStopDragging:(RATabItem *)tab
 {
     [self redrawTabs:YES];
-    [tabPlaceHolder addSubview:RAWebView.tabview]; 
+    [tabPlaceHolder addSubview:tab.tabView.view]; 
 }
 
 
@@ -448,35 +445,26 @@
 }
 
 #pragma mark -
-#pragma mark RAWebviewControllerDelegate
+#pragma mark RATabItelDelegate
 
--(void)tabDidSelect:(RAWebViewController *)RAWebView{
-    NSInteger tag = [_tabsArray indexOfObject:RAWebView];
+-(void)tabItemDidSelect:(RATabItem *)tab{
+    NSInteger tag = [_tabsArray indexOfObject:tab];
     [tabController selectTabViewItemAtIndex:tag]; 
-    RAWebViewController *clickedtab = [_tabsArray objectAtIndex:tag];
-    [clickedtab setMenu]; 
-    [clickedtab setWindowTitle:allTabsButton];
+    RATabItem *clickedtab = [_tabsArray objectAtIndex:tag];
+    [clickedtab.webViewController setMenu]; 
+    [clickedtab.webViewController setWindowTitle:allTabsButton];
     
     [self resetAllTabsButon]; 
     [self setTabSelectedState]; 
 }
 
 //do all the memory clean up stuff here, it might be better to switch it within the RAWebview itself
--(void)tabWillClose:(RAWebViewController *)RAWebView{
-    NSInteger tag = [_tabsArray indexOfObject:RAWebView];
+-(void)tabItemWillClose:(RATabItem *)tab{
+    NSInteger tag = [_tabsArray indexOfObject:tab];
     //The current webview remove
-    RAWebViewController *clickedtab = [_tabsArray objectAtIndex:tag];
-    [clickedtab view];
-    [clickedtab setDelegate:nil];
-    [[clickedtab webview]setHostWindow:nil];
-    [[clickedtab webview]setUIDelegate:nil]; 
-    [[clickedtab webview]setPolicyDelegate:nil];
-    [[clickedtab webview]stopLoading:[clickedtab webview]];
-    [[[clickedtab view]animator]setAlphaValue:0.0]; 
-    [[clickedtab view]removeFromSuperview];
-    [[[clickedtab tabview]animator]setAlphaValue:0.0]; 
-    [[clickedtab tabview]removeFromSuperview];
-    [[clickedtab webview]removeFromSuperview];
+    RATabItem *clickedtab = [_tabsArray objectAtIndex:tag];
+    [clickedtab prepareTabClose]; 
+    [[clickedtab.webViewController webview]removeFromSuperview];
     if (tag == 0 && tag == [tabController indexOfTabViewItem:
                             [tabController selectedTabViewItem]]) {
         if ([_tabsArray count] == 1) {
@@ -502,9 +490,9 @@
     [[NSNotificationCenter defaultCenter]postNotificationName:UPDATE_TAB_NUMBER object:nil];
 }
 
--(void)shouldCreateNewTab:(RAWebViewController *)RAWebView
+-(void)tabItemRequestANewTab:(RATabItem *)tab
 {
-    [self addtabs:[RAWebView tabsButton]];
+    [self addtabs:[tab.webViewController tabsButton]];
 }
 
 #pragma mark -
@@ -542,11 +530,11 @@
     if (modifierFlags & NSCommandKeyMask && [[NSApp currentEvent] type] == NSLeftMouseDownMask)  {
         if ([elementInformation objectForKey:@"WebElementLinkURL"] 
             && [elementInformation objectForKey:@"WebElementTargetFrame"]) {
-            RAWebViewController *tempController = [_tabsArray objectAtIndex:
+            RATabItem *tempController = [_tabsArray objectAtIndex:
                                                    [tabController indexOfTabViewItem:
                                                     [tabController selectedTabViewItem]]];
-            [tempController.webview stopLoading:tempController.webview];
-            [tempController webView:tempController.webview didFinishLoadForFrame:[tempController.webview mainFrame]];
+            [tempController.webViewController.webview stopLoading:tempController.webViewController.webview];
+            [tempController.webViewController webView:tempController.webViewController.webview didFinishLoadForFrame:[tempController.webViewController.webview mainFrame]];
             NSMenuItem *tempItem = [[NSMenuItem alloc]init];
             [tempItem setRepresentedObject:[elementInformation objectForKey:@"WebElementLinkURL"]]; 
             [self openTabInBackgroundWithUrl:tempItem]; 
@@ -575,10 +563,10 @@
         [dlDelegate release]; 
         if (![type isEqualToString:@"application/pdf"]) {
             [webView stopLoading:webView];
-            for (RAWebViewController *tempController in _tabsArray) {
-                if (tempController.webview == webView) {
-                    [tempController webView:tempController.webview didFinishLoadForFrame:
-                     [tempController.webview mainFrame]];
+            for (RATabItem *tempController in _tabsArray) {
+                if (tempController.webViewController.webview == webView) {
+                    [tempController.webViewController webView:tempController.webViewController.webview didFinishLoadForFrame:
+                     [tempController.webViewController.webview mainFrame]];
                 }
             }
         }
@@ -752,11 +740,8 @@
 //Bad memory maanagement for now ! 
 - (void)dealloc
 {   
-    for (RAWebViewController *newtab in _tabsArray) {
-        [[newtab webview]setUIDelegate:nil]; 
-        [newtab setDelegate:nil];
-        [[newtab webview]setPolicyDelegate:nil];
-        [[newtab webview]removeFromSuperview];
+    for (RATabItem *newtab in _tabsArray) {
+        [newtab prepareTabClose]; 
     } 
     [_tabsArray removeAllObjects];
     [_tabsArray release], _tabsArray = nil;
