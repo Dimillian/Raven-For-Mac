@@ -22,7 +22,7 @@
 @synthesize reusableIdentifier = _reusableIdentifier;
 @synthesize listView = _listView;
 @synthesize row = _row;
-@synthesize dropHighlight = _dropHighlight;
+@dynamic dropHighlight; 
 
 + (id)cellLoadedFromNibNamed:(NSString*)nibName reusableIdentifier:(NSString*)identifier
 {
@@ -103,6 +103,11 @@
 	[[self listView] setShowsDropHighlight: inState != PXListViewDropNowhere];
 	_dropHighlight = inState;
 	[self setNeedsDisplay:YES];
+}
+
+-(PXListViewDropHighlight)dropHighlight
+{
+    return _dropHighlight; 
 }
 
 

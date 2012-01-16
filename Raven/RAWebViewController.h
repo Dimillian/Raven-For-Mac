@@ -47,8 +47,8 @@
     
     RATabView *_tabView;  
     
-    BOOL isNewTab; 
-    BOOL isInternal; 
+    BOOL _newTab; 
+    BOOL _internal; 
     NSString *UA; 
     NSInteger count; 
     NSImage *_favicon; 
@@ -86,8 +86,8 @@
 -(id)infoValueForKey:(NSString*)key;
 -(void)setMobileUserAgent;
 -(void)setDesktopUserAgent; 
--(void)getFavicon:(id)sender; 
--(void)setFaviconUI:(id)sender; 
+-(void)downloadFavicon:(id)sender; 
+-(void)updateFaviconUI:(id)sender; 
 -(void)saveHistory:(id)sender;
 
 //Properties
@@ -102,7 +102,8 @@
 @property (nonatomic, retain) NSButton *tabsButton;
 @property (nonatomic, retain) RATabView *tabView; 
 @property int doRegisterHistory;
-@property BOOL isNewTab;
+@property (nonatomic, getter=isNewTab) BOOL newTab;
+@property (nonatomic, getter=isInternal) BOOL internal; 
 @end
 
 //delegate

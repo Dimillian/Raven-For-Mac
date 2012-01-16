@@ -22,7 +22,7 @@
     NSMutableArray *_buttonImageArrayOn; 
     NSMutableArray *_buttonImageArrayOff; 
     NSMutableArray *_navigatorViewControllerArray; 
-    BOOL _isVisible; 
+    BOOL _visible; 
     NSInteger _index; 
 }
 
@@ -43,7 +43,7 @@
 @property (nonatomic, assign) NSMutableArray *buttonImageArrayOn; 
 @property (nonatomic, assign) NSMutableArray *buttonImageArrayOff; 
 @property (nonatomic, assign) NSMutableArray *navigatorViewControllerArray; 
-@property BOOL isVisible; 
+@property (nonatomic, getter = isVisible) BOOL visible; 
 @property NSInteger index; 
 
 @end

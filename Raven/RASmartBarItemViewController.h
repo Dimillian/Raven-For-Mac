@@ -59,7 +59,7 @@
 -(void)updateStatusAndCleanMemory;
 -(void)calculateTotalTab;
 -(void)resetAllButton; 
--(void)setSelectedButton;
+-(void)reselectedPreviousButton;
 -(void)updateTabsNumber; 
 -(void)hideCloseAppButton; 
 -(void)showCloseAppButton; 

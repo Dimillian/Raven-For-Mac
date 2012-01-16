@@ -7,6 +7,7 @@
 //
 
 #import "RATabItem.h"
+#import "RANavigatorViewController.h"
 
 @implementation RATabItem
 @synthesize webViewController = _webViewController, tabView = _tabView, delegate; 
@@ -22,11 +23,22 @@
     return self; 
 }
 
+-(void)dealloc
+{
+    [_webViewController release]; 
+    [super dealloc]; 
+}
 
 -(void)callView
 {
     [_webViewController view]; 
     [_tabView view]; 
+}
+
+-(void)setWebViewDelegate:(RANavigatorViewController *)controller
+{
+    [[_webViewController webview]setUIDelegate:controller]; 
+    [[_webViewController webview]setPolicyDelegate:controller]; 
 }
 
 -(void)prepareTabClose

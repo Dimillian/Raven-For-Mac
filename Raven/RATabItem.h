@@ -10,7 +10,9 @@
 #import "RATabView.h"
 #import "RAWebViewController.h"
 
+
 @protocol RATabItemDelegate; 
+@class RANavigatorViewController;
 @interface RATabItem : NSObject <RATabViewDelegate, RAWebViewControllerDelegate>
 {
     id<RATabItemDelegate> delegate; 
@@ -19,6 +21,7 @@
 }
 -(void)callView; 
 -(void)prepareTabClose; 
+-(void)setWebViewDelegate:(RANavigatorViewController *)controller; 
 @property (nonatomic, assign) id<RATabItemDelegate> delegate; 
 @property (nonatomic, retain) RAWebViewController *webViewController; 
 @property (nonatomic, retain) RATabView *tabView; 

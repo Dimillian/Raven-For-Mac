@@ -57,6 +57,7 @@
 -(void)openTabInBackgroundWithUrl:(id)sender;
 -(void)windowResize:(id)sender; 
 -(void)setTabSelectedState; 
+-(void)moveIndexOfTabControllerFromIndex:(NSInteger)from toIndex:(NSInteger)to; 
 
 -(void)redrawTabs:(BOOL)fromWindow;
 -(void)hideTabHolder; 

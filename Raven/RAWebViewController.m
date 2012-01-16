@@ -24,8 +24,8 @@
 #define FAVICON_PATH @"~/Library/Application Support/RavenApp/favicon/%@"
 
 @implementation RAWebViewController
-@synthesize switchView, webview, address, searchWebView, tabsButton; 
-@synthesize doRegisterHistory, isNewTab, secondTabButton, addressBarView, delegate, favicon = _favicon, tabView = _tabView; 
+@synthesize switchView, webview, address, searchWebView, tabsButton, newTab = _newTab, internal = _internal; 
+@synthesize doRegisterHistory, secondTabButton, addressBarView, delegate, favicon = _favicon, tabView = _tabView; 
 
 #pragma -
 #pragma mark init
@@ -35,7 +35,7 @@
     if (self !=nil)
     {
         [self initWithNibName:@"NavigatorNoBottom" bundle:nil];
-        self.tabView = [[RATabView alloc]initWithNibName:@"RATabView" bundle:nil]; 
+        _tabView = [[RATabView alloc]initWithNibName:@"RATabView" bundle:nil]; 
     }
     
     return self; 
@@ -48,7 +48,7 @@
     {
         [self initWithNibName:@"NavigatorNoBottom" bundle:nil]; 
         self.delegate = dgate;
-        self.tabView = [[RATabView alloc]initWithNibName:@"RATabView" bundle:nil]; 
+        _tabView = [[RATabView alloc]initWithNibName:@"RATabView" bundle:nil]; 
     }
     
     return self;  
@@ -89,7 +89,7 @@
     [temp setImage:homeicon];     
     [self.tabView setToolTip:[self title]]; 
     
-    isNewTab = YES; 
+    self.newTab = YES; 
     
     [progressMain setMinValue:0.0]; 
     [progressMain setMaxValue:1.0]; 
@@ -223,13 +223,13 @@
     NSString *addressTo = [address stringValue];
     addressTo = [addressTo stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     if ([addressTo hasPrefix:RAINTERNALPREFIX]) {
-        isInternal = YES;
+        self.internal = YES;
         addressTo = [addressTo substringFromIndex:8]; 
         [self loadInternalPage:addressTo]; 
         
     }
     else{
-        isInternal = NO; 
+        self.internal = NO; 
         if (addressTo != nil) {
             if ([addressTo hasPrefix:RAJAVASCRIPTPREFIX]) {
                 addressTo = [addressTo stringByReplacingOccurrencesOfString:RAJAVASCRIPTPREFIX withString:@""]; 
@@ -415,7 +415,7 @@
 }
 
 //TODO Fetch in history first, if we go it, load it. 
--(void)getFavicon:(id)sender
+-(void)downloadFavicon:(id)sender
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     NSString *URL = [webview mainFrameURL];
@@ -484,11 +484,11 @@
         [tempIcon release]; 
     }
     [pool release]; 
-    [self performSelectorOnMainThread:@selector(setFaviconUI:) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(updateFaviconUI:) withObject:nil waitUntilDone:YES];
     [self performSelectorInBackground:@selector(saveHistory:) withObject:nil];
 }
 
--(void)setFaviconUI:(id)sender
+-(void)updateFaviconUI:(id)sender
 {
     NSString *title = [webview mainFrameTitle];
     if ([title isEqualToString:@"Raven Welcome Page"] || 
@@ -565,7 +565,7 @@
     //get the current URL
     NSString *url = [webview mainFrameURL];
     //set the URl in the address bar
-    if (!isInternal) {
+    if (!self.isInternal) {
          if(![self isTextFieldInFocus:address]){
             [address setStringValue:url];
         }
@@ -581,16 +581,16 @@
     if (frame == [sender mainFrame]){
         ([[webview backForwardList]backListCount] < 1) ? [backButton setEnabled:NO] : [backButton setEnabled:YES];
         ([[webview backForwardList]forwardListCount] < 1) ? [forwardButton setEnabled:NO] : [forwardButton setEnabled:YES];
-        [self performSelectorInBackground:@selector(getFavicon:) withObject:nil];
+        [self performSelectorInBackground:@selector(downloadFavicon:) withObject:nil];
         [address setStringValue:sender.mainFrameURL];
         //get the current title and set it in the window title
         NSString *title = [webview mainFrameTitle];
         [self.tabView updateTitleAndToolTip:[webview mainFrameTitle]]; 
         [[sender window] setTitle:title];
-        if (isNewTab)
+        if (self.isNewTab)
         {
             [address setStringValue:@""];
-            isNewTab = NO; 
+            self.newTab = NO; 
         }
     } 
 }
@@ -678,7 +678,7 @@
     [webview removeFromSuperview];
     [webview release], webview = nil;
     [fPanelArray release]; 
-    [self.tabView release]; 
+    [_tabView release]; 
     [super dealloc];
 }
 

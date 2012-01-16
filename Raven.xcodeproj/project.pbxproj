@@ -1153,7 +1153,7 @@
 				9FB6387B14A79B9600E4E5A5 /* Main Window */,
 				9FB6387514A79B4200E4E5A5 /* Utiliy */,
 				9FB6387214A79B1C00E4E5A5 /* Bookmarks */,
-				9FB6386514A79AAB00E4E5A5 /* WevIew */,
+				9FB6386514A79AAB00E4E5A5 /* WebView controller */,
 				9F263C5214C07366001B60B8 /* Tab View */,
 				9FB6386414A79AA900E4E5A5 /* Tabs Controller */,
 				9FB6386314A79AA600E4E5A5 /* Download */,
@@ -1470,7 +1470,7 @@
 			name = "Tabs Controller";
 			sourceTree = "<group>";
 		};
-		9FB6386514A79AAB00E4E5A5 /* WevIew */ = {
+		9FB6386514A79AAB00E4E5A5 /* WebView controller */ = {
 			isa = PBXGroup;
 			children = (
 				9FB6388E14A79D7500E4E5A5 /* Custom */,
@@ -1478,7 +1478,7 @@
 				9FB6387014A79AF000E4E5A5 /* View */,
 				9FB6386F14A79AEF00E4E5A5 /* Controller */,
 			);
-			name = WevIew;
+			name = "WebView controller";
 			sourceTree = "<group>";
 		};
 		9FB6386614A79AB200E4E5A5 /* Controller */ = {
@@ -1764,8 +1764,6 @@
 				9FF2D46B1493975100A5CE48 /* RAGridView.m */,
 				69B313531356395000F3DCFD /* RASettingViewController.h */,
 				69B313541356395000F3DCFD /* RASettingViewController.m */,
-				9F20FACD14AA5CD30036CCCE /* RAGridViewContentView.h */,
-				9F20FACE14AA5CD30036CCCE /* RAGridViewContentView.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1777,6 +1775,8 @@
 				9FF2D46C1493975100A5CE48 /* RAGridView.xib */,
 				9F20FAC314A9D6FC0036CCCE /* RAGridViewCell.h */,
 				9F20FAC414A9D6FC0036CCCE /* RAGridViewCell.m */,
+				9F20FACD14AA5CD30036CCCE /* RAGridViewContentView.h */,
+				9F20FACE14AA5CD30036CCCE /* RAGridViewContentView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";

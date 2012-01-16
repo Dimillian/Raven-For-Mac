@@ -417,7 +417,7 @@ static NSString* dummyBundleId_ = nil;
         NSArray* ary;
         ary = [CMUserScript patternsFromStrings: [md objectForKey: @"@include"]];
         [self setInclude: ary];
-        include_ = [ary retain];
+        include_ = [ary mutableCopy];
     
         // exclude
         ary = [CMUserScript patternsFromStrings: [md objectForKey: @"@exclude"]];

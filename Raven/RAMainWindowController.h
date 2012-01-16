@@ -53,7 +53,7 @@
     int f; 
     int previousIndex;
     int previousAppNumber; 
-    BOOL isHidden; 
+    BOOL hidden; 
     
     NSMutableArray *appList;
     
@@ -82,16 +82,12 @@
     
     
     NSString *passedUrl; 
-    BOOL isAdressBarHidden; 
-    BOOL isAnimated; 
+    BOOL adressBarHidden; 
+    BOOL animated; 
     BOOL firstScroll; 
-    
-    
-    
-    
+
 }
--(IBAction)toggleSmartBar:(id)sender;
--(IBAction)toggleAddressBar:(id)sender;
+
 //button action
 -(IBAction)history:(id)sender; 
 -(IBAction)home:(id)sender; 
@@ -100,11 +96,12 @@
 -(IBAction)setting:(id)sender; 
 -(IBAction)raven:(id)sender; 
 
--(IBAction)nextApp:(id)sender;
--(IBAction)previousApp:(id)sender;
-
 
 //method
+-(void)toggleSmartBar:(id)sender;
+-(void)toggleAddressBar:(id)sender;
+-(void)nextApp:(id)sender;
+-(void)previousApp:(id)sender;
 -(void)showSideBar; 
 -(void)hideSideBar; 
 -(void)animate:(NSUInteger)setMode;
@@ -112,8 +109,8 @@
 -(void)SetMenuButton;
 -(void)updateMenu; 
 -(void)initSmartBar; 
--(void)updateSmartBarUi;
--(void)resetSmartBarUiWithAnimation:(BOOL)animated;
+-(void)updateSmartBarViewSize;
+-(void)resetSmartBarUiWithAnimation:(BOOL)animate;
 -(void)newAppInstalled;
 -(void)reSelectCurrentApp; 
 -(void)removeAppAtIndex:(NSUInteger)index; 
@@ -138,7 +135,9 @@
 @property (assign) NSView *centeredView;
 @property (assign) NSViewController *myCurrentViewController;
 @property (nonatomic, assign) NSMutableArray *appList;
-@property BOOL isAnimated; 
+@property (nonatomic, getter = isAnimated) BOOL animated;
+@property (nonatomic, getter = isHidden) BOOL hidden;
+@property (nonatomic, getter = isAdressBarHidden) BOOL adressBarHidden;
 @end
 
 //delegate

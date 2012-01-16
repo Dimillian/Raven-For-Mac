@@ -126,7 +126,7 @@
 {
     
     if (_state == 0) {
-        [self setSelectedButton];
+        [self reselectedPreviousButton];
         NSUInteger i = 0; 
         int h_button = 166; 
         int h_field =  150; 
@@ -209,12 +209,12 @@
 
 -(void)hideView
 {
-    [self.smartBarItem setIsVisible:NO]; 
+    [self.smartBarItem setVisible:NO]; 
 }
 
 -(void)showView
 {
-    [self.smartBarItem setIsVisible:YES]; 
+    [self.smartBarItem setVisible:YES]; 
 }
 
 #pragma mark -
@@ -359,7 +359,7 @@
 }
 
 //select previously selected button when switching app
--(void)setSelectedButton
+-(void)reselectedPreviousButton
 {
     RASmartBarButton *button = [buttonArray objectAtIndex:_selectedButton]; 
     [self onButtonClick:button]; 

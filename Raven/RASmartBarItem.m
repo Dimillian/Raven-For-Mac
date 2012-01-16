@@ -10,7 +10,7 @@
 #import "RANavigatorViewController.h"
 
 @implementation RASmartBarItem
-@synthesize folder = _folder, appName = _appName, URLArray = _URLArray, buttonImageArrayOn = _buttonImageArrayOn, buttonImageArrayOff = _buttonImageArrayOff, isVisible = _isVisible, mainIcon = _mainIcon, mainIconBig = _mainIconBig, index = _index, navigatorViewControllerArray =_navigatorViewControllerArray, context = _context, category = _category, makerName = _makerName, internalAppUrl = _internalAppUrl; 
+@synthesize folder = _folder, appName = _appName, URLArray = _URLArray, buttonImageArrayOn = _buttonImageArrayOn, buttonImageArrayOff = _buttonImageArrayOff, visible = _visible, mainIcon = _mainIcon, mainIconBig = _mainIconBig, index = _index, navigatorViewControllerArray =_navigatorViewControllerArray, context = _context, category = _category, makerName = _makerName, internalAppUrl = _internalAppUrl; 
 
 -(id)init
 {
@@ -32,7 +32,7 @@
         self.folder = [dictionnary objectForKey:PLIST_KEY_FOLDER]; 
         self.category = [dictionnary objectForKey:PLIST_KEY_CATEGORY]; 
         self.makerName = [dictionnary objectForKey:PLIST_KEY_OFFICIAL]; 
-        self.isVisible = [[dictionnary objectForKey:PLIST_KEY_ENABLE]intValue];
+        self.visible = [[dictionnary objectForKey:PLIST_KEY_ENABLE]intValue];
         self.index = plistIndex;
         NSImage *mainImage = [[NSImage alloc]initByReferencingFile:
                               [[NSString stringWithFormat:application_support_path@"%@/main.png", self.folder]stringByExpandingTildeInPath]];
@@ -94,7 +94,7 @@
 
 -(void)hideSmartBarItem
 {
-    self.isVisible = NO; 
+    self.visible = NO; 
     [_buttonImageArrayOn release]; 
     [_buttonImageArrayOff release]; 
     [_navigatorViewControllerArray release]; 
@@ -103,7 +103,7 @@
 
 -(void)showSmartBarItem
 {
-    self.isVisible = YES; 
+    self.visible = YES; 
     _buttonImageArrayOn = [[NSMutableArray alloc]init]; 
     _buttonImageArrayOff = [[NSMutableArray alloc]init]; 
     _navigatorViewControllerArray = [[NSMutableArray alloc]init]; 

@@ -20,7 +20,8 @@
 #define app_view_w 108
 #define app_view_h 278
 #define initial_app_space 514
-#define bottom_bar_size 40
+#define bottom_bar_size 50
+#define bottom_bar_size_little 25
 #define number_h 21
 
 #define button_x 16
@@ -38,7 +39,7 @@
 
 
 @implementation RAMainWindowController
-@synthesize passedUrl, navigatorview, downloadButton, centeredView, myCurrentViewController, appList, delegate, isAnimated;
+@synthesize passedUrl, navigatorview, downloadButton, centeredView, myCurrentViewController, appList, delegate, animated, hidden, adressBarHidden;
 #pragma mark -
 #pragma mark init and close
 - (id)initWithWindow:(NSWindow *)window
@@ -152,7 +153,7 @@
         static int NSWindowAnimationBehaviorDocumentWindow = 3;
         [[self window]setAnimationBehavior:NSWindowAnimationBehaviorDocumentWindow];
     }
-    isAdressBarHidden = NO; 
+    self.adressBarHidden = NO; 
     //Listen to interesting notifications about GUI refresh
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
@@ -235,7 +236,7 @@
 {   
     if ([[notification name]isEqualToString:SMART_BAR_UPDATE]) {
         //[self initSmartBar];
-        [self updateSmartBarUi];
+        [self updateSmartBarViewSize];
         [self resetSmartBarUiWithAnimation:YES];
         [self updateMenu];
         [self animate:13];
@@ -326,7 +327,7 @@
 -(void)launchRuntime
 {  
     [self initSmartBar]; 
-    [self updateSmartBarUi];
+    [self updateSmartBarViewSize];
     [self raven:nil];
     
     //Experimental setting
@@ -341,7 +342,7 @@
 //Called each time window is resized
 -(void)windowDidResize:(NSNotification *)notification
 {
-    [self updateSmartBarUi];
+    [self updateSmartBarViewSize];
 }
 
 //Read app.plist and instanciate each item and add them in array, all app are in memory
@@ -361,7 +362,6 @@
     NSMutableArray *folders = [[NSMutableArray alloc]init]; 
     for (NSDictionary *item in folder) {
         [folders addObject:item];
-        
     }
     NSMenu *topMenu = [NSApp menu]; 
     NSMenu *smartBarMenu = [[topMenu itemAtIndex:4]submenu];
@@ -422,7 +422,7 @@
 #pragma mark RASmartBarController UI
 
 //Update the smart bar scrollview height to get the right scroll
--(void)updateSmartBarUi
+-(void)updateSmartBarViewSize
 {
     NSUInteger count = 0;
     NSInteger totalAppUrl = 0;
@@ -439,7 +439,7 @@
     else
     {
         [rightView setFrameSize:NSMakeSize(rightView.frame.size.width, 
-                                           bottom_bar_size + self.window.frame.size.height + (totalSize - self.window.frame.size.height))];
+                                           bottom_bar_size_little + self.window.frame.size.height + (totalSize - self.window.frame.size.height))];
     }
     
 }
@@ -460,21 +460,21 @@
     [smartApp onOtherAppClick:nil];
     [smartApp release]; 
     [smartBarItem release]; 
-    [self updateSmartBarUi];
+    [self updateSmartBarViewSize];
     [self raven:nil];
     [self resetIndex]; 
     
 }
 
 //reset the smartbar UI, place item at their initial state
--(void)resetSmartBarUiWithAnimation:(BOOL)animated
+-(void)resetSmartBarUiWithAnimation:(BOOL)animate
 {
     previousIndex = -1;
     NSInteger y = 0; 
     for (NSInteger x=0; x<[appList count]; x++) {
         RASmartBarItemViewController *smartApp = [appList objectAtIndex:x];
         if (smartApp.smartBarItem.isVisible) {
-            if (animated) {
+            if (animate) {
                 [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, rightView.frame.size.height - initial_app_space - (retracted_app_height*y), app_view_w, app_view_h)];
                 if (smartApp.state == 1) {
                     [smartApp onOtherAppClick:nil]; 
@@ -558,7 +558,7 @@
 -(IBAction)toggleSmartBar:(id)sender
 {
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    if (isHidden == YES) {
+    if  (self.isHidden) {
         [settingButton setHidden:NO];
         [NSAnimationContext beginGrouping];
         [[NSAnimationContext currentContext] setDuration:0.3];
@@ -567,8 +567,8 @@
         [[cornerBox animator]setFrame:NSMakeRect(-17, cornerBox.frame.origin.y, cornerBox.frame.size.width, cornerBox.frame.size.height)];
         [[settingButton animator]setAlphaValue:1.0];
         [NSAnimationContext endGrouping];
-        isHidden = NO;
-        isAdressBarHidden = NO; 
+        self.hidden = NO;
+        self.adressBarHidden = NO; 
         
     }
     else{
@@ -584,8 +584,8 @@
             [[settingButton animator]setHidden:YES];
         }
         [NSAnimationContext endGrouping];
-        isHidden = YES;
-        isAdressBarHidden = NO; 
+        self.hidden = YES;
+        self.adressBarHidden = NO; 
         
     }
     
@@ -594,7 +594,7 @@
 -(void)showSideBar{
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     if (standardUserDefaults) {
-        if ([standardUserDefaults integerForKey:SIDEBAR_LIKE_DOCK] == 1 && isHidden == YES) {
+        if ([standardUserDefaults integerForKey:SIDEBAR_LIKE_DOCK] == 1 && self.isHidden) {
             [settingButton setHidden:NO];
             [NSAnimationContext beginGrouping];
             [[NSAnimationContext currentContext] setDuration:0.3];
@@ -610,7 +610,7 @@
 -(void)hideSideBar{
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     if (standardUserDefaults) {
-        if ([standardUserDefaults integerForKey:SIDEBAR_LIKE_DOCK] == 1 && isHidden == YES) {
+        if ([standardUserDefaults integerForKey:SIDEBAR_LIKE_DOCK] == 1 && self.isHidden) {
             [NSAnimationContext beginGrouping];
             [[NSAnimationContext currentContext] setDuration:0.3];
             [[smartBarScrollView animator]setFrame:NSMakeRect(smartBarScrollView.frame.origin.x - 76, smartBarScrollView.frame.origin.y, smartBarScrollView.frame.size.width, smartBarScrollView.frame.size.height)];
@@ -770,13 +770,13 @@
 #pragma mark window UI
 -(void)toggleAddressBar:(id)sender
 {
-    if (isAdressBarHidden) {
+    if (self.isAdressBarHidden) {
         [[centeredView animator]setFrame:NSMakeRect(centeredView.frame.origin.x, centeredView.frame.origin.y, centeredView.frame.size.width, centeredView.frame.size.height - toolbarSize)];
-        isAdressBarHidden = NO; 
+        self.adressBarHidden = NO; 
     }
     else{
         [[centeredView animator]setFrame:NSMakeRect(centeredView.frame.origin.x, centeredView.frame.origin.y, centeredView.frame.size.width, centeredView.frame.size.height + toolbarSize)];
-        isAdressBarHidden = YES;
+        self.adressBarHidden = YES;
     }
 
 }
@@ -790,17 +790,17 @@
 {
     currentApp = -1; 
     if (sender == ravenMenuButton) {
-        isAnimated = YES; 
+        self.animated = YES; 
     }
     else{
-        isAnimated = NO; 
+        self.animated = NO; 
     }
     [self SetMenuButton]; 
     //Select the button
     [self home:sender]; 
     //Set the alphe value of the current button
     [[ravenMenuButton animator]setAlphaValue:1.0]; 
-    [self resetSmartBarUiWithAnimation:isAnimated];
+    [self resetSmartBarUiWithAnimation:self.isAnimated];
     [self animate:13]; 
 }
 

@@ -132,7 +132,10 @@
             }
             if (i == 0) {
                 if ([[aTab.tabView view]isHidden] == YES && !fromWindow) {
-                    [aTab.webViewController.webview setFrame:NSMakeRect(aTab.webViewController.webview.frame.origin.x, aTab.webViewController.webview.frame.origin.y, aTab.webViewController.webview.frame.size.width, aTab.webViewController.webview.frame.size.height - tabHeight)];
+                    [aTab.webViewController.webview setFrame:NSMakeRect(aTab.webViewController.webview.frame.origin.x, 
+                                                                        aTab.webViewController.webview.frame.origin.y, 
+                                                                        aTab.webViewController.webview.frame.size.width, 
+                                                                        aTab.webViewController.webview.frame.size.height - tabHeight)];
                 }
             }
             //If it is not from window notification animate
@@ -162,7 +165,10 @@
     for (RATabItem *aTab in _tabsArray) {
         [[aTab.tabView tabHolder]setHidden:YES];
         [[aTab.tabView view]setHidden:YES]; 
-        [[aTab.webViewController webview]setFrame:NSMakeRect(aTab.webViewController.webview.frame.origin.x, aTab.webViewController.webview.frame.origin.y, aTab.webViewController.webview.frame.size.width, aTab.webViewController.webview.frame.size.height+tabHeight)];
+        [[aTab.webViewController webview]setFrame:NSMakeRect(aTab.webViewController.webview.frame.origin.x, 
+                                                             aTab.webViewController.webview.frame.origin.y, 
+                                                             aTab.webViewController.webview.frame.size.width, 
+                                                             aTab.webViewController.webview.frame.size.height+tabHeight)];
     }
     
 }
@@ -202,30 +208,25 @@
     if (localWindow == nil) {
         localWindow = [NSApp keyWindow];
     }
-    RATabItem *newtab = [[RATabItem alloc]init]; 
+    RATabItem *newtab = [[RATabItem alloc]init];
     [newtab setDelegate:self]; 
-    //Add the button and webview instance in array.
     [_tabsArray addObject:newtab]; 
-    //force the newtab view to call awakefromNib
     [newtab callView];
     
-    //set the new webview delegate to this class method
-    [[newtab.webViewController webview]setUIDelegate:self]; 
-    [[newtab.webViewController webview]setPolicyDelegate:self]; 
-    //Set the host window to the actual window for plugin 
+    //Set the host window to the actual window for plugins support
     [[newtab.webViewController webview]setHostWindow:localWindow];
-        
+    [newtab setWebViewDelegate:self]; 
     [tabPlaceHolder addSubview:[newtab.tabView view]];
     [[newtab.tabView view]setFrame:NSMakeRect([_tabsArray indexOfObject:newtab]*tabButtonSize, tabHeight, tabButtonSize, tabHeight)];
     [[newtab.webViewController address]selectText:self];
     
     //if the passed URL value is different of nil then load it in the webview 
     if (self.PassedUrl != nil) {
-        [newtab.webViewController setIsNewTab:NO]; 
+        [newtab.webViewController setNewTab:NO]; 
         [newtab.webViewController loadWithUrl:self.PassedUrl]; 
 
     }
-    //if null then inti the webview with tthe welcom page
+    //if null then inti the webview with tthe welcome page
     else
     {
         NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -336,7 +337,7 @@
         [item setImage:[button.tabView.faviconTab image]];
         [item setAction:@selector(tabsButtonClicked:)];
         [item setEnabled:YES];
-        [item setTarget:button];
+        [item setTarget:button.tabView];
         [menu addItem:item];
         [item release]; 
     }
@@ -404,30 +405,33 @@
 -(void)tabItemDidMoveLeft:(RATabItem *)tab
 {
     if ([_tabsArray indexOfObject:tab] > 0) {
-        NSTabViewItem *tabItem = [tabController tabViewItemAtIndex:[_tabsArray indexOfObject:tab]];
-        [tabController removeTabViewItem:[tabController tabViewItemAtIndex:[_tabsArray indexOfObject:tab]]]; 
-        [tabController insertTabViewItem:tabItem atIndex:[_tabsArray indexOfObject:tab]-1]; 
+        [self moveIndexOfTabControllerFromIndex:[_tabsArray indexOfObject:tab] 
+                                        toIndex:[_tabsArray indexOfObject:tab]-1]; 
         [_tabsArray moveObjectFromIndex:[_tabsArray indexOfObject:tab] 
                                 toIndex:[_tabsArray indexOfObject:tab]-1];
         [tab.tabView tabsButtonClicked:tab.webViewController.tabsButton]; 
-        
-        
-        
         [self redrawTabs:YES]; 
+
     }
 }
 
 -(void)tabItemDidMoveRight:(RATabItem *)tab
 {
     if ([_tabsArray indexOfObject:tab] < [_tabsArray count] - 1) {
-        NSTabViewItem *tabItem = [tabController tabViewItemAtIndex:[_tabsArray indexOfObject:tab]];
-        [tabController removeTabViewItem:[tabController tabViewItemAtIndex:[_tabsArray indexOfObject:tab]]]; 
-        [tabController insertTabViewItem:tabItem atIndex:[_tabsArray indexOfObject:tab]+1]; 
+        [self moveIndexOfTabControllerFromIndex:[_tabsArray indexOfObject:tab] 
+                                        toIndex:[_tabsArray indexOfObject:tab]+1]; 
         [_tabsArray moveObjectFromIndex:[_tabsArray indexOfObject:tab] 
                                 toIndex:[_tabsArray indexOfObject:tab]+1];
         [tab.tabView tabsButtonClicked:tab.webViewController.tabsButton]; 
         [self redrawTabs:YES]; 
     }
+}
+
+-(void)moveIndexOfTabControllerFromIndex:(NSInteger)from toIndex:(NSInteger)to
+{
+    NSTabViewItem *tabItem = [tabController tabViewItemAtIndex:from];
+    [tabController removeTabViewItem:tabItem]; 
+    [tabController insertTabViewItem:tabItem atIndex:to]; 
 }
 
 -(void)tabItemDidStopDragging:(RATabItem *)tab
@@ -602,7 +606,9 @@
             [popupWindow replaceWebView:sender]; 
             [popupWindow setDelegate:self]; 
             [_popupWindowArray addObject:popupWindow]; 
-            [popupWindow release]; 
+            if(IS_RUNNING_LION){
+                [popupWindow release]; 
+            }
             [sender stopLoading:sender];  
         }
         else{

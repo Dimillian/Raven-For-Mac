@@ -17,7 +17,7 @@
 @implementation PXListDocumentView
 
 @synthesize listView = _listView;
-@synthesize dropHighlight = _dropHighlight;
+@dynamic dropHighlight; 
 
 - (BOOL)isFlipped
 {
@@ -70,5 +70,10 @@
 	//NSLog( @"setDropHighlight %lu", _dropHighlight );
 	[self setNeedsDisplayInRect: [self visibleRect]];
 }
+
+-(PXListViewDropHighlight)dropHighlight{
+    return _dropHighlight; 
+}
+
 
 @end
