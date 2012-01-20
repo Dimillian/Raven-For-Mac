@@ -1159,7 +1159,7 @@
 				9FB6386314A79AA600E4E5A5 /* Download */,
 				9FB6386214A79AA500E4E5A5 /* History */,
 				9FC3B79B14038C5500E28D71 /* Work in progress */,
-				9F69AB6F14272A79003AE44B /* PureDelegate */,
+				9F69AB6F14272A79003AE44B /* App Delegate */,
 				69F4485E138A249000432BC7 /* Reusable Subclass */,
 				690A79BE138B056B001AB4DE /* Main Menu */,
 				9F38239A141E7B4600EE4CE3 /* External Framework */,
@@ -1324,15 +1324,13 @@
 			name = "setting window";
 			sourceTree = "<group>";
 		};
-		9F69AB6F14272A79003AE44B /* PureDelegate */ = {
+		9F69AB6F14272A79003AE44B /* App Delegate */ = {
 			isa = PBXGroup;
 			children = (
 				9F8A1CCA13FD9E9B00DD291C /* RavenAppDelegate.h */,
 				69F8A090133CD50300E32E6D /* RavenAppDelegate.m */,
-				9F79C1E113D0CA160039A1CB /* RANSURLDownloadDelegate.h */,
-				9F79C1E213D0CA160039A1CB /* RANSURLDownloadDelegate.m */,
 			);
-			name = PureDelegate;
+			name = "App Delegate";
 			sourceTree = "<group>";
 		};
 		9F6A9C5C14BB655100A4F481 /* Popup Window */ = {
@@ -1510,8 +1508,8 @@
 		9FB6386914A79AE800E4E5A5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				69DF001013C0B26E006F92BD /* RADownloadController.h */,
-				69DF001113C0B26E006F92BD /* RADownloadController.m */,
+				69D902F9134B9F990097F30F /* RADownloadViewController.h */,
+				69D902FA134B9F990097F30F /* RADownloadViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1519,6 +1517,8 @@
 		9FB6386A14A79AE900E4E5A5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9F79C1E113D0CA160039A1CB /* RANSURLDownloadDelegate.h */,
+				9F79C1E213D0CA160039A1CB /* RANSURLDownloadDelegate.m */,
 				69DF001313C0B280006F92BD /* RADownloadObject.h */,
 				69DF001413C0B280006F92BD /* RADownloadObject.m */,
 			);
@@ -1644,8 +1644,8 @@
 		9FB6387814A79B5900E4E5A5 /* Singleton */ = {
 			isa = PBXGroup;
 			children = (
-				69D902F9134B9F990097F30F /* RADownloadViewController.h */,
-				69D902FA134B9F990097F30F /* RADownloadViewController.m */,
+				69DF001013C0B26E006F92BD /* RADownloadController.h */,
+				69DF001113C0B26E006F92BD /* RADownloadController.m */,
 			);
 			name = Singleton;
 			sourceTree = "<group>";

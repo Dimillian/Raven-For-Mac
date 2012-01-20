@@ -73,7 +73,7 @@
      NSWorkspace *workspace = [NSWorkspace sharedWorkspace];
 	[[cell titleLabel] setStringValue:[download name]];
     [[cell progressView]setDoubleValue:[download.progress doubleValue]];
-    [[cell progressText]setStringValue:[NSString stringWithFormat:@"%@ of %@ downloaded",[self stringFromFileSize:[download.progressBytes intValue]],[self stringFromFileSize:[download.size intValue]]]]; 
+    [[cell progressText]setStringValue:[NSString stringWithFormat:@"%@ of %@ downloaded",download.readbleProgressFileSize,download.readbleTotalFileSize]]; 
     [[cell iconDownload]setImage:[workspace iconForFile:download.path]];
     [[cell openButton]setTarget:self]; 
     [[cell openButton]setAction:@selector(openFile:)];
@@ -99,7 +99,7 @@
     //send the url to the class instancied webview
     [downloadPath setStringValue:aDownload.path];
     [source setStringValue:aDownload.downloadUrl]; 
-    [size setStringValue:[self stringFromFileSize:[aDownload.size intValue]]]; 
+    [size setStringValue:aDownload.readbleTotalFileSize]; 
     [name setStringValue:aDownload.name]; 
     NSImage *icon = [workspace iconForFile:aDownload.path]; 
     [icon setSize:NSMakeSize(150, 150)];
@@ -151,21 +151,6 @@
     [controller release];
 }
 
-- (NSString *)stringFromFileSize:(int)theSize
-{
-	float floatSize = theSize;
-	if (theSize<1023)
-		return([NSString stringWithFormat:@"%i bytes",theSize]);
-	floatSize = floatSize / 1024;
-	if (floatSize<1023)
-		return([NSString stringWithFormat:@"%1.1f KB",floatSize]);
-	floatSize = floatSize / 1024;
-	if (floatSize<1023)
-		return([NSString stringWithFormat:@"%1.1f MB",floatSize]);
-	floatSize = floatSize / 1024;
-	
-	return([NSString stringWithFormat:@"%1.1f GB",floatSize]);
-}
 
 - (void)dealloc
 {

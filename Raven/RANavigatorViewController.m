@@ -82,6 +82,35 @@
     [selectedTab.webViewController setMenu];
 }
 
+#pragma mark - Utility 
+-(BOOL)firstTimeLaunch
+{
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    if ([standardUserDefaults integerForKey:DO_HAVE_LAUNCHED] == 0) {
+        [standardUserDefaults setInteger:1 forKey:DO_HAVE_LAUNCHED];
+        [standardUserDefaults synchronize];
+        return YES; 
+    }
+    else{
+        return NO; 
+    }
+}
+
+-(BOOL)shouldOpenBaseUrl
+{
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    return (self.baseUrl && [standardUserDefaults integerForKey:OPEN_NEW_TAB_BASE_URL] == 1);
+}
+
+-(BOOL)shouldOpenInBackground:(id)sender
+{
+    NSUserDefaults *standardUserDefault = [NSUserDefaults standardUserDefaults]; 
+    return (([standardUserDefault integerForKey:OPEN_TAB_IN_BACKGROUND] == 0  
+             && !inBackground) 
+            || [sender class] == [NSButton class]);
+
+}
+
 
 
 #pragma mark -
@@ -224,51 +253,40 @@
     if (self.PassedUrl != nil) {
         [newtab.webViewController setNewTab:NO]; 
         [newtab.webViewController loadWithUrl:self.PassedUrl]; 
-
     }
     //if null then inti the webview with tthe welcome page
     else
     {
-        NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-        if (standardUserDefaults) {
-            if ([standardUserDefaults integerForKey:DO_HAVE_LAUNCHED] == 0) {
-                [standardUserDefaults setInteger:1 forKey:DO_HAVE_LAUNCHED];
-                [standardUserDefaults synchronize];
-                [newtab.webViewController loadInternalPage:@"Start"];
+        if ([self firstTimeLaunch]) {
+            [newtab.webViewController loadInternalPage:@"Start"];
+        }
+        else
+        {
+            if ([self shouldOpenBaseUrl]) {
+                [newtab.webViewController loadWithUrl:self.baseUrl];  
             }
-                else
-                {
-                    if (self.baseUrl && [standardUserDefaults integerForKey:OPEN_NEW_TAB_BASE_URL] == 1) {
-                        [newtab.webViewController loadWithUrl:self.baseUrl];  
-                    }
-                    else{
-                        [newtab.webViewController loadWithPreferredUrl]; 
-                    }
-                }
+            else{
+                [newtab.webViewController loadWithPreferredUrl]; 
             }
         }
+    }
     //[buttonview release]; 
     NSTabViewItem *item = [[NSTabViewItem alloc]init]; 
     [item setView:[newtab.webViewController switchView]];
     [tabController addTabViewItem:item];
     
-    NSUserDefaults *standardUserDefault = [NSUserDefaults standardUserDefaults]; 
-    if (standardUserDefault) {
-        if (([standardUserDefault integerForKey:OPEN_TAB_IN_BACKGROUND] == 0 
-            && !inBackground)
-            || [sender class] == [NSButton class]) {
-                //reset all tabs button position
-                [self resetAllTabsButon]; 
-                [tabController selectTabViewItem:item]; 
-                [newtab.webViewController setMenu]; 
-                if (newtab != nil)
-                {
-                    [newtab.webViewController setWindowTitle:sender];
-                }
+    if ([self shouldOpenInBackground:sender]) {
+        //reset all tabs button position
+        [self resetAllTabsButon]; 
+        [tabController selectTabViewItem:item]; 
+        [newtab.webViewController setMenu]; 
+        if (newtab != nil)
+        {
+            [newtab.webViewController setWindowTitle:sender];
         }
-        else{
-            inBackground = NO;
-        }
+    }
+    else{
+        inBackground = NO;
     }
     
     [self resetAllTabsButon];
@@ -385,6 +403,13 @@
     self.PassedUrl = [[sender representedObject]absoluteString];
     inBackground = YES;
     [self addtabs:tabsButton];
+}
+
+-(void)openNewTab:(id)sender
+{
+    self.PassedUrl = [[sender representedObject]absoluteString];
+    inBackground = NO;
+    [self addtabs:tabsButton]; 
 }
 
 #pragma mark -
@@ -508,6 +533,9 @@
         NSMutableArray *newItem = [[defaultMenuItems mutableCopy]autorelease];
         NSMenuItem *item = [defaultMenuItems objectAtIndex:1]; 
         [item setTitle:@"Open in a new tab"];
+        [item setTarget:self];
+        [item setAction:@selector(openNewTab:)]; 
+        [item setRepresentedObject:[element objectForKey:@"WebElementLinkURL"]]; 
         [newItem replaceObjectAtIndex:1 withObject:item]; 
         NSUserDefaults *standardUserDefault = [NSUserDefaults standardUserDefaults]; 
         if (standardUserDefault) {
@@ -534,11 +562,13 @@
     if (modifierFlags & NSCommandKeyMask && [[NSApp currentEvent] type] == NSLeftMouseDownMask)  {
         if ([elementInformation objectForKey:@"WebElementLinkURL"] 
             && [elementInformation objectForKey:@"WebElementTargetFrame"]) {
+            cmdKey = YES; 
             RATabItem *tempController = [_tabsArray objectAtIndex:
-                                                   [tabController indexOfTabViewItem:
-                                                    [tabController selectedTabViewItem]]];
+                                         [tabController indexOfTabViewItem:
+                                         [tabController selectedTabViewItem]]];
             [tempController.webViewController.webview stopLoading:tempController.webViewController.webview];
             [tempController.webViewController webView:tempController.webViewController.webview didFinishLoadForFrame:[tempController.webViewController.webview mainFrame]];
+
             NSMenuItem *tempItem = [[NSMenuItem alloc]init];
             [tempItem setRepresentedObject:[elementInformation objectForKey:@"WebElementLinkURL"]]; 
             [self openTabInBackgroundWithUrl:tempItem]; 
@@ -552,14 +582,16 @@
 //So if the popup gently ask the delegate we set the flag to yes
 - (void)webView:(WebView *)webView decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id < WebPolicyDecisionListener >)listener
 {
-    askForNewWindow = YES; 
-    [listener use];
+    self.PassedUrl = [[request URL]absoluteString]; 
+    [self addtabs:tabsButton];
+    [webView stopLoading:webView];
+    askForNewWindow = YES;
 }
 
 
 - (void)webView:(WebView *)webView decidePolicyForMIMEType:(NSString *)type request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener
 {
-    if ([type hasPrefix:@"application"]) {
+    if ([type hasPrefix:@"application"] && ![type isEqualToString:@"application/x-javascript"]) {
         RANSURLDownloadDelegate *dlDelegate = [[RANSURLDownloadDelegate alloc]init];
         NSURLDownload  *theDownload = [[NSURLDownload alloc] initWithRequest:request
                                                                 delegate:dlDelegate];
@@ -585,7 +617,7 @@
     [listener use]; 
 }
 
-//here in any case we init and load the request the Apple way, after the webview will be rooter depending
+//here in any case we init and load the request the Apple way, after the webview will be rooted depending
 //If it is a popup or a new tab
 - (WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
@@ -600,21 +632,16 @@
 //if it previously asked we set the frameload delegate and load it to get the URL and open the tab with
 - (void)webViewShow:(WebView *)sender
 {
-        if (!askForNewWindow) {
-            RAPopupWindowController *popupWindow = [[RAPopupWindowController alloc]initWithWindowNibName:@"RAPopupWindow"];
-            [popupWindow.window makeKeyAndOrderFront:popupWindow.window];
-            [popupWindow replaceWebView:sender]; 
-            [popupWindow setDelegate:self]; 
-            [_popupWindowArray addObject:popupWindow]; 
-            if(IS_RUNNING_LION){
-                [popupWindow release]; 
-            }
-            [sender stopLoading:sender];  
-        }
-        else{
-            //if new tab load the webview here to get the mainframeUrl
-            [sender setFrameLoadDelegate:self]; 
-        }
+    RAPopupWindowController *popupWindow = [[RAPopupWindowController alloc]initWithWindowNibName:@"RAPopupWindow"];
+    [popupWindow.window makeKeyAndOrderFront:popupWindow.window];
+    [popupWindow replaceWebView:sender]; 
+    [popupWindow setDelegate:self]; 
+    [_popupWindowArray addObject:popupWindow]; 
+    if(IS_RUNNING_LION){
+        [popupWindow release]; 
+    }
+    [sender stopLoading:sender];  
+    askForNewWindow = NO; 
 }
 
 - (WebView *)webView:(WebView *)sender createWebViewModalDialogWithRequest:(NSURLRequest *)request
@@ -624,22 +651,6 @@
     [[tempview mainFrame]loadRequest:request]; 
     return tempview; 
 }
-
-//used to create a new tab
-//we just get the main frame URL and pass it to the new tab
--(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
-{
-    if (frame == [sender mainFrame]) {
-        self.PassedUrl = [sender mainFrameURL]; 
-        [self addtabs:tabsButton];
-        [sender stopLoading:sender];  
-        askForNewWindow = NO;
-
-    }
-}
-
-
-
 
 //Manage javascript altert message
 - (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame

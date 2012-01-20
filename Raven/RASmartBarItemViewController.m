@@ -295,26 +295,16 @@
 
 -(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs
 {
-    switch (numberOfTabs) {
-        case 0:
-            return @"";
-            break;
-        case 1:
-            return @"•";
-            break; 
-        case 2:
-            return @"••";
-            break;
-        case 3:
-            return @"•••";
-            break; 
-        case 4:
-            return @"••••";
-            break; 
-        default:
-            return @"•••••";
-            break;
+    NSString *dots = [NSString stringWithFormat:@""]; 
+    if (numberOfTabs<5) {
+        for (NSUInteger a = 0; a<numberOfTabs; a++) {
+            dots = [dots stringByAppendingFormat:@"•"]; 
+        }   
     }
+    else{
+        dots = @"•••••";
+    }
+    return dots; 
     
 }
 #pragma mark -

@@ -90,6 +90,9 @@
 -(void)updateFaviconUI:(id)sender; 
 -(void)saveHistory:(id)sender;
 
+//internal
+-(void)setWebViewBackground;
+
 //Properties
 @property (nonatomic, assign) id<RAWebViewControllerDelegate> delegate;
 @property (nonatomic, retain) NSSearchField *searchWebView;

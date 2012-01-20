@@ -95,14 +95,7 @@
     [progressMain setMaxValue:1.0]; 
     [searchWebView setHidden:YES];
     
-    if (IS_RUNNING_LION) {
-        id webDocView = [[[self.webview mainFrame] frameView] documentView];
-        NSScrollView *detailWebScrollView = (NSScrollView *)[[webDocView superview] superview];
-        LWVWebClipView *webClipView = [[LWVWebClipView alloc] initWithFrame:[[detailWebScrollView contentView] frame]];
-        [detailWebScrollView setContentView:webClipView];
-        [detailWebScrollView setDocumentView:webDocView];
-        [webClipView release];
-     }
+    [self setWebViewBackground]; 
     
     [self.tabView setInitialState]; 
     
@@ -110,6 +103,19 @@
     
     //[webview displayGrowlNotification]; 
      
+}
+
+-(void)setWebViewBackground
+{
+    if (IS_RUNNING_LION) {
+        id webDocView = [[[self.webview mainFrame] frameView] documentView];
+        NSScrollView *detailWebScrollView = (NSScrollView *)[[webDocView superview] superview];
+        LWVWebClipView *webClipView = [[LWVWebClipView alloc] initWithFrame:[[detailWebScrollView contentView] frame]];
+        [detailWebScrollView setContentView:webClipView];
+        [detailWebScrollView setDocumentView:webDocView];
+        [webClipView release];
+    }
+    
 }
 
 -(id)infoValueForKey:(NSString*)key
@@ -485,7 +491,7 @@
     }
     [pool release]; 
     [self performSelectorOnMainThread:@selector(updateFaviconUI:) withObject:nil waitUntilDone:YES];
-    [self performSelectorInBackground:@selector(saveHistory:) withObject:nil];
+    [self performSelectorOnMainThread:@selector(saveHistory:) withObject:nil waitUntilDone:NO];
 }
 
 -(void)updateFaviconUI:(id)sender
@@ -514,16 +520,18 @@
     else if (doRegisterHistory == 2) {
         NSDate *currentDate = [[NSDate alloc]initWithTimeIntervalSinceNow:0]; 
         NSString *currentUrl= [webview mainFrameURL];
-        NSImage *currentFavicon = _favicon;
+        NSImage *currentFavicon = self.favicon;
         NSString *udid = [[NSURL URLWithString:[webview mainFrameURL]]host];
         if (udid != nil) {
             udid = [udid createFileNameFromString:udid];
-            [[currentFavicon TIFFRepresentation] writeToFile:[[NSString stringWithFormat:FAVICON_PATH, udid]stringByExpandingTildeInPath] atomically:YES];
+            [[currentFavicon TIFFRepresentation]writeToFile:[[NSString stringWithFormat:FAVICON_PATH, udid]stringByExpandingTildeInPath] atomically:YES];
             [controller insetHistoryItem:[webview mainFrameTitle] 
                                      url:currentUrl 
                                     data:[udid dataUsingEncoding:NSStringEncodingConversionAllowLossy] 
                                     date:currentDate];
-            [controller updateBookmarkFavicon:[currentFavicon TIFFRepresentation] forUrl:currentUrl];
+            if (currentFavicon) {
+                [controller updateBookmarkFavicon:[currentFavicon TIFFRepresentation] forUrl:currentUrl];
+            }
 
         }
         [currentDate release]; 

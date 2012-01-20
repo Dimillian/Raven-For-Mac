@@ -9,7 +9,9 @@
 #import "RADownloadObject.h"
 
 @implementation RADownloadObject
-@synthesize size = _size, progress = _progress, name = _name, key = _key, path = _path, progressBytes = _progressBytes, downloadUrl = _downloadUrl;
+@synthesize size = _size, progress = _progress, name = _name, key = _key, path = _path, 
+            progressBytes = _progressBytes, downloadUrl = _downloadUrl, downloadRequest = _downloadRequest;
+@dynamic readbleTotalFileSize, readbleProgressFileSize; 
 
 -(id)initWithKey:(NSNumber *)k name:(NSString *)n progress:(NSNumber *)pro size:(NSNumber *)s path:(NSString *)p progressBytes:(NSNumber *)pb source:(NSString *)sc  
 {
@@ -24,6 +26,34 @@
     }
     return (self); 
 }
+
+-(NSString *)readbleTotalFileSize
+{
+    
+    return [self stringFromFileSize:[_size intValue]]; 
+}
+
+-(NSString *)readbleProgressFileSize
+{
+    return [self stringFromFileSize:[_progressBytes intValue]]; 
+}
+
+- (NSString *)stringFromFileSize:(int)theSize
+{
+	float floatSize = theSize;
+	if (theSize<1023)
+		return([NSString stringWithFormat:@"%i bytes",theSize]);
+	floatSize = floatSize / 1024;
+	if (floatSize<1023)
+		return([NSString stringWithFormat:@"%1.1f KB",floatSize]);
+	floatSize = floatSize / 1024;
+	if (floatSize<1023)
+		return([NSString stringWithFormat:@"%1.1f MB",floatSize]);
+	floatSize = floatSize / 1024;
+	
+	return([NSString stringWithFormat:@"%1.1f GB",floatSize]);
+}
+
 /*
 //I'll figure out why I put this later
 -(id) initWithCoder: (NSCoder*) coder {
@@ -62,6 +92,7 @@
     [_path release]; 
     [_progressBytes release]; 
     [_downloadUrl release]; 
+    [_downloadRequest release]; 
     [super dealloc]; 
 }
 

@@ -44,6 +44,7 @@
     BOOL inBackground;
     BOOL isAdressBarHidden; 
     BOOL askForNewWindow; 
+    BOOL cmdKey; 
 }
 
 -(IBAction)addtabs:(id)sender;
@@ -55,15 +56,18 @@
 -(void)closeFirtTab; 
 -(NSMenu *)getTabsMenu;
 -(void)openTabInBackgroundWithUrl:(id)sender;
+-(void)openNewTab:(id)sender;
 -(void)windowResize:(id)sender; 
 -(void)setTabSelectedState; 
 -(void)moveIndexOfTabControllerFromIndex:(NSInteger)from toIndex:(NSInteger)to; 
-
 -(void)redrawTabs:(BOOL)fromWindow;
 -(void)hideTabHolder; 
 -(void)setMenu; 
 //method
 -(void)resetAllTabsButon; 
+-(BOOL)firstTimeLaunch;
+-(BOOL)shouldOpenBaseUrl; 
+-(BOOL)shouldOpenInBackground:(id)sender; 
 
 @property int fromOtherViews;
 @property (nonatomic, copy) NSString *PassedUrl;

@@ -79,6 +79,9 @@ static RAlistManager *sharedUserManager = nil;
     NSString *realPath = [NSString stringWithFormat:@"%@/app.plist", path];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:realPath];
     NSString *appFolder = [dict objectForKey:PLIST_KEY_FOLDER];
+    if ([dict objectForKey:PLIST_KEY_ENABLE] == [NSNumber numberWithInt:0]){
+        [dict setObject:[NSNumber numberWithInt:1] forKey:PLIST_KEY_ENABLE]; 
+    }
     NSString *appPlist = [PLIST_PATH stringByExpandingTildeInPath];
     NSMutableDictionary *dictToEdit = [NSMutableDictionary dictionaryWithContentsOfFile:appPlist];
     NSMutableArray *folders = [[dictToEdit objectForKey:PLIST_KEY_DICTIONNARY] mutableCopy];

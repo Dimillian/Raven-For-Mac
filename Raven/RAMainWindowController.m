@@ -301,26 +301,16 @@
 
 -(NSString *)numberOfDotToDisplay:(NSUInteger)numberOfTabs
 {
-    switch (numberOfTabs) {
-        case 0:
-            return @"";
-            break;
-        case 1:
-            return @"•";
-            break; 
-        case 2:
-            return @"••";
-            break;
-        case 3:
-            return @"•••";
-            break; 
-        case 4:
-            return @"••••";
-            break; 
-        default:
-            return @"•••••";
-            break;
+    NSString *dots = [NSString stringWithFormat:@""]; 
+    if (numberOfTabs<5) {
+        for (NSUInteger a = 0; a<numberOfTabs; a++) {
+            dots = [dots stringByAppendingFormat:@"•"]; 
+        }   
     }
+    else{
+        dots = @"•••••";
+    }
+    return dots; 
     
 }
 //take care of the Smart Bar init once window is awake
@@ -363,12 +353,6 @@
     for (NSDictionary *item in folder) {
         [folders addObject:item];
     }
-    NSMenu *topMenu = [NSApp menu]; 
-    NSMenu *smartBarMenu = [[topMenu itemAtIndex:4]submenu];
-    NSInteger count = smartBarMenu.itemArray.count;
-    for (NSInteger sb= count; sb < count; sb++) {
-        [smartBarMenu removeItemAtIndex:count];
-    }
     
     //local array index
     int x = 0;
@@ -385,7 +369,6 @@
         [smartApp release];
         [smartBarItem release]; 
     }
-    [topMenu setSubmenu:smartBarMenu forItem:[topMenu itemAtIndex:4]];
     //[NSApp setMenu:topMenu];
     [folders release];
     [self updateMenu]; 
@@ -397,9 +380,10 @@
     int x = 0;
     NSMenu *topMenu = [NSApp menu]; 
     NSMenu *smartBarMenu = [[topMenu itemAtIndex:4]submenu];
-    NSInteger count = smartBarMenu.itemArray.count;
-    for (NSInteger sb=count; sb < count; sb++) {
-        [smartBarMenu removeItemAtIndex:count];
+    for (NSMenuItem *item in smartBarMenu.itemArray) {
+        if ([item action] == @selector(onMainButtonClick:)) {
+            [smartBarMenu removeItem:item]; 
+        }
     }
     for (RASmartBarItemViewController *smartApp in appList) {
         if (smartApp.smartBarItem.isVisible) {

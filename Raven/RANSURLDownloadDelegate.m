@@ -17,6 +17,7 @@
 @implementation RANSURLDownloadDelegate
 @synthesize delegate; 
 @synthesize downloadUrl = _downloadUrl, downloadName = _downloadName, downloadPath = _downloadPath, totalByes = _totalByes, percentage = _percentage, ProgressBytes = _progressBytes; 
+
 -(void)downloadDidBegin:(NSURLDownload *)download
 {
     trackDownload = YES;
@@ -47,8 +48,17 @@
         self.ProgressBytes = [NSNumber numberWithInt:0]; 
         startTime = [NSDate timeIntervalSinceReferenceDate]; 
         NSNumber *key = [NSNumber numberWithUnsignedInteger:downloadIndex]; 
-        if (key != nil && self.downloadName != nil && self.percentage != nil && self.totalByes != nil && self.downloadPath != nil && self.ProgressBytes != nil && self.downloadUrl != nil) {
-            aDownload = [[RADownloadObject alloc]initWithKey:key name:self.downloadName progress:self.percentage size:self.totalByes path:self.downloadPath progressBytes:self.ProgressBytes source:self.downloadUrl]; 
+        if (key != nil && self.downloadName != nil && self.percentage != nil && 
+            self.totalByes != nil && self.downloadPath != nil && 
+            self.ProgressBytes != nil && self.downloadUrl != nil) {
+            aDownload = [[RADownloadObject alloc]initWithKey:key 
+                                                        name:self.downloadName 
+                                                    progress:self.percentage 
+                                                        size:self.totalByes 
+                                                        path:self.downloadPath 
+                                               progressBytes:self.ProgressBytes 
+                                                      source:self.downloadUrl]; 
+            aDownload.downloadRequest = download; 
             RADownloadController *controller = [[RADownloadController alloc]init]; 
             [[controller downloadArray]addObject:aDownload];
             [controller release];

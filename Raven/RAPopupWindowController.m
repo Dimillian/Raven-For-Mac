@@ -72,7 +72,6 @@
         [NSApp nextEventMatchingMask:NSAnyEventMask untilDate:[NSDate dateWithTimeIntervalSinceNow:1.0] inMode:NSDefaultRunLoopMode dequeue:YES];
         [pool drain];
     }
-
 }
 
 
@@ -99,6 +98,7 @@
 
 -(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
+
     
 }
 

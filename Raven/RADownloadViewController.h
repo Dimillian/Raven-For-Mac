@@ -31,6 +31,5 @@
 -(IBAction)openFile:(id)sender;
 -(IBAction)moveToTrash:(id)sender;
 -(IBAction)resetList:(id)sender;
--(NSString *)stringFromFileSize:(int)theSize;
 -(void)receiveNotification:(NSNotification *)notification;
 @end

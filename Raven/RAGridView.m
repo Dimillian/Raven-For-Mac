@@ -21,6 +21,8 @@
 #define content_view_width 925
 #define icon_per_row 5
 #define scroller_size 10
+#define less_than_five_icon_diviser 2.2
+#define icon_less_five_dist 90
 
 @implementation RAGridView
 
@@ -114,12 +116,21 @@
 
 -(CGFloat)getXbase
 {
-    CGFloat x_base_iconview; 
-    if (scrollView.frame.size.width > content_view_width) {
-        x_base_iconview = (scrollView.frame.size.width - content_view_width)/2;
+    CGFloat x_base_iconview = 0; 
+    if (cellArray.count <= 4)
+    {
+        float substrate = 40; 
+        for (NSUInteger i = 0; i<cellArray.count; i++) {
+            if (i!=0) {
+                substrate = substrate + icon_less_five_dist; 
+            }
+            x_base_iconview = scrollView.frame.size.width/less_than_five_icon_diviser - substrate;
+        }
     }
     else{
-        x_base_iconview = 0; 
+        if (scrollView.frame.size.width > content_view_width) {
+            x_base_iconview = (scrollView.frame.size.width - content_view_width)/2;
+        }
     }
     return x_base_iconview; 
 }
