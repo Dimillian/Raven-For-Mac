@@ -37,7 +37,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSWindowTemplate" id="1005">
-				<int key="NSWindowStyleMask">15</int>
+				<int key="NSWindowStyleMask">271</int>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{392, 78}, {699, 667}}</string>
 				<int key="NSWTFlags">544735232</int>
@@ -52,9 +52,10 @@
 						<object class="NSCustomView" id="751416760">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">306</int>
-							<string key="NSFrameSize">{699, 644}</string>
+							<string key="NSFrameSize">{699, 645}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:1192</string>
 							<string key="NSClassName">NSView</string>
 						</object>
@@ -69,14 +70,14 @@
 										<object class="NSTextField" id="65437335">
 											<reference key="NSNextResponder" ref="977769358"/>
 											<int key="NSvFlags">10</int>
-											<string key="NSFrame">{{6, 3}, {654, 17}}</string>
+											<string key="NSFrame">{{5, 3}, {655, 17}}</string>
 											<reference key="NSSuperview" ref="977769358"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
+											<reference key="NSNextKeyView" ref="751416760"/>
 											<int key="NSViewLayerContentsRedrawPolicy">2</int>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="869206713">
-												<int key="NSCellFlags">-1272316351</int>
+												<int key="NSCellFlags">-2077622719</int>
 												<int key="NSCellFlags2">43072</int>
 												<string key="NSContents"/>
 												<object class="NSFont" key="NSSupport">
@@ -102,7 +103,7 @@
 											</object>
 										</object>
 									</array>
-									<string key="NSFrame">{{1, 1}, {697, 21}}</string>
+									<string key="NSFrame">{{1, 1}, {699, 21}}</string>
 									<reference key="NSSuperview" ref="497746942"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="65437335"/>
@@ -110,7 +111,7 @@
 									<string key="NSReuseIdentifierKey">_NS:632</string>
 								</object>
 							</array>
-							<string key="NSFrame">{{0, 644}, {699, 23}}</string>
+							<string key="NSFrame">{{-1, 644}, {701, 23}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="977769358"/>
@@ -137,14 +138,13 @@
 							<int key="NSBoxType">4</int>
 							<int key="NSTitlePosition">0</int>
 							<bool key="NSTransparent">NO</bool>
-							<double key="NSCornerRadius2">4</double>
 							<object class="NSColor" key="NSBorderColor2">
 								<int key="NSColorSpace">6</int>
 								<string key="NSCatalogName">System</string>
-								<string key="NSColorName">disabledControlTextColor</string>
+								<string key="NSColorName">controlColor</string>
 								<object class="NSColor" key="NSColor">
 									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
+									<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
 								</object>
 							</object>
 							<object class="NSColor" key="NSFillColor2">

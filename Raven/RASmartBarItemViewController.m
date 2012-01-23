@@ -36,7 +36,7 @@
 //[[badgeView animator]setFrame:NSMakeRect(badge_x, badge_y, badge_w, badge_h)];
 
 @implementation RASmartBarItemViewController
-@synthesize state = _state, delegate, selectedButton = _selectedButton, smartBarItem = _smartBarItem;
+@synthesize state = _state, delegate, selectedButton = _selectedButton, smartBarItem = _smartBarItem, mainButton;
 
 #pragma mark -
 #pragma mark init and dealloc

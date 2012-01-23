@@ -45,6 +45,8 @@
     IBOutlet RAAddressFieldBox *addressBox; 
     IBOutlet NSView *addressBarView;
     
+    RANSURLDownloadDelegate *downloadDL;
+    
     RATabView *_tabView;  
     
     BOOL _newTab; 
@@ -59,7 +61,7 @@
     int doComeFromHistoryOrBookmark;    
 }
 -(id)initWithDelegate:(id<RAWebViewControllerDelegate>)dgate;
-
+-(void)configureWebView; 
 //Bouton action method
 -(IBAction)go:(id)sender; 
 -(IBAction)mobile:(id)sender;
@@ -89,6 +91,7 @@
 -(void)downloadFavicon:(id)sender; 
 -(void)updateFaviconUI:(id)sender; 
 -(void)saveHistory:(id)sender;
+
 
 //internal
 -(void)setWebViewBackground;

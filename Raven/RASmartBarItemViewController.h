@@ -71,6 +71,7 @@
 
 @property (nonatomic, assign) id<RASmartBarViewItemControllerDelegate> delegate;
 @property (nonatomic, retain) RASmartBarItem *smartBarItem; 
+@property (nonatomic, retain) RASBAPPMainButton *mainButton; 
 @property NSInteger selectedButton;
 @property NSInteger state;
 

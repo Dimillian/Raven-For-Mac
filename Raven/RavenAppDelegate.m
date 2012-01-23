@@ -82,6 +82,9 @@
             if ([standardUserDefaults objectForKey:OPEN_ALL_APP_ON_WINDOW_OPEN] == nil) {
                 [standardUserDefaults setInteger:0 forKey:OPEN_ALL_APP_ON_WINDOW_OPEN]; 
             }
+            if ([standardUserDefaults objectForKey:OPEN_POPUP_IN_TAB] == nil) {
+                [standardUserDefaults setInteger:1 forKey:OPEN_POPUP_IN_TAB]; 
+            }
             //We use this key to define default webpreference setting
             //Only done one time at first launch
             if ([standardUserDefaults objectForKey:JAVA_WEBVIEW] == nil) {

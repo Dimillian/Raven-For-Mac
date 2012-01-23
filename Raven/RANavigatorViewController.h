@@ -44,7 +44,7 @@
     BOOL inBackground;
     BOOL isAdressBarHidden; 
     BOOL askForNewWindow; 
-    BOOL cmdKey; 
+    BOOL cmdKeyPressed; 
 }
 
 -(IBAction)addtabs:(id)sender;
@@ -68,11 +68,14 @@
 -(BOOL)firstTimeLaunch;
 -(BOOL)shouldOpenBaseUrl; 
 -(BOOL)shouldOpenInBackground:(id)sender; 
+-(BOOL)isRATabItem:(id)sender; 
+-(BOOL)shouldOpenPopupInTab; 
 
 @property int fromOtherViews;
 @property (nonatomic, copy) NSString *PassedUrl;
 @property (nonatomic, copy) NSString *baseUrl;
 @property (nonatomic, assign) NSMutableArray *tabsArray; 
+@property (getter = isCmdKeyPressed) BOOL cmdKeyPressed; 
 
 
 

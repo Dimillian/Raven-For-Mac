@@ -36,10 +36,10 @@
         self.index = plistIndex;
         NSImage *mainImage = [[NSImage alloc]initByReferencingFile:
                               [[NSString stringWithFormat:application_support_path@"%@/main.png", self.folder]stringByExpandingTildeInPath]];
-        self.mainIcon = mainImage;
+        _mainIcon = mainImage;
         NSImage *mainImageBig = [[NSImage alloc]initByReferencingFile:
                                  [[NSString stringWithFormat:application_support_path@"%@/main_big.png", self.folder]stringByExpandingTildeInPath]];
-        self.mainIconBig = mainImageBig; 
+        _mainIconBig = mainImageBig; 
         _URLArray = [[dictionnary objectForKey:PLIST_KEY_URL]mutableCopy];
         _navigatorViewControllerArray = [[NSMutableArray alloc]init]; 
         _buttonImageArrayOn = [[NSMutableArray alloc]init]; 
@@ -73,8 +73,6 @@
         NSURL *URL = [NSURL URLWithString:[_URLArray objectAtIndex:0]];
         self.context = [URL host];
         self.internalAppUrl = [NSString stringWithFormat:@"%@://", _appName]; 
-        [mainImage release]; 
-        [mainImageBig release];
     }
     
     return self; 

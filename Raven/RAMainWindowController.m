@@ -39,7 +39,7 @@
 
 
 @implementation RAMainWindowController
-@synthesize passedUrl, navigatorview, downloadButton, centeredView, myCurrentViewController, appList, delegate, animated, hidden, adressBarHidden;
+@synthesize passedUrl, navigatorview, downloadButton, centeredView, myCurrentViewController, appList, delegate, animated, hidden, adressBarHidden, smartBarScrollViewContentView;
 #pragma mark -
 #pragma mark init and close
 - (id)initWithWindow:(NSWindow *)window
@@ -362,7 +362,7 @@
         [appList addObject:smartApp]; 
         [[appList objectAtIndex:x]view];
         if (smartApp.smartBarItem.isVisible) {
-            [rightView addSubview:[[appList objectAtIndex:x]view]];
+            [smartBarScrollViewContentView addSubview:[[appList objectAtIndex:x]view]];
             [smartApp onOtherAppClick:nil];
         }
         x+=1;
@@ -418,11 +418,11 @@
     }
     NSInteger totalSize = initial_position + (count * retracted_app_height);
     if ((totalSize + 60) < self.window.frame.size.height) {
-        [rightView setFrameSize:NSMakeSize(rightView.frame.size.width, self.window.frame.size.height - bottom_bar_size)];
+        [smartBarScrollViewContentView setFrameSize:NSMakeSize(smartBarScrollViewContentView.frame.size.width, self.window.frame.size.height - bottom_bar_size)];
     }
     else
     {
-        [rightView setFrameSize:NSMakeSize(rightView.frame.size.width, 
+        [smartBarScrollViewContentView setFrameSize:NSMakeSize(smartBarScrollViewContentView.frame.size.width, 
                                            bottom_bar_size_little + self.window.frame.size.height + (totalSize - self.window.frame.size.height))];
     }
     
@@ -440,7 +440,7 @@
                                                                                 andRASmartBarItem:smartBarItem];
     [appList addObject:smartApp]; 
     [[appList lastObject]view];
-    [rightView addSubview:[[appList lastObject]view]];
+    [smartBarScrollViewContentView addSubview:[[appList lastObject]view]];
     [smartApp onOtherAppClick:nil];
     [smartApp release]; 
     [smartBarItem release]; 
@@ -459,13 +459,13 @@
         RASmartBarItemViewController *smartApp = [appList objectAtIndex:x];
         if (smartApp.smartBarItem.isVisible) {
             if (animate) {
-                [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, rightView.frame.size.height - initial_app_space - (retracted_app_height*y), app_view_w, app_view_h)];
+                [[[smartApp view]animator]setFrame:NSMakeRect(app_position_x, smartBarScrollViewContentView.frame.size.height - initial_app_space - (retracted_app_height*y), app_view_w, app_view_h)];
                 if (smartApp.state == 1) {
                     [smartApp onOtherAppClick:nil]; 
                 } 
             }
             else{
-                [[smartApp view]setFrame:NSMakeRect(app_position_x, rightView.frame.size.height - initial_app_space - (retracted_app_height*y), app_view_w, app_view_h)];
+                [[smartApp view]setFrame:NSMakeRect(app_position_x, smartBarScrollViewContentView.frame.size.height - initial_app_space - (retracted_app_height*y), app_view_w, app_view_h)];
                 if (smartApp.state == 1) {
                     [smartApp onOtherAppClick:nil]; 
                 } 
@@ -665,7 +665,7 @@
     [self resetIndex];
     RAlistManager *listManager = [RAlistManager sharedUser];
     [listManager changeStateOfAppAtIndex:index withState:1];
-    [rightView addSubview:smarBarApp.view]; 
+    [smartBarScrollViewContentView addSubview:smarBarApp.view]; 
 }
 
 -(void)hideAppAtIndex:(NSUInteger)index
@@ -967,11 +967,11 @@
             [bookmarkButton setEnabled:NO];
             [[downloadButton animator]setAlphaValue:0.0]; 
             [downloadButton setEnabled:NO];
-            [[homeButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -65, 32, 32)];
+            [[homeButton animator ]setFrame:NSMakeRect(16, smartBarScrollViewContentView.frame.size.height -65, 32, 32)];
             [[firstButtonNumber animator]setAlphaValue:0.0];
-            [[historyButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -65, 32, 32)];
-            [[bookmarkButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -65, 32, 32)];
-            [[downloadButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -65, 32, 32)];
+            [[historyButton animator ]setFrame:NSMakeRect(16, smartBarScrollViewContentView.frame.size.height -65, 32, 32)];
+            [[bookmarkButton animator ]setFrame:NSMakeRect(16, smartBarScrollViewContentView.frame.size.height -65, 32, 32)];
+            [[downloadButton animator ]setFrame:NSMakeRect(16, smartBarScrollViewContentView.frame.size.height -65, 32, 32)];
             
             break;
         case 13:
@@ -984,12 +984,12 @@
             [bookmarkButton setEnabled:YES];
             [[downloadButton animator]setAlphaValue:1.0];
             [downloadButton setEnabled:YES];
-            [[homeButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -115, 32, 32)];
-            [[firstButtonNumber animator]setFrame:NSMakeRect(16, rightView.frame.size.height -131, button_w, number_h)];
+            [[homeButton animator ]setFrame:NSMakeRect(16, smartBarScrollViewContentView.frame.size.height -115, 32, 32)];
+            [[firstButtonNumber animator]setFrame:NSMakeRect(16, smartBarScrollViewContentView.frame.size.height -131, button_w, number_h)];
             [[firstButtonNumber animator]setAlphaValue:1.0];
-            [[historyButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -165, 32, 32)];
-            [[bookmarkButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -215, 32, 32)];
-            [[downloadButton animator ]setFrame:NSMakeRect(16, rightView.frame.size.height -265, 32, 32)]; 
+            [[historyButton animator ]setFrame:NSMakeRect(16, smartBarScrollViewContentView.frame.size.height -165, 32, 32)];
+            [[bookmarkButton animator ]setFrame:NSMakeRect(16, smartBarScrollViewContentView.frame.size.height -215, 32, 32)];
+            [[downloadButton animator ]setFrame:NSMakeRect(16, smartBarScrollViewContentView.frame.size.height -265, 32, 32)]; 
             default:
             break;
     }

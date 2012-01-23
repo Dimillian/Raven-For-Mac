@@ -43,6 +43,7 @@
 #define WEBPREFERENCE_DEFAULT @"webPreferenceDefaultIsSet"
 #define OPEN_NEW_TAB_BASE_URL @"openNewTabWithBaseUrl"
 #define OPEN_ALL_APP_ON_WINDOW_OPEN @"openAllAppOnWindowOpen"
+#define OPEN_POPUP_IN_TAB @"openPopupInTab"
 
 //notifications
 #define DOWNLOAD_BEGIN @"downloadDidBegin"

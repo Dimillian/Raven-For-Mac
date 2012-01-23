@@ -43,7 +43,7 @@
     
     
     //The view under the smart bar, later texture will be applied
-    IBOutlet NSView *rightView;  
+    IBOutlet NSView *smartBarScrollViewContentView;  
     
     //keep the navigation mode (need to switch to enum)
     NSUInteger *mode; 
@@ -134,6 +134,7 @@
 @property (assign) NSButton *downloadButton; 
 @property (assign) NSView *centeredView;
 @property (assign) NSViewController *myCurrentViewController;
+@property (nonatomic, retain) NSView *smartBarScrollViewContentView;  
 @property (nonatomic, assign) NSMutableArray *appList;
 @property (nonatomic, getter = isAnimated) BOOL animated;
 @property (nonatomic, getter = isHidden) BOOL hidden;

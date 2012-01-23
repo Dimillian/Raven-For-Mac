@@ -73,17 +73,9 @@
     [self setDoRegisterHistory:2];
     //Hide the stop loading button
     [stopLoading setHidden:YES];
-    [webview setContinuousSpellCheckingEnabled:YES]; 
     //Setup the delegate of the webview
-    RANSURLDownloadDelegate *downloadDL = [[RANSURLDownloadDelegate alloc]init]; 
-    [webview setDownloadDelegate:downloadDL]; 
-    [webview setShouldCloseWithWindow:YES]; 
-    [address setDelegate:self]; 
-    [webview setUIDelegate:self];
-    [webview setResourceLoadDelegate:self]; 
-    [webview setFrameLoadDelegate:self]; 
-    [webview setPolicyDelegate:self]; 
-    [webview setMaintainsBackForwardList:YES]; 
+    downloadDL = [[RANSURLDownloadDelegate alloc]init]; 
+    [self configureWebView];
     NSImage *homeicon = [NSImage imageNamed:@"welcome-favicon.png"]; 
     
     [temp setImage:homeicon];     
@@ -103,6 +95,19 @@
     
     //[webview displayGrowlNotification]; 
      
+}
+
+-(void)configureWebView
+{
+     [webview setContinuousSpellCheckingEnabled:YES]; 
+    [webview setDownloadDelegate:downloadDL]; 
+    [webview setShouldCloseWithWindow:YES]; 
+    [address setDelegate:self]; 
+    [webview setUIDelegate:self];
+    [webview setResourceLoadDelegate:self]; 
+    [webview setFrameLoadDelegate:self]; 
+    [webview setPolicyDelegate:self]; 
+    [webview setMaintainsBackForwardList:YES]; 
 }
 
 -(void)setWebViewBackground
@@ -561,10 +566,8 @@
         [[temp animator]setAlphaValue:0.0];
         [self.tabView startLoading]; 
         [progressMain setHidden:NO]; 
-        [progressMain setControlSize:NSMiniControlSize]; 
-        
+        [progressMain setControlSize:NSMiniControlSize];
     }
-    
 }
 
 //Call when webview really did start loading
@@ -687,6 +690,7 @@
     [webview release], webview = nil;
     [fPanelArray release]; 
     [_tabView release]; 
+    [downloadDL release]; 
     [super dealloc];
 }
 

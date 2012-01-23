@@ -119,6 +119,7 @@
     CGFloat x_base_iconview = 0; 
     if (cellArray.count <= 4)
     {
+        //Dirty center is less than 5 icons
         float substrate = 40; 
         for (NSUInteger i = 0; i<cellArray.count; i++) {
             if (i!=0) {
