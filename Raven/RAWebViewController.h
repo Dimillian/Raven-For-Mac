@@ -60,7 +60,7 @@
     int doRegisterHistory;
     int doComeFromHistoryOrBookmark;    
 }
--(id)initWithDelegate:(id<RAWebViewControllerDelegate>)dgate;
+-(id)initWithDelegate:(id<RAWebViewControllerDelegate>)dgate andTabView:(RATabView *)tabView;
 -(void)configureWebView; 
 //Bouton action method
 -(IBAction)go:(id)sender; 

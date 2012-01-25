@@ -63,7 +63,6 @@
 -(void)redrawTabs:(BOOL)fromWindow;
 -(void)hideTabHolder; 
 -(void)setMenu; 
-//method
 -(void)resetAllTabsButon; 
 -(BOOL)firstTimeLaunch;
 -(BOOL)shouldOpenBaseUrl; 

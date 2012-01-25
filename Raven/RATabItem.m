@@ -16,9 +16,10 @@
 {
     self = [super init]; 
     if(self){
-        _webViewController = [[RAWebViewController alloc]initWithDelegate:self]; 
-        _tabView = _webViewController.tabView; 
+        _tabView = [[RATabView alloc]initWithNibName:@"RATabView" bundle:nil]; 
         [_tabView setDelegate:self]; 
+        _webViewController = [[RAWebViewController alloc]initWithDelegate:self andTabView:_tabView]; 
+
     }
     return self; 
 }
@@ -26,6 +27,7 @@
 
 -(void)dealloc
 {
+    [_tabView release]; 
     [_webViewController release]; 
     [super dealloc]; 
 }
@@ -44,17 +46,15 @@
 
 -(void)prepareTabClose
 {
+    [[self.webViewController webview]setUIDelegate:nil]; 
+    [[self.tabView view]setAlphaValue:0.0]; 
+    [[self.tabView view]removeFromSuperview];
     [self.webViewController view];
     [self.webViewController setDelegate:nil];
-    [[self.webViewController webview]setHostWindow:nil];
-    [[self.webViewController webview]setUIDelegate:nil]; 
     [[self.webViewController webview]setPolicyDelegate:nil];
     [[self.webViewController webview]stopLoading:[self.webViewController webview]];
-    [[[self.webViewController view]animator]setAlphaValue:0.0]; 
-    [[self.webViewController view]removeFromSuperview];
-    [[[self.tabView view]animator]setAlphaValue:0.0]; 
-    [[self.tabView view]removeFromSuperview];
     [[self.webViewController webview]removeFromSuperview];
+    [[self.webViewController view]removeFromSuperview];
 }
 
 #pragma mark -

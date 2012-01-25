@@ -102,7 +102,6 @@
         [self goBack];
     }
     
-    
 }
 
 - (void)updateTrackingAreas
@@ -130,7 +129,6 @@
     RAMainWindowController *controller = [[self window]windowController];
     [controller hideSideBar];
 }
-
 
 
 - (void)dealloc

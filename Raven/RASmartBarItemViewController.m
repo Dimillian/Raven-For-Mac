@@ -59,7 +59,7 @@
     {
         [self initWithNibName:@"RASmartBarItemViewController" bundle:nil]; 
         delegate = dgate;
-        self.smartBarItem = item;
+        _smartBarItem = [item retain];
         buttonArray = [[NSMutableArray alloc]init];
         tabNumberFieldArray = [[NSMutableArray alloc]init];
     }

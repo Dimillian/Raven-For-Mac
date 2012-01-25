@@ -31,7 +31,8 @@
 -(void)sendHideDelegate:(id)sender; 
 -(void)displayDraggingMod; 
 -(void)displayNormalMod; 
--(void)moveToLocation:(NSPoint)location withInitialMousePosition:(NSPoint)position; 
+-(void)moveToLocation:(NSPoint)location withInitialMousePosition:(NSPoint)position;
+-(NSInteger)indexOfItemForPoint:(NSPoint)point; 
 -(void)popupMenuWithLocation:(NSPoint)location; 
 -(void)setHideAfterDragginOperation:(BOOL)op; 
 -(NSMenu *)getMenu; 

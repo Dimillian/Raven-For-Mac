@@ -28,18 +28,16 @@
     self = [super init]; 
     if (self != nil) {
 
-        self.appName = [dictionnary objectForKey:PLIST_KEY_APPNAME]; 
-        self.folder = [dictionnary objectForKey:PLIST_KEY_FOLDER]; 
-        self.category = [dictionnary objectForKey:PLIST_KEY_CATEGORY]; 
-        self.makerName = [dictionnary objectForKey:PLIST_KEY_OFFICIAL]; 
-        self.visible = [[dictionnary objectForKey:PLIST_KEY_ENABLE]intValue];
-        self.index = plistIndex;
-        NSImage *mainImage = [[NSImage alloc]initByReferencingFile:
-                              [[NSString stringWithFormat:application_support_path@"%@/main.png", self.folder]stringByExpandingTildeInPath]];
-        _mainIcon = mainImage;
-        NSImage *mainImageBig = [[NSImage alloc]initByReferencingFile:
-                                 [[NSString stringWithFormat:application_support_path@"%@/main_big.png", self.folder]stringByExpandingTildeInPath]];
-        _mainIconBig = mainImageBig; 
+        _appName = [[dictionnary objectForKey:PLIST_KEY_APPNAME]retain]; 
+        _folder = [[dictionnary objectForKey:PLIST_KEY_FOLDER]retain]; 
+        _category = [[dictionnary objectForKey:PLIST_KEY_CATEGORY]retain]; 
+        _makerName = [[dictionnary objectForKey:PLIST_KEY_OFFICIAL]retain]; 
+        _visible = [[dictionnary objectForKey:PLIST_KEY_ENABLE]intValue];
+        _index = plistIndex;
+        _mainIcon = [[NSImage alloc]initByReferencingFile:
+                     [[NSString stringWithFormat:application_support_path@"%@/main.png", self.folder]stringByExpandingTildeInPath]];;
+        _mainIconBig = [[NSImage alloc]initByReferencingFile:
+                        [[NSString stringWithFormat:application_support_path@"%@/main_big.png", self.folder]stringByExpandingTildeInPath]];; 
         _URLArray = [[dictionnary objectForKey:PLIST_KEY_URL]mutableCopy];
         _navigatorViewControllerArray = [[NSMutableArray alloc]init]; 
         _buttonImageArrayOn = [[NSMutableArray alloc]init]; 
@@ -70,9 +68,10 @@
             i++;
         }
         
-        NSURL *URL = [NSURL URLWithString:[_URLArray objectAtIndex:0]];
-        self.context = [URL host];
-        self.internalAppUrl = [NSString stringWithFormat:@"%@://", _appName]; 
+        NSURL *url = [[NSURL alloc]initWithString:[_URLArray objectAtIndex:0]];
+        _context = [url host]; 
+        [url release];
+        _internalAppUrl = [[NSString alloc]initWithFormat:@"%@://", _appName]; 
     }
     
     return self; 
@@ -126,8 +125,9 @@
 }
 -(void)dealloc
 {
+    [_category release]; 
+    [_makerName release]; 
     [_URLArray release]; 
-    [_context release]; 
     [_navigatorViewControllerArray release]; 
     [_buttonImageArrayOn release]; 
     [_buttonImageArrayOff release]; 

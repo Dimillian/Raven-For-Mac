@@ -512,13 +512,11 @@
     [self setTabSelectedState]; 
 }
 
-//do all the memory clean up stuff here, it might be better to switch it within the RAWebview itself
 -(void)tabItemWillClose:(RATabItem *)tab{
     NSInteger tag = [_tabsArray indexOfObject:tab];
     //The current webview remove
     RATabItem *clickedtab = [_tabsArray objectAtIndex:tag];
     [clickedtab prepareTabClose]; 
-    [[clickedtab.webViewController webview]removeFromSuperview];
     if (tag == 0 && tag == [tabController indexOfTabViewItem:
                             [tabController selectedTabViewItem]]) {
         if ([_tabsArray count] == 1) {
@@ -615,7 +613,9 @@
 
 - (void)webView:(WebView *)webView decidePolicyForMIMEType:(NSString *)type request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener
 {
-    if ([type hasPrefix:@"application"] && ![type isEqualToString:@"application/x-javascript"]) {
+    if ([type hasPrefix:@"application"] && 
+        ![type isEqualToString:@"application/x-javascript"] &&
+        ![type isEqualToString:@"application/xml"]) {
         RANSURLDownloadDelegate *dlDelegate = [[RANSURLDownloadDelegate alloc]init];
         NSURLDownload  *theDownload = [[NSURLDownload alloc] initWithRequest:request
                                                                 delegate:dlDelegate];
@@ -804,7 +804,6 @@
 #pragma -
 #pragma mark memory management
 
-//Bad memory maanagement for now ! 
 - (void)dealloc
 {   
     for (RATabItem *newtab in _tabsArray) {

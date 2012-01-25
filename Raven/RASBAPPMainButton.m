@@ -8,6 +8,8 @@
 
 #import "RASBAPPMainButton.h"
 #import <math.h>
+#import "RAMainWindowController.h"
+#import "RASmartBarItemViewController.h"
 #define drop_height 60
 #define mouse_in_icon 25
 
@@ -65,6 +67,7 @@
 -(void)mouseEntered:(NSEvent *)theEvent
 {
     [self performSelector:@selector(sendMouseEntered:) withObject:nil afterDelay:0.5f];
+    //[self indexOfItemForPoint:[self convertPoint:[theEvent locationInWindow] fromView:nil]];  
     [delegate mouseDidEntered:self]; 
     [super mouseEntered:theEvent]; 
 }
@@ -75,6 +78,7 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [super mouseExited:theEvent]; 
 }
+
 
 -(void)mouseDown:(NSEvent *)theEvent
 {
@@ -132,10 +136,24 @@
 
 }
 
+-(NSInteger)indexOfItemForPoint:(NSPoint)point
+{
+    NSInteger index = 0; 
+    RAMainWindowController *mainWC = [[self window]windowController]; 
+    for (RASmartBarItemViewController *item in mainWC.appList) {
+        if ([self mouse:point inRect:item.mainButton.frame]) {
+            index = [mainWC.appList indexOfObject:item]; 
+            break; 
+        }
+    }
+    return index; 
+}
+
 //Need to review the formula, compare previous with new location and see how many time 60 fit in the rest. 
 //Then send the delegate X time, X is the rest
 -(void)moveToLocation:(NSPoint)location withInitialMousePosition:(NSPoint)position
 {
+    //[self indexOfItemForPoint:location]; 
     isDragging = YES; 
     if (isDragging) {
         //down

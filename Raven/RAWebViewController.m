@@ -35,20 +35,21 @@
     if (self !=nil)
     {
         [self initWithNibName:@"NavigatorNoBottom" bundle:nil];
+        
         _tabView = [[RATabView alloc]initWithNibName:@"RATabView" bundle:nil]; 
     }
     
     return self; 
 }
 
--(id)initWithDelegate:(id<RAWebViewControllerDelegate>)dgate
+-(id)initWithDelegate:(id<RAWebViewControllerDelegate>)dgate andTabView:(RATabView *)tabView
 {
     self = [super init]; 
     if (self !=nil)
     {
         [self initWithNibName:@"NavigatorNoBottom" bundle:nil]; 
         self.delegate = dgate;
-        _tabView = [[RATabView alloc]initWithNibName:@"RATabView" bundle:nil]; 
+        _tabView = [tabView retain]; 
     }
     
     return self;  
@@ -67,7 +68,6 @@
 -(void)awakeFromNib
 {  
     [webview setPreferencesIdentifier:@"PreferenceWeb"]; 
-  
     [self setDesktopUserAgent];
     //register history item
     [self setDoRegisterHistory:2];
@@ -99,7 +99,7 @@
 
 -(void)configureWebView
 {
-     [webview setContinuousSpellCheckingEnabled:YES]; 
+    [webview setContinuousSpellCheckingEnabled:YES]; 
     [webview setDownloadDelegate:downloadDL]; 
     [webview setShouldCloseWithWindow:YES]; 
     [address setDelegate:self]; 
@@ -429,15 +429,14 @@
 -(void)downloadFavicon:(id)sender
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSString *URL = [webview mainFrameURL];
     NSString *URLPrefix; 
-    if ([URL hasPrefix:@"https"]) {
+    if ([[webview mainFrameURL]hasPrefix:@"https"]) {
         URLPrefix = RAHTTPSPREFIX;
     }
     else{
         URLPrefix = RAHTTPPREFIX;
     }
-    URL = [[NSURL URLWithString:URL]host];
+    NSString *URL = [[NSURL URLWithString:webview.mainFrameURL]host];
     NSError * error;
     NSString * html = [NSString stringWithContentsOfURL:
                        [NSURL URLWithString:
@@ -679,18 +678,16 @@
 //Bad memory maanagement for now ! 
 - (void)dealloc
 {  
-    
     [webview stopLoading:webview]; 
     [webview setUIDelegate:nil];
     [webview setDownloadDelegate:nil]; 
     [webview setResourceLoadDelegate:nil]; 
     [webview setFrameLoadDelegate:nil];
     [webview setPolicyDelegate:nil]; 
-    [webview removeFromSuperview];
     [webview release], webview = nil;
-    [fPanelArray release]; 
-    [_tabView release]; 
+    [fPanelArray release];
     [downloadDL release]; 
+    [_tabView release]; 
     [super dealloc];
 }
 
