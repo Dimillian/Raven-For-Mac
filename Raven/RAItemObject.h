@@ -8,11 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
-
-
-
 @interface RAItemObject : NSObject  {
-    
     int _udid; 
     int _type; 
     NSString *_title; 

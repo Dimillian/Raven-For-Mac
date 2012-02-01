@@ -220,7 +220,7 @@
 
     
     shelfView = 
-    [[RAGridView alloc]initWithNibName:@"RAGridView" bundle:nil]; 
+    [[RALibraryScreen alloc]initWithNibName:@"RALibraryScreen" bundle:nil]; 
     
     
     previousIndex = -1;
@@ -900,7 +900,7 @@
         {
             
             myCurrentViewController = shelfView;
-            [shelfView reDrawView]; 
+            [shelfView.gridView redraw]; 
             
             
         }

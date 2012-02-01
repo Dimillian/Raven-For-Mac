@@ -9,22 +9,22 @@
 #import <Cocoa/Cocoa.h>
 #import "RAGridViewCell.h"
 #import "RAGridViewContentView.h"
+#import "RAGridScrollView.h"
 
 @class RAMainWindowController;
-@interface RAGridView : NSViewController <NSCollectionViewDelegate, RAGridViewCellDelegate, NSWindowDelegate>
+@interface RALibraryScreen : NSViewController <NSCollectionViewDelegate, NSWindowDelegate, RAGridScrollViewDelegate, RAGridViewDataSource>
 {
-    IBOutlet NSScrollView *scrollView; 
-    IBOutlet RAGridViewContentView *contentView; 
+    IBOutlet RAGridScrollView *gridView; 
     IBOutlet NSButton *toggleEditButton; 
     IBOutlet NSSegmentedControl *selectorButton;
     NSMutableArray *cellArray; 
     RAMainWindowController *mainWindow; 
      
 }
--(CGFloat)getXbase; 
+
+@property (nonatomic, retain) RAGridScrollView *gridView; 
 -(void)resetView; 
 -(void)receiveNotification:(NSNotification *)notification;
--(void)reDrawView;
 -(void)deleteItem:(RASmartBarItem *)item; 
 
 -(IBAction)toggleEditPressed:(id)sender; 

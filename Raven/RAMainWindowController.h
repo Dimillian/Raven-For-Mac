@@ -23,7 +23,7 @@
 #import "RASmartBarItem.h"
 #import "Growl/Growl.h"
 #import "Growl/GrowlApplicationBridge.h"
-#import "RAGridView.h"
+#import "RALibraryScreen.h"
 
 
 @protocol RAMainDelegate; 
@@ -75,7 +75,7 @@
     RAHistoryViewController *historyviewcontroller;
     RABookmarkViewController *bookmarkview;
     RADownloadViewController *downloadview; 
-    RAGridView *shelfView; 
+    RALibraryScreen *shelfView; 
     
     
     IBOutlet NSView *titleBar;

@@ -9,7 +9,7 @@
 #import "RAGridViewCell.h"
 
 @implementation RAGridViewCell
-@synthesize delegate; 
+@synthesize delegate, data; 
 
 #pragma mark - init and dealloc
 - (id)initWithFrame:(NSRect)frame
@@ -168,17 +168,17 @@
 #pragma mark - delegate
 -(void)closeButtonClicked:(id)sender
 {
-    [delegate onCloseButtonClick:data]; 
+    [delegate onCloseButtonClick:self]; 
 }
 
 -(void)removeButtonClicked:(id)sender
 {
-    [delegate onRemoveButtonClick:data];
+    [delegate onRemoveButtonClick:self];
 }
 
 -(void)addButtonClicked:(id)sender
 {
-    [delegate onAddButtonClick:data];
+    [delegate onAddButtonClick:self];
 }
 
 
@@ -210,7 +210,7 @@
 
 -(void)mouseDown:(NSEvent *)theEvent
 {
-    [delegate onMouseDown:data];
+    [delegate onMouseDown:self];
     [self enableOverlay:NO]; 
     [super mouseDown:theEvent]; 
 }

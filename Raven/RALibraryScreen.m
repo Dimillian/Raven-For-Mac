@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "RAGridView.h"
+#import "RALibraryScreen.h"
 #import "RAMainWindowController.h"
 #import "RASmartBarItem.h"
 #import "RASmartBarItemViewController.h"
@@ -14,23 +14,15 @@
 #import "RAlistManager.h"
 #import "RavenAppDelegate.h"
 
-#define top_margin 50
-#define left_margin 0; 
-#define x_space 200; 
-#define y_space 150; 
-#define content_view_width 925
-#define icon_per_row 5
-#define scroller_size 10
-#define less_than_five_icon_diviser 2.2
-#define icon_less_five_dist 90
-
-@implementation RAGridView
-
+@implementation RALibraryScreen
+@synthesize gridView; 
 #pragma mark - init
 -(void)awakeFromNib
 {
     mainWindow = [[NSApp keyWindow]windowController]; 
     [self.view setFrameSize:mainWindow.window.frame.size]; 
+    [gridView setDataSource:self]; 
+    [gridView setDelegate:self]; 
     [selectorButton setSelectedSegment:1]; 
     [[NSNotificationCenter defaultCenter]addObserver:self 
                                             selector:@selector(receiveNotification:) 
@@ -38,17 +30,18 @@
                                               object:nil];
     
     
-    [[NSNotificationCenter defaultCenter]addObserver:self 
-                                            selector:@selector(reDrawView) 
+    [[NSNotificationCenter defaultCenter]addObserver:gridView 
+                                            selector:@selector(redraw) 
                                                 name:NSWindowDidResizeNotification 
                                               object:nil];
-    [self resetView];
-    [self reDrawView]; 
-    
+    [self resetView]; 
+    [gridView redraw]; 
 }
 
 
 -(void)dealloc{
+    [gridView setDataSource:nil]; 
+    [gridView setDelegate:nil]; 
     [[NSNotificationCenter defaultCenter]removeObserver:self]; 
     [cellArray release]; 
     [super dealloc]; 
@@ -57,7 +50,7 @@
 -(void)receiveNotification:(NSNotification *)notification
 {
     [self resetView];
-    [self reDrawView];
+    [gridView redraw]; 
 }
 
 -(void)resetView
@@ -73,68 +66,19 @@
     cellArray = [[NSMutableArray alloc]init]; 
     for (RASmartBarItemViewController *item in mainWindow.appList) {
         RAGridViewCell *cell = [[RAGridViewCell alloc]initWithItem:item.smartBarItem];
+        [cell setDelegate:gridView]; 
         if (selectorButton.selectedSegment == 0) {
             if (item.smartBarItem.isVisible) {
                 [cellArray addObject:cell];
-                [contentView addSubview:cell]; 
             }
         }
         else{
             [cellArray addObject:cell];
-            [contentView addSubview:cell]; 
         }
-        [cell setDelegate:self];
         [cell release]; 
     }
 }
 
-#pragma mark - drawing
--(void)reDrawView
-{
-    NSInteger row = 0;  
-    CGFloat h = top_margin; 
-    CGFloat x_iconView = [self getXbase]; 
-    for (RAGridViewCell *cell in cellArray) {
-        [cell setFrameOrigin:NSMakePoint(x_iconView, h)];
-        x_iconView = x_iconView + x_space; 
-        row = row +1;
-        if (row == icon_per_row) {
-            h = h + y_space;
-            x_iconView = [self getXbase]; 
-            row = 0; 
-        }
-    }
-    h = h + y_space;
-    CGFloat final_h = 0; 
-    CGFloat final_w = 0; 
-    
-    (scrollView.frame.size.height < h) ? (final_h = h + top_margin) : (final_h = scrollView.frame.size.height - scroller_size); 
-    (scrollView.frame.size.width < content_view_width) ? (final_w = content_view_width) : (final_w = scrollView.frame.size.width - scroller_size);
-    
-    [contentView setFrameSize:NSMakeSize(final_w, final_h)]; 
-}
-
--(CGFloat)getXbase
-{
-    CGFloat x_base_iconview = 0; 
-    if (cellArray.count <= 4)
-    {
-        //Dirty center is less than 5 icons
-        float substrate = 40; 
-        for (NSUInteger i = 0; i<cellArray.count; i++) {
-            if (i!=0) {
-                substrate = substrate + icon_less_five_dist; 
-            }
-            x_base_iconview = scrollView.frame.size.width/less_than_five_icon_diviser - substrate;
-        }
-    }
-    else{
-        if (scrollView.frame.size.width > content_view_width) {
-            x_base_iconview = (scrollView.frame.size.width - content_view_width)/2;
-        }
-    }
-    return x_base_iconview; 
-}
 
 #pragma mark - IB action
 
@@ -152,8 +96,8 @@
 
 -(IBAction)selectorButtonPressed:(id)sender
 {
-    [self resetView]; 
-    [self reDrawView];
+    [self resetView];
+    [gridView redraw]; 
     [self toggleEditPressed:toggleEditButton]; 
 }
 
@@ -190,32 +134,47 @@
     }
 }
 
-
-#pragma mark - RAGridViewCellDelegate
-
--(void)onCloseButtonClick:(RASmartBarItem *)item
+#pragma mark - RAGridViewDataSource
+-(NSInteger)numberOfCell
 {
-    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_HIDDEN object:item];
+    return cellArray.count; 
+}
+
+-(NSInteger)numberofCellPerRow
+{
+    return 5; 
+}
+
+-(RAGridViewCell *)cellForIndex:(NSInteger)index
+{
+    return [cellArray objectAtIndex:index]; 
+}
+
+#pragma mark - RAGridViewDelegate
+
+-(void)didClickOnCellCloseButton:(RAGridViewCell *)cell
+{
+    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_HIDDEN object:cell.data];
     [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
 }
 
--(void)onRemoveButtonClick:(RASmartBarItem *)item
+-(void)didClickOnCellRemoveButton:(RAGridViewCell *)cell
 {
-    [self deleteItem:item]; 
+    [self deleteItem:cell.data]; 
 }
 
--(void)onAddButtonClick:(RASmartBarItem *)item
+-(void)didClickOnCellAddButton:(RAGridViewCell *)cell
 {
-    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_SHOW object:item];
+    [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE_ITEM_SHOW object:cell.data];
     [[NSNotificationCenter defaultCenter]postNotificationName:SMART_BAR_UPDATE object:nil];
-    [self performSelector:@selector(onMouseDown:) withObject:item afterDelay:0.5f];
+    [self performSelector:@selector(didMouseDownOnCell:) withObject:cell afterDelay:0.5f];
     
 
 }
 
--(void)onMouseDown:(RASmartBarItem *)item
+-(void)didMouseDownOnCell:(RAGridViewCell *)cell
 {
-    RASmartBarItemViewController *itemView = [mainWindow.appList objectAtIndex:item.index]; 
+    RASmartBarItemViewController *itemView = [mainWindow.appList objectAtIndex:cell.data.index]; 
     [itemView onMainButtonClick:nil]; 
 }
 

@@ -318,6 +318,7 @@
 		9FDF1CEB146D201B009D3DAE /* chromedefault in Resources */ = {isa = PBXBuildFile; fileRef = 9FDF1CEA146D201B009D3DAE /* chromedefault */; };
 		9FE5DE3D1434A77D003614C3 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE5DE3B1434A77D003614C3 /* down.png */; };
 		9FE5DE3E1434A77D003614C3 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE5DE3C1434A77D003614C3 /* up.png */; };
+		9FEA51E914D984AE00D61BF3 /* RAGridScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEA51E814D984AD00D61BF3 /* RAGridScrollView.m */; };
 		9FEF2AAB147EEB26007BC286 /* RATabPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF2AAA147EEB26007BC286 /* RATabPlaceholderView.m */; };
 		9FEF2AAF147EEF19007BC286 /* RASBAPPMainButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF2AAE147EEF19007BC286 /* RASBAPPMainButton.m */; };
 		9FEF2AB8147F8D82007BC286 /* RASmartBarHolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF2AB7147F8D82007BC286 /* RASmartBarHolderView.m */; };
@@ -325,8 +326,8 @@
 		9FEF7D3C147514CF006ADC7B /* RACookieWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF7D3B147514CF006ADC7B /* RACookieWindowController.m */; };
 		9FEF7D3F147514F9006ADC7B /* RACookieWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FEF7D3E147514F9006ADC7B /* RACookieWindow.xib */; };
 		9FF1017E13CCF03500B8F942 /* RATabFaviconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */; };
-		9FF2D46D1493975100A5CE48 /* RAGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2D46B1493975100A5CE48 /* RAGridView.m */; };
-		9FF2D46E1493975100A5CE48 /* RAGridView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FF2D46C1493975100A5CE48 /* RAGridView.xib */; };
+		9FF2D46D1493975100A5CE48 /* RALibraryScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2D46B1493975100A5CE48 /* RALibraryScreen.m */; };
+		9FF2D46E1493975100A5CE48 /* RALibraryScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FF2D46C1493975100A5CE48 /* RALibraryScreen.xib */; };
 		9FF4B9D31408D6DB005FCE7F /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D11408D6DB005FCE7F /* eye.png */; };
 		9FF4B9D41408D6DB005FCE7F /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D21408D6DB005FCE7F /* trash.png */; };
 		9FF4B9D91408D84C005FCE7F /* bookmarks_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FF4B9D61408D84C005FCE7F /* bookmarks_empty.png */; };
@@ -753,6 +754,9 @@
 		9FDF1CEA146D201B009D3DAE /* chromedefault */ = {isa = PBXFileReference; lastKnownFileType = file; path = chromedefault; sourceTree = "<group>"; };
 		9FE5DE3B1434A77D003614C3 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		9FE5DE3C1434A77D003614C3 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
+		9FEA51E414D9846800D61BF3 /* RAGridViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGridViewDataSource.h; sourceTree = "<group>"; };
+		9FEA51E714D984AD00D61BF3 /* RAGridScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGridScrollView.h; sourceTree = "<group>"; };
+		9FEA51E814D984AD00D61BF3 /* RAGridScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAGridScrollView.m; sourceTree = "<group>"; };
 		9FEF2AA9147EEB26007BC286 /* RATabPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATabPlaceholderView.h; sourceTree = "<group>"; };
 		9FEF2AAA147EEB26007BC286 /* RATabPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATabPlaceholderView.m; sourceTree = "<group>"; };
 		9FEF2AAD147EEF19007BC286 /* RASBAPPMainButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RASBAPPMainButton.h; sourceTree = "<group>"; };
@@ -765,9 +769,9 @@
 		9FEF7D3E147514F9006ADC7B /* RACookieWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RACookieWindow.xib; sourceTree = "<group>"; };
 		9FF1017C13CCF03500B8F942 /* RATabFaviconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATabFaviconView.h; sourceTree = "<group>"; };
 		9FF1017D13CCF03500B8F942 /* RATabFaviconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATabFaviconView.m; sourceTree = "<group>"; };
-		9FF2D46A1493975100A5CE48 /* RAGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAGridView.h; sourceTree = "<group>"; };
-		9FF2D46B1493975100A5CE48 /* RAGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAGridView.m; sourceTree = "<group>"; };
-		9FF2D46C1493975100A5CE48 /* RAGridView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RAGridView.xib; sourceTree = "<group>"; };
+		9FF2D46A1493975100A5CE48 /* RALibraryScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RALibraryScreen.h; sourceTree = "<group>"; };
+		9FF2D46B1493975100A5CE48 /* RALibraryScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RALibraryScreen.m; sourceTree = "<group>"; };
+		9FF2D46C1493975100A5CE48 /* RALibraryScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RALibraryScreen.xib; sourceTree = "<group>"; };
 		9FF4B9D11408D6DB005FCE7F /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
 		9FF4B9D21408D6DB005FCE7F /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		9FF4B9D61408D84C005FCE7F /* bookmarks_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmarks_empty.png; sourceTree = "<group>"; };
@@ -1742,6 +1746,8 @@
 		9FB6388414A79C2000E4E5A5 /* Home screen */ = {
 			isa = PBXGroup;
 			children = (
+				9FEA51F014D994CA00D61BF3 /* Legacy */,
+				9FEA51EE14D994AB00D61BF3 /* RAGridView */,
 				9FB6388714A79C2D00E4E5A5 /* View */,
 				9FB6388614A79C2C00E4E5A5 /* Controller */,
 			);
@@ -1760,10 +1766,8 @@
 		9FB6388614A79C2C00E4E5A5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				9FF2D46A1493975100A5CE48 /* RAGridView.h */,
-				9FF2D46B1493975100A5CE48 /* RAGridView.m */,
-				69B313531356395000F3DCFD /* RASettingViewController.h */,
-				69B313541356395000F3DCFD /* RASettingViewController.m */,
+				9FF2D46A1493975100A5CE48 /* RALibraryScreen.h */,
+				9FF2D46B1493975100A5CE48 /* RALibraryScreen.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1771,12 +1775,7 @@
 		9FB6388714A79C2D00E4E5A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				69B313571356396C00F3DCFD /* Settings.xib */,
-				9FF2D46C1493975100A5CE48 /* RAGridView.xib */,
-				9F20FAC314A9D6FC0036CCCE /* RAGridViewCell.h */,
-				9F20FAC414A9D6FC0036CCCE /* RAGridViewCell.m */,
-				9F20FACD14AA5CD30036CCCE /* RAGridViewContentView.h */,
-				9F20FACE14AA5CD30036CCCE /* RAGridViewContentView.m */,
+				9FF2D46C1493975100A5CE48 /* RALibraryScreen.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1903,6 +1902,38 @@
 				9FD7B27814668FF4007EFF15 /* hello.user.js */,
 			);
 			name = GreaseKit;
+			sourceTree = "<group>";
+		};
+		9FEA51EE14D994AB00D61BF3 /* RAGridView */ = {
+			isa = PBXGroup;
+			children = (
+				9F20FACD14AA5CD30036CCCE /* RAGridViewContentView.h */,
+				9F20FACE14AA5CD30036CCCE /* RAGridViewContentView.m */,
+				9FEA51E414D9846800D61BF3 /* RAGridViewDataSource.h */,
+				9FEA51E714D984AD00D61BF3 /* RAGridScrollView.h */,
+				9FEA51E814D984AD00D61BF3 /* RAGridScrollView.m */,
+				9FEA51EF14D994C000D61BF3 /* Cell */,
+			);
+			name = RAGridView;
+			sourceTree = "<group>";
+		};
+		9FEA51EF14D994C000D61BF3 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9F20FAC314A9D6FC0036CCCE /* RAGridViewCell.h */,
+				9F20FAC414A9D6FC0036CCCE /* RAGridViewCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		9FEA51F014D994CA00D61BF3 /* Legacy */ = {
+			isa = PBXGroup;
+			children = (
+				69B313571356396C00F3DCFD /* Settings.xib */,
+				69B313531356395000F3DCFD /* RASettingViewController.h */,
+				69B313541356395000F3DCFD /* RASettingViewController.m */,
+			);
+			name = Legacy;
 			sourceTree = "<group>";
 		};
 		9FEF2AB3147F8C99007BC286 /* Window Related */ = {
@@ -2319,7 +2350,7 @@
 				9FAC88811498E92900CF650F /* growlWebView.js in Resources */,
 				9FDF1CEB146D201B009D3DAE /* chromedefault in Resources */,
 				9FEF7D3F147514F9006ADC7B /* RACookieWindow.xib in Resources */,
-				9FF2D46E1493975100A5CE48 /* RAGridView.xib in Resources */,
+				9FF2D46E1493975100A5CE48 /* RALibraryScreen.xib in Resources */,
 				9FB638AF14A9282700E4E5A5 /* shadow_shelf.png in Resources */,
 				9FB638B414A9296500E4E5A5 /* close_app.png in Resources */,
 				9FB638B514A9296500E4E5A5 /* delete_app.png in Resources */,
@@ -2439,7 +2470,7 @@
 				9FEF2AB8147F8D82007BC286 /* RASmartBarHolderView.m in Sources */,
 				9F37D77F148689EB0011B90F /* PXListView+UserInteraction.m in Sources */,
 				9F634B83148E8C8C005AAE43 /* RASmartBarItem.m in Sources */,
-				9FF2D46D1493975100A5CE48 /* RAGridView.m in Sources */,
+				9FF2D46D1493975100A5CE48 /* RALibraryScreen.m in Sources */,
 				9F94F84B14973B5600E53BEA /* RADotTextField.m in Sources */,
 				9FAC887D1498E63000CF650F /* WebView+Growl.m in Sources */,
 				9F20FAC514A9D6FC0036CCCE /* RAGridViewCell.m in Sources */,
@@ -2449,6 +2480,7 @@
 				9F7FD52814BF2B32002119BB /* NSMutableArray+Raven.m in Sources */,
 				9F263C5D14C073F4001B60B8 /* RATabView.m in Sources */,
 				9F263C6214C17FD8001B60B8 /* RATabItem.m in Sources */,
+				9FEA51E914D984AE00D61BF3 /* RAGridScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

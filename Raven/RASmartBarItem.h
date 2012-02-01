@@ -24,6 +24,8 @@
     NSMutableArray *_navigatorViewControllerArray; 
     BOOL _visible; 
     NSInteger _index; 
+    
+
 }
 
 -(id)initWithDictionnary:(NSDictionary *)dictionnary andPlistIndex:(int)plistIndex; 

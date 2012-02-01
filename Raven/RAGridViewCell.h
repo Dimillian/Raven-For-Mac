@@ -38,13 +38,14 @@
 -(void)addButtonClicked:(id)sender; 
 
 @property (nonatomic, assign) id<RAGridViewCellDelegate> delegate;
+@property (nonatomic, retain) RASmartBarItem *data; 
 @end
 
 @protocol RAGridViewCellDelegate
 @optional
--(void)onCloseButtonClick:(RASmartBarItem *)item; 
--(void)onRemoveButtonClick:(RASmartBarItem *)item; 
--(void)onAddButtonClick:(RASmartBarItem *)item; 
--(void)onMouseDown:(RASmartBarItem *)item; 
+-(void)onCloseButtonClick:(RAGridViewCell *)item; 
+-(void)onRemoveButtonClick:(RAGridViewCell *)item; 
+-(void)onAddButtonClick:(RAGridViewCell *)item; 
+-(void)onMouseDown:(RAGridViewCell *)item; 
 @end
 
